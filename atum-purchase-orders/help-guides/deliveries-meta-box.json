@@ -1,0 +1,47 @@
+[
+	{
+		"title": "Add Delivery",
+		"element": "#po_deliveries .add-delivery",
+		"intro": "Click the 'Add Delivery' button to open the modal that you can use to add new deliveries when you receive the products.<br>You can add just one delivery (if you received all the products at once) or multiple (if you received only part of your products)."
+	},
+	{
+		"title": "Edit or Remove Delivery",
+		"element": "#po_deliveries .delivery:nth(0) .show-actions",
+		"intro": "If you want to edit or remove any delivery data or its items after is created you can do so from the actions menu that will show up by clicking the three dots icon besides the delivery name."
+	},
+	{
+		"title": "Delivery Date",
+		"element": "#po_deliveries .delivery:nth(0) .delivery-date__field",
+		"intro": "In the Delivery Date field, you can specify the date when you received your products."
+	},
+	{
+		"title": "Document Number",
+		"element": "#po_deliveries .delivery:nth(0) .delivery-number__field",
+		"intro": "In the Document Number field, you can specify any document number associated with the delivery (optional)."
+	},
+	{
+		"title": "Files",
+		"element": "#po_deliveries .delivery:nth(0) .delivery-files__field",
+		"intro": "You can also attach one or multiple files to deliveries for your records (optional)."
+	},
+	{
+		"title": "Items Already In",
+		"element": "#po_deliveries .delivery:nth(0) .po-delivery-items thead .already-in",
+		"intro": "In the 'Already In' column for any delivery item, will be counted the items that were already added to previous deliveries (not the current one)."
+	},
+	{
+		"title": "Items Delivered",
+		"element": "#po_deliveries .delivery:nth(0) .po-delivery-items thead .delivered",
+		"intro": "In the 'Delivered' column for any delivery item, will be counted the items that were received in the current delivery."
+	},
+	{
+		"title": "Items Pending",
+		"element": "#po_deliveries .delivery:nth(0) .po-delivery-items thead .pending",
+		"intro": "In the 'Pending' column for any delivery item, will be counted the items that are still pending to receive at this stage (when there are partial deliveries)."
+	},
+	{
+		"title": "Add to Stock",
+		"element": "#po_deliveries .delivery:nth(0) .add-all-to-stock",
+		"intro": "Once you add all the delivered items, you can click the button to add them into stock and the related product's (or inventory) stocks will increase in the specified quantity."
+	}
+]

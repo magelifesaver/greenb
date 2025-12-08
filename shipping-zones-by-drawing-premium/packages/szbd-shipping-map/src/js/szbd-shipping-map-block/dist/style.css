@@ -1,0 +1,17 @@
+#szbd-picked,
+.wc-block-components-address-form__szbd-shipping_point {
+  display: none;
+}
+
+#szbd_checkout_field .szbd-plus-code-form {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+#szbd_checkout_field.at_fail {
+  display: none;
+}
+
+.szbd-shipping-details-block .wc-block-components-validation-error {
+  font-size: 1.2em;
+}

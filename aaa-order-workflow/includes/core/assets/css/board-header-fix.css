@@ -1,0 +1,26 @@
+/* Board header compact layout */
+.aaa-board-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:6px 10px;
+  margin:0 0 6px 0;
+  background:#f7f7f7;
+  border:1px solid #e5e5ea;
+  border-radius:6px;
+}
+.aaa-board-head .aaa-title {
+  font-size:18px;
+  font-weight:600;
+  margin:0;
+  line-height:1.2;
+}
+.aaa-board-head .aaa-actions {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+}
+.aaa-board-head .aaa-actions .button { margin:0; }
+.aaa-board-shell { margin-top:6px; }

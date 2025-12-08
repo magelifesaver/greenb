@@ -1,0 +1,42 @@
+/* File Path: /wp-content/plugins/aaa-fci/assets/css/aaa-fci-fastcart-iframe.css
+   Scope: ONLY apply when <html data-aaa-fci="fastcart"> is present (set by our JS in the iframe).
+*/
+
+/* Require the data-attribute so nothing is affected site-wide */
+html[data-aaa-fci="fastcart"] header,
+html[data-aaa-fci="fastcart"] footer,
+html[data-aaa-fci="fastcart"] .site-header,
+html[data-aaa-fci="fastcart"] .site-footer,
+html[data-aaa-fci="fastcart"] .masthead,
+html[data-aaa-fci="fastcart"] .x-masthead,
+html[data-aaa-fci="fastcart"] .x-colophon,
+html[data-aaa-fci="fastcart"] #header,
+html[data-aaa-fci="fastcart"] #footer,
+html[data-aaa-fci="fastcart"] .et-l--header,
+html[data-aaa-fci="fastcart"] .et-l--footer,
+html[data-aaa-fci="fastcart"] .ast-header-break-point,
+html[data-aaa-fci="fastcart"] .elementor-location-header,
+html[data-aaa-fci="fastcart"] .elementor-location-footer,
+html[data-aaa-fci="fastcart"] #top,
+html[data-aaa-fci="fastcart"] #bottom,
+html[data-aaa-fci="fastcart"] .oceanwp-header,
+html[data-aaa-fci="fastcart"] .oceanwp-footer,
+html[data-aaa-fci="fastcart"] .ct-header,
+html[data-aaa-fci="fastcart"] .ct-footer,
+html[data-aaa-fci="fastcart"] .nv-header,
+html[data-aaa-fci="fastcart"] .nv-footer,
+html[data-aaa-fci="fastcart"] .sticky-header,
+html[data-aaa-fci="fastcart"] .sticky-footer,
+html[data-aaa-fci="fastcart"] .sticky,
+html[data-aaa-fci="fastcart"] .is-sticky { display:none!important; }
+
+html[data-aaa-fci="fastcart"] body { margin:0!important; padding:0!important; scroll-padding-top:0!important; }
+
+/* Error box inside login modal forms */
+html[data-aaa-fci="fastcart"] .aaa-fci-login-error {
+  margin: 0 0 .75rem; padding: .6rem .8rem;
+  border: 1px solid #e00; background:#ffecec; color:#900; border-radius:6px; font-size:.92rem;
+}
+
+/* Optional submitting state */
+html[data-aaa-fci="fastcart"] .aaa-fci-login--submitting { opacity: .7; pointer-events: none; }

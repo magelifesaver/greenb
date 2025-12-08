@@ -1,0 +1,153 @@
+var geocode;
+var map;
+var marker;
+var markerOptions;
+
+
+async function init(){
+
+
+	const { Map } = await google.maps.importLibrary("maps");
+	const { Geo } = await google.maps.importLibrary("geometry");
+	const { Geocode } = await google.maps.importLibrary("geocoding");
+	const { Searchbox } = await google.maps.importLibrary("places");
+	const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+	initialize(init_map, add_zoom_listener);
+	geocode = new google.maps.Geocoder();
+	codeAddress();
+
+	
+
+
+}
+
+function codeAddress() {
+	var input = document.getElementById('szbdzones_address');
+	var searchBox = new google.maps.places.SearchBox(input);
+	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	map.addListener('bounds_changed', function() {
+		searchBox.setBounds(map.getBounds());
+	});
+	
+	searchBox.addListener('places_changed', function() {
+		var places = searchBox.getPlaces();
+		if (places.length == 0) {
+			return;
+		}
+		
+		var bounds = new google.maps.LatLngBounds();
+		places.forEach(function(place) {
+			if (!place.geometry) {
+				return;
+			}
+			
+			placeMarker(place.geometry.location);
+			if (place.geometry.viewport) {
+				bounds.union(place.geometry.viewport);
+			} else {
+				bounds.extend(place.geometry.location);
+			}
+		});
+		map.fitBounds(bounds);
+	});
+
+	if ((document.getElementById('szbdzones_address') != null)) {
+		var shipaddr = document.getElementById('szbdzones_address');
+		shipaddr.addEventListener('keydown', function (e) {
+
+			if (e.key == 'Enter') {
+				e.preventDefault();
+			}
+		});
+	}
+}
+
+function init_map() {
+	try{
+	var mapOptions = {
+		center: new google.maps.LatLng(szbd_map.lat, szbd_map.lng),
+		zoom: Number(szbd_map.zoom),
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapId: 'SZBD_ADMIN_MAP',
+	};
+	map = new google.maps.Map(document.getElementById("szbdzones_id"), mapOptions);
+
+	
+
+	if (!_.isNull(szbd_map.position)     ) {
+
+		var position = Array.isArray(szbd_map.position) ? new google.maps.LatLng((szbd_map.position)[0][0],(szbd_map.position)[0][1] ) : szbd_map.position;
+		
+		markerOptions = {
+			
+			position: position,
+			map: map,
+			gmpDraggable: true,
+		};
+		marker = new google.maps.marker.AdvancedMarkerElement(markerOptions);
+		var location = marker.position;
+		if (location) {
+			
+			document.getElementById('szbdzones_geo_coordinates').value = JSON.stringify(location);
+		}
+		add_drag_listener();
+	}
+}catch(e){
+	console.debug(e);
+}
+}
+
+function add_zoom_listener() {
+	google.maps.event.addListener(map, 'zoom_changed', function(e) {
+		jQuery("input#szbdzones_zoom").val(map.getZoom());
+	});
+}
+function add_drag_listener(){
+	if(marker){
+		google.maps.event.addListener(marker, 'dragend', function(e) {
+		placeMarker(e.latLng);
+		let location = marker.position;
+		
+		document.getElementById('szbdzones_geo_coordinates').value = JSON.stringify(location);
+	});
+	}
+	
+}
+
+function initialize(callback_1, callback_2) {
+	callback_1();
+	callback_2();
+	var center = map.getCenter();
+	jQuery("input#szbdzones_lat").val(center.lat());
+	jQuery("input#szbdzones_lng").val(center.lng());
+	jQuery("input#szbdzones_zoom").val(map.getZoom());
+	google.maps.event.addListener(map, 'click', function(e) {
+		placeMarker(e.latLng);
+		let location = marker.position;
+		
+		document.getElementById('szbdzones_geo_coordinates').value = JSON.stringify(location);
+	});
+
+	google.maps.event.addListener(map, 'center_changed', function() {
+		center = map.getCenter();
+		jQuery("input#szbdzones_lat").val(center.lat());
+		jQuery("input#szbdzones_lng").val(center.lng());
+	});
+}
+
+function placeMarker(location) {
+		if (marker) {
+			marker.position = location;
+		} else {
+			marker = new google.maps.marker.AdvancedMarkerElement({
+				position: location,
+				map: map,
+				gmpDraggable: true,
+			});
+		}
+		add_drag_listener();
+	}
+jQuery(document).ready(function($) {
+	init();
+});

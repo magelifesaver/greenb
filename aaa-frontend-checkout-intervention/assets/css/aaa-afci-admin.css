@@ -1,0 +1,80 @@
+/* File: /assets/css/aaa-fci-admin.css
+ * Purpose: Styling for unified Session Log admin UI
+ * Version: 1.4.0
+*/
+
+.afci-wrap .afci-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 10px 0 16px;
+}
+
+.afci-filter {
+  min-width: 200px;
+}
+
+.afci-legend {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.afci-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1.6;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  font-size: 12px;
+}
+
+.afci-badge.ok { background: #eaf8ee; border-color: #cfead7; color: #1a7f37; }
+.afci-badge.warn { background: #fff4e5; border-color: #ffe0b2; color: #b54708; }
+.afci-badge.err { background: #fdeaea; border-color: #f5c2c2; color: #d92c2c; }
+.afci-badge.info { background: #eaf4ff; border-color: #cfe0ff; color: #1e4fa1; }
+
+.afci-table .afci-summary {
+  max-width: 520px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.afci-expander-row .afci-expander-body {
+  margin: 8px 0;
+  border: 1px solid #e6e6e6;
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.afci-expander-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.afci-event-expander-row .afci-event-details {
+  border-left: 3px solid #dcdcdc;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.afci-details-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.afci-details-col pre {
+  max-height: 360px;
+  overflow: auto;
+  background: #f6f8fa;
+  border: 1px solid #eee;
+  padding: 10px;
+}

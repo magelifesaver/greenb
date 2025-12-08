@@ -1,0 +1,8 @@
+[
+	{
+		"title": "Barcode field",
+		"element": "#barcode_term_meta",
+		"intro": "This is the term barcode field. You can enter any barcode you want here.<p><img src='{{pluginUrl}}help-guides/images/10.png'></p>",
+		"load": "init"
+	}
+]

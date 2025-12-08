@@ -1,0 +1,1 @@
+!function(){"use strict";(0,window.wp.plugins.registerPlugin)("szbd-shipping-map",{render:()=>{},scope:"woocommerce-checkout"})}();

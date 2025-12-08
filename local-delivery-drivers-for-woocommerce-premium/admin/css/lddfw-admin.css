@@ -1,0 +1,472 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+/* <fs_premium_only> */
+
+.lddfw_media_preview {
+  border: 1px solid #cccccc;
+  width: 300px;
+  height: 199px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.lddfw_media_preview img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.lddfw_icon {
+  box-shadow: none !important;
+  outline: none !important;
+  display: inline-block;
+  line-height: 11px;
+}
+
+.lddfw-toggle-off {
+  height: 20px;
+  width: 20px;
+  background-color: #dc3545;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.lddfw-toggle-on {
+  height: 20px;
+  width: 20px;
+  background-color: #28a745;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* </fs_premium_only> */
+
+.lddfw-text-center {
+  text-align: center !important;
+}
+
+.lddfw_admin_bar {
+  margin-bottom: 15px;
+}
+
+.column-lddfw_driver_claim,
+.column-lddfw_driver_availability,
+.column-lddfw_driver_account {
+  text-align: center !important;
+}
+
+.lddfw_premium_icon {
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.driver_app {
+  margin-top: 25px;
+}
+
+.driver_app img {
+  float: left;
+  margin-right: 10px;
+}
+
+.lddfw-text-center a {
+  transition: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#lddfw_dates_custom_range,
+#lddfw_dates_range_select,
+#lddfw_dates_range_submit {
+  margin-right: 15px;
+  float: left;
+}
+
+#lddfw_dates_range_wrap {
+  margin-bottom: 15px;
+  display: inline-block;
+  width: 100%;
+}
+
+.lddfw_order_image {
+  display: inline-block;
+}
+
+body.rtl .driver_app a {
+  direction: ltr;
+  display: inline-block;
+}
+
+body.rtl .driver_app img {
+  float: right;
+  margin-left: 10px;
+  margin-right: 0px;
+}
+
+.lddfw_driver_box .lddfw_line {
+  width: 100%;
+  height: 6px;
+  margin-top: 2px;
+}
+
+.lddfw_driver_box {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border: 1px solid silver;
+  text-align: left;
+  width: 100%;
+  line-height: 28px;
+  background: #fff;
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  position: relative;
+}
+
+.lddfw_directions-panel-listing {
+  display: none;
+  height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.lddfw_driver_box.open .lddfw_directions-panel-listing {
+  display: block;
+}
+
+span.lddfw_point {
+  position: absolute;
+  margin-left: -14px;
+  color: #fff;
+  top: -5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.lddfw_driver_box.active {
+  background: rgba(255, 255, 255, 1);
+}
+
+.lddfw_driver_box svg {
+  width: 18px;
+  color: #2d2d2d;
+}
+
+.lddfw_driver_box .col-2.text-center {
+  width: 50px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+
+.lddfw_total_route {
+  margin-bottom: 10px;
+}
+
+.lddfw_driver_box img {
+  max-width: 50px;
+  max-height: 50px;
+  margin-right: 10px;
+  min-height: 50px;
+}
+
+.lddfw_driver_name {
+  font-size: 16px;
+  display: inline-block;
+  top: -18px;
+  position: relative;
+  font-weight: bold;
+}
+
+.lddfw_button {
+  width: 25px;
+  height: 22px;
+  float: right;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg aria-hidden='true' style='color:silver' focusable='false' data-prefix='fas' data-icon='toggle-off' class='svg-inline--fa fa-toggle-off fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><path fill='currentColor' d='M384 64H192C85.961 64 0 149.961 0 256s85.961 192 192 192h192c106.039 0 192-85.961 192-192S490.039 64 384 64zM64 256c0-70.741 57.249-128 128-128 70.741 0 128 57.249 128 128 0 70.741-57.249 128-128 128-70.741 0-128-57.249-128-128zm320 128h-48.905c65.217-72.858 65.236-183.12 0-256H384c70.741 0 128 57.249 128 128 0 70.74-57.249 128-128 128z'></path></svg>");
+  position: absolute;
+  right: 9px;
+  top: 7px;
+}
+
+.lddfw_driver_box.active .lddfw_button {
+  background-image: url("data:image/svg+xml;utf8,<svg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='toggle-on' class='svg-inline--fa fa-toggle-on fa-w-18' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><path fill='currentColor' d='M384 64H192C86 64 0 150 0 256s86 192 192 192h192c106 0 192-86 192-192S490 64 384 64zm0 320c-70.8 0-128-57.3-128-128 0-70.8 57.3-128 128-128 70.8 0 128 57.3 128 128 0 70.8-57.3 128-128 128z'></path></svg>");
+}
+
+.lddfw_handle {
+  width: 18px;
+  height: 29px;
+  float: right;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='angle-down' class='svg-inline--fa fa-angle-down fa-w-10' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><path fill='currentColor' d='M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z'></path></svg>");
+  position: absolute;
+  top: 36px;
+  right: 12px;
+}
+
+.lddfw_driver_box.open .lddfw_handle {
+  background-image: url("data:image/svg+xml;utf8,<svg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='angle-up' class='svg-inline--fa fa-angle-up fa-w-10' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><path fill='currentColor' d='M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z'></path></svg>");
+}
+
+.lddfw_driver_box .lddfw_tracking {
+  float: right;
+  margin-right: 50px;
+  margin-top: -2px;
+}
+
+.lddfw_driver_box .col-10 {
+  width: 80%;
+  text-align: left;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.lddfw_driver_box .col-10.middle {
+  top: -23px;
+}
+
+#lddfw_map123 {
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid silver;
+  display: inline-block;
+}
+
+div#driver-panel {
+  float: right;
+}
+
+.lddfw_track_drivers button {
+  width: 100%;
+}
+
+.lddfw_tracking a:active,
+.lddfw_tracking a:focus {
+  outline: 0;
+  border: none;
+  box-shadow: none;
+}
+
+#lddfw_map123 {
+  width: 100%;
+}
+
+div#driver-panel {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.lddfw_track_drivers {
+  margin-bottom: 10px;
+}
+
+.lddfw_premium_feature {
+  position: relative;
+  display: inline-block;
+}
+
+.lddfw_premium_feature_note h2,
+.lddfw_premium_feature_note p {
+  margin: 0px !important;
+  color: #000 !important;
+}
+
+.lddfw_premium_feature_note h2 {
+  margin-bottom: 4px !important;
+}
+
+.lddfw_premium_feature_note {
+  position: absolute;
+  width: 250px;
+  background-color: #fff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+  top: -172px;
+  left: -167px;
+  z-index: 99999;
+}
+
+.lddfw_star_button:focus {
+  box-shadow: none !important;
+}
+
+.lddfw_star_button {
+  margin-right: 5px;
+}
+
+.lddfw_star_button svg {
+  top: 3px;
+  position: relative;
+}
+
+.lddfw_premium_feature_note:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 186px;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -9px;
+  margin-bottom: -20px;
+}
+
+.lddfw_premium_close {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+  color: #575758 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  height: 16px !important;
+}
+
+.lddfw_premium_buynow {
+  display: inline-block !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  border-radius: 0.25rem !important;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  text-decoration: none !important;
+  margin-top: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+.lddfw_premium_buynow:hover {
+  background-color: #218838 !important;
+  border-color: #1e7e34 !important;
+  color: #fff !important;
+}
+
+#lddfw_check_google_keys_wrap {
+  background: #fff;
+  padding: 10px;
+}
+
+#lddfw_check_google_keys_wrap,
+#lddfw_check_google_keys_wrap iframe,
+#lddfw_check_google_keys_wrap #map {
+  margin-top: 10px;
+}
+
+#lddfw_check_google_keys_wrap .title {
+  background: #dcdcde;
+  color: #50575e;
+  padding: 10px;
+}
+
+#lddfw_check_google_keys_wrap p {
+  background: #fff;
+  margin-top: 10px;
+}
+
+@media (min-width: 1200px) {
+  #lddfw_map123 {
+    width: 70%;
+  }
+  div#driver-panel {
+    margin-top: 0px;
+    width: 29%;
+  }
+}
+
+@media (min-width: 1740px) {
+  #lddfw_map123 {
+    width: 80%;
+  }
+  div#driver-panel {
+    margin-top: 0px;
+    width: 19%;
+  }
+}
+
+.rtl .lddfw_driver_box {
+  margin-right: 0px;
+  direction: ltr;
+}
+
+.rtl #lddfw_routes {
+  text-align: left;
+}
+
+.lddfw_delete_variable_button {
+  position: absolute;
+  top: -4px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.lddfw_variable_input {
+  position: relative;
+  margin-top: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Gallery container */
+.lddfw-gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px;
+  justify-content: center;
+}
+
+/* Image wrapper – 2 columns */
+.lddfw-gallery-container a.lddfw_order_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(50% - 16px); /* 2 columns with gap */
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #f9f9f9;
+}
+
+.lddfw-gallery-container a.lddfw_order_image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Images */
+.lddfw-gallery-container a.lddfw_order_image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}

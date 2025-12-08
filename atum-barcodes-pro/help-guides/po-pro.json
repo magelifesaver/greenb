@@ -1,0 +1,15 @@
+[
+	{
+		"title": "ATUM Barcode",
+		"element": "#po-data-meta-box .atum-barcodes",
+		"intro": "Here you see the barcode generated for this Purchase Order.<p><img src='{{pluginUrl}}help-guides/images/4.png'></p>It can be distinct to the above example depending on your configuration.<br>By default, the PO ID will be used for the barcode but if you want to change it, click on the pencil icon, enter a new custom number and save.<p><img src='{{pluginUrl}}help-guides/images/5.png'></p>",
+		"load": "init"
+	},
+	{
+		"title": "Screen Options",
+		"element": "#screen-options-link-wrap",
+		"intro": "From the Screen Options tab, you can enable or disable the display of the barcodes meta box.",
+		"load": "init",
+        "markerPosition": "bottom-right"
+	}
+]

@@ -1,0 +1,581 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ATUM Barcodes PRO\n"
+"POT-Creation-Date: 2025-08-28 11:15+0200\n"
+"PO-Revision-Date: 2023-04-20 13:49+0200\n"
+"Last-Translator: BE REBEL <https://berebel.studio>\n"
+"Language-Team: BE REBEL <https://berebel.studio>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: atum-barcodes-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: *.js\n"
+
+#. translators: the addon name and the minimum ATUM version
+#: atum-barcodes-pro.php:236
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM version %2$s or greater. Please update it."
+msgstr ""
+
+#. translators: the addon name and the minimum MI version
+#: atum-barcodes-pro.php:244
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Multi-Inventory version %2$s or greater. "
+"Please update or disable it."
+msgstr ""
+
+#. translators: the addon name and the minimum PO version
+#: atum-barcodes-pro.php:252
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Purchase Orders PRO version %2$s or greater. "
+"Please update or disable it."
+msgstr ""
+
+#. translators: the addon name and the minimum PO version
+#: atum-barcodes-pro.php:260
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Pick & Pack version %2$s or greater. Please "
+"update or disable it."
+msgstr ""
+
+#. translators: First one is the addon name, second is the minimum WP version and third is the WP updates page
+#: atum-barcodes-pro.php:268
+#, php-format
+msgid ""
+"The %1$s add-on requires the WordPress %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#. translators: the addon name
+#: atum-barcodes-pro.php:276
+#, php-format
+msgid "The ATUM %s add-on requires WooCommerce to be activated."
+msgstr ""
+
+#. translators: First one is the addon name, second is the minimum WooCommerce version and third is the WP updates page
+#: atum-barcodes-pro.php:284
+#, php-format
+msgid ""
+"The %1$s add-on requires the WooCommerce %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#. translators: The addons name and the minimum PHP version required
+#: atum-barcodes-pro.php:318
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires PHP version %2$s or greater. Please, update it "
+"or contact your hosting provider."
+msgstr ""
+
+#. translators: The first one is the addon name and second is the plugins installation page URL
+#: atum-barcodes-pro.php:326
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please <a href='%2$s'>install it</a>."
+msgstr ""
+
+#. translators: The first one is the addon name and second is the plugins page URL
+#: atum-barcodes-pro.php:334
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please enable it from <a href='%2$s'>plugins page</a>."
+msgstr ""
+
+#: classes/Entities/Orders.php:162
+msgid "Invalid or duplicated barcode."
+msgstr ""
+
+#: classes/Entities/Orders.php:195 classes/Entities/Suppliers.php:50
+#: classes/Integrations/PickPack.php:85 classes/Integrations/PickPack.php:329
+msgid "Barcode"
+msgstr ""
+
+#: classes/Entities/Orders.php:427 classes/Entities/Orders.php:434
+#: classes/Entities/Products.php:140 classes/Entities/Products.php:147
+#: classes/Entities/Suppliers.php:66 classes/Entities/Suppliers.php:73
+#: classes/Entities/Taxonomies.php:67 classes/Entities/Taxonomies.php:74
+#: classes/Inc/Ajax.php:181 classes/Inc/Ajax.php:188
+#: classes/Inc/Documents.php:230 classes/Inc/Documents.php:237
+#: classes/Inc/Hooks.php:208 classes/Inc/Hooks.php:215
+#: classes/Inc/Metaboxes.php:249 classes/Inc/Metaboxes.php:256
+#: classes/Inc/Settings.php:254 classes/Inc/Settings.php:261
+#: classes/Integrations/MultiInventory.php:397
+#: classes/Integrations/MultiInventory.php:404
+#: classes/Integrations/PickPack.php:341 classes/Integrations/PickPack.php:348
+#: classes/Integrations/PurchaseOrders.php:253
+#: classes/Integrations/PurchaseOrders.php:260
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: classes/Inc/Ajax.php:55
+msgid "Missing product ID"
+msgstr ""
+
+#: classes/Inc/Ajax.php:61
+msgid "This is not a variable product"
+msgstr ""
+
+#: classes/Inc/Ajax.php:110
+msgid "Please, provide a valid meta key name."
+msgstr ""
+
+#: classes/Inc/Ajax.php:164
+msgid ""
+"An unexpected error ocurred when converting the barcodes. Please check your "
+"PHP error log."
+msgstr ""
+
+#. translators: the custom meta key
+#: classes/Inc/Ajax.php:168
+#, php-format
+msgid ""
+"All the barcodes stored in \"%s\" meta key have been successfully converted "
+"to ATUM barcodes"
+msgstr ""
+
+#: classes/Inc/Globals.php:40
+msgid "Code 39"
+msgstr ""
+
+#: classes/Inc/Globals.php:41
+msgid "Code 39 + Checksum"
+msgstr ""
+
+#: classes/Inc/Globals.php:42
+msgid "Code 39 Extended"
+msgstr ""
+
+#: classes/Inc/Globals.php:43
+msgid "Code 39 Extended + Checksum"
+msgstr ""
+
+#: classes/Inc/Globals.php:44
+msgid "Code 93"
+msgstr ""
+
+#: classes/Inc/Globals.php:45
+msgid "Standard 2 of 5"
+msgstr ""
+
+#: classes/Inc/Globals.php:46
+msgid "Standard 2 of 5 + Checksum"
+msgstr ""
+
+#: classes/Inc/Globals.php:47
+msgid "Interleaved 2 of 5"
+msgstr ""
+
+#: classes/Inc/Globals.php:48
+msgid "Interleaved 2 of 5 + Checksum"
+msgstr ""
+
+#: classes/Inc/Globals.php:49
+msgid "Code 128 Auto"
+msgstr ""
+
+#: classes/Inc/Globals.php:50
+msgid "Code 128 A"
+msgstr ""
+
+#: classes/Inc/Globals.php:51
+msgid "Code 128 B"
+msgstr ""
+
+#: classes/Inc/Globals.php:52
+msgid "Code 128 C"
+msgstr ""
+
+#: classes/Inc/Globals.php:53
+msgid "EAN 8"
+msgstr ""
+
+#: classes/Inc/Globals.php:54
+msgid "EAN 13"
+msgstr ""
+
+#: classes/Inc/Globals.php:55
+msgid "UPC-A"
+msgstr ""
+
+#: classes/Inc/Globals.php:56
+msgid "UPC-E"
+msgstr ""
+
+#: classes/Inc/Globals.php:57
+msgid "5-Digits UPC-Based Extention"
+msgstr ""
+
+#: classes/Inc/Globals.php:58
+msgid "2-Digits UPC-Based Extention"
+msgstr ""
+
+#: classes/Inc/Globals.php:59
+msgid "MSI"
+msgstr ""
+
+#: classes/Inc/Globals.php:60
+msgid "MSI + Checksum"
+msgstr ""
+
+#: classes/Inc/Globals.php:61
+msgid "Postnet"
+msgstr ""
+
+#: classes/Inc/Globals.php:62
+msgid "Planet"
+msgstr ""
+
+#: classes/Inc/Globals.php:63
+msgid "RMS4CC"
+msgstr ""
+
+#: classes/Inc/Globals.php:64
+msgid "KIX (Klant index - Customer index)"
+msgstr ""
+
+#: classes/Inc/Globals.php:65
+msgid "IMB (Intelligent Mail Barcode - Onecode - USPS-B-3200)"
+msgstr ""
+
+#: classes/Inc/Globals.php:66
+msgid "Codabar"
+msgstr ""
+
+#: classes/Inc/Globals.php:67
+msgid "Code 11"
+msgstr ""
+
+#: classes/Inc/Globals.php:68
+msgid "Pharmacode"
+msgstr ""
+
+#: classes/Inc/Globals.php:69
+msgid "Pharmacode Two-Tracks"
+msgstr ""
+
+#: classes/Inc/Globals.php:84
+msgid "QR Code"
+msgstr ""
+
+#: classes/Inc/Globals.php:85
+msgid "PDF417"
+msgstr ""
+
+#: classes/Inc/Globals.php:86
+msgid "DATAMATRIX"
+msgstr ""
+
+#: classes/Inc/Globals.php:113
+msgid "Products"
+msgstr ""
+
+#: classes/Inc/Globals.php:114
+msgid "Purchase Orders"
+msgstr ""
+
+#: classes/Inc/Globals.php:115
+msgid "Inventory Logs"
+msgstr ""
+
+#: classes/Inc/Globals.php:116
+msgid "Suppliers"
+msgstr ""
+
+#: classes/Inc/Globals.php:121 classes/Inc/Globals.php:124
+msgid "WC Orders"
+msgstr ""
+
+#: classes/Inc/Globals.php:125
+msgid "WC Refunds"
+msgstr ""
+
+#: classes/Inc/Globals.php:142
+msgid "ATUM Locations"
+msgstr ""
+
+#: classes/Inc/Globals.php:143
+msgid "Product Categories"
+msgstr ""
+
+#: classes/Inc/Globals.php:144
+msgid "Product Tags"
+msgstr ""
+
+#: classes/Inc/Helpers.php:162
+msgid "Barcode type not allowed"
+msgstr ""
+
+#: classes/Inc/Helpers.php:171
+#, php-format
+msgid "Wrong check digit: %s"
+msgstr ""
+
+#: classes/Inc/Metaboxes.php:85
+msgid "ATUM Barcodes"
+msgstr ""
+
+#: classes/Inc/Metaboxes.php:188
+msgid "Click to expand"
+msgstr ""
+
+#: classes/Inc/Metaboxes.php:190
+msgid "This variation has no barcode yet"
+msgstr ""
+
+#: classes/Inc/Metaboxes.php:191
+msgid "Unexpected error!"
+msgstr ""
+
+#: classes/Inc/Settings.php:58
+msgid "Barcodes"
+msgstr ""
+
+#: classes/Inc/Settings.php:61
+msgid "Barcodes PRO Options"
+msgstr ""
+
+#: classes/Inc/Settings.php:95
+msgid "Default barcode type"
+msgstr ""
+
+#: classes/Inc/Settings.php:96
+msgid ""
+"Choose the barcode type that will be used by default for all the entities "
+"that support barcodes."
+msgstr ""
+
+#: classes/Inc/Settings.php:107
+msgid "Show barcode text"
+msgstr ""
+
+#: classes/Inc/Settings.php:108
+msgid ""
+"Show the related text under the barcode images (only applicable to 1D "
+"barcodes)."
+msgstr ""
+
+#: classes/Inc/Settings.php:115
+msgid "Barcode color"
+msgstr ""
+
+#: classes/Inc/Settings.php:116
+msgid "Choose a color for the barcode."
+msgstr ""
+
+#: classes/Inc/Settings.php:123
+msgid "Automatic barcodes for orders"
+msgstr ""
+
+#: classes/Inc/Settings.php:124
+msgid ""
+"Create barcodes for all the order entities (WooCommerce Orders, Purchase "
+"Orders, Inventory Logs, etc) based on their ID or number."
+msgstr ""
+
+#: classes/Inc/Settings.php:131
+msgid "Entities that support barcodes"
+msgstr ""
+
+#: classes/Inc/Settings.php:132
+msgid "Choose the entities to which you want to add barcodes support."
+msgstr ""
+
+#: classes/Inc/Settings.php:139
+msgid "Show barcodes in List Tables"
+msgstr ""
+
+#: classes/Inc/Settings.php:140
+msgid ""
+"Show the barcode images instead of text on all the ATUM list tables that "
+"include this column."
+msgstr ""
+
+#: classes/Inc/Settings.php:147
+msgid "Convert barcodes from 3rd party plugins"
+msgstr ""
+
+#: classes/Inc/Settings.php:147
+msgid "Barcodes PRO"
+msgstr ""
+
+#: classes/Inc/Settings.php:148
+msgid ""
+"Convert barcode previously saved by 3rd party plugins as custom meta keys to "
+"ATUM barcodes. If you already have a value for the ATUM barcode it won't be "
+"overridden"
+msgstr ""
+
+#: classes/Inc/Settings.php:154
+msgid "Enter the meta key name to convert..."
+msgstr ""
+
+#: classes/Inc/Settings.php:158
+msgid "Convert Now!"
+msgstr ""
+
+#: classes/Inc/Settings.php:160
+msgid ""
+"This will convert all the meta keys found with the name provided to ATUM "
+"barcodes."
+msgstr ""
+
+#: classes/Inc/Settings.php:174
+msgid "Add barcodes to WC Order emails"
+msgstr ""
+
+#: classes/Inc/Settings.php:175
+msgid "Choose whether to add ATUM barcodes to WooCommerce order emails."
+msgstr ""
+
+#: classes/Inc/Settings.php:180 classes/Inc/Settings.php:202
+msgid "To items and orders"
+msgstr ""
+
+#: classes/Inc/Settings.php:181 classes/Inc/Settings.php:203
+msgid "To orders only"
+msgstr ""
+
+#: classes/Inc/Settings.php:182 classes/Inc/Settings.php:204
+msgid "To items only"
+msgstr ""
+
+#: classes/Inc/Settings.php:183 classes/Inc/Settings.php:205
+msgid "Do not add"
+msgstr ""
+
+#: classes/Inc/Settings.php:196
+msgid "Add barcodes to PO PDFs"
+msgstr ""
+
+#: classes/Inc/Settings.php:197
+msgid "Choose whether to add ATUM barcodes to Purchase Orders PDFs."
+msgstr ""
+
+#: classes/Integrations/MultiInventory.php:114 views/meta-boxes/barcodes.php:42
+#: views/meta-boxes/mi-barcodes.php:42
+msgid "Error generating the barcode. Please check if it was entered correctly"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:84
+msgid "Edit PO barcode"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:87
+msgid "Edit PO Barcode"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:118
+msgid "None"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:119
+msgid "Set"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:120
+msgid "Unexpected error. The Barcode could not be saved."
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:137
+msgid "Missing data"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:143
+msgid "The PO does not exist"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:151
+msgid "The barcode is already in use by another PO"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:168
+msgid "Barcode saved successfully"
+msgstr ""
+
+#: views/meta-boxes/barcode-input.php:15
+msgid "Enter a manual barcode..."
+msgstr ""
+
+#: views/meta-boxes/barcodes.php:30
+msgid "Load variations first to see their barcodes"
+msgstr ""
+
+#: views/meta-boxes/barcodes.php:34
+msgid "Select a variation..."
+msgstr ""
+
+#: views/meta-boxes/barcodes.php:50 views/meta-boxes/barcodes.php:52
+msgid ""
+"This barcode was created automatically. If you want to add your own barcode, "
+"please use the input field below."
+msgstr ""
+
+#: views/meta-boxes/barcodes.php:58
+msgid "No barcode available."
+msgstr ""
+
+#: views/meta-boxes/mi-barcodes.php:53
+msgid "No barcodes available."
+msgstr ""
+
+#: views/meta-boxes/product-data/atum-tab-fields.php:19
+msgid "Barcodes Settings"
+msgstr ""
+
+#: views/meta-boxes/product-data/atum-tab-fields.php:22
+msgid "Barcode Type"
+msgstr ""
+
+#: views/meta-boxes/product-data/atum-tab-fields.php:25
+msgid "Global"
+msgstr ""
+
+#: views/meta-boxes/product-data/atum-tab-fields.php:31
+msgid ""
+"Choose a different barcode type for this product if you want to override the "
+"global setting."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "ATUM Barcodes PRO"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/addons/atum-barcodes-pro"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Transform your inventory management with our Barcodes add-on. Easily create "
+"barcodes for products, orders, suppliers, and more. Customize barcodes and "
+"take advantage of Multi-Inventory support. Improve operations with barcode "
+"integration in list tables, purchase order emails, PDFs, and more. Enhance "
+"efficiency and accuracy in inventory tracking today."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Stock Management Labs™"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/"
+msgstr ""

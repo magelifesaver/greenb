@@ -1,0 +1,62 @@
+[
+	{
+		"title": "Stock Column",
+		"element": ".atum_order_items thead .available_stock",
+		"intro": "In the Stock column, you can view the stock available for every PO item or inventory item."
+	},
+	{
+		"title": "LWS Column",
+		"element": ".atum_order_items thead .last_week_sales",
+		"intro": "In the LWS column, you can view the sales performed during the last week for every PO item."
+	},
+	{
+		"title": "Inbound Column",
+		"element": ".atum_order_items thead .inbound_stock",
+		"intro": "In the Inbound column, you can view the inbound stock (number of items added to POs that are still due) for every PO item."
+	},
+	{
+		"title": "ROQ Column",
+		"element": ".atum_order_items thead .roq",
+		"intro": "In the ROQ column, you can view the recommended order quantity for every PO item.<br>The formula for calculating the ROQ value is:<br><br><code>((Last Week Sales / 7) * Suppliers Lead Time in Days) – Inbound Stock</code>"
+	},
+	{
+		"title": "Item Cost",
+		"element": ".atum_order_items thead .item_cost",
+		"intro": "By clicking the blue figures on any cell within the Cost column, you can set the PO item's cost."
+	},
+	{
+		"title": "Item Discount",
+		"element": ".atum_order_items thead .item_discount",
+		"intro": "By clicking the blue figures on any cell within the Discount column, you can set the PO item's unitary discount value. It supports fixed values and percentages.<br>Also, if you click on the 'Set default discount link', the discount saved in the supplier's profile will be applied."
+	},
+	{
+		"title": "Item Quantity",
+		"element": ".atum_order_items thead .quantity",
+		"intro": "By clicking the blue figures on any cell within the Quantity column, you can set the PO item's units you need to purchase."
+	},
+	{
+		"title": "Item Tax",
+		"element": ".atum_order_items thead .tax",
+		"intro": "By clicking the blue figures on any cell within the Tax column, you can set the PO item's tax. It supports fixed values and percentages.<br>Also, if you click on the 'Set default tax link', the tax saved in the supplier's profile will be applied."
+	},
+	{
+		"title": "Item Actions",
+		"element": ".atum_order_items thead .actions",
+		"intro": "The actions menu will show up some useful actions that will vary depending on the displayed item (Add Meta, Remove, Create New Inventory, Set Purchase Price, etc)."
+	},
+	{
+		"title": "Add Products",
+		"element": ".atum-order-add-item .add-po-item",
+		"intro": "Click on the 'Add Product(s)' button to open the modal that you can use to add one or multiple products and/or inventories."
+	},
+	{
+		"title": "Add Fee",
+		"element": ".atum-order-add-item .add-po-fee",
+		"intro": "Click on the 'Add Fee' button to open the modal that you can use to add a fee item. You can specify its name, the cost and if you want it to be a fixed value or a percentage from the total."
+	},
+	{
+		"title": "Add Shipping",
+		"element": ".atum-order-add-item .add-po-shipping",
+		"intro": "Click on the 'Add Shipping' button to open the modal that you can use to add a shipping cost. You can specify its name, the cost and if you want it to be a fixed value or a percentage from the total."
+	}
+]

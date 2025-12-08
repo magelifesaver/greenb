@@ -1,0 +1,2425 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce MultiSite Global Cart\n"
+"POT-Creation-Date: 2025-01-27 22:58+0200\n"
+"PO-Revision-Date: 2025-01-27 22:58+0200\n"
+"Last-Translator: NspCode <contact@nsp-code.com>\n"
+"Language-Team: Nsp Code <contact@nsp-code.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../compatibility/ast-pro/ast-pro.php:70
+#: ../compatibility/ast-pro/ast-pro.php:89
+#: ../compatibility/ast-tracking-per-order-items/ast-tracking-per-order-items.php:114
+msgid "Track Shipment"
+msgstr "Localiza el envío"
+
+#: ../compatibility/bookly-responsive-appointment-booking-tool/main.php:63
+msgid ""
+"Sorry, the time slot %date_time% for %service% has been already occupied."
+msgstr "Lo sentimos, el horario %date_time% para %service% ya ha sido ocupado."
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:77
+msgid "Attendee"
+msgstr "Asistente"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:81
+#, php-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:120
+msgid "First Name"
+msgstr "Nombre"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:138
+msgid "Last Name"
+msgstr "Apellido"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:156
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:206
+#: ../include/admin/reports/class-woogc-report-customer-list.php:206
+msgid "Email"
+msgstr "Email"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:176
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:198
+msgid "Company"
+msgstr "Empresa"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:220
+msgid "Designation"
+msgstr "Designación"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:300
+#, php-format
+msgid "Name is required for %s attendee %d"
+msgstr "El nombre es requerido para %s el participante %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:307
+#, php-format
+msgid "Last name is required for %s attendee %d"
+msgstr "El apellido es requerido para %s el particpante %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:314
+#, php-format
+msgid "Email is required for %s attendee %d"
+msgstr "El email es requerido para “%s” del asistente %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:322
+#, php-format
+msgid "Telephone is required for %s attendee %d"
+msgstr "El teléfono es requerido para %s del asistente %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:331
+#, php-format
+msgid "Company is required for %s attendee %d"
+msgstr "La empresa es requerida para “%s” del participante %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:340
+#, php-format
+msgid "Designation is required for %s attendee %d"
+msgstr "La designación es requerida para “%s” del participante %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:348
+#, php-format
+msgid "Email is not valid for %s attendee %d"
+msgstr "El e-mail es inválido para “%s” del participante %d"
+
+#: ../compatibility/fooevents/classes/woohelper.php:187
+msgid "{OrderNumber} Ticket"
+msgstr "{OrderNumber} Boleto"
+
+#: ../compatibility/fooevents/classes/woohelper.php:255
+#: ../compatibility/fooevents/classes/woohelper.php:311
+#: ../compatibility/fooevents/classes/woohelper.php:323
+msgid ""
+"Your tickets are attached. Please print them and bring them to the event."
+msgstr ""
+"Tus entradas se encuentran adjuntas. Por favor imprimelas y traelas el día "
+"del evento."
+
+#: ../compatibility/wc-dynamic-pricing-and-discounts/classes/conditions/rp-wcdpd-condition-product-category.class.php:59
+msgid "Product category"
+msgstr "Categoría de producto"
+
+#: ../compatibility/woocommerce-advanced-fees/includes/conditions/wpc-contains-shipping-class-condition.php:60
+msgid "No shipping class"
+msgstr "Ninguna clase de envío"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Changed_Cart_Quantity_Event.php:47
+msgid "Changed Cart Quantity"
+msgstr "Cantidad de la cesta modificada"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Changed_Cart_Quantity_Event.php:56
+msgid "Triggered when a customer changes the quantity of an item in the cart."
+msgstr ""
+"Se activa cuando un cliente cambia la cantidad de un artículo del carrito."
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Removed_From_Cart_Event.php:50
+msgid "Removed from Cart"
+msgstr "Eliminado de la cesta"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Removed_From_Cart_Event.php:59
+msgid "Triggered when a customer removes an item from the cart."
+msgstr "Se activa cuando un cliente retira un artículo del carrito."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:26
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:30
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:82
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes suficientes permisos para acceder a esta página."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:39
+msgid "You haven't selected any orders"
+msgstr "No ha seleccionado ningún pedido"
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:43
+msgid "Some of the export parameters are missing."
+msgstr "No se encuentran algunos de los parámetros de exportación."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:105
+#, php-format
+msgid "Document of type '%s' for the selected order(s) could not be generated"
+msgstr ""
+"No se ha podido generar el documento de tipo '%s' para lo(s) pedido(s) "
+"seleccionado(s)"
+
+#: ../compatibility/woocommerce-smart-coupons/includes/class-sc-purchase-credit.php:131
+#, fuzzy
+#| msgid "Send coupons to me"
+msgid "Send Coupons to..."
+msgstr "Enviarme los Cupones"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:116
+msgid "Sorry, you are not allowed to move this item to the Trash."
+msgstr "No se permite trasladar este elemento a la papelera."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:127
+msgid "Error in moving to Trash."
+msgstr "Error al mover a la papelera."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:148
+msgid "Sorry, you are not allowed to restore this item from the Trash."
+msgstr "No está autorizado para restaurar este elemento de la papelera."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:152
+msgid "Error in restoring from Trash."
+msgstr "Error en la restauración de la papelera."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:178
+msgid "Sorry, you are not allowed to delete this item."
+msgstr "Lo sentimos, no tiene permitido eliminar este elemento."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:182
+msgid "Error in deleting."
+msgstr "Error al eliminar."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:296
+msgid "1 post not updated, somebody is editing it."
+msgstr "1 entrada no actualizada, alguien más está editándola."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:314
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Resultados de búsqueda para &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:595
+#: ../include/admin/class-woogc-admin-network-orders.php:1344
+msgid "Restore"
+msgstr "Restaurar"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:596
+msgid "Delete Permanently"
+msgstr "Borrar permanentemente"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:600
+msgid "Move to Trash"
+msgstr "Mover a la Papelera"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:603
+msgid "Mark processing"
+msgstr "Marcar como procesando"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:604
+msgid "Mark on-hold"
+msgstr "Marcar como en espera"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:605
+msgid "Mark complete"
+msgstr "Marcar como completado"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:624
+msgid "Filter by shop"
+msgstr "Filtrar por tienda"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:626
+msgid "All Shops"
+msgstr "Todas las Tiendas"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:714
+msgid "Filter by date"
+msgstr "Filtrar por fecha"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:716
+msgid "All dates"
+msgstr "Todas las fechas"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:729
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:774
+msgid "Filter"
+msgstr "Filtro"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:905
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:190
+#: ../include/admin/reports/class-woogc-report-stock.php:190
+msgid "Shop"
+msgstr "Tienda"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:906
+msgid "Status"
+msgstr "Estado"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:907
+msgid "Order"
+msgstr "Orden"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:908
+msgid "Billing"
+msgstr "Facturación"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:909
+msgid "Ship to"
+msgstr "Envíar a"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:912
+msgid "Date"
+msgstr "Fecha"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:913
+msgid "Total"
+msgstr "Total"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:914
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:211
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:195
+#: ../include/admin/reports/class-woogc-report-customer-list.php:211
+#: ../include/admin/reports/class-woogc-report-stock.php:195
+msgid "Actions"
+msgstr "Acciones"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:982
+#, php-format
+msgid "Select %s"
+msgstr "Seleccionar %s"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:990
+#, php-format
+msgid "&#8220;%s&#8221; is locked"
+msgstr "&#8220;%s&#8221; está bloqueado"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1012
+#: ../include/admin/class-woogc-admin-post-types.php:41
+msgid "Unpublished"
+msgstr "Sin publicar"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1015
+msgid "Y/m/d g:i:s a"
+msgstr "Y/m/d g:i:s A"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1022
+#, php-format
+msgid "%s ago"
+msgstr "hace %s"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1024
+#: ../include/admin/class-woogc-admin-post-types.php:44
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1029
+msgid "Published"
+msgstr "Publicado"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1032
+msgid "Missed schedule"
+msgstr "Horario perdido"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1034
+msgid "Scheduled"
+msgstr "Programado"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1037
+msgid "Last Modified"
+msgstr "Última modificación"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1094
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1099
+#: ../include/admin/class-woogc-admin-network-orders.php:1149
+#: ../include/admin/class-woogc-admin-network-orders.php:1152
+#: ../include/admin/class-woogc-admin-network-orders.php:1155
+#: ../include/admin/class-woogc-admin-post-types.php:52
+#: ../include/admin/class-woogc-admin-post-types.php:140
+#: ../include/admin/class-woogc-admin-post-types.php:142
+#: ../include/admin/class-woogc-admin-post-types.php:144
+#: ../include/class.woogc.options.php:333
+#: ../include/class.woogc.options.php:365
+#: ../include/class.woogc.options.php:389
+#: ../include/class.woogc.options.php:493
+#: ../include/class.woogc.options.php:540
+#: ../include/class.woogc.options.php:554
+#: ../include/class.woogc.options.php:568
+#: ../include/class.woogc.options.php:597
+#: ../include/coupons/class-coupons.php:66
+#: ../include/coupons/class-coupons.php:96
+#: ../include/coupons/class-coupons.php:126
+#: ../include/product-sync/views/html-bulk-edit-product.php:62
+#: ../include/product-sync/views/html-bulk-edit-product.php:82
+#: ../include/product-sync/views/html-bulk-edit-product.php:95
+#: ../include/product-sync/views/html-bulk-edit-product.php:108
+msgid "Yes"
+msgstr "Sí"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1114
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1127
+#: ../include/admin/class-woogc-admin-network-orders.php:1169
+#: ../include/admin/class-woogc-admin-post-types.php:120
+#: ../include/admin/class-woogc-admin-post-types.php:156
+msgid "Via"
+msgstr "Vía"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1216
+#: ../include/admin/class-woogc-admin-post-types.php:207
+msgid "Processing"
+msgstr "Procesando"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1225
+#: ../include/admin/class-woogc-admin-post-types.php:215
+msgid "Complete"
+msgstr "Completo"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1232
+#: ../include/admin/class-woogc-admin-network-orders.php:1370
+#: ../include/admin/class-woogc-admin-post-types.php:222
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:159
+#: ../include/admin/reports/class-woogc-report-stock.php:159
+msgid "View"
+msgstr "Ver"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1331
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr "Editar &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1332
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:157
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:152
+#: ../include/admin/reports/class-woogc-report-customer-list.php:157
+#: ../include/admin/reports/class-woogc-report-stock.php:152
+msgid "Edit"
+msgstr "Editar"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1343
+#, php-format
+msgid "Restore &#8220;%s&#8221; from the Trash"
+msgstr "Restaurar &#8220;%s&#8221; desde la Papelera"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1358
+#, php-format
+msgid "Preview &#8220;%s&#8221;"
+msgstr "Vista Previa &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1359
+msgid "Preview"
+msgstr "Vista previa"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1369
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr "Ver &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:42
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:208
+#: ../include/admin/reports/class-woogc-report-customer-list.php:208
+#: ../include/class.woogc.admin-menus.php:66
+#: ../include/class.woogc.options.php:90
+msgid "Orders"
+msgstr "Pedidos"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:45
+msgid "Sales by date"
+msgstr "Ventas por fecha"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:51
+msgid "Sales by product"
+msgstr "Ventas por producto"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:60
+msgid "Customers"
+msgstr "Clientes"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:63
+msgid "Customers vs. guests"
+msgstr "Alumnos vs. invitados"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:69
+msgid "Customer list"
+msgstr "Lista de Cliente"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:77
+msgid "Stock"
+msgstr "Stock"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:80
+msgid "Low in stock"
+msgstr "Bajo en existencia"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:86
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:135
+#: ../include/admin/reports/class-woogc-report-stock.php:135
+msgid "Out of stock"
+msgstr "Agotado"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:92
+msgid "Most stocked"
+msgstr "Mejor abastecidos"
+
+#: ../include/admin/class-woogc-admin-post-types.php:43
+msgid "Y/m/d g:i:s A"
+msgstr "Y/m/d g:i:s A"
+
+#: ../include/admin/class-woogc-admin-post-types.php:107
+msgid "Tel:"
+msgstr "Tel:"
+
+#: ../include/admin/class-woogc-admin-post-types.php:183
+msgid "Guest"
+msgstr "Invitado"
+
+#: ../include/admin/class-woogc-admin-post-types.php:193
+msgid "Show more details"
+msgstr "Mostrar más detalles"
+
+#: ../include/admin/class.admin.php:136
+#, php-format
+msgid "Stock: %d"
+msgstr "Existencias:%d"
+
+#: ../include/admin/class.admin.php:161 ../include/admin/class.admin.php:194
+msgid "Invalid order"
+msgstr "Orden inválida"
+
+#: ../include/admin/class.admin.php:226
+#: ../include/order/class-wc-order-item-product.php:69
+msgid "Invalid product ID"
+msgstr "Identificación del producto no válido"
+
+#: ../include/admin/class.admin.php:230
+#, php-format
+msgid "%s is a variable product parent and cannot be added."
+msgstr "%s es un producto primario variable y no se puede agregar."
+
+#: ../include/admin/class.admin.php:237
+#, php-format
+msgid "Error: %s"
+msgstr "Error: %s"
+
+#: ../include/admin/class.admin.php:301
+#, php-format
+msgid "Added line items: %s"
+msgstr "Elementos de línea añadidos: %s"
+
+#: ../include/admin/reports-hpos/class-woogc-admin-report.php:558
+#: ../include/admin/reports/class-woogc-admin-report.php:546
+#, php-format
+msgid "Sold %1$s worth in the last %2$d days"
+msgstr "Vendido %s en el último %d días"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:37
+#: ../include/admin/reports/class-woogc-report-customer-list.php:37
+msgid "No customers found."
+msgstr "No se han encontrado clientes."
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:61
+#: ../include/admin/reports/class-woogc-report-customer-list.php:61
+#, php-format
+msgid "Refreshed stats for %s"
+msgstr "Estadísticas actualizadas para %s"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:66
+#: ../include/admin/reports/class-woogc-report-customer-list.php:66
+msgid "Search customers"
+msgstr "Buscar clientes"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:151
+#: ../include/admin/reports/class-woogc-report-customer-list.php:151
+msgid "Refresh stats"
+msgstr "Actualizar estadísticas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:173
+#: ../include/admin/reports/class-woogc-report-customer-list.php:173
+msgid "Link previous orders"
+msgstr "Enlazar órdenes anteriores"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:204
+#: ../include/admin/reports/class-woogc-report-customer-list.php:204
+msgid "Name (Last, First)"
+msgstr "Nombre (Apellido, Nombre)"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:205
+#: ../include/admin/reports/class-woogc-report-customer-list.php:205
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:207
+#: ../include/admin/reports/class-woogc-report-customer-list.php:207
+msgid "Location"
+msgstr "Ubicación"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:209
+#: ../include/admin/reports/class-woogc-report-customer-list.php:209
+msgid "Money spent"
+msgstr "Dinero gastado"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:210
+#: ../include/admin/reports/class-woogc-report-customer-list.php:210
+msgid "Last order"
+msgstr "Última inscripción"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:42
+#: ../include/admin/reports/class-woogc-report-customers.php:42
+#, php-format
+msgid "%s signups in this period"
+msgstr "%s inscripciones en este período"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:157
+#: ../include/admin/reports/class-woogc-report-customers.php:157
+msgid "orders"
+msgstr "pedidos"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:179
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:592
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:155
+#: ../include/admin/reports/class-woogc-report-customers.php:179
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:579
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:155
+msgid "Year"
+msgstr "Año"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:180
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:593
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:156
+#: ../include/admin/reports/class-woogc-report-customers.php:180
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:580
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:156
+msgid "Last month"
+msgstr "Último mes"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:181
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:594
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:157
+#: ../include/admin/reports/class-woogc-report-customers.php:181
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:581
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:157
+msgid "This month"
+msgstr "Este mes"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:182
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:595
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:158
+#: ../include/admin/reports/class-woogc-report-customers.php:182
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:582
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:158
+msgid "Last 7 days"
+msgstr "Últimos 7 días"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:350
+#: ../include/admin/reports/class-woogc-report-customers.php:350
+msgid "Customer orders"
+msgstr "Pedidos de clientes"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:356
+#: ../include/admin/reports/class-woogc-report-customers.php:356
+msgid "customer orders"
+msgstr "inscripciones de los clientes"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:360
+#: ../include/admin/reports/class-woogc-report-customers.php:360
+msgid "Guest orders"
+msgstr "Pedidos de invitados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:366
+#: ../include/admin/reports/class-woogc-report-customers.php:366
+msgid "guest orders"
+msgstr "inscripciones de los invitados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:370
+#: ../include/admin/reports/class-woogc-report-customers.php:370
+msgid "Signups"
+msgstr "Registros"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:377
+#: ../include/admin/reports/class-woogc-report-customers.php:377
+msgid "new users"
+msgstr "nuevos usuarios"
+
+#: ../include/admin/reports-hpos/class-woogc-report-low-in-stock.php:23
+#: ../include/admin/reports/class-woogc-report-low-in-stock.php:23
+msgid "No low in stock products found."
+msgstr "No se ha encontrado ningún producto con pocas existencias."
+
+#: ../include/admin/reports-hpos/class-woogc-report-out-of-stock.php:23
+#: ../include/admin/reports/class-woogc-report-out-of-stock.php:23
+msgid "No out of stock products found."
+msgstr "No se han encontrado productos agotados."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:475
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:462
+#, php-format
+msgid "%s average gross daily sales"
+msgstr "%s bruto de ventas diarias"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:480
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:467
+#, php-format
+msgid "%s average net daily sales"
+msgstr "%s neto medio de las ventas diarias"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:488
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:475
+#, php-format
+msgid "%s average gross monthly sales"
+msgstr "%s promedio bruto de ventas mensuales"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:493
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:480
+#, php-format
+msgid "%s average net monthly sales"
+msgstr "%s ventas netas mensuales promedio"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:502
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:489
+#, php-format
+msgid "%s gross sales in this period"
+msgstr "%s ventas brutas en este periodo"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:505
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:492
+msgid ""
+"This is the sum of the order totals after any refunds and including shipping "
+"and taxes."
+msgstr ""
+"Esta es la suma de los totales del pedido después de cualquier reembolso e "
+"incluye el envío y los impuestos."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:520
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:507
+#, php-format
+msgid "%s net sales in this period"
+msgstr "%s ventas netas en este periodo"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:523
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:510
+msgid ""
+"This is the sum of the order totals after any refunds and excluding shipping "
+"and taxes."
+msgstr ""
+"Esta es la suma del total de pedidos una vez excluidos reembolsos, costes de "
+"envío e impuestos."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:538
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:525
+#, php-format
+msgid "%s orders placed"
+msgstr "%s pedidos realizados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:548
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:535
+#, php-format
+msgid "%s items purchased"
+msgstr "%s artículos comprados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:568
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:555
+#, php-format
+msgid "%s charged for shipping"
+msgstr "%s cobrado por el envío"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:577
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:564
+#, php-format
+msgid "%s worth of coupons used"
+msgstr "%s valor de cupones utilizados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:637
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:624
+msgid "Export CSV"
+msgstr "Exportar CSV"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:719
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:554
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:706
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:554
+msgid "Number of items sold"
+msgstr "Número de productos vendidos"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:727
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:714
+msgid "Number of orders"
+msgstr "Cantidad de pedidos"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:735
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:722
+msgid "Average gross sales amount"
+msgstr "Cantidad promedio de ventas brutas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:745
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:732
+msgid "Average net sales amount"
+msgstr "Importe neto promedio de ventas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:755
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:742
+msgid "Coupon amount"
+msgstr "Importe del cupón"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:765
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:752
+msgid "Shipping amount"
+msgstr "Cantidad de envíos"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:775
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:762
+msgid "Gross sales amount"
+msgstr "Cantidad bruta de ventas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:785
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:772
+msgid "Net sales amount"
+msgstr "Cantidad neta de ventas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:795
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:782
+msgid "Refund amount"
+msgstr "Cantidad reembolsada"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:134
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:134
+#, php-format
+msgid "%s sales for the selected items"
+msgstr "%s ventas de los artículos seleccionados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:141
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:141
+#, php-format
+msgid "%s purchases for the selected items"
+msgstr "%s compras de los artículos seleccionados"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:189
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:189
+msgid "Showing reports for:"
+msgstr "Mostrando informes de:"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:562
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:562
+msgid "Sales amount"
+msgstr "Cantidad de ventas"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:53
+#: ../include/admin/reports/class-woogc-report-stock.php:53
+msgid "No products found."
+msgstr "No se encontraron productos."
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:131
+#: ../include/admin/reports/class-woogc-report-stock.php:131
+msgid "On backorder"
+msgstr "En la lista de espera"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:133
+#: ../include/admin/reports/class-woogc-report-stock.php:133
+msgid "In stock"
+msgstr "En stock"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:191
+#: ../include/admin/reports/class-woogc-report-stock.php:191
+msgid "Product"
+msgstr "Producto"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:192
+#: ../include/admin/reports/class-woogc-report-stock.php:192
+msgid "Parent"
+msgstr "Superior"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:193
+#: ../include/admin/reports/class-woogc-report-stock.php:193
+msgid "Units in stock"
+msgstr "Unidades en inventario"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:194
+#: ../include/admin/reports/class-woogc-report-stock.php:194
+msgid "Stock status"
+msgstr "Status stok"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:25
+#: ../include/class.woogc.options.php:787
+msgid "Licence Key"
+msgstr "Clave de Licencia"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:28
+msgid "Deactivate"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:30
+msgid "You can generate more keys from"
+msgstr "Puede generar más claves a partir de"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:37
+#, fuzzy
+#| msgid "Status"
+msgid "License Status"
+msgstr "Estado"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:42
+msgid "License Expiration"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:46
+msgid ""
+"Licence is expired, plugin <b>Updates</b> and <b>Support</b> are not "
+"available"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:62
+msgid "New plugin version available"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license.php:21
+#, fuzzy
+#| msgid "Licence Key"
+msgid "License Key"
+msgstr "Clave de Licencia"
+
+#: ../include/admin/views/html-admin-license.php:26
+msgid ""
+"Enter the Licence Key you received when purchased this product. If you lost "
+"the key, you can always retrieve it from"
+msgstr ""
+"Introduzca la clave de licencia que recibió al comprar este producto. Si ha "
+"perdido la clave, siempre puede recuperarla en"
+
+#: ../include/admin/views/html-admin-license.php:26
+msgid "My Account"
+msgstr "Mi cuenta"
+
+#: ../include/admin/views/html-admin-license.php:29
+msgid "Save"
+msgstr "Guardar"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid ""
+"Rememebr, once activated, a new login session is required. The cookies and "
+"cache data is recommended to be cleared and a browser restart might also be "
+"required"
+msgstr ""
+"Recuerde que, una vez activada, se requiere una nueva sesión de inicio de "
+"sesión. Se recomienda borrar las cookies y los datos de la caché, y es "
+"posible que sea necesario reiniciar el navegador"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid "More details at"
+msgstr "Más detalles"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid "Plugin Instalation"
+msgstr "Instalación de plugins"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:164
+msgid "Checkout for Shop"
+msgstr "Pago de la tienda"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:199
+msgid "Your order for"
+msgstr "Su Pedido en"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:276
+msgid "Continue Checkout"
+msgstr "Continuar con la compra"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:277
+msgid "There are other products in your cart which require Checkout"
+msgstr "Hay otros productos en su cesta que requieren pasar por caja"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:278
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../include/checkout/class.single_checkout.php:306
+msgid "This is a Split of"
+msgstr "Se trata de un Split de"
+
+#: ../include/checkout/class.wc-checkout-extend.php:227
+msgid ""
+"Please read and accept the terms and conditions to proceed with your order."
+msgstr ""
+"Por favor, lee y acepta nuestros términos y condiciones antes de completar "
+"tu pedido."
+
+#: ../include/checkout/class.wc-checkout-extend.php:234
+msgid "Please enter an address to continue."
+msgstr "Por favor, introduce una dirección para continuar."
+
+#: ../include/checkout/class.wc-checkout-extend.php:238
+#, php-format
+msgid ""
+"Unfortunately <strong>we do not ship %s</strong>. Please enter an "
+"alternative shipping address."
+msgstr ""
+"Lamentablemente <strong>no enviamos a %s</strong>. Por favor, ¿podrías "
+"introducir una dirección de envío alternativo?."
+
+#: ../include/checkout/class.wc-checkout-extend.php:247
+#: ../include/checkout/class.wc-checkout-extend.php:252
+msgid ""
+"No shipping method has been selected. Please double check your address, or "
+"contact us if you need any help."
+msgstr ""
+"Ez da bidalketa metodorik definitu. Mesedez, berrikusi zure helbidea edo "
+"jarri gurekin harremanetan laguntza behar baduzu."
+
+#: ../include/checkout/class.wc-checkout-extend.php:263
+msgid "Invalid payment method."
+msgstr "Método de pago no válido."
+
+#: ../include/checkout/class.wc-checkout-extend.php:280
+msgid "We were unable to process your order, please try again."
+msgstr "No hemos podido procesar tu pedido, por favor inténtalo de nuevo."
+
+#: ../include/checkout/class.wc-checkout-extend.php:290
+#, php-format
+msgid ""
+"Sorry, your session has expired. <a href=\"%s\" class=\"wc-backward\">Return "
+"to shop</a>"
+msgstr ""
+"La sesión ha caducado. <a href=\"%s\" class=\"wc-backward\">Volver a la "
+"tienda</a>"
+
+#: ../include/checkout/class.wc-checkout-extend.php:329
+msgid "Unable to create order."
+msgstr "No se puedo crear pedido."
+
+#: ../include/class-woogc-download-handler.php:68
+#: ../include/class-woogc-download-handler.php:73
+#: ../include/class-woogc-download-handler.php:88
+#: ../include/class-woogc-download-handler.php:106
+msgid "Invalid download link."
+msgstr "Enlace de descarga no válido."
+
+#: ../include/class-woogc-download-handler.php:156
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:172
+msgid "Invalid order."
+msgstr "Pedido no válido."
+
+#: ../include/class-woogc-download-handler.php:168
+msgid "Sorry, you have reached your download limit for this file"
+msgstr "Lo sentimos, has alcanzado el limite de descarga para este archivo"
+
+#: ../include/class-woogc-download-handler.php:179
+msgid "Sorry, this download has expired"
+msgstr "Lo sentimos, esta descarga ha expirado"
+
+#: ../include/class-woogc-download-handler.php:192
+#: ../include/class-woogc-download-handler.php:195
+msgid "You must be logged in to download files."
+msgstr "Debes acceder para descargar archivos."
+
+#: ../include/class-woogc-download-handler.php:195
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: ../include/class-woogc-download-handler.php:195
+msgid "Log in to Download Files"
+msgstr "Inicia sesión para descargar archivos"
+
+#: ../include/class-woogc-download-handler.php:198
+msgid "This is not your download link."
+msgstr "Este no es su enlace de descarga."
+
+#: ../include/class-woogc-download-handler.php:219
+msgid "No file defined"
+msgstr "Archivo no definido"
+
+#: ../include/class-woogc-download-handler.php:442
+msgid "File not found"
+msgstr "Archivo no encontrado"
+
+#: ../include/class.woogc.admin-menus.php:65
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: ../include/class.woogc.admin-menus.php:67
+msgid "Reports"
+msgstr "Informes"
+
+#: ../include/class.woogc.admin-menus.php:179
+msgid "Orders per Page"
+msgstr "Pedidos por página"
+
+#: ../include/class.woogc.ajax.php:173
+#, php-format
+msgid "Item %1$s stock reduced from %2$s to %3$s."
+msgstr "Reducido el inventario del artículo %1$s de %2$s a %3$s."
+
+#: ../include/class.woogc.ajax.php:186
+msgid ""
+"No products had their stock reduced - they may not have stock management "
+"enabled."
+msgstr ""
+"No se redujo el cupo del curso - puede ser que no esté habilitado el control "
+"de cupos."
+
+#: ../include/class.woogc.ajax.php:228
+#, php-format
+msgid "Item %1$s stock increased from %2$s to %3$s."
+msgstr "Se incrementó el stock del producto %1$s de %2$s a %3$s."
+
+#: ../include/class.woogc.ajax.php:240
+msgid ""
+"No products had their stock increased - they may not have stock management "
+"enabled."
+msgstr ""
+"No se incrementaron los inventarios de los productos - puede ser que no "
+"tengas habilitado el control de inventarios."
+
+#: ../include/class.woogc.form-handler.php:59
+msgid "Item"
+msgstr "Artículo"
+
+#: ../include/class.woogc.form-handler.php:63
+#: ../include/class.woogc.form-handler.php:66
+#, php-format
+msgid "%s removed."
+msgstr "%s eliminado."
+
+#: ../include/class.woogc.form-handler.php:64
+msgid "Undo?"
+msgstr "¿Deshacer?"
+
+#: ../include/class.woogc.form-handler.php:123
+#, php-format
+msgid "You can only have 1 %s in your cart."
+msgstr "Sólo puedes tener 1 %s en tu cesta."
+
+#: ../include/class.woogc.form-handler.php:152
+msgid "Cart updated."
+msgstr "Pedido actualizado."
+
+#: ../include/class.woogc.form-handler.php:251
+#: ../include/session/class-wc-cart-session-extend.php:443
+msgid "The cart has been filled with the items from your previous order."
+msgstr "La cesta se ha llenado con artículos de tus pedidos anteriores."
+
+#: ../include/class.woogc.functions.php:481
+#: ../include/class.woogc.functions.php:496
+msgid ""
+"<b>WooCommerce Global Cart</b> - unable to copy over to /wp-content/mu-"
+"plugins/ and launch the MU module file.."
+msgstr ""
+"<b>WooCommerce Global Cart</b> - no se puede copiar a /wp-content/mu-"
+"plugins/ y lanzar el archivo de módulo MU.."
+
+#: ../include/class.woogc.functions.php:491
+msgid ""
+"<b>WooCommerce Global Cart</b> - unable to insert the loader to /wp-config."
+"php. Ensure the file is writable."
+msgstr ""
+"<b>WooCommerce Global Cart</b> - no se puede insertar el cargador en /wp-"
+"config.php. Asegúrese de que el archivo tiene permisos de escritura."
+
+#: ../include/class.woogc.functions.php:600
+msgid "Unexpected wp-config.php file content"
+msgstr "Contenido inesperado del archivo wp-config.php"
+
+#: ../include/class.woogc.functions.php:684
+msgid "Unable to determinate the wp-config.php file path"
+msgstr "No se puede determinar la ruta del archivo wp-config.php"
+
+#: ../include/class.woogc.functions.php:696
+msgid "The wp-config.php file is not writable"
+msgstr "El archivo wp-config.php no tiene permisos de escritura"
+
+#: ../include/class.woogc.functions.php:708
+msgid "Unable to read the wp-config.php file content"
+msgstr "No se puede leer el contenido del archivo wp-config.php"
+
+#: ../include/class.woogc.functions.php:733
+msgid "Cache Module status updated"
+msgstr "Estado del módulo de caché actualizado"
+
+#: ../include/class.woogc.functions.php:744
+msgid "Unable to update the wp-config.php file"
+msgstr "No se puede actualizar el archivo wp-config.php"
+
+#: ../include/class.woogc.general-filters.php:156
+#, php-format
+msgid "Search %s"
+msgstr "Buscar %s"
+
+#: ../include/class.woogc.general-filters.php:158
+#, php-format
+msgid "All %s"
+msgstr "Todos %s"
+
+#: ../include/class.woogc.general-filters.php:160
+#, php-format
+msgid "Parent %s"
+msgstr "Superior %s"
+
+#: ../include/class.woogc.general-filters.php:162
+#, php-format
+msgid "Parent %s:"
+msgstr "Superior %s:"
+
+#: ../include/class.woogc.general-filters.php:164
+#, php-format
+msgid "Edit %s"
+msgstr "Editar %s"
+
+#: ../include/class.woogc.general-filters.php:166
+#, php-format
+msgid "Update %s"
+msgstr "Actualizar %s"
+
+#: ../include/class.woogc.general-filters.php:168
+#, php-format
+msgid "Add new %s"
+msgstr "Añadir nuevo %s"
+
+#: ../include/class.woogc.general-filters.php:170
+#, php-format
+msgid "New %s"
+msgstr "Nuevo %s"
+
+#: ../include/class.woogc.general-filters.php:172
+#, php-format
+msgid "No &quot;%s&quot; found"
+msgstr "No se encontró &quot;%s&quot"
+
+#: ../include/class.woogc.general-filters.php:174
+#, php-format
+msgid "&larr; Back to \"%s\" attributes"
+msgstr "&larr; Volver a los “%s” atributos"
+
+#: ../include/class.woogc.options.php:86
+#, fuzzy
+#| msgid "Licence"
+msgid "License"
+msgstr "Licencia"
+
+#: ../include/class.woogc.options.php:87
+#, fuzzy
+#| msgid "General Settings"
+msgid "General"
+msgstr "Configuración general"
+
+#: ../include/class.woogc.options.php:88 ../include/class.woogc.options.php:263
+msgid "Synchronization Type"
+msgstr "Tipo de sincronización"
+
+#: ../include/class.woogc.options.php:89
+#, fuzzy
+#| msgid "Checkout Type"
+msgid "Checkout"
+msgstr "Tipo de Checkout"
+
+#: ../include/class.woogc.options.php:91
+#, fuzzy
+#| msgid "Product Sync"
+msgid "Products Sync"
+msgstr "Sincronizar Producto"
+
+#: ../include/class.woogc.options.php:92
+msgid "Cart"
+msgstr ""
+
+#: ../include/class.woogc.options.php:96
+#, fuzzy
+#| msgid "Shipping amount"
+msgid "Shipping"
+msgstr "Cantidad de envíos"
+
+#: ../include/class.woogc.options.php:159
+msgid "Save Settings"
+msgstr "Guardar ajustes"
+
+#: ../include/class.woogc.options.php:185
+msgid ""
+"The license key is crucial for ensuring access to updates, support, and "
+"premium features. By entering the license key, the plugin verifies its "
+"authenticity with the developer's server, allowing it to function fully."
+msgstr ""
+
+#: ../include/class.woogc.options.php:186
+msgid ""
+"Once licensed, the plugin receives regular updates, including security "
+"patches and new features, which are essential for maintaining compatibility "
+"and performance. Additionally, the license grants access to technical "
+"support, ensuring users can resolve issues efficiently."
+msgstr ""
+
+#: ../include/class.woogc.options.php:187
+msgid ""
+"Deactivating the license key, typically used when moving the license to a "
+"new site or installation, disable updates and support for previous domain."
+msgstr ""
+
+#: ../include/class.woogc.options.php:231
+#, fuzzy
+#| msgid "Use Global Cart for selected sites."
+msgid "Use Global Features for Selected Sites."
+msgstr "Utilice el carro global para los sitios seleccionados."
+
+#: ../include/class.woogc.options.php:232
+msgid ""
+"The \"Use Global Features for Selected Sites\" option within the WP Global "
+"Cart plugin ensures that the Global Cart functionality is applied "
+"exclusively to sites that have been specifically selected and checked "
+"through this interface. For the Global Cart to operate correctly, the "
+"WooCommerce plugin must be active on the respective site, either as a "
+"network-activated plugin or installed and activated locally within the site "
+"itself."
+msgstr ""
+
+#: ../include/class.woogc.options.php:233
+msgid ""
+"It is essential to verify that the selected site has its <b>Public</b> "
+"attribute enabled. This setting determines whether the site is visible and "
+"accessible in the interface, ensuring it can be included in the Global Cart "
+"network. Without this attribute active, the site will not be displayed in "
+"the selection area, and the Global Cart features will be unavailable for "
+"that site."
+msgstr ""
+
+#: ../include/class.woogc.options.php:234
+msgid ""
+"If the WooCommerce plugin is not available or inactive on a selected site, "
+"the Global Cart routines will automatically be disabled for that site, "
+"preventing it from t in the shared cart functionality across the network."
+msgstr ""
+
+#: ../include/class.woogc.options.php:235
+msgid ""
+"Additionally, the list of sites permitted to run the Global Cart feature can "
+"be further controlled and customized using the filter hook:"
+msgstr ""
+
+#: ../include/class.woogc.options.php:235
+msgid ""
+" This filter allows developers to programmatically manage and restrict which "
+"sites have access to the Global Cart, providing a more flexible way to "
+"tailor the feature based on specific requirements."
+msgstr ""
+
+#: ../include/class.woogc.options.php:258
+msgid "Screen"
+msgstr "Pantalla"
+
+#: ../include/class.woogc.options.php:259
+msgid "Headers"
+msgstr "Encabezados"
+
+#: ../include/class.woogc.options.php:264
+msgid ""
+"The \"Synchronization Type\" option in the WP Global Cart plugin determines "
+"how data synchronization is handled across selected shops, ensuring a "
+"unified and consistent experience for shared features like the global cart."
+msgstr ""
+
+#: ../include/class.woogc.options.php:265
+#, fuzzy
+#| msgid "There are two types of synchronisation procedures:"
+msgid "There are two synchronization methods available:"
+msgstr "Existen dos tipos de procedimientos de sincronización:"
+
+#: ../include/class.woogc.options.php:266
+msgid ""
+"<b>Screen</b> ( default ) - This method is the simplest to configure and "
+"offers broad compatibility across all server environments. Synchronization "
+"occurs visibly during user interactions, making it suitable for most setups."
+msgstr ""
+
+#: ../include/class.woogc.options.php:267
+#, fuzzy
+#| msgid ""
+#| "<b>Headers</b> - Is a more complex synchronisation procedure. It works "
+#| "through HTTP headers and is an unnoticeable/background operation. It may "
+#| "not be compatible with all environments that use heavy caches (e.g. "
+#| "Varnish)."
+msgid ""
+"<b>Headers</b> - A more advanced synchronization method that operates "
+"through HTTP headers in the background, making the process seamless and "
+"invisible to users. However, it may face compatibility issues with "
+"environments using aggressive caching mechanisms, such as Varnish."
+msgstr ""
+"<b>Cabeceras</b> - Es un procedimiento de sincronización más complejo. "
+"Funciona a través de las cabeceras HTTP y es una operación imperceptible/en "
+"segundo plano. Puede no ser compatible con todos los entornos que utilizan "
+"cachés pesadas (por ejemplo, Varnish)."
+
+#: ../include/class.woogc.options.php:269
+msgid ""
+"The plugin is designed to automatically apply the chosen synchronization "
+"type, ensuring smooth data handling without requiring extensive "
+"configuration. Carefully select the method that best suits your server setup "
+"to maintain optimal performance and data consistency."
+msgstr ""
+
+#: ../include/class.woogc.options.php:292
+msgid "Single Checkout"
+msgstr "Pago único"
+
+#: ../include/class.woogc.options.php:293
+msgid "Each Store Checkout"
+msgstr "Pago en cada tienda"
+
+#: ../include/class.woogc.options.php:297
+msgid "Checkout Type"
+msgstr "Tipo de Checkout"
+
+#: ../include/class.woogc.options.php:298
+msgid ""
+"The <b>Single Checkout</b> option allows customers to complete a single, "
+"unified checkout process for all items in their cart, regardless of which "
+"store each product originates from. In this setup, the total payment is "
+"collected in full on the checkout site, simplifying the transaction process "
+"for the customer."
+msgstr ""
+
+#: ../include/class.woogc.options.php:299
+msgid ""
+"Alternatively, selecting the <b>Each Store Checkout</b> option creates "
+"separate checkout sessions for each store contributing products to the cart. "
+"This means individual transactions are initiated at each respective store, "
+"with payments processed separately for their specific products. Each shop "
+"independently handles its own portion of the order, ensuring direct payment "
+"collection."
+msgstr ""
+
+#: ../include/class.woogc.options.php:300
+msgid ""
+"Ensure the WooCommerce 'Enable taxes' option for the check-out site, is set "
+"accordingly to other shops in the network, to avoid adding or subtracting "
+"the value to total. If 'Enable taxes' is active, ensure all Tax rates use "
+"identic definition and rates across the shops."
+msgstr ""
+"Asegúrese de que la opción 'Activar impuestos' de WooCommerce para el sitio "
+"de check-out, está configurada en consecuencia con otras tiendas de la red, "
+"para evitar sumar o restar el valor al total. Si la opción \"Activar "
+"impuestos\" está activa, asegúrese de que todos los tipos impositivos "
+"utilizan la misma definición y tipos en todas las tiendas."
+
+#: ../include/class.woogc.options.php:307
+msgid "Any Site"
+msgstr "Cualquier sitio"
+
+#: ../include/class.woogc.options.php:322
+msgid "Cart Checkout location"
+msgstr "Ubicación de la cesta de la compra"
+
+#: ../include/class.woogc.options.php:323
+msgid ""
+"The Cart Checkout Location option is applicable when the Checkout Type is "
+"set to <b>Single Checkout</b>."
+msgstr ""
+
+#: ../include/class.woogc.options.php:324
+msgid ""
+"This setting determines where the customer will be redirected to finalize "
+"their order. You can configure it to direct users to a specific site for "
+"completing the checkout process, centralizing all transactions on that "
+"chosen site. Alternatively, it can be set to allow checkout on any "
+"participating site within the network, giving customers the flexibility to "
+"complete their purchase wherever they prefer."
+msgstr ""
+
+#: ../include/class.woogc.options.php:325
+msgid ""
+"This option is useful for businesses seeking either a centralized checkout "
+"hub or a more distributed approach where multiple stores can handle the "
+"checkout process. Choose the location setup based on your preferred payment "
+"flow and site management structure."
+msgstr ""
+
+#: ../include/class.woogc.options.php:332
+#: ../include/class.woogc.options.php:364
+#: ../include/class.woogc.options.php:388
+#: ../include/class.woogc.options.php:492
+#: ../include/class.woogc.options.php:539
+#: ../include/class.woogc.options.php:553
+#: ../include/class.woogc.options.php:567
+#: ../include/class.woogc.options.php:596
+#: ../include/coupons/class-coupons.php:64
+#: ../include/coupons/class-coupons.php:95
+#: ../include/coupons/class-coupons.php:125
+#: ../include/product-sync/views/html-bulk-edit-product.php:63
+#: ../include/product-sync/views/html-bulk-edit-product.php:83
+#: ../include/product-sync/views/html-bulk-edit-product.php:96
+#: ../include/product-sync/views/html-bulk-edit-product.php:109
+msgid "No"
+msgstr "No"
+
+#: ../include/class.woogc.options.php:337
+msgid "Split Order"
+msgstr "Dividir pedido"
+
+#: ../include/class.woogc.options.php:338
+msgid ""
+"The Split Order option is available when the Checkout Type is set to "
+"<b>Single Checkout</b>."
+msgstr ""
+
+#: ../include/class.woogc.options.php:339
+msgid ""
+"When enabled, this feature automatically generates separate orders in each "
+"shop involved in the transaction, creating individual orders for every store "
+"contributing products to the main cart. Each split order will contain only "
+"the products associated with that specific shop, ensuring a clear separation "
+"of items and order management across the network."
+msgstr ""
+
+#: ../include/class.woogc.options.php:340
+msgid ""
+"This setup allows each shop to manage its portion of the order "
+"independently, including order processing, inventory management, and "
+"fulfillment. It may provides better clarity and control for both store "
+"owners and customers when dealing with multi-store purchases under a single "
+"checkout session."
+msgstr ""
+
+#: ../include/class.woogc.options.php:369
+msgid "Use Sequential Order Numbers"
+msgstr "Utilizar números de orden secuencial"
+
+#: ../include/class.woogc.options.php:370
+msgid ""
+"The Use Sequential Order Numbers option ensures that order IDs are generated "
+"in a consecutive, uninterrupted sequence across the entire network, "
+"regardless of which shop the order originates from."
+msgstr ""
+
+#: ../include/class.woogc.options.php:371
+msgid ""
+"This feature helps maintain a consistent order numbering system, simplifying "
+"order tracking, reporting, and bookkeeping, especially in multi-store "
+"setups. It is highly recommended when the <b>Cart Checkout Location</b> is "
+"configured for a <b>Any Shop</b>, as it prevents gaps or duplicated order "
+"numbers when processing sales across multiple stores."
+msgstr ""
+
+#: ../include/class.woogc.options.php:372
+msgid ""
+"By enabling this option, you can achieve a more organized and professional "
+"order management system, improving clarity for both administrators and "
+"customers."
+msgstr ""
+
+#: ../include/class.woogc.options.php:393
+#, fuzzy
+#| msgid "Enable Synchronization"
+msgid "Enable Order Synchronization"
+msgstr "Activar sincronización"
+
+#: ../include/class.woogc.options.php:394
+msgid "( recommended to <b>NO</b> )"
+msgstr ""
+
+#: ../include/class.woogc.options.php:395
+msgid ""
+"Enable this option to synchronize orders across specific shops in your "
+"network. Refer to the bellow \"Order Synchronization for selected Shops\" "
+"setting for shop selection and the \"Order Synchronization to selected "
+"Shop\" option to designate the target shop for synchronization."
+msgstr ""
+
+#: ../include/class.woogc.options.php:396
+msgid ""
+"This feature is generally not required, as network orders are already "
+"accessible globally within the user's \"My Account\" section, and admins can "
+"view all orders in the WooCommerce Global Orders interface."
+msgstr ""
+
+#: ../include/class.woogc.options.php:397
+msgid ""
+"However, this feature can be useful if you need network orders to trigger "
+"actions at a specific shop. Order synchronization is done through the REST "
+"API, ensuring that shop-specific actions and filters are applied. Unless you "
+"have a specific use case for this functionality, it is recommended to keep "
+"this option disabled."
+msgstr ""
+
+#: ../include/class.woogc.options.php:406
+msgid "Consumer API details"
+msgstr ""
+
+#: ../include/class.woogc.options.php:409
+msgid ""
+"When 'Enable Order Synchronization' option is active, the Consumer API "
+"details are used to connect to the target shop through the API, where the "
+"order will be synchronized."
+msgstr ""
+
+#: ../include/class.woogc.options.php:410
+msgid ""
+"An API credential can be generated at the target shop, at WooCommerce > "
+"Settings > Advanced > REST API."
+msgstr ""
+
+#: ../include/class.woogc.options.php:438
+#, fuzzy
+#| msgid "Synchronization Type"
+msgid "Order Synchronization for selected Shops"
+msgstr "Tipo de sincronización"
+
+#: ../include/class.woogc.options.php:439
+msgid ""
+"When the 'Enable Order Synchronization' option is enabled, orders created on "
+"the selected shops will be automatically synchronized to the designated "
+"target shop. This ensures that all relevant order data is transferred "
+"seamlessly, allowing for centralized management of orders across multiple "
+"shops within your network. You can choose which shops to include in this "
+"synchronization process, ensuring flexibility in how orders are handled and "
+"processed."
+msgstr ""
+
+#: ../include/class.woogc.options.php:440
+msgid ""
+"The option ensures that order data remains synchronized. When an order is "
+"updated or modified in the origin shop, the changes are automatically "
+"reflected in the other connected shop. This ensures consistency of order "
+"information across your network, maintaining accurate and up-to-date records "
+"in all selected shops."
+msgstr ""
+
+#: ../include/class.woogc.options.php:468
+#, fuzzy
+#| msgid "Synchronization Type"
+msgid "Order Synchronization to selected Shop"
+msgstr "Tipo de sincronización"
+
+#: ../include/class.woogc.options.php:469
+msgid ""
+"When the 'Enable Order Synchronization' option is enabled, any orders "
+"created on the designated shops will be automatically synchronized to the "
+"designated target shop. This ensures that the target shop receives all "
+"relevant order details, keeping the order information consistent across your "
+"network. This synchronization process helps centralize order management, "
+"making it easier to track and manage orders from multiple shops in one place."
+msgstr ""
+
+#: ../include/class.woogc.options.php:497
+msgid "Enable Products Synchronization interface"
+msgstr "Activar la interfaz de sincronización de productos"
+
+#: ../include/class.woogc.options.php:498
+#, fuzzy
+#| msgid ""
+#| "If the Products Synchronization option is active, a new tab within the "
+#| "Product Data interface is shown to help with Product replication across "
+#| "the network, to one or more shops."
+msgid ""
+"Enabling the Products Synchronization option activates a dedicated tab "
+"within the Product Data interface, providing an intuitive way to manage "
+"product replication across the network."
+msgstr ""
+"Si la opción de Sincronización de Productos está activa, se muestra una "
+"nueva pestaña dentro de la interfaz de Datos de Producto para ayudar con la "
+"replicación de Productos a través de la red, a una o más tiendas."
+
+#: ../include/class.woogc.options.php:499
+msgid ""
+"This feature allows you to easily synchronize product details to one or "
+"multiple shops, ensuring consistency in product listings across your entire "
+"network. It streamlines the process of duplicating products, saving time and "
+"reducing the risk of errors when managing multi-store inventories."
+msgstr ""
+
+#: ../include/class.woogc.options.php:500
+msgid ""
+"By using this interface, you can control which stores receive the product "
+"data, making it ideal for networks where products need to be available "
+"across multiple sites with minimal manual effort."
+msgstr ""
+
+#: ../include/class.woogc.options.php:507
+#, fuzzy
+#| msgid "Product category"
+msgid "On Product Update"
+msgstr "Categoría de producto"
+
+#: ../include/class.woogc.options.php:508
+msgid "Asynchronous Cron"
+msgstr "Cron asíncrono"
+
+#: ../include/class.woogc.options.php:512
+#, fuzzy
+#| msgid "Synchronization Type"
+msgid "Synchronization operation type"
+msgstr "Tipo de sincronización"
+
+#: ../include/class.woogc.options.php:513
+msgid ""
+"The Synchronization Operation Type option allows you to control how product "
+"synchronization updates are processed across your network."
+msgstr ""
+
+#: ../include/class.woogc.options.php:514
+msgid ""
+"<b>On Product Update (Default)</b>: Synchronization begins immediately when "
+"a product is updated, ensuring real-time data consistency across selected "
+"shops. This method is straightforward and suitable for most environments "
+"where instant updates are preferred."
+msgstr ""
+
+#: ../include/class.woogc.options.php:515
+msgid ""
+"<b>Asynchronous Cron</b>: This method schedules the synchronization as a "
+"delayed background task using the WordPress Cron system. It helps distribute "
+"server load more effectively, minimizing performance impact during bulk "
+"updates or on high-traffic websites."
+msgstr ""
+
+#: ../include/class.woogc.options.php:544
+msgid "Replace the Cart Products with origin version"
+msgstr "Sustituir los productos de la cesta por la versión de origen"
+
+#: ../include/class.woogc.options.php:545
+msgid ""
+"The Replace the Cart Products with Origin Version option controls how "
+"synchronized products are handled within the shopping cart."
+msgstr ""
+
+#: ../include/class.woogc.options.php:546
+msgid ""
+"When a product in the cart is a synchronized item from another shop, "
+"enabling this option will replace it with the original version of the "
+"product from its source shop. This ensures that the cart reflects the exact "
+"product details and version from the store where the item originates."
+msgstr ""
+
+#: ../include/class.woogc.options.php:558
+msgid "Replace the Cart Products with local version"
+msgstr "Sustituir los productos de la cesta por la versión local"
+
+#: ../include/class.woogc.options.php:559
+msgid ""
+"The Replace the Cart Products with Local Version option ensures that if a "
+"product in the cart is also available in the current store, it will be "
+"replaced with the local version of the product. The system identifies "
+"matching products by comparing their SKU attribute ( or programmatically for "
+"any other meta data ), ensuring an accurate substitution process. This "
+"option is particularly useful when you want to prioritize local inventory "
+"over synchronized products from other shops within the network."
+msgstr ""
+
+#: ../include/class.woogc.options.php:560
+msgid ""
+"The substitution only occurs for products of the same type, meaning that the "
+"local version must match the original product. This ensures that the cart "
+"remains consistent with the store's available offerings while preventing "
+"mismatches or errors in product types."
+msgstr ""
+
+#: ../include/class.woogc.options.php:572
+msgid "Filter to Show Product Attributres"
+msgstr "Filtro para mostrar los atributos del producto"
+
+#: ../include/class.woogc.options.php:573
+msgid ""
+"The Filter to Show Product Attributes option controls whether product "
+"attributes are displayed on the cart page. If the attributes have not "
+"already been shown in the product title, enabling this option will ensure "
+"they are listed separately on the cart page for better visibility and "
+"clarity."
+msgstr ""
+
+#: ../include/class.woogc.options.php:574
+msgid ""
+"This feature is useful for providing additional product details, such as "
+"size, color, or other specifications, allowing customers to review key "
+"information before completing their purchase. It enhances the shopping "
+"experience by ensuring that all relevant product attributes are easily "
+"accessible, especially when they aren't included in the title itself."
+msgstr ""
+
+#: ../include/class.woogc.options.php:601
+msgid "Calculate Shipping costs for each Shops"
+msgstr "Calcular los gastos de envío de cada tienda"
+
+#: ../include/class.woogc.options.php:602
+msgid ""
+"The Calculate Shipping Costs for Each Shop option enables separate shipping "
+"calculations for products from different shops within the same cart. When "
+"the cart contains items from multiple shops, shipping costs will be "
+"calculated individually for each store. This is particularly useful when "
+"customers will receive multiple packages from different shops, as it ensures "
+"accurate and specific shipping charges for each item."
+msgstr ""
+
+#: ../include/class.woogc.options.php:603
+msgid ""
+"If set to <b>No</b>, the shipping setup from the checkout shop will apply to "
+"the entire order, regardless of the number of shops involved."
+msgstr ""
+
+#: ../include/class.woogc.options.php:604
+msgid ""
+"Note that an update to the theme's /cart-shipping.php template file is "
+"required to fully support this feature. For more information, refer to the"
+msgstr ""
+
+#: ../include/class.woogc.options.php:604
+msgid "guide"
+msgstr ""
+
+#: ../include/class.woogc.options.php:605
+msgid ""
+"Additionally, after changing this option, clearing your browser cache is "
+"necessary to ensure the changes take effect properly."
+msgstr ""
+
+#: ../include/class.woogc.options.php:612
+msgid "Disabled - No taxes"
+msgstr "Deshabilitado - Sin impuestos"
+
+#: ../include/class.woogc.options.php:627
+msgid "Use Global Taxe Rates"
+msgstr "Utilizar tipos impositivos globales"
+
+#: ../include/class.woogc.options.php:628
+msgid ""
+"The Use Global Tax Rates option ensures consistency in tax calculations "
+"across all shops in the network when taxes are enabled. By activating this "
+"feature, the same tax rates are applied uniformly across all stores, "
+"preventing discrepancies in tax values that could arise from using different "
+"tax rates at each shop."
+msgstr ""
+
+#: ../include/class.woogc.options.php:629
+msgid ""
+"When enabled, the tax rates of the selected shop will be used as the "
+"standard for all other shops within the network, ensuring that taxes are "
+"calculated consistently and accurately for every transaction, regardless of "
+"the store where the product is purchased. This helps maintain clarity and "
+"fairness in pricing for customers across the entire network."
+msgstr ""
+
+#: ../include/class.woogc.options.php:757
+msgid "Settings Saved"
+msgstr "Configuración Guardada"
+
+#: ../include/class.woogc.options.php:787
+msgid "WooCommerce Global Cart plugin is inactive, please enter your"
+msgstr ""
+"El plugin WooCommerce Global Cart está inactivo, por favor introduzca su"
+
+#: ../include/class.woogc.options.php:816
+#: ../include/class.woogc.options.php:883
+msgid "There was a problem connecting to "
+msgstr "Se ha producido un problema al conectarse a "
+
+#: ../include/class.woogc.options.php:841
+#: ../include/class.woogc.options.php:922
+msgid "There was a problem with the data block received from "
+msgstr "Hubo un problema con el bloque de datos recibido de "
+
+#: ../include/class.woogc.options.php:865
+msgid "Licence Key can't be empty"
+msgstr "La clave de licencia no puede estar vacía"
+
+#: ../include/class.woogc.options.php:914
+msgid "There was a problem activating the licence: "
+msgstr "Se ha producido un problema al activar la licencia "
+
+#: ../include/class.woogc.php:473
+msgid ""
+"Unable to copy woo-gc.php to mu-plugins folder. Is this directory writable?"
+msgstr ""
+"No se puede copiar woo-gc.php a la carpeta mu-plugins. ¿Se puede escribir en "
+"este directorio?"
+
+#: ../include/class.woogc.php:489
+msgid ""
+"COOKIE_DOMAIN constant already defined. The Global Cart feature possibly not "
+"fully functional."
+msgstr ""
+"La constante COOKIE_DOMAIN ya está definida. Es posible que la función "
+"Global Cart no funcione completamente."
+
+#: ../include/class.woogc.php:529
+msgid ""
+"All shops utilizing the Global Cart must employ the same HPOS setup; "
+"currently, there is a mix, with some using it while others do not."
+msgstr ""
+"Todas las tiendas que utilicen el carro global deben emplear la misma "
+"configuración de HPOS; actualmente, existe una mezcla, ya que algunas lo "
+"utilizan y otras no."
+
+#: ../include/class.woogc.php:546
+msgid "WooCommerce plugin is required to be active."
+msgstr "Se requiere que el plugin WooCommerce esté activo."
+
+#: ../include/class.woogc.updater.php:134
+msgid "An error occour when try to identify the pluguin."
+msgstr "Se produce un error al intentar identificar el plugin."
+
+#: ../include/class.woogc.updater.php:134
+#: ../include/class.woogc.updater.php:154
+msgid "Try again"
+msgstr "Inténtalo de nuevo"
+
+#: ../include/class.woogc.updater.php:154
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr "Un HTTP inesperado error ocurrió durante la petición de la API."
+
+#: ../include/coupons/class-coupons.php:48
+#: ../include/coupons/class-coupons.php:93
+msgid "Global Coupon"
+msgstr "Cupón global"
+
+#: ../include/coupons/class-coupons.php:99
+msgid ""
+"If set to Yes, the coupon will be created and updated on all other "
+"WooCommerce shops."
+msgstr ""
+"Si se establece en Sí, el cupón se creará y actualizará en todas las demás "
+"tiendas WooCommerce."
+
+#: ../include/coupons/class-coupons.php:123
+msgid "Global Coupon Unlink"
+msgstr "Desvincular el cupón global"
+
+#: ../include/coupons/class-coupons.php:129
+msgid ""
+"If set to Yes, the coupon will stay on this shop but removed from all "
+"others.  If set to No, the coupon will be preserved at all shops but not "
+"maintained globally."
+msgstr ""
+"Si se establece en Sí, el cupón se mantendrá en esta tienda pero se "
+"eliminará de todas las demás.  Si se establece en No, el cupón se conservará "
+"en todas las tiendas pero no se mantendrá globalmente."
+
+#: ../include/order/class-wc-order-item-product.php:96
+msgid "Invalid variation ID"
+msgstr "Identificador no válido de variación"
+
+#: ../include/product-sync/class.woogc.ps.async.php:141
+msgid "Product Synchronisation is in progress."
+msgstr "La sincronización de productos está en curso."
+
+#: ../include/product-sync/class.woogc.ps.async.php:142
+msgid ""
+"Product Synchronization is in progress. Your products are being updated to "
+"ensure all information is consistent and up-to-date across the selected "
+"shops. Please wait while the system completes this process. The duration may "
+"vary depending on the number of products and the required operations."
+msgstr ""
+"La sincronización de productos está en curso. Sus productos están siendo "
+"actualizados para asegurar que toda la información es consistente y está "
+"actualizada en las tiendas seleccionadas. Por favor, espere mientras el "
+"sistema completa este proceso. La duración puede variar en función del "
+"número de productos y de las operaciones requeridas."
+
+#: ../include/product-sync/class.woogc.ps.async.php:234
+#: ../include/product-sync/class.woogc.ps.async.php:260
+msgid "Continue the synchronization batch."
+msgstr "Continúe con el lote de sincronización."
+
+#: ../include/product-sync/class.woogc.ps.async.php:234
+#: ../include/product-sync/class.woogc.ps.async.php:260
+msgid "Start the synchronization batch."
+msgstr "Inicie el lote de sincronización."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:95
+msgid "Product Sync"
+msgstr "Sincronizar Producto"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:128
+#: ../include/product-sync/views/html-bulk-edit-product.php:18
+#: ../include/product-sync/views/html-quick-edit-product.php:20
+msgid "In this section, you can control the synchronisation shops and options."
+msgstr ""
+"En esta sección puedes controlar las tiendas y opciones de sincronización."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:170
+#: ../include/product-sync/views/html-bulk-edit-product.php:48
+#: ../include/product-sync/views/html-quick-edit-product.php:50
+msgid "Shop Title"
+msgstr "Título de la tienda"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:171
+#: ../include/product-sync/class.woogc.ps.interfaces.php:345
+#: ../include/product-sync/views/html-bulk-edit-product.php:49
+#: ../include/product-sync/views/html-quick-edit-product.php:51
+msgid "Enable Synchronization"
+msgstr "Activar sincronización"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:196
+msgid "View Product"
+msgstr "Ver producto"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:251
+#: ../include/product-sync/class.woogc.ps.interfaces.php:413
+#: ../include/product-sync/views/html-bulk-edit-product.php:79
+#: ../include/product-sync/views/html-quick-edit-product.php:91
+msgid "Maintain Child Product Synchronization"
+msgstr "Mantener la sincronización de productos hijos"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:251
+#: ../include/product-sync/views/html-bulk-edit-product.php:85
+#: ../include/product-sync/views/html-quick-edit-product.php:91
+msgid "When the current Product change, the Child Product get updated as well."
+msgstr ""
+"Cuando el producto actual cambia, el producto hijo también se actualiza."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:274
+#: ../include/product-sync/class.woogc.ps.interfaces.php:435
+#: ../include/product-sync/views/html-bulk-edit-product.php:92
+#: ../include/product-sync/views/html-quick-edit-product.php:99
+msgid "Categories and Tags Synchronization"
+msgstr "Sincronización de categorías y etiquetas"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:274
+msgid ""
+"Synchronize the product categories and tags. If the term is not found on the "
+"child store, it will be created."
+msgstr ""
+"Sincronizar las categorías de productos y etiquetas. Si el término no se "
+"encuentra en la tienda secundaria, se creará."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:296
+#: ../include/product-sync/class.woogc.ps.interfaces.php:457
+#: ../include/product-sync/views/html-bulk-edit-product.php:105
+#: ../include/product-sync/views/html-quick-edit-product.php:107
+msgid "Stock Synchronization"
+msgstr "Sincronización de existencias"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:296
+#: ../include/product-sync/class.woogc.ps.interfaces.php:457
+#: ../include/product-sync/views/html-bulk-edit-product.php:111
+#: ../include/product-sync/views/html-quick-edit-product.php:107
+msgid ""
+"Any stock changes on the products across the network using \"Stock "
+"Synchronization\", updates others stock too."
+msgstr ""
+"Cualquier cambio en las existencias de los productos a través de la red "
+"mediante \"Sincronización de existencias\", actualiza también las "
+"existencias de los demás."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:329
+msgid "In this section, you can control the synchronisation options."
+msgstr "En esta sección puedes controlar las opciones de sincronización."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:330
+msgid "This is a Child product."
+msgstr "Se trata de un producto infantil."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:344
+msgid "Origin Shop Title"
+msgstr "Origen Tienda Título"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:359
+msgid "View Origin Product"
+msgstr "Ver producto de origen"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:413
+msgid "When the parent Product change, this Child Product get updated as well."
+msgstr ""
+"Cuando el Producto padre cambia, este Producto hijo se actualiza también."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:435
+msgid ""
+"Synchronize the parent product categories and tags. If the term is not found "
+"on the current store, it will be created."
+msgstr ""
+"Sincroniza las categorías y etiquetas de productos padre. Si el término no "
+"se encuentra en la tienda actual, se creará."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:689
+msgid "Sync"
+msgstr "Sincronizar"
+
+#: ../include/product-sync/class.woogc.ps.php:508
+msgid "Product successfully synchronized."
+msgstr "Producto sincronizado correctamente."
+
+#: ../include/product-sync/class.woogc.ps.php:714
+msgid "Unable to set SKU metadata with value of "
+msgstr "No se han podido definir los metadatos SKU con el valor "
+
+#: ../include/product-sync/class.woogc.ps.php:714
+msgid ""
+"Ensure the value is not assigned to a different products on the target shop "
+msgstr ""
+"Asegúrese de que el valor no se asigna a productos diferentes en la tienda "
+"de destino "
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid "Unable to set Tax Class "
+msgstr "No se puede establecer la clase de impuesto "
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid " on shop ID "
+msgstr " en la identificación de la tienda "
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid " as the class does not exists. Create it then Update."
+msgstr " ya que la clase no existe. Créela y actualícela."
+
+#: ../include/product-sync/class.woogc.ps.php:795
+msgid "Unable to set "
+msgstr "No se puede fijar "
+
+#: ../include/product-sync/class.woogc.ps.php:795
+msgid " metadata with value "
+msgstr " metadatos con valor "
+
+#: ../include/product-sync/class.woogc.ps.php:1106
+msgid "Unable to set cross sell id for product "
+msgstr ""
+"No se puede establecer el identificador de venta cruzada para el product "
+
+#: ../include/product-sync/class.woogc.ps.php:1106
+#: ../include/product-sync/class.woogc.ps.php:1142
+msgid "Make sure the product is synchronised at the child shop, then Update."
+msgstr ""
+"Asegúrese de que el producto está sincronizado en la tienda infantil y, a "
+"continuación, Actualizar."
+
+#: ../include/product-sync/class.woogc.ps.php:1142
+msgid "Unable to set upsell id for product "
+msgstr "No se puede establecer el identificador de venta del product "
+
+#: ../include/product-sync/views/html-bulk-edit-product.php:61
+#: ../include/product-sync/views/html-bulk-edit-product.php:81
+#: ../include/product-sync/views/html-bulk-edit-product.php:94
+#: ../include/product-sync/views/html-bulk-edit-product.php:107
+msgid "No change"
+msgstr "Sin cambio"
+
+#: ../include/product-sync/views/html-bulk-edit-product.php:98
+#: ../include/product-sync/views/html-quick-edit-product.php:99
+msgid ""
+"Synchronize the product categories and terms. If the term is not found on "
+"the child store, it will be created."
+msgstr ""
+"Sincronice las categorías de productos y los términos. Si el término no se "
+"encuentra en la tienda secundaria, se creará."
+
+#: ../include/session/class-wc-cart-session-extend.php:156
+#, php-format
+msgid ""
+"%s has been removed from your cart because it can no longer be purchased. "
+"Please contact us if you need assistance."
+msgstr ""
+"%s ha sido eliminado de tu pedido ya que no está disponible para la venta. "
+"Por favor, ponte en contacto con nosotros si necesitas ayuda."
+
+#: ../include/session/class-wc-cart-session-extend.php:162
+#, php-format
+msgid ""
+"%1$s has been removed from your cart because it has since been modified. You "
+"can add it back to your cart <a href=\"%2$s\">here</a>."
+msgstr ""
+"%1$s se ha borrado de tu cesta debido a que ha tenido modificaciones. Puedes "
+"añadirlo de nuevo <a href=\"%2$s\">aquí</a>."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:89
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:169
+msgid "Sorry, this order is invalid and cannot be paid for."
+msgstr "Lo sentimos, esta orden no es válida y no se puede pagar."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:105
+msgid ""
+"This order cannot be paid for. Please contact us if you need assistance."
+msgstr ""
+"Tu pedido ya no se puede cancelar. Por favor, ponte en contacto con nosotros "
+"si necesitas ayuda."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:111
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:166
+#, php-format
+msgid ""
+"This order&rsquo;s status is &ldquo;%s&rdquo;&mdash;it cannot be paid for. "
+"Please contact us if you need assistance."
+msgstr ""
+"El estado de este pedido es \"%s\". No se ha podido pagar. Por favor, ponte "
+"en contacto con nosotros si necesitas ayuda."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:121
+#, php-format
+msgid ""
+"Sorry, \"%s\" is no longer in stock so this order cannot be paid for. We "
+"apologize for any inconvenience caused."
+msgstr ""
+"Lo sentimos, \"%s\" ya no está disponible, por lo que este pedido no se "
+"puede pagar. Nos disculpamos por cualquier inconveniente causado."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:145
+msgid "Pay for order"
+msgstr "Pagar"
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:242
+msgid ""
+"The order totals have been updated. Please confirm your order by pressing "
+"the \"Place order\" button at the bottom of the page."
+msgstr ""
+"El total de la donación ha sido actualizado. Por favor confirma tu donación  "
+"pulsando el botón de donación en la parte inferior de la página."
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:391
+msgid "&laquo; Previous"
+msgstr "&laquo; Anterior"
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:392
+msgid "Next &raquo;"
+msgstr "Siguiente &raquo;"
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:496
+msgid "&hellip;"
+msgstr "&hellip;"
+
+#: ../include/stock/ReserveStock.php:91
+#, php-format
+msgid "&quot;%s&quot; is out of stock and cannot be purchased."
+msgstr "&quot;%s&quot; no tiene inventario y no se puede comprar."
+
+#: ../include/stock/ReserveStock.php:188
+#, php-format
+msgid "Not enough units of %s are available in stock to fulfil this order."
+msgstr ""
+"No hay suficientes unidades de %s disponibles en stock para cumplir con este "
+"pedido."
+
+#: ../include/stock/class.stock.php:83
+#, php-format
+msgid "Unable to reduce stock for item %s."
+msgstr "No se puede reducir el stock para el artículo %s."
+
+#: ../include/stock/class.stock.php:159
+msgid "Stock levels reduced:"
+msgstr "Niveles de stock reducidos:"
+
+#: ../include/stock/class.stock.php:227
+#, php-format
+msgid "Unable to restore stock for item %s."
+msgstr ""
+
+#: ../include/stock/class.stock.php:244
+msgid "Stock levels increased:"
+msgstr ""
+
+#~ msgid ""
+#~ "The Global Cart applies only if the site is checked through this "
+#~ "interface and the WooCoomerce plugin is active, either through Network or "
+#~ "locally."
+#~ msgstr ""
+#~ "El Carrito Global sólo se aplica si el sitio se comprueba a través de "
+#~ "esta interfaz y el plugin WooCoomerce está activo, ya sea a través de la "
+#~ "Red o localmente."
+
+#~ msgid ""
+#~ "Ensure the site has the Public attribute active, to show on that area."
+#~ msgstr ""
+#~ "Asegúrese de que el sitio tiene activo el atributo Público, para que "
+#~ "aparezca en esa zona."
+
+#~ msgid ""
+#~ "If WooCommerce not available for a site, the Global Cart routines will "
+#~ "not be loaded."
+#~ msgstr ""
+#~ "Si WooCommerce no está disponible para un sitio, las rutinas del Carrito "
+#~ "Global no se cargarán."
+
+#, fuzzy
+#~| msgid ""
+#~| "The allowed sites that run Global Cart can also be controled through the "
+#~| "filter woogc/global_cart/sites."
+#~ msgid ""
+#~ "The allowed sites that run Global Cart can also be controled through the "
+#~ "filter"
+#~ msgstr ""
+#~ "Los sitios permitidos que ejecutan Global Cart también pueden ser "
+#~ "controlados a través del filtro woogc/global_cart/sites."
+
+#~ msgid ""
+#~ "The Synchronization procedure ensures the data is processed unitary "
+#~ "across the selected shops ( e.g. global cart )."
+#~ msgstr ""
+#~ "El procedimiento de sincronización garantiza que los datos se procesen de "
+#~ "forma unitaria en todas las tiendas seleccionadas ( por ejemplo, la cesta "
+#~ "global )."
+
+#~ msgid ""
+#~ "<b>Screen</b> ( default ) - This is the easiest to set up and is "
+#~ "compatible with all environment types."
+#~ msgstr ""
+#~ "<b>Pantalla</b> ( por defecto ) - Es la más fácil de configurar y es "
+#~ "compatible con todos los tipos de entorno."
+
+#~ msgid ""
+#~ "The plugin automatically set-up any of the selected synchronisation type."
+#~ msgstr ""
+#~ "El plugin configura automáticamente cualquiera de los tipos de "
+#~ "sincronización seleccionados."
+
+#~ msgid ""
+#~ "Single Checkout can occur for all cart items, independently from where "
+#~ "each product is coming from. In this case the payment will be collected "
+#~ "in full amount on the check-out site. Selecting Each Store checkout type, "
+#~ "the system create individual check-out sessions in shops from where the "
+#~ "cart products are belong. Each shop will retrieve the payment separately "
+#~ "for their own products"
+#~ msgstr ""
+#~ "El pago único puede realizarse para todos los artículos del carrito, "
+#~ "independientemente de la procedencia de cada producto. En este caso, el "
+#~ "pago se cobrará en su totalidad en el sitio de pago. Seleccionando el "
+#~ "tipo de pago Cada Tienda, el sistema creará sesiones de pago individuales "
+#~ "en las tiendas a las que pertenezcan los productos del carrito. Cada "
+#~ "tienda recuperará el pago por separado para sus propios productos"
+
+#~ msgid ""
+#~ "The option is being used when Checkout Type being set as Single Checkout. "
+#~ "<br />When checkout a user will be redirected to a specific site to "
+#~ "complete the order or he can proceed to any site. "
+#~ msgstr ""
+#~ "La opción se utiliza cuando el tipo de pago se establece como pago único. "
+#~ "<br />Cuando el pago se redirige a un sitio específico para completar el "
+#~ "pedido o puede proceder a cualquier sitio "
+
+#~ msgid ""
+#~ "The option is being used when Checkout Type being set as Single Checkout. "
+#~ "<br />When the option is active, the core creates individual orders "
+#~ "within all shops which include a product in the main order. The split "
+#~ "order includes only the products for the specific shop. "
+#~ msgstr ""
+#~ "La opción se utiliza cuando el tipo de pago se establece como pago único. "
+#~ "<br />Cuando la opción está activa, el núcleo crea pedidos individuales "
+#~ "dentro de todas las tiendas que incluyen un producto en el pedido "
+#~ "principal. El pedido dividido incluye sólo los productos de la tienda "
+#~ "específica. "
+
+#~ msgid ""
+#~ "Sequential Order Numbers is a way to maintain consecutive ids for orders "
+#~ "across network, independently from shop where order has been placed. This "
+#~ "is recommended to always use when Checkout location is set for a specific "
+#~ "shop."
+#~ msgstr ""
+#~ "Los números de pedido secuenciales son una forma de mantener "
+#~ "identificadores consecutivos para los pedidos en toda la red, "
+#~ "independientemente de la tienda donde se haya realizado el pedido. Se "
+#~ "recomienda utilizarlo siempre que se establezca una ubicación de pago "
+#~ "para una tienda específica."
+
+#~ msgid ""
+#~ "Choose the default On Product Update to start the synchronization update "
+#~ "procedure immediately. Or opt for the Asynchronous Cron to schedule "
+#~ "updates with a delay, on a separate task, ensuring minimal impact on "
+#~ "server performance."
+#~ msgstr ""
+#~ "Elija por defecto On Product Update para iniciar inmediatamente el "
+#~ "procedimiento de actualización de la sincronización. O bien opte por Cron "
+#~ "asíncrono para programar las actualizaciones con retraso, en una tarea "
+#~ "independiente, garantizando un impacto mínimo en el rendimiento del "
+#~ "servidor."
+
+#~ msgid ""
+#~ "If a product in the shopping cart is a synchronized product from a "
+#~ "different shop, that will be substituted with the origin compound."
+#~ msgstr ""
+#~ "Si un producto de la cesta de la compra es un producto sincronizado de "
+#~ "una tienda diferente, se sustituirá por el compuesto de origen."
+
+#~ msgid ""
+#~ "When the option is set to Yes, the switch occurs regardless of the "
+#~ "product synchronisation options."
+#~ msgstr ""
+#~ "Cuando la opción está establecida en Sí, el cambio se produce "
+#~ "independientemente de las opciones de sincronización del producto."
+
+#~ msgid ""
+#~ "If a product in the shopping cart is also available in the current store, "
+#~ "it will be substituted with the local product. The identification of a "
+#~ "match is determined by comparing the product SKU attribute."
+#~ msgstr ""
+#~ "Si un producto de la cesta de la compra también está disponible en la "
+#~ "tienda actual, se sustituirá por el producto local. La identificación de "
+#~ "una coincidencia se determina comparando el atributo SKU del producto."
+
+#~ msgid "The substitution occours only for products of same type."
+#~ msgstr "La sustitución sólo se produce para productos del mismo tipo."
+
+#~ msgid ""
+#~ "Output the list of product attributes, on cart page, if not being already "
+#~ "outputed on the product title."
+#~ msgstr ""
+#~ "Muestra la lista de atributos del producto, en la página del carrito, si "
+#~ "no se muestra ya en el título del producto."
+
+#~ msgid ""
+#~ "When the cart contains products from different shops, calculate separate "
+#~ "shipping costs for each of the sites. Useful when the customer receives "
+#~ "multiple packages from different shops. If set to No, only the check-out "
+#~ "shop shipping set-up applies."
+#~ msgstr ""
+#~ "Cuando el carro contiene productos de diferentes tiendas, calcular los "
+#~ "gastos de envío por separado para cada uno de los sitios. Útil cuando el "
+#~ "cliente recibe varios paquetes de diferentes tiendas. Si se establece en "
+#~ "No, sólo se aplica la configuración de envío de la tienda de salida."
+
+#~ msgid ""
+#~ "An update is required for the theme /cart-shipping.php template file, "
+#~ "more details at"
+#~ msgstr ""
+#~ "Se requiere una actualización para el tema /cart-shipping.php archivo de "
+#~ "plantilla, más detalles en"
+
+#~ msgid "On option change, a browser cache clear is required."
+#~ msgstr "Al cambiar de opción, es necesario borrar la caché del navegador."
+
+#~ msgid ""
+#~ "When Taxes are enabled for the shops, this ensures the same Tax Rates are "
+#~ "used unitary across the network, to avoid adding or subtracting different "
+#~ "tax values to the total."
+#~ msgstr ""
+#~ "Cuando los Impuestos están habilitados para las tiendas, esto asegura que "
+#~ "las mismas Tasas de Impuestos son usadas unitariamente a través de la "
+#~ "red, para evitar sumar o restar diferentes valores de impuestos al total."
+
+#~ msgid ""
+#~ "The selected Shop Rates rates will be used for all other shops in the "
+#~ "network."
+#~ msgstr ""
+#~ "Las tarifas seleccionadas se utilizarán para todas las demás tiendas de "
+#~ "la red."
+
+#~ msgid "Coupon Receiver Details"
+#~ msgstr "Detalles del receptor del cupón"
+
+#~ msgid "Your order contains coupons. What would you like to do?"
+#~ msgstr "¿Qué te gustaría hacer con él?"
+
+#~ msgid "Gift coupons to someone else"
+#~ msgstr "Cupones de regalo para otra persona"
+
+#~ msgid "Send to one person"
+#~ msgstr "Enviar a una persona"
+
+#~ msgid "Send to different people"
+#~ msgstr "Enviar a varias personas"
+
+#~ msgid "Email address"
+#~ msgstr "Dirección de correo electrónico"
+
+#~ msgid "Message"
+#~ msgstr "Mensaje"
+
+#~ msgid "Licenxe Key"
+#~ msgstr "Clave Licenxe"
+
+#~ msgid "Customer downloads"
+#~ msgstr "Descargas de clientes"
+
+#~ msgid "File ID"
+#~ msgstr "Expediente %d"
+
+#~ msgid "Permission ID"
+#~ msgstr "Permisos"
+
+#~ msgid "User"
+#~ msgstr "Usuario"
+
+#~ msgid "IP address"
+#~ msgstr "Dirección IP"
+
+#~ msgid "Timestamp"
+#~ msgstr "Marca de tiempo"

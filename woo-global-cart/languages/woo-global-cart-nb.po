@@ -1,0 +1,2021 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce MultiSite Global Cart\n"
+"POT-Creation-Date: 2025-01-16 11:56+0200\n"
+"PO-Revision-Date: 2025-01-16 11:56+0200\n"
+"Last-Translator: NspCode <contact@nsp-code.com>\n"
+"Language-Team: Nsp Code <contact@nsp-code.com>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../compatibility/ast-pro/ast-pro.php:70
+#: ../compatibility/ast-pro/ast-pro.php:89
+#: ../compatibility/ast-tracking-per-order-items/ast-tracking-per-order-items.php:114
+msgid "Track Shipment"
+msgstr "Spor Forsendelse"
+
+#: ../compatibility/bookly-responsive-appointment-booking-tool/main.php:63
+msgid ""
+"Sorry, the time slot %date_time% for %service% has been already occupied."
+msgstr "Beklager, tidsvinduet %date_time% for %service% er allerede opptatt."
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:77
+msgid "Attendee"
+msgstr "Deltaker"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:81
+#, php-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:120
+msgid "First Name"
+msgstr "Fornavn"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:138
+msgid "Last Name"
+msgstr "Etternavn"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:156
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:206
+#: ../include/admin/reports/class-woogc-report-customer-list.php:206
+msgid "Email"
+msgstr "E-post"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:176
+msgid "Telephone"
+msgstr "Telefon"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:198
+msgid "Company"
+msgstr "Firma"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:220
+msgid "Designation"
+msgstr "Tittel"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:300
+#, php-format
+msgid "Name is required for %s attendee %d"
+msgstr "Navn er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:307
+#, php-format
+msgid "Last name is required for %s attendee %d"
+msgstr "Etternavn er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:314
+#, php-format
+msgid "Email is required for %s attendee %d"
+msgstr "E-post er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:322
+#, php-format
+msgid "Telephone is required for %s attendee %d"
+msgstr "Telefon er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:331
+#, php-format
+msgid "Company is required for %s attendee %d"
+msgstr "Firma er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:340
+#, php-format
+msgid "Designation is required for %s attendee %d"
+msgstr "Tittel er påkrevd for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/checkouthelper.php:348
+#, php-format
+msgid "Email is not valid for %s attendee %d"
+msgstr "E-post er ikke gyldig for %s deltaker %d"
+
+#: ../compatibility/fooevents/classes/woohelper.php:187
+msgid "{OrderNumber} Ticket"
+msgstr "{OrderNumber} Billett"
+
+#: ../compatibility/fooevents/classes/woohelper.php:255
+#: ../compatibility/fooevents/classes/woohelper.php:311
+#: ../compatibility/fooevents/classes/woohelper.php:323
+msgid ""
+"Your tickets are attached. Please print them and bring them to the event."
+msgstr ""
+"Dine billetter er vedlagt. Vennligst skriv ut og ta dem med til "
+"arrangementet."
+
+#: ../compatibility/wc-dynamic-pricing-and-discounts/classes/conditions/rp-wcdpd-condition-product-category.class.php:59
+msgid "Product category"
+msgstr "Produktkategori"
+
+#: ../compatibility/woocommerce-advanced-fees/includes/conditions/wpc-contains-shipping-class-condition.php:60
+msgid "No shipping class"
+msgstr "Ingen fraktklasse"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Changed_Cart_Quantity_Event.php:47
+msgid "Changed Cart Quantity"
+msgstr "Endret handlekurv mengde"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Changed_Cart_Quantity_Event.php:56
+msgid "Triggered when a customer changes the quantity of an item in the cart."
+msgstr "Utløses når en kunde endrer mengden av en vare i handlekurven."
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Removed_From_Cart_Event.php:50
+msgid "Removed from Cart"
+msgstr "Fjernet fra handlekurven"
+
+#: ../compatibility/woocommerce-google-analytics-pro/includes/Removed_From_Cart_Event.php:59
+msgid "Triggered when a customer removes an item from the cart."
+msgstr "Utløses når en kunde fjerner en vare fra handlekurven."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:26
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:30
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:82
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+"Du har ikke tilstrekkelige rettigheter til å få tilgang til denne siden."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:39
+msgid "You haven't selected any orders"
+msgstr "Du har ikke valgt noen bestillinger"
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:43
+msgid "Some of the export parameters are missing."
+msgstr "Noen av eksportparameterne mangler."
+
+#: ../compatibility/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php:105
+#, php-format
+msgid "Document of type '%s' for the selected order(s) could not be generated"
+msgstr ""
+"Dokument av typen '%s' for de valgte bestillingene kunne ikke genereres"
+
+#: ../compatibility/woocommerce-smart-coupons/includes/class-sc-purchase-credit.php:131
+#, fuzzy
+#| msgid "Send coupons to me"
+msgid "Send Coupons to..."
+msgstr "Send kuponger til meg"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:116
+msgid "Sorry, you are not allowed to move this item to the Trash."
+msgstr ""
+"Beklager, du har ikke tillatelse til å flytte dette elementet til "
+"papirkurven."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:127
+msgid "Error in moving to Trash."
+msgstr "Feil ved flytting til papirkurven."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:148
+msgid "Sorry, you are not allowed to restore this item from the Trash."
+msgstr ""
+"Beklager, du har ikke tillatelse til å gjenopprette dette elementet fra "
+"papirkurven."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:152
+msgid "Error in restoring from Trash."
+msgstr "Feil ved gjenoppretting fra papirkurven."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:178
+msgid "Sorry, you are not allowed to delete this item."
+msgstr "Beklager, du har ikke tillatelse til å slette dette elementet."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:182
+msgid "Error in deleting."
+msgstr "Feil ved sletting."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:296
+msgid "1 post not updated, somebody is editing it."
+msgstr "1 innlegg er ikke oppdatert, noen redigerer det."
+
+#: ../include/admin/class-woogc-admin-network-orders.php:314
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Søkeresultater for &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:595
+#: ../include/admin/class-woogc-admin-network-orders.php:1344
+msgid "Restore"
+msgstr "Gjenopprett"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:596
+msgid "Delete Permanently"
+msgstr "Slett permanent"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:600
+msgid "Move to Trash"
+msgstr "Flytt til papirkurven"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:603
+msgid "Mark processing"
+msgstr "Merk som behandlet"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:604
+msgid "Mark on-hold"
+msgstr "Merk som på vent"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:605
+msgid "Mark complete"
+msgstr "Merk som fullført"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:624
+msgid "Filter by shop"
+msgstr "Filtrer etter butikk"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:626
+msgid "All Shops"
+msgstr "Alle butikker"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:714
+msgid "Filter by date"
+msgstr "Filtrer etter dato"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:716
+msgid "All dates"
+msgstr "Alle datoer"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:729
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:774
+msgid "Filter"
+msgstr "Filtrer"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:905
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:190
+#: ../include/admin/reports/class-woogc-report-stock.php:190
+msgid "Shop"
+msgstr "Butikk"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:906
+msgid "Status"
+msgstr "Status"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:907
+msgid "Order"
+msgstr "Bestilling"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:908
+msgid "Billing"
+msgstr "Fakturering"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:909
+msgid "Ship to"
+msgstr "Send til"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:912
+msgid "Date"
+msgstr "Dato"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:913
+msgid "Total"
+msgstr "Total"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:914
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:211
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:195
+#: ../include/admin/reports/class-woogc-report-customer-list.php:211
+#: ../include/admin/reports/class-woogc-report-stock.php:195
+msgid "Actions"
+msgstr "Handlinger"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:982
+#, php-format
+msgid "Select %s"
+msgstr "Velg %s"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:990
+#, php-format
+msgid "&#8220;%s&#8221; is locked"
+msgstr "&#8220;%s&#8221; er låst"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1012
+#: ../include/admin/class-woogc-admin-post-types.php:41
+msgid "Unpublished"
+msgstr "Upublisert"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1015
+msgid "Y/m/d g:i:s a"
+msgstr "Å/m/d t:m:s a"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1022
+#, php-format
+msgid "%s ago"
+msgstr "%s siden"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1024
+#: ../include/admin/class-woogc-admin-post-types.php:44
+msgid "Y/m/d"
+msgstr "Å/m/d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1029
+msgid "Published"
+msgstr "Publisert"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1032
+msgid "Missed schedule"
+msgstr "Mistet tidsplan"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1034
+msgid "Scheduled"
+msgstr "Planlagt"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1037
+msgid "Last Modified"
+msgstr "Sist endret"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1094
+msgid "Y-m-d"
+msgstr "Å-m-d"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1099
+#: ../include/admin/class-woogc-admin-network-orders.php:1149
+#: ../include/admin/class-woogc-admin-network-orders.php:1152
+#: ../include/admin/class-woogc-admin-network-orders.php:1155
+#: ../include/admin/class-woogc-admin-post-types.php:52
+#: ../include/admin/class-woogc-admin-post-types.php:140
+#: ../include/admin/class-woogc-admin-post-types.php:142
+#: ../include/admin/class-woogc-admin-post-types.php:144
+#: ../include/class.woogc.options.php:332
+#: ../include/class.woogc.options.php:362
+#: ../include/class.woogc.options.php:391
+#: ../include/class.woogc.options.php:434
+#: ../include/class.woogc.options.php:448
+#: ../include/class.woogc.options.php:462
+#: ../include/class.woogc.options.php:490
+#: ../include/coupons/class-coupons.php:66
+#: ../include/coupons/class-coupons.php:96
+#: ../include/coupons/class-coupons.php:126
+#: ../include/product-sync/views/html-bulk-edit-product.php:62
+#: ../include/product-sync/views/html-bulk-edit-product.php:82
+#: ../include/product-sync/views/html-bulk-edit-product.php:95
+#: ../include/product-sync/views/html-bulk-edit-product.php:108
+msgid "Yes"
+msgstr "Ja"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1114
+msgid "Phone:"
+msgstr "Telefon:"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1127
+#: ../include/admin/class-woogc-admin-network-orders.php:1169
+#: ../include/admin/class-woogc-admin-post-types.php:120
+#: ../include/admin/class-woogc-admin-post-types.php:156
+msgid "Via"
+msgstr "Via"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1216
+#: ../include/admin/class-woogc-admin-post-types.php:207
+msgid "Processing"
+msgstr "Behandler"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1225
+#: ../include/admin/class-woogc-admin-post-types.php:215
+msgid "Complete"
+msgstr "Fullført"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1232
+#: ../include/admin/class-woogc-admin-network-orders.php:1370
+#: ../include/admin/class-woogc-admin-post-types.php:222
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:159
+#: ../include/admin/reports/class-woogc-report-stock.php:159
+msgid "View"
+msgstr "Vis"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1331
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr "Rediger &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1332
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:157
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:152
+#: ../include/admin/reports/class-woogc-report-customer-list.php:157
+#: ../include/admin/reports/class-woogc-report-stock.php:152
+msgid "Edit"
+msgstr "Rediger"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1343
+#, php-format
+msgid "Restore &#8220;%s&#8221; from the Trash"
+msgstr "Gjenopprett &#8220;%s&#8221; fra papirkurven"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1358
+#, php-format
+msgid "Preview &#8220;%s&#8221;"
+msgstr "Forhåndsvisning &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1359
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: ../include/admin/class-woogc-admin-network-orders.php:1369
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr "Vis &#8220;%s&#8221;"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:42
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:208
+#: ../include/admin/reports/class-woogc-report-customer-list.php:208
+#: ../include/class.woogc.admin-menus.php:66
+#: ../include/class.woogc.options.php:90
+msgid "Orders"
+msgstr "Bestillinger"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:45
+msgid "Sales by date"
+msgstr "Salg etter dato"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:51
+msgid "Sales by product"
+msgstr "Salg etter produkt"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:60
+msgid "Customers"
+msgstr "Kunder"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:63
+msgid "Customers vs. guests"
+msgstr "Kunder vs. gjester"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:69
+msgid "Customer list"
+msgstr "Kundeliste"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:77
+msgid "Stock"
+msgstr "Lagerbeholdning"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:80
+msgid "Low in stock"
+msgstr "Lav lagerbeholdning"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:86
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:135
+#: ../include/admin/reports/class-woogc-report-stock.php:135
+msgid "Out of stock"
+msgstr "Utsolgt"
+
+#: ../include/admin/class-woogc-admin-network-reports.php:92
+msgid "Most stocked"
+msgstr "Høyest lagerbeholdning"
+
+#: ../include/admin/class-woogc-admin-post-types.php:43
+msgid "Y/m/d g:i:s A"
+msgstr "Å/m/d t:m:s A"
+
+#: ../include/admin/class-woogc-admin-post-types.php:107
+msgid "Tel:"
+msgstr "Tlf:"
+
+#: ../include/admin/class-woogc-admin-post-types.php:183
+msgid "Guest"
+msgstr "Gjest"
+
+#: ../include/admin/class-woogc-admin-post-types.php:193
+msgid "Show more details"
+msgstr "Vis flere detaljer"
+
+#: ../include/admin/class.admin.php:136
+#, php-format
+msgid "Stock: %d"
+msgstr "Lagerbeholdning: %d"
+
+#: ../include/admin/class.admin.php:161 ../include/admin/class.admin.php:194
+msgid "Invalid order"
+msgstr "Ugyldig bestilling"
+
+#: ../include/admin/class.admin.php:226
+#: ../include/order/class-wc-order-item-product.php:69
+msgid "Invalid product ID"
+msgstr "Ugyldig produkt-ID"
+
+#: ../include/admin/class.admin.php:230
+#, php-format
+msgid "%s is a variable product parent and cannot be added."
+msgstr "%s er et variabelt produktforelder og kan ikke legges til."
+
+#: ../include/admin/class.admin.php:237
+#, php-format
+msgid "Error: %s"
+msgstr "Feil: %s"
+
+#: ../include/admin/class.admin.php:301
+#, php-format
+msgid "Added line items: %s"
+msgstr "Linjeelementer lagt til: %s"
+
+#: ../include/admin/reports-hpos/class-woogc-admin-report.php:558
+#: ../include/admin/reports/class-woogc-admin-report.php:546
+#, php-format
+msgid "Sold %1$s worth in the last %2$d days"
+msgstr "Solgte for %1$s i løpet av de siste %2$d dagene"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:37
+#: ../include/admin/reports/class-woogc-report-customer-list.php:37
+msgid "No customers found."
+msgstr "Ingen kunder funnet."
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:61
+#: ../include/admin/reports/class-woogc-report-customer-list.php:61
+#, php-format
+msgid "Refreshed stats for %s"
+msgstr "Oppdaterte statistikker for %s"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:66
+#: ../include/admin/reports/class-woogc-report-customer-list.php:66
+msgid "Search customers"
+msgstr "Søk etter kunder"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:151
+#: ../include/admin/reports/class-woogc-report-customer-list.php:151
+msgid "Refresh stats"
+msgstr "Oppdater statistikk"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:173
+#: ../include/admin/reports/class-woogc-report-customer-list.php:173
+msgid "Link previous orders"
+msgstr "Koble til tidligere bestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:204
+#: ../include/admin/reports/class-woogc-report-customer-list.php:204
+msgid "Name (Last, First)"
+msgstr "Navn (Etternavn, Fornavn)"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:205
+#: ../include/admin/reports/class-woogc-report-customer-list.php:205
+msgid "Username"
+msgstr "Brukernavn"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:207
+#: ../include/admin/reports/class-woogc-report-customer-list.php:207
+msgid "Location"
+msgstr "Sted"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:209
+#: ../include/admin/reports/class-woogc-report-customer-list.php:209
+msgid "Money spent"
+msgstr "Penger brukt"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customer-list.php:210
+#: ../include/admin/reports/class-woogc-report-customer-list.php:210
+msgid "Last order"
+msgstr "Siste bestilling"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:42
+#: ../include/admin/reports/class-woogc-report-customers.php:42
+#, php-format
+msgid "%s signups in this period"
+msgstr "%s registreringer i denne perioden"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:157
+#: ../include/admin/reports/class-woogc-report-customers.php:157
+msgid "orders"
+msgstr "bestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:179
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:592
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:155
+#: ../include/admin/reports/class-woogc-report-customers.php:179
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:579
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:155
+msgid "Year"
+msgstr "År"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:180
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:593
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:156
+#: ../include/admin/reports/class-woogc-report-customers.php:180
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:580
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:156
+msgid "Last month"
+msgstr "Sist måned"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:181
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:594
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:157
+#: ../include/admin/reports/class-woogc-report-customers.php:181
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:581
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:157
+msgid "This month"
+msgstr "Denne måneden"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:182
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:595
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:158
+#: ../include/admin/reports/class-woogc-report-customers.php:182
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:582
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:158
+msgid "Last 7 days"
+msgstr "Siste 7 dager"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:350
+#: ../include/admin/reports/class-woogc-report-customers.php:350
+msgid "Customer orders"
+msgstr "Kundebestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:356
+#: ../include/admin/reports/class-woogc-report-customers.php:356
+msgid "customer orders"
+msgstr "kundebestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:360
+#: ../include/admin/reports/class-woogc-report-customers.php:360
+msgid "Guest orders"
+msgstr "Gjestebestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:366
+#: ../include/admin/reports/class-woogc-report-customers.php:366
+msgid "guest orders"
+msgstr "gjestebestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:370
+#: ../include/admin/reports/class-woogc-report-customers.php:370
+msgid "Signups"
+msgstr "Registreringer"
+
+#: ../include/admin/reports-hpos/class-woogc-report-customers.php:377
+#: ../include/admin/reports/class-woogc-report-customers.php:377
+msgid "new users"
+msgstr "nye brukere"
+
+#: ../include/admin/reports-hpos/class-woogc-report-low-in-stock.php:23
+#: ../include/admin/reports/class-woogc-report-low-in-stock.php:23
+msgid "No low in stock products found."
+msgstr "Ingen produkter med lav lagerbeholdning funnet."
+
+#: ../include/admin/reports-hpos/class-woogc-report-out-of-stock.php:23
+#: ../include/admin/reports/class-woogc-report-out-of-stock.php:23
+msgid "No out of stock products found."
+msgstr "Ingen utsolgte produkter funnet."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:475
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:462
+#, php-format
+msgid "%s average gross daily sales"
+msgstr "%s gjennomsnittlig brutto daglig salg"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:480
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:467
+#, php-format
+msgid "%s average net daily sales"
+msgstr "%s gjennomsnittlig netto daglig salg"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:488
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:475
+#, php-format
+msgid "%s average gross monthly sales"
+msgstr "%s gjennomsnittlig brutto månedlig salg"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:493
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:480
+#, php-format
+msgid "%s average net monthly sales"
+msgstr "%s gjennomsnittlig netto månedlig salg"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:502
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:489
+#, php-format
+msgid "%s gross sales in this period"
+msgstr "%s brutto salg i denne perioden"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:505
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:492
+msgid ""
+"This is the sum of the order totals after any refunds and including shipping "
+"and taxes."
+msgstr ""
+"Dette er summen av ordrebeløpene etter eventuelle refusjoner og inkludert "
+"frakt og avgifter."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:520
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:507
+#, php-format
+msgid "%s net sales in this period"
+msgstr "%s netto salg i denne perioden"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:523
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:510
+msgid ""
+"This is the sum of the order totals after any refunds and excluding shipping "
+"and taxes."
+msgstr ""
+"Dette er summen av ordrebeløpene etter eventuelle refusjoner og ekskludert "
+"frakt og avgifter."
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:538
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:525
+#, php-format
+msgid "%s orders placed"
+msgstr "%s bestillinger lagt inn"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:548
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:535
+#, php-format
+msgid "%s items purchased"
+msgstr "%s varer kjøpt"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:568
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:555
+#, php-format
+msgid "%s charged for shipping"
+msgstr "%s belastet for frakt"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:577
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:564
+#, php-format
+msgid "%s worth of coupons used"
+msgstr "Kuponger verdt %s brukt"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:637
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:624
+msgid "Export CSV"
+msgstr "Eksporter CSV"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:719
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:554
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:706
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:554
+msgid "Number of items sold"
+msgstr "Antall solgte varer"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:727
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:714
+msgid "Number of orders"
+msgstr "Antall bestillinger"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:735
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:722
+msgid "Average gross sales amount"
+msgstr "Gjennomsnittlig brutto salgsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:745
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:732
+msgid "Average net sales amount"
+msgstr "Gjennomsnittlig netto salgsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:755
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:742
+msgid "Coupon amount"
+msgstr "Kupongbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:765
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:752
+msgid "Shipping amount"
+msgstr "Fraktbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:775
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:762
+msgid "Gross sales amount"
+msgstr "Brutto salgsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:785
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:772
+msgid "Net sales amount"
+msgstr "Netto salgsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-date.php:795
+#: ../include/admin/reports/class-woogc-report-sales-by-date.php:782
+msgid "Refund amount"
+msgstr "Refusjonsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:134
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:134
+#, php-format
+msgid "%s sales for the selected items"
+msgstr "%s salg for de valgte varene"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:141
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:141
+#, php-format
+msgid "%s purchases for the selected items"
+msgstr "%s kjøp for de valgte varene"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:189
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:189
+msgid "Showing reports for:"
+msgstr "Viser rapporter for:"
+
+#: ../include/admin/reports-hpos/class-woogc-report-sales-by-product.php:562
+#: ../include/admin/reports/class-woogc-report-sales-by-product.php:562
+msgid "Sales amount"
+msgstr "Salgsbeløp"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:53
+#: ../include/admin/reports/class-woogc-report-stock.php:53
+msgid "No products found."
+msgstr "Ingen produkter funnet."
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:131
+#: ../include/admin/reports/class-woogc-report-stock.php:131
+msgid "On backorder"
+msgstr "Restordre"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:133
+#: ../include/admin/reports/class-woogc-report-stock.php:133
+msgid "In stock"
+msgstr "På lager"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:191
+#: ../include/admin/reports/class-woogc-report-stock.php:191
+msgid "Product"
+msgstr "Produkt"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:192
+#: ../include/admin/reports/class-woogc-report-stock.php:192
+msgid "Parent"
+msgstr "Forelder"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:193
+#: ../include/admin/reports/class-woogc-report-stock.php:193
+msgid "Units in stock"
+msgstr "Enheter på lager"
+
+#: ../include/admin/reports-hpos/class-woogc-report-stock.php:194
+#: ../include/admin/reports/class-woogc-report-stock.php:194
+msgid "Stock status"
+msgstr "Lagerstatus"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:25
+#: ../include/class.woogc.options.php:667
+msgid "Licence Key"
+msgstr "Lisensnøkkel"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:28
+msgid "Deactivate"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:30
+msgid "You can generate more keys from"
+msgstr "Du kan generere flere nøkler fra"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:37
+#, fuzzy
+#| msgid "Status"
+msgid "License Status"
+msgstr "Status"
+
+#: ../include/admin/views/html-admin-license-deactivate.php:42
+msgid "License Expiration"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:46
+msgid ""
+"Licence is expired, plugin <b>Updates</b> and <b>Support</b> are not "
+"available"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license-deactivate.php:62
+msgid "New plugin version available"
+msgstr ""
+
+#: ../include/admin/views/html-admin-license.php:21
+#, fuzzy
+#| msgid "Licence Key"
+msgid "License Key"
+msgstr "Lisensnøkkel"
+
+#: ../include/admin/views/html-admin-license.php:26
+msgid ""
+"Enter the Licence Key you received when purchased this product. If you lost "
+"the key, you can always retrieve it from"
+msgstr ""
+"Skriv inn lisensnøkkelen du mottok da du kjøpte dette produktet. Hvis du "
+"mistet nøkkelen, kan du alltid hente den fra"
+
+#: ../include/admin/views/html-admin-license.php:26
+msgid "My Account"
+msgstr "Min konto"
+
+#: ../include/admin/views/html-admin-license.php:29
+msgid "Save"
+msgstr "Lagre"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid ""
+"Rememebr, once activated, a new login session is required. The cookies and "
+"cache data is recommended to be cleared and a browser restart might also be "
+"required"
+msgstr ""
+"Husk, når aktivert, kreves en ny påloggingsøkt. Det anbefales å tømme "
+"informasjonskapsler og cache-data, og en nettleseromstart kan også være "
+"nødvendig"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid "More details at"
+msgstr "Mer detaljer på"
+
+#: ../include/admin/views/html-admin-license.php:34
+msgid "Plugin Instalation"
+msgstr "Plugin-installasjon"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:164
+msgid "Checkout for Shop"
+msgstr "Betaling for butikk"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:199
+msgid "Your order for"
+msgstr "Din bestilling for"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:276
+msgid "Continue Checkout"
+msgstr "Fortsett til kassen"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:277
+msgid "There are other products in your cart which require Checkout"
+msgstr "Det er andre produkter i handlekurven din som krever utsjekking"
+
+#: ../include/cart-split/class.woogc.cart-split-core.php:278
+msgid "Continue"
+msgstr "Fortsett"
+
+#: ../include/checkout/class.single_checkout.php:306
+msgid "This is a Split of"
+msgstr "Dette er en deling av"
+
+#: ../include/checkout/class.wc-checkout-extend.php:227
+msgid ""
+"Please read and accept the terms and conditions to proceed with your order."
+msgstr "Vennligst les og godta vilkårene for å fortsette med bestillingen din."
+
+#: ../include/checkout/class.wc-checkout-extend.php:234
+msgid "Please enter an address to continue."
+msgstr "Vennligst oppgi en adresse for å fortsette."
+
+#: ../include/checkout/class.wc-checkout-extend.php:238
+#, php-format
+msgid ""
+"Unfortunately <strong>we do not ship %s</strong>. Please enter an "
+"alternative shipping address."
+msgstr ""
+"Beklager, <strong>vi sender ikke til %s</strong>. Vennligst skriv inn en "
+"alternativ leveringsadresse."
+
+#: ../include/checkout/class.wc-checkout-extend.php:247
+#: ../include/checkout/class.wc-checkout-extend.php:252
+msgid ""
+"No shipping method has been selected. Please double check your address, or "
+"contact us if you need any help."
+msgstr ""
+"Ingen leveringsmetode er valgt. Vennligst dobbeltsjekk adressen din, eller "
+"kontakt oss hvis du trenger hjelp."
+
+#: ../include/checkout/class.wc-checkout-extend.php:263
+msgid "Invalid payment method."
+msgstr "Ugyldig betalingsmetode."
+
+#: ../include/checkout/class.wc-checkout-extend.php:280
+msgid "We were unable to process your order, please try again."
+msgstr "Vi kunne ikke behandle bestillingen din, vennligst prøv igjen."
+
+#: ../include/checkout/class.wc-checkout-extend.php:290
+#, php-format
+msgid ""
+"Sorry, your session has expired. <a href=\"%s\" class=\"wc-backward\">Return "
+"to shop</a>"
+msgstr ""
+"Beklager, økten din har utløpt. <a href=\"%s\" class=\"wc-backward\">Tilbake "
+"til butikken</a>"
+
+#: ../include/checkout/class.wc-checkout-extend.php:329
+msgid "Unable to create order."
+msgstr "Kan ikke opprette bestilling."
+
+#: ../include/class-woogc-download-handler.php:68
+#: ../include/class-woogc-download-handler.php:73
+#: ../include/class-woogc-download-handler.php:88
+#: ../include/class-woogc-download-handler.php:106
+msgid "Invalid download link."
+msgstr "Ugyldig nedlastingslink."
+
+#: ../include/class-woogc-download-handler.php:156
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:172
+msgid "Invalid order."
+msgstr "Ugyldig bestilling."
+
+#: ../include/class-woogc-download-handler.php:168
+msgid "Sorry, you have reached your download limit for this file"
+msgstr "Beklager, du har nådd nedlastingsgrensen for denne filen"
+
+#: ../include/class-woogc-download-handler.php:179
+msgid "Sorry, this download has expired"
+msgstr "Beklager, denne nedlastingen er utløpt"
+
+#: ../include/class-woogc-download-handler.php:192
+#: ../include/class-woogc-download-handler.php:195
+msgid "You must be logged in to download files."
+msgstr "Du må være innlogget for å laste ned filer."
+
+#: ../include/class-woogc-download-handler.php:195
+msgid "Login"
+msgstr "Logg inn"
+
+#: ../include/class-woogc-download-handler.php:195
+msgid "Log in to Download Files"
+msgstr "Logg inn for å laste ned filer"
+
+#: ../include/class-woogc-download-handler.php:198
+msgid "This is not your download link."
+msgstr "Dette er ikke ditt nedlastingslink."
+
+#: ../include/class-woogc-download-handler.php:219
+msgid "No file defined"
+msgstr "Ingen fil definert"
+
+#: ../include/class-woogc-download-handler.php:442
+msgid "File not found"
+msgstr "Fil ikke funnet"
+
+#: ../include/class.woogc.admin-menus.php:65
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: ../include/class.woogc.admin-menus.php:67
+msgid "Reports"
+msgstr "Rapporter"
+
+#: ../include/class.woogc.admin-menus.php:179
+msgid "Orders per Page"
+msgstr "Bestillinger per side"
+
+#: ../include/class.woogc.ajax.php:173
+#, php-format
+msgid "Item %1$s stock reduced from %2$s to %3$s."
+msgstr "Vare %1$s lager redusert fra %2$s til %3$s."
+
+#: ../include/class.woogc.ajax.php:186
+msgid ""
+"No products had their stock reduced - they may not have stock management "
+"enabled."
+msgstr ""
+"Ingen produkter hadde sitt lager redusert - de har kanskje ikke lagerstyring "
+"aktivert."
+
+#: ../include/class.woogc.ajax.php:228
+#, php-format
+msgid "Item %1$s stock increased from %2$s to %3$s."
+msgstr "Vare %1$s lager økt fra %2$s til %3$s."
+
+#: ../include/class.woogc.ajax.php:240
+msgid ""
+"No products had their stock increased - they may not have stock management "
+"enabled."
+msgstr ""
+"Ingen produkter hadde sitt lager økt - de har kanskje ikke lagerstyring "
+"aktivert."
+
+#: ../include/class.woogc.form-handler.php:59
+msgid "Item"
+msgstr "Vare"
+
+#: ../include/class.woogc.form-handler.php:63
+#: ../include/class.woogc.form-handler.php:66
+#, php-format
+msgid "%s removed."
+msgstr "%s fjernet."
+
+#: ../include/class.woogc.form-handler.php:64
+msgid "Undo?"
+msgstr "Angre?"
+
+#: ../include/class.woogc.form-handler.php:123
+#, php-format
+msgid "You can only have 1 %s in your cart."
+msgstr "Du kan kun ha 1 %s i handlekurven."
+
+#: ../include/class.woogc.form-handler.php:152
+msgid "Cart updated."
+msgstr "Handlekurv oppdatert."
+
+#: ../include/class.woogc.form-handler.php:251
+#: ../include/session/class-wc-cart-session-extend.php:443
+msgid "The cart has been filled with the items from your previous order."
+msgstr "Handlekurven er fylt med varene fra din forrige bestilling."
+
+#: ../include/class.woogc.functions.php:464
+#: ../include/class.woogc.functions.php:479
+msgid ""
+"<b>WooCommerce Global Cart</b> - unable to copy over to /wp-content/mu-"
+"plugins/ and launch the MU module file.."
+msgstr ""
+"<b>WooCommerce Global Cart</b> - kan ikke kopiere til /wp-content/mu-"
+"plugins/ og starte MU-modulfilen.."
+
+#: ../include/class.woogc.functions.php:474
+msgid ""
+"<b>WooCommerce Global Cart</b> - unable to insert the loader to /wp-config."
+"php. Ensure the file is writable."
+msgstr ""
+"<b>WooCommerce Global Cart</b> - kan ikke sette inn lasteren til /wp-config."
+"php. Sørg for at filen er skrivbar."
+
+#: ../include/class.woogc.functions.php:583
+msgid "Unexpected wp-config.php file content"
+msgstr "Uventet innhold i wp-config.php-fil"
+
+#: ../include/class.woogc.functions.php:667
+msgid "Unable to determinate the wp-config.php file path"
+msgstr "Kan ikke bestemme wp-config.php-filens bane"
+
+#: ../include/class.woogc.functions.php:679
+msgid "The wp-config.php file is not writable"
+msgstr "wp-config.php-filen er ikke skrivbar"
+
+#: ../include/class.woogc.functions.php:691
+msgid "Unable to read the wp-config.php file content"
+msgstr "Kan ikke lese innholdet i wp-config.php-filen"
+
+#: ../include/class.woogc.functions.php:716
+msgid "Cache Module status updated"
+msgstr "Cache-modulstatus oppdatert"
+
+#: ../include/class.woogc.functions.php:727
+msgid "Unable to update the wp-config.php file"
+msgstr "Kan ikke oppdatere wp-config.php-filen"
+
+#: ../include/class.woogc.general-filters.php:148
+#, php-format
+msgid "Search %s"
+msgstr "Søk %s"
+
+#: ../include/class.woogc.general-filters.php:150
+#, php-format
+msgid "All %s"
+msgstr "Alle %s"
+
+#: ../include/class.woogc.general-filters.php:152
+#, php-format
+msgid "Parent %s"
+msgstr "Foreldre %s"
+
+#: ../include/class.woogc.general-filters.php:154
+#, php-format
+msgid "Parent %s:"
+msgstr "Foreldre %s:"
+
+#: ../include/class.woogc.general-filters.php:156
+#, php-format
+msgid "Edit %s"
+msgstr "Rediger %s"
+
+#: ../include/class.woogc.general-filters.php:158
+#, php-format
+msgid "Update %s"
+msgstr "Oppdater %s"
+
+#: ../include/class.woogc.general-filters.php:160
+#, php-format
+msgid "Add new %s"
+msgstr "Legg til ny %s"
+
+#: ../include/class.woogc.general-filters.php:162
+#, php-format
+msgid "New %s"
+msgstr "Ny %s"
+
+#: ../include/class.woogc.general-filters.php:164
+#, php-format
+msgid "No &quot;%s&quot; found"
+msgstr "Fant ingen &quot;%s&quot;"
+
+#: ../include/class.woogc.general-filters.php:166
+#, php-format
+msgid "&larr; Back to \"%s\" attributes"
+msgstr "&larr; Tilbake til \"%s\" attributter"
+
+#: ../include/class.woogc.options.php:86
+#, fuzzy
+#| msgid "Licence"
+msgid "License"
+msgstr "Lisens"
+
+#: ../include/class.woogc.options.php:87
+#, fuzzy
+#| msgid "General Settings"
+msgid "General"
+msgstr "Generelle innstillinger"
+
+#: ../include/class.woogc.options.php:88 ../include/class.woogc.options.php:263
+msgid "Synchronization Type"
+msgstr "Synkroniseringstype"
+
+#: ../include/class.woogc.options.php:89
+#, fuzzy
+#| msgid "Checkout Type"
+msgid "Checkout"
+msgstr "Type kasse"
+
+#: ../include/class.woogc.options.php:91
+#, fuzzy
+#| msgid "Product Sync"
+msgid "Products Sync"
+msgstr "Produktsynkronisering"
+
+#: ../include/class.woogc.options.php:92
+msgid "Cart"
+msgstr ""
+
+#: ../include/class.woogc.options.php:96
+#, fuzzy
+#| msgid "Shipping amount"
+msgid "Shipping"
+msgstr "Fraktbeløp"
+
+#: ../include/class.woogc.options.php:158
+msgid "Save Settings"
+msgstr "Lagre innstillinger"
+
+#: ../include/class.woogc.options.php:184
+msgid ""
+"The license key is crucial for ensuring access to updates, support, and "
+"premium features. By entering the license key, the plugin verifies its "
+"authenticity with the developer's server, allowing it to function fully."
+msgstr ""
+
+#: ../include/class.woogc.options.php:185
+msgid ""
+"Once licensed, the plugin receives regular updates, including security "
+"patches and new features, which are essential for maintaining compatibility "
+"and performance. Additionally, the license grants access to technical "
+"support, ensuring users can resolve issues efficiently."
+msgstr ""
+
+#: ../include/class.woogc.options.php:186
+msgid ""
+"Deactivating the license key, typically used when moving the license to a "
+"new site or installation, disable updates and support for previous domain."
+msgstr ""
+
+#: ../include/class.woogc.options.php:230
+#, fuzzy
+#| msgid "Use Global Cart for selected sites."
+msgid "Use Global Features for selected sites."
+msgstr "Bruk global handlekurv for valgte sider."
+
+#: ../include/class.woogc.options.php:231
+msgid ""
+"The Global Cart applies only if the site is checked through this interface "
+"and the WooCoomerce plugin is active, either through Network or locally."
+msgstr ""
+"Den globale handlekurven gjelder kun hvis siden er valgt gjennom dette "
+"grensesnittet og WooCommerce-pluginet er aktivt, enten via nettverket eller "
+"lokalt."
+
+#: ../include/class.woogc.options.php:231
+msgid "Ensure the site has the Public attribute active, to show on that area."
+msgstr ""
+"Sørg for at siden har den offentlige attributten aktiv for å vises på det "
+"området."
+
+#: ../include/class.woogc.options.php:233
+msgid ""
+"If WooCommerce not available for a site, the Global Cart routines will not "
+"be loaded."
+msgstr ""
+"Hvis WooCommerce ikke er tilgjengelig for en side, vil de globale "
+"handlekurvrutinene ikke bli lastet."
+
+#: ../include/class.woogc.options.php:235
+#, fuzzy
+#| msgid ""
+#| "The allowed sites that run Global Cart can also be controled through the "
+#| "filter woogc/global_cart/sites."
+msgid ""
+"The allowed sites that run Global Cart can also be controled through the "
+"filter"
+msgstr ""
+"De tillatte sidene som kjører Global Cart kan også kontrolleres gjennom "
+"filteret woogc/global_cart/sites."
+
+#: ../include/class.woogc.options.php:258
+msgid "Screen"
+msgstr "Skjerm"
+
+#: ../include/class.woogc.options.php:259
+msgid "Headers"
+msgstr "Overskrifter"
+
+#: ../include/class.woogc.options.php:264
+msgid ""
+"The Synchronization procedure ensures the data is processed unitary across "
+"the selected shops ( e.g. global cart )."
+msgstr ""
+"Synkroniseringsprosedyren sørger for at dataene behandles enhetlig på tvers "
+"av de valgte butikkene (f.eks. global handlekurv)."
+
+#: ../include/class.woogc.options.php:266
+msgid "There are two types of synchronisation procedures:"
+msgstr "Det er to typer synkroniseringsprosedyrer:"
+
+#: ../include/class.woogc.options.php:267
+msgid ""
+"<b>Screen</b> ( default ) - This is the easiest to set up and is compatible "
+"with all environment types."
+msgstr ""
+"<b>Skjerm</b> (standard) - Dette er det enkleste å sette opp og er "
+"kompatibelt med alle miljøtyper."
+
+#: ../include/class.woogc.options.php:268
+msgid ""
+"<b>Headers</b> - Is a more complex synchronisation procedure. It works "
+"through HTTP headers and is an unnoticeable/background operation. It may not "
+"be compatible with all environments that use heavy caches (e.g. Varnish)."
+msgstr ""
+"<b>Overskrifter</b> - Er en mer kompleks synkroniseringsprosedyre. Den "
+"fungerer gjennom HTTP-overskrifter og er en usynlig/bakgrunnsoperasjon. Den "
+"er kanskje ikke kompatibel med alle miljøer som bruker tunge cache (f.eks. "
+"Varnish)."
+
+#: ../include/class.woogc.options.php:270
+msgid ""
+"The plugin automatically set-up any of the selected synchronisation type."
+msgstr ""
+"Pluginen setter automatisk opp hvilken som helst av de valgte "
+"synkroniseringstypene."
+
+#: ../include/class.woogc.options.php:293
+msgid "Single Checkout"
+msgstr "Enkel kasse"
+
+#: ../include/class.woogc.options.php:294
+msgid "Each Store Checkout"
+msgstr "Hver butikk kasse"
+
+#: ../include/class.woogc.options.php:298
+msgid "Checkout Type"
+msgstr "Type kasse"
+
+#: ../include/class.woogc.options.php:299
+msgid ""
+"Single Checkout can occur for all cart items, independently from where each "
+"product is coming from. In this case the payment will be collected in full "
+"amount on the check-out site. Selecting Each Store checkout type, the system "
+"create individual check-out sessions in shops from where the cart products "
+"are belong. Each shop will retrieve the payment separately for their own "
+"products"
+msgstr ""
+"Enkel utsjekking kan forekomme for alle varene i handlekurven, uavhengig av "
+"hvor hvert produkt kommer fra. I dette tilfellet vil hele beløpet bli samlet "
+"inn på utsjekkingsstedet. Hvis du velger utsjekkingstypen Each Store, "
+"oppretter systemet individuelle utsjekkingsøkter i butikkene der produktene "
+"i handlekurven hører hjemme. Hver butikk vil hente betalingen separat for "
+"sine egne produkter"
+
+#: ../include/class.woogc.options.php:301
+msgid ""
+"Ensure the WooCommerce 'Enable taxes' option for the check-out site, is set "
+"accordingly to other shops in the network, to avoid adding or subtracting "
+"the value to total. If 'Enable taxes' is active, ensure all Tax rates use "
+"identic definition and rates across the shops."
+msgstr ""
+"Sørg for at WooCommerce-innstillingen 'Aktiver skatter' for utsjekk-siden er "
+"satt i samsvar med de andre butikkene i nettverket, for å unngå å legge til "
+"eller trekke fra verdien til totalen. Hvis 'Aktiver skatter' er aktivert, "
+"sørg for at alle skattesatser bruker identisk definisjon og satser på tvers "
+"av butikkene."
+
+#: ../include/class.woogc.options.php:308
+msgid "Any Site"
+msgstr "Hvilken som helst side"
+
+#: ../include/class.woogc.options.php:323
+msgid "Cart Checkout location"
+msgstr "Handlekurvens utsjekkplassering"
+
+#: ../include/class.woogc.options.php:324
+msgid ""
+"The option is being used when Checkout Type being set as Single Checkout. "
+"<br />When checkout a user will be redirected to a specific site to complete "
+"the order or he can proceed to any site. "
+msgstr ""
+"Alternativet brukes når Checkout Type er angitt som Single Checkout. <br /"
+">Ved utsjekking vil en bruker bli omdirigert til et bestemt nettsted for å "
+"fullføre bestillingen, eller han kan fortsette til et hvilket som helst "
+"nettsted. "
+
+#: ../include/class.woogc.options.php:331
+#: ../include/class.woogc.options.php:361
+#: ../include/class.woogc.options.php:390
+#: ../include/class.woogc.options.php:433
+#: ../include/class.woogc.options.php:447
+#: ../include/class.woogc.options.php:461
+#: ../include/class.woogc.options.php:489
+#: ../include/coupons/class-coupons.php:64
+#: ../include/coupons/class-coupons.php:95
+#: ../include/coupons/class-coupons.php:125
+#: ../include/product-sync/views/html-bulk-edit-product.php:63
+#: ../include/product-sync/views/html-bulk-edit-product.php:83
+#: ../include/product-sync/views/html-bulk-edit-product.php:96
+#: ../include/product-sync/views/html-bulk-edit-product.php:109
+msgid "No"
+msgstr "Nei"
+
+#: ../include/class.woogc.options.php:336
+msgid "Split Order"
+msgstr "Del ordre"
+
+#: ../include/class.woogc.options.php:337
+msgid ""
+"The option is being used when Checkout Type being set as Single Checkout. "
+"<br />When the option is active, the core creates individual orders within "
+"all shops which include a product in the main order. The split order "
+"includes only the products for the specific shop. "
+msgstr ""
+"Alternativet brukes når Checkout Type er angitt som Single Checkout. <br /"
+">Når alternativet er aktivt, oppretter kjernen individuelle bestillinger i "
+"alle butikker som inkluderer et produkt i hovedbestillingen. Den delte "
+"bestillingen inkluderer bare produktene for den spesifikke butikken. "
+
+#: ../include/class.woogc.options.php:366
+msgid "Use Sequential Order Numbers"
+msgstr "Bruk sekvensielle ordrenumre"
+
+#: ../include/class.woogc.options.php:367
+msgid ""
+"Sequential Order Numbers is a way to maintain consecutive ids for orders "
+"across network, independently from shop where order has been placed. This is "
+"recommended to always use when Checkout location is set for a specific shop."
+msgstr ""
+"Sekvensielle ordrenumre er en måte å opprettholde konsekutive id-er for "
+"bestillinger på tvers av nettverket, uavhengig av hvilken butikk "
+"bestillingen ble lagt inn i. Dette er anbefalt å alltid bruke når utsjekk-"
+"plasseringen er satt for en spesifikk butikk."
+
+#: ../include/class.woogc.options.php:395
+msgid "Enable Products Synchronization interface"
+msgstr "Aktiver produkt-synkronisering grensesnitt"
+
+#: ../include/class.woogc.options.php:396
+msgid ""
+"If the Products Synchronization option is active, a new tab within the "
+"Product Data interface is shown to help with Product replication across the "
+"network, to one or more shops."
+msgstr ""
+"Hvis alternativet for produkt-synkronisering er aktivert, vises en ny fane i "
+"Produktdata-grensesnittet for å hjelpe med produktreplikasjon på tvers av "
+"nettverket, til en eller flere butikker."
+
+#: ../include/class.woogc.options.php:403
+msgid "On Product Update"
+msgstr "Ved produktoppdatering"
+
+#: ../include/class.woogc.options.php:404
+msgid "Asynchronous Cron"
+msgstr "Asynkron Cron"
+
+#: ../include/class.woogc.options.php:408
+msgid "Synchronization operation type"
+msgstr "Synkroniserings operasjonstype"
+
+#: ../include/class.woogc.options.php:409
+msgid ""
+"Choose the default On Product Update to start the synchronization update "
+"procedure immediately. Or opt for the Asynchronous Cron to schedule updates "
+"with a delay, on a separate task, ensuring minimal impact on server "
+"performance."
+msgstr ""
+"Velg standardinnstillingen for Ved produktoppdatering for å starte "
+"synkroniseringsoppdateringen umiddelbart. Eller velg Asynkron Cron for å "
+"planlegge oppdateringer med forsinkelse, på en separat oppgave, som sikrer "
+"minimal påvirkning på serverens ytelse."
+
+#: ../include/class.woogc.options.php:438
+msgid "Replace the Cart Products with origin version"
+msgstr "Erstatt handlekurvproduktene med opprinnelig versjon"
+
+#: ../include/class.woogc.options.php:439
+msgid ""
+"If a product in the shopping cart is a synchronized product from a different "
+"shop, that will be substituted with the origin compound."
+msgstr ""
+"Hvis et produkt i handlekurven er et synkronisert produkt fra en annen "
+"butikk, vil det bli erstattet med den opprinnelige versjonen."
+
+#: ../include/class.woogc.options.php:440
+msgid ""
+"When the option is set to Yes, the switch occurs regardless of the product "
+"synchronisation options."
+msgstr ""
+"Når alternativet er satt til Ja, skjer byttet uavhengig av produkt-"
+"synkroniseringsalternativene."
+
+#: ../include/class.woogc.options.php:452
+msgid "Replace the Cart Products with local version"
+msgstr "Erstatt handlekurvproduktene med lokal versjon"
+
+#: ../include/class.woogc.options.php:453
+msgid ""
+"If a product in the shopping cart is also available in the current store, it "
+"will be substituted with the local product. The identification of a match is "
+"determined by comparing the product SKU attribute."
+msgstr ""
+"Hvis et produkt i handlekurven også er tilgjengelig i den nåværende "
+"butikken, vil det bli erstattet med det lokale produktet. Identifikasjonen "
+"av et treff er bestemt ved å sammenligne produktets SKU-attributt."
+
+#: ../include/class.woogc.options.php:454
+msgid "The substitution occours only for products of same type."
+msgstr "Byttet skjer kun for produkter av samme type."
+
+#: ../include/class.woogc.options.php:466
+msgid "Filter to Show Product Attributres"
+msgstr "Filter for å vise produktattributter"
+
+#: ../include/class.woogc.options.php:467
+msgid ""
+"Output the list of product attributes, on cart page, if not being already "
+"outputed on the product title."
+msgstr ""
+"Vis listen over produktattributter på handlekurvsiden, hvis de ikke allerede "
+"er vist på produktets tittel."
+
+#: ../include/class.woogc.options.php:494
+msgid "Calculate Shipping costs for each Shops"
+msgstr "Beregn fraktkostnader for hver butikk"
+
+#: ../include/class.woogc.options.php:495
+msgid ""
+"When the cart contains products from different shops, calculate separate "
+"shipping costs for each of the sites. Useful when the customer receives "
+"multiple packages from different shops. If set to No, only the check-out "
+"shop shipping set-up applies."
+msgstr ""
+"Når handlekurven inneholder produkter fra forskjellige butikker, beregn "
+"separate fraktkostnader for hver av sidene. Nyttig når kunden mottar flere "
+"pakker fra forskjellige butikker. Hvis satt til Nei, gjelder kun "
+"fraktinnstillingene for utsjekk-butikken."
+
+#: ../include/class.woogc.options.php:496
+msgid ""
+"An update is required for the theme /cart-shipping.php template file, more "
+"details at"
+msgstr ""
+"En oppdatering kreves for temaet /cart-shipping.php malfil, mer detaljer på"
+
+#: ../include/class.woogc.options.php:497
+msgid "On option change, a browser cache clear is required."
+msgstr "Ved endring av alternativ, kreves en tømming av nettleserens cache."
+
+#: ../include/class.woogc.options.php:504
+msgid "Disabled - No taxes"
+msgstr "Deaktivert - Ingen skatter"
+
+#: ../include/class.woogc.options.php:519
+msgid "Use Global Taxe Rates"
+msgstr "Bruk globale skattesatser"
+
+#: ../include/class.woogc.options.php:520
+msgid ""
+"When Taxes are enabled for the shops, this ensures the same Tax Rates are "
+"used unitary across the network, to avoid adding or subtracting different "
+"tax values to the total."
+msgstr ""
+"Når skatter er aktivert for butikkene, sørger dette for at de samme "
+"skattesatsene brukes enhetlig på tvers av nettverket, for å unngå å legge "
+"til eller trekke fra forskjellige skatteverdier til totalen."
+
+#: ../include/class.woogc.options.php:521
+msgid ""
+"The selected Shop Rates rates will be used for all other shops in the "
+"network."
+msgstr ""
+"De valgte butikkens skattesatser vil bli brukt for alle andre butikker i "
+"nettverket."
+
+#: ../include/class.woogc.options.php:637
+msgid "Settings Saved"
+msgstr "Innstillinger lagret"
+
+#: ../include/class.woogc.options.php:667
+msgid "WooCommerce Global Cart plugin is inactive, please enter your"
+msgstr "WooCommerce Global Cart-plugin er inaktiv, vennligst legg inn din"
+
+#: ../include/class.woogc.options.php:696
+#: ../include/class.woogc.options.php:763
+msgid "There was a problem connecting to "
+msgstr "Det oppstod et problem med å koble til "
+
+#: ../include/class.woogc.options.php:721
+#: ../include/class.woogc.options.php:802
+msgid "There was a problem with the data block received from "
+msgstr "Det oppstod et problem med datablokken mottatt fra "
+
+#: ../include/class.woogc.options.php:745
+msgid "Licence Key can't be empty"
+msgstr "Lisensnøkkelen kan ikke være tom"
+
+#: ../include/class.woogc.options.php:794
+msgid "There was a problem activating the licence: "
+msgstr "Det oppstod et problem med å aktivere lisensen: "
+
+#: ../include/class.woogc.php:459
+msgid ""
+"Unable to copy woo-gc.php to mu-plugins folder. Is this directory writable?"
+msgstr ""
+"Kan ikke kopiere woo-gc.php til mu-plugins-mappen. Er denne katalogen "
+"skrivbar?"
+
+#: ../include/class.woogc.php:475
+msgid ""
+"COOKIE_DOMAIN constant already defined. The Global Cart feature possibly not "
+"fully functional."
+msgstr ""
+"COOKIE_DOMAIN-konstanten er allerede definert. Global Cart-funksjonen "
+"fungerer muligens ikke helt som den skal."
+
+#: ../include/class.woogc.php:515
+msgid ""
+"All shops utilizing the Global Cart must employ the same HPOS setup; "
+"currently, there is a mix, with some using it while others do not."
+msgstr ""
+"Alle butikker som bruker Global Cart må bruke den samme HPOS-innstillingen; "
+"for øyeblikket er det en blanding, med noen som bruker den mens andre ikke "
+"gjør det."
+
+#: ../include/class.woogc.php:532
+msgid "WooCommerce plugin is required to be active."
+msgstr "WooCommerce-plugin er nødvendig for å være aktiv."
+
+#: ../include/class.woogc.updater.php:127
+msgid "An error occour when try to identify the pluguin."
+msgstr "Det oppstod en feil når du prøvde å identifisere pluginen."
+
+#: ../include/class.woogc.updater.php:127
+#: ../include/class.woogc.updater.php:147
+msgid "Try again"
+msgstr "Prøv igjen"
+
+#: ../include/class.woogc.updater.php:147
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr "En uventet HTTP-feil oppstod under API-forespørselen."
+
+#: ../include/coupons/class-coupons.php:48
+#: ../include/coupons/class-coupons.php:93
+msgid "Global Coupon"
+msgstr "Global kupong"
+
+#: ../include/coupons/class-coupons.php:99
+msgid ""
+"If set to Yes, the coupon will be created and updated on all other "
+"WooCommerce shops."
+msgstr ""
+"Hvis satt til Ja, vil kupongen bli opprettet og oppdatert på alle andre "
+"WooCommerce-butikker."
+
+#: ../include/coupons/class-coupons.php:123
+msgid "Global Coupon Unlink"
+msgstr "Fjern kobling av global kupong"
+
+#: ../include/coupons/class-coupons.php:129
+#, fuzzy
+#| msgid ""
+#| "If set to Yes, the coupon will stay on this shop but removed from all "
+#| "others. If set to No, the coupon will be preserved at all shops but not "
+#| "maintained globally."
+msgid ""
+"If set to Yes, the coupon will stay on this shop but removed from all "
+"others.  If set to No, the coupon will be preserved at all shops but not "
+"maintained globally."
+msgstr ""
+"Hvis satt til Ja, vil kupongen bli værende i denne butikken, men fjernet fra "
+"alle andre. Hvis satt til Nei, vil kupongen bli beholdt på alle butikker, "
+"men ikke vedlikeholdt globalt."
+
+#: ../include/order/class-wc-order-item-product.php:96
+msgid "Invalid variation ID"
+msgstr "Ugyldig variant-ID"
+
+#: ../include/product-sync/class.woogc.ps.async.php:141
+msgid "Product Synchronisation is in progress."
+msgstr "Produktsynkronisering pågår."
+
+#: ../include/product-sync/class.woogc.ps.async.php:142
+msgid ""
+"Product Synchronization is in progress. Your products are being updated to "
+"ensure all information is consistent and up-to-date across the selected "
+"shops. Please wait while the system completes this process. The duration may "
+"vary depending on the number of products and the required operations."
+msgstr ""
+"Produktsynkronisering pågår. Produktene dine blir oppdatert for å sikre at "
+"all informasjon er konsekvent og oppdatert på tvers av de valgte butikkene. "
+"Vennligst vent mens systemet fullfører denne prosessen. Varigheten kan "
+"variere avhengig av antallet produkter og nødvendige operasjoner."
+
+#: ../include/product-sync/class.woogc.ps.async.php:234
+#: ../include/product-sync/class.woogc.ps.async.php:260
+msgid "Continue the synchronization batch."
+msgstr "Fortsett synkroniseringsbatchen."
+
+#: ../include/product-sync/class.woogc.ps.async.php:234
+#: ../include/product-sync/class.woogc.ps.async.php:260
+msgid "Start the synchronization batch."
+msgstr "Start synkroniseringsbatchen."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:95
+msgid "Product Sync"
+msgstr "Produktsynkronisering"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:128
+#: ../include/product-sync/views/html-bulk-edit-product.php:18
+#: ../include/product-sync/views/html-quick-edit-product.php:20
+msgid "In this section, you can control the synchronisation shops and options."
+msgstr ""
+"I denne seksjonen kan du kontrollere synkroniseringsbutikker og alternativer."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:170
+#: ../include/product-sync/views/html-bulk-edit-product.php:48
+#: ../include/product-sync/views/html-quick-edit-product.php:50
+msgid "Shop Title"
+msgstr "Butikkens tittel"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:171
+#: ../include/product-sync/class.woogc.ps.interfaces.php:345
+#: ../include/product-sync/views/html-bulk-edit-product.php:49
+#: ../include/product-sync/views/html-quick-edit-product.php:51
+msgid "Enable Synchronization"
+msgstr "Aktiver synkronisering"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:196
+msgid "View Product"
+msgstr "Vis produkt"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:251
+#: ../include/product-sync/class.woogc.ps.interfaces.php:413
+#: ../include/product-sync/views/html-bulk-edit-product.php:79
+#: ../include/product-sync/views/html-quick-edit-product.php:91
+msgid "Maintain Child Product Synchronization"
+msgstr "Oppretthold synkronisering av barneprodukter"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:251
+#: ../include/product-sync/views/html-bulk-edit-product.php:85
+#: ../include/product-sync/views/html-quick-edit-product.php:91
+msgid "When the current Product change, the Child Product get updated as well."
+msgstr ""
+"Når det nåværende produktet endres, blir barneproduktet også oppdatert."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:274
+#: ../include/product-sync/class.woogc.ps.interfaces.php:435
+#: ../include/product-sync/views/html-bulk-edit-product.php:92
+#: ../include/product-sync/views/html-quick-edit-product.php:99
+msgid "Categories and Tags Synchronization"
+msgstr "Synkronisering av kategorier og etiketter"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:274
+msgid ""
+"Synchronize the product categories and tags. If the term is not found on the "
+"child store, it will be created."
+msgstr ""
+"Synkroniser produktkategorier og etiketter. Hvis termen ikke finnes i "
+"barnebutikken, vil den bli opprettet."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:296
+#: ../include/product-sync/class.woogc.ps.interfaces.php:457
+#: ../include/product-sync/views/html-bulk-edit-product.php:105
+#: ../include/product-sync/views/html-quick-edit-product.php:107
+msgid "Stock Synchronization"
+msgstr "Synkronisering av lagerbeholdning"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:296
+#: ../include/product-sync/class.woogc.ps.interfaces.php:457
+#: ../include/product-sync/views/html-bulk-edit-product.php:111
+#: ../include/product-sync/views/html-quick-edit-product.php:107
+msgid ""
+"Any stock changes on the products across the network using \"Stock "
+"Synchronization\", updates others stock too."
+msgstr ""
+"Enhver lagerendring på produktene i nettverket ved hjelp av "
+"\"Lagerbeholdningssynkronisering\" oppdaterer også lagerbeholdningen på "
+"andre produkter."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:329
+msgid "In this section, you can control the synchronisation options."
+msgstr "I denne seksjonen kan du kontrollere synkroniseringsalternativene."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:330
+msgid "This is a Child product."
+msgstr "Dette er et barneprodukt."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:344
+msgid "Origin Shop Title"
+msgstr "Opprinnelig butikk tittel"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:359
+msgid "View Origin Product"
+msgstr "Vis opprinnelig produkt"
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:413
+msgid "When the parent Product change, this Child Product get updated as well."
+msgstr ""
+"Når foreldreproduktet endres, blir dette barneproduktet også oppdatert."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:435
+msgid ""
+"Synchronize the parent product categories and tags. If the term is not found "
+"on the current store, it will be created."
+msgstr ""
+"Synkroniser foreldres produktkategorier og etiketter. Hvis termen ikke "
+"finnes i den nåværende butikken, vil den bli opprettet."
+
+#: ../include/product-sync/class.woogc.ps.interfaces.php:689
+msgid "Sync"
+msgstr "Synkroniser"
+
+#: ../include/product-sync/class.woogc.ps.php:508
+msgid "Product successfully synchronized."
+msgstr "Produktet er vellykket synkronisert."
+
+#: ../include/product-sync/class.woogc.ps.php:714
+msgid "Unable to set SKU metadata with value of "
+msgstr "Kan ikke sette SKU metadata med verdien "
+
+#: ../include/product-sync/class.woogc.ps.php:714
+msgid ""
+"Ensure the value is not assigned to a different products on the target shop "
+msgstr "Sørg for at verdien ikke er tildelt andre produkter i målbutikken."
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid "Unable to set Tax Class "
+msgstr "Kan ikke sette skattekode "
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid " on shop ID "
+msgstr " på butikk-ID "
+
+#: ../include/product-sync/class.woogc.ps.php:755
+msgid " as the class does not exists. Create it then Update."
+msgstr " da klassen ikke eksisterer. Opprett den og oppdater deretter."
+
+#: ../include/product-sync/class.woogc.ps.php:795
+msgid "Unable to set "
+msgstr "Kan ikke sette "
+
+#: ../include/product-sync/class.woogc.ps.php:795
+msgid " metadata with value "
+msgstr " metadata med verdien "
+
+#: ../include/product-sync/class.woogc.ps.php:1106
+msgid "Unable to set cross sell id for product "
+msgstr "Kan ikke sette kryss-salg-ID for produkt "
+
+#: ../include/product-sync/class.woogc.ps.php:1106
+#: ../include/product-sync/class.woogc.ps.php:1142
+msgid "Make sure the product is synchronised at the child shop, then Update."
+msgstr ""
+"Sørg for at produktet er synkronisert i barnebutikken, og oppdater deretter."
+
+#: ../include/product-sync/class.woogc.ps.php:1142
+msgid "Unable to set upsell id for product "
+msgstr "Kan ikke sette oppsalg-ID for produkt "
+
+#: ../include/product-sync/views/html-bulk-edit-product.php:61
+#: ../include/product-sync/views/html-bulk-edit-product.php:81
+#: ../include/product-sync/views/html-bulk-edit-product.php:94
+#: ../include/product-sync/views/html-bulk-edit-product.php:107
+msgid "No change"
+msgstr "Ingen endring"
+
+#: ../include/product-sync/views/html-bulk-edit-product.php:98
+#: ../include/product-sync/views/html-quick-edit-product.php:99
+msgid ""
+"Synchronize the product categories and terms. If the term is not found on "
+"the child store, it will be created."
+msgstr ""
+"Synkroniser produktkategorier og termer. Hvis termen ikke finnes i "
+"barnebutikken, vil den bli opprettet."
+
+#: ../include/session/class-wc-cart-session-extend.php:156
+#, php-format
+msgid ""
+"%s has been removed from your cart because it can no longer be purchased. "
+"Please contact us if you need assistance."
+msgstr ""
+"%s har blitt fjernet fra handlekurven din fordi det ikke lenger kan kjøpes. "
+"Vennligst kontakt oss hvis du trenger hjelp."
+
+#: ../include/session/class-wc-cart-session-extend.php:162
+#, php-format
+msgid ""
+"%1$s has been removed from your cart because it has since been modified. You "
+"can add it back to your cart <a href=\"%2$s\">here</a>."
+msgstr ""
+"%1$s har blitt fjernet fra handlekurven din fordi den har blitt modifisert. "
+"Du kan legge den tilbake i handlekurven din <a href=\"%2$s\">her</a>."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:89
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:169
+msgid "Sorry, this order is invalid and cannot be paid for."
+msgstr "Beklager, denne bestillingen er ugyldig og kan ikke betales for."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:105
+msgid ""
+"This order cannot be paid for. Please contact us if you need assistance."
+msgstr ""
+"Denne bestillingen kan ikke betales for. Vennligst kontakt oss hvis du "
+"trenger hjelp."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:111
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:166
+#, php-format
+msgid ""
+"This order&rsquo;s status is &ldquo;%s&rdquo;&mdash;it cannot be paid for. "
+"Please contact us if you need assistance."
+msgstr ""
+"Bestillingens status er \"%s\"—den kan ikke betales for. Vennligst kontakt "
+"oss hvis du trenger hjelp."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:121
+#, php-format
+msgid ""
+"Sorry, \"%s\" is no longer in stock so this order cannot be paid for. We "
+"apologize for any inconvenience caused."
+msgstr ""
+"Beklager, \"%s\" er ikke lenger på lager, så denne bestillingen kan ikke "
+"betales for. Vi beklager eventuelle ulemper dette medfører."
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:145
+msgid "Pay for order"
+msgstr "Betal for bestilling"
+
+#: ../include/shortcodes/class-wc-shortcode-checkout.php:242
+msgid ""
+"The order totals have been updated. Please confirm your order by pressing "
+"the \"Place order\" button at the bottom of the page."
+msgstr ""
+"Bestillingssummene er blitt oppdatert. Vennligst bekreft bestillingen ved å "
+"trykke på \"Plasser bestilling\"-knappen nederst på siden."
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:391
+msgid "&laquo; Previous"
+msgstr "&laquo; Forrige"
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:392
+msgid "Next &raquo;"
+msgstr "Neste &raquo;"
+
+#: ../include/shortcodes/class.woogc.shortcodes.php:496
+msgid "&hellip;"
+msgstr "&hellip;"
+
+#: ../include/stock/ReserveStock.php:91
+#, php-format
+msgid "&quot;%s&quot; is out of stock and cannot be purchased."
+msgstr "\"%s\" er utsolgt og kan ikke kjøpes."
+
+#: ../include/stock/ReserveStock.php:188
+#, php-format
+msgid "Not enough units of %s are available in stock to fulfil this order."
+msgstr ""
+"Ikke nok enheter av %s er tilgjengelig på lager for å oppfylle denne "
+"bestillingen."
+
+#: ../include/stock/class.stock.php:83
+#, php-format
+msgid "Unable to reduce stock for item %s."
+msgstr "Kan ikke redusere lageret for varen %s."
+
+#: ../include/stock/class.stock.php:159
+msgid "Stock levels reduced:"
+msgstr "Lagerbeholdningen er redusert:"
+
+#: ../include/stock/class.stock.php:227
+#, php-format
+msgid "Unable to restore stock for item %s."
+msgstr "Kan ikke gjenopprette lagerbeholdningen for varen %s."
+
+#: ../include/stock/class.stock.php:244
+msgid "Stock levels increased:"
+msgstr "Lagerbeholdningen er økt:"
+
+#~ msgid "Coupon Receiver Details"
+#~ msgstr "Kupongmottaker Detaljer"
+
+#~ msgid "Your order contains coupons. What would you like to do?"
+#~ msgstr "Bestillingen din inneholder kuponger. Hva vil du gjøre?"
+
+#~ msgid "Gift coupons to someone else"
+#~ msgstr "Gi bort kuponger til noen andre"
+
+#~ msgid "Send to one person"
+#~ msgstr "Send til én person"
+
+#~ msgid "Send to different people"
+#~ msgstr "Send til forskjellige personer"
+
+#~ msgid "Email address"
+#~ msgstr "E-postadresse"
+
+#~ msgid "Message"
+#~ msgstr "Melding"
+
+#~ msgid "WooCommerce Global Cart"
+#~ msgstr "WooCommerce Global Cart"
+
+#~ msgid "Licenxe Key"
+#~ msgstr "Lisensnøkkel"

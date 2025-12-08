@@ -1,0 +1,2057 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Account Funds for WooCommerce 3.2.1\n"
+"Report-Msgid-Bugs-To: https://kestrelwp.com/contact/\n"
+"Last-Translator: gpt-po v1.2.3\n"
+"Language-Team: Kestrel <support@kestrelwp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-05-15T09:07:21+00:00\n"
+"PO-Revision-Date: 2025-06-16 20:09+0900\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+"Copyright: (C) 2025 Kestrel\n"
+
+#. Plugin Name of the plugin
+#: woocommerce-account-funds.php
+msgid "Account Funds for WooCommerce"
+msgstr "Fundusze konta dla WooCommerce"
+
+#. Plugin URI of the plugin
+#: woocommerce-account-funds.php
+msgid "https://woocommerce.com/products/account-funds/"
+msgstr "https://woocommerce.com/products/account-funds/"
+
+#. Description of the plugin
+#: woocommerce-account-funds.php
+msgid "Allow customers to deposit funds into their accounts and pay with account funds during checkout."
+msgstr "Pozwól klientom na wpłacanie środków na swoje konta i płacenie nimi podczas realizacji zamówienia."
+
+#. Author of the plugin
+#: woocommerce-account-funds.php
+msgid "Kestrel"
+msgstr "Kestrel"
+
+#. Author URI of the plugin
+#: woocommerce-account-funds.php
+msgid "http://kestrelwp.com"
+msgstr "http://kestrelwp.com"
+
+#. translators: Placeholders: %1$s - Refund amount, %2$s - Account funds label, e.g. "Account funds"
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:62
+#, php-format
+msgid "Refund %1$s via %2$s"
+msgstr "Zwrot %1$s za pomocą %2$s"
+
+#. translators: Placeholders: %1$s - Refund amount, %2$s - Account funds label, e.g. "Account funds"
+#. translators: Placeholders: %1$s- refund amount, %2$s - payment gateway title
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:128
+#: src/Gateway.php:477
+#, php-format
+msgid "Refunded %1$s via %2$s."
+msgstr "Zwrot %1$s za pomocą %2$s."
+
+#. Translators: Placeholders: %1$s - Store credit amount to be removed, %$2s - Customer store credit balance amount -  %3$s - Label used to describe store credit
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:178
+#, php-format
+msgid "Insufficient %1$s in customer's balance (%2$s) to remove the amount of %3$s."
+msgstr "Niewystarczająca ilość %1$s na koncie klienta (%2$s), aby odjąć kwotę %3$s."
+
+#. Translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:193
+#, php-format
+msgid "Removed %1$s in %2$s from customer's balance."
+msgstr "Usunięto %1$s z %2$s z konta klienta."
+
+#. translators: Placeholder: %s - Average daily account funds deposits
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:97
+#, php-format
+msgid "%s average daily deposits"
+msgstr "%s średnich dziennych depozytów"
+
+#. translators: Placeholder: %s - Average monthly account funds deposits
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:102
+#, php-format
+msgid "%s average monthly deposits"
+msgstr "%s średnich miesięcznych depozytów"
+
+#. translators: Placeholder: %s - Total account funds deposits in a chosen period
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:108
+#, php-format
+msgid "%s total deposits in this period"
+msgstr "%s łącznej sumy depozytów w tym okresie"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:109
+msgid "This is the sum of the order totals after any refunds and including shipping and taxes."
+msgstr "To jest suma wartości zamówień po ewentualnych zwrotach, w tym koszty wysyłki i podatki."
+
+#. translators: Placeholder: %s - Account funds deposits made in total for a chosen period
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:120
+#, php-format
+msgid "%s deposits made"
+msgstr "%s dokonanych depozytów"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:135
+msgid "Year"
+msgstr "Rok"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:136
+msgid "Last month"
+msgstr "Ostatni miesiąc"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:137
+msgid "This month"
+msgstr "Ten miesiąc"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:138
+msgid "Last 7 days"
+msgstr "Ostatnie 7 dni"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:201
+msgid "Number of deposits made"
+msgstr "Liczba dokonanych depozytów"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:209
+msgid "Average sales amount"
+msgstr "Średnia wartość sprzedaży"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:219
+msgid "Deposits amount"
+msgstr "Kwota depozytów"
+
+#. translators: Placeholder- %s - minimum account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:154
+#, php-format
+msgid "The minimum amount that can be topped up is %s"
+msgstr "Minimalna kwota do doładowania to %s"
+
+#. translators: Placeholder: %s - maximum account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:158
+#, php-format
+msgid "The maximum amount that can be topped up is %s"
+msgstr "Maksymalna kwota do doładowania to %s"
+
+#: legacy/includes/class-wc-account-funds-my-account.php:168
+msgid "View cart"
+msgstr "Zobacz koszyk"
+
+#. translators: Placeholder: %s - Account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:170
+#, php-format
+msgid "Top-up of %1$s has been added to cart."
+msgstr "Doładowanie %1$s zostało dodane do koszyka."
+
+#. translators: Account funds deposits
+#: legacy/includes/class-wc-account-funds-reports.php:24
+msgid "Deposits"
+msgstr "Depozyty"
+
+#. translators: Account funds deposits overview
+#: legacy/includes/class-wc-account-funds-reports.php:28
+msgid "Overview"
+msgstr "Przegląd"
+
+#. translators: Name of the account funds widget
+#: legacy/includes/class-wc-account-funds-widget.php:17
+msgid "My Account Funds"
+msgstr "Moje środki na koncie"
+
+#. translators: Placeholders: %1$s - account funds amount, 2$s - account funds label, e.g. "Account Funds"
+#. translators: Placeholders: %1$s - Funds amount, %2$s - Label used to describe account funds
+#: legacy/includes/class-wc-account-funds-widget.php:45
+#: templates/myaccount/account-funds.php:38
+#, php-format
+msgid "You currently have <strong>%1$s</strong> worth of %2$s in your account."
+msgstr "Obecnie masz <strong>%1$s</strong> wartości %2$s na swoim koncie."
+
+#. translators: Account funds deposits
+#: legacy/includes/class-wc-account-funds-widget.php:57
+msgid "View deposits"
+msgstr "Przeglądaj depozyty"
+
+#. translators: Placeholder: %s - label used to describe account funds owned by the current user, e.g. "My account funds"
+#: legacy/includes/class-wc-account-funds-widget.php:85
+#, php-format
+msgid "My %s"
+msgstr "Moje %s"
+
+#: legacy/includes/class-wc-account-funds-widget.php:90
+msgid "Title:"
+msgstr "Tytuł:"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:54
+#, php-format
+msgid "%s increase"
+msgstr "%s zwiększenie"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:58
+#, php-format
+msgid "This email is sent to the customer when the %s amount is manually increased."
+msgstr "Ten e-mail jest wysyłany do klienta, gdy kwota %s jest ręcznie zwiększana."
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:88
+#, php-format
+msgid "%s increased"
+msgstr "%s zwiększone"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:103
+#, php-format
+msgid "Your %s amount has increased to:"
+msgstr "Twoja kwota %s została zwiększona do:"
+
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:129
+msgid "Message"
+msgstr "Wiadomość"
+
+#. translators: Placeholder: %s - list of available placeholders
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:251
+#, php-format
+msgid "Available placeholders: %s."
+msgstr "Dostępne placeholders: %s."
+
+#. translators: Placeholders: %s - list of available placeholders
+#: legacy/includes/wc-account-funds-functions.php:161
+#, php-format
+msgid "Available placeholders: %s"
+msgstr "Dostępne placeholders: %s"
+
+#: legacy/includes/wc-account-funds-order-functions.php:115
+msgid "Customer not found."
+msgstr "Nie znaleziono klienta."
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. insufficient account funds amount
+#: legacy/includes/wc-account-funds-order-functions.php:129
+#, php-format
+msgid "Insufficient %s amount."
+msgstr "Niewystarczająca kwota %s."
+
+#. translators: Placeholders: %1$s payment gateway title, %2$s account funds used (applied at checkout)
+#: legacy/includes/wc-account-funds-order-functions.php:150
+#, php-format
+msgid "%1$s payment applied: %2$s"
+msgstr "%1$s zastosowana płatność: %2$s"
+
+#: src/Admin.php:86
+msgid "Account funds"
+msgstr "Środki na koncie"
+
+#: src/Admin.php:191
+msgid "The store credit gateway is not enabled. Customers will not be able to pay for orders using their store credit."
+msgstr "Brak włączonego bramki płatności za pomocą salda sklepu. Klienci nie będą mogli płacić za zamówienia przy użyciu salda sklepu."
+
+#: src/Admin.php:193
+msgid "View gateway settings"
+msgstr "Zobacz ustawienia bramki płatności"
+
+#: src/Admin.php:207
+msgid "Version 4.0.0 of Kestrel Account funds for WooCommerce is a major upgrade paving the way for many new features to reward customers with store credit and expand your business opportunities in building customer loyalty."
+msgstr "Wersja 4.0.0 Kestrel Account funds for WooCommerce to duża aktualizacja, która otwiera drogę dla wielu nowych funkcji nagradzania klientów saldem sklepu i rozszerzania możliwości Twojego biznesu w budowaniu lojalności klientów."
+
+#: src/Admin.php:209
+msgid "Learn more"
+msgstr "Dowiedz się więcej"
+
+#: src/Admin.php:216
+msgid "Account funds for WooCommerce"
+msgstr "Środki na koncie dla WooCommerce"
+
+#: src/Admin/Products.php:66
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:81
+#: src/Settings/Store_Credit_Label.php:87
+#: src/Store_Credit/Reward_Status.php:84
+msgid "Store credit"
+msgstr "Saldo sklepu"
+
+#: src/Admin/Products.php:137
+msgid "Store credit products can be purchased by customers to increase their store credit balance by an amount equal to the price paid."
+msgstr "Produkty z saldem sklepu mogą być kupowane przez klientów, aby zwiększyć ich saldo sklepu o kwotę równą zapłaconej cenie."
+
+#: src/Admin/Products.php:138
+msgid "If a sale price is set, customers will pay the sale price and receive the full price amount in store credit instead."
+msgstr "Jeśli ustawiono cenę promocyjną, klienci zapłacą cenę promocyjną i otrzymają pełną kwotę ceny jako saldo sklepu zamiast tego."
+
+#: src/Admin/Products.php:139
+msgid "Important note: store credit products should not be taxed if you are charging tax on the purchase of products."
+msgstr "Ważna uwaga: produkty z saldem sklepu nie powinny być opodatkowane, jeśli naliczasz podatek od zakupu produktów."
+
+#: src/Admin/Screens/Settings_Screen.php:78
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: src/Admin/Screens/Settings_Screen.php:90
+msgid "Account funds settings"
+msgstr "Ustawienia środków na koncie"
+
+#: src/Admin/Screens/Settings_Screen.php:108
+msgid "Labels"
+msgstr "Etykiety"
+
+#: src/Admin/Screens/Settings_Screen.php:109
+msgid "Determine how store credit is presented to customers. Leave blank to use the default \"Store credit\"."
+msgstr "Określ, jak saldo sklepu jest prezentowane klientom. Pozostaw puste, aby użyć domyślnego \"Saldo sklepu\"."
+
+#: src/Admin/Screens/Settings_Screen.php:113
+msgid "Funding"
+msgstr "Finansowanie"
+
+#: src/Admin/Screens/Settings_Screen.php:114
+msgid "Determine if customers are able to increase their store credit from their account page."
+msgstr "Określ, czy klienci mogą zwiększać swoje saldo sklepu z poziomu strony konta."
+
+#. translators: Placeholder: %1$s - opening link tag, %2$s - closing link tag
+#: src/Admin/Screens/Settings_Screen.php:163
+#, php-format
+msgid "To configure the store credit payment gateway and let customers pay with their store credit, please visit the %1$s store credit payment gateway settings%2$s."
+msgstr "Aby skonfigurować bramkę płatności za pomocą salda sklepu i umożliwić klientom płatność tym saldem, odwiedź ustawienia bramki płatności za pomocą salda sklepu %1$s%2$s."
+
+#: src/Admin/Screens/Settings_Screen.php:184
+msgid "Save changes"
+msgstr "Zapisz zmiany"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:53
+#: src/Store_Credit/Reward_Type.php:65
+#: src/Store_Credit/Reward_Type.php:84
+#: src/System_Status_Report.php:121
+msgid "Cashback"
+msgstr "Zwrot gotówki"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:67
+msgid "Edit cashback reward"
+msgstr "Edytuj nagrodę za cashback"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:70
+msgid "Add new cashback reward"
+msgstr "Dodaj nową nagrodę cashback"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:82
+msgid "Award store credit to customers when they make a purchase. Choose to award credit as percentage or fixed amount, relative to the whole order value or specific products within the order."
+msgstr "Przyznawaj klientom saldo sklepu po dokonaniu zakupu. Wybierz przyznanie salda jako procent lub kwotę stałą, w odniesieniu do całkowitej wartości zamówienia lub określonych produktów w zamówieniu."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:111
+msgid "Award cashback store credit when the customer pays for an order that fits the eligibility rules."
+msgstr "Przyznawaj cashback w formie salda sklepu, gdy klient opłaci zamówienie spełniające warunki kwalifikacji."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:115
+msgid "Award cashback store credit for every eligible product within a paid order."
+msgstr "Przyznawaj cashback za każde kwalifikujące się produkty w opłaconym zamówieniu."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:165
+msgid "Define who qualifies for cashback based on order value or contents."
+msgstr "Zdefiniuj, kto kwalifikuje się do cashback na podstawie wartości zamówienia lub jego zawartości."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:171
+msgid "Eligible orders"
+msgstr "Kwalifikujące się zamówienia"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:175
+msgid "Award cashback only if the paid order meets the specified criteria."
+msgstr "Przyznawaj cashback tylko, jeśli opłacone zamówienie spełnia określone kryteria."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:183
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:349
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:188
+msgid "Products"
+msgstr "Produkty"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:184
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:350
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:189
+msgid "Search for products&hellip;"
+msgstr "Szukaj produktów&hellip;"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:208
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:373
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:212
+msgid "Product categories"
+msgstr "Kategorie produktów"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:209
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:374
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:213
+msgid "Select categories&hellip;"
+msgstr "Wybierz kategorie&hellip;"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:234
+msgid "Product types"
+msgstr "Typy produktów"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:241
+msgid "Select product types&hellip;"
+msgstr "Wybierz typy produktów&hellip;"
+
+#. translators: Placeholder: %s - Currency symbol
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:252
+#, php-format
+msgid "Minimum order value (%s)"
+msgstr "Minimalna wartość zamówienia (%s)"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:257
+msgid "The order must reach this value (after discounts, before tax and shipping) to qualify for cashback."
+msgstr "Zamówienie musi osiągnąć tę wartość (po rabatach, przed podatkiem i wysyłką), aby kwalifikować się do cashback."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:258
+msgid "Leave blank for no minimum."
+msgstr "Pozostaw puste, aby nie było minimalnej wartości."
+
+#. translators: Placeholder: %s - Currency symbol
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:269
+#, php-format
+msgid "Maximum order value (%s)"
+msgstr "Maksymalna wartość zamówienia (%s)"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:274
+msgid "Award cashback only if the order total is less than this amount."
+msgstr "Przyznaj cashback tylko, jeśli łączna wartość zamówienia jest mniejsza od tej kwoty."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:275
+msgid "Leave blank for no maximum."
+msgstr "Pozostaw puste, aby nie było maksymalnej wartości."
+
+#. translators: Context: Limit awarding store credit once per customer
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:282
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:410
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:249
+msgid "Award limits"
+msgstr "Limity przyznawania"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:290
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:418
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:259
+msgid "Unlimited"
+msgstr "Nieograniczone"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:291
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:419
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:258
+msgid "Once per customer"
+msgstr "Raz na klienta"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:297
+msgid "Exclude free items"
+msgstr "Wyklucz produkty darmowe"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:298
+msgid "Do not award cashback if the order contains any free products"
+msgstr "Nie przyznawaj cashback, jeśli zamówienie zawiera produkty darmowe"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:305
+msgid "Exclude items on sale"
+msgstr "Wyklucz produkty na wyprzedaży"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:306
+msgid "Do not award cashback if the order contains any products marked on sale"
+msgstr "Nie przyznawaj cashback, jeśli zamówienie zawiera produkty oznaczone jako wyprzedaż"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:313
+msgid "Exclude coupons"
+msgstr "Wyklucz kupony"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:314
+msgid "Do not award cashback if any coupon was applied to the order"
+msgstr "Nie przyznawaj cashback, jeśli do zamówienia został zastosowany kupon"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:331
+msgid "Define who qualifies for cashback based on products within an order."
+msgstr "Zdefiniuj, kto kwalifikuje się do cashback na podstawie produktów w zamówieniu."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:337
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:172
+msgid "Eligible products"
+msgstr "Produkty kwalifikujące się"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:343
+msgid "Select the products that customers can buy to earn cashback."
+msgstr "Wybierz produkty, które klienci mogą kupić, aby zarobić cashback."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:370
+msgid "Award cashback when the customer purchases any of the selected products."
+msgstr "Przyznaj cashback, gdy klient kupi dowolny z wybranych produktów."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:392
+msgid "Award cashback when the customer purchases any products in the selected product categories."
+msgstr "Przyznaj cashback, gdy klient kupi produkty z wybranych kategorii produktów."
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:420
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:257
+msgid "Once per product"
+msgstr "Raz na produkt"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:426
+msgid "Product quantity"
+msgstr "Ilość produktu"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:430
+msgid "Multiply cashback awarded for each eligible product by its quantity in the same order"
+msgstr "Pomnóż przyznany cashback za każdy kwalifikujący się produkt przez jego ilość w tym samym zamówieniu"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:431
+msgid "Award cashback once per eligible product ignoring its quantity in the same order"
+msgstr "Przyznaj cashback raz na kwalifikujący się produkt, ignorując jego ilość w tym samym zamówieniu"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:451
+msgid "The maximum order amount defined by this cashback should not be less than the minimum order amount, otherwise the reward will be unapplicable."
+msgstr "Maksymalna kwota zamówienia określona przez ten cashback nie powinna być mniejsza od minimalnej kwoty zamówienia, w przeciwnym razie nagroda będzie nieobowiązująca."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:50
+#: src/Store_Credit/Reward_Type.php:86
+#: src/System_Status_Report.php:134
+msgid "Milestones"
+msgstr "Kamienie milowe"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:64
+msgid "Edit milestone reward"
+msgstr "Edytuj nagrodę za kamień milowy"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:67
+msgid "Add new milestone reward"
+msgstr "Dodaj nową nagrodę za kamień milowy"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:79
+msgid "Award store credit to customers when they perform specific actions in the shop."
+msgstr "Przyznawaj klientom kredyt sklepowy za wykonywanie określonych działań w sklepie."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:108
+msgid "Award milestone store credit when a guest customer signs up for an account."
+msgstr "Przyznaj kredyt za kamień milowy, gdy gość zarejestruje konto."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:112
+msgid "Award milestone store credit when a customer leaves a product review, based on the eligibility rules."
+msgstr "Przyznaj kredyt za kamień milowy, gdy klient zostawi recenzję produktu, zgodnie z zasadami kwalifikacji."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:166
+msgid "Define who qualifies for store credit by leaving a product review."
+msgstr "Zdefiniuj, kto kwalifikuje się do kredytu sklepowego poprzez zostawienie recenzji produktu."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:177
+msgid "Select the products that customers must review to earn the milestone award."
+msgstr "Wybierz produkty, które klienci muszą zrecenzować, aby otrzymać nagrodę za kamień milowy."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:180
+msgid "Any product"
+msgstr "Dowolny produkt"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:181
+msgid "Specific products"
+msgstr "Konkretne produkty"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:182
+msgid "Products within specific categories"
+msgstr "Produkty w określonych kategoriach"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:209
+msgid "Award store credit when the customer reviews any of the selected products."
+msgstr "Przyznaj kredyt sklepowy, gdy klient zrecenzuje dowolny z wybranych produktów."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:231
+msgid "Award store credit when the customer reviews any products in the selected product categories."
+msgstr "Przyznaj kredyt sklepowy, gdy klient zrecenzuje produkty z wybranych kategorii."
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:267
+msgid "Verified purchase required"
+msgstr "Wymagana weryfikacja zakupu"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:268
+msgid "Only reward reviews for products the customer has purchased"
+msgstr "Przyznawaj recenzje tylko za produkty, które klient zakupił"
+
+#. translators: Context: Store credit configuration name
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:70
+msgid "Name"
+msgstr "Nazwa"
+
+#. translators: Context: Store credit configuration status
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:72
+#: templates/myaccount/account-funds/deposit-item-data.php:37
+#: templates/myaccount/recent-deposits.php:29
+msgid "Status"
+msgstr "Status"
+
+#. translators: Context: Store credit financial amount (e.g. milestone, reward...) or percentage (e.g. cashback)
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:74
+#: src/Admin/User_Profiles.php:126
+msgid "Amount"
+msgstr "Kwota"
+
+#. translators: Context: Event name upon which store credit is awarded to a customer
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:76
+msgid "Awarded upon"
+msgstr "Przyznano za"
+
+#. translators: Context: Number of times a store credit has been awarded to customers
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:78
+msgid "Awarded times"
+msgstr "Przyznano razy"
+
+#. translators: Context: Total amount of store credit awarded to customers
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:80
+msgid "Awarded total"
+msgstr "Razem przyznano"
+
+#. translators: Context: Button label to edit a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:157
+msgid "Edit"
+msgstr "Edytuj"
+
+#. translators: Context: Button label to soft-delete a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:160
+msgid "Trash"
+msgstr "Kosz"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:163
+msgid "Credit configuration name"
+msgstr "Nazwa konfiguracji kredytu"
+
+#. translators: Context: Button label to restore a credit configuration from the trash
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:169
+msgid "Restore"
+msgstr "Przywróć"
+
+#. translators: Context: Button label to permanently delete a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:171
+msgid "Permanently delete"
+msgstr "Usuń na stałe"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:247
+msgid "Limited to once per customer"
+msgstr "Ograniczone do razu na klienta"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:249
+msgid "Limited to once per product"
+msgstr "Ograniczone do razu na produkt"
+
+#. translators: Placeholders: %1$s - current count of awarded store credit across customers, %2$s - remaining available redemptions
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:268
+#, php-format
+msgid "%1$s out of %2$s"
+msgstr "%1$s z %2$s"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:329
+msgid "Empty trash"
+msgstr "Opróżnij kosz"
+
+#. translators: Placeholder: %d - count of all credit configuration tyes
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:341
+#, php-format
+msgid "All (%d)"
+msgstr "Wszystko (%d)"
+
+#. translators: Placeholder: %d - count of trashed credit configurations
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:356
+#, php-format
+msgid "Trash (%d)"
+msgstr "Kosz (%d)"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:143
+msgid "A customer will receive store credit every time they review a product."
+msgstr "Klient otrzyma kredyt sklepowy za każdym razem, gdy oceni produkt."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:144
+msgid "A customer will receive store credit whe they review any product once only."
+msgstr "Klient otrzyma kredyt sklepowy, gdy oceni dowolny produkt tylko raz."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:145
+msgid "A customer will receive store credit only once per product they review."
+msgstr "Klient otrzyma kredyt sklepowy tylko raz za każdy oceniany produkt."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:149
+msgid "A customer will receive store credit every time they pay for an eligible order."
+msgstr "Klient otrzyma kredyt sklepowy za każdym razem, gdy zapłaci za kwalifikujące się zamówienie."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:150
+msgid "A customer will receive store credit only once for an eligible order they have paid for."
+msgstr "Klient otrzyma kredyt sklepowy tylko raz za zamówienie, za które zapłacił i które kwalifikuje się do nagrody."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:151
+msgid "A customer will receive store credit only once for each eligible product they purchase in any order."
+msgstr "Klient otrzyma kredyt sklepowy tylko raz za każdy kwalifikujący się produkt zakupiony w dowolnym zamówieniu."
+
+#. translators: Placeholders: %1$s - date, %2$s - time
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:188
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s w %2$s"
+
+#. translators: Placeholder: %1$s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.), %2$s - opening <a> link tag, %3$s closning </a> link tag
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:300
+#, php-format
+msgid "1 %1$s moved to trash. %2$sUndo%3$s"
+msgstr "1 %1$s przeniesiono do kosza. %2$sCofnij%3$s"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:303
+#, php-format
+msgid "Could not move %s to trash."
+msgstr "Nie można przenieść %s do kosza."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:329
+#, php-format
+msgid "1 %s restored from trash."
+msgstr "1 %s przywrócono z kosza."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:332
+#, php-format
+msgid "Could not restore %s from trash."
+msgstr "Nie można przywrócić %s z kosza."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:358
+#, php-format
+msgid "%s permanently deleted"
+msgstr "%s trwale usunięto"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:361
+#, php-format
+msgid "Could not delete %s permanently."
+msgstr "Nie można trwale usunąć %s."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:385
+#, php-format
+msgid "No %s permanently deleted."
+msgstr "Nie ma %s do trwałego usunięcia."
+
+#. translators: Placeholder: %d - number of deleted items, %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:389
+#, php-format
+msgid "%1$d %2$s permanently deleted."
+msgid_plural "%1$d %2$s permanently deleted."
+msgstr[0] "%d %s trwale usunięto."
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:425
+msgid "Configuration"
+msgstr "Konfiguracja"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:433
+msgid "Details"
+msgstr "Szczegóły"
+
+#. translators: Placeholder: %s - singular name of the store credit type being created
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:474
+#, php-format
+msgid "%s name"
+msgstr "%s nazwa"
+
+#. translators: Context: Label for the store credit label input field (indicates how the store credit will be displayed in the frontend)
+#. translators: Context: Label used to describe store credit in the frontend
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:477
+#: src/System_Status_Report.php:99
+msgid "Store credit label"
+msgstr "Etykieta kredytu sklepowego"
+
+#. translators: Context: Store credit configuration rules
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:523
+msgid "Eligibility"
+msgstr "Kwalifikacje"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:607
+msgid "Customers will be awarded store credit as configured while its status is active."
+msgstr "Klienci będą otrzymywać kredyt sklepowym zgodnie z konfiguracją, gdy jego status jest aktywny."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:609
+msgid "This store credit resource is deplete and it cannot be awarded to customers because it has reached its maximum usage limit. Increase the limit to reactivate it."
+msgstr "Ten zasób kredytu sklepowego jest wyczerpany i nie można go przyznać klientom, ponieważ osiągnął limit maksymalnego użycia. Zwiększ limit, aby go ponownie aktywować."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:613
+msgid "Status:"
+msgstr "Status:"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:643
+#, php-format
+msgid "The number of times this store credit %s has been awarded to customers, out of the maximum usage limit allowed by its configuration."
+msgstr "Liczba razy, kiedy ten kredyt sklepowym %s został przyznany klientom, w ramach dozwolonego limitu użycia określonego w konfiguracji."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:650
+#, php-format
+msgid "The number of times this store credit %s has been awarded to customers."
+msgstr "Liczba razy, kiedy ten kredyt sklepowym %s został przyznany klientom."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:658
+#, php-format
+msgid "The total amount of store credit awarded to customers from this %s."
+msgstr "Łączna kwota przyznanego kredytu sklepowego z tego %s."
+
+#. translators: Context: Follows number of times store credit has been awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:664
+msgid "Awarded times:"
+msgstr "Przyznane razy:"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:665
+msgid "Total awarded:"
+msgstr "Razem przyznano:"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:666
+msgid "Created on:"
+msgstr "Utworzono:"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:667
+msgid "Last modified:"
+msgstr "Ostatnia modyfikacja:"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:690
+msgid "Move to trash"
+msgstr "Przenieś do kosza"
+
+#. translators: Context: Button to create or update a credit configuration
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:700
+msgid "Create"
+msgstr "Utwórz"
+
+#. translators: Context: Button to create or update a credit configuration
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:700
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:727
+msgid "Set the value of the store credit and choose the event that will trigger the reward."
+msgstr "Ustaw wartość kredytu sklepowego i wybierz zdarzenie, które wywoła nagrodę."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:735
+msgid "Amount type"
+msgstr "Typ kwoty"
+
+#. translators: Placeholder: %s - currency symbol for the store credit amount to be specified afterwards
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:741
+#, php-format
+msgid "Fixed (%s)"
+msgstr "Stała (%s)"
+
+#. translators: Context: percentage value of the store credit amount to be specified afterwards
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:743
+msgid "Percentage (%)"
+msgstr "Procentowa (%)"
+
+#. translators: Context: Percentage amount of store credit awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:753
+msgid "Amount (%)"
+msgstr "Kwota (%)"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:759
+#, php-format
+msgid "Percentage amount awarded as store credit to customers that meet the conditions defined by the %s eligibility rules."
+msgstr "Procentowa kwota przyznawana jako kredyt sklepowym klientom spełniającym warunki określone przez zasady kwalifikacji %s."
+
+#. translators: Placeholder: %s - currency symbol, in the context of store credit amount awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:766
+#, php-format
+msgid "Amount (%s)"
+msgstr "Kwota (%s)"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:772
+#, php-format
+msgid "Fixed amount awarded as store credit to customers that meet the conditions defined by the %s eligibility rules."
+msgstr "Stała kwota przyznawana jako kredyt sklepowym klientom spełniającym warunki określone przez zasady kwalifikacji %s."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:778
+msgid "Award cap"
+msgstr "Limit nagród"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:782
+msgid "Choose whether to limit the number of times this store credit can be awarded to customers."
+msgstr "Wybierz, czy ograniczyć liczbę razy, kiedy ten kredyt sklepowym może zostać przyznany klientom."
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:787
+#, php-format
+msgid "Keep awarding this %s indefinitely"
+msgstr "Kontynuuj przyznawanie tego %s bez końca"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:792
+#, php-format
+msgid "Limit the number of times the %s will trigger in the shop"
+msgstr "Ogranicz liczbę wywołań %s w sklepie"
+
+#. translators: Context: Limit to the number of times store credit can be awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:801
+msgid "Maximum awards"
+msgstr "Maksymalna liczba nagród"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:805
+msgid "The maximum number of times the store credit can be awarded across all customers until depletion."
+msgstr "Maksymalna liczba razy, kiedy kredyt sklepowym może zostać przyznany wszystkim klientom, aż do wyczerpania."
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:814
+msgid "Award trigger"
+msgstr "Wyzwalacz nagrody"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:841
+#, php-format
+msgid "%s successfully saved."
+msgstr "%s pomyślnie zapisano."
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" by default
+#: src/Admin/User_Profiles.php:134
+#, php-format
+msgid "The amount of %s this user can use to purchase items."
+msgstr "Kwota %s, którą ten użytkownik może użyć do zakupu produktów."
+
+#: src/Admin/User_Profiles.php:184
+msgid "Store credit manually increased by a shop manager."
+msgstr "Kredyt sklepowy ręcznie zwiększony przez menedżera sklepu."
+
+#: src/Admin/User_Profiles.php:194
+msgid "Store credit manually decreased by a shop manager."
+msgstr "Kredyt sklepowy ręcznie zmniejszony przez menedżera sklepu."
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:188
+#: src/API/Store/Cart_Extension_Endpoint.php:216
+#, php-format
+msgid "Invalid request data to handle %s."
+msgstr "Nieprawidłowe dane żądania do obsługi %s."
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:194
+#, php-format
+msgid "Session not available to handle %s."
+msgstr "Sesja niedostępna do obsługi %s."
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:199
+#, php-format
+msgid "Partial payments using %s are not allowed."
+msgstr "Częściowe płatności za pomocą %s nie są dozwolone."
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:204
+#, php-format
+msgid "Customer is not eligible to use %s."
+msgstr "Klient nie kwalifikuje się do korzystania z %s."
+
+#: src/API/Store/Cart_Extension_Endpoint.php:232
+msgid "The current state of store credit for the current cart session."
+msgstr "Obecny stan kredytu sklepowego dla bieżącej sesji koszyka."
+
+#: src/API/Store/Cart_Extension_Endpoint.php:238
+msgid "The ID of the user."
+msgstr "ID użytkownika."
+
+#: src/API/Store/Cart_Extension_Endpoint.php:243
+msgid "Whether partial payments using store credit are allowed."
+msgstr "Czy dozwolone są częściowe płatności za pomocą kredytu sklepowego."
+
+#: src/API/Store/Cart_Extension_Endpoint.php:248
+msgid "Whether the store credit payment gateway is available."
+msgstr "Czy brama płatności za pomocą kredytu sklepowe jest dostępna"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:253
+msgid "Whether the cart contains a store credit deposit."
+msgstr "Czy koszyk zawiera depozyt z kredytu sklepowe"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:258
+msgid "The store credit balance available to the current user."
+msgstr "Dostępny stan kredytu sklepowe dla bieżącego użytkownika"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:262
+msgid "The amount of store credit available."
+msgstr "Kwota dostępnego kredytu sklepowe"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:271
+msgid "The store credit used in the current session."
+msgstr "Kredyt sklepowe użyty w bieżącej sesji"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:275
+msgid "The amount of store credit used, in cents."
+msgstr "Kwota użytego kredytu sklepowe, w centach"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:284
+msgid "The store credit remaining to be used in the current session."
+msgstr "Pozostały kredyt sklepowe do wykorzystania w bieżącej sesji"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:288
+msgid "The amount of store credit remaining, in cents."
+msgstr "Pozostała kwota kredytu sklepowe, w centach"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Cart.php:203
+#, php-format
+msgid "Earn %1$s in %2$s for placing this order!"
+msgstr "Zdobądź %1$s w %2$s za złożenie tego zamówienia!"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credits (default: "Store credit")
+#: src/Cart.php:467
+#, php-format
+msgid "Use <strong>%1$s</strong> from your %2$s balance."
+msgstr "Użyj <strong>%1$s</strong> z salda %2$s"
+
+#. translators: Context: Button label to remove applied store credit from cart
+#: src/Cart.php:492
+msgid "Remove"
+msgstr "Usuń"
+
+#: src/Gateway.php:119
+msgid "This gateway allows customers to pay for an order at checkout using their available store credit."
+msgstr "Ta brama umożliwia klientom opłacenie zamówienia przy kasie za pomocą dostępnego kredytu sklepowe."
+
+#. translators: Placeholder: %s - literal {store_credit_balance} merge tag
+#. translators: Placeholder: %s - Store credit balance placeholder
+#: src/Gateway.php:132
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:126
+#, php-format
+msgid "Available balance: %s"
+msgstr "Dostępne saldo: %s"
+
+#. translators: Context: Payment gateway enabled or disabled status
+#: src/Gateway.php:169
+msgid "Enabled"
+msgstr "Włączone"
+
+#: src/Gateway.php:172
+msgid "Enable store credit"
+msgstr "Włącz kredyt sklepowe"
+
+#. translators: Context: Payment gateway title
+#: src/Gateway.php:176
+msgid "Title"
+msgstr "Tytuł"
+
+#: src/Gateway.php:178
+msgid "This controls the payment gateway title which the user sees during checkout."
+msgstr "To kontroluje tytuł bramki płatniczej, który widzi użytkownik podczas realizacji zamówienia."
+
+#. translators: Placeholders: %1$s - opening HTML link tag, %2$s - closing HTML link tag
+#: src/Gateway.php:183
+#, php-format
+msgid "This value can be set and overridden by defining the customer-facing label for store credit in the plugin's %1$sgeneral settings%2$s."
+msgstr "Ta wartość może być ustawiona i nadpisana przez zdefiniowanie etykiety widocznej dla klienta dla kredytu sklepowe w ustawieniach %1$sgeneralnych%2$s wtyczki."
+
+#: src/Gateway.php:192
+msgid "Description"
+msgstr "Opis"
+
+#. translators: Placeholder: %s - Literal {store_credit_balance} merge tag
+#: src/Gateway.php:196
+#, php-format
+msgid "Payment method description that the customer will see on your checkout. Available placeholder: %s."
+msgstr "Opis metody płatności, który zobaczy klient na stronie realizacji zamówienia. Dostępny placeholder: %s."
+
+#: src/Gateway.php:197
+msgid "Displays the current customer's store credit balance"
+msgstr "Wyświetla aktualne saldo kredytu sklepowe klienta"
+
+#: src/Gateway.php:204
+msgid "Partial payment"
+msgstr "Częściowa płatność"
+
+#: src/Gateway.php:205
+msgid "Allow customers to apply available store credit and pay the difference via another gateway"
+msgstr "Pozwól klientom na zastosowanie dostępnego kredytu sklepowe i opłacenie różnicy za pomocą innej bramy"
+
+#: src/Gateway.php:206
+msgid "If disabled, users must pay for the entire order using store credit: if they don't have enough store credit, the gateway will not be available at checkout."
+msgstr "Jeśli wyłączone, użytkownicy muszą zapłacić za całe zamówienie za pomocą kredytu sklepowe: jeśli nie mają wystarczającego kredytu, brama nie będzie dostępna przy kasie."
+
+#: src/Gateway.php:354
+msgid "You must be logged in to use this payment method."
+msgstr "Aby korzystać z tej metody płatności, musisz być zalogowany."
+
+#. translators: Placeholder: %s - Error message
+#: src/Gateway.php:357
+#: src/Gateway.php:368
+#: src/Gateway.php:385
+#: src/Gateway.php:424
+#: src/Orders.php:166
+#, php-format
+msgid "Payment error: %s"
+msgstr "Błąd płatności: %s"
+
+#: src/Gateway.php:365
+msgid "Order not found."
+msgstr "Nie znaleziono zamówienia."
+
+#. translators: Placeholder: %s - Title of the payment gateway an order was paid via
+#: src/Gateway.php:554
+#, php-format
+msgid "Via %s"
+msgstr "Przez %s"
+
+#. translators: Placeholders: %1$s - Product name in cart (cart item), %2$s: Label for store credit (default: "Store credit")
+#: src/Integrations/PayPal.php:88
+#, php-format
+msgid "%1$s (with tax, discount, and %2$s applied)"
+msgstr "%1$s (z podatkiem, rabatem i %2$s)"
+
+#. translators: Placeholder: %s - May output the shop manager ID in parenthesis or empty string when undefined
+#: src/Lifecycle/Database.php:300
+#, php-format
+msgid "Store credit manually increased by a shop manager %s using update_user_meta() (deprecated)."
+msgstr "Kredyt sklepu ręcznie zwiększony przez menedżera sklepu %s za pomocą update_user_meta() (przestarzałe)."
+
+#. translators: Placeholder: %s - May output the shop manager ID in parenthesis or empty string when undefined
+#: src/Lifecycle/Database.php:313
+#, php-format
+msgid "Store credit manually decreased by a shop manager %s using update_user_meta() (deprecated)."
+msgstr "Kredyt sklepu ręcznie zmniejszony przez menedżera sklepu %s za pomocą update_user_meta() (przestarzałe)."
+
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:163
+msgid "Account funds on registration"
+msgstr "Środki na koncie podczas rejestracji"
+
+#. translators: Placeholders: %1$s - opening <a> HTML link tag, %2$s - closing </a> HTML link tag
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:48
+#, php-format
+msgid "Success! %1$sA customer just paid for their order using store credit!%2$s"
+msgstr "Sukces! %1$sKlient właśnie zapłacił za swoje zamówienie za pomocą kredytu sklepowe!%2$s"
+
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:63
+msgid "Liking the experience so far? It helps us a bunch if you tell other WooCommerce users what made it work for you."
+msgstr "Podoba Ci się to doświadczenie? To bardzo nam pomaga, jeśli powiesz innym użytkownikom WooCommerce, co sprawiło, że to zadziałało dla Ciebie."
+
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:64
+msgid "Leave a quick review"
+msgstr "Zostaw krótką recenzję"
+
+#: src/Lifecycle/Milestones/First_Store_Credit_Awarded.php:43
+msgid "Nice! A customer was awarded store credit!"
+msgstr "Super! Klient otrzymał kredyt sklepowe!"
+
+#. translators: Placeholders: %1$s - opening anchor tag, %2$s - closing anchor tag, %3$s - opening anchor tag, %4$s - closing anchor tag
+#: src/Lifecycle/Milestones/First_Store_Credit_Awarded.php:57
+#, php-format
+msgid "They can use the store credit they earned to pay for an order. Excited? Having questions or feedback? %1$sLeave a review%2$s or %3$sget in touch with us%4$s!"
+msgstr "Mogą użyć uzyskanego kredytu sklepowe do opłacenia zamówienia. Podekscytowany? Masz pytania lub uwagi? %1$sZostaw recenzję%2$s lub %3$sskontaktuj się z nami%4$s!"
+
+#: src/Lifecycle/Milestones/First_Store_Credit_Reward_Configured.php:43
+msgid "Awesome, your first store credit is live!"
+msgstr "Super, Twój pierwszy kredyt sklepowe jest aktywny!"
+
+#. translators: Placeholders: %1$s - opening <a> HTML link tag, %2$s - closing </a> HTML link tag
+#: src/Lifecycle/Milestones/First_Store_Credit_Reward_Configured.php:57
+#, php-format
+msgid "Want a say in what we build? %1$sJoin our newsletter%2$s for roadmap updates, early access, and the occasional bird pun. Then reply to the welcome email and tell us what you’d love to see next."
+msgstr "Chcesz mieć wpływ na to, co tworzymy? %1$sDołącz do naszego newslettera%2$s, aby otrzymywać aktualizacje planów, wczesny dostęp i okazjonalne żarty o ptakach. Następnie odpowiedz na e-mail powitalny i powiedz nam, co chciałbyś zobaczyć następnego."
+
+#: src/Orders.php:206
+msgid "Customer bought store credit top-up."
+msgstr "Klient zakupił doładowanie kredytu sklepowe"
+
+#: src/Orders.php:208
+msgid "Customer bought store credit deposit."
+msgstr "Klient zakupił depozyt kredytu sklepowe"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:222
+#, php-format
+msgid "Added %1$s in %2$s to the customer's balance."
+msgstr "Dodano %1$s w %2$s do salda klienta"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:339
+#, php-format
+msgid "Removed %1$s in %2$s from the customer's balance used to pay for the order."
+msgstr "Usunięto %1$s z %2$s z salda klienta używanego do opłacenia zamówienia."
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:389
+#, php-format
+msgid "Restored %1$s in %2$s from the customer's balance after the order was cancelled."
+msgstr "Przywrócono %1$s z %2$s z salda klienta po anulowaniu zamówienia."
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:458
+#, php-format
+msgid "Granted %1$s in %2$s to the customer after refunding order items."
+msgstr "Przyznano %1$s z %2$s klientowi po zwrocie pozycji zamówienia."
+
+#. translators: Placeholder: %s - label used to describe store credit to customers, e.g. "store credit"
+#: src/Orders/Order.php:115
+#, php-format
+msgid "Unable to determine the order to pay with %s."
+msgstr "Nie można ustalić zamówienia do opłacenia za pomocą %s."
+
+#. translators: Placeholder: %s - label used to describe store credit to customers, e.g. "store credit"
+#: src/Orders/Order.php:127
+#, php-format
+msgid "A registered customer with a valid email is required to pay for the order using %s."
+msgstr "Aby zapłacić za zamówienie za pomocą %s, konieczne jest zarejestrowanie się jako klient z ważnym e-mailem."
+
+#. translators: Placeholder: %s - label used to describe store credit, e.g. "Insufficient store credit amount".
+#: src/Orders/Order.php:135
+#, php-format
+msgid "Insufficient %s amount to pay for the order."
+msgstr "Niewystarczająca kwota %s do opłacenia zamówienia."
+
+#. translators: Placeholders: %1$s - Store credit label, %2$s - Amount paid using store credit
+#: src/Orders/Order.php:151
+#, php-format
+msgid "Customer paid with %1$s: %2$s."
+msgstr "Klient zapłacił za pomocą %1$s: %2$s."
+
+#. translators: Placeholder: %1$s - Total cashback amount awarded, %2$s - Comma-separated list of admin cashback sources (HTML links)
+#: src/Orders/Order.php:288
+#, php-format
+msgid "Awarded %1$s as %2$s cashback to customer via %3$s."
+msgstr "Przyznano %1$s jako cashback %2$s klientowi za pośrednictwem %3$s."
+
+#. translators: Placeholders: %1$s - Voided amount, %2$s - Store credit label
+#: src/Orders/Order.php:342
+#, php-format
+msgid "Voided %1$s from the awarded %2$s cashback for this order."
+msgstr "Anulowano %1$s z przyznanego cashback %2$s dla tego zamówienia."
+
+#: src/Plugin.php:147
+#: src/System_Status_Report.php:47
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#: assets/js/blocks/wc-account-funds-cart-checkout-block.js:1
+msgid "Account Funds"
+msgstr "Fundusze konta"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Products.php:206
+#, php-format
+msgid "Earn %1$s in %2$s for reviewing this product!"
+msgstr "Zdobądź %1$s w %2$s za recenzję tego produktu!"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Products.php:297
+#, php-format
+msgid "Earn up to %1$s in %2$s upon purchase!"
+msgstr "Zdobądź do %1$s w %2$s przy zakupie!"
+
+#. translators: Placeholders: %s - Account funds label, e.g. "Account funds"
+#. translators: Placeholder: %s - Label used to represent store credit (e.g. "Store credit top-up")
+#: src/Products/Store_Credit_Top_Up.php:98
+#: src/Settings/Store_Credit_Account_Top_Up.php:298
+#, php-format
+msgid "%s top-up"
+msgstr "%s doładowanie"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:70
+msgid "Enable \"My Account\" top-up"
+msgstr "Włącz \"Moje konto\" do doładowań"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:71
+msgid "Allow customers to top up their store credit via their account page"
+msgstr "Pozwól klientom doładować swoje saldo sklepu przez stronę konta"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:77
+msgid "Allow rewards"
+msgstr "Włącz nagrody"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:78
+msgid "Top-up orders may trigger eligible rewards, when applicable"
+msgstr "Zamówienia doładowania mogą wywołać kwalifikujące się nagrody, gdy jest to możliwe"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:79
+msgid "For example, disabling this will prevent store credit cashback to be awarded to customers that top-up."
+msgstr "Na przykład wyłączenie tego zapobiegnie przyznaniu cashback za doładowanie klientom."
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:85
+msgid "Minimum top-up"
+msgstr "Minimalne doładowanie"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:86
+msgid "The minimum amount of store credit a customer is allowed to top up from their account page."
+msgstr "Minimalna kwota salda sklepu, którą klient może doładować ze swojej strony konta."
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:92
+msgid "Maximum top-up"
+msgstr "Maksymalne doładowanie"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:93
+msgid "The maximum amount of store credit a customer is allowed to top up from their account page."
+msgstr "Maksymalna kwota salda sklepu, którą klient może doładować ze swojej strony konta."
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:99
+msgid "Top-up image type"
+msgstr "Typ obrazu do doładowania"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:100
+msgid "The type of image to display for the top-up button."
+msgstr "Typ obrazu do wyświetlenia dla przycisku doładowania."
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:105
+msgid "Use default image"
+msgstr "Użyj domyślnego obrazu"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:106
+msgid "Use a custom image"
+msgstr "Użyj niestandardowego obrazu"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:112
+msgid "Top-up image"
+msgstr "Obraz doładowania"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:114
+msgid "Choose or upload an image from the media gallery to use as the image shown in cart when the customer adds store credit for top-up."
+msgstr "Wybierz lub załaduj obraz z galerii mediów, aby użyć jako obraz wyświetlany w koszyku, gdy klient dodaje saldo sklepu do doładowania."
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:144
+msgid "Top-up image used in the cart"
+msgstr "Obraz do doładowania używany w koszyku"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:145
+msgid "Select image"
+msgstr "Wybierz obraz"
+
+#: src/Settings/Store_Credit_Label.php:60
+msgid "Singular label"
+msgstr "Etykieta pojedyncza"
+
+#: src/Settings/Store_Credit_Label.php:61
+msgid "The label shown to customers when referring to store credit in its singular form."
+msgstr "Etykieta wyświetlana klientom, gdy odnosi się do salda sklepu w formie pojedynczej."
+
+#: src/Settings/Store_Credit_Label.php:68
+msgid "Plural label"
+msgstr "Etykieta mnoga"
+
+#: src/Settings/Store_Credit_Label.php:69
+msgid "The label shown to customers when referring to store credit in its plural form."
+msgstr "Etykieta wyświetlana klientom, gdy odnosi się do salda sklepu w formie mnogiej."
+
+#: src/Store_Credit/Eligible_Orders_Group.php:81
+msgid "Order contains specific products"
+msgstr "Zamówienie zawiera określone produkty"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:83
+msgid "Order does not contain specific products"
+msgstr "Zamówienie nie zawiera określonych produktów"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:85
+msgid "Order contains product categories"
+msgstr "Zamówienie zawiera kategorie produktów"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:87
+msgid "Order does not contain product categories"
+msgstr "Zamówienie nie zawiera kategorii produktów"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:89
+msgid "Order contains product types"
+msgstr "Zamówienie zawiera typy produktów"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:91
+msgid "Order does not contain product types"
+msgstr "Zamówienie nie zawiera typów produktów"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:94
+msgid "Any order"
+msgstr "Dowolne zamówienie"
+
+#: src/Store_Credit/Eligible_Products_Group.php:67
+msgid "Some products"
+msgstr "Niektóre produkty"
+
+#: src/Store_Credit/Eligible_Products_Group.php:69
+msgid "Some product categories"
+msgstr "Niektóre kategorie produktów"
+
+#: src/Store_Credit/Eligible_Products_Group.php:72
+msgid "All products"
+msgstr "Wszystkie produkty"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:63
+msgid "Active"
+msgstr "Aktywne"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:66
+msgid "Depleted"
+msgstr "Wycofane"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:70
+msgid "Inactive"
+msgstr "Nieaktywne"
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:89
+#, php-format
+msgid "This %s configuration is active and will be awarded to customers when its conditions are met."
+msgstr "Ta konfiguracja %s jest aktywna i zostanie przyznana klientom, gdy spełnione zostaną jej warunki."
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:92
+#, php-format
+msgid "This %s configuration has reached its award limit and will no longer be awarded to customers."
+msgstr "Ta konfiguracja %s osiągnęła limit przyznawania i nie będzie już przyznawana klientom."
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:96
+#, php-format
+msgid "This %s configuration is inactive and will not be awarded to customers."
+msgstr "Ta konfiguracja %s jest nieaktywna i nie będzie przyznawana klientom."
+
+#: src/Store_Credit/Reward_Type.php:67
+msgid "Milestone"
+msgstr "Kamień milowy"
+
+#: src/Store_Credit/Reward_Type.php:69
+msgid "Reward"
+msgstr "Nagroda"
+
+#: src/Store_Credit/Reward_Type.php:88
+msgid "Rewards"
+msgstr "Nagrody"
+
+#: src/Store_Credit/Wallet.php:351
+msgid "Cannot award store credit to a user account without an email."
+msgstr "Nie można przyznać kredytu sklepowego do konta użytkownika bez adresu e-mail."
+
+#: src/Store_Credit/Wallet.php:359
+msgid "Credit transactions should have a positive amount."
+msgstr "Transakcje kredytowe powinny mieć dodatnią kwotę."
+
+#: src/Store_Credit/Wallet.php:384
+msgid "Cannot debit a user account without an email."
+msgstr "Nie można obciążyć konta użytkownika bez adresu e-mail."
+
+#: src/Store_Credit/Wallet.php:397
+msgid "Cannot debit an amount larger than the available store credit balance."
+msgstr "Nie można obciążyć kwoty większej niż dostępny stan kredytu sklepowego."
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:93
+msgid "User action"
+msgstr "Akcja użytkownika"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:95
+msgid "Customer account registration"
+msgstr "Rejestracja konta klienta"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:97
+msgid "Product purchase"
+msgstr "Zakup produktu"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:99
+msgid "Product review"
+msgstr "Recenzja produktu"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:101
+msgid "Order paid"
+msgstr "Zamówienie opłacone"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:103
+msgid "Order refunded"
+msgstr "Zamówienie zwrócone"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:105
+msgid "Order cancelled"
+msgstr "Zamówienie anulowane"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:107
+msgid "Data migration"
+msgstr "Migracja danych"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:110
+msgid "Undefined event"
+msgstr "Nieokreślone zdarzenie"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:62
+msgid "Voided"
+msgstr "Anulowane"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:64
+msgid "Expired"
+msgstr "Wygasłe"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:67
+msgid "Committed"
+msgstr "Zaakceptowane"
+
+#. translators: Placeholders: %1$s - Minimum store credit top-up amount, %2$s - Maximum store credit top-up amount
+#: src/System_Status_Report.php:75
+#, php-format
+msgid "Minimum: %1$s - Maximum: %2$s"
+msgstr "Minimalnie: %1$s - Maksymalnie: %2$s"
+
+#: src/System_Status_Report.php:77
+msgid "No limit"
+msgstr "Brak limitu"
+
+#: src/System_Status_Report.php:100
+msgid "Label used to display store credit in the frontend."
+msgstr "Etykieta używana do wyświetlania kredytu sklepowego na stronie frontend."
+
+#. translators: Placeholders: %1$s - Singular store credit label, %2$s - Plural store credit label
+#: src/System_Status_Report.php:102
+#, php-format
+msgid "Singular: \"%1$s\" - Plural: \"%2$s\""
+msgstr "Liczba pojedyncza: \"%1$s\" - Liczba mnoga: \"%2$s\""
+
+#: src/System_Status_Report.php:107
+msgid "Gateway enabled"
+msgstr "Aktywowany bramka płatności"
+
+#: src/System_Status_Report.php:108
+msgid "Whether the store credit gateway is enabled."
+msgstr "Czy bramka kredytu sklepowego jest włączona."
+
+#: src/System_Status_Report.php:114
+msgid "Partial payments enabled"
+msgstr "Włączone częściowe płatności"
+
+#: src/System_Status_Report.php:115
+msgid "Whether customers can use store credit for partial payments."
+msgstr "Czy klienci mogą używać kredytu sklepowego do częściowych płatności."
+
+#: src/System_Status_Report.php:122
+msgid "Number of configured cashback awards."
+msgstr "Liczba skonfigurowanych nagród cashback."
+
+#: src/System_Status_Report.php:135
+msgid "Number of configured milestone awards"
+msgstr "Liczba skonfigurowanych nagród za kamienie milowe"
+
+#: src/System_Status_Report.php:147
+msgid "Top-up enabled"
+msgstr "Włączone doładowania"
+
+#: src/System_Status_Report.php:148
+msgid "Customers are allowed to top up store credit from their account page."
+msgstr "Klienci mogą doładować kredyt sklepowego ze swojej strony konta."
+
+#: src/System_Status_Report.php:163
+msgid "Top-up rewards allowed"
+msgstr "Doładowania nagród dozwolone"
+
+#: src/System_Status_Report.php:164
+msgid "Whether top-ups are excluded from earning rewards."
+msgstr "Czy doładowania są wyłączone z zarabiania nagród."
+
+#. translators: Placeholders: %1$s is the amount of store credit, %2$s is the pluralized store credit label
+#: src/Users.php:91
+#, php-format
+msgid "You will receive up to %1$s in %2$s when you create your account!"
+msgstr "Otrzymasz do %1$s w %2$s, gdy utworzysz konto!"
+
+#: templates/myaccount/account-funds/deposit-item-data.php:29
+msgid "Order number"
+msgstr "Numer zamówienia"
+
+#: templates/myaccount/account-funds/deposit-item-data.php:34
+#: templates/myaccount/recent-deposits.php:28
+msgid "Date"
+msgstr "Data"
+
+#: templates/myaccount/account-funds/topup-in-cart-notice.php:29
+msgid "View Cart"
+msgstr "Zobacz koszyk"
+
+#. translators: Placeholder: %s - Account funds top-up product title, e.g. "Account funds"
+#: templates/myaccount/account-funds/topup-in-cart-notice.php:32
+#, php-format
+msgid "You have \"%s\" in your cart."
+msgstr "Masz \"%s\" w swoim koszyku."
+
+#: templates/myaccount/recent-deposits.php:27
+msgid "Order"
+msgstr "Zamówienie"
+
+#: templates/myaccount/recent-deposits.php:34
+msgid "Recent deposits"
+msgstr "Ostatnie depozyty"
+
+#. translators: Placeholder: %s: Label used to describe account funds
+#: templates/myaccount/topup-form.php:34
+#, php-format
+msgid "Top-up %s"
+msgstr "Doładuj %s"
+
+#. translators: Placeholder: %s - Minimum account fund top-up amount
+#: templates/myaccount/topup-form.php:47
+#, php-format
+msgid "Minimum: <strong>%s</strong>."
+msgstr "Minimalnie: <strong>%s</strong>."
+
+#. translators: Placeholder: %s - Maximum account fund top-up amount
+#: templates/myaccount/topup-form.php:50
+#, php-format
+msgid "Maximum: <strong>%s</strong>."
+msgstr "Maksymalnie: <strong>%s</strong>."
+
+#: templates/myaccount/topup-form.php:59
+msgid "Top-up"
+msgstr "Doładowanie"
+
+#. translators: Placeholders: %1$s is a list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:592
+#, php-format
+msgid "%1$s or %2$s"
+msgid_plural "%1$s, or %2$s"
+msgstr[0] "%1$s lub %2$s"
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholders: %1$s is a comma separated list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:596
+#, php-format
+msgid "%1$s and %2$s"
+msgid_plural "%1$s, and %2$s"
+msgstr[0] "%1$s i %2$s"
+msgstr[1] ""
+msgstr[2] ""
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:673
+msgid "Every Minute"
+msgstr "Co minutę"
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:675
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Co %d minut"
+
+#. translators: Placeholder: %s - User display name
+#: vendor-scoped/kestrelwp/fenix/src/Model/User.php:360
+#, php-format
+msgid "%s avatar"
+msgstr "%s awatar"
+
+#. translators: Placeholders: %1$s - Opening <a> link tag, %2$s - Closing </a> link tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:105
+#, php-format
+msgid "This plugin is localized into multiple languages. While English is our primary language, our goal is to serve merchants and their customers in their own native language. If you would like to provide localization feedback and help us build features that are relevant to you and to customers located in your region, please %1$sget in touch%2$s."
+msgstr "Ten plugin jest zlokalizowany w wielu językach. Chociaż angielski jest naszym głównym językiem, naszym celem jest obsługa sprzedawców i ich klientów w ich własnym języku ojczystym. Jeśli chcesz przekazać opinię na temat lokalizacji i pomóc nam tworzyć funkcje, które są dla Ciebie i klientów w Twoim regionie istotne, prosimy %1$sskontaktuj się z nami%2$s."
+
+#. translators: Context: WordPress admin link to configure the plugin (verb)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:153
+msgid "Configure"
+msgstr "Konfiguruj"
+
+#. translators: Context: Link to the plugin's documentation ("Docs" = "Documentation")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:157
+msgid "Docs"
+msgstr "Dokumentacja"
+
+#. translators: Context: Link to reach out to customer support ("Support" = "Customer support")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:161
+msgid "Support"
+msgstr "Wsparcie"
+
+#. translators: Context: Link to review the plugin ("Review" = "Review the plugin" as in verb action)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:165
+msgid "Review"
+msgstr "Recenzja"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:106
+msgid "Dashboard"
+msgstr "Panel"
+
+#. translators: Placeholders: %1$s - Opening anchor tag, %2$s - Closing anchor tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:181
+#, php-format
+msgid "You have not completed setup. %1$sClick here to resume%2$s."
+msgstr "Nie ukończyłeś konfiguracji. %1$sKliknij tutaj, aby wznowić%2$s."
+
+#. translators: Context: Button label to cancel an action in a modal dialog.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dialogs/Modal_Button.php:257
+msgid "Close"
+msgstr "Zamknij"
+
+#. translators: Context: Button label to cancel an action in a modal dialog.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dialogs/Modal_Button.php:271
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Invalid request."
+msgstr "Nieprawidłowe żądanie."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Invalid parameter."
+msgstr "Nieprawidłowy parametr."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Unauthorized."
+msgstr "Nieautoryzowany."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Forbidden."
+msgstr "Zabronione."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Resource not found."
+msgstr "Nie znaleziono zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot create resource."
+msgstr "Nie można utworzyć zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot read resource."
+msgstr "Nie można odczytać zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot edit resource."
+msgstr "Nie można edytować zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot delete resource."
+msgstr "Nie można usunąć zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Internal server error."
+msgstr "Błąd serwera wewnętrznego."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:55
+msgid "Log level is required."
+msgstr "Wymagany poziom logowania."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:58
+msgid "Invalid log level."
+msgstr "Nieprawidłowy poziom logowania."
+
+#. translators: Context: Text content of the debug message is a required value when logging an item to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:61
+msgid "Log message is required."
+msgstr "Wymagana wiadomość logu."
+
+#. translators: Context: Unique identifier for the log (optional)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:92
+msgid "The log ID (optional)."
+msgstr "ID logu (opcjonalnie)."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:98
+msgid "The log level. "
+msgstr "Poziom logu."
+
+#. translators: Context: Debug log message
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:104
+msgid "The log message."
+msgstr "Wiadomość logu."
+
+#. translators: Context: Debug log context, e.g. additional data to be logged to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:109
+msgid "The log context."
+msgstr "Kontext logu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarding status."
+msgstr "Status onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The current onboarding step."
+msgstr "Aktualny krok onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The current onboarding progress."
+msgstr "Postęp onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarding persona."
+msgstr "Persona onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarded version."
+msgstr "Wersja onboardowana."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The last updated date or null if never updated."
+msgstr "Data ostatniej aktualizacji lub null, jeśli nigdy nie była aktualizowana."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin identifier."
+msgstr "Identyfikator wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin name."
+msgstr "Nazwa wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin file."
+msgstr "Absolutna ścieżka do pliku wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin directory."
+msgstr "Absolutna ścieżka do katalogu wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The path relative to the plugins directory in the WordPress installation."
+msgstr "Ścieżka względna względem katalogu wtyczek w instalacji WordPress."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin textdomain."
+msgstr "Tekstdomain wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin assets."
+msgstr "URL do zasobów wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin root."
+msgstr "URL do katalogu głównego wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin documentation."
+msgstr "URL do dokumentacji wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin reviews."
+msgstr "URL do recenzji wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin sales page."
+msgstr "URL do strony sprzedaży wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin settings."
+msgstr "URL do ustawień wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin support."
+msgstr "URL do wsparcia wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin vendor."
+msgstr "Dostawca wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin version."
+msgstr "Wersja wtyczki."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting name."
+msgstr "Nazwa ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting type."
+msgstr "Typ ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting attributes."
+msgstr "Atrybuty ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Whether the setting is required."
+msgstr "Czy ustawienie jest wymagane."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Default setting value."
+msgstr "Domyślna wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting description."
+msgstr "Opis ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting instructions."
+msgstr "Instrukcje dotyczące ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting placeholder."
+msgstr "Miejsce na ustawienie."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting title."
+msgstr "Tytuł ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting value."
+msgstr "Wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Formatted setting value."
+msgstr "Sformatowana wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting store."
+msgstr "Sklep ustawień."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:441
+msgid "Visit dashboard"
+msgstr "Odwiedź panel"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:444
+msgid "Configure settings"
+msgstr "Konfiguruj ustawienia"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:447
+msgid "Read documentation"
+msgstr "Przeczytaj dokumentację"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:449
+msgid "The plugin has been activated."
+msgstr "Wtyczka została aktywowana."
+
+#. translators: Placeholder: %s - Plugin name
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:86
+#, php-format
+msgid "Want to get more out of %s? Join the our newsletter for quick tips, features, and member-only offers."
+msgstr "Chcesz uzyskać więcej z %s? Dołącz do naszego newslettera po szybkie wskazówki, funkcje i oferty tylko dla członków."
+
+#. translators: Placeholder: %1$s - Plugin name, %2$s - Opening HTML anchor tag, %3$s - Plugin vendor, %4$s - Closing HTML anchor tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:93
+#, php-format
+msgid "Want to get more out of %1$s? Join the %2$s%3$s newsletter%4$s for quick tips, features, and member-only offers."
+msgstr "Chcesz uzyskać więcej z %1$s? Dołącz do newslettera %2$s%3$s%4$s po szybkie wskazówki, funkcje i oferty tylko dla członków."
+
+#. translators: Context: Button label to sign up to newsletter
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:102
+msgid "Sign up"
+msgstr "Zapisz się"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:275
+msgid "Subscribing..."
+msgstr "Subskrybuję..."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:289
+msgid "Thank you!"
+msgstr "Dziękujemy!"
+
+#. translators: Placeholders: %1$s - opening link tag, %2$s - closing link tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Privacy.php:65
+#, php-format
+msgid "By using this plugin, you may be storing personal data or sharing data with an external service. %1$sContact the plugin developer for more information%2$s."
+msgstr "Korzystając z tej wtyczki, możesz przechowywać dane osobowe lub udostępniać dane z zewnętrzną usługą. %1$sSkontaktuj się z twórcą wtyczki, aby uzyskać więcej informacji%2$s."
+
+#. translators: Placeholder: %s - Setting title
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Setting.php:262
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Settings_Group.php:160
+#, php-format
+msgid "\"%s\" is required."
+msgstr "\"%s\" jest wymagane."
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:86
+#, php-format
+msgid "Could not validate %s into a valid amount"
+msgstr "Nie można zweryfikować %s jako poprawnej kwoty"
+
+#. translators: Placeholder: %d - Minimum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:91
+#, php-format
+msgid "The amount is below the minimum of %d"
+msgstr "Kwota jest poniżej minimalnej %d"
+
+#. translators: Placeholder: %d - Maximum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:95
+#, php-format
+msgid "The amount is above the maximum of %d"
+msgstr "Kwota jest powyżej maksymalnej wartości %d"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Boolean.php:41
+#, php-format
+msgid "Could not validate %s into a boolean value"
+msgstr "Nie można zweryfikować %s jako wartość logiczną"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:105
+msgid "OpenSSL is required for credential encryption."
+msgstr "Wymagany jest OpenSSL do szyfrowania danych uwierzytelniających."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:116
+msgid "Could not encrypt credential."
+msgstr "Nie można zaszyfrować danych uwierzytelniających."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:142
+msgid "OpenSSL is required for credential decryption."
+msgstr "Wymagany jest OpenSSL do deszyfrowania danych uwierzytelniających."
+
+#. translators: Placeholder: %s - Invalid email address
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Email.php:33
+#, php-format
+msgid "\"%s\" is not a valid email address"
+msgstr "\"%s\" nie jest prawidłowym adresem e-mail"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/JSON.php:31
+#, php-format
+msgid "Could not validate %s into a JSON value"
+msgstr "Nie można zweryfikować %s jako wartość JSON"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:44
+#, php-format
+msgid "Could not validate %s into a number"
+msgstr "Nie można zweryfikować %s jako liczbę"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Minimum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:48
+#, php-format
+msgid "%1$s is below the minimum allowed of %2$d"
+msgstr "%1$s jest poniżej dozwolonego minimum %2$d"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Maximum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:52
+#, php-format
+msgid "%1$s is above the maximum allowed of %2$d"
+msgstr "%1$s jest powyżej dozwolonego maksimum %2$d"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:56
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:56
+#, php-format
+msgid "\"%s\" is not among the list of accepted values"
+msgstr "\"%s\" nie znajduje się na liście akceptowanych wartości"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:60
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:60
+#, php-format
+msgid "\"%s\" does not match the required format"
+msgstr "\"%s\" nie pasuje do wymaganego formatu"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:42
+#, php-format
+msgid "Could not validate %s into a string"
+msgstr "Nie można zweryfikować %s jako ciąg znaków"
+
+#. translators: Placeholder: %d - Minimum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:47
+#, php-format
+msgid "Length is below the minimum of %d"
+msgstr "Długość jest poniżej minimalnej %d"
+
+#. translators: Placeholder: %d - Maximum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:51
+#, php-format
+msgid "Length is above the maximum of %d"
+msgstr "Długość jest powyżej maksymalnej %d"
+
+#. translators: Placeholder: %s - Invalid URL
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Url.php:30
+#, php-format
+msgid "\"%s\" is not a valid URL"
+msgstr "\"%s\" nie jest prawidłowym adresem URL"
+
+#: vendor-scoped/kestrelwp/fenix/src/WooCommerce/Admin.php:36
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#. translators: Placeholder: %s - Plugin name
+#: vendor-scoped/kestrelwp/fenix/src/WooCommerce/System_Status_Report.php:142
+#, php-format
+msgid "This section shows troubleshooting information about %s."
+msgstr "Ta sekcja wyświetla informacje o rozwiązywaniu problemów dotyczące %s."
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#, js-format
+msgid "Use %s from your %s"
+msgstr "Użyj %s z Twojego %s"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#, js-format
+msgid "Remove %s"
+msgstr "Usuń %s"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block.js:1
+msgid "Available balance:"
+msgstr "Dostępne saldo:"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+msgctxt "failed to apply account funds to order"
+msgid "An error occurred, please try again or try an alternate form of payment."
+msgstr "Wystąpił błąd, spróbuj ponownie lub użyj innej formy płatności."

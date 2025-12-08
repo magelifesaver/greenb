@@ -1,0 +1,45 @@
+/* Dashboard Widgets Suite - Settings Styles */
+
+.wp-admin h1 .dws-version { color: #c7c7c7; font-size: 90%; }
+.wp-admin form h2 { margin-top: 25px; }
+.wp-admin form hr { margin: 15px 0 0 0; }
+
+.wp-admin .notice code { line-height: 1; font-size: 12px; }
+.wp-admin .dws-dismiss-notice { float: right; }
+
+.wp-admin .dws-label { display: block; color: #555; font-style: italic; font-size: 13px; line-height: 1.5; }
+.wp-admin .inline-block { display: inline-block; }
+.wp-admin select + .inline-block, .wp-admin input[type=number] + .inline-block { margin: 0 0 0 3px; }
+
+.wp-admin input[type=text] { width: 60%; }
+.wp-admin input[type=text] + label { margin: 3px 0 0 3px; }
+.wp-admin input.dws-input-text-short[type=text] { width: 65px; }
+
+.ui-dialog .ui-dialog-titlebar { font-size: 16px; }
+.ui-dialog .ui-dialog-buttonpane, .ui-dialog .ui-dialog-titlebar, .ui-dialog .ui-dialog-content { text-align: center; }
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { float: none; }
+.ui-dialog .ui-dialog-buttonpane .ui-button { margin: 0; }
+.ui-dialog .ui-dialog-buttonpane .ui-button:first-child { margin-right: 15px; }
+
+.wp-resources { width: 100%; overflow: hidden; padding: 0 0 5px 0; }
+.wp-resources h2 span { margin: -3px 3px 0 0; vertical-align: middle; }
+.wp-resources .wp-resources-wrap { width: 100%; overflow: hidden; }
+.wp-resources img { display: block; width: 125px; height: 125px; margin: 0; padding: 0; border: 0; background-color: #fff; color: #fff; }
+.wp-resources a { float: left; width: 125px; height: 125px; margin: 7px 15px 3px 0; padding: 1px; border: 1px solid #ccc; opacity: 0.9; }
+.wp-resources a:link, .wp-resources a:visited, .wp-resources a:hover, .wp-resources a:after { box-shadow: none; }
+.wp-resources a:hover { opacity: 1.0; }
+
+.wp-admin .notice-lh p { line-height: 1.8; }
+.wp-admin .notice-custom { background-image: url(../img/sun-icon.png); background-repeat: no-repeat; background-position: left 5px center; background-size: 60px 40px; }
+.wp-admin .notice-custom p { margin: 15px 0; padding-left: 60px; line-height: 1.6; }
+.wp-admin .notice-link { display: inline-block; margin-right: 5px; }
+@media (max-width: 782px) {
+	.wp-admin .notice-custom p { margin: 10px 0; }
+}
+
+@media (max-width: 800px) {
+	.wp-resources, .wp-resources-sep { display: none; }
+}
+@media (max-width: 1100px) {
+	.wp-admin .dws-dismiss-notice { float: none; }
+}

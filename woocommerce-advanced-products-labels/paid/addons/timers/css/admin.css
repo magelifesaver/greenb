@@ -1,0 +1,64 @@
+
+.br_framework_settings .br_template_select li label.br-timer-template-preview > span {
+    background: none;
+    height: 63px;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-preview > span span {
+    bottom: 13px;
+    height: 35px;
+    width: 100%;
+}
+
+.br_label_timer {
+    white-space: nowrap;
+}
+
+.br_label_timer_templates .br_settings_vtab-content {
+    min-height: 120px;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-compact-1 > span span {
+    background: transparent url("../images/timer_template-compact-1.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-1 > span span {
+    background: transparent url("../images/timer_template-large-1.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-2 > span span {
+    background: transparent url("../images/timer_template-large-2.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-3 > span span {
+    background: transparent url("../images/timer_template-large-3.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-4 > span span {
+    background: transparent url("../images/timer_template-large-4.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-5 > span span {
+    background: transparent url("../images/timer_template-large-5.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-6 > span span {
+    background: transparent url("../images/timer_template-large-6.png") no-repeat center/contain;
+}
+
+.br_framework_settings .br_template_select li label.br-timer-template-large-7 > span span {
+    background: transparent url("../images/timer_template-large-7.png") no-repeat center/contain;
+}
+
+.br_settings_timers {
+    display: none;
+}
+
+.br_settings_timers.active {
+    display: block;
+}
+
+#preview .timer_template_large-4 .br_label_timer_item {
+    height: 2em;
+    width: 2em;
+}

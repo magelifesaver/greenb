@@ -1,0 +1,637 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Time Picker for WooCommerce Premium\n"
+"POT-Creation-Date: 2024-12-05 02:33+0100\n"
+"PO-Revision-Date: 2024-12-05 02:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: time-picker-for-woocommerce.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: classes/class-tpfw-admin.php:105 includes/views/html-ava.php:41
+msgid "Delivery"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:107 includes/views/html-ava.php:40
+msgid "Pickup"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:219
+msgid "Order Type"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:228 classes/class-tpfw-admin.php:303
+#: classes/class-tpfw-admin.php:323
+msgid "Selected Time"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:268 classes/class-tpfw-admin.php:427
+#: classes/class-tpfw-admin.php:429 classes/class-tpfw-timepick.php:952
+msgid "Pickup Order"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:281 classes/class-tpfw-admin.php:435
+#: classes/class-tpfw-admin.php:438 classes/class-tpfw-timepick.php:956
+msgid "Delivery Order"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:426 classes/class-tpfw-admin.php:433
+msgid "Fulfillment Time "
+msgstr ""
+
+#: classes/class-tpfw-admin.php:426
+msgid "Selected Pickup Time "
+msgstr ""
+
+#: classes/class-tpfw-admin.php:433
+msgid "Selected Delivery Time "
+msgstr ""
+
+#: classes/class-tpfw-admin.php:471 classes/class-tpfw-timepick.php:881
+#: classes/class-tpfw-timepick.php:908 classes/class-tpfw-timepick.php:939
+msgid "When to pick up?"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:471 classes/class-tpfw-timepick.php:881
+#: classes/class-tpfw-timepick.php:908 classes/class-tpfw-timepick.php:939
+msgid "Your order will be ready "
+msgstr ""
+
+#: classes/class-tpfw-admin.php:475 classes/class-tpfw-timepick.php:885
+#: classes/class-tpfw-timepick.php:912 classes/class-tpfw-timepick.php:943
+msgid "When will we deliver to you?"
+msgstr ""
+
+#: classes/class-tpfw-admin.php:476 classes/class-tpfw-timepick.php:886
+#: classes/class-tpfw-timepick.php:913 classes/class-tpfw-timepick.php:944
+msgid "Your order will be delivered "
+msgstr ""
+
+#: classes/class-tpfw-settings.php:13
+msgid "Time picker for WooCommerce Premium"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:48
+msgid "Time Picker"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:49
+msgid "Schedules"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:50
+msgid "Order Time Management"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:88
+msgid "Timepicker Schedules"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:130
+msgid "From"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:131
+msgid "To"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:133
+msgid "Mode"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:135
+msgid "Weekday"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:136
+msgid "Single Date"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:137 classes/class-tpfw-settings.php:159
+msgid "Product Categories"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:138
+msgid "Product Tags"
+msgstr ""
+
+#: classes/class-tpfw-settings.php:160
+msgid "Preperation Time"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:120
+msgid "Sorry! The selected time is now occupied."
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:148
+msgid "Please select a time."
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:664
+msgid "As soon as possible"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:665
+msgid "Choose a pickup location to view times"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:666
+msgctxt "datepicker"
+msgid "Closed"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:769
+msgid "Select Pickup Time?"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:769
+msgid "Select Delivery Time?"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:781
+#: packages/tpfw-checkout-pickup-options-block/tpfw-pickup-timepicker-blocks-integration.php:104
+#: packages/tpfw-checkout-shipping-options-block/tpfw-delivery-timepicker-blocks-integration.php:106
+msgid "Today"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:806
+msgid "Date?"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:819
+msgid "Time?"
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:820
+msgid "Select time..."
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:952
+msgid "The customer will pickup the order "
+msgstr ""
+
+#: classes/class-tpfw-timepick.php:957
+msgid "Deliver the order "
+msgstr ""
+
+#: includes/start-args.php:16
+msgid "Time to finished order"
+msgstr ""
+
+#: includes/start-args.php:19
+msgid "Calculate an approximate time for an order to be ready."
+msgstr ""
+
+#: includes/start-args.php:22
+msgid "Preparation Time"
+msgstr ""
+
+#: includes/start-args.php:28
+msgid "Fixed preparation time"
+msgstr ""
+
+#: includes/start-args.php:29
+msgid "Dynamic preparation time"
+msgstr ""
+
+#: includes/start-args.php:33
+msgid "Fixed preparation time per order"
+msgstr ""
+
+#: includes/start-args.php:38
+msgid "Set a fixed time in minutes for preparing an order."
+msgstr ""
+
+#: includes/start-args.php:45
+msgid "Dynamic Preparation Time"
+msgstr ""
+
+#: includes/start-args.php:52
+msgid "Preparation Time per Order or Order Item"
+msgstr ""
+
+#: includes/start-args.php:58
+msgid "Per Order"
+msgstr ""
+
+#: includes/start-args.php:59
+msgid "Per Order Item"
+msgstr ""
+
+#: includes/start-args.php:71
+msgid "Extra Time"
+msgstr ""
+
+#: includes/start-args.php:74
+msgid ""
+"Add extra time depending on already existing orders with a \"processing\" or "
+"\"on-hold\" order status."
+msgstr ""
+
+#: includes/start-args.php:77
+msgid "Extra time per processing order/item"
+msgstr ""
+
+#: includes/start-args.php:82
+msgid "Set extra time in minutes per order or item already processing."
+msgstr ""
+
+#: includes/start-args.php:85
+msgid "Use order or items?"
+msgstr ""
+
+#: includes/start-args.php:91 includes/start-args.php:219
+msgid "Orders"
+msgstr ""
+
+#: includes/start-args.php:92 includes/start-args.php:220
+msgid "Items"
+msgstr ""
+
+#: includes/start-args.php:94
+msgid ""
+"Choose to calculate extra time per processing order or per processing item."
+msgstr ""
+
+#: includes/start-args.php:97 includes/start-args.php:224
+msgid "Choose categories to include"
+msgstr ""
+
+#: includes/start-args.php:104
+msgid "Select product categories to include when counting the processing items"
+msgstr ""
+
+#: includes/start-args.php:111
+msgid "Pickup Orders"
+msgstr ""
+
+#: includes/start-args.php:116
+msgid "Time until ready for pickup?"
+msgstr ""
+
+#: includes/start-args.php:120 includes/start-args.php:146
+#: includes/start-args.php:161
+msgid "None"
+msgstr ""
+
+#: includes/start-args.php:121 includes/start-args.php:147
+msgid "By preparation time"
+msgstr ""
+
+#: includes/start-args.php:122 includes/start-args.php:148
+msgid "By preparation time & extra time"
+msgstr ""
+
+#: includes/start-args.php:125
+msgid "Set the time until a pickup order is ready."
+msgstr ""
+
+#: includes/start-args.php:136
+msgid "Delivery Orders"
+msgstr ""
+
+#: includes/start-args.php:142
+msgid "Time until delivery?"
+msgstr ""
+
+#: includes/start-args.php:149
+msgid "By preparation time & shipping time"
+msgstr ""
+
+#: includes/start-args.php:150
+msgid "By preparation time & extra time & shipping time"
+msgstr ""
+
+#: includes/start-args.php:153 includes/start-args.php:166
+msgid "Set the time until a delivery order can be delivered."
+msgstr ""
+
+#: includes/start-args.php:157
+msgid "Set shipping time"
+msgstr ""
+
+#: includes/start-args.php:162 includes/start-args.php:170
+msgid "Fixed shipping time"
+msgstr ""
+
+#: includes/start-args.php:175
+msgid "Set a fixed time in minutes for shipping an order."
+msgstr ""
+
+#: includes/start-args.php:193
+msgid "Time Picker Settings"
+msgstr ""
+
+#: includes/start-args.php:199
+msgid "Selectable days"
+msgstr ""
+
+#: includes/start-args.php:204
+msgid "Set the number of days to pick time from"
+msgstr ""
+
+#: includes/start-args.php:212
+msgid "Enable maximum orders or items per time slot"
+msgstr ""
+
+#: includes/start-args.php:218
+msgid "Disable"
+msgstr ""
+
+#: includes/start-args.php:231
+msgid ""
+"Select product categories to include when counting the items per time slot"
+msgstr ""
+
+#: includes/start-args.php:234
+msgid "Set maximum orders/items per time slot"
+msgstr ""
+
+#: includes/start-args.php:239
+msgid "Set the maximum quantity of orders/items per time slot"
+msgstr ""
+
+#: includes/start-args.php:245
+msgid "Preselect closest timeslot"
+msgstr ""
+
+#: includes/start-args.php:249
+msgid "Preselect the closest available time slot (Only when date is today)"
+msgstr ""
+
+#: includes/start-args.php:253
+msgid "Time Picker Placement"
+msgstr ""
+
+#: includes/start-args.php:259
+msgid "Before Customer Details"
+msgstr ""
+
+#: includes/start-args.php:260
+msgid "First at Customer Details"
+msgstr ""
+
+#: includes/start-args.php:261
+msgid "After Order Notes"
+msgstr ""
+
+#: includes/start-args.php:262
+msgid "Before Payment"
+msgstr ""
+
+#: includes/start-args.php:263
+msgid "After Place Order"
+msgstr ""
+
+#: includes/start-args.php:266
+msgid ""
+"Select where on the checkout page to place the time picker. (This only "
+"applies to the old checkout page)"
+msgstr ""
+
+#: includes/start-args.php:269
+msgid "Show time ranges?"
+msgstr ""
+
+#: includes/start-args.php:274
+msgid "Display time as ranges instead of a specific time"
+msgstr ""
+
+#: includes/start-args.php:277
+msgid "Date format"
+msgstr ""
+
+#: includes/start-args.php:283
+msgid "From general WordPress settings"
+msgstr ""
+
+#: includes/start-args.php:284
+msgid "Custom format"
+msgstr ""
+
+#: includes/start-args.php:287
+msgid "Choose the date format of the date picker."
+msgstr ""
+
+#: includes/start-args.php:291
+msgid "Custom date format"
+msgstr ""
+
+#: includes/start-args.php:296
+msgid ""
+" <a href=\"https://wordpress.org/support/article/formatting-date-and-time/"
+"\"> Date formatting documentation</a>"
+msgstr ""
+
+#: includes/start-args.php:301
+msgid "When start showing \"As soon as possible\""
+msgstr ""
+
+#: includes/start-args.php:311
+msgid ""
+"How many minutes before first timeslot to show \"As soon as possible\" as "
+"first timepicker choice."
+msgstr ""
+
+#: includes/start-args.php:319
+msgid "Time Picker for Pickup Orders"
+msgstr ""
+
+#: includes/start-args.php:322
+msgid "Let the customer choose a time for when to pick up their order."
+msgstr ""
+
+#: includes/start-args.php:326 includes/start-args.php:385
+msgid "Enable"
+msgstr ""
+
+#: includes/start-args.php:331 includes/start-args.php:390
+msgid ""
+"This enables the time picker on the checkout page. To open slot times it is "
+"also needed to add a schedule for the time picker at the \"Availability "
+"Schedule\" settings tab."
+msgstr ""
+
+#: includes/start-args.php:334 includes/start-args.php:393
+msgid "Postpone"
+msgstr ""
+
+#: includes/start-args.php:339 includes/start-args.php:398
+msgid ""
+"Postpone times avalible for selection using the configuration in the \"Order "
+"Time Managment\" Tab."
+msgstr ""
+
+#: includes/start-args.php:342 includes/start-args.php:401
+msgid "When to start count processing orders/items?"
+msgstr ""
+
+#: includes/start-args.php:347 includes/start-args.php:406
+msgid ""
+"If time slots are postponed with extra time, choose how many minutes before "
+"its time slot a processing order will be included in the postponement. "
+"Processing orders without any time slot will always be included."
+msgstr ""
+
+#: includes/start-args.php:350 includes/start-args.php:409
+msgid "Step"
+msgstr ""
+
+#: includes/start-args.php:360 includes/start-args.php:419
+msgid "Set the time step in minutes from which customers can choose from"
+msgstr ""
+
+#: includes/start-args.php:363 includes/start-args.php:422
+msgid "As soon as possible?"
+msgstr ""
+
+#: includes/start-args.php:368 includes/start-args.php:427
+msgid ""
+"Show \"As soon as possible\" as first choice when time slots are available"
+msgstr ""
+
+#: includes/start-args.php:379
+msgid "Time Picker for Delivery Orders"
+msgstr ""
+
+#: includes/start-args.php:382
+msgid ""
+"Let the customer choose a time for when to expect their order to be delivered"
+msgstr ""
+
+#: includes/views/html-ava.php:12 includes/views/html-ordertime.php:12
+msgid "Add row"
+msgstr ""
+
+#: includes/views/html-ava.php:20
+msgid "No schedules have been created."
+msgstr ""
+
+#: includes/views/html-ava.php:30 includes/views/html-ava.php:33
+msgid "hh:mm"
+msgstr ""
+
+#: includes/views/html-ava.php:42
+msgid "Pickup & Delivery"
+msgstr ""
+
+#: includes/views/html-ava.php:50 includes/views/html-ordertime.php:31
+msgid "All Categories"
+msgstr ""
+
+#: includes/views/html-ava.php:55 includes/views/html-ordertime.php:36
+msgid "Remove"
+msgstr ""
+
+#: includes/views/html-ava.php:59
+msgid "Monday"
+msgstr ""
+
+#: includes/views/html-ava.php:60
+msgid "Tuesday"
+msgstr ""
+
+#: includes/views/html-ava.php:61
+msgid "Wednesday"
+msgstr ""
+
+#: includes/views/html-ava.php:62
+msgid "Thursday"
+msgstr ""
+
+#: includes/views/html-ava.php:63
+msgid "Friday"
+msgstr ""
+
+#: includes/views/html-ava.php:64
+msgid "Saturday"
+msgstr ""
+
+#: includes/views/html-ava.php:65
+msgid "Sunday"
+msgstr ""
+
+#: includes/views/html-ordertime.php:20
+msgid "No rules have been created."
+msgstr ""
+
+#: includes/views/html-ordertime.php:35
+msgid "minutes"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/src/js/tpfw-pickup-timepicker-block/block.js:131
+#: packages/tpfw-checkout-shipping-options-block/src/js/tpfw-delivery-timepicker-block/block.js:127
+msgid "Please pick a time."
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/src/js/tpfw-pickup-timepicker-block/block.js:164
+msgid "Pickup time"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/src/js/tpfw-pickup-timepicker-block/block.js:169
+msgid "Select the date and time when to pickup."
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/src/js/tpfw-pickup-timepicker-block/block.js:190
+#: packages/tpfw-checkout-shipping-options-block/src/js/tpfw-delivery-timepicker-block/block.js:184
+msgid "Time"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/tpfw-pickup-timepicker-blocks-integration.php:93
+msgid "Select Pickup Time"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/tpfw-pickup-timepicker-blocks-integration.php:93
+#: packages/tpfw-checkout-shipping-options-block/tpfw-delivery-timepicker-blocks-integration.php:95
+msgid "Select Delivery Time"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/tpfw-pickup-timepicker-blocks-integration.php:94
+msgid "Select Pickup Date"
+msgstr ""
+
+#: packages/tpfw-checkout-pickup-options-block/tpfw-pickup-timepicker-blocks-integration.php:94
+#: packages/tpfw-checkout-shipping-options-block/tpfw-delivery-timepicker-blocks-integration.php:96
+msgid "Select Delivery Date"
+msgstr ""
+
+#: packages/tpfw-checkout-shipping-options-block/src/js/tpfw-delivery-timepicker-block/block.js:158
+msgid "Delivery time"
+msgstr ""
+
+#: packages/tpfw-checkout-shipping-options-block/src/js/tpfw-delivery-timepicker-block/block.js:163
+msgid "Select the date and time when you like to receive your delivery."
+msgstr ""
+
+#: time-picker-for-woocommerce.php:269
+msgid "Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Time Picker for WooCommerce Premium"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A checkout date & time picker for delivery and pickup."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Arosoft.se"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://arosoft.se"
+msgstr ""

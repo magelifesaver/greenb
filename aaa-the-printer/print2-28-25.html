@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Receipt Template</title>
+  </head>
+  <body style="margin:0; padding:0; font-family: Arial, sans-serif; width:80mm;">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; padding: 10px;">
+      <!-- Using width:50% instead of max-width to ensure Dompdf applies it reliably -->
+      <img src="https://eruz9t5gjtm.exactdn.com/wp-content/uploads/sites/9/2024/10/Label_Logo_200-e1730382513671.png?lossy=1&ssl=1&fit=200%2C81"
+           alt="Logo"
+           style="width:50%; height:auto;" />
+    </div>
+
+    <!-- Customer Info (Dotted Box) -->
+    <div style="border:1px dotted #000; padding:10px; margin:5px;">
+      <div style="font-size:14px;">Customer Name: [Customer Name]</div>
+      <div style="font-size:14px;">Address: [Customer Address]</div>
+      <div style="font-size:14px;">Tel: [Customer Telephone]</div>
+    </div>
+
+    <!-- Order Information -->
+    <div style="padding:5px 10px;">
+      <div style="font-size:14px;">Order Number: [Order Number]</div>
+      <div style="font-size:14px;">Order Date: February 24th 2025</div>
+      <div style="font-size:14px;">Order Time: [Order Time]</div>
+      <div style="font-size:14px;">Delivery Date: [Delivery Date]</div>
+      <div style="font-size:14px;">Delivery Time: [Delivery Time]</div>
+    </div>
+
+    <!-- Fixed Divider -->
+    <hr style="border:0; border-top:1px dashed #000; margin:10px 0;" />
+
+    <!-- Product Table -->
+    <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+      <thead>
+        <tr style="border-bottom:1px solid #000;">
+          <th style="text-align:left; padding:5px; font-size:24px;">Product</th>
+          <th style="text-align:right; padding:5px; font-size:14px;">Qty</th>
+          <th style="text-align:right; padding:5px; font-size:14px;">Price</th>
+          <th style="text-align:right; padding:5px; font-size:14px;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Product Row Example -->
+        <!-- The plugin's PHP code will replace this row (and repeat it) for each item.
+             Keep the comments so the regex can find/replace everything correctly. -->
+
+<!-- Product Row Example -->
+<tr style="border-bottom:1px solid #ccc;">
+  <td style="padding:5px; font-size:24px;">
+    [Product Name]<br />
+    <span style="font-size:12px; color:#555;">Brand: [Brand Name]</span>
+  </td>
+  <td style="text-align:right; padding:5px; font-size:34px;">[Qty]</td>
+  <td style="text-align:right; padding:5px; font-size:14px;">[Price]</td>
+  <td style="text-align:right; padding:5px; font-size:14px;">[Total Price]</td>
+</tr>
+<!-- Repeat product rows as needed -->
+
+      </tbody>
+    </table>
+
+    <!-- Order Summary -->
+    <div style="padding:10px;">
+      <table style="width:100%; border-collapse:collapse; font-size:14px;">
+    <tr>
+      <td>Subtotal</td>
+      <td style="text-align:right;">[Subtotal]</td>
+    </tr>
+    <tr>
+      <td>Discount</td>
+      <td style="text-align:right;">[Discount]</td>
+    </tr>
+    <tr>
+      <td>Tip</td>
+      <td style="text-align:right;">[Tip]</td>
+    </tr>
+    <tr style="font-weight:bold; border-top:1px solid #000;">
+      <td style="padding-top:5px;">Total</td>
+      <td style="text-align:right; padding-top:5px;">[Total]</td>
+    </tr>
+  </table>
+</div>
+
+    <!-- Thick Divider -->
+    <hr style="border:0; border-top:3px solid #000; margin:10px 0;" />
+
+    <!-- Customer Notes (Dotted Border) -->
+    <div style="border:1px dotted #000; padding:10px; margin:5px; font-size:14px;">
+      Customer Notes: [Customer Notes]
+    </div>
+
+    <!-- Bottom Details (Without Labels) -->
+    <div style="padding:10px; font-size:14px; text-align:center;">
+      <div>[Payment Method]</div>
+      <div>[Shipping/Delivery City]</div>
+      <div>[Source]</div>
+    </div>
+
+    <!-- Daily Order Number -->
+    <div style="text-align:center; padding:10px; font-size:14px; font-weight:bold;">
+      DON: [Daily Order Number]
+    </div>
+  </body>
+</html>

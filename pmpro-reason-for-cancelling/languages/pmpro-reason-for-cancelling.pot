@@ -1,0 +1,131 @@
+# Copyright (C) 2024 Paid Memberships Pro
+# This file is distributed under the same license as the Paid Memberships Pro - Reason For Cancelling Add On plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Paid Memberships Pro - Reason For Cancelling Add On 1.0\n"
+"Report-Msgid-Bugs-To: info@paidmembershipspro.com\n"
+"Last-Translator: Paid Memberships Pro <info@paidmembershipspro.com>\n"
+"Language-Team: Paid Memberships Pro <info@paidmembershipspro.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-02-21T14:21:36+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: pmpro-reason-for-cancelling\n"
+
+#. Plugin Name of the plugin
+#: pmpro-reason-for-cancelling.php
+msgid "Paid Memberships Pro - Reason For Cancelling Add On"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: pmpro-reason-for-cancelling.php
+msgid "https://www.paidmembershipspro.com/add-ons/pmpro-reason-cancelling/"
+msgstr ""
+
+#. Description of the plugin
+#: pmpro-reason-for-cancelling.php
+msgid "Adds a field to specify a reason for cancelling to the cancel page."
+msgstr ""
+
+#. Author of the plugin
+#: pmpro-reason-for-cancelling.php
+msgid "Paid Memberships Pro"
+msgstr ""
+
+#. Author URI of the plugin
+#: pmpro-reason-for-cancelling.php
+msgid "https://www.paidmembershipspro.com"
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:9
+msgid "Cancellation Reasons"
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:25
+msgid "This user has not submitted any reasons for cancelling."
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:40
+msgid "Date"
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:41
+msgid "Cancelled Level(s)"
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:42
+msgid "Reason"
+msgstr ""
+
+#: classes/pmpror4c-class-member-edit-panel-reasons.php:55
+msgid "All Levels"
+msgstr ""
+
+#: includes/deprecated.php:27
+#: pmpro-reason-for-cancelling.php:50
+msgid "Please enter a reason for cancelling."
+msgstr ""
+
+#: includes/deprecated.php:45
+msgid "Reason for cancelling:"
+msgstr ""
+
+#: includes/deprecated.php:62
+#: pmpro-reason-for-cancelling.php:74
+msgid "N/A"
+msgstr ""
+
+#: pmpro-reason-for-cancelling.php:25
+#: templates/cancel.php:57
+msgid "If so, please enter a reason for cancelling and click \"Yes, cancel my account\" below."
+msgstr ""
+
+#: pmpro-reason-for-cancelling.php:26
+#: templates/cancel.php:58
+msgid "Reason for Cancelling"
+msgstr ""
+
+#: templates/cancel.php:42
+msgid "Are you sure you want to cancel your membership?"
+msgstr ""
+
+#. translators: %s: The level name(s).
+#: templates/cancel.php:50
+msgid "Are you sure you want to cancel your %s membership?"
+msgid_plural "Are you sure you want to cancel your %s memberships?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/cancel.php:65
+msgid "Yes, cancel my account"
+msgstr ""
+
+#: templates/cancel.php:67
+msgid "No, keep my account"
+msgstr ""
+
+#: templates/cancel.php:74
+msgid "My Memberships"
+msgstr ""
+
+#: templates/cancel.php:78
+msgid "Level"
+msgstr ""
+
+#: templates/cancel.php:79
+msgid "Expiration"
+msgstr ""
+
+#: templates/cancel.php:104
+msgid "Cancel"
+msgstr ""
+
+#: templates/cancel.php:113
+msgid "Cancel All Memberships"
+msgstr ""
+
+#: templates/cancel.php:122
+msgid "Click here to go to the home page."
+msgstr ""

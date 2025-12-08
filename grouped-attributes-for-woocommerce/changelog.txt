@@ -1,0 +1,19 @@
+* Group Attributes for WooCommerce *
+
+2024-08-19 - version 1.0.4
+* Resolved Minor issue of tabs print
+
+2024-08-08 - version 1.0.3
+* Fixed the default tab empty issue if attributes are empty
+
+2024-01-29 - version 1.0.2
+* Declared Comaptibility with Blocks Cart/Checkout
+
+2023-12-08 - version 1.0.1
+* QIT Issues Resloved
+* Resolved issue of showing same popup for different products on shop page
+* Resolved issue of data only showing for first item on shop page while Tab option is selected
+* Resolved css issue of Larger Text of tab button
+
+2023-04-17 - version 1.0.0
+* Initial Release

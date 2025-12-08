@@ -1,0 +1,1351 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Store Credit for WooCommerce 5.0.0-dev.1\n"
+"Report-Msgid-Bugs-To: https://kestrelwp.com/contact/\n"
+"Last-Translator: gpt-po v1.2.3\n"
+"Language-Team: Kestrel <support@kestrelwp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-06-18T01:24:44+00:00\n"
+"PO-Revision-Date: 2025-06-18 10:29+0900\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+"Copyright: (C) 2025 Kestrel\n"
+
+#. Plugin Name of the plugin
+#: woocommerce-store-credit.php
+#: legacy/includes/admin/notices/enable-coupons.php:14
+#: legacy/includes/admin/notices/sell-credit.php:18
+#: legacy/includes/admin/notices/update.php:19
+#: legacy/includes/admin/notices/updating.php:20
+#: src/Plugin.php:108
+msgid "Store Credit for WooCommerce"
+msgstr "Kredyt sklepowy dla WooCommerce"
+
+#. Plugin URI of the plugin
+#: woocommerce-store-credit.php
+msgid "https://woocommerce.com/products/store-credit/"
+msgstr "https://woocommerce.com/products/store-credit/"
+
+#. Description of the plugin
+#: woocommerce-store-credit.php
+msgid "Create \"store credit\" coupons for customers which are redeemable at checkout."
+msgstr "Twórz kupony „kredytu sklepowego” dla klientów, które można wymieniać przy kasie."
+
+#. Author of the plugin
+#: woocommerce-store-credit.php
+msgid "Kestrel"
+msgstr "Kestrel"
+
+#. Author URI of the plugin
+#: woocommerce-store-credit.php
+msgid "https://kestrelwp.com/"
+msgstr "https://kestrelwp.com/"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-menu.php:39
+#: legacy/includes/admin/class-wc-store-credit-admin-menu.php:40
+#: legacy/includes/admin/class-wc-store-credit-admin-menu.php:54
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:46
+msgid "Send store credit"
+msgstr "Wyślij kredyt sklepow"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-meta-boxes.php:53
+msgid "Store credit usage"
+msgstr "Użycie kredytu sklepowego"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:99
+msgid "Send a store credit coupon to a customer or multiple customers at once."
+msgstr "Wyślij kupon kredytu sklepowego do klienta lub wielu klientów naraz."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:103
+#: legacy/includes/class-wc-store-credit-product-addons.php:464
+msgid "Credit amount"
+msgstr "Kwota kredytu"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:104
+msgid "The amount the store credit coupon is worth."
+msgstr "Kwota, którą jest wart kupon kredytu sklepowego."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:113
+msgid "Customer(s)"
+msgstr "Klient(owie)"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:114
+msgid "The customers who will receive the coupon."
+msgstr "Klienci, którzy otrzymają kupon."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:116
+msgid "You can also enter emails from non-registered customers."
+msgstr "Możesz również wpisać e-maile od nie zarejestrowanych klientów."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:121
+msgid "Choose one or more customers&hellip;"
+msgstr "Wybierz jednego lub więcej klientów&hellip;"
+
+#. translators: Context: Form field label for a store credit coupon note
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:128
+msgid "Note"
+msgstr "Notatka"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:131
+msgid "A note for the customer who will receive the coupon."
+msgstr "Notatka dla klienta, który otrzyma kupon."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:132
+msgid "Enter a note or the reason for this coupon."
+msgstr "Wpisz notatkę lub powód tego kuponu."
+
+#. translators: Context: Form field label for a store credit coupon expiration
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:140
+msgid "Expiration"
+msgstr "Wygasanie"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:142
+msgid "Define when the coupon expires."
+msgstr "Zdefiniuj, kiedy kupon wygaśnie."
+
+#. translators: Context: Store credit coupon never expires
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:146
+#: src/Blocks/Cart_Checkout_Integration.php:129
+#: templates/cart/store-credit-coupon.php:39
+msgid "Never expires"
+msgstr "Nigdy nie wygasa"
+
+#. translators: Context: Store credit coupon expires at a specific date
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:148
+msgid "Specific date"
+msgstr "Określona data"
+
+#. translators: Context: Store credit coupon expires after a specific period
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:150
+msgid "Specific period"
+msgstr "Okres czasu"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:155
+msgid "The coupon will expire on the specified date."
+msgstr "Kupon wygaśnie w określonej dacie."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:168
+msgid "The coupon will expire when the period passes."
+msgstr "Kupon wygaśnie po upływie okresu."
+
+#. translators: Context: Section title for the usage restrictions of a store credit coupon
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:180
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:219
+msgid "Usage restriction"
+msgstr "Ograniczenia użycia"
+
+#. translators: Context: Form field label for a store credit coupon individual use
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:185
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:225
+msgid "Individual use only"
+msgstr "Tylko do użytku indywidualnego"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:186
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:226
+msgid "Check this box if the coupon cannot be used in conjunction with other coupons."
+msgstr "Zaznacz to pole, jeśli kupon nie może być używany razem z innymi kuponami."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:192
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:233
+msgid "Exclude sale items"
+msgstr "Wyklucz produkty na wyprzedaży"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:193
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:234
+msgid "Check this box if the coupon should not apply to items on sale."
+msgstr "Zaznacz to pole, jeśli kupon nie powinien mieć zastosowania do produktów na wyprzedaży."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:199
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:245
+msgid "Products"
+msgstr "Produkty"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:200
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:246
+msgid "Product that the coupon will be applied to, or that need to be in the cart in order to be applied."
+msgstr "Produkt, do którego będzie stosowany kupon, lub który musi znajdować się w koszyku, aby można go było zastosować."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:206
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:218
+#: legacy/includes/admin/wc-store-credit-meta-box-functions.php:107
+msgid "Search for a product&hellip;"
+msgstr "Szukaj produktu&hellip;"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:211
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:255
+msgid "Exclude products"
+msgstr "Wyklucz produkty"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:212
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:256
+msgid "Product that the coupon will not be applied to, or that cannot be in the cart in order to be applied."
+msgstr "Produkt, do którego kupon nie będzie stosowany, lub który nie może znajdować się w koszyku, aby można go było zastosować."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:223
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:269
+msgid "Product categories"
+msgstr "Kategorie produktów"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:224
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:270
+msgid "Product categories that the coupon will be applied to, or that need to be in the cart in order to be applied."
+msgstr "Kategorie produktów, do których będzie stosowany kupon, lub które muszą znajdować się w koszyku, aby można go było zastosować."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:229
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:240
+#: legacy/includes/admin/wc-store-credit-meta-box-functions.php:150
+msgid "Select product categories&hellip;"
+msgstr "Wybierz kategorie produktów&hellip;"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:234
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:278
+msgid "Exclude categories"
+msgstr "Wyklucz kategorie"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:235
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:279
+msgid "Product categories that the coupon will not be applied to, or that cannot be in the cart in order to be applied."
+msgstr "Kategorie produktów, do których kupon nie będzie stosowany, lub które nie mogą znajdować się w koszyku, aby można go było zastosować."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:301
+msgid "You need to provide a credit amount for the coupon."
+msgstr "Musisz podać kwotę kredytu dla kuponu."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:306
+msgid "You need to choose a customer who to send the coupon."
+msgstr "Musisz wybrać klienta, do którego chcesz wysłać kupon."
+
+#. translators: Placeholder: %s - Comma-separated list of invalid emails
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:323
+#, php-format
+msgid "The following emails are invalid: %s."
+msgstr "Następujące e-maile są nieprawidłowe: %s."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:328
+msgid "An expiration date is required."
+msgstr "Wymagana jest data wygaśnięcia."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:333
+msgid "An expiration period is required."
+msgstr "Wymagany jest okres wygaśnięcia."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:362
+msgid "Store credit sent to the customer."
+msgid_plural "Store credit sent to the customers."
+msgstr[0] "Kredyt sklepowy wysłany do klienta."
+msgstr[1] ""
+msgstr[2] ""
+
+#: legacy/includes/admin/class-wc-store-credit-admin-send-credit-page.php:364
+msgid "An unexpected error occurred."
+msgstr "Wystąpił nieoczekiwany błąd."
+
+#. translators: Context: Settings section matching plugin name
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:27
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:47
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:54
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:21
+#: legacy/includes/class-wc-store-credit-coupons.php:45
+#: legacy/includes/class-wc-store-credit-my-account.php:74
+#: legacy/includes/class-wc-store-credit-my-account.php:89
+#: legacy/includes/class-wc-store-credit-order.php:156
+#: legacy/includes/class-wc-store-credit-products.php:46
+#: src/Blocks/Cart_Checkout_Integration.php:64
+#: templates/myaccount/dashboard-store-credit.php:30
+msgid "Store credit"
+msgstr "Kredyt sklepow"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:48
+msgid "The following options are specific to store credit coupons."
+msgstr "Następujące opcje są specyficzne dla kuponów kredytu sklepowego."
+
+#. translators: Context: Settings label matching the WooCommerce "My Account" page title
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:54
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:32
+msgid "My Account"
+msgstr "Moje konto"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:55
+msgid "Display store credit on the My Account page."
+msgstr "Wyświetl kredyt sklepowy na stronie Moje konto."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:61
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:37
+msgid "Delete after use"
+msgstr "Usuń po użyciu"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:62
+msgid "Delete the coupon when the credit is exhausted."
+msgstr "Usuń kupon, gdy kredyt zostanie wyczerpany."
+
+#. translators: Context: Settings label matching the WooCommerce "Individual use" coupon option
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:69
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:42
+msgid "Individual use"
+msgstr "Użytek indywidualny"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:70
+msgid "The coupon cannot be used in conjunction with other coupons."
+msgstr "Kupon nie może być używany w połączeniu z innymi kuponami."
+
+#. translators: Context: Tax-inclusive coupon
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:79
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:154
+#: legacy/includes/admin/meta-boxes/views/html-coupon-data-store-credit.php:25
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:47
+msgid "Include tax"
+msgstr "Uwzględnij podatek"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:80
+msgid "The coupon amount includes taxes."
+msgstr "Kwota kuponu zawiera podatki."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:81
+msgid "The options 'Prices entered with tax' and 'Round tax at subtotal' must be enabled."
+msgstr "Należy włączyć opcje „Ceny podane z podatkiem” i „Zaokrąglij podatek do sumy częściowej”."
+
+#. translators: Context: Setting label to apply a store credit coupon to shipping
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:97
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:170
+#: legacy/includes/admin/meta-boxes/views/html-coupon-data-store-credit.php:36
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:52
+msgid "Apply to shipping"
+msgstr "Zastosuj do wysyłki"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:98
+msgid "Apply the remaining coupon amount to the shipping costs."
+msgstr "Zastosuj pozostałą kwotę kuponu do kosztów wysyłki."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:106
+msgid "Shipping not enabled."
+msgstr "Wysyłka nie jest włączona."
+
+#. translators: Placeholders: %s - List of placeholders
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:113
+#, php-format
+msgid "Available placeholders: %s"
+msgstr "Dostępne symbole zastępcze: %s"
+
+#. translators: Context: Setting label to format the store credit coupon code
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:118
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:57
+msgid "Coupon code format"
+msgstr "Format kodu kuponu"
+
+#. translators: Context: Setting label for the store credit coupon display options
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:128
+msgid "Display coupons"
+msgstr "Wyświetl kupony"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:129
+msgid "Display the customer's coupons on the Cart and Checkout pages."
+msgstr "Wyświetl kupony klienta na stronach Koszyk i Realizacja zamówienia."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:134
+msgid "Enter the message to display on the cart and checkout pages when the customer has coupons available. HTML is not supported."
+msgstr "Wprowadź wiadomość wyświetlaną na stronach koszyka i realizacji zamówienia, gdy klient ma dostępne kupony. HTML nie jest obsługiwany."
+
+#. translators: Placeholder: %s - Represents a merge tag., ie [link] surrounded by <code> HTML tags
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:136
+#, php-format
+msgid "You can use a %s merge tag to toggle showing the coupons list. However, this tag will not work when using the cart and checkout blocks and should be omitted then."
+msgstr "Możesz użyć tagu scalającego %s, aby przełączać wyświetlanie listy kuponów. Jednak ten tag nie będzie działał podczas korzystania z bloków koszyka i realizacji zamówienia i powinien być wtedy pominięty."
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:141
+msgid "Coupons notice"
+msgstr "Powiadomienie o kuponach"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:147
+#: legacy/includes/wc-store-credit-template-functions.php:24
+#: src/Blocks/Cart_Checkout_Integration.php:107
+msgid "You have store credit coupons available!"
+msgstr "Masz dostępne kupony z kredytem sklepowym!"
+
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:148
+#: legacy/includes/admin/class-wc-store-credit-admin-settings.php:174
+#: legacy/includes/wc-store-credit-template-functions.php:25
+msgid "View coupons"
+msgstr "Zobacz kupony"
+
+#: legacy/includes/admin/class-wc-store-credit-admin.php:124
+msgid "Please, enter valid amounts separated by \"|\". For example: 10 | 20 | 30."
+msgstr "Wprowadź poprawne kwoty oddzielone znakiem \"|\". Na przykład: 10 | 20 | 30."
+
+#: legacy/includes/admin/list-tables/class-wc-store-credit-admin-list-table-coupons.php:44
+msgid "Filter by customer or email"
+msgstr "Filtruj według klienta lub e-maila"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-coupon-usage.php:79
+msgid "Order Number"
+msgstr "Numer zamówienia"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-coupon-usage.php:80
+msgid "Date"
+msgstr "Data"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-coupon-usage.php:81
+msgid "Status"
+msgstr "Status"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-coupon-usage.php:82
+msgid "Credit used"
+msgstr "Wykorzystany kredyt"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:87
+#: legacy/includes/class-wc-store-credit-privacy.php:160
+msgid "Coupon amount"
+msgstr "Kwota kuponu"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:91
+msgid "Value of the coupon. Default: regular price."
+msgstr "Wartość kuponu. Domyślnie: cena regularna."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:96
+msgid "Preset amounts"
+msgstr "Wstępnie ustawione kwoty"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:99
+msgid "List of predefined credit amounts. Use \"|\" to separate the different amounts. For example: 10 | 20 | 30."
+msgstr "Lista predefiniowanych kwot kredytu. Użyj \"|\" do oddzielenia różnych kwot. Na przykład: 10 | 20 | 30."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:104
+msgid "Custom amount"
+msgstr "Własna kwota"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:105
+msgid "Allow the customer to choose the amount of credit to purchase."
+msgstr "Pozwól klientowi wybrać kwotę kredytu do zakupu."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:111
+msgid "Minimum amount"
+msgstr "Minimalna kwota"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:115
+msgid "The minimum amount of credit to purchase."
+msgstr "Minimalna kwota kredytu do zakupu."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:120
+msgid "Maximum amount"
+msgstr "Maksymalna kwota"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:124
+msgid "The maximum amount of credit to purchase."
+msgstr "Maksymalna kwota kredytu do zakupu."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:129
+msgid "Amount step"
+msgstr "Krok kwoty"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:133
+msgid "The credit amount must be in the specified interval."
+msgstr "Kwota kredytu musi mieścić się w określonym zakresie."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:142
+msgid "Coupon expiration"
+msgstr "Wygaśnięcie kuponu"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:143
+msgid "Coupon expiration period"
+msgstr "Okres ważności kuponu"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:146
+msgid "The coupon will expire passed this period. Leave empty to not expire."
+msgstr "Kupon wygaśnie po upływie tego okresu. Pozostaw puste, aby nie wygasał."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:147
+msgid "N/A"
+msgstr "N/D"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:155
+#: legacy/includes/admin/meta-boxes/views/html-coupon-data-store-credit.php:26
+msgid "Check this box if the coupon amount includes taxes."
+msgstr "Zaznacz to pole, jeśli kwota kuponu zawiera podatki."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:160
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:176
+msgid "Default"
+msgstr "Domyślny"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:161
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:177
+msgid "Yes"
+msgstr "Tak"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:162
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:178
+msgid "No"
+msgstr "Nie"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:171
+#: legacy/includes/admin/meta-boxes/views/html-coupon-data-store-credit.php:37
+msgid "Check this box to apply the remaining coupon amount to the shipping costs."
+msgstr "Zaznacz to pole, aby zastosować pozostałą kwotę kuponu do kosztów wysyłki."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:189
+msgid "Send to someone"
+msgstr "Wyślij do kogoś"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:190
+msgid "Allow purchasing credit for a different person."
+msgstr "Pozwól na zakup kredytu dla innej osoby."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:197
+msgid "Title to display"
+msgstr "Tytuł do wyświetlenia"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:198
+msgid "Add a title for the receiver form."
+msgstr "Dodaj tytuł do formularza odbiorcy."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:202
+#: legacy/includes/class-wc-store-credit-product-addons.php:231
+msgid "Send credit to someone?"
+msgstr "Wyślij kredyt do kogoś?"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:207
+msgid "Display receiver fields"
+msgstr "Wyświetl pola odbiorcy"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:208
+msgid "How to display the receiver fields on page load."
+msgstr "Jak wyświetlać pola odbiorcy po załadowaniu strony."
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:213
+msgid "Collapsed"
+msgstr "Zwinięte"
+
+#: legacy/includes/admin/meta-boxes/class-wc-store-credit-meta-box-product-data.php:214
+msgid "Expanded"
+msgstr "Rozwinięte"
+
+#: legacy/includes/admin/meta-boxes/views/html-coupon-store-credit-usage.php:20
+msgid "This coupon has not been used yet."
+msgstr "Ten kupon nie został jeszcze użyty."
+
+#: legacy/includes/admin/meta-boxes/views/html-coupon-store-credit-usage.php:69
+msgid "Initial amount:"
+msgstr "Kwota początkowa:"
+
+#: legacy/includes/admin/meta-boxes/views/html-coupon-store-credit-usage.php:70
+msgid "Total used:"
+msgstr "Raz wykorzystano:"
+
+#: legacy/includes/admin/notices/enable-coupons.php:14
+msgid "WooCommerce coupons are not enabled."
+msgstr "Kupony WooCommerce nie są włączone."
+
+#: legacy/includes/admin/notices/enable-coupons.php:16
+msgid "Enable coupons."
+msgstr "Włącz kupony."
+
+#: legacy/includes/admin/notices/sell-credit.php:19
+msgid "Now you can sell Store Credit coupons to your customers for their own usage or as gift cards."
+msgstr "Teraz możesz sprzedawać kupony z kredytem sklepowym swoim klientom do własnego użytku lub jako karty podarunkowe."
+
+#: legacy/includes/admin/notices/sell-credit.php:25
+msgid "Add product"
+msgstr "Dodaj produkt"
+
+#: legacy/includes/admin/notices/sell-credit.php:32
+msgid "View Store Credit for WooCommerce documentation"
+msgstr "Zobacz dokumentację Store Credit dla WooCommerce"
+
+#: legacy/includes/admin/notices/sell-credit.php:33
+msgid "Read more"
+msgstr "Czytaj więcej"
+
+#: legacy/includes/admin/notices/update.php:19
+msgid "We need to update your store database to the latest version."
+msgstr "Musimy zaktualizować bazę danych sklepu do najnowszej wersji."
+
+#: legacy/includes/admin/notices/update.php:22
+msgid "Run the updater"
+msgstr "Uruchom aktualizator"
+
+#: legacy/includes/admin/notices/update.php:28
+msgid "It is strongly recommended that you backup your database before proceeding. Are you sure you wish to run the updater now?"
+msgstr "Zaleca się wykonanie kopii zapasowej bazy danych przed kontynuacją. Czy na pewno chcesz uruchomić aktualizator teraz?"
+
+#: legacy/includes/admin/notices/updating.php:20
+msgid "Your database is being updated in the background."
+msgstr "Twoja baza danych jest aktualizowana w tle."
+
+#: legacy/includes/admin/notices/updating.php:22
+msgid "Taking a while? Click here to run it now."
+msgstr "Chcesz to zrobić szybciej? Kliknij tutaj, aby uruchomić teraz."
+
+#: legacy/includes/admin/views/html-admin-page-send-credit.php:25
+msgid "Send credit"
+msgstr "Wyślij kredyt"
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:21
+msgid "This section shows information about Store Credit for WooCommerce."
+msgstr "Ta sekcja pokazuje informacje o Kredycie Sklepowym dla WooCommerce."
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:27
+msgid "Prices entered with tax"
+msgstr "Ceny podane z podatkiem"
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:62
+msgid "Overrides"
+msgstr "Nadpisy"
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:67
+msgid "-"
+msgstr "-"
+
+#. translators: %1$s: Template name, %2$s: Template version, %3$s: Core version.
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:78
+#, php-format
+msgid "%1$s version %2$s is out of date. The core version is %3$s"
+msgstr "%1$s wersja %2$s jest nieaktualna. Wersja rdzenia to %3$s"
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:95
+msgid "Outdated templates"
+msgstr "Przeterminowane szablony"
+
+#: legacy/includes/admin/views/html-admin-status-report-settings.php:98
+msgid "Learn how to update"
+msgstr "Dowiedz się, jak zaktualizować"
+
+#: legacy/includes/admin/wc-store-credit-admin-functions.php:100
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: legacy/includes/admin/wc-store-credit-admin-functions.php:141
+msgid "Dismiss"
+msgstr "Odrzuć"
+
+#: legacy/includes/class-wc-store-credit-cart-coupons.php:43
+msgid "Store credit coupon not found."
+msgstr "Nie znaleziono kuponu kredytu sklepowego."
+
+#: legacy/includes/class-wc-store-credit-cart-coupons.php:50
+msgid "The store credit will be applied after adding some products to the cart."
+msgstr "Kredyt sklepowym zostanie zastosowany po dodaniu produktów do koszyka."
+
+#. translators: %s: coupon code
+#: legacy/includes/class-wc-store-credit-cart.php:81
+#, php-format
+msgid "Store credit: %s"
+msgstr "Kredyt sklepowym: %s"
+
+#: legacy/includes/class-wc-store-credit-coupons.php:152
+msgid "There is no credit remaining on this coupon."
+msgstr "Na tym kuponie nie pozostał żaden kredyt."
+
+#: legacy/includes/class-wc-store-credit-coupons.php:154
+msgid "This coupon cannot be used on this cart."
+msgstr "Ten kupon nie może być użyty na tym koszyku."
+
+#: legacy/includes/class-wc-store-credit-order-details.php:69
+msgid "Coupon"
+msgid_plural "Coupons"
+msgstr[0] "Kupon"
+msgstr[1] ""
+msgstr[2] ""
+
+#: legacy/includes/class-wc-store-credit-order-details.php:197
+msgid "Store credit used:"
+msgstr "Użyty kredyt sklepowym:"
+
+#: legacy/includes/class-wc-store-credit-order-details.php:245
+msgid "Store Credit used:"
+msgstr "Użyty kredyt sklepowym:"
+
+#. translators: %s: Order shipping method
+#: legacy/includes/class-wc-store-credit-paypal.php:80
+#, php-format
+msgid "Shipping via %s"
+msgstr "Wysyłka przez %s"
+
+#. translators: Context: Payment method
+#: legacy/includes/class-wc-store-credit-privacy.php:22
+#: src/Lifecycle/Migrations/Upgrade_To_Version_2_4_0.php:144
+msgid "Store Credit"
+msgstr "Kredyt sklepowym"
+
+#: legacy/includes/class-wc-store-credit-privacy.php:24
+#: legacy/includes/class-wc-store-credit-privacy.php:25
+msgid "Store credit for WooCommerce coupon data"
+msgstr "Dane kuponu kredytu sklepowym dla WooCommerce"
+
+#. translators: Placeholder: %s - Marketplace privacy URL
+#: legacy/includes/class-wc-store-credit-privacy.php:53
+#, php-format
+msgid "By using this extension, you may be storing personal data or sharing data with an external service. <a href=\"%s\" target=\"_blank\">Learn more about how this works, including what you may want to include in your privacy policy.</a>"
+msgstr "Korzystając z tego rozszerzenia, możesz przechowywać dane osobowe lub udostępniać dane z zewnętrzną usługą. <a href=\"%s\" target=\"_blank\">Dowiedz się więcej o tym, jak to działa, w tym co możesz chcieć zawrzeć w swojej polityce prywatności.</a>"
+
+#: legacy/includes/class-wc-store-credit-privacy.php:79
+msgid "Coupons"
+msgstr "Kupony"
+
+#. Translators: %s Coupon code.
+#: legacy/includes/class-wc-store-credit-privacy.php:129
+#, php-format
+msgid "Removed personal data from coupon %s."
+msgstr "Usunięto dane osobowe z kuponu %s."
+
+#. Translators: %s Coupon code.
+#: legacy/includes/class-wc-store-credit-privacy.php:133
+#, php-format
+msgid "Personal data within coupon %s has been retained."
+msgstr "Dane osobowe w kuponie %s zostały zachowane."
+
+#: legacy/includes/class-wc-store-credit-privacy.php:156
+msgid "Coupon code"
+msgstr "Kod kuponu"
+
+#: legacy/includes/class-wc-store-credit-privacy.php:164
+msgid "Allowed emails"
+msgstr "Dozwolone adresy e-mail"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:149
+msgid "zero"
+msgstr "zero"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:150
+msgid "unlimited"
+msgstr "nieograniczone"
+
+#. translators: 1: minimum amount, 2: maximum amount, 3: step amount
+#: legacy/includes/class-wc-store-credit-product-addons.php:155
+#, php-format
+msgid "Enter an amount between %1$s and %2$s with increments of %3$s."
+msgstr "Wprowadź kwotę między %1$s a %2$s z krokiem %3$s."
+
+#. translators: 1: minimum amount 2: maximum amount
+#: legacy/includes/class-wc-store-credit-product-addons.php:163
+#, php-format
+msgid "Enter an amount between %1$s and %2$s."
+msgstr "Wprowadź kwotę między %1$s a %2$s."
+
+#. translators: Placeholder: %s - Currency symbol
+#: legacy/includes/class-wc-store-credit-product-addons.php:175
+#, php-format
+msgid "Credit amount (%s)"
+msgstr "Kwota kredytu (%s)"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:197
+msgid "Send to"
+msgstr "Wyślij do"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:198
+msgid "The receiver email"
+msgstr "E-mail odbiorcy"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:203
+msgid "Message"
+msgstr "Wiadomość"
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:204
+msgid "Add a message"
+msgstr "Dodaj wiadomość"
+
+#. translators: %s: field label
+#: legacy/includes/class-wc-store-credit-product-addons.php:284
+#, php-format
+msgid "\"%s\" is a required field."
+msgstr "\"%s\" jest polem wymaganym."
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:302
+#: legacy/includes/class-wc-store-credit-product-addons.php:318
+msgid "The credit amount is not valid."
+msgstr "Kwota kredytu jest nieprawidłowa."
+
+#: legacy/includes/class-wc-store-credit-product-addons.php:309
+msgid "Please, enter a credit amount."
+msgstr "Proszę, wprowadź kwotę kredytu."
+
+#. translators: %s: minimum amount
+#: legacy/includes/class-wc-store-credit-product-addons.php:326
+#, php-format
+msgid "The minimum credit amount is %s."
+msgstr "Minimalna kwota kredytu to %s."
+
+#. translators: %s: maximum amount
+#: legacy/includes/class-wc-store-credit-product-addons.php:334
+#, php-format
+msgid "The maximum credit amount is %s."
+msgstr "Maksymalna kwota kredytu to %s."
+
+#. translators: %s: amount step
+#: legacy/includes/class-wc-store-credit-product-addons.php:343
+#, php-format
+msgid "The credit amount has an interval of %s."
+msgstr "Kwota kredytu ma zakres %s."
+
+#: legacy/includes/class-wc-store-credit-rest-api.php:94
+msgid "Store credit discount for the order."
+msgstr "Zniżka na kredyt sklepowym dla zamówienia."
+
+#: legacy/includes/coupon-discounts/class-wc-store-credit-coupon-discount.php:58
+msgid "Invalid coupon."
+msgstr "Nieprawidłowy kupon."
+
+#: legacy/includes/coupon-discounts/class-wc-store-credit-coupon-discount.php:66
+msgid "Invalid item discounts."
+msgstr "Nieprawidłowe rabaty na pozycje."
+
+#. translators: Placeholder: %s - PHP class name
+#: legacy/includes/coupon-discounts/class-wc-store-credit-coupon-discounts.php:161
+#: legacy/includes/item-discounts/class-wc-store-credit-item-discounts.php:231
+#, php-format
+msgid "The argument must be an instance of the class %s."
+msgstr "Argument musi być instancją klasy %s."
+
+#. translators: Placeholder: %s - Shipping method label
+#: legacy/includes/discounts/class-wc-store-credit-discounts.php:601
+#, php-format
+msgid "Discount: %s"
+msgstr "Rabat: %s"
+
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:47
+msgid "Email used for sending a store credit coupon to a customer."
+msgstr "E-mail używany do wysyłania kuponu kredytu sklepowym do klienta."
+
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:71
+msgid "You have received a coupon"
+msgstr "Otrzymałeś kupon"
+
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:82
+msgid "You have been given {coupon_amount} credit"
+msgstr "Otrzymałeś {coupon_amount} kredytu"
+
+#. translators: Placeholder: Button text to redeem store credit
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:95
+msgid "Redeem now"
+msgstr "Zrealizuj teraz"
+
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:219
+msgid "Button text"
+msgstr "Tekst przycisku"
+
+#: legacy/includes/emails/class-wc-store-credit-email-send-credit.php:222
+msgid "Text for the email CTA button."
+msgstr "Tekst dla przycisku CTA w e-mailu."
+
+#. translators: $1: customer name, $2 customer id, $3: customer email
+#: legacy/includes/wc-store-credit-customer-functions.php:182
+#, php-format
+msgid "%1$s (#%2$s &ndash; %3$s)"
+msgstr "%1$s (#%2$s &ndash; %3$s)"
+
+#: legacy/includes/wc-store-credit-functions.php:379
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dzień"
+msgstr[1] ""
+msgstr[2] ""
+
+#: legacy/includes/wc-store-credit-functions.php:380
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "tydzień"
+msgstr[1] ""
+msgstr[2] ""
+
+#: legacy/includes/wc-store-credit-functions.php:381
+msgid "month"
+msgid_plural "months"
+msgstr[0] "miesiąc"
+msgstr[1] ""
+msgstr[2] ""
+
+#: legacy/includes/wc-store-credit-functions.php:382
+msgid "year"
+msgid_plural "years"
+msgstr[0] "rok"
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholder: %s - Store credit coupon expiration date
+#. translators: %s: coupon date expires
+#: src/Blocks/Cart_Checkout_Integration.php:128
+#: templates/cart/store-credit-coupon.php:37
+#, php-format
+msgid "Expires on %s"
+msgstr "Wygasa %s"
+
+#: templates/emails/customer-store-credit.php:37
+#: templates/emails/plain/customer-store-credit.php:38
+msgid "To redeem your store credit use the following code during checkout:"
+msgstr "Aby zrealizować swój kredyt sklepowym, użyj następującego kodu podczas realizacji zamówienia:"
+
+#. translators: Placeholder: %s - expiration date
+#: templates/emails/customer-store-credit.php:53
+#: templates/emails/plain/customer-store-credit.php:56
+#, php-format
+msgid "This credit can be redeemed until %s."
+msgstr "Ten kredyt można zrealizować do %s."
+
+#. translators: Placeholder: %s - Comma-separated list of product names
+#: templates/emails/customer-store-credit.php:77
+#: templates/emails/plain/customer-store-credit.php:77
+#, php-format
+msgid "This credit is valid for the following product: %s."
+msgid_plural "This credit is valid for the following products: %s."
+msgstr[0] "Ten kredyt jest ważny dla następującego produktu: %s."
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholder: %s - Comma-separated list of product category names
+#: templates/emails/customer-store-credit.php:96
+#, php-format
+msgid "This credit is valid for the following product category: %s."
+msgid_plural "This credit is valid for the following product categories: %s."
+msgstr[0] "Ten kredyt jest ważny dla następującej kategorii produktu: %s."
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholder: %s - Comma-separated list of product category names
+#: templates/emails/plain/customer-store-credit.php:102
+#, php-format
+msgid "This credit is valid for the following category: %s."
+msgid_plural "This credit is valid for the following categories: %s."
+msgstr[0] "Ten kredyt jest ważny dla następującej kategorii: %s."
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholder: %s - store-credit endpoint
+#: templates/myaccount/dashboard-store-credit.php:35
+#, php-format
+msgid "You have <a href=\"%s\">store credit coupons</a> available to spend on your next purchase."
+msgstr "Masz dostępne <a href=\"%s\">kupony kredytu sklepowym</a> do wykorzystania przy następnym zakupie."
+
+#. translators: Context: Table column for store credit coupon codes
+#: templates/myaccount/store-credit.php:28
+msgid "Code"
+msgstr "Kod"
+
+#. translators: Context: Table column for store credit amounts
+#: templates/myaccount/store-credit.php:30
+msgid "Credit"
+msgstr "Kredyt"
+
+#. translators: Context: Table column for store credit expiration
+#: templates/myaccount/store-credit.php:32
+msgid "Expiry date"
+msgstr "Data wygaśnięcia"
+
+#. translators: Context: Table column for actions concerning user store credit
+#: templates/myaccount/store-credit.php:34
+msgid "Actions"
+msgstr "Akcje"
+
+#: templates/myaccount/store-credit.php:40
+msgid "No store credit coupons found."
+msgstr "Nie znaleziono kuponów kredytowych sklepu."
+
+#: templates/myaccount/store-credit.php:76
+msgid "Use now"
+msgstr "Użyj teraz"
+
+#: templates/single-product/store-credit/preset-amounts.php:29
+msgid "Choose a different amount:"
+msgstr "Wybierz inną kwotę:"
+
+#: templates/single-product/store-credit/preset-amounts.php:39
+msgid "Other"
+msgstr "Inne"
+
+#. translators: Placeholders: %1$s is a list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:546
+#, php-format
+msgid "%1$s or %2$s"
+msgid_plural "%1$s, or %2$s"
+msgstr[0] "%1$s lub %2$s"
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: Placeholders: %1$s is a comma separated list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:550
+#, php-format
+msgid "%1$s and %2$s"
+msgid_plural "%1$s, and %2$s"
+msgstr[0] "%1$s i %2$s"
+msgstr[1] ""
+msgstr[2] ""
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:673
+msgid "Every Minute"
+msgstr "Co minutę"
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:675
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Co %d minut"
+
+#. translators: Placeholder: %s - User display name
+#: vendor-scoped/kestrelwp/fenix/src/Model/User.php:360
+#, php-format
+msgid "%s avatar"
+msgstr "%s avatar"
+
+#. translators: Placeholders: %1$s - Opening <a> link tag, %2$s - Closing </a> link tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:105
+#, php-format
+msgid "This plugin is localized into multiple languages. While English is our primary language, our goal is to serve merchants and their customers in their own native language. If you would like to provide localization feedback and help us build features that are relevant to you and to customers located in your region, please %1$sget in touch%2$s."
+msgstr "Ten plugin jest zlokalizowany w wielu językach. Chociaż angielski jest naszym głównym językiem, naszym celem jest obsługa sprzedawców i ich klientów w ich własnym języku. Jeśli chcesz przekazać nam opinię na temat lokalizacji i pomóc nam tworzyć funkcje, które są dla Ciebie i klientów w Twoim regionie istotne, prosimy %1$sskontaktuj się z nami%2$s."
+
+#. translators: Context: WordPress admin link to configure the plugin (verb)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:153
+msgid "Configure"
+msgstr "Konfiguruj"
+
+#. translators: Context: Link to the plugin's documentation ("Docs" = "Documentation")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:157
+msgid "Docs"
+msgstr "Dokumentacja"
+
+#. translators: Context: Link to reach out to customer support ("Support" = "Customer support")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:161
+msgid "Support"
+msgstr "Wsparcie"
+
+#. translators: Context: Link to review the plugin ("Review" = "Review the plugin" as in verb action)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:165
+msgid "Review"
+msgstr "Recenzja"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:106
+msgid "Dashboard"
+msgstr "Panel"
+
+#. translators: Placeholders: %1$s - Opening anchor tag, %2$s - Closing anchor tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:181
+#, php-format
+msgid "You have not completed setup. %1$sClick here to resume%2$s."
+msgstr "Nie ukończyłeś konfiguracji. %1$sKliknij tutaj, aby kontynuować%2$s."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Invalid request."
+msgstr "Nieprawidłowe żądanie."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Invalid parameter."
+msgstr "Nieprawidłowy parametr."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Unauthorized."
+msgstr "Nieautoryzowany."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Forbidden."
+msgstr "Zabronione."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Resource not found."
+msgstr "Nie znaleziono zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Cannot create resource."
+msgstr "Nie można utworzyć zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Cannot read resource."
+msgstr "Nie można odczytać zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Cannot edit resource."
+msgstr "Nie można edytować zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Cannot delete resource."
+msgstr "Nie można usunąć zasobu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:94
+msgid "Internal server error."
+msgstr "Błąd serwera wewnętrznego."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:55
+msgid "Log level is required."
+msgstr "Poziom logowania jest wymagany."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:58
+msgid "Invalid log level."
+msgstr "Nieprawidłowy poziom logowania."
+
+#. translators: Context: Text content of the debug message is a required value when logging an item to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:61
+msgid "Log message is required."
+msgstr "Wiadomość logu jest wymagana."
+
+#. translators: Context: Unique identifier for the log (optional)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:92
+msgid "The log ID (optional)."
+msgstr "ID logu (opcjonalnie)."
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:98
+msgid "The log level. "
+msgstr "Poziom logu."
+
+#. translators: Context: Debug log message
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:104
+msgid "The log message."
+msgstr "Wiadomość logu."
+
+#. translators: Context: Debug log context, e.g. additional data to be logged to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:109
+msgid "The log context."
+msgstr "Kontext logu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The onboarding status."
+msgstr "Status onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The current onboarding step."
+msgstr "Aktualny krok onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The current onboarding progress."
+msgstr "Postęp onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The onboarding persona."
+msgstr "Persona onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The onboarded version."
+msgstr "Wersja onboardingu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:172
+msgid "The last updated date or null if never updated."
+msgstr "Data ostatniej aktualizacji lub null, jeśli nigdy nie była aktualizowana."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin identifier."
+msgstr "Identyfikator pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin name."
+msgstr "Nazwa pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin file."
+msgstr "Absolutna ścieżka do pliku pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin directory."
+msgstr "Absolutna ścieżka do katalogu pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The path relative to the plugins directory in the WordPress installation."
+msgstr "Ścieżka względna do katalogu pluginów w instalacji WordPress."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin textdomain."
+msgstr "Tekstdomain pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin assets."
+msgstr "URL do zasobów pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin root."
+msgstr "URL do katalogu głównego pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin documentation."
+msgstr "URL do dokumentacji pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin reviews."
+msgstr "URL do recenzji pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin sales page."
+msgstr "URL do strony sprzedaży pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin settings."
+msgstr "URL do ustawień pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin support."
+msgstr "URL do wsparcia pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin vendor."
+msgstr "Dostawca pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin version."
+msgstr "Wersja pluginu."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting name."
+msgstr "Nazwa ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting type."
+msgstr "Typ ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting attributes."
+msgstr "Atrybuty ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Whether the setting is required."
+msgstr "Czy ustawienie jest wymagane."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Default setting value."
+msgstr "Domyślna wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting description."
+msgstr "Opis ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting instructions."
+msgstr "Instrukcje dotyczące ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting placeholder."
+msgstr "Miejsce na ustawienie."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting title."
+msgstr "Tytuł ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting value."
+msgstr "Wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Formatted setting value."
+msgstr "Sformatowana wartość ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting store."
+msgstr "Sklep ustawienia."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:331
+msgid "Visit dashboard"
+msgstr "Odwiedź panel"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:334
+msgid "Configure settings"
+msgstr "Konfiguruj ustawienia"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:337
+msgid "Read documentation"
+msgstr "Przeczytaj dokumentację"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:347
+msgid "The plugin has been activated."
+msgstr "Plugin został aktywowany."
+
+#. translators: Placeholder: %s - Setting title
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Setting.php:222
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Settings_Group.php:160
+#, php-format
+msgid "\"%s\" is required."
+msgstr "\"%s\" jest wymagane."
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Boolean.php:41
+#, php-format
+msgid "Could not validate %s into a boolean value"
+msgstr "Nie można zweryfikować %s jako wartość logiczną"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:105
+msgid "OpenSSL is required for credential encryption"
+msgstr "OpenSSL jest wymagany do szyfrowania danych uwierzytelniających"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:128
+msgid "OpenSSL is required for credential decryption"
+msgstr "OpenSSL jest wymagany do odszyfrowania danych uwierzytelniających"
+
+#. translators: Placeholder: %s - Invalid email address
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Email.php:33
+#, php-format
+msgid "\"%s\" is not a valid email address"
+msgstr "\"%s\" nie jest prawidłowym adresem e-mail"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/JSON.php:31
+#, php-format
+msgid "Could not validate %s into a JSON value"
+msgstr "Nie można zweryfikować %s jako wartość JSON"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:44
+#, php-format
+msgid "Could not validate %s into a number"
+msgstr "Nie można zweryfikować %s jako liczbę"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Minimum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:48
+#, php-format
+msgid "%1$s is below the minimum allowed of %2$d"
+msgstr "%1$s jest poniżej dozwolonego minimum %2$d"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Maximum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:52
+#, php-format
+msgid "%1$s is above the maximum allowed of %2$d"
+msgstr "%1$s jest powyżej dozwolonego maksimum %2$d"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:56
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:55
+#, php-format
+msgid "\"%s\" is not among the list of accepted values"
+msgstr "\"%s\" nie znajduje się na liście akceptowanych wartości"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:60
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:59
+#, php-format
+msgid "\"%s\" does not match the required format"
+msgstr "\"%s\" nie pasuje do wymaganego formatu"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:42
+#, php-format
+msgid "Could not validate %s into a string"
+msgstr "Nie można zweryfikować %s jako ciąg znaków"
+
+#. translators: Placeholder: %d - Minimum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:47
+#, php-format
+msgid "Length is below the minimum of %d"
+msgstr "Długość jest poniżej minimalnej %d"
+
+#. translators: Placeholder: %d - Maximum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:51
+#, php-format
+msgid "Length is above the maximum of %d"
+msgstr "Długość jest powyżej maksymalnej %d"
+
+#. translators: Placeholder: %s - Invalid URL
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Url.php:30
+#, php-format
+msgid "\"%s\" is not a valid URL"
+msgstr "\"%s\" nie jest prawidłowym adresem URL"
+
+#. translators: Placeholder: %s - Plugin name
+#: vendor-scoped/kestrelwp/fenix/src/WooCommerce/System_Status_Report.php:142
+#, php-format
+msgid "This section shows troubleshooting information about %s."
+msgstr "Ta sekcja zawiera informacje o rozwiązywaniu problemów dotyczące %s."
+
+#: assets/js/blocks/cart-checkout-blocks-integration.js:1
+msgid "Store credit available:"
+msgstr "Dostępny kredyt sklepow"
+
+#: assets/js/blocks/cart-checkout-blocks-integration.js:1
+#, js-format
+msgid "Apply %s"
+msgstr "Zastosuj %s"

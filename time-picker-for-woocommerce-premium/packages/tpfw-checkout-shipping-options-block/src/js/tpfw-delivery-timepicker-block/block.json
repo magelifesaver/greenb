@@ -1,0 +1,30 @@
+{
+	"apiVersion": 2,
+	"name": "tpfw/tpfw-delivery-timepicker-block",
+	"version": "2.0.0",
+	"title": "Delivery Timepicker Block",
+	"category": "woocommerce",
+	"description": "Adds a time and a date field for a delivery choice.",
+	"supports": {
+		"html": false,
+		"align": false,
+		"multiple": false,
+		"reusable": false
+	},
+	"parent": ["woocommerce/checkout-shipping-methods-block"],
+	"attributes": {
+		"lock": {
+			"type": "object",
+			"default": {
+				"remove": true,
+				"move": true
+			}
+		},
+		"text": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"textdomain": "tpfw"
+	
+}

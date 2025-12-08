@@ -1,0 +1,904 @@
+# Copyright (C) 2025 Barn2 Plugins
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Fast Cart 1.3.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-fast-cart\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-07-23T12:21:06+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: wc-fast-cart\n"
+
+#. Plugin Name of the plugin
+#: D:\local\test\app\public\wp-content\plugins\woocommerce-fast-cart\woocommerce-fast-cart.php
+msgid "WooCommerce Fast Cart"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: D:\local\test\app\public\wp-content\plugins\woocommerce-fast-cart\woocommerce-fast-cart.php
+msgid "https://barn2.com/wordpress-plugins/woocommerce-fast-cart/"
+msgstr ""
+
+#. Description of the plugin
+#: D:\local\test\app\public\wp-content\plugins\woocommerce-fast-cart\woocommerce-fast-cart.php
+msgid "Same page order popup for the WooCommerce cart and checkout."
+msgstr ""
+
+#. Author of the plugin
+#: D:\local\test\app\public\wp-content\plugins\woocommerce-fast-cart\woocommerce-fast-cart.php
+msgid "Barn2 Plugins"
+msgstr ""
+
+#. Author URI of the plugin
+#: D:\local\test\app\public\wp-content\plugins\woocommerce-fast-cart\woocommerce-fast-cart.php
+msgid "https://barn2.com"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Admin/Settings_API_Helper.php:154
+msgid "[View page]"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Admin/Settings_API_Helper.php:615
+#: dependencies/barn2/barn2-lib/src/WooCommerce/Admin/Custom_Settings_Fields.php:138
+msgid "Size"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Admin/Settings_Util.php:70
+msgid "Documentation"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Admin/Settings_Util.php:70
+msgid "Support"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/Admin/Admin_Links.php:38
+msgid "Settings"
+msgstr ""
+
+#. translators: %s: The plugin name
+#: dependencies/barn2/barn2-lib/src/Plugin/Admin/Admin_Links.php:54
+msgid "View %s documentation"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/Admin/Admin_Links.php:55
+msgid "Docs"
+msgstr ""
+
+#. translators: 1: licence key link start, 2: license key link end
+#: dependencies/barn2/barn2-lib/src/Plugin/Admin/Plugin_Updater.php:155
+msgid "Activate %1$syour license key%2$s to enable updates."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/Admin/Plugin_Updater.php:210
+msgid "Auto-updates unavailable."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:59
+msgid "License key successfully activated."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:59
+msgid "There was an error activating your license key."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:63
+msgid "License key successfully deactivated."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:63
+msgid "There was an error deactivating your license key, please try again."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:66
+msgid "The license key looks good!"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:66
+msgid "There's a problem with your license key."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:108
+msgid "License key"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:110
+msgid "The licence key is contained in your order confirmation email."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:113
+msgid "License Key"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:132
+msgid "Check"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:132
+msgid "Activate"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:132
+msgid "Deactivate"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Key_Setting.php:140
+msgid "License key deactivated."
+msgstr ""
+
+#. translators: 1: the plugin name, 2: settings link start, 3: settings link end.
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Notices.php:84
+msgid "Thank you for installing %1$s. To get started, please %2$s enter your license key%3$s."
+msgstr ""
+
+#. translators: 1: the plugin name, 2: renewal link start, 3: renewal link end.
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Notices.php:109
+msgid "Your license key for %1$s has expired. %2$sClick here to renew for 20%% discount%3$s."
+msgstr ""
+
+#. translators: 1: the plugin name, 2: renewal link start, 3: renewal link end.
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Notices.php:134
+msgid "You no longer have a valid license for %1$s. Please %2$spurchase a new license key%3$s to continue using the plugin."
+msgstr ""
+
+#. translators: 1: the plugin name, 2: settings link start, 3: settings link end.
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Admin/License_Notices.php:162
+msgid "%1$s - your site has moved to a new domain. Please %2$sreactivate your license key%3$s."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/EDD_Licensing.php:170
+msgid "An error has occurred, please try again."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:93
+msgid "Your license key is active."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:113
+msgid "Please enter your license key."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:115
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:393
+msgid "Your license key is invalid."
+msgstr ""
+
+#. translators: 1: account page link start, 2: account page link end
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:337
+msgid "Invalid license key - please check your order confirmation email or %1$sAccount%2$s."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:343
+msgid "No URL was supplied for activation, please contact support."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:346
+msgid "License key mismatch, please contact support."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:349
+msgid "This license is for a bundled product and cannot be activated."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:353
+msgid "Your license key is not valid for this plugin."
+msgstr ""
+
+#. translators: %s: The number of sites the license is activated on
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:359
+msgid "%s site active"
+msgid_plural "%s sites active"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: The sites active description, e.g. '2 sites active'
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:362
+msgid "Your license key has reached its activation limit (%s)."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:363
+#: dependencies/barn2/barn2-lib/src/Util.php:35
+#: src/Util.php:343
+msgid "Read more"
+msgstr ""
+
+#. translators: support for RTL, 1: the license error, 2: a link
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:365
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:383
+msgid "%1$s %2$s"
+msgstr ""
+
+#. translators: %s: The license expiry date
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:378
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:381
+msgid "Renew now for 20% discount."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:584
+msgid "Your license key is not active. Please reactivate or save the settings."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:588
+msgid "Your license key has expired."
+msgstr ""
+
+#. translators: 1: purchase link start, 2: purchase link end.
+#: dependencies/barn2/barn2-lib/src/Plugin/License/Plugin_License.php:594
+msgid "Your license key has been disabled. Please %1$spurchase a new license key%2$s to continue using the plugin."
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: PHP version required.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:103
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:112
+msgid "%1$s requires PHP %2$s or greater. Please update the PHP version used by your web server."
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: WP version required.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:136
+msgid "%1$s requires WordPress %2$s or greater. Please update your WordPress installation."
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: Update Core <a> tag open. %3$s: <a> tag close. %4$s: WP version required.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:146
+msgid "%1$s requires WordPress %4$s or greater. Please %2$supdate%3$s your WordPress installation."
+msgstr ""
+
+#. translators: %1$s: Plugin name.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:169
+msgid "%1$s requires WooCommerce to be installed and active."
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: WooCommerce link. %3$s Install/Upgrade/Activate WooCommerce link.
+#. translators: %1$s: Plugin name. %2$s: EDD link. %3$s Install/Upgrade/Activate EDD link.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:175
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:224
+msgid "%1$s requires %2$s to be installed and active.%3$s"
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: WooCommerce version required.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:189
+msgid "%1$s requires WooCommerce %2$s or greater. Please update your WooCommerce setup first."
+msgstr ""
+
+#. translators: %1$s: Plugin name. %2$s: WooCommerce link. %3$s WooCommerce version required. %4$s Install/Upgrade/Activate WooCommerce link.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:195
+msgid "%1$s requires %2$s %3$s or greater. Please %4$s your WooCommerce setup first."
+msgstr ""
+
+#. translators: %1$s: Plugin name.
+#: dependencies/barn2/barn2-lib/src/Plugin/Requirements.php:218
+msgid "%1$s requires Easy Digital Downloads to be installed and active."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Plugin/Simple_Plugin.php:102
+msgid "%1$s could not complete its first activation because the following error occurred:<br>%2$s"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:102
+msgid "%1$s database update required"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:102
+msgid "<p>%1$s has been updated! To keep things running smoothly, we have to update your database to the newest version. The database update process runs in the background and may take a little while, so please be patient.</p>"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:102
+msgid "%1$s database update done"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:102
+msgid "<p>%1$s database update complete. Thank you for updating to the latest version!</p>"
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:288
+msgid "You do not have sufficient permissions to perform this action."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Service/Updater.php:292
+msgid "An upgrade is already in progress. Please wait until it completes."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Util.php:552
+msgid "Unable to connect to the filesystem. Please confirm your credentials."
+msgstr ""
+
+#: dependencies/barn2/barn2-lib/src/Util.php:580
+msgid "You don't have permission to activate the plugin."
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Api.php:151
+msgid "Could not find the appropriate step."
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Api.php:196
+msgid "Please enter a license key."
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Api.php:199
+msgid "Invalid action requested."
+msgstr ""
+
+#. translators: %s: The name of the plugin.
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:344
+msgid "%s setup wizard"
+msgstr ""
+
+#. translators: %s is replaced by Fast Cart
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:434
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:507
+#: src/Admin/Settings_Page.php:109
+msgid "Warning: This will overwrite your existing settings for %s. Are you sure you want to continue?"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:484
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:492
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:541
+msgid "Setup wizard"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Setup_Wizard.php:487
+msgid "If you need to access the setup wizard again, please click on the button below."
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Cross_Selling.php:23
+#: src/Admin/Wizard/Steps/Cross_Selling.php:25
+msgid "More"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Cross_Selling.php:24
+#: src/Admin/Wizard/Steps/Cross_Selling.php:29
+msgid "Extra features"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Cross_Selling.php:25
+msgid "Enhance your site with these fantastic plugins from Barn2."
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Ready.php:23
+msgid "Ready"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Ready.php:24
+#: src/Admin/Wizard/Steps/Complete.php:24
+msgid "Setup Complete"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Steps/Welcome.php:25
+#: dependencies/barn2/setup-wizard/src/Steps/Welcome_Free.php:24
+msgid "Welcome"
+msgstr ""
+
+#: dependencies/barn2/setup-wizard/src/Util.php:28
+msgid "Select an option"
+msgstr ""
+
+#: src/Admin/Admin_Controller.php:66
+msgid "Please enter an API key"
+msgstr ""
+
+#: src/Admin/Admin_Controller.php:67
+msgid "Your API key is invalid"
+msgstr ""
+
+#: src/Admin/Admin_Controller.php:68
+msgid "✓ Valid key"
+msgstr ""
+
+#: src/Admin/Settings_Page.php:73
+#: src/Util.php:269
+msgid "Fast Cart"
+msgstr ""
+
+#: src/Admin/Wizard/Service.php:81
+msgid "The license key is contained in your order confirmation email."
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Cart.php:38
+#: src/Admin/Wizard/Steps/Cart.php:40
+#: src/Admin/Wizard/Steps/Features.php:49
+msgid "Cart"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Cart.php:39
+msgid "Choose what to include in the popup cart."
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Cart.php:54
+msgid "Cart features"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Complete.php:23
+msgid "Done"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Complete.php:25
+msgid "Congratulations, you have finished setting up the plugin! Customers can now complete their purchase much more quickly and easily."
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Cross_Selling.php:27
+msgid "Enhance your store with these fantastic plugins from Barn2."
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Features.php:25
+#: src/Admin/Wizard/Steps/Features.php:27
+msgid "Features"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Features.php:26
+msgid "Select your features"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Features.php:50
+#: src/Frontend_Scripts.php:395
+#: templates/fast-cart/proceed-to-checkout-buttons.php:24
+msgid "Checkout"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Features.php:51
+msgid "Both"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Features.php:55
+msgid "Which stages of the ordering process will be available in the Fast Cart?"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:25
+#: src/Admin/Wizard/Steps/General.php:27
+msgid "Display"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:26
+msgid "Control the overall layout and behavior of the fast cart"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:62
+#: src/Util.php:293
+msgid "Side cart"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:63
+#: src/Util.php:294
+msgid "Centered popup"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:76
+#: src/Util.php:302
+msgid "Open after adding a product to the cart"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:82
+#: src/Util.php:447
+msgid "Top"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:83
+#: src/Util.php:448
+msgid "Center"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:84
+#: src/Util.php:449
+msgid "Bottom"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:85
+#: src/Util.php:450
+msgid "Hidden"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:90
+#: src/Admin/Wizard/Steps/General.php:91
+msgid "Floating cart icon"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:97
+#: src/Util.php:459
+msgid "Icon only"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:98
+#: src/Util.php:460
+msgid "Text only"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:99
+#: src/Util.php:461
+msgid "Icon and text"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:104
+#: src/Util.php:456
+msgid "Button style"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/General.php:110
+#: src/Util.php:467
+msgid "Button text"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Pages.php:25
+#: src/Admin/Wizard/Steps/Pages.php:27
+msgid "Replace Pages"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Pages.php:26
+msgid "Force customers to use the fast cart by preventing access to the standard WooCommerce cart/checkout"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Pages.php:43
+#: src/Util.php:480
+msgid "Replace cart page"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Pages.php:50
+#: src/Util.php:487
+msgid "Replace checkout page"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Welcome.php:24
+msgid "Use this setup wizard to quickly configure the most popular options for WooCommerce Fast Cart. You can easily change these options later on the plugin settings page or by relaunching the setup wizard."
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Welcome.php:25
+msgid "Speed up the customer journey in no time"
+msgstr ""
+
+#: src/Admin/Wizard/Steps/Welcome.php:26
+msgid "Welcome to WooCommerce Fast Cart"
+msgstr ""
+
+#: src/Checkout_Processing.php:80
+msgid "Fast Cart In Progress"
+msgstr ""
+
+#: src/Checkout_Processing.php:85
+msgid "Fast Cart Utilized During Checkout"
+msgstr ""
+
+#: src/Frontend_Preview.php:147
+msgid "Show hover button for Quick View"
+msgstr ""
+
+#: src/Frontend_Preview.php:264
+msgid "You are previewing a feature of WooCommerce Fast Cart."
+msgstr ""
+
+#: src/Frontend_Preview.php:265
+msgid "Back to Settings"
+msgstr ""
+
+#: src/Frontend_Preview.php:266
+msgid "Close Preview"
+msgstr ""
+
+#: src/Frontend_Scripts.php:394
+msgid "My Cart"
+msgstr ""
+
+#: src/Frontend_Scripts.php:396
+msgid "Your cart is currently empty."
+msgstr ""
+
+#. translators: %s references name of product
+#: src/Frontend_Scripts.php:398
+msgid "%s added to the cart."
+msgstr ""
+
+#: src/Frontend_Scripts.php:399
+msgid "View Cart"
+msgstr ""
+
+#: src/Frontend_Scripts.php:400
+msgid "Item"
+msgstr ""
+
+#: src/Frontend_Templates.php:301
+msgid "Coupon Code"
+msgstr ""
+
+#: src/Frontend_Templates.php:303
+msgid "Coupon code"
+msgstr ""
+
+#: src/Frontend_Templates.php:304
+msgid "Apply coupon"
+msgstr ""
+
+#: src/Util.php:272
+msgid "The following options control the WooCommerce Fast Cart extension."
+msgstr ""
+
+#: src/Util.php:284
+msgid "Content"
+msgstr ""
+
+#: src/Util.php:289
+msgid "Layout"
+msgstr ""
+
+#: src/Util.php:299
+msgid "Auto open"
+msgstr ""
+
+#: src/Util.php:311
+msgid "Allow fast checkout"
+msgstr ""
+
+#: src/Util.php:314
+msgid "Allow customers to check out in the fast cart popup"
+msgstr ""
+
+#: src/Util.php:316
+msgid "May not work with all themes -"
+msgstr ""
+
+#: src/Util.php:318
+msgid "try it with yours"
+msgstr ""
+
+#: src/Util.php:322
+msgid "Direct checkout"
+msgstr ""
+
+#: src/Util.php:325
+msgid "Skip the cart and show the checkout immediately"
+msgstr ""
+
+#: src/Util.php:329
+msgid "Autocomplete"
+msgstr ""
+
+#: src/Util.php:332
+msgid "Auto-fill the customer's address details in the fast checkout"
+msgstr ""
+
+#: src/Util.php:336
+msgid "Google API key"
+msgstr ""
+
+#: src/Util.php:341
+msgid "Enter your Google API key to use address autocomplete"
+msgstr ""
+
+#: src/Util.php:353
+#: src/Util.php:361
+#: src/Util.php:369
+#: src/Util.php:377
+#: src/Util.php:385
+#: src/Util.php:393
+#: src/Util.php:401
+#: src/Util.php:409
+#: src/Util.php:417
+#: src/Util.php:425
+msgid "Cart contents"
+msgstr ""
+
+#: src/Util.php:356
+msgid "Show product images"
+msgstr ""
+
+#: src/Util.php:364
+msgid "Show product subtotals"
+msgstr ""
+
+#: src/Util.php:372
+msgid "Show product prices"
+msgstr ""
+
+#: src/Util.php:380
+msgid "Show quantity pickers"
+msgstr ""
+
+#: src/Util.php:388
+msgid "Show delete buttons"
+msgstr ""
+
+#: src/Util.php:396
+msgid "Show coupons"
+msgstr ""
+
+#: src/Util.php:404
+msgid "Show order subtotal"
+msgstr ""
+
+#: src/Util.php:412
+msgid "Show shipping information"
+msgstr ""
+
+#: src/Util.php:420
+msgid "Show cross-sells"
+msgstr ""
+
+#: src/Util.php:428
+msgid "Show 'Keep Shopping' button"
+msgstr ""
+
+#: src/Util.php:437
+msgid "Cart icon"
+msgstr ""
+
+#: src/Util.php:444
+msgid "Position"
+msgstr ""
+
+#: src/Util.php:475
+msgid "Replace pages"
+msgstr ""
+
+#: src/Util.php:483
+msgid "Open when customers try to access the default cart page"
+msgstr ""
+
+#: src/Util.php:490
+msgid "Open when customers try to access the default checkout page"
+msgstr ""
+
+#: src/Util.php:498
+msgid "Design"
+msgstr ""
+
+#: src/Util.php:503
+msgid "Cart icon color"
+msgstr ""
+
+#: src/Util.php:506
+msgid "The primary color used for the floating cart button icon."
+msgstr ""
+
+#: src/Util.php:507
+#: src/Util.php:517
+#: src/Util.php:527
+#: src/Util.php:537
+#: src/Util.php:557
+#: src/Util.php:567
+msgid "Color"
+msgstr ""
+
+#: src/Util.php:513
+msgid "Cart button background"
+msgstr ""
+
+#: src/Util.php:516
+msgid "The background color used for the floating cart button."
+msgstr ""
+
+#: src/Util.php:523
+msgid "Cart count text color"
+msgstr ""
+
+#: src/Util.php:526
+msgid "The text color used for the number of items count."
+msgstr ""
+
+#: src/Util.php:533
+msgid "Cart count background"
+msgstr ""
+
+#: src/Util.php:536
+msgid "The background color used for the number of items count."
+msgstr ""
+
+#: src/Util.php:543
+msgid "Cart button border radius"
+msgstr ""
+
+#: src/Util.php:546
+msgid "The border radius for the fast cart button in pixel."
+msgstr ""
+
+#: src/Util.php:547
+msgid "in pixel"
+msgstr ""
+
+#: src/Util.php:553
+msgid "Checkout button text color"
+msgstr ""
+
+#: src/Util.php:556
+msgid "The text color used for the checkout button inside Fast Cart."
+msgstr ""
+
+#: src/Util.php:563
+msgid "Checkout button background"
+msgstr ""
+
+#: src/Util.php:566
+msgid "The background color used for the checkout button inside Fast Cart."
+msgstr ""
+
+#: src/Util.php:595
+msgid "Uninstalling "
+msgstr ""
+
+#: src/Util.php:600
+msgid "Delete data on uninstall"
+msgstr ""
+
+#: src/Util.php:603
+msgid "Permanently delete all "
+msgstr ""
+
+#: templates/fast-cart/cart-totals.php:17
+msgid "Cart Totals"
+msgstr ""
+
+#: templates/fast-cart/cart-totals.php:22
+#: templates/fast-cart/cart-totals.php:23
+#: templates/fast-cart/cart.php:124
+msgid "Subtotal"
+msgstr ""
+
+#: templates/fast-cart/cart-totals.php:46
+#: templates/fast-cart/cart-totals.php:47
+msgid "Shipping"
+msgstr ""
+
+#. translators: %s location.
+#: templates/fast-cart/cart-totals.php:68
+msgid "(estimated for %s)"
+msgstr ""
+
+#: templates/fast-cart/cart-totals.php:94
+#: templates/fast-cart/cart-totals.php:95
+#: templates/fast-cart/cart.php:47
+msgid "Total"
+msgstr ""
+
+#: templates/fast-cart/cart.php:43
+msgid "Image"
+msgstr ""
+
+#: templates/fast-cart/cart.php:44
+#: templates/fast-cart/cart.php:76
+msgid "Product"
+msgstr ""
+
+#: templates/fast-cart/cart.php:45
+#: templates/fast-cart/cart.php:96
+msgid "Price"
+msgstr ""
+
+#: templates/fast-cart/cart.php:46
+#: templates/fast-cart/cart.php:102
+msgid "Quantity"
+msgstr ""
+
+#: templates/fast-cart/cart.php:91
+msgid "Available on backorder"
+msgstr ""
+
+#: templates/fast-cart/cart.php:139
+msgid "Remove this item"
+msgstr ""
+
+#: templates/fast-cart/cart.php:158
+msgid "Update cart"
+msgstr ""
+
+#. translators: %s: rating
+#: templates/fast-cart/cross-sells-product-rating.php:24
+msgid "Rated %s out of 5"
+msgstr ""
+
+#: templates/fast-cart/cross-sells.php:14
+msgid "You may be interested in&hellip;"
+msgstr ""
+
+#: templates/fast-cart/proceed-to-checkout-buttons.php:21
+msgid "Keep Shopping"
+msgstr ""
+
+#: templates/fast-checkout/checkout-complete.php:25
+msgid "Your order has been submitted! Please wait while we redirect you to the order receipt."
+msgstr ""
+
+#: templates/fast-checkout/payment-complete.php:50
+msgid "Your order has been submitted! Please wait while we redirect you to payment."
+msgstr ""

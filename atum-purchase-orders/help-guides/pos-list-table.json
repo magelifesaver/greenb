@@ -1,0 +1,36 @@
+[
+	{
+		"title": "ATUM PO PRO help guide",
+		"intro": "Welcome to ATUM Purchase Orders PRO! 👋.<br>We have replaced your previews Purchase Order interface with this new and advanced premium feature. You do not have to worry; your work is not gone; we have just made it look cooler 😉.<br><br>Many of you have asked us in the past what the \"PO\" stands for; well, we like to shorten the \"Purchase Order\" term to \"PO.\"<br><br>Our team has prepared a little help guide to show you around this screen. You can return to this guide at any time by clicking the \"round\" icon at the top right."
+	},
+	{
+		"title": "PO Notifications",
+		"element": "#po-unread-badge",
+		"intro": "The round red circle is your unread notification count. ATUM will notify you of any changes within the Purchase Order interface. You can click the icon to see the messages in detail."
+	},
+	{
+		"title": "Late PO Banner",
+		"element": ".late-po-banner",
+		"intro": "The \"Late Purchase Orders (x)\" notification banner will show at the top to inform you about overdue purchase orders. You can click the \"View\" button on the right to display these orders."
+	},
+	{
+		"title": "View Selector",
+		"element": "#pos_list_nav",
+		"intro": "Filter the list of purchase orders by their current status by clicking the relevant field in the \"View Selector\" section."
+	},
+	{
+		"title": "Search Box",
+		"element": ".search-box",
+		"intro": "You can search in any available column. Choose from the dropdown on the left and type the desired search term in the field on the right.<br>ATUM will only search in the \"PO\" column if you do not pick from the dropdown."
+	},
+	{
+		"title": "Bulk Actions",
+		"element": ".filters-container .bulkactions",
+		"intro": "We like to keep things familiar, so a \"Bulk Action\" dropdown is necessary. \nYou can make changes to any selected Purchase Orders at the same time."
+	},
+	{
+		"title": "List Filters",
+		"element": ".filters-container .actions:not(.bulkactions)",
+		"intro": "From these filters, you can filter POs by supplier, by creaton date, those that will due soon, late POs and also track any batch number within POs."
+	}
+]

@@ -1,0 +1,2091 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ATUM Action Logs\n"
+"POT-Creation-Date: 2025-06-18 09:03+0200\n"
+"PO-Revision-Date: 2020-05-07 10:40+0200\n"
+"Last-Translator: Salva Machí <salvamb@sispixels.com>\n"
+"Language-Team: BE REBEL <https://berebel.studio>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: atum-logs.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+
+#: atum-logs.php:402
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM version %2$s or greater. Please update it."
+msgstr ""
+
+#: atum-logs.php:410
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Product Levels version %2$s or greater. Please "
+"update or disable it."
+msgstr ""
+
+#: atum-logs.php:418
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Multi-Inventory version %2$s or greater. "
+"Please update or disable it."
+msgstr ""
+
+#: atum-logs.php:426
+#, php-format
+msgid ""
+"The %1$s add-on requires the WordPress %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#: atum-logs.php:434
+#, php-format
+msgid "The ATUM %s add-on requires WooCommerce to be activated."
+msgstr ""
+
+#: atum-logs.php:442
+#, php-format
+msgid ""
+"The %1$s add-on requires the WooCommerce %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#: atum-logs.php:476
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires PHP version %2$s or greater. Please, update it "
+"or contact your hosting provider."
+msgstr ""
+
+#: atum-logs.php:484
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please <a href='%2$s'>install it</a>."
+msgstr ""
+
+#: atum-logs.php:492
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please enable it from <a href='%2$s'>plugins page</a>."
+msgstr ""
+
+#: classes/Api/AtumLogsApi.php:59 classes/Api/AtumLogsApi.php:67
+#: classes/Api/Extenders/Logs.php:56 classes/Api/Extenders/Logs.php:64
+#: classes/Inc/Ajax.php:192 classes/Inc/Ajax.php:200 classes/Inc/Hooks.php:6367
+#: classes/Inc/Hooks.php:6375 classes/Inc/Settings.php:207
+#: classes/Inc/Settings.php:215 classes/Integrations/CostPrice.php:113
+#: classes/Integrations/CostPrice.php:120
+#: classes/Integrations/ExportPro.php:708
+#: classes/Integrations/ExportPro.php:715
+#: classes/Integrations/MultiInventory.php:2214
+#: classes/Integrations/MultiInventory.php:2221
+#: classes/Integrations/PickPack.php:419 classes/Integrations/PickPack.php:426
+#: classes/Integrations/ProductLevels.php:1158
+#: classes/Integrations/ProductLevels.php:1166
+#: classes/Integrations/PurchaseOrders.php:1317
+#: classes/Integrations/PurchaseOrders.php:1324
+#: classes/Integrations/StockTakes.php:325
+#: classes/Integrations/StockTakes.php:332
+#: classes/LogRegistry/LogRegistry.php:291
+#: classes/LogRegistry/LogRegistry.php:299
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:34
+msgid "Usage"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:35
+msgid "Missing parameter"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:46
+#, php-format
+msgid "since %s"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:48
+#, php-format
+msgid "until %s"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:50
+#, php-format
+msgid "You are going to remove every logs %1$s %2$s"
+msgstr ""
+
+#: classes/Cli/CliCommands.php:51
+msgid "Are you sure?"
+msgstr ""
+
+#: classes/Inc/Ajax.php:94
+msgid "No Items Selected."
+msgstr ""
+
+#: classes/Inc/Ajax.php:98
+msgid "Invalid bulk action."
+msgstr ""
+
+#: classes/Inc/Ajax.php:126
+msgid "Action applied to the selected logs successfully."
+msgstr ""
+
+#: classes/Inc/Ajax.php:140
+msgid "No Item Selected."
+msgstr ""
+
+#: classes/Inc/Helpers.php:81 classes/LogRegistry/Lists/ListTable.php:703
+msgid "Show all"
+msgstr ""
+
+#: classes/Inc/Helpers.php:247 classes/Inc/Hooks.php:420
+#: classes/Inc/Hooks.php:618
+msgid "Product"
+msgstr ""
+
+#: classes/Inc/Helpers.php:250 classes/Inc/Hooks.php:4934
+msgid "Fee"
+msgstr ""
+
+#: classes/Inc/Helpers.php:253 classes/Inc/Hooks.php:1281
+msgid "Shipping Cost"
+msgstr ""
+
+#: classes/Inc/Helpers.php:256 classes/Inc/Hooks.php:4942
+msgid "Tax"
+msgstr ""
+
+#: classes/Inc/Helpers.php:1392
+msgid "Invalid dates"
+msgstr ""
+
+#: classes/Inc/Helpers.php:1400
+msgid "The specified logs were successfully deleted"
+msgstr ""
+
+#: classes/Inc/Hooks.php:379
+msgid "Not found"
+msgstr ""
+
+#: classes/Inc/Hooks.php:420
+msgid "Inventory"
+msgstr ""
+
+#: classes/Inc/Hooks.php:431
+msgid "BOM Inventory"
+msgstr ""
+
+#: classes/Inc/Hooks.php:431 classes/Inc/Hooks.php:621
+msgid "BOM Product"
+msgstr ""
+
+#: classes/Inc/Hooks.php:486
+msgid "stock amount"
+msgstr ""
+
+#: classes/Inc/Hooks.php:492
+msgid "regular price"
+msgstr ""
+
+#: classes/Inc/Hooks.php:495
+msgid "sale price"
+msgstr ""
+
+#: classes/Inc/Hooks.php:498
+msgid "ending date"
+msgstr ""
+
+#: classes/Inc/Hooks.php:501
+msgid "starting date"
+msgstr ""
+
+#: classes/Inc/Hooks.php:504
+msgid "purchase price"
+msgstr ""
+
+#: classes/Inc/Hooks.php:711
+msgid "Products"
+msgstr ""
+
+#: classes/Inc/Hooks.php:716
+msgid "BOM Products"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1079
+msgid "fee"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1079
+msgid "shipping cost"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1240
+msgid "Shipping Method"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1259
+msgid "Shipping Method Title"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1300
+msgid "Order Tax Class"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1322 classes/Inc/Hooks.php:5141
+msgid "quantity"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1344 classes/Inc/Hooks.php:5135
+msgid "price"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1381 classes/Inc/Hooks.php:5138
+#: classes/Inc/Hooks.php:5180
+msgid "tax"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1403
+msgid "total"
+msgstr ""
+
+#: classes/Inc/Hooks.php:1421
+msgid "Item Name"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2439 classes/Inc/Hooks.php:2466
+msgid "Update WC's Manage Stock"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2442 classes/Inc/Hooks.php:2470
+msgid "Update ATUM's stock control"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2445 classes/Inc/Hooks.php:2474
+msgid "Clear Out Stock Threshold"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2448 classes/Inc/Hooks.php:2478
+msgid "Clear Out ATUM Temporary Data"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2451 classes/Inc/Hooks.php:2482
+msgid "Switch from Zones to Zones"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2456 classes/Inc/Hooks.php:2488
+msgid "Migrate from Countries to Zones"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2461 classes/Inc/Hooks.php:2494
+msgid "Migrate from Zones to Countries"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2500 classes/Integrations/ProductLevels.php:1064
+msgid "Sync WooCommerce stock with calculated stock"
+msgstr ""
+
+#: classes/Inc/Hooks.php:2506
+msgid "Unknown"
+msgstr ""
+
+#: classes/Inc/Hooks.php:3030
+msgid "Supplier"
+msgstr ""
+
+#: classes/Inc/Hooks.php:3052
+msgid "Stock Quantity"
+msgstr ""
+
+#: classes/Inc/Hooks.php:3055
+msgid "Description"
+msgstr ""
+
+#: classes/Inc/Hooks.php:3058
+msgid "Short Description"
+msgstr ""
+
+#: classes/Inc/Settings.php:60 classes/Inc/Settings.php:152
+#: classes/LogRegistry/LogRegistry.php:92 views/log-registry.php:19
+msgid "Action Logs"
+msgstr ""
+
+#: classes/Inc/Settings.php:63
+msgid "General Options"
+msgstr ""
+
+#: classes/Inc/Settings.php:64
+msgid "Displaying Options"
+msgstr ""
+
+#: classes/Inc/Settings.php:86
+msgid "Show user avatar"
+msgstr ""
+
+#: classes/Inc/Settings.php:87
+msgid "Shows the user avatar in the logs list."
+msgstr ""
+
+#: classes/Inc/Settings.php:94 classes/LogRegistry/LogRegistry.php:134
+msgid "Logs per page"
+msgstr ""
+
+#: classes/Inc/Settings.php:95
+msgid ""
+"Controls the number of logs displayed per page within the Atum Action Logs "
+"screen. Please note, you can set this value within the 'Screen Option' tab "
+"as well."
+msgstr ""
+
+#: classes/Inc/Settings.php:106
+msgid "Relative dates"
+msgstr ""
+
+#: classes/Inc/Settings.php:107
+msgid "Shows the dates in a relative format, indicating the elapsed time."
+msgstr ""
+
+#: classes/Inc/Settings.php:134
+#, php-format
+msgid "Check this option to register logs of type %s."
+msgstr ""
+
+#: classes/Inc/Settings.php:144
+#, php-format
+msgid "Enable this option to register logs from %s."
+msgstr ""
+
+#: classes/Inc/Settings.php:157
+msgid "Delete logs"
+msgstr ""
+
+#: classes/Inc/Settings.php:158
+msgid "Select a date range or delete all the action logs at once."
+msgstr ""
+
+#: classes/Inc/Settings.php:161
+msgid "Delete Range"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:101
+#, php-format
+msgid "Created the Picking List %s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:105
+#, php-format
+msgid "Deleted Permanently the Picking List %s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:109
+#, php-format
+msgid "Moved to trash the Picking List %s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:113
+#, php-format
+msgid "Restored the Picking List %s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:117
+#, php-format
+msgid "Printed the Picking List %s to PDF"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:121
+#, php-format
+msgid ""
+"Packed %1$s units of %2$s from the Order %3$s within the Picking List %4$s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:125
+#, php-format
+msgid "The order %1$s was picked & packed within the Picking List %2$s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:129
+#, php-format
+msgid "Completed the Picking List %s"
+msgstr ""
+
+#: classes/Integrations/PickPack.php:133
+#, php-format
+msgid "Changed the Status to the Pick & Pack %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:179
+msgid "PO created"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:183
+#, php-format
+msgid "PO status changed to %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:186
+msgid "Changed the Totals"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:190
+#, php-format
+msgid "%1$s changed to %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:194
+#, php-format
+msgid "Added the product %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:198
+#, php-format
+msgid "Added a new %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:201
+msgid "Added a new tax"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:205
+#, php-format
+msgid "Changed the %1$s for the order item %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:209
+#, php-format
+msgid "Added meta to the order item %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:213
+#, php-format
+msgid "Removed meta from the order item %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:217
+#, php-format
+msgid "Deleted the order item %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:220
+msgid "Added meta data to the PO"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:224
+#, php-format
+msgid "Set the purchase price for the product %s from this PO"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:227
+msgid "Added a note"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:230
+msgid "Removed a note"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:233
+msgid "PDF generated"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:237
+#, php-format
+msgid "The stock levels of product %s changed after changing the PO status"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:240
+msgid "Moved to trash"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:243
+msgid "Restored from trash"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:246
+msgid "PO has been mailed"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:250
+#, php-format
+msgid "A new delivery %s has been added"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:254
+#, php-format
+msgid "The delivery %s was removed"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:258
+#: classes/Integrations/PurchaseOrders.php:262
+#, php-format
+msgid "Edited %1$s at the Delivery %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:266
+#, php-format
+msgid "Increased the stock for the product %1$s from the Delivery %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:270
+#, php-format
+msgid "The item %1$s in the Delivery %2$s was removed"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:274
+#, php-format
+msgid "Added the file %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:278
+#, php-format
+msgid "Removed the file %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:282
+#, php-format
+msgid "A new invoice %s has been added"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:286
+#, php-format
+msgid "The invoice %s has been removed"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:293
+#, php-format
+msgid "Edited %1$s at the Invoice %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:297
+#, php-format
+msgid "Removed %1$s from the Invoice %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:301
+#, php-format
+msgid "Added the file %1$s to the Delivery %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:305
+#, php-format
+msgid "Removed the file %1$s from the Delivery %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:309
+#, php-format
+msgid "Merged with PO %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:313
+#, php-format
+msgid "PO cloned from the PO %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:317
+#, php-format
+msgid "PO approved by %s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:321
+#, php-format
+msgid "Added the inventory %1$s for the item %2$s"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:541
+msgid "PO Logs"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:541
+msgid "Returning PO Logs"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:93
+#, php-format
+msgid "Created the Stock Take %s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:97
+#, php-format
+msgid "Deleted Permanently the Stock Take %s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:101
+#, php-format
+msgid "Moved to trash the Stock Take %s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:105
+#, php-format
+msgid "Restored the Stock Take %s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:109
+#, php-format
+msgid "Reconciled the stock for the products in the Stock Take %s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:113
+#, php-format
+msgid ""
+"The stock levels of product %1$s changed after reconcile the Stock Take %2$s"
+msgstr ""
+
+#: classes/Integrations/StockTakes.php:117
+#, php-format
+msgid ""
+"The stock levels of the inventory %1$s from the product %2$s changed after "
+"reconcile the Stock Take %3$s"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:139
+msgid "User"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:140
+msgid "Log"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:141
+msgid "Source"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:142
+msgid "Module"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:143
+msgid "Date"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:144
+msgid "Actions"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:166
+msgid "Restore log"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:171
+msgid "Delete permanently"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:182
+#: classes/LogRegistry/Lists/ListTable.php:650
+msgid "Move to trash"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:187
+#: classes/LogRegistry/Lists/ListTable.php:646
+msgid "Mark as featured"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:192
+#: classes/LogRegistry/Lists/ListTable.php:647
+msgid "Unmark as featured"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:200
+#: classes/LogRegistry/Lists/ListTable.php:648
+msgid "Mark as read"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:208
+#: classes/LogRegistry/Lists/ListTable.php:649
+msgid "Mark as unread"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:216
+msgid "View additional info"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:281
+msgid "No Logs found"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:285
+#, php-format
+msgid " with query '%s'"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:344
+msgid "Empty trash"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:361
+msgid "All"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:362
+msgid "FEATURED"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:363
+msgid "UNREAD"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:364
+msgid "READ"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:365
+msgid "DELETED"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:638
+msgid "Recover from trash"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:639
+msgid "Permanently remove"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:698
+msgid "Do you want to permanently remove all logs in trash?"
+msgstr ""
+
+#: classes/LogRegistry/Lists/ListTable.php:701
+msgid "Log Data"
+msgstr ""
+
+#: classes/LogRegistry/LogRegistry.php:222
+msgid "Entries (max number of characters)"
+msgstr ""
+
+#: classes/LogRegistry/LogRegistry.php:259
+#: views/reports/log-registry-report-html.php:24
+msgid "ATUM Log Registry Report"
+msgstr ""
+
+#: classes/Models/LogEntry.php:263
+#, php-format
+msgid "Changed the %1$s to the %2$s %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:267
+#, php-format
+msgid "Assigned the ATUM locations %1$s to the %2$s %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:271
+#, php-format
+msgid "Removed the ATUM locations %1$s from the %2$s %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:275
+#, php-format
+msgid "Disabled the ATUM’s stock control in bulk to the %1$s %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:279
+#, php-format
+msgid "Enabled the ATUM’s stock control in bulk to the %1$s %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:283
+#, php-format
+msgid "Disabled the WC’s manage stock in bulk to the %1$s %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:287
+#, php-format
+msgid "Enabled the WC’s manage stock in bulk to the %1$s %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:290
+msgid "Stock Central data exported"
+msgstr ""
+
+#: classes/Models/LogEntry.php:293
+msgid "Exported the BOM products"
+msgstr ""
+
+#: classes/Models/LogEntry.php:297
+#, php-format
+msgid "Created a new Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:301
+#, php-format
+msgid "Changed the Status to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:305
+#, php-format
+msgid "Changed the Totals to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:309
+#, php-format
+msgid "Set the %1$s for the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:313
+#, php-format
+msgid "Changed the Status to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:317
+#, php-format
+msgid "Changed the Totals to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:321
+#, php-format
+msgid "Set the %1$s for the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:325
+#, php-format
+msgid "Added a new product to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:329
+#, php-format
+msgid "Added a new product to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:333
+#, php-format
+msgid "Added a new %1$s to the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:337
+#, php-format
+msgid "Created a new Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:341
+#, php-format
+msgid "Added a new %1$s to the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:345
+#, php-format
+msgid "Added a new tax to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:349
+#, php-format
+msgid "Added a new tax to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:353
+#, php-format
+msgid "Changed the %1$s for the order item %2$s on the Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:357
+#, php-format
+msgid "Added meta to the order item %1$s on the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:361
+#, php-format
+msgid "Removed meta from the order item %1$s on the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:365
+#, php-format
+msgid "Changed the %1$s for the order item %2$s on the Inventory Log %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:369
+#, php-format
+msgid "Added meta to the order item %1$s on the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:373
+#, php-format
+msgid "Removed meta from the order item %1$s on the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:377
+#, php-format
+msgid "Deleted the order item %1$s from the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:381
+#, php-format
+msgid "Deleted the order item %1$s from the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:385
+#, php-format
+msgid "Added meta to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:389
+#, php-format
+msgid "Added meta to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:393
+#, php-format
+msgid ""
+"Set the purchase price for the product %1$s from the Purchase Order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:397
+#, php-format
+msgid "Added a note to the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:401
+#, php-format
+msgid "Removed a note from the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:405
+#, php-format
+msgid "Added a note to the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:409
+#, php-format
+msgid "Removed a note from the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:413
+#, php-format
+msgid "Printed the Purchase Order %s to PDF"
+msgstr ""
+
+#: classes/Models/LogEntry.php:417
+#, php-format
+msgid ""
+"The stock levels of product %1$s changed after changing the PO %2$s status"
+msgstr ""
+
+#: classes/Models/LogEntry.php:421
+#, php-format
+msgid "Deleted Permanently the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:425
+#, php-format
+msgid "Deleted Permanently the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:429
+#, php-format
+msgid "Increased the stock for the product %1$s from the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:433
+#, php-format
+msgid "Decreased the stock for the product %1$s from the Inventory Log %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:437
+#, php-format
+msgid "Deleted Permanently the Supplier %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:441
+#, php-format
+msgid "Deleted Permanently the Product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:445
+#, php-format
+msgid "Deleted Permanently the Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:449
+#, php-format
+msgid "Deleted Permanently the Coupon %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:453
+#, php-format
+msgid "Moved to trash the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:457
+#, php-format
+msgid "Moved to trash the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:461
+#, php-format
+msgid "Moved to trash the Supplier %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:465
+#, php-format
+msgid "Moved to trash the Product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:469
+#, php-format
+msgid "Moved to trash the Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:473
+#, php-format
+msgid "Moved to trash the Coupon %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:477
+#, php-format
+msgid "Restored the Purchase Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:481
+#, php-format
+msgid "The PO %s has been mailed"
+msgstr ""
+
+#: classes/Models/LogEntry.php:485
+#, php-format
+msgid "A new delivery %1$s was added to the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:489
+#, php-format
+msgid "The delivery %1$s was removed from the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:493
+#, php-format
+msgid "Edited the item %1$s for the Delivery %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:497
+#, php-format
+msgid "Edited the inventory %1$s for the Delivery %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:501
+#, php-format
+msgid ""
+"Increased the stock for the product %1$s from the Delivery %2$s within the "
+"PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:505
+#, php-format
+msgid "The item %1$s in the Delivery %2$s was removed from the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:509
+#, php-format
+msgid "A new file was added to the Delivery %1$s from the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:513
+#, php-format
+msgid "The file %1$s was removed from the Delivery %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:517
+#, php-format
+msgid "A new file was added to the PO %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:521
+#, php-format
+msgid "The file %1$s was removed from the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:525
+#, php-format
+msgid "A new invoice %1$s was added to the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:529
+#, php-format
+msgid "The invoice %1$s was removed from the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:533
+#, php-format
+msgid "Edited the item %1$s for the Invoice %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:537
+#, php-format
+msgid "Edited the tax %1$s for the Invoice %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:541
+#, php-format
+msgid "Edited the fee %1$s for the Invoice %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:545
+#, php-format
+msgid "Edited the shipping cost %1$s for the Invoice %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:549
+#, php-format
+msgid "Removed the item %1$s for the Invoice %2$s within the PO %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:553
+#, php-format
+msgid "Merged the Purchase Order %1$s with the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:557
+#, php-format
+msgid "Cloned the Purchase Order %1$s from the PO %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:561
+#, php-format
+msgid "The Purchase Order %1$s has been approved by %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:565
+#, php-format
+msgid "Restored the Inventory Log %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:569
+#, php-format
+msgid "Restored the Supplier %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:573
+#, php-format
+msgid "Restored the Product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:577
+#, php-format
+msgid "Restored the Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:581
+#, php-format
+msgid "Restored the Coupon %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:585
+#, php-format
+msgid "Created a new Supplier %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:589
+#, php-format
+msgid "Changed the Supplier Status to %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:593
+#, php-format
+msgid "Changed %1$s to the Supplier %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:597
+#, php-format
+msgid "Enabled the module %s from ATUM Settings"
+msgstr ""
+
+#: classes/Models/LogEntry.php:601
+#, php-format
+msgid "Disabled the module %s from ATUM Settings"
+msgstr ""
+
+#: classes/Models/LogEntry.php:605
+#, php-format
+msgid "Changed the option %s from ATUM Settings"
+msgstr ""
+
+#: classes/Models/LogEntry.php:609
+#, php-format
+msgid "Run the tool %s from ATUM Settings"
+msgstr ""
+
+#: classes/Models/LogEntry.php:613
+#, php-format
+msgid "Run the tool %s from command line"
+msgstr ""
+
+#: classes/Models/LogEntry.php:617
+#, php-format
+msgid "Activated the license key for the add-on %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:621
+#, php-format
+msgid "Deactivated the license key for the add-on %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:625
+#, php-format
+msgid "Created a new ATUM Location %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:629
+#, php-format
+msgid "Deleted the ATUM Location %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:633
+#, php-format
+msgid "Changed the ATUM Location %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:637
+#, php-format
+msgid "Assigned the ATUM Location %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:641
+#, php-format
+msgid "Removed the ATUM Location %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:645
+#, php-format
+msgid "Created a new product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:649
+#, php-format
+msgid "Added a new variation %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:653
+#, php-format
+msgid "Removed the variation %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:657
+#, php-format
+msgid "A new order %s was created by a customer"
+msgstr ""
+
+#: classes/Models/LogEntry.php:661
+#, php-format
+msgid "Created a new manual order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:665
+#, php-format
+msgid "Changed the Totals for the order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:669
+#, php-format
+msgid "Changed the %1$s for the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:673
+#, php-format
+msgid "Set the %1$s for the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:677
+#, php-format
+msgid "Applied the coupon %1$s to the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:681
+#, php-format
+msgid "Applied a refund to the order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:685
+msgid "An email was sent (Manually) to the customer with the order details"
+msgstr ""
+
+#: classes/Models/LogEntry.php:689
+msgid ""
+"An email was sent (Automatically) to the customer with the order details"
+msgstr ""
+
+#: classes/Models/LogEntry.php:693
+msgid "An email was sent (Manually) to the customer with the invoice"
+msgstr ""
+
+#: classes/Models/LogEntry.php:697
+msgid "An email was sent (Automatically) to the customer with the invoice"
+msgstr ""
+
+#: classes/Models/LogEntry.php:701
+msgid "An order notification email was sent (Manually)"
+msgstr ""
+
+#: classes/Models/LogEntry.php:705
+msgid "An order notification email was sent (Automatically)"
+msgstr ""
+
+#: classes/Models/LogEntry.php:709
+#, php-format
+msgid ""
+"The stock levels of product %1$s changed after changing the order status %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:713
+#, php-format
+msgid "The stock levels of product %1$s changed after adding to the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:717
+#, php-format
+msgid "Changed the status in bulk to the orders %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:721
+#, php-format
+msgid "Added a new product %1$s to the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:725
+#, php-format
+msgid "Added a new Fee to the order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:729
+#, php-format
+msgid "Added a new Tax to the order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:733
+#, php-format
+msgid "Added a new Shipping Cost to the order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:737
+#, php-format
+msgid "Deleted the order items %1$s on the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:741
+#, php-format
+msgid "Changed the %1$s for the order item %2$s on the order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:745
+#, php-format
+msgid "Added meta to the order item %1$s on the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:749
+#, php-format
+msgid "Removed meta from the order item %1$s on the order %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:753
+#, php-format
+msgid "Added a note to the Order %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:757
+#, php-format
+msgid "Created a new Category %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:761
+#, php-format
+msgid "Deleted the Category %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:765
+#, php-format
+msgid "Changed the Category %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:769
+#, php-format
+msgid "Added the Category %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:773
+#, php-format
+msgid "Removed the Category %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:777
+#, php-format
+msgid "Created a new Tag %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:781
+#, php-format
+msgid "Deleted the Tag %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:785
+#, php-format
+msgid "Changed the Tag %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:789
+#, php-format
+msgid "Added the Tag %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:793
+#, php-format
+msgid "Removed the Tag %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:797
+#, php-format
+msgid "Created a new attribute %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:801
+#, php-format
+msgid "Added a new value %1$s to attribute %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:805
+#, php-format
+msgid "Deleted the attribute %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:809
+#, php-format
+msgid "Changed the Attribute %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:813
+#, php-format
+msgid "Assigned the Attribute %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:817
+#, php-format
+msgid "Removed the Attribute %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:821
+#, php-format
+msgid "Assigned the value %1$s to the Attribute %2$s within the product %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:825
+#, php-format
+msgid "Removed the value %1$s from the Attribute %2$s within the product %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:829
+#, php-format
+msgid "Changed the status to the product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:833
+#, php-format
+msgid "Added a new review to the product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:837
+#, php-format
+msgid "Created a new coupon %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:841
+#, php-format
+msgid "Changed the %1$s for the coupon %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:845
+#, php-format
+msgid "Changed the option “%s” from WC settings"
+msgstr ""
+
+#: classes/Models/LogEntry.php:849
+#, php-format
+msgid "Switched the ATUM Controlled at product level for the product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:853
+#, php-format
+msgid "Enabled the “Sync Purchase Price” on the product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:857
+#, php-format
+msgid "Disabled the “Sync Purchase Price” on the product %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:861
+#, php-format
+msgid "Changed the %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:865
+#, php-format
+msgid "Changed the %1$s for the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:869
+#, php-format
+msgid "Changed the setting %1$s for the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:873
+#, php-format
+msgid ""
+"The inventory %1$s of product %2$s has reached its “Out of stock threshold” "
+"and it was marked as “Out of stock”"
+msgstr ""
+
+#: classes/Models/LogEntry.php:877
+#, php-format
+msgid ""
+"Inventory %1$s of product %2$s depleted, the inventory has been marked as "
+"“Out of stock”"
+msgstr ""
+
+#: classes/Models/LogEntry.php:881
+#, php-format
+msgid "Inventory %1$s of product %2$s depleted, using the next one in the list"
+msgstr ""
+
+#: classes/Models/LogEntry.php:885
+#, php-format
+msgid "Changed the %1$s to the inventory %2$s on the product %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:889
+#, php-format
+msgid "Created a new inventory %1$s on the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:893
+#, php-format
+msgid "Removed the inventory %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:897
+#, php-format
+msgid "Marked the inventories %1$s as “write-off” on the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:901
+#, php-format
+msgid "Unmarked the inventories %1$s as “write-off” on the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:905
+#, php-format
+msgid "The inventory %s has expired"
+msgstr ""
+
+#: classes/Models/LogEntry.php:909
+#, php-format
+msgid ""
+"The region restriction was applied on order %1$s and the inventory %2$s was "
+"bypassed"
+msgstr ""
+
+#: classes/Models/LogEntry.php:913
+#, php-format
+msgid "%1$s units of Inventory %2$s were used for the Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:917
+#, php-format
+msgid ""
+"Changed the quantity for the inventory %1$s of the order item %2$s within "
+"the Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:921
+#, php-format
+msgid ""
+"Changed the stock levels for the inventory %1$s of the product %2$s within "
+"the Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:925
+#, php-format
+msgid "%1$s units of inventory %2$s were sold at %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:929
+#, php-format
+msgid ""
+"The Inventories %1$s were used automatically for the order item %2$s from "
+"the order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:933
+#, php-format
+msgid ""
+"The Inventories %1$s were used automatically for the order item %2$s from "
+"the Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:937
+#, php-format
+msgid ""
+"Changed manually the Inventories %1$s for the order item %2$s within the "
+"order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:941
+#, php-format
+msgid ""
+"Changed manually the Inventories %1$s for the order item %2$s within the "
+"Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:945
+#, php-format
+msgid ""
+"Added manually a new inventory %1$s for the order item %2$s within the order "
+"%3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:949
+#, php-format
+msgid "Removed Inventory %1$s from the order item %2$s within the order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:953
+#, php-format
+msgid ""
+"Removed Inventory %1$s from the order item %2$s within the Purchase Order "
+"%3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:957
+#, php-format
+msgid ""
+"Removed Inventory %1$s from the order item %2$s within the Inventory Log %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:961
+#, php-format
+msgid ""
+"Added manually a new inventory %1$s for the order item %2$s within the "
+"Purchase Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:965
+#, php-format
+msgid ""
+"The product %1$s has reached its minimum threshold on the BOM %2$s and all "
+"the associated products with a lower priority were set as “Out of stock”"
+msgstr ""
+
+#: classes/Models/LogEntry.php:969
+#, php-format
+msgid ""
+"The product %s has reached its “Out of stock threshold” and it was marked as "
+"“Out of stock”"
+msgstr ""
+
+#: classes/Models/LogEntry.php:973
+#, php-format
+msgid ""
+"The BOMs %1$s were used automatically for the order item %2$s from order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:977
+#, php-format
+msgid "Linked a Raw Material %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:981
+#, php-format
+msgid "Linked a Product Part %1$s to the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:985
+#, php-format
+msgid "Unlinked a Raw Material %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:989
+#, php-format
+msgid "Unlinked a Product Part %1$s from the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:993
+#, php-format
+msgid ""
+"The BOMs %1$s were used automatically for the main inventory used on order "
+"item %2$s on order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:997
+#, php-format
+msgid "Changed the quantity to the linked BOM %1$s on the product %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1001
+#, php-format
+msgid ""
+"Changed the quantity used for BOM %1$s on the order item %2$s from order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1005
+#, php-format
+msgid ""
+"Changed the quantity used for BOM %1$s on the order item %2$s from Inventory "
+"Log %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1009
+#, php-format
+msgid ""
+"Changed the quantity used for BOM %1$s on the order item %2$s from Purchase "
+"Order %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1013
+#, php-format
+msgid ""
+"The stock levels of product %1$s changed after changing their BOMs stock"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1017
+#, php-format
+msgid ""
+"The BOM %1$s has changed the inventory %2$s by inventory %3$s in the order "
+"%4$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1021
+#, php-format
+msgid "Exported the template %s manually"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1025
+#, php-format
+msgid "Downloaded the export %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1028
+msgid "Run a manual export"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1032
+#, php-format
+msgid "Saved the template %s as a new custom template"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1036
+#, php-format
+msgid "Changed the %1$s to the template %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1040
+#, php-format
+msgid "Changed the fields to the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1044
+#, php-format
+msgid "Deleted template %1$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1048
+#, php-format
+msgid "Failed to delete template %1$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1052
+#, php-format
+msgid "A scheduled export has executed for the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1056
+#, php-format
+msgid "An email was sent after exporting the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1060
+#, php-format
+msgid "An email was not sent after exporting the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1064
+#, php-format
+msgid "A file was stored on the server after exporting the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1068
+#, php-format
+msgid "An import using the template %s has started"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1072
+#, php-format
+msgid "An import was executed successfully using the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1076
+#, php-format
+msgid "An import was executed and failed using the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1080
+#, php-format
+msgid "An import was executed successfully with warnings using the template %s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1087
+#, php-format
+msgid "%1$s units of product %2$s were produced"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1091
+#, php-format
+msgid "%1$s units of product %2$s were produced for the inventory %3$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1095
+#, php-format
+msgid "The stock levels of BOM %1$s changed after producing %2$s"
+msgstr ""
+
+#: classes/Models/LogEntry.php:1098
+msgid "No message"
+msgstr ""
+
+#: classes/Models/LogModel.php:544
+msgid "system"
+msgstr ""
+
+#: classes/Models/LogModel.php:819 classes/Models/LogModel.php:820
+#: classes/Models/LogModel.php:821 classes/Models/LogModel.php:822
+msgid "Product Data"
+msgstr ""
+
+#: classes/Models/LogModel.php:823 classes/Models/LogModel.php:824
+#: classes/Models/LogModel.php:825
+msgid "Orders"
+msgstr ""
+
+#: classes/Models/LogModel.php:826
+msgid "Stock Takes"
+msgstr ""
+
+#: classes/Models/LogModel.php:827
+msgid "Picking Lists"
+msgstr ""
+
+#: classes/Models/LogModel.php:828 classes/Models/LogModel.php:829
+#: classes/Models/LogModel.php:830
+msgid "Purchase Orders"
+msgstr ""
+
+#: classes/Models/LogModel.php:831 classes/Models/LogModel.php:832
+msgid "Inventory Logs"
+msgstr ""
+
+#: classes/Models/LogModel.php:833 classes/Models/LogModel.php:834
+#: classes/Models/LogModel.php:835 classes/Models/LogModel.php:836
+#: classes/Models/LogModel.php:837 classes/Models/LogModel.php:838
+#: classes/Models/LogModel.php:839
+msgid "Settings"
+msgstr ""
+
+#: classes/Models/LogModel.php:840
+msgid "Suppliers"
+msgstr ""
+
+#: classes/Models/LogModel.php:841
+msgid "Add-ons"
+msgstr ""
+
+#: classes/Models/LogModel.php:842
+msgid "Locations"
+msgstr ""
+
+#: classes/Models/LogModel.php:843
+msgid "Categories"
+msgstr ""
+
+#: classes/Models/LogModel.php:844
+msgid "Coupons"
+msgstr ""
+
+#: classes/Models/LogModel.php:845 classes/Models/LogModel.php:846
+#: classes/Models/LogModel.php:847
+msgid "Stock Central"
+msgstr ""
+
+#: classes/Models/LogModel.php:848 classes/Models/LogModel.php:849
+msgid "Manufacturing Central"
+msgstr ""
+
+#: classes/Models/LogModel.php:850
+msgid "Export"
+msgstr ""
+
+#: classes/Models/LogModel.php:851
+msgid "Import"
+msgstr ""
+
+#: classes/Models/LogModel.php:880
+msgid "Woocommerce"
+msgstr ""
+
+#: classes/Models/LogModel.php:881
+msgid "ATUM"
+msgstr ""
+
+#: classes/Models/LogModel.php:882
+msgid "ATUM Multi-Inventory"
+msgstr ""
+
+#: classes/Models/LogModel.php:883
+msgid "ATUM Product Levels"
+msgstr ""
+
+#: classes/Models/LogModel.php:884
+msgid "ATUM Export Pro"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: classes/Models/LogModel.php:885
+msgid "ATUM Action Logs"
+msgstr ""
+
+#: classes/Models/LogModel.php:886
+msgid "ATUM Purchase Orders"
+msgstr ""
+
+#: classes/Models/LogModel.php:887
+msgid "ATUM Stock Takes"
+msgstr ""
+
+#: classes/Models/LogModel.php:888
+msgid "ATUM Pick & Pack"
+msgstr ""
+
+#: views/help-tabs/log-registry/help-sidebar.php:15
+msgid "Visit our Website for More"
+msgstr ""
+
+#: views/help-tabs/log-registry/help-sidebar.php:17
+msgid "Read the Docs"
+msgstr ""
+
+#: views/help-tabs/log-registry/help-sidebar.php:19
+msgid "Watch our Videos"
+msgstr ""
+
+#: views/help-tabs/log-registry/help-sidebar.php:21
+msgid "Get Support"
+msgstr ""
+
+#: views/help-tabs/log-registry/help-sidebar.php:25
+msgid "Open Support Ticket"
+msgstr ""
+
+#: views/log-orders.php:30
+msgid "System"
+msgstr ""
+
+#: views/log-orders.php:42
+msgid "No Logs Registered"
+msgstr ""
+
+#: views/log-registry.php:44
+msgid "Search in Column"
+msgstr ""
+
+#: views/log-registry.php:46 views/log-registry.php:50
+msgid "Search In"
+msgstr ""
+
+#: views/log-registry.php:56
+msgid "Search..."
+msgstr ""
+
+#: views/log-registry.php:60
+msgid "Search"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:32
+msgid "Report Data"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:37
+#, php-format
+msgid "Site: %s"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:41
+#, php-format
+msgid "Creator: %s"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:44
+#, php-format
+msgid "Date: %s"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:53
+msgid "Logs Resume"
+msgstr ""
+
+#: views/reports/log-registry-report-html.php:58
+#, php-format
+msgid "Total: %d item"
+msgid_plural "Total: %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/reports/log-registry-report-html.php:62
+#, php-format
+msgid "Featured: %d item"
+msgid_plural "Featured: %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/reports/log-registry-report-html.php:66
+#, php-format
+msgid "Unread: %d item"
+msgid_plural "Unread: %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/reports/log-registry-report-html.php:71
+#, php-format
+msgid "Deleted: %d item"
+msgid_plural "Deleted: %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/tools/logs-remover.php:15
+msgid "Select a date range"
+msgstr ""
+
+#: views/tools/logs-remover.php:22
+msgid "From..."
+msgstr ""
+
+#: views/tools/logs-remover.php:26
+msgid "To..."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/addons/atum-action-logs"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Keeping track of any changes happening in your shop has never been easier. "
+"The Action Logs add-on supports all ATUM premium add-ons and all WooCommerce "
+"actions."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Stock Management Labs™"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/"
+msgstr ""

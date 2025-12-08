@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle>
+	<domain name="meta-box-aio">
+		<project name="Meta Box AIO">
+			<source>
+				<directory>src</directory>
+			</source>
+			<target>
+				<directory>languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-admin-columns">
+		<project name="MB Admin Columns">
+			<source>
+				<directory>vendor/meta-box/mb-admin-columns</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-admin-columns/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-blocks">
+		<project name="MB Blocks">
+			<source>
+				<directory>vendor/meta-box/mb-blocks</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-blocks/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-comment-meta">
+		<project name="MB Comment Meta">
+			<source>
+				<directory>vendor/meta-box/mb-comment-meta</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-comment-meta/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-custom-post-type">
+		<project name="MB Custom Post Type">
+			<source>
+				<directory>vendor/meta-box/mb-custom-post-type</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-custom-post-type/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-custom-table">
+		<project name="MB Custom Table">
+			<source>
+				<directory>vendor/meta-box/mb-custom-table</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-custom-table/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-elementor-integrator">
+		<project name="Meta Box - Elementor Integrator">
+			<source>
+				<directory>vendor/meta-box/mb-elementor-integrator</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-elementor-integrator/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-frontend-submission">
+		<project name="MB Frontend Submission">
+			<source>
+				<directory>vendor/meta-box/mb-frontend-submission</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-frontend-submission/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-relationships">
+		<project name="MB Relationships">
+			<source>
+				<directory>vendor/meta-box/mb-relationships</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-relationships/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-rest-api">
+		<project name="MB REST API">
+			<source>
+				<directory>vendor/meta-box/mb-rest-api</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-rest-api/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-revision">
+		<project name="MB Revision">
+			<source>
+				<directory>vendor/meta-box/mb-revision</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-revision/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-settings-page">
+		<project name="MB Settings Page">
+			<source>
+				<directory>vendor/meta-box/mb-settings-page</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-settings-page/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-term-meta">
+		<project name="MB Term Meta">
+			<source>
+				<directory>vendor/meta-box/mb-term-meta</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-term-meta/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-user-meta">
+		<project name="MB User Meta">
+			<source>
+				<directory>vendor/meta-box/mb-user-meta</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-user-meta/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-user-profile">
+		<project name="MB User Profile">
+			<source>
+				<directory>vendor/meta-box/mb-user-profile</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-user-profile/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-views">
+		<project name="MB Views">
+			<source>
+				<directory>vendor/meta-box/mb-views</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-views/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="mb-yoast-seo">
+		<project name="Meta Box - Yoast SEO">
+			<source>
+				<directory>vendor/meta-box/mb-yoast-seo</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/mb-yoast-seo/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-beaver-themer-integrator">
+		<project name="Meta Box - Beaver Themer Integrator">
+			<source>
+				<directory>vendor/meta-box/meta-box-beaver-themer-integrator</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-beaver-themer-integrator/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-builder">
+		<project name="Meta Box Builder">
+			<source>
+				<directory>vendor/meta-box/meta-box-builder</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-builder/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-columns">
+		<project name="Meta Box Columns">
+			<source>
+				<directory>vendor/meta-box/meta-box-columns</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-columns/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-conditional-logic">
+		<project name="Meta Box Conditional Logic">
+			<source>
+				<directory>vendor/meta-box/meta-box-conditional-logic</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-conditional-logic/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-facetwp-integrator">
+		<project name="Meta Box - FacetWP Integrator">
+			<source>
+				<directory>vendor/meta-box/meta-box-facetwp-integrator</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-facetwp-integrator/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-geolocation">
+		<project name="Meta Box Geolocation">
+			<source>
+				<directory>vendor/meta-box/meta-box-geolocation</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-geolocation/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-group">
+		<project name="Meta Box Group">
+			<source>
+				<directory>vendor/meta-box/meta-box-group</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-group/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-include-exclude">
+		<project name="Meta Box Include Exclude">
+			<source>
+				<directory>vendor/meta-box/meta-box-include-exclude</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-include-exclude/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-show-hide">
+		<project name="Meta Box Show Hide">
+			<source>
+				<directory>vendor/meta-box/meta-box-show-hide</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-show-hide/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-tabs">
+		<project name="Meta Box Tabs">
+			<source>
+				<directory>vendor/meta-box/meta-box-tabs</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-tabs/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-template">
+		<project name="Meta Box Template">
+			<source>
+				<directory>vendor/meta-box/meta-box-template</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-template/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="meta-box-tooltip">
+		<project name="Meta Box Tooltip">
+			<source>
+				<directory>vendor/meta-box/meta-box-tooltip</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/meta-box-tooltip/languages</directory>
+			</target>
+		</project>
+	</domain>
+	<domain name="text-limiter">
+		<project name="Meta Box Text Limiter">
+			<source>
+				<directory>vendor/meta-box/text-limiter</directory>
+			</source>
+			<target>
+				<directory>vendor/meta-box/text-limiter/languages</directory>
+			</target>
+		</project>
+	</domain>
+</bundle>

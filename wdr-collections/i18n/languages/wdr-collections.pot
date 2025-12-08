@@ -1,0 +1,283 @@
+# Copyright (C) 2024 Flycart
+# This file is distributed under the GPL v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Discount Rules: Collections 1.2.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wdr-collections\n"
+"Last-Translator: Flycart <support@flycart.org>\n"
+"Language-Team: Flycart <support@flycart.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-14T12:16:00+00:00\n"
+"PO-Revision-Date:  \n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: wdr-collections\n"
+
+#. Plugin Name of the plugin
+#: wdr-collections.php
+msgid "Discount Rules: Collections"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: wdr-collections.php
+msgid "https://flycart.org"
+msgstr ""
+
+#. Description of the plugin
+#: wdr-collections.php
+msgid "Add-on for Woo Discount Rules"
+msgstr ""
+
+#. Author of the plugin
+#: wdr-collections.php
+msgid "Flycart"
+msgstr ""
+
+#: app/Controllers/Admin/Ajax.php:58
+#: app/Controllers/Admin/Ajax.php:73
+msgid "Method not exists."
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:37
+msgid "Collection deleted successfully!"
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:38
+msgid "Are you sure want to delete this collection!"
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:39
+msgid "This collection was linked to the following rules, so you cannot remove this collection"
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:40
+msgid "Collection saved successfully!"
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:41
+msgid "Attention: This collection was linked to the following rules, so your changes will be reflect in all the linked rules"
+msgstr ""
+
+#: app/Controllers/Admin/Page.php:42
+msgid "<p>Discount will be applied <b>only the selected collections (based on mode of apply)</b></p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p>"
+msgstr ""
+
+#: app/Controllers/Admin/Tabs/Collections.php:32
+#: app/Controllers/Common/Filters.php:31
+#: app/Views/Admin/Tabs/Collections.php:7
+msgid "Collections"
+msgstr ""
+
+#: app/Controllers/Common/BXGY.php:29
+msgid "Buy X Get Y - Collections"
+msgstr ""
+
+#: app/Controllers/Common/BXGY.php:47
+msgid "Search Collections"
+msgstr ""
+
+#: app/Controllers/Common/BXGY.php:60
+msgid "Select Collections"
+msgstr ""
+
+#: app/Controllers/Common/Filters.php:30
+msgid "Filter collections"
+msgstr ""
+
+#: app/Helpers/Collection.php:288
+#: app/Helpers/Collection.php:295
+msgid "Untitled Collection"
+msgstr ""
+
+#: app/Helpers/Plugin.php:40
+msgid "Woo Discount Rules: Collections requires PHP version %s"
+msgstr ""
+
+#: app/Helpers/Plugin.php:48
+msgid "Woo Discount Rules: Collections requires WordPress version %s"
+msgstr ""
+
+#: app/Helpers/Plugin.php:67
+msgid "Woo Discount Rules: Collections requires %s plugin to be installed and active"
+msgstr ""
+
+#: app/Helpers/Plugin.php:76
+msgid "Woo Discount Rules: Collections requires %s version %s"
+msgstr ""
+
+#: app/Helpers/Validation.php:29
+msgid "Accepts only letters a-z, numbers 0-9 and spaces with special characters"
+msgstr ""
+
+#: app/Helpers/Validation.php:30
+msgid "Invalid characters"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:8
+msgid "Conditions Relationship "
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:11
+msgid "Match All"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:13
+msgid "Match Any"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:62
+msgid "In List"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:63
+msgid "Not In List"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:76
+msgid "Products"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:90
+msgid "Select "
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:106
+msgid "Choose products that get the discount using \"In List\". If you want to exclude a few products, choose \"Not In List\" and select the products you wanted to exclude from discount. (You can add multiple filters)"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:109
+msgid "Choose categories that get the discount using \"In List\". If you want to exclude a few categories, choose \"Not In List\" and select the categories you wanted to exclude from discount. (You can add multiple filters of same type)"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:112
+msgid "Choose attributes that get the discount using \"In List\". If you want to exclude a few attributes, choose \"Not In List\" and select the attributes you wanted to exclude from discount. (You can add multiple filters of same type)"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:115
+msgid "Choose tags that get the discount using \"In List\". If you want to exclude a few tags, choose \"Not In List\" and select the tags you wanted to exclude from discount. (You can add multiple filters of same type)"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:118
+msgid "Choose SKUs that get the discount using \"In List\". If you want to exclude a few SKUs, choose \"Not In List\" and select the SKUs you wanted to exclude from discount. (You can add multiple filters of same type)"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:121
+msgid "Choose whether you want to include (or exclude) products on sale (those having a sale price) for the discount "
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:124
+#: app/Views/Admin/Collections/Filters/Main.php:172
+msgid "Discount applies to all eligible products in the store"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:128
+msgid "Discount applies to custom taxonomy"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:140
+msgid "Choose"
+msgstr ""
+
+#: app/Views/Admin/Collections/Filters/Main.php:183
+msgid "Add filter"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:13
+msgid "Collection Title"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:19
+msgid "#Collection ID: "
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:24
+msgid "Save"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:26
+msgid "Save & Close"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:29
+msgid "Cancel"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:35
+msgid "Filter"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:37
+msgid "Choose which <b>gets</b> discount (products/categories/attributes/SKU and so on )"
+msgstr ""
+
+#: app/Views/Admin/Collections/Manage.php:38
+msgid "Note : You can also exclude products/categories."
+msgstr ""
+
+#: app/Views/Admin/Filters/Collections.php:15
+msgid "Include"
+msgstr ""
+
+#: app/Views/Admin/Filters/Collections.php:16
+msgid "Exclude"
+msgstr ""
+
+#: app/Views/Admin/Filters/Collections.php:23
+msgid "Select Collection"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:9
+msgid "Add New Collection"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:13
+msgid "Documentation"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:21
+msgid "Title"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:26
+msgid "Created"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:27
+msgid "Modified"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:28
+msgid "Action"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:60
+#: app/Views/Admin/Tabs/Collections.php:80
+msgid "By: "
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:61
+#: app/Views/Admin/Tabs/Collections.php:81
+msgid " On: "
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:88
+msgid "Edit"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:92
+msgid "Delete"
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:99
+msgid "No collections found."
+msgstr ""
+
+#: app/Views/Admin/Tabs/Collections.php:106
+msgid "Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=unlock_pro' target='_blank'>Upgrading to Pro</a>"
+msgstr ""
+
+#: wdr-collections.php:44
+msgid "Woo Discount Rules: Collections is unable to find the Core class."
+msgstr ""

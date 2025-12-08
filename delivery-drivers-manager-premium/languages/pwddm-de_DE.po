@@ -1,0 +1,1788 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: Delivery Drivers Manager Premium\n"
+"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
+"PO-Revision-Date: 2021-11-03 15:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch\n"
+"Language: de-DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.5; wp-5.8.1"
+
+#: delivery-drivers-manager.php:250 delivery-drivers-manager.php:410 
+#: delivery-drivers-manager.php:414
+#, fuzzy
+msgid "Premium Feature"
+msgstr "Premium-Funktion"
+
+#: delivery-drivers-manager.php:251 delivery-drivers-manager.php:415
+#, fuzzy
+msgid "You Discovered a Premium Feature!"
+msgstr "Sie haben ein Premium-Feature entdeckt!"
+
+#: delivery-drivers-manager.php:253
+#, fuzzy
+msgid "With premium version you will be able to:"
+msgstr "Mit der Premium-Version können Sie:"
+
+#: delivery-drivers-manager.php:416
+#, fuzzy
+msgid "Upgrading to Premium will unlock it."
+msgstr "Durch ein Upgrade auf Premium wird es freigeschaltet."
+
+#: delivery-drivers-manager.php:417
+#, fuzzy
+msgid "UNLOCK PREMIUM"
+msgstr "PREMIUM FREISCHALTEN"
+
+#: index.php:8
+#, fuzzy
+msgid ""
+"Delivery drivers manager is a WooCommerce add-on, you must activate a "
+"WooCommerce on your site."
+msgstr ""
+"Der Liefertreiber-Manager ist ein WooCommerce-Add-On, Sie müssen ein "
+"WooCommerce auf Ihrer Website aktivieren."
+
+#: index.php:12
+#, fuzzy
+msgid ""
+"Delivery drivers manager is a local delivery drivers for woocommerce premium "
+"add-on, you must activate it on your site."
+msgstr ""
+"Delivery Drivers Manager ist ein lokaler Liefertreiber für das Woocommerce-"
+"Premium-Add-On. Sie müssen es auf Ihrer Website aktivieren."
+
+#: index.php:88 includes/class-pwddm-order.php:455 
+#: includes/class-pwddm-orders.php:268 includes/class-pwddm-orders.php:1006 
+#: includes/class-pwddm-reports.php:57 includes/class-pwddm-reports.php:99 
+#: includes/class-pwddm-reports.php:129 includes/class-pwddm-reports.php:189 
+#: includes/class-pwddm-reports.php:803 includes/class-pwddm-reports.php:871 
+#: includes/class-pwddm-route.php:902
+#, fuzzy
+msgid "Driver assigned"
+msgstr "Fahrer zugewiesen"
+
+#: index.php:89 includes/class-pwddm-order.php:456 
+#: includes/class-pwddm-orders.php:269 includes/class-pwddm-orders.php:1007 
+#: includes/class-pwddm-reports.php:58 includes/class-pwddm-reports.php:100 
+#: includes/class-pwddm-reports.php:130 includes/class-pwddm-reports.php:190 
+#: includes/class-pwddm-reports.php:804 includes/class-pwddm-reports.php:872 
+#: includes/class-pwddm-route.php:903
+#, fuzzy
+msgid "Out for delivery"
+msgstr "raus zur Lieferung"
+
+#: index.php:90 includes/class-pwddm-order.php:457 
+#: includes/class-pwddm-orders.php:270 includes/class-pwddm-orders.php:1008 
+#: includes/class-pwddm-reports.php:60 includes/class-pwddm-reports.php:102 
+#: includes/class-pwddm-reports.php:132 includes/class-pwddm-reports.php:192 
+#: includes/class-pwddm-reports.php:806 includes/class-pwddm-reports.php:874 
+#: includes/class-pwddm-route.php:904
+#, fuzzy
+msgid "Failed delivery"
+msgstr "Fehlgeschlagene Lieferung"
+
+#: index.php:102 includes/class-pwddm-order.php:469 
+#: includes/class-pwddm-orders.php:284 includes/class-pwddm-orders.php:1022 
+#: includes/class-pwddm-route.php:918
+#, fuzzy
+msgid "Failed Delivery Attempt"
+msgstr "Fehlgeschlagener Zustellversuch"
+
+#: index.php:204
+#, fuzzy
+msgid "manager"
+msgstr "Manager"
+
+#: index.php:227
+#, fuzzy
+msgid "Are you sure?"
+msgstr "Bist du sicher?"
+
+#: index.php:229 includes/class-pwddm-route.php:1086
+#, fuzzy
+msgid "hour"
+msgstr "Stunde"
+
+#: index.php:230 includes/class-pwddm-route.php:1087
+#, fuzzy
+msgid "hours"
+msgstr "Std"
+
+#: index.php:231 includes/class-pwddm-route.php:1088
+#, fuzzy
+msgid "mins"
+msgstr "Minuten"
+
+#: admin/class-pwddm-admin.php:132 includes/class-pwddm-order.php:66 
+#: includes/class-pwddm-orders.php:937 includes/class-pwddm-password.php:37 
+#: includes/class-pwddm-password.php:97
+#, fuzzy
+msgid ""
+"Security Check Failure - This alert may occur when you are logged in as an "
+"administrator and as a delivery driver on the same browser and the same "
+"device. If you want to work on both panels please try to work with two "
+"different browsers."
+msgstr ""
+"Fehler bei der Sicherheitsüberprüfung – Diese Warnung kann auftreten, wenn "
+"Sie als Administrator und als Zustellungstreiber im selben Browser und auf "
+"demselben Gerät angemeldet sind. Wenn Sie auf beiden Panels arbeiten möchten,"
+" versuchen Sie es mit zwei verschiedenen Browsern."
+
+#: admin/class-pwddm-admin.php:415
+#, fuzzy
+msgid "Drivers manager panel"
+msgstr "Fahrer-Manager-Panel"
+
+#: admin/class-pwddm-admin.php:425
+#, fuzzy
+msgid "Premium main features"
+msgstr "Premium-Hauptfunktionen"
+
+#: admin/class-pwddm-admin.php:437
+#, fuzzy
+msgid "Manager initial screen"
+msgstr "Manager-Startbildschirm"
+
+#: admin/class-pwddm-admin.php:444
+#, fuzzy
+msgid "Logo"
+msgstr "Logo"
+
+#: admin/class-pwddm-admin.php:451
+#, fuzzy
+msgid "Title"
+msgstr "Titel"
+
+#: admin/class-pwddm-admin.php:459
+#, fuzzy
+msgid "Subtitle"
+msgstr "Untertitel"
+
+#: admin/class-pwddm-admin.php:467
+#, fuzzy
+msgid "Page background"
+msgstr "Seitenhintergrund"
+
+#: admin/class-pwddm-admin.php:475
+#, fuzzy
+msgid "Text color"
+msgstr "Textfarbe"
+
+#: admin/class-pwddm-admin.php:482
+#, fuzzy
+msgid "Button text color"
+msgstr "Schaltflächentextfarbe"
+
+#: admin/class-pwddm-admin.php:489
+#, fuzzy
+msgid "Button background"
+msgstr "Schaltflächenhintergrund"
+
+#: admin/class-pwddm-admin.php:511
+#, fuzzy
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: admin/class-pwddm-admin.php:568
+#, fuzzy
+msgid "Developed by"
+msgstr "Entwickelt von"
+
+#: admin/class-pwddm-admin.php:568
+#, fuzzy
+msgid "Premium"
+msgstr "Prämie"
+
+#: admin/class-pwddm-admin.php:568
+#, fuzzy
+msgid "Documents"
+msgstr "Unterlagen"
+
+#: admin/class-pwddm-admin.php:578
+#, fuzzy
+msgid "Drivers account"
+msgstr "Fahrerkonto"
+
+#: admin/class-pwddm-admin.php:581
+#, fuzzy
+msgid "Delivery manager"
+msgstr "Liefermanager"
+
+#: admin/class-pwddm-admin.php:677
+#, fuzzy
+msgid "Driver Manager"
+msgstr "Fahrer-Manager"
+
+#: admin/class-pwddm-admin.php:682
+msgid "Select the driver manager."
+msgstr "Wählen Sie den Fahrermanager aus."
+
+#: admin/class-pwddm-admin.php:703
+#, fuzzy
+msgid "Delivery Drivers Manager"
+msgstr "Lieferfahrer-Manager"
+
+#: admin/class-pwddm-admin.php:706
+#, fuzzy
+msgid "Manager account status"
+msgstr "Status des Verwaltungskontos"
+
+#: admin/class-pwddm-admin.php:709 includes/class-pwddm-driver.php:484
+#, fuzzy
+msgid "Not active"
+msgstr "Nicht aktiv"
+
+#: admin/class-pwddm-admin.php:711 includes/class-pwddm-driver.php:486
+#, fuzzy
+msgid "Active"
+msgstr "Aktiv"
+
+#: admin/class-pwddm-admin.php:713
+#, fuzzy
+msgid ""
+"Only managers with active accounts can access the delivery drivers manager."
+msgstr ""
+"Nur Manager mit aktiven Konten können auf den Zustellfahrer-Manager "
+"zugreifen."
+
+#: admin/class-pwddm-admin.php:717
+msgid "Manager drivers"
+msgstr "Manager-Fahrer"
+
+#: admin/class-pwddm-admin.php:720 includes/class-pwddm-reports.php:973
+msgid "Admin drivers only"
+msgstr "Nur Admin-Fahrer"
+
+#: admin/class-pwddm-admin.php:725 includes/class-pwddm-reports.php:969
+msgid "Manager & Admin drivers"
+msgstr "Manager- und Admin-Fahrer"
+
+#: admin/class-pwddm-admin.php:726 includes/class-pwddm-reports.php:971
+msgid "Manager drivers only"
+msgstr "Nur Manager-Fahrer"
+
+#: admin/class-pwddm-admin.php:732
+#, fuzzy
+msgid "Allow delivery manager to work with drivers."
+msgstr "Erlauben Sie dem Liefermanager, mit den Fahrern zu arbeiten."
+
+#: admin/class-pwddm-admin.php:784 includes/class-pwddm-reports.php:1003
+#, fuzzy
+msgid "The link above is the delivery driver's manager url."
+msgstr "Der obige Link ist die Manager-URL des Lieferfahrers."
+
+#: admin/class-pwddm-admin.php:801
+#, fuzzy
+msgid ""
+"Local delivery drivers for WooCommerce is a WooCommerce add-on, you must "
+"activate a WooCommerce on your site."
+msgstr ""
+"Lokale Liefertreiber für WooCommerce ist ein WooCommerce-Add-On, Sie müssen "
+"ein WooCommerce auf Ihrer Website aktivieren."
+
+#: admin/class-pwddm-admin.php:856 admin/class-pwddm-admin.php:857
+#, fuzzy
+msgid "General settings"
+msgstr "Allgemeine Einstellungen"
+
+#: admin/class-pwddm-admin.php:862 admin/class-pwddm-admin.php:863
+#, fuzzy
+msgid "Branding"
+msgstr "Markenzeichen"
+
+#: admin/class-pwddm-admin.php:936 includes/class-pwddm-screens.php:148
+#, fuzzy
+msgid "WELCOME"
+msgstr "WILLKOMMEN"
+
+#: admin/class-pwddm-admin.php:952
+#, fuzzy
+msgid "To the vendor delivery drivers manager"
+msgstr "An den Fahrer-Manager für die Lieferantenlieferung"
+
+#: admin/class-pwddm-admin.php:979
+#, fuzzy
+msgid "Select a image"
+msgstr "Wählen Sie ein Bild aus"
+
+#: admin/class-pwddm-admin.php:980
+#, fuzzy
+msgid "Delete image"
+msgstr "Lösche Bild"
+
+#: admin/class-pwddm-admin.php:1057
+msgid "Enable Drivers Manager to work with his own drivers."
+msgstr ""
+"Aktivieren Sie Drivers Manager, um mit seinen eigenen Fahrer zu arbeiten."
+
+#: admin/class-pwddm-admin.php:1058
+#, fuzzy
+msgid "Enable Drivers Manager to view the drivers routes."
+msgstr "Aktivieren Sie Drivers Manager, um die Fahrerrouten anzuzeigen."
+
+#: admin/class-pwddm-admin.php:1059
+#, fuzzy
+msgid "Enable Drivers Manager to bulk update orders."
+msgstr ""
+"Aktivieren Sie Drivers Manager, um Bestellungen in großen Mengen zu "
+"aktualisieren."
+
+#: admin/class-pwddm-admin.php:1060
+#, fuzzy
+msgid "Enable full dashboard for Admin and Drivers Manager."
+msgstr ""
+"Aktivieren Sie das vollständige Dashboard für Admin und Drivers Manager."
+
+#: admin/class-pwddm-admin.php:1061
+#, fuzzy
+msgid "Enable full reports for Drivers Manager."
+msgstr "Aktivieren Sie vollständige Berichte für Drivers Manager."
+
+#: admin/class-pwddm-admin.php:1075
+msgid "Drivers Manager Settings"
+msgstr "Einstellungen Fahrer-Manager"
+
+#: admin/class-pwddm-admin.php:1075
+msgid "Drivers Manager"
+msgstr "Fahrer-Manager"
+
+#: admin/class-pwddm-admin.php:1076 includes/class-pwddm-reports.php:726 
+#: includes/class-pwddm-screens.php:59 includes/class-pwddm-screens.php:263
+msgid "Dashboard"
+msgstr "Dashboard "
+
+#: admin/class-pwddm-admin.php:1077 includes/class-pwddm-screens.php:101 
+#: includes/class-pwddm-screens.php:326
+#, fuzzy
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: includes/class-pwddm-driver.php:192 includes/class-pwddm-orders.php:447 
+#: includes/class-pwddm-orders.php:1309
+#, fuzzy
+msgid "<<"
+msgstr "<<"
+
+#: includes/class-pwddm-driver.php:193 includes/class-pwddm-orders.php:448 
+#: includes/class-pwddm-orders.php:1310
+#, fuzzy
+msgid ">>"
+msgstr ">>"
+
+#: includes/class-pwddm-driver.php:208
+#, fuzzy
+msgid "Name"
+msgstr "Name"
+
+#: includes/class-pwddm-driver.php:209 includes/class-pwddm-order.php:371 
+#: includes/class-pwddm-reports.php:128 includes/class-pwddm-reports.php:188 
+#: includes/class-pwddm-reports.php:597 includes/class-pwddm-reports.php:680 
+#: includes/class-pwddm-reports.php:802 includes/class-pwddm-reports.php:870 
+#: includes/class-pwddm-reports.php:916 includes/class-pwddm-reports.php:981
+#, fuzzy
+msgid "Phone"
+msgstr "Telefon"
+
+#: includes/class-pwddm-driver.php:210 includes/class-pwddm-login.php:58 
+#: includes/class-pwddm-password.php:158 includes/class-pwddm-reports.php:598 
+#: includes/class-pwddm-reports.php:681 includes/class-pwddm-reports.php:917 
+#: includes/class-pwddm-reports.php:982
+#, fuzzy
+msgid "Email"
+msgstr "Email"
+
+#: includes/class-pwddm-driver.php:211 includes/class-pwddm-screens.php:97
+msgid "Account"
+msgstr "Account"
+
+#: includes/class-pwddm-driver.php:212
+#, fuzzy
+msgid "Claim"
+msgstr "Anspruch"
+
+#: includes/class-pwddm-driver.php:213 includes/class-pwddm-reports.php:600
+#, fuzzy
+msgid "Availability"
+msgstr "Verfügbarkeit"
+
+#: includes/class-pwddm-driver.php:214 includes/class-pwddm-reports.php:602 
+#: includes/class-pwddm-reports.php:867 includes/class-pwddm-reports.php:978
+#, fuzzy
+msgid "Manager"
+msgstr "Manager"
+
+#: includes/class-pwddm-driver.php:265
+msgid "Drivers not found."
+msgstr "Fahrer nicht gefunden."
+
+#: includes/class-pwddm-driver.php:352 includes/class-pwddm-order.php:593
+#, fuzzy
+msgid "Photo"
+msgstr "Foto"
+
+#: includes/class-pwddm-driver.php:380 includes/class-pwddm-driver.php:382 
+#: includes/class-pwddm-driver.php:580 includes/class-pwddm-driver.php:581
+#, fuzzy
+msgid "First name"
+msgstr "Vorname"
+
+#: includes/class-pwddm-driver.php:386 includes/class-pwddm-driver.php:388 
+#: includes/class-pwddm-driver.php:584 includes/class-pwddm-driver.php:585
+#, fuzzy
+msgid "Last name"
+msgstr "Nachname"
+
+#: includes/class-pwddm-driver.php:392 includes/class-pwddm-driver.php:394
+#, fuzzy
+msgid "Company"
+msgstr "Gesellschaft"
+
+#: includes/class-pwddm-driver.php:398 includes/class-pwddm-driver.php:400
+#, fuzzy
+msgid "Address line 1"
+msgstr "Anschrift Zeile 1"
+
+#: includes/class-pwddm-driver.php:404 includes/class-pwddm-driver.php:406
+#, fuzzy
+msgid "Address line 2"
+msgstr "Adresszeile 2"
+
+#: includes/class-pwddm-driver.php:410 includes/class-pwddm-driver.php:412
+#, fuzzy
+msgid "City"
+msgstr "Stadt"
+
+#: includes/class-pwddm-driver.php:416 includes/class-pwddm-driver.php:418
+#, fuzzy
+msgid "Postcode / ZIP"
+msgstr "Postleitzahl / PLZ"
+
+#: includes/class-pwddm-driver.php:432
+#, fuzzy
+msgid "Country / Region"
+msgstr "Land / Region"
+
+#: includes/class-pwddm-driver.php:434
+#, fuzzy
+msgid "Select Country / Region"
+msgstr "Land/Region auswählen"
+
+#: includes/class-pwddm-driver.php:442 includes/class-pwddm-driver.php:449
+#, fuzzy
+msgid "State / County"
+msgstr "Bundesland / Landkreis"
+
+#: includes/class-pwddm-driver.php:444
+#, fuzzy
+msgid "Select State / County"
+msgstr "Wählen Sie Bundesland / Landkreis"
+
+#: includes/class-pwddm-driver.php:453 includes/class-pwddm-driver.php:455 
+#: includes/class-pwddm-driver.php:588 includes/class-pwddm-driver.php:589
+#, fuzzy
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: includes/class-pwddm-driver.php:459 includes/class-pwddm-driver.php:592
+#, fuzzy
+msgid "Email address"
+msgstr "E-Mail-Addresse"
+
+#: includes/class-pwddm-driver.php:461 includes/class-pwddm-driver.php:593
+#, fuzzy
+msgid "Enter email"
+msgstr "Email eingeben"
+
+#: includes/class-pwddm-driver.php:466 includes/class-pwddm-driver.php:596 
+#: includes/class-pwddm-driver.php:597 includes/class-pwddm-login.php:59
+#, fuzzy
+msgid "Password"
+msgstr "Passwort"
+
+#: includes/class-pwddm-driver.php:468
+#, fuzzy
+msgid "Set New Password"
+msgstr "Neues Passwort festlegen"
+
+#: includes/class-pwddm-driver.php:471
+#, fuzzy
+msgid "Enter password"
+msgstr "Passwort eingeben"
+
+#: includes/class-pwddm-driver.php:474
+#, fuzzy
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: includes/class-pwddm-driver.php:481
+#, fuzzy
+msgid "Driver account status"
+msgstr "Status des Fahrerkontos"
+
+#: includes/class-pwddm-driver.php:488
+#, fuzzy
+msgid "Only drivers with active accounts can access the drivers' panel."
+msgstr "Nur Fahrer mit aktiven Konten können auf das Fahrerfenster zugreifen."
+
+#: includes/class-pwddm-driver.php:493
+#, fuzzy
+msgid "Driver availability"
+msgstr "Fahrerverfügbarkeit"
+
+#: includes/class-pwddm-driver.php:496 includes/class-pwddm-route.php:1583
+#, fuzzy
+msgid "Unavailable"
+msgstr "Nicht verfügbar"
+
+#: includes/class-pwddm-driver.php:498 includes/class-pwddm-route.php:1581
+#, fuzzy
+msgid "Available"
+msgstr "Erhältlich"
+
+#: includes/class-pwddm-driver.php:500
+#, fuzzy
+msgid "The delivery driver availability for work today."
+msgstr "Die Verfügbarkeit des Lieferfahrers für die Arbeit heute."
+
+#: includes/class-pwddm-driver.php:505
+#, fuzzy
+msgid "Driver can claim orders"
+msgstr "Fahrer kann Bestellungen beanspruchen"
+
+#: includes/class-pwddm-driver.php:510
+#, fuzzy
+msgid "No"
+msgstr "Nein"
+
+#: includes/class-pwddm-driver.php:511
+#, fuzzy
+msgid "Yes"
+msgstr "Jawohl"
+
+#: includes/class-pwddm-driver.php:513
+#, fuzzy
+msgid "Give the driver permission to claim orders."
+msgstr "Erteilen Sie dem Fahrer die Erlaubnis, Aufträge zu beanspruchen."
+
+#: includes/class-pwddm-driver.php:520
+#, fuzzy
+msgid "Address Coordinates"
+msgstr "Adresskoordinaten"
+
+#: includes/class-pwddm-driver.php:521
+#, fuzzy
+msgid "Leave blank for auto-filling."
+msgstr "Zum automatischen Ausfüllen leer lassen."
+
+#: includes/class-pwddm-driver.php:523
+#, fuzzy
+msgid "Latitude"
+msgstr "Breite"
+
+#: includes/class-pwddm-driver.php:525
+#, fuzzy
+msgid "latitude"
+msgstr "Breite"
+
+#: includes/class-pwddm-driver.php:526
+#, fuzzy
+msgid "e.g. 37.819722"
+msgstr "z.B. 37.819722"
+
+#: includes/class-pwddm-driver.php:531
+#, fuzzy
+msgid "Longitude"
+msgstr "Längengrad"
+
+#: includes/class-pwddm-driver.php:533
+#, fuzzy
+msgid "longitude"
+msgstr "Längengrad"
+
+#: includes/class-pwddm-driver.php:534
+#, fuzzy
+msgid "e.g. -122.478611"
+msgstr "z.B. -122.478611"
+
+#: includes/class-pwddm-driver.php:544 includes/class-pwddm-manager.php:131 
+#: includes/class-pwddm-order.php:539
+#, fuzzy
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: includes/class-pwddm-driver.php:548 includes/class-pwddm-driver.php:621 
+#: includes/class-pwddm-login.php:66 includes/class-pwddm-manager.php:135 
+#: includes/class-pwddm-password.php:165 includes/class-pwddm-route.php:1043
+#, fuzzy
+msgid "Loading"
+msgstr "Wird geladen"
+
+#: includes/class-pwddm-driver.php:554 includes/class-pwddm-driver.php:715
+#, fuzzy
+msgid "The driver does not belong to you."
+msgstr "Der Fahrer gehört nicht Ihnen."
+
+#: includes/class-pwddm-driver.php:604
+#, fuzzy
+msgid "Country"
+msgstr "Land"
+
+#: includes/class-pwddm-driver.php:606
+#, fuzzy
+msgid "Select country"
+msgstr "Land auswählen"
+
+#: includes/class-pwddm-driver.php:617
+#, fuzzy
+msgid "Submit"
+msgstr "einreichen"
+
+#: includes/class-pwddm-driver.php:647 includes/class-pwddm-driver.php:802 
+#: includes/class-pwddm-login.php:93 includes/class-pwddm-manager.php:163
+#, fuzzy
+msgid ""
+"Security Check Failure - This alert may occur when you are logged in as an "
+"administrator and as a manager on the same browser and the same device. If "
+"you want to work on both panels please try to work with two different "
+"browsers."
+msgstr ""
+"Sicherheitsüberprüfungsfehler – Diese Warnung kann auftreten, wenn Sie als "
+"Administrator und als Manager im selben Browser und auf demselben Gerät "
+"angemeldet sind. Wenn Sie auf beiden Panels arbeiten möchten, versuchen Sie "
+"es mit zwei verschiedenen Browsern."
+
+#: includes/class-pwddm-driver.php:653 includes/class-pwddm-driver.php:807 
+#: includes/class-pwddm-manager.php:169
+#, fuzzy
+msgid "You are not a manager."
+msgstr "Sie sind kein Manager."
+
+#: includes/class-pwddm-driver.php:677
+#, fuzzy
+msgid "Driver number is empty."
+msgstr "Fahrernummer ist leer."
+
+#: includes/class-pwddm-driver.php:682 includes/class-pwddm-driver.php:833 
+#: includes/class-pwddm-login.php:105
+#, fuzzy
+msgid "The email field is empty."
+msgstr "Das E-Mail-Feld ist leer."
+
+#: includes/class-pwddm-driver.php:686 includes/class-pwddm-driver.php:841 
+#: includes/class-pwddm-login.php:113
+#, fuzzy
+msgid "The email is invalid."
+msgstr "Die E-Mail ist ungültig."
+
+#: includes/class-pwddm-driver.php:692
+#, fuzzy
+msgid "Email exist for another user."
+msgstr "E-Mail für einen anderen Benutzer vorhanden."
+
+#: includes/class-pwddm-driver.php:695 includes/class-pwddm-driver.php:850
+#, fuzzy
+msgid "First name is empty."
+msgstr "Vorname ist leer."
+
+#: includes/class-pwddm-driver.php:698 includes/class-pwddm-driver.php:853
+#, fuzzy
+msgid "Last name is empty."
+msgstr "Nachname ist leer."
+
+#: includes/class-pwddm-driver.php:701 includes/class-pwddm-driver.php:856
+#, fuzzy
+msgid "Phone is empty."
+msgstr "Telefon ist leer."
+
+#: includes/class-pwddm-driver.php:704
+#, fuzzy
+msgid "Address 1 is empty."
+msgstr "Adresse 1 ist leer."
+
+#: includes/class-pwddm-driver.php:707
+#, fuzzy
+msgid "City is empty."
+msgstr "Stadt ist leer."
+
+#: includes/class-pwddm-driver.php:710 includes/class-pwddm-driver.php:859
+#, fuzzy
+msgid "Country is empty."
+msgstr "Land ist leer."
+
+#: includes/class-pwddm-driver.php:768
+msgid "The driver successfully updated."
+msgstr "Der Fahrer wurde erfolgreich aktualisiert."
+
+#: includes/class-pwddm-driver.php:837 includes/class-pwddm-login.php:109
+#, fuzzy
+msgid "The password field is empty."
+msgstr "Das Passwortfeld ist leer."
+
+#: includes/class-pwddm-driver.php:847 includes/class-pwddm-driver.php:889
+#, fuzzy
+msgid "User is already exist in the system."
+msgstr "Benutzer ist bereits im System vorhanden."
+
+#: includes/class-pwddm-driver.php:884
+msgid "New driver successfully created "
+msgstr "Neuer Fahrer erfolgreich angelegt"
+
+#: includes/class-pwddm-driver.php:884
+#, fuzzy
+msgid "View driver"
+msgstr "Fahrer anzeigen"
+
+#: includes/class-pwddm-driver.php:886
+msgid "An error occurred creating new driver."
+msgstr "Beim Erstellen eines neuen Fahrers ist ein Fehler aufgetreten."
+
+#: includes/class-pwddm-login.php:53 includes/class-pwddm-login.php:62 
+#: includes/class-pwddm-password.php:204
+#, fuzzy
+msgid "Login"
+msgstr "Anmeldung"
+
+#: includes/class-pwddm-login.php:54
+#, fuzzy
+msgid "Enter your details below to continue."
+msgstr "Geben Sie unten Ihre Daten ein, um fortzufahren."
+
+#: includes/class-pwddm-login.php:69
+#, fuzzy
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: includes/class-pwddm-login.php:120 includes/class-pwddm-login.php:125
+#, fuzzy
+msgid "Either the email or password you entered is invalid."
+msgstr ""
+"Entweder ist die eingegebene E-Mail-Adresse oder das eingegebene Passwort "
+"ungültig."
+
+#: includes/class-pwddm-login.php:128
+#, fuzzy
+msgid "You are not a registered delivery manager."
+msgstr "Sie sind kein registrierter Liefermanager."
+
+#: includes/class-pwddm-login.php:132
+#, fuzzy
+msgid "Your account is not active, please contact your administrator."
+msgstr ""
+"Ihr Konto ist nicht aktiv, bitte wenden Sie sich an Ihren Administrator."
+
+#: includes/class-pwddm-manager.php:73
+#, fuzzy
+msgid "Select a manager"
+msgstr "Wählen Sie einen Manager aus"
+
+#: includes/class-pwddm-manager.php:105
+#, fuzzy
+msgid "Driver Commissions"
+msgstr "Fahrerprovisionen"
+
+#: includes/class-pwddm-manager.php:108
+#, fuzzy
+msgid "Select"
+msgstr "Auswählen"
+
+#: includes/class-pwddm-manager.php:109
+#, fuzzy
+msgid "Fixed Price"
+msgstr "Festpreis"
+
+#: includes/class-pwddm-manager.php:110
+#, fuzzy
+msgid "Delivery total percentage"
+msgstr "Gesamtprozentsatz der Lieferung"
+
+#: includes/class-pwddm-manager.php:111
+#, fuzzy
+msgid "Order total percentage"
+msgstr "Gesamtprozentsatz der Bestellung"
+
+#: includes/class-pwddm-manager.php:113
+#, fuzzy
+msgid "Set commissions for your drivers only."
+msgstr "Legen Sie Provisionen nur für Ihre Fahrer fest."
+
+#: includes/class-pwddm-manager.php:178
+#, fuzzy
+msgid "The settings successfully updated."
+msgstr "Die Einstellungen wurden erfolgreich aktualisiert."
+
+#: includes/class-pwddm-order.php:38
+#, fuzzy
+msgid "Order status has been changed by the manager."
+msgstr "Der Auftragsstatus wurde vom Manager geändert."
+
+#: includes/class-pwddm-order.php:47
+#, fuzzy
+msgid "Order successfully updated."
+msgstr "Bestellung erfolgreich aktualisiert."
+
+#: includes/class-pwddm-order.php:74 includes/class-pwddm-order.php:76 
+#: includes/class-pwddm-order.php:78 includes/class-pwddm-order.php:80 
+#: includes/class-pwddm-order.php:82 includes/class-pwddm-orders.php:947 
+#: includes/class-pwddm-orders.php:949 includes/class-pwddm-orders.php:951 
+#: includes/class-pwddm-orders.php:953 includes/class-pwddm-orders.php:955
+#, fuzzy
+msgid "Order status has been changed by manager."
+msgstr "Der Auftragsstatus wurde vom Manager geändert."
+
+#: includes/class-pwddm-order.php:260
+#, fuzzy
+msgid "Info"
+msgstr "Die Info"
+
+#: includes/class-pwddm-order.php:263 includes/class-pwddm-orders.php:1339
+#, fuzzy
+msgid "Date"
+msgstr "Datum"
+
+#: includes/class-pwddm-order.php:266 includes/class-pwddm-orders.php:1342
+#, fuzzy
+msgid "Status"
+msgstr "Status"
+
+#: includes/class-pwddm-order.php:271
+#, fuzzy
+msgid "Failed date"
+msgstr "Fehlgeschlagenes Datum"
+
+#: includes/class-pwddm-order.php:277
+#, fuzzy
+msgid "Delivered date"
+msgstr "Lieferdatum"
+
+#: includes/class-pwddm-order.php:284
+#, fuzzy
+msgid "Payment method"
+msgstr "Bezahlverfahren"
+
+#: includes/class-pwddm-order.php:290 includes/class-pwddm-order.php:638 
+#: includes/class-pwddm-order.php:750 includes/class-pwddm-reports.php:61 
+#: includes/class-pwddm-reports.php:103 includes/class-pwddm-reports.php:133 
+#: includes/class-pwddm-reports.php:193 includes/class-pwddm-reports.php:807 
+#: includes/class-pwddm-reports.php:875
+#, fuzzy
+msgid "Total"
+msgstr "Gesamt"
+
+#: includes/class-pwddm-order.php:308
+#, fuzzy
+msgid "Order - Info"
+msgstr "Bestellung - Info"
+
+#: includes/class-pwddm-order.php:328
+#, fuzzy
+msgid "Shipping Address"
+msgstr "Lieferanschrift"
+
+#: includes/class-pwddm-order.php:344
+#, fuzzy
+msgid "Order - Shipping Address"
+msgstr "Bestellung - Lieferadresse"
+
+#: includes/class-pwddm-order.php:365 includes/class-pwddm-orders.php:1340
+#, fuzzy
+msgid "Customer"
+msgstr "Kunde"
+
+#: includes/class-pwddm-order.php:388
+#, fuzzy
+msgid "Order - Customer"
+msgstr "Bestellung - Kunde"
+
+#: includes/class-pwddm-order.php:418
+#, fuzzy
+msgid "Billing Address"
+msgstr "Rechnungsadresse"
+
+#: includes/class-pwddm-order.php:434
+#, fuzzy
+msgid "Order - Billing Address"
+msgstr "Bestellung - Rechnungsadresse"
+
+#: includes/class-pwddm-order.php:494
+#, fuzzy
+msgid "Choose action"
+msgstr "Aktion wählen"
+
+#: includes/class-pwddm-order.php:495 includes/class-pwddm-order.php:496 
+#: includes/class-pwddm-order.php:497 includes/class-pwddm-order.php:498 
+#: includes/class-pwddm-order.php:499 includes/class-pwddm-orders.php:1071 
+#: includes/class-pwddm-orders.php:1072 includes/class-pwddm-orders.php:1073 
+#: includes/class-pwddm-orders.php:1074 includes/class-pwddm-orders.php:1075 
+#: includes/class-pwddm-route.php:965 includes/class-pwddm-route.php:966 
+#: includes/class-pwddm-route.php:967 includes/class-pwddm-route.php:968 
+#: includes/class-pwddm-route.php:969
+#, fuzzy
+msgid "Change status to"
+msgstr "Status ändern in"
+
+#: includes/class-pwddm-order.php:495 includes/class-pwddm-orders.php:271 
+#: includes/class-pwddm-orders.php:1009 includes/class-pwddm-orders.php:1071 
+#: includes/class-pwddm-route.php:905 includes/class-pwddm-route.php:965
+#, fuzzy
+msgid "Processing"
+msgstr "wird bearbeitet"
+
+#: includes/class-pwddm-order.php:499 includes/class-pwddm-orders.php:1075 
+#: includes/class-pwddm-orders.php:1118 includes/class-pwddm-route.php:969 
+#: includes/class-pwddm-route.php:1006
+#, fuzzy
+msgid "Delivered"
+msgstr "Geliefert"
+
+#: includes/class-pwddm-order.php:507 includes/pwddm-metaboxes.php:29
+#, fuzzy
+msgid "Assign a driver"
+msgstr "Einen Fahrer zuweisen"
+
+#: includes/class-pwddm-order.php:508 includes/class-pwddm-orders.php:1076 
+#: includes/class-pwddm-route.php:971
+#, fuzzy
+msgid "Unassign driver"
+msgstr "Zuweisung des Fahrers aufheben"
+
+#: includes/class-pwddm-order.php:525 includes/class-pwddm-orders.php:1090 
+#: includes/class-pwddm-route.php:982 includes/pwddm-metaboxes.php:45
+#, fuzzy
+msgid "drivers"
+msgstr "Fahrer"
+
+#: includes/class-pwddm-order.php:554 includes/class-pwddm-order.php:561 
+#: includes/class-pwddm-orders.php:478 includes/class-pwddm-orders.php:1343 
+#: includes/class-pwddm-reports.php:185 includes/class-pwddm-reports.php:511 
+#: includes/class-pwddm-reports.php:522 includes/class-pwddm-reports.php:677
+msgid "Driver"
+msgstr "Fahrer"
+
+#: includes/class-pwddm-order.php:570
+#, fuzzy
+msgid "Driver note"
+msgstr "Fahrerhinweis"
+
+#: includes/class-pwddm-order.php:582
+#, fuzzy
+msgid "Signature"
+msgstr "Unterschrift"
+
+#: includes/class-pwddm-order.php:607
+#, fuzzy
+msgid "You don't have access to this order."
+msgstr "Sie haben keinen Zugriff auf diese Bestellung."
+
+#: includes/class-pwddm-order.php:631
+#, fuzzy
+msgid "Products"
+msgstr "Produkte"
+
+#: includes/class-pwddm-order.php:636
+#, fuzzy
+msgid "Item"
+msgstr "Artikel"
+
+#: includes/class-pwddm-order.php:713
+#, fuzzy
+msgid "Discount"
+msgstr "Rabatt"
+
+#: includes/class-pwddm-order.php:727
+#, fuzzy
+msgid "Shipping"
+msgstr "Versand"
+
+#: includes/class-pwddm-order.php:727
+#, fuzzy
+msgid "via"
+msgstr "über"
+
+#: includes/class-pwddm-order.php:754
+#, fuzzy
+msgid "Refund"
+msgstr "Erstattung"
+
+#: includes/class-pwddm-order.php:755
+#, fuzzy
+msgid "Net Total"
+msgstr "Netto Gesamt"
+
+#: includes/class-pwddm-orders.php:477 includes/class-pwddm-orders.php:1338
+msgid "Order"
+msgstr "Bestellung"
+
+#: includes/class-pwddm-orders.php:479
+#, fuzzy
+msgid "Location"
+msgstr "Standort"
+
+#: includes/class-pwddm-orders.php:605
+#, fuzzy
+msgid "Pickup:"
+msgstr "Abholen:"
+
+#: includes/class-pwddm-orders.php:615
+#, fuzzy
+msgid ""
+"\"ROOFTOP\" indicates that the returned result is a precise geocode for "
+"which we have location information accurate down to street address precision."
+msgstr ""
+"\"ROOFTOP\" zeigt an, dass das zurückgegebene Ergebnis ein präziser Geocode "
+"ist, für den wir Standortinformationen haben, die bis auf die "
+"Straßenadressen genau sind."
+
+#: includes/class-pwddm-orders.php:621
+#, fuzzy
+msgid ""
+"\"GEOMETRIC_CENTER\" indicates that the returned result is the geometric "
+"center of a result such as a polyline (for example, a street) or polygon "
+"(region)."
+msgstr ""
+"\"GEOMETRIC_CENTER\" gibt an, dass das zurückgegebene Ergebnis der "
+"geometrische Mittelpunkt eines Ergebnisses ist, beispielsweise einer "
+"Polylinie (z. B. einer Straße) oder eines Polygons (Region)."
+
+#: includes/class-pwddm-orders.php:627
+#, fuzzy
+msgid "\"APPROXIMATE\" indicates that the returned result is approximate."
+msgstr ""
+"\"APPROXIMATE\" gibt an, dass das zurückgegebene Ergebnis ungefähr ist."
+
+#: includes/class-pwddm-orders.php:632
+#, fuzzy
+msgid ""
+"\"RANGE_INTERPOLATED\" indicates that the returned result reflects an "
+"approximation (usually on a road) interpolated between two precise points "
+"(such as intersections). Interpolated results are generally returned when "
+"rooftop geocodes are unavailable for a street address."
+msgstr ""
+"\"RANGE_INTERPOLATED\" gibt an, dass das zurückgegebene Ergebnis eine "
+"Annäherung (normalerweise auf einer Straße) widerspiegelt, die zwischen zwei "
+"genauen Punkten (wie Kreuzungen) interpoliert wurde. Interpolierte "
+"Ergebnisse werden im Allgemeinen zurückgegeben, wenn für eine Straßenadresse "
+"keine Geocodes auf dem Dach verfügbar sind."
+
+#: includes/class-pwddm-orders.php:636
+#, fuzzy
+msgid "Address not found."
+msgstr "Adresse nicht gefunden."
+
+#: includes/class-pwddm-orders.php:647 includes/class-pwddm-orders.php:655 
+#: includes/class-pwddm-orders.php:1463
+#, fuzzy
+msgid "There are no orders."
+msgstr "Es gibt keine Bestellungen."
+
+#: includes/class-pwddm-orders.php:1047 includes/class-pwddm-orders.php:1153 
+#: includes/class-pwddm-route.php:951 includes/class-pwddm-route.php:1032
+#, fuzzy
+msgid "Filter"
+msgstr "Filter"
+
+#: includes/class-pwddm-orders.php:1050 includes/class-pwddm-orders.php:1070 
+#: includes/class-pwddm-route.php:954 includes/class-pwddm-route.php:964
+#, fuzzy
+msgid "Bulk actions"
+msgstr "Massenaktionen"
+
+#: includes/class-pwddm-orders.php:1061
+#, fuzzy
+msgid "Bulk assign drivers to orders."
+msgstr "Massenzuweisung von Fahrern zu Aufträgen."
+
+#: includes/class-pwddm-orders.php:1062
+#, fuzzy
+msgid "Bulk update order statuses."
+msgstr "Auftragsstatus im Bulk-Update."
+
+#: includes/class-pwddm-orders.php:1094 includes/class-pwddm-route.php:986
+#, fuzzy
+msgid "Assign to"
+msgstr "Zuweisen"
+
+#: includes/class-pwddm-orders.php:1103 includes/class-pwddm-route.php:994
+#, fuzzy
+msgid "Apply"
+msgstr "Anwenden"
+
+#: includes/class-pwddm-orders.php:1113
+#, fuzzy
+msgid "All Statuses"
+msgstr "Alle Status"
+
+#: includes/class-pwddm-orders.php:1124 includes/class-pwddm-route.php:1011
+#, fuzzy
+msgid "All Dates"
+msgstr "Alle Termine"
+
+#: includes/class-pwddm-orders.php:1125 includes/class-pwddm-reports.php:420 
+#: includes/class-pwddm-route.php:1012
+#, fuzzy
+msgid "Today"
+msgstr "Heute"
+
+#: includes/class-pwddm-orders.php:1126 includes/class-pwddm-reports.php:421 
+#: includes/class-pwddm-route.php:1013
+#, fuzzy
+msgid "Yesterday"
+msgstr "Gestern"
+
+#: includes/class-pwddm-orders.php:1127 includes/class-pwddm-reports.php:422 
+#: includes/class-pwddm-route.php:1014
+#, fuzzy
+msgid "This month"
+msgstr "Diesen Monat"
+
+#: includes/class-pwddm-orders.php:1128 includes/class-pwddm-reports.php:423 
+#: includes/class-pwddm-route.php:1015
+#, fuzzy
+msgid "Last month"
+msgstr "Letzten Monat"
+
+#: includes/class-pwddm-orders.php:1134 includes/class-pwddm-route.php:1020
+#, fuzzy
+msgid "Filter By"
+msgstr "Filtern nach"
+
+#: includes/class-pwddm-orders.php:1137 includes/class-pwddm-route.php:1021
+#, fuzzy
+msgid "With drivers"
+msgstr "Mit Fahrern"
+
+#: includes/class-pwddm-orders.php:1140 includes/class-pwddm-route.php:1022
+msgid "Without drivers"
+msgstr "Ohne Fahrer"
+
+#: includes/class-pwddm-orders.php:1142 includes/class-pwddm-reports.php:127 
+#: includes/class-pwddm-reports.php:201 includes/class-pwddm-reports.php:448 
+#: includes/class-pwddm-reports.php:522 includes/class-pwddm-reports.php:596 
+#: includes/class-pwddm-reports.php:692 includes/class-pwddm-reports.php:984 
+#: includes/class-pwddm-route.php:1023 includes/class-pwddm-screens.php:71 
+#: includes/class-pwddm-screens.php:245
+msgid "Drivers"
+msgstr "Fahrer"
+
+#: includes/class-pwddm-orders.php:1341
+#, fuzzy
+msgid "Shipping address"
+msgstr "Lieferanschrift"
+
+#: includes/class-pwddm-password.php:44
+#, fuzzy
+msgid "Email field is empty."
+msgstr "E-Mail-Feld ist leer."
+
+#: includes/class-pwddm-password.php:48
+#, fuzzy
+msgid "The email you entered is invalid."
+msgstr "Die eingegebene E-Mail ist ungültig."
+
+#: includes/class-pwddm-password.php:54
+#, fuzzy
+msgid "The email you entered was not found."
+msgstr "Die eingegebene E-Mail wurde nicht gefunden."
+
+#: includes/class-pwddm-password.php:58
+#, fuzzy
+msgid "You are not a registered delivery driver."
+msgstr "Sie sind kein registrierter Lieferfahrer."
+
+#: includes/class-pwddm-password.php:64
+#, fuzzy
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+"Jemand hat angefordert, dass das Passwort für das folgende Konto "
+"zurückgesetzt wird:"
+
+#: includes/class-pwddm-password.php:66
+#, fuzzy
+#, php-format
+msgid "Email: %s"
+msgstr "E-Mail: %s"
+
+#: includes/class-pwddm-password.php:67
+#, fuzzy
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+"Wenn dies ein Fehler war, ignorieren Sie diese E-Mail einfach und nichts "
+"wird passieren."
+
+#: includes/class-pwddm-password.php:68
+#, fuzzy
+msgid "To reset your password, visit the following address:"
+msgstr "Um Ihr Passwort zurückzusetzen, besuchen Sie die folgende Adresse:"
+
+#: includes/class-pwddm-password.php:72
+#, fuzzy
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: includes/class-pwddm-password.php:74
+#, fuzzy
+msgid "An error occurred while sending mail."
+msgstr "Beim Senden von E-Mails ist ein Fehler aufgetreten."
+
+#: includes/class-pwddm-password.php:108
+#, fuzzy
+msgid "The new password field is empty."
+msgstr "Das Feld für das neue Passwort ist leer."
+
+#: includes/class-pwddm-password.php:112
+#, fuzzy
+msgid "The confirm password field is empty."
+msgstr "Das Feld Kennwort bestätigen ist leer."
+
+#: includes/class-pwddm-password.php:116
+#, fuzzy
+msgid "New password and confirm password do not match."
+msgstr "Neues Passwort und Passwort zur Bestätigung stimmen nicht überein."
+
+#: includes/class-pwddm-password.php:126
+#, fuzzy
+msgid ""
+"This key is invalid or has already been used. Please reset your password "
+"again if needed."
+msgstr ""
+"Dieser Schlüssel ist ungültig oder wurde bereits verwendet. Bitte setzen Sie "
+"Ihr Passwort bei Bedarf erneut zurück."
+
+#: includes/class-pwddm-password.php:154
+#, fuzzy
+msgid "Forgot your password?"
+msgstr "Passwort vergessen?"
+
+#: includes/class-pwddm-password.php:155
+#, fuzzy
+msgid "Enter your email, and we'll email you a link to change your password."
+msgstr ""
+"Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Ändern "
+"Ihres Passworts per E-Mail zu."
+
+#: includes/class-pwddm-password.php:161 includes/class-pwddm-password.php:285 
+#: includes/class-pwddm-password.php:289 includes/class-pwddm-reports.php:437
+#, fuzzy
+msgid "Send"
+msgstr "Senden"
+
+#: includes/class-pwddm-password.php:169
+#, fuzzy
+msgid "Back to login"
+msgstr "Zurück zur Anmeldung"
+
+#: includes/class-pwddm-password.php:201
+#, fuzzy
+msgid "Your password has been changed successfully."
+msgstr "Ihr Passwort wurde erfolgreich geändert."
+
+#: includes/class-pwddm-password.php:202
+#, fuzzy
+msgid "Please click on the login button to login with your new password"
+msgstr ""
+"Bitte klicken Sie auf den Login-Button, um sich mit Ihrem neuen Passwort "
+"anzumelden"
+
+#: includes/class-pwddm-password.php:233
+#, fuzzy
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
+
+#: includes/class-pwddm-password.php:234
+#, fuzzy
+msgid ""
+"A password reset link was sent. Click the link in the email to create a new "
+"password. If you do not receive an email within 5 minutes, please click on "
+"the resend email button below."
+msgstr ""
+"Ein Link zum Zurücksetzen des Passworts wurde gesendet. Klicken Sie auf den "
+"Link in der E-Mail, um ein neues Passwort zu erstellen. Wenn Sie innerhalb "
+"von 5 Minuten keine E-Mail erhalten, klicken Sie bitte unten auf die "
+"Schaltfläche E-Mail erneut senden."
+
+#: includes/class-pwddm-password.php:236
+#, fuzzy
+msgid "Resend email"
+msgstr "E-Mail zurücksenden"
+
+#: includes/class-pwddm-password.php:239 includes/class-pwddm-password.php:294
+#, fuzzy
+msgid "Back to forgot password"
+msgstr "Zurück zu Passwort vergessen"
+
+#: includes/class-pwddm-password.php:277
+#, fuzzy
+msgid "Create a new password."
+msgstr "Erstelle ein neues Passwort."
+
+#: includes/class-pwddm-password.php:279
+#, fuzzy
+msgid "New password"
+msgstr "Neues Kennwort"
+
+#: includes/class-pwddm-password.php:280
+#, fuzzy
+msgid "Confirm password"
+msgstr "Kennwort bestätigen"
+
+#: includes/class-pwddm-reports.php:51
+#, fuzzy
+msgid "Orders without drivers"
+msgstr "Bestellungen ohne Fahrer"
+
+#: includes/class-pwddm-reports.php:56 includes/class-pwddm-reports.php:96
+#, fuzzy
+msgid "Ready for claim"
+msgstr "Bereit zur Reklamation"
+
+#: includes/class-pwddm-reports.php:59 includes/class-pwddm-reports.php:101 
+#: includes/class-pwddm-reports.php:131 includes/class-pwddm-reports.php:191 
+#: includes/class-pwddm-reports.php:805 includes/class-pwddm-reports.php:873
+#, fuzzy
+msgid "Delivered today"
+msgstr "Heute geliefert"
+
+#: includes/class-pwddm-reports.php:74 includes/class-pwddm-reports.php:154 
+#: includes/class-pwddm-reports.php:471 includes/class-pwddm-reports.php:828
+#, fuzzy
+msgid "No orders"
+msgstr "Keine Bestellungen"
+
+#: includes/class-pwddm-reports.php:122
+#, fuzzy
+msgid "Drivers orders"
+msgstr "Fahrerbestellungen"
+
+#: includes/class-pwddm-reports.php:409
+#, fuzzy
+msgid "Drivers commissions"
+msgstr "Fahrerprovisionen"
+
+#: includes/class-pwddm-reports.php:415
+#, fuzzy
+msgid "Dates"
+msgstr "Termine"
+
+#: includes/class-pwddm-reports.php:424
+#, fuzzy
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: includes/class-pwddm-reports.php:431
+#, fuzzy
+msgid "From"
+msgstr "Von"
+
+#: includes/class-pwddm-reports.php:432
+#, fuzzy
+msgid "To"
+msgstr "Zu"
+
+#: includes/class-pwddm-reports.php:449 includes/class-pwddm-reports.php:512 
+#: includes/class-pwddm-reports.php:523 includes/class-pwddm-route.php:1543 
+#: includes/class-pwddm-route.php:1614 includes/class-pwddm-screens.php:88 
+#: includes/class-pwddm-screens.php:350
+#, fuzzy
+msgid "Orders"
+msgstr "Aufträge"
+
+#: includes/class-pwddm-reports.php:450
+#, fuzzy
+msgid "Orders Total"
+msgstr "Bestellungen insgesamt"
+
+#: includes/class-pwddm-reports.php:451
+#, fuzzy
+msgid "Shipping Total"
+msgstr "Versand insgesamt"
+
+#: includes/class-pwddm-reports.php:452 includes/class-pwddm-reports.php:515 
+#: includes/class-pwddm-reports.php:526
+#, fuzzy
+msgid "Commission"
+msgstr "Kommission"
+
+#: includes/class-pwddm-reports.php:513 includes/class-pwddm-reports.php:524
+#, fuzzy
+msgid "Orders Price"
+msgstr "Bestellpreis"
+
+#: includes/class-pwddm-reports.php:514 includes/class-pwddm-reports.php:525
+#, fuzzy
+msgid "Shipping Price"
+msgstr "Versandkosten"
+
+#: includes/class-pwddm-reports.php:579
+#, fuzzy
+msgid "Active drivers"
+msgstr "Aktive Fahrer"
+
+#: includes/class-pwddm-reports.php:585 includes/class-pwddm-screens.php:77
+#, fuzzy
+msgid "Add new driver"
+msgstr "Neuen Fahrer hinzufügen"
+
+#: includes/class-pwddm-reports.php:589 includes/class-pwddm-screens.php:82
+#, fuzzy
+msgid "All drivers"
+msgstr "Alle Fahrer"
+
+#: includes/class-pwddm-reports.php:599 includes/class-pwddm-reports.php:682 
+#: includes/class-pwddm-reports.php:918 includes/class-pwddm-reports.php:983
+#, fuzzy
+msgid "Address"
+msgstr "Die Anschrift"
+
+#: includes/class-pwddm-reports.php:601
+#, fuzzy
+msgid "Claim orders"
+msgstr "Bestellungen anfordern"
+
+#: includes/class-pwddm-reports.php:611
+msgid "No drivers"
+msgstr "Keine Fahrer"
+
+#: includes/class-pwddm-reports.php:696
+#, fuzzy
+msgid "Availables"
+msgstr "Verfügbare"
+
+#: includes/class-pwddm-reports.php:696
+#, fuzzy
+msgid "Unavailables"
+msgstr "Nicht verfügbar"
+
+#: includes/class-pwddm-reports.php:697
+#, fuzzy
+msgid "Can claim"
+msgstr "Kann behaupten"
+
+#: includes/class-pwddm-reports.php:697
+#, fuzzy
+msgid "Can't claim"
+msgstr "Kann nicht behaupten"
+
+#: includes/class-pwddm-reports.php:709
+#, fuzzy
+#, php-format
+msgid ""
+"The link above is the delivery driver's Mobile-Friendly panel URL. %1$s The "
+"delivery drivers can access it from their mobile phones. %2$s"
+msgstr ""
+"Der obige Link ist die URL des mobilfreundlichen Panels des "
+"Auslieferungsfahrers. %1$s Die Zustellfahrer können von ihren Mobiltelefonen "
+"darauf zugreifen. %2$s"
+
+#: includes/class-pwddm-reports.php:710
+#, fuzzy
+#, php-format
+msgid ""
+"Notice: If you want to be logged in as an manager and to check the drivers' "
+"panel on the same device, %1$s %2$syou must work with two different browsers "
+"otherwise you will log out from the manager panel and the drivers' panel "
+"won't function correctly.%3$s"
+msgstr ""
+"Hinweis: Wenn Sie sich als Manager anmelden und das Fahrerfenster auf "
+"demselben Gerät überprüfen möchten, %1$s %2$sSie müssen mit zwei "
+"verschiedenen Browsern arbeiten, sonst melden Sie sich vom Managerfenster "
+"und den Fahrern ab ' Panel funktioniert nicht richtig.%3$s"
+
+#: includes/class-pwddm-reports.php:797
+#, fuzzy
+msgid "Manager drivers orders"
+msgstr "Manager-Fahrerbestellungen"
+
+#: includes/class-pwddm-reports.php:801 includes/class-pwddm-reports.php:884 
+#: includes/class-pwddm-reports.php:915 includes/class-pwddm-reports.php:991
+#, fuzzy
+msgid "Managers"
+msgstr "Manager"
+
+#: includes/class-pwddm-reports.php:906
+#, fuzzy
+msgid "Active managers"
+msgstr "Aktive Manager"
+
+#: includes/class-pwddm-reports.php:907
+#, fuzzy
+msgid "Add new manager"
+msgstr "Neuen Manager hinzufügen"
+
+#: includes/class-pwddm-reports.php:910
+#, fuzzy
+msgid "All managers"
+msgstr "Alle Manager"
+
+#: includes/class-pwddm-reports.php:919
+#, fuzzy
+msgid "Manage drivers"
+msgstr "Fahrer verwalten"
+
+#: includes/class-pwddm-reports.php:928
+#, fuzzy
+msgid "No managers"
+msgstr "Keine Manager"
+
+#: includes/class-pwddm-reports.php:1004
+#, fuzzy
+#, php-format
+msgid ""
+"Notice: If you want to be logged in as an administrator and to check the "
+"managers' panel on the same device, %1$s %2$syou must work with two "
+"different browsers otherwise you will log out from the admin panel and the "
+"managers' panel won't function correctly.%3$s"
+msgstr ""
+"Hinweis: Wenn Sie sich als Administrator anmelden und das Manager-Panel auf "
+"demselben Gerät überprüfen möchten, %1$s %2$sSie müssen mit zwei "
+"verschiedenen Browsern arbeiten, sonst melden Sie sich vom Admin-Panel und "
+"den Managern ab ' Panel funktioniert nicht richtig.%3$s"
+
+#: includes/class-pwddm-route.php:139 includes/class-pwddm-route.php:260
+#, fuzzy
+msgid "An unexpected error has occurred, please try again."
+msgstr ""
+"Ein unerwarteter Fehler ist aufgetreten, bitte versuchen Sie es erneut."
+
+#: includes/class-pwddm-route.php:162 includes/class-pwddm-route.php:168 
+#: includes/class-pwddm-route.php:1328 includes/class-pwddm-screens.php:372
+msgid "Order #"
+msgstr "Bestellung #"
+
+#: includes/class-pwddm-route.php:162
+#, fuzzy
+msgid "no route could be found between the origin and address."
+msgstr "zwischen Ursprung und Adresse konnte keine Route gefunden werden."
+
+#: includes/class-pwddm-route.php:168
+#, fuzzy
+msgid "origin and/or address could not be geocoded."
+msgstr "Herkunft und/oder Adresse konnten nicht geokodiert werden."
+
+#: includes/class-pwddm-route.php:305
+#, fuzzy
+msgid ""
+"The route has been optimized by distance, if you want to make changes you "
+"can drag and drop orders manually."
+msgstr ""
+"Die Route wurde nach Entfernung optimiert, wenn Sie Änderungen vornehmen "
+"möchten, können Sie Bestellungen per Drag & Drop manuell ziehen."
+
+#: includes/class-pwddm-route.php:306
+#, fuzzy
+msgid "Optimize route, please wait..."
+msgstr "Route optimieren, bitte warten..."
+
+#: includes/class-pwddm-route.php:308
+#, fuzzy
+msgid ""
+"The route is ready for optimization, you can make changes by drag and drop "
+"orders manually."
+msgstr ""
+"Die Route ist bereit für die Optimierung, Sie können Änderungen per Drag & "
+"Drop manuell vornehmen."
+
+#: includes/class-pwddm-route.php:309
+#, fuzzy
+msgid "Please wait..."
+msgstr "Warten Sie mal..."
+
+#: includes/class-pwddm-route.php:315 includes/class-pwddm-route.php:316
+#, fuzzy
+msgid "Plan your route"
+msgstr "Planen Sie Ihre Route"
+
+#: includes/class-pwddm-route.php:315
+#, fuzzy
+msgid "Finish planning route"
+msgstr "Routenplanung beenden"
+
+#: includes/class-pwddm-route.php:622
+#, fuzzy
+msgid "View Route"
+msgstr "Route anzeigen"
+
+#: includes/class-pwddm-route.php:933
+#, fuzzy
+msgid "There are no routes for drivers."
+msgstr "Es gibt keine Routen für Autofahrer."
+
+#: includes/class-pwddm-route.php:970
+#, fuzzy
+msgid "Remove order location status"
+msgstr "Standortstatus der Bestellung entfernen"
+
+#: includes/class-pwddm-route.php:1040
+#, fuzzy
+msgid "Show orders on map"
+msgstr "Bestellungen auf Karte anzeigen"
+
+#: includes/class-pwddm-route.php:1045
+#, fuzzy
+msgid "Hide orders on map"
+msgstr "Bestellungen auf der Karte ausblenden"
+
+#: includes/class-pwddm-route.php:1285
+#, fuzzy
+msgid "Pickup Store:"
+msgstr "Abholgeschäft:"
+
+#: includes/class-pwddm-route.php:1318
+msgid "Order:"
+msgstr "Bestellung:"
+
+#: includes/class-pwddm-route.php:1328
+#, fuzzy
+msgid "selected"
+msgstr "ausgewählt"
+
+#: includes/class-pwddm-route.php:1568 includes/class-pwddm-route.php:1572 
+#: includes/class-pwddm-route.php:1576
+#, fuzzy
+msgid "Travel mode"
+msgstr "Reisemodus"
+
+#: includes/class-pwddm-route.php:1597
+#, fuzzy
+msgid "Call driver:"
+msgstr "Fahrer anrufen:"
+
+#: includes/class-pwddm-route.php:1597
+#, fuzzy
+msgid "Send WhatsApp to driver"
+msgstr "WhatsApp an Fahrer senden"
+
+#: includes/class-pwddm-route.php:1601
+#, fuzzy
+msgid "Vehicle"
+msgstr "Fahrzeug"
+
+#: includes/class-pwddm-route.php:1604
+#, fuzzy
+msgid "Licence plate"
+msgstr "Nummernschild"
+
+#: includes/class-pwddm-route.php:1611
+#, fuzzy
+msgid "Driver home"
+msgstr "Fahrer nach Hause"
+
+#: includes/class-pwddm-route.php:1614
+#, fuzzy
+msgid "Route"
+msgstr "Route"
+
+#: includes/class-pwddm-route.php:1614
+#, fuzzy
+msgid "Direction"
+msgstr "Richtung"
+
+#: includes/class-pwddm-route.php:1615
+#, fuzzy
+msgid "Show/Hide route"
+msgstr "Route anzeigen/ausblenden"
+
+#: includes/class-pwddm-route.php:1827 includes/class-pwddm-route.php:1828
+#, fuzzy
+msgid "Driver doesn't have a route."
+msgstr "Fahrer hat keine Route."
+
+#: includes/class-pwddm-route.php:1858
+#, fuzzy
+msgid "Origin"
+msgstr "Herkunft"
+
+#: includes/class-pwddm-route.php:1859
+#, fuzzy
+msgid "Destination"
+msgstr "Ziel"
+
+#: includes/class-pwddm-route.php:1867 includes/class-pwddm-route.php:1870 
+#: includes/class-pwddm-route.php:1877 includes/class-pwddm-route.php:1878
+#, fuzzy
+msgid "Pickup"
+msgstr "Abholen"
+
+#: includes/class-pwddm-route.php:1883
+#, fuzzy
+msgid "last_address_on_route"
+msgstr "last_address_on_route"
+
+#: includes/class-pwddm-route.php:1883
+#, fuzzy
+msgid "Auto - Farthest / Last address on route."
+msgstr "Auto - Am weitesten entfernte / letzte Adresse auf der Route."
+
+#: includes/class-pwddm-route.php:1888 includes/class-pwddm-route.php:1889
+#, fuzzy
+msgid "Home"
+msgstr "Heim"
+
+#: includes/class-pwddm-route.php:1931
+#, fuzzy
+msgid "Optimize route"
+msgstr "Route optimieren"
+
+#: includes/class-pwddm-route.php:1931
+#, fuzzy
+msgid "View route"
+msgstr "Route anzeigen"
+
+#: includes/class-pwddm-route.php:1968
+#, fuzzy
+msgid "Driver Home:"
+msgstr "Fahrerhaus:"
+
+#: includes/class-pwddm-screens.php:62 includes/class-pwddm-screens.php:279
+#, fuzzy
+msgid "Reports"
+msgstr "Berichte"
+
+#: includes/class-pwddm-screens.php:66
+#, fuzzy
+msgid "Routes"
+msgstr "Routen"
+
+#: includes/class-pwddm-screens.php:91
+#, fuzzy
+msgid "All orders"
+msgstr "Alle Bestellungen"
+
+#: includes/class-pwddm-screens.php:104
+#, fuzzy
+msgid "Log out"
+msgstr "Ausloggen"
+
+#: includes/class-pwddm-screens.php:149
+#, fuzzy
+msgid "To the delivery manager"
+msgstr "An den Liefermanager"
+
+#: includes/class-pwddm-screens.php:185
+#, fuzzy
+msgid "Get started"
+msgstr "Loslegen"
+
+#: includes/class-pwddm-screens.php:212
+#, fuzzy
+msgid "New Driver"
+msgstr "Neuer Fahrer"
+
+#: includes/class-pwddm-screens.php:299
+#, fuzzy
+msgid "View drivers' routes on a map."
+msgstr "Zeigen Sie die Routen der Fahrer auf einer Karte an."
+
+#: includes/class-pwddm-screens.php:300
+#, fuzzy
+msgid "View routes' duration and distance."
+msgstr "Zeigen Sie die Dauer und Entfernung der Routen an."

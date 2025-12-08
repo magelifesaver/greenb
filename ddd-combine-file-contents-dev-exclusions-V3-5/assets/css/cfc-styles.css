@@ -1,0 +1,89 @@
+/* Container styling */
+#cfc-directory-tree-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #fff;
+    margin-right: 10%;
+}
+
+/* Unordered list as a nested tree */
+.cfc-v2-tree {
+    list-style: none;
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Checkbox spacing */
+.cfc-v2-checkbox {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* Folder name styling */
+.cfc-v2-folder-name {
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.cfc-v2-folder-name:hover {
+    color: red;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/* File name styling */
+.cfc-v2-file-name {
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.cfc-v2-file-name:hover {
+    color: green;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/* Expand icon styling */
+.cfc-v2-expand-icon {
+    cursor: pointer;
+    margin-left: 6px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Hide nested lists by default */
+.cfc-v2-tree ul {
+    display: none;
+}
+
+/* Show nested lists when parent <li> has class="expanded" */
+.cfc-v2-tree .expanded > ul {
+    display: block;
+}
+
+
+.selected-folder .cfc-v2-folder-name {
+    color: purple;
+    font-size: 1.5em;
+}
+.selected-file .cfc-v2-file-name {
+    color: blue;
+    font-size: 1.5em;
+}
+/* If you’re using the default “table” layout from highlightjs-line-numbers */
+table.hljs-ln td.hljs-ln-numbers {
+  padding-right: 1em;
+}
+table.hljs-ln td.hljs-ln-code {
+  padding-left: 1em;
+}
+
+/* Fallback for the simpler <pre class="line-numbers"><code>…</code></pre> output */
+pre.line-numbers code {
+  display: block;
+  padding-left: 1em;
+}

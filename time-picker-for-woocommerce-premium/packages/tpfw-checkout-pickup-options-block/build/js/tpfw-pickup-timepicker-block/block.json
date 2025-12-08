@@ -1,0 +1,31 @@
+{
+  "apiVersion": 2,
+  "name": "tpfw/tpfw-pickup-timepicker-block",
+  "version": "2.0.0",
+  "title": "Food Online Pickup Location and Time",
+  "category": "woocommerce",
+  "description": "Adds forms to choose time and pickup location.",
+  "supports": {
+    "html": false,
+    "align": false,
+    "multiple": false,
+    "reusable": false
+  },
+  "parent": [
+    "woocommerce/checkout-pickup-options-block"
+  ],
+  "attributes": {
+    "lock": {
+      "type": "object",
+      "default": {
+        "remove": true,
+        "move": true
+      }
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "tpfw"
+}

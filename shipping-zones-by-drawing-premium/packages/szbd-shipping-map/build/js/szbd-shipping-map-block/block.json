@@ -1,0 +1,33 @@
+{
+  "apiVersion": 2,
+  "name": "szbd-shipping-message/szbd-shipping-map-block",
+  "version": "2.0.0",
+  "title": "Map and Plus Code Form",
+  "category": "woocommerce",
+  "description": "Adds a shipping map and a plus code form (Shipping Zones by Drawing)",
+  "supports": {
+    "html": false,
+    "align": false,
+    "multiple": false,
+    "reusable": false
+  },
+  "parent": [
+    "woocommerce/checkout-shipping-address-block"
+  ],
+  "attributes": {
+    "lock": {
+      "type": "object",
+      "default": {
+        "remove": true,
+        "move": true
+      }
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "szbd",
+  "editorStyle": "file:../../../build/style-szbd-shipping-map-block.css",
+  "style": "file:../../../build/style-index.css"
+}

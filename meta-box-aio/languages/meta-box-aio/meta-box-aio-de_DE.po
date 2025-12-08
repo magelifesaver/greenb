@@ -1,0 +1,403 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Meta Box AIO\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-06 09:30+0000\n"
+"PO-Revision-Date: 2025-04-07 14:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.2-dev; wp-6.7.2\n"
+"X-Domain: meta-box-aio"
+
+#: src/Settings.php:320
+msgid ""
+"A lightweight WordPress plugin for creating many-to-many relationships "
+"between posts, terms and users."
+msgstr ""
+"Ein leichtes WordPress-Plugin zum Erstellen von viele-zu-viele Beziehungen "
+"zwischen Beiträgen, Begriffen und Nutzern."
+
+#: src/Settings.php:424
+msgid "Add as many custom fields as you want and organize them into tabs."
+msgstr ""
+"Füge so viele benutzerdefinierte Felder hinzu, wie du willst, und "
+"organisiere sie in Registerkarten."
+
+#: src/Settings.php:315
+msgid ""
+"Add content of custom fields to Rank Math Content Analysis to have "
+"better/correct SEO score."
+msgstr ""
+"Füge den Inhalt von benutzerdefinierten Feldern zur Rank Math Content "
+"Analysis hinzu, um eine bessere/richtige SEO-Bewertung zu erhalten."
+
+#: src/Settings.php:447
+msgid ""
+"Add content of custom fields to Yoast SEO Content Analysis to have "
+"better/correct SEO score."
+msgstr ""
+"Füge den Inhalt von benutzerdefinierten Feldern zur Yoast SEO Inhaltsanalyse "
+"hinzu, um eine bessere/richtige SEO-Bewertung zu erhalten."
+
+#: src/Settings.php:288
+msgid ""
+"Add custom fields to comments in WordPress. Support all field types and "
+"options."
+msgstr ""
+"Füge benutzerdefinierte Felder zu Kommentaren in WordPress hinzu. "
+"Unterstützt alle Feldtypen und Optionen."
+
+#: src/Settings.php:350
+msgid ""
+"Add custom fields to user profile (user meta) quickly with simple syntax."
+msgstr ""
+"Füge mit einer einfachen Syntax schnell benutzerdefinierte Felder zum "
+"Benutzerprofil (Benutzer-Meta) hinzu."
+
+#: src/Settings.php:110
+msgid "Admin"
+msgstr "Admin"
+
+#: src/Settings.php:103
+msgid "All"
+msgstr "Alle"
+
+#. Description of the plugin
+msgid "All Meta Box extensions in one package."
+msgstr "Alle Meta Box Erweiterungen in einem Paket."
+
+#: src/Settings.php:404
+msgid ""
+"Automatically and instantly populate location data with the power of Google "
+"Maps Geolocation API."
+msgstr ""
+"Fülle die Standortdaten automatisch und sofort mit der Power der Google Maps "
+"Geolocation API auf."
+
+#: src/Settings.php:120
+msgid "Available Extensions"
+msgstr "Verfügbare Erweiterungen"
+
+#: src/Settings.php:360
+msgid ""
+"Build front-end templates for WordPress without touching theme files. "
+"Support Twig and all field types."
+msgstr ""
+"Erstelle Front-End-Vorlagen für WordPress, ohne die Theme-Dateien anzufassen."
+" Unterstützt Twig und alle Feldtypen."
+
+#: src/Settings.php:305
+msgid ""
+"Connect and display custom fields created by the Meta Box plugin in the Divi."
+msgstr ""
+"Verbinde und zeige benutzerdefinierte Felder, die mit dem Meta Box Plugin "
+"erstellt wurden, in Divi an."
+
+#: src/Settings.php:389
+msgid ""
+"Connect and display custom fields created by the Meta Box plugin in the "
+"Elementor's dynamic tags."
+msgstr ""
+"Verbinde und zeige benutzerdefinierte Felder, die mit dem Meta Box Plugin "
+"erstellt wurden, in den dynamischen Tags von Elementor an."
+
+#: src/Settings.php:383
+msgid "Control when and where meta boxes, fields and HTML elements appear."
+msgstr "Steuere wann und wo Meta-Boxen, Felder und HTML-Elemente erscheinen."
+
+#: src/Settings.php:294
+msgid ""
+"Create and manage custom post types easily in WordPress with an easy-to-use "
+"interface."
+msgstr ""
+"Erstelle und verwalte benutzerdefinierte Beitragstypen in WordPress mit "
+"einer leicht zu bedienenden Oberfläche."
+
+#: src/Settings.php:310
+msgid "Create editorial forms so users can submit blog posts on the front end."
+msgstr ""
+"Erstelle redaktionelle Formulare, damit Nutzer eigene Blogbeiträge im "
+"Frontend einreichen können."
+
+#: src/Settings.php:335
+msgid "Create impressive and robust custom settings pages in a few clicks."
+msgstr ""
+"Erstelle mit ein paar Klicks beeindruckende und robuste Einstellungsseiten."
+
+#: src/Settings.php:355
+msgid ""
+"Create register, login and edit user profile forms in the frontend. Embed "
+"everywhere with shortcodes."
+msgstr ""
+"Erstelle Formulare zum Registrieren, Anmelden und Bearbeiten von "
+"Benutzerprofilen im Frontend. Binde diese überall mit Shortcodes ein."
+
+#: src/Settings.php:282
+msgid ""
+"Creating custom Gutenberg blocks with PHP. No React, Webpack or Babel. "
+"Beautiful syntax, powerful features."
+msgstr ""
+"Eigene Gutenberg-Blöcke mit PHP erstellen. Kein React, Webpack oder Babel. "
+"Schöne Syntax, leistungsstarke Funktionen."
+
+#: src/Settings.php:107
+msgid "Data"
+msgstr "Daten"
+
+#: src/Settings.php:429
+msgid "Define custom meta boxes and custom fields easier with templates."
+msgstr ""
+"Definiere benutzerdefinierte Metakästchen und benutzerdefinierte Felder "
+"einfacher mit Vorlagen."
+
+#: src/Settings.php:277
+msgid ""
+"Display custom fields in table columns in admin screens for All Posts (types)"
+"."
+msgstr ""
+"Zeigen Sie benutzerdefinierte Felder in Tabellenspalten in Admin-"
+"Bildschirmen für alle Beiträge (Typen) an."
+
+#: src/Settings.php:378
+msgid "Display fields more beautiful by putting them into 12-columns grid."
+msgstr ""
+"Stelle Felder schöner dar, indem du sie in einem 12-Spalten-Raster anordnest."
+
+#: src/Settings.php:440
+msgid "Display help information for fields using beautiful tooltips."
+msgstr "Zeige Hilfeinformationen für Felder mit schönen Tooltips an."
+
+#: src/Settings.php:163
+msgid "Docs"
+msgstr "Dokumente"
+
+#: src/Settings.php:89 src/Settings.php:184 src/Settings.php:225
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: src/Settings.php:373
+msgid ""
+"Drag and drop your custom fields into place without a single line of code."
+msgstr ""
+"Ziehe deine benutzerdefinierten Felder per Drag-and-Drop an ihren Platz, "
+"ohne eine einzige Zeile Code zu schreiben."
+
+#: src/Settings.php:340
+msgid "Easily add custom fields to categories, tags or any custom taxonomy."
+msgstr ""
+"Füge mühelos benutzerdefinierte Felder zu Kategorien, Tags oder jeder "
+"benutzerdefinierten Taxonomie hinzu."
+
+#: src/Settings.php:62 src/Settings.php:63
+msgid "Extensions"
+msgstr "Erweiterungen"
+
+#: src/Settings.php:101
+msgid "Filter:"
+msgstr "Filter:"
+
+#: src/Settings.php:168
+msgid "Forum"
+msgstr "Forum"
+
+#: src/Settings.php:105
+msgid "Free"
+msgstr "Gratis"
+
+#: src/Settings.php:111
+msgid "Frontend"
+msgstr "Frontend"
+
+#. Author URI of the plugin
+msgid "https://metabox.io"
+msgstr "https://metabox.io"
+
+#. URI of the plugin
+msgid "https://metabox.io/pricing/"
+msgstr "https://metabox.io/pricing/"
+
+#: src/Settings.php:397
+msgid ""
+"Integrates Meta Box and FacetWP, makes custom fields searchable and "
+"filterable in the frontend."
+msgstr ""
+"Integriert Meta Box und FacetWP, macht benutzerdefinierte Felder im Frontend "
+"durchsuchbar und filterbar."
+
+#: src/Settings.php:109
+msgid "Integration"
+msgstr "Integration"
+
+#: src/Settings.php:193
+msgid "Join Our Facebook Group &rarr;"
+msgstr "Tritt unserer Facebook-Gruppe bei &rarr;"
+
+#: src/Settings.php:192
+msgid ""
+"Join the community of super helpful Meta Box users. Say hello, ask questions,"
+" give feedback, help each other and get faster update information!"
+msgstr ""
+"Tritt der Gemeinschaft der super hilfsbereiten Meta Box Nutzer bei. Sag "
+"hallo, stell Fragen, gib Feedback, helft euch gegenseitig und erhaltet "
+"schnellere Update-Informationen!"
+
+#: src/Settings.php:239
+msgid "License Warning"
+msgstr "Lizenz-Warnung"
+
+#: src/Settings.php:435
+msgid ""
+"Limit the number of characters or words entered for text and textarea fields."
+msgstr ""
+"Begrenze die Anzahl der eingegebenen Zeichen oder Wörter für Text- und "
+"Textarea-Felder."
+
+#. Name of the plugin
+msgid "Meta Box AIO"
+msgstr "Meta Box AIO"
+
+#: src/Settings.php:190
+msgid "Meta Box Community"
+msgstr "Meta Box Gemeinschaft"
+
+#. Author of the plugin
+msgid "MetaBox.io"
+msgstr "MetaBox.io"
+
+#: src/Settings.php:272
+msgid ""
+"Migrate field groups and custom fields from Advanced Custom Fields to Meta "
+"Box"
+msgstr ""
+"Migriere Feldgruppen und benutzerdefinierte Felder von Advanced Custom "
+"Fields zu Meta Box"
+
+#: src/Settings.php:345
+msgid ""
+"Migrate post types, field groups, custom fields and relationships from "
+"Toolset to Meta Box"
+msgstr ""
+"Migriere Beitragstypen, Feldgruppen, benutzerdefinierte Felder und "
+"Beziehungen von Toolset zu Meta Box"
+
+#: src/Settings.php:91 src/Settings.php:183 src/Settings.php:227
+msgid "My Account"
+msgstr "Mein Konto"
+
+#: src/Settings.php:409
+msgid "Organize custom fields into robust and intensely user-friendly groups."
+msgstr ""
+"Organisiere benutzerdefinierte Felder in robusten und besonders "
+"benutzerfreundlichen Gruppen."
+
+#: src/Settings.php:106
+msgid "Popular"
+msgstr "Beliebt"
+
+#: src/Settings.php:104
+msgid "Premium"
+msgstr "Premium"
+
+#: src/Settings.php:325
+msgid "Pull all meta value from posts, terms into the WP REST API responses."
+msgstr ""
+"Ziehe alle Metawerte von Beiträgen und Begriffen in die WP REST API-"
+"Antworten."
+
+#: src/Settings.php:180
+msgid "Quick Links"
+msgstr "Direktlinks"
+
+#: src/Settings.php:176
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: src/Settings.php:299
+msgid ""
+"Save custom fields data to custom table instead of the default meta tables. "
+"Reduce database size and increase performance."
+msgstr ""
+"Speichere die Daten von benutzerdefinierten Feldern in benutzerdefinierten "
+"Tabellen statt in den Standard-Metatabellen. Reduziere die Datenbankgröße "
+"und erhöhe die Leistung."
+
+#: src/Settings.php:366
+msgid ""
+"Select and show custom fields created by the Meta Box plugin in the Beaver "
+"Themer field connection."
+msgstr ""
+"Wähle benutzerdefinierte Felder, die mit dem Meta Box Plugin erstellt wurden "
+"aus und zeige sie in der Beaver Themer Feldverbindung an."
+
+#: src/Settings.php:257
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+#: src/Settings.php:414
+msgid "Show or hide meta boxes whenever and for whomever you choose."
+msgstr "Zeige oder verstecke Metakästen, wann und für wen du willst."
+
+#: src/Settings.php:90 src/Settings.php:185 src/Settings.php:226
+msgid "Support Forum"
+msgstr "Support Forum"
+
+#. %s - Plugin name
+#: src/Settings.php:158
+#, php-format
+msgid "This extension requires plugin %s to be installed and activated."
+msgstr ""
+"Für diese Erweiterung muss das Plugin %s installiert und aktiviert sein."
+
+#: src/Settings.php:419
+msgid "Toggle meta boxes by page template, post format or taxonomy using JS."
+msgstr ""
+"Schalte die Metaboxen nach Seitenvorlage, Beitragsformat oder Taxonomie mit "
+"JS um."
+
+#: src/Settings.php:330
+msgid ""
+"Track changes of custom fields with WordPress revision. Save, compare, "
+"restore the changes easily."
+msgstr ""
+"Verfolge Änderungen an benutzerdefinierten Feldern mit WordPress Revision. "
+"Speichere, vergleiche und stelle die Änderungen einfach wieder her."
+
+#: src/Settings.php:108
+msgid "UI"
+msgstr "UI"
+
+#. %1$s - URL to the settings page.
+#: src/Settings.php:210
+#, php-format
+msgid ""
+"You have not set your Meta Box license key yet. Please <a href=\"%1$s\">"
+"enter your license key</a> to continue."
+msgstr ""
+"Du hast deinen Meta Box-Lizenzschlüssel noch nicht eingegeben. Bitte <a "
+"href=\"%1$s\">Gebe deinen Lizenzschlüssel ein</a> um fortzufahren."
+
+#. %2$s - URL to the My Account page.
+#: src/Settings.php:216
+#, php-format
+msgid ""
+"Your license key for Meta Box is <b>expired</b>. Please <a href=\"%2$s\" "
+"target=\"_blank\">renew your license</a> to continue."
+msgstr ""
+"Dein Lizenzschlüssel für Meta Box ist <b>abgelaufen</b>. Bitte <a "
+"href=\"%2$s\" target=\"_blank\">erneuere deine Lizenz</a> um fortzufahren."
+
+#. %1$s - URL to the settings page.
+#: src/Settings.php:212 src/Settings.php:214
+#, php-format
+msgid ""
+"Your license key for Meta Box is <b>invalid</b>. Please <a href=\"%1$s\">"
+"update your license key</a> to continue."
+msgstr ""
+"Dein Lizenzschlüssel für Meta Box ist <b>ungültig</b>. Bitte <a "
+"href=\"%1$s\">aktualisiere deinen Lizenzschlüssel</a> um fortzufahren."

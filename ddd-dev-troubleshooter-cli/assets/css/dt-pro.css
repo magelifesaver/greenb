@@ -1,0 +1,59 @@
+/* Styles for Dev Troubleshooter Pro */
+
+.wrap h1 {
+  margin-bottom: 1em;
+}
+
+#dt-search-results {
+  margin-top: 1em;
+}
+
+#dt-search-results h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#dt-search-results ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+#dt-search-results ul li {
+  margin-bottom: 0.75em;
+}
+
+#dt-search-results li strong {
+  font-weight: bold;
+}
+
+#dt-search-results li ul {
+  list-style: disc;
+  padding-left: 1em;
+}
+
+#dt-search-results li ul li {
+  margin-bottom: 0.5em;
+}
+
+/* Buttons spacing */
+#dt-flush-cache,
+#dt-flush-rewrite,
+#dt-search-btn {
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Input and select fields */
+#dt-search-plugin,
+#dt-search-term,
+#dt-exclude-folders,
+#dt-plugin-select {
+  max-width: 400px;
+  margin-bottom: 0.5em;
+}
+
+/* Error message styling */
+#dt-search-results p[style*="color:red"] {
+  font-weight: bold;
+}

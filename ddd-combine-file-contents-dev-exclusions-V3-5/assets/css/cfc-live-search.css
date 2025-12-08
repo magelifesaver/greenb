@@ -1,0 +1,60 @@
+/* File Path: assets/css/live-search.css */
+/* Make the tree search input sticky when scrolling */
+#cfc-directory-tree-container > div:first-child {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+/* Styles for live search feature */
+#cfc-directory-tree-container input#cfc-file-search,
+#cfc-code-search {
+    box-sizing: border-box;
+    padding: 4px;
+}
+
+.cfc-ls-highlight {
+    background: #ffff99;
+}
+
+.cfc-ls-hidden {
+    display: none !important;
+}
+
+/* File header lines in code preview */
+.cfc-file-header {
+    color: #555;
+    font-style: italic;
+}
+
+/* Combined code preview container */
+#cfc-preview-highlight {
+    max-height: 600px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #fff;
+}
+
+/* Highlighted search term in code */
+mark.cfc-term-highlight {
+    background: yellow;
+    color: inherit;
+}
+/* focused match: orange */
+mark.cfc-term-highlight.current-match {
+  background: orange !important;
+}
+/* Current-file indicator above preview */
+#cfc-current-file-indicator {
+  text-align: right;
+  font-size: 16px;
+  color: #666;
+  margin: 4px 0;
+}
+#cfc-current-file-indicator::before {
+  content: 'File: ';
+  font-weight: 600;
+  color: #333;
+}

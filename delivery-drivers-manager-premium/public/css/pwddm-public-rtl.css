@@ -1,0 +1,86 @@
+body,
+#pwddm_login,
+#pwddm_forgot_password,
+.alert,
+.pwddm_box,
+.pwddm_sidenav {
+    text-align: right;
+}
+
+#pwddm_header .col-2,
+#pwddm_availability {
+    text-align: left;
+}
+
+body,
+#pwddm_header .pwddm_sidenav a {
+    direction: rtl;
+}
+
+.pwddm_premium_icon {
+    margin-top: -4px;
+    margin-left: 3px;
+}
+
+#pwddm_header {
+    direction: ltr;
+}
+
+#pwddm_hide_map_btn svg,
+.fa-angle-double-right {
+    transform: rotate(180deg);
+}
+
+.alert-dismissible {
+    padding-right: 1.25rem;
+    padding-left: 4rem;
+}
+
+#pwddm_header .pwddm_sidenav a {
+    padding: 8px 32px 8px 8px;
+}
+
+.pwddm_box .pwddm_order_address,
+.pwddm_box .pwddm_order_custom,
+.pwddm_box .pwddm_order_distance {
+    padding-left: 0px;
+    padding-right: 45px;
+}
+
+.pwddm_order_view {
+    margin-right: 45px;
+    margin-left: 0px;
+}
+
+.pwddm_items img {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.pwddm_driver_phone_number {
+    margin-right: 10px;
+}
+
+.pwddm_driver_availability {
+    right: 0px;
+}
+
+#pwddm_routes {
+    direction: ltr;
+}
+
+.lddfw_handle_column {
+    right: auto;
+    left: 9px
+}
+
+.tab-content>.tab-pane,
+.pwddm_driver_box .nav-tabs {
+    text-align: right;
+    direction: rtl;
+}
+
+#pwddm_login_frm input {
+    direction: ltr;
+}

@@ -1,0 +1,20 @@
+[
+	{
+		"title": "ATUM Barcodes meta box",
+		"element": "#atum_barcodes .inside",
+		"intro": "Click on the message to load the variations and then select the variation from the dropdown menu.<p><img src='{{pluginUrl}}help-guides/images/13.png'></p><p><img src='{{pluginUrl}}help-guides/images/14.png'></p><p><img src='{{pluginUrl}}help-guides/images/15.png'></p><p><img src='{{pluginUrl}}help-guides/images/16.png'></p>",
+		"load": "init"
+	},
+	{
+		"title": "Barcode field",
+		"intro": "You can find the barcode field within each variation.<br>You can enter any barcode you want there.<p><img src='{{pluginUrl}}help-guides/images/17.png'></p>",
+		"load": "init"
+	},
+	{
+		"title": "Screen Options",
+		"element": "#screen-options-link-wrap",
+		"intro": "From the Screen Options tab, you can enable or disable the display of the barcodes meta box.",
+		"load": "init",
+        "markerPosition": "bottom-right"
+	}
+]

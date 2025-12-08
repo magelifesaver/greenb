@@ -1,0 +1,446 @@
+*** Account Funds for WooCommerce ***
+
+2025-11-17 - version 4.0.8
+* Localization - Address a translation issue when using the provided Dutch translations in the rewards admin screens that caused a PHP error due to misplaced placeholder
+
+2025-11-03 - version 4.0.7
+* Fix - Address an uncommon issue where some customer metadata is not a string, but an array, causing a PHP error when handling a customer object
+
+2025-10-28 - version 4.0.6
+* Fix - Address an issue with WooCommerce Subscription when a customer pays a renewal with store credit
+
+2025-10-20 - version 4.0.5
+* Fix - When a user updates their email address from the My Account page, ensure their store credit balance is preserved
+* Fix - When a Subscription payment renewal fails, ensure that the subscription is set to failed
+
+2025-09-30 - version 4.0.4
+* Fix - Resolve a compatibility issue with WooCommerce Subscriptions when the customer switches from a subscription to another in some themes
+
+2025-09-24 - version 4.0.3
+* Tweak - Attach the customers' account funds balance to WooCommerce customers API responses
+* Fix - Address an issue where Subscription renewals could cause debiting the customer's store credit balance twice
+* Fix - Partial payments should be disabled at checkout if the main gateway becomes disabled as the result of third party code that disallows store credit payments
+* Fix - Address a framework issue where third party code may have the customer addresses stored in consecutive user meta resulting in array values instead of a single values
+
+2025-09-03 - version 4.0.2
+* Fix - Address an issue where a PHP error may have occurred in the My Account > Store Credit page in some circumstances
+* Fix - Ensure that eligible orders would persist categories when specified in the cashback configuration screen
+* Localization - Update translations and ensure the bundled translations also cover the translatable strings included in the plugin's framework components
+* Dev - Allow updating a user's store credit balance using the deprecated `update_user_meta()` function for backwards compatibility (not recommended)
+* Dev - Add a filter hook to allow negative store credit balances to account for some specific customization scenarios where this is desirable (discouraged)
+
+2025-08-28 - version 4.0.1
+* Fix - Prevent WooCommerce from accidentally creating a draft or pending payment order when displaying cashback information in the cart or checkout pages
+* Fix - Using comma as the decimal separator should persist the amount entered in the WordPress user profile edit screen store credit field
+
+2025-08-27 - version 4.0.0
+* Feature - Merchants can award customers with store credit based on customizable cashback or milestone rewards
+* Feature - Display cues for customers about the applicable store credit rewards they can earn in the product, cart and checkout pages, or the signup form
+* Feature - Merchants can define a custom label for store credit also in the plural form, from the plugin settings page
+* Tweak - The plugin settings and the new screens added in this release are now found within a top-level menu item for improved user experience
+* Tweak - The setting to allow "Partial payment" has been moved to the plugin's gateway settings for consistency and better organization
+* Fix - Various bugfixes and improvements to the plugin's functionality, user interface and user experience
+* Misc - Beginning from this version, the plugin will start changing some of its terminology and adopt "store credit" instead of "account funds" to better align with the new features and functionalities
+* Dev - Store credit will be stored inside a custom table instead of a user meta, with rows representing each transaction, forming a wallet ledger for each customer
+* Dev - Many legacy classes and functions are deprecated in this major release
+* Localization - Updated translations in all supported languages, added Chinese (simplified and traditional) translations
+
+2025-07-24 - version 3.2.3
+* Fix - Ensure the email object is not loaded twice when previewing an email while using the advanced emails feature in newer WooCommerce versions
+* Fix - Improve compatibility with PDF Invoices & Packing Slips for WooCommerce when handling refunds
+* Misc - Add an admin notice about the upcoming v4.0.0 release
+
+2025-06-16 - version 3.2.2
+* Tweak - Update styling of the Account Funds top-up button in the "My Account" page
+* Fix - Applied funds on checkout should not double when changing shipping details when automated tax rates are enabled in WooCommerce Tax plugin
+* Localization - Add Polish translations
+
+2025-05-15 - version 3.2.1
+* Fix - Ensure the account funds reports are loading properly
+* Fix - Remove deprecated usage of `wc_current_theme_is_fse_theme()` in favor of `wp_is_block_theme()`
+
+2025-04-29 - version 3.2.0
+* Feature - Add setting to assign a product image to top-up products shown in cart when topping up account funds
+* Tweak - Make partial payments enabled by default in new installations
+* Tweak - Add a setting to enable receiving funds on account registration
+* Tweak - Update the system status report data
+* Tweak - Display notice or redirect to cart when topping up funds
+* Fix - Ensure orders paid with account funds can be refundable to the customer's account funds
+* Dev - Use an updated version of the Fenix Plugin Framework in the plugin moving forward
+* Localization - Provide translations of the plugin in the following languages: French, German, Italian, Spanish, Dutch, Portuguese, Japanese
+
+2024-09-25 - version 3.1.1
+* Tweak - Update the block integration stylesheet to use a prefix
+* Fix - Do not load block assets when the checkout block is not in use
+
+2024-07-10 - version 3.1.0
+* Feature - Add support for the WooCommerce Cart and Checkout blocks
+* Tweak - Disable partial payments if the account funds gateway is disabled and the funds available are greater than the order total
+* Fix - Ensure partial funds can be used on cart page without having to trigger a page reload
+* Fix - Ensure funds can be applied when the order total would drop to zero when applying a discount
+* Misc - Deprecate the account funds discount feature in favor of funds top up sales
+* Misc - Prevent the plugin from being activated if WooCommerce is not active
+
+2024-05-22 - version 3.0.3
+* Fix - Allow account fund discounts in combination with an individual-use coupon
+* Fix - Improve compatibility with WooCommerce Shipping & Tax plugin when automated taxes are enabled
+* Fix - Address a PHP issue upon plugin upgrade or new activation
+
+2024-03-26 - version 3.0.2
+* Misc - Change plugin name to Account Funds for WooCommerce
+* Misc - Update brand to Kestrel
+
+2024-01-17 - version 3.0.1
+* Fix - Fixed error when generating a funds discount code before the `WC_Session` object is initialized
+* Dev - Improved compatibility with PHP 8.2 by not declaring dynamic properties in classes
+* Misc - Tested compatibility up to WooCommerce 8.5
+
+2023-11-30 - version 3.0.0
+* Feature - Use funds as a payment method on orders manually created
+* Tweak - Declared incompatibility with the WooCommerce Cart and Checkout blocks
+* Tweak - Updated the plugin URLs to the new woo.com domain
+* Dev - Dropped `woo-includes/` files
+* Dev - Dropped deprecated code from versions 2.x
+* Dev - Dropped deprecated filter hook `woocommerce_account_funds_get_settings`
+* Misc - Tested compatibility up to WooCommerce 8.5 and WordPress 6.3
+* Misc - Require WooCommerce 4.0+, WordPress 5.0+, and PHP 7.4+
+
+2023-04-12 - version 2.9.1
+* Tweak - Display the "Refund via Account Funds" button for orders paid with a different payment gateway only on WooCommerce 6.4 and later
+
+2023-04-12 - version 2.9.0
+* Feature - Added automatic refunds via 'Account Funds' for any payment method
+* Tweak - Tested compatibility with WooCommerce 7.6
+* Dev - Allow filtering of the funds' discount data before applying the discount
+
+2023-03-28 - version 2.8.0
+* Feature - Use a different name to refer to the account funds
+* Tweak - Register the increase funds email as a transactional email
+* Tweak - Added setting for customizing the message of the increase funds email
+* Tweak - Include the additional content in the increase funds email
+* Tweak - Added placeholder {funds_amount} to the increase funds email
+* Tweak - Use the store locale when sending customer emails
+* Tweak - Added setting for customizing the payment gateway description displayed in the checkout form
+* Tweak - Improved performance by initializing the payment gateway description only when needed
+* Tweak - Register the plugin integrations when all plugins have been loaded
+* Tweak - Reduced the plugin text strings by re-using strings from the WooCommerce core
+* Dev - Add the 'tax_status' value as the first argument of the filter `woocommerce_account_funds_topup_get_tax_status`
+* Dev - Update plugin templates
+
+2022-11-16 - version 2.7.3
+* Tweak - Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
+
+2022-11-10 - version 2.7.2
+* Tweak - Check if the funds are still applicable to the cart when its items are updated
+* Fix - Funds were not being removed from the cart after adding a deposit product
+
+2022-10-17 - version 2.7.1
+* Tweak - Skip the v2.3.7 migration script when updating from a version older than 2.3.0.
+* Misc - Tested compatibility up to WooCommerce 7.0 and WordPress 6.1
+
+2022-06-14 - version 2.7.0
+* Tweak - Validates the format of the funds' amount in the edit user screen
+* Tweak - Updated link to get support in the plugin list
+* Misc - Tested compatibility up to WooCommerce 6.6 and WordPress 6.0
+* Dev - Added filters for customizing who can view and edit the users' funds
+* Dev - Deprecated methods `WC_Account_Funds::add_funds()` and `WC_Account_Funds::remove_funds()`
+* Misc - Require WooCommerce 3.7+, WordPress 4.9+, and PHP 5.6+
+
+2022-04-28 - version 2.6.5
+* Misc - Tested compatibility up to WooCommerce 6.5
+
+2022-03-09 - version 2.6.4
+* Tweak - Update the cart session after applying the funds
+
+2022-02-23 - version 2.6.3
+* Tweak - Use the order's currency symbol to format order prices
+* Misc - Tested compatibility up to WooCommerce 6.3
+* Fix - Fixed warning when displaying the funds used in the edit order screen and the plugin WooCommerce Payments is active
+
+2022-01-26 - version 2.6.2
+* Tweak - Don't restore the funds automatically when an order is marked as 'Refunded' (use partial refunds instead)
+* Misc - Tested compatibility up to WooCommerce 6.2 and WordPress 5.9
+* Fix - The restored funds' amount cannot be greater than the "Net payment" amount when canceling an order that contains partial refunds
+
+2021-12-17 - version 2.6.1
+* Fix - Fixed wrong Order balance in the Square dashboard when partially paying the order with funds
+* Misc - Tested compatibility up to WooCommerce 6.0
+
+2021-11-23 - version 2.6.0
+* Feature - Add funds to the customer account on registration
+* Tweak - Moved the 'Partial Funds Payment' setting to the top of the settings page
+* Tweak - Validate the price type fields on the settings page
+* Tweak - Toggle visibility of the dependant settings fields
+* Dev - Deprecated filter hook `woocommerce_account_funds_get_settings`
+* Misc - Tested compatibility up to WooCommerce 5.9
+* Misc - Require WooCommerce 3.4+, WordPress 4.7+, and PHP 5.4+
+
+2021-10-20 - version 2.5.4
+* Tweak - Added plugin info to the WooCommerce System Status Report
+* Misc - Tested compatibility up to WooCommerce 5.8
+
+2021-09-01 - version 2.5.3
+* Misc - Tested compatibility up to WooCommerce 5.7
+
+2021-07-20 - version 2.5.2
+* Tweak - Don't return zero when the customer funds balance is negative
+
+2021-07-01 - version 2.5.1
+* Fix - The funds were not being added to the customer account when using the top-up form (only from version 2.5)
+* Misc - Tested compatibility up to WordPress 5.8
+
+2021-06-28 - version 2.5.0
+* Feature - Sell deposit products at a sale price
+* Feature - Support recurring deposit products with the extension "All products for WooCommerce Subscriptions"
+* Tweak - Tested compatibility up to  WooCommerce 5.5
+* Dev - Added class autoloader
+
+2021-04-28 - version 2.4.4
+* Tweak - Remove the discount applied by the "Account funds" payment gateway when this one stops being available
+* Tweak - Remove the applied funds if after updating the cart the "Account funds" payment gateway is available
+* Tweak - Set the minimum Top-up amount to 1
+* Tweak - Tested compatibility up to WooCommerce 5.3
+* Fix - Don't add to cart a Top-up product with zero funds
+
+2021-04-19 - version 2.4.3
+* Fix - Percentage discount for using funds is calculated based on the amount of funds used (reverts the fix from version 2.4.2)
+
+2021-04-16 - version 2.4.2
+* Fix - Fixed wrong discount when giving a percentage discount for using funds
+
+2021-04-13 - version 2.4.1
+* Fix - The 'Account funds' checkbox didn't work on the cart page when modifying the cart at the same time
+
+2021-04-08 - version 2.4.0
+* Feature - Added support for "Refunds" to the "Account Funds" payment gateway
+* Tweak - Funds are restored after canceling or refunding an order
+* Tweak - Don't set the order total to zero when the payment gateway is "Account Funds"
+* Tweak - Display the "Funds used" row in the Order details before the "Payment gateway" row
+* Tweak - Hide the "Funds used" row in the Order details when the payment gateway is "Account Funds"
+* Fix - Unlock the used funds when canceling the PayPal payment process
+* Fix - Fixed warnings thrown for using the deprecated method `WC_Order->get_product_from_item()`
+* Misc - Tested compatibility up to WooCommerce 5.2
+* Misc - Updated the minimum requirements to WooCommerce 3.2+ and WordPress 4.4+
+
+2021-03-23 - version 2.3.11
+* Tweak - Always display the 'Account funds' payment gateway when there are enough funds to pay the Order
+* Tweak - Hide the 'Account funds' checkbox field when the payment gateway is available
+
+2021-03-16 - version 2.3.10
+* Tweak - Top-up the customer funds when an order with deposit products is marked as processing
+* Fix - Fixed jQuery selector for detecting changes on the Account Funds checkbox field during checkout
+* Misc - Tested compatibility up to WooCommerce 5.1 and WordPress 5.7
+
+2021-01-26 - version 2.3.9
+* Fix - Order status keeps pending after using funds for renewing a subscription
+* Misc - Tested compatibility with WooCommerce 4.9
+
+2020-12-30 - version 2.3.8
+* Tweak - Set the subscription renewal to manual when a renewal paid with funds fails
+* Fix - Fixed the not available payment gateways error when paying a failed renewal order of a subscription purchased with funds
+
+2020-12-28 - version 2.3.7
+* Tweak - Update the database version when the plugin version changes
+* Tweak - Fixed the balance for orders paid with funds in WooCommerce 4.7
+* Tweak - Added an update script for deducting the funds from the accounts affected by the issue fixed on version 2.3.4
+
+2020-12-15 - version 2.3.6
+* Fix - Allow changing the payment method of a subscription to "Account Funds" when this one is the unique payment gateway
+
+2020-12-09 - version 2.3.5
+* Tweak - Don't apply the funds' discount when changing the payment method of a subscription.
+* Tweak - Don't copy the account funds' metadata when creating a subscription from an order.
+* Fix - The Account funds gateway was not available when changing the payment method of a subscription
+* Fix - Fixed the zero-order total displayed in recurrent orders when applying funds to new subscriptions
+* Misc - Tested compatibility with WooCommerce 4.8 and WordPress 5.6
+
+2020-11-16 - version 2.3.4
+* Fix - Funds were not being deducted from the account on fully paid orders with funds in WC 4.7
+* Misc - Tested compatibility with WooCommerce 4.7
+
+2020-10-27 - version 2.3.3
+* Tweak - Improved performance when applying account funds to the cart
+* Fix - Fixed warning when trying to apply funds on pages where the cart hasn't been initialized
+* Misc - Tested compatibility with WooCommerce 4.6
+
+2020-09-17 - version 2.3.2
+* Fix - Using funds to partially pay the order
+* Misc - Tested compatibility with WooCommerce 4.5 and WordPress 5.5
+
+2020-09-07 - version 2.3.1
+* Fix - Compatibility issue with WooCommerce Subscriptions
+
+2020-08-05 - version 2.3.0
+* Tweak - Add "Funds used" before order total
+* Tweak - Checkout improvements
+* Tweak - UI improvements on order details (admin view)
+* Dev - Deprecated function `WC_Account_Funds_Cart_Manager::can_apply_funds()`
+* Misc - Tested compatibility with WooCommerce 4.3
+
+2020-06-09 - version 2.2.1
+* Misc - Tested compatibility with WooCommerce 4.2
+
+2020-04-22 - version 2.2.0
+* Tweak - Added responsive styles to the "Recent deposits" table on the "My Account" page
+* Tweak - Check the minimum requirements are satisfied before initializing the extension
+* Tweak - Added link to the extension settings on the plugins page
+* Tweak - Updated plugin row metas
+* Tweak - Enqueue minified scripts
+* Fix - Enqueue the checkout scripts on the checkout page only
+* Dev - Optimized code for handling the 'Account Funds' on the 'My Account' page
+* Dev - Updated the templates under `myaccount/`
+* Dev - Added new constants for defining the basename, path, and URL of the extension
+* Dev - Optimized plugin initialization
+* Update - Add compatibility with WooCommerce 4.1
+
+2020-03-30 - version 2.1.21
+* Misc - Tested compatibility to WooCommerce 4.0 and WordPress 5.4
+
+2020-01-08 - version 2.1.20
+* Misc - WooCommerce 3.9 compatibility
+
+2019-10-31 - version 2.1.19
+* Fix - Fixed incompatibility with the extension "Dynamic pricing" which made the account funds discount was applied twice
+* Misc - Add support to WooCommerce 3.8 and WordPress 5.3
+
+2019-09-02 - version 2.1.18
+* Fix - Fixed error when checking if the "Account Funds" gateway is available during a REST API request
+
+2019-08-06 - version 2.1.17
+* Tweak - Directly mark as completed the orders with only top-up and deposit products
+* Misc - Add support to WooCommerce 3.7 and WordPress 5.2
+
+2019-04-09 - version 2.1.16
+* Fix - Fixed issue fetching the created date of the orders in the deposits report
+* Misc - Ensure WooCommerce 3.6 compatibility
+
+2019-01-09 - version 2.1.15
+* Fix - Include the "Account Funds" gateway in the list of available payment methods in the subscription renewals
+* Fix - Remove funds from the user account after paying for a failed subscription renewal
+
+2018-12-14 - version 2.1.14
+* Fix - Don't add the funds used to the order total when checking the PayPal IPNs
+
+2018-11-27 - version 2.1.13
+* Fix - Check the WooCommerce cart instance is initialized before accessing it
+* Fix - Fixed the text domain for some translatable strings
+
+2018-09-25 - version 2.1.12
+* Tweak - Hide Account Funds payment gateway when there are not enough funds
+* Misc - Ensure WooCommerce 3.5 compatibility
+
+2018-05-23 - version 2.1.11
+* Tweak - Add filters for adding and removing funds
+* Tweak - Add privacy policy notification
+* Dev - Add data export and erasure hooks
+* Misc - Ensure WooCommerce 3.4 compatibility
+
+2018-01-30 - version 2.1.10
+* Fix - Address an issue in the where order page edits affect order total
+
+2017-12-12 - version 2.1.9
+* Misc - Handle latest WooCommerce version compatibility
+
+2017-12-12 - version 2.1.8
+* Fix - Apply correct discount calculation when account funds are used
+
+2017-09-29 - version 2.1.7
+* Fix - Account for WooCommerce 3.1 error notices
+* Fix - Widget should redirect to My Account > Account Funds
+* Fix - Display funds used in order items section of edit order screen
+* Fix - Address issue where failed renewal payment doesn't set the renewal order to "Failed"
+
+2017-06-22 - version 2.1.6
+* Fix - Refund on a top-up order doesn't remove the Account Funds
+* Fix - When coupon discount is used incorrect total is added to funds
+
+2017-04-26 - version 2.1.5
+* Fix - Issue where product type deposit reverted to simple product upon saving
+
+2017-04-17 - version 2.1.4
+* Tweak - Add new email settings and templates when funds are increased via admin page
+* Fix - Error when opening admin page of coupons
+
+2017-04-12 - version 2.1.3
+* Fix - Unable to add funds via top-up when using WooCommerce 3.0
+* Fix - Amount funded in recent deposits display zero
+* Fix - Error in my account funds page
+* Fix - Added migration routine to store top-up related information in order item meta
+
+2017-04-03 - version 2.1.2
+* Fix - When partially paying with a gateway, the full amount is passed instead of remaining amount
+* Fix - Subscriptions recurring payments applied but status not set to active after payment
+* Misc - Update for WooCommerce 3.0 compatibility
+
+2016-12-28 - version 2.1.1
+* Fix - Use subtotal for adding the funds from top-up amount, otherwise, it would be incorrect when coupons are applied in the order
+
+2016-11-10 - version 2.1.0
+* Feature - Change with how the checkout flow logic works. User may apply account funds if less than order total and if more user must use it like a normal gateway
+* Fix - When partially paying with a gateway, the full amount is passed instead of remaining amount
+* Fix - Checkout gateway selection does not work if additional payment gateways are active
+* Fix - Subscriptions recurring payments applied but status not set to active after payment
+* Fix - PayPal double account funds applied
+* Fix - Stripe Partial account funds not applied on the gateway side
+
+2016-07-15 - version 2.0.15
+* Tweak - Provide filter hook to change the tax status of top-up product
+* Fix - Revert applied tax to top-up product that was added in 2.0.14
+
+2016-07-05 - version 2.0.14
+* Fix - Double navigation displayed under Account Funds of My Account page
+* Fix - Tax was not respected when adding the funds via top-up
+
+2016-06-09 - version 2.0.13
+* Fix - Partial payments with Sage Pay Form now sending correct amount
+
+2016-05-31 - version 2.0.12
+* Tweak - New UI in my account, with menu and breadcrumb, when WooCommerce 2.6 is being used
+* Fix - Issue where calculation for partial payments with multiple quantities was incorrect
+* Fix - Issue where top-up funds were not getting added into user funds
+
+2016-03-07 - version 2.0.11
+* Fix - Account funds not applied to PayPal Standard items
+
+2016-02-05 - version 2.0.10
+* Fix - Deprecated notices that cause header already sent errors
+* Fix - Partial funds was not working correctly
+
+2016-01-21 - version 2.0.9
+* Fix - Added update routine to fix incorrect order total on existing renewal orders
+
+2016-01-11 - version 2.0.8
+* Fix - Incorrect order total on subscription renewal
+
+2015-12-21 - version 2.0.7
+* Fix - Address rounding error
+
+2015-12-17 - version 2.0.6
+* Feature - Allow deposits to have a sale price
+* Tweak - Show min/max top-up amount info to customer if Minimum/Maximum Top-up is set
+* Fix - Fatal error when using PHP >=7.0
+* Fix - Make top-up product virtual
+* Fix - Account page errors
+
+2015-11-11 - version 2.0.5
+* Fix - Error when subscription renewal happened in the backend
+
+2015-08-18 - version 2.0.4
+* Fix - Error on account page
+
+2015-04-21 - version 2.0.3
+* Fix - Address potential XSS with add_query_arg/remove_query_arg
+* Fix - Fix my account product display when no deposit products exist
+
+2015-03-03 - version 2.0.2
+* Fix - Fix saving gateway options
+
+2015-03-03 - version 2.0.1
+* Fix - Prevent case where meta is cleared
+
+2015-02-01 - version 2.0.0
+* Feature - Allow partial fund payments
+* Feature - Allow user-defined top-ups from the "my account" page
+* Tweak Send email to customer when manually increasing funds
+* Misc - Refactored entire plugin
+* Misc - Add WooCommerce 2.3 compatibility

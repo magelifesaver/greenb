@@ -1,0 +1,1398 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulky - Bulk Edit Products fo Woo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-14 08:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.3; wp-5.7.2\n"
+"X-Domain: woocommerce-bulk-editor"
+
+#. note time
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/handle-order.php:170
+#, php-format
+msgid "%1$s at %2$s by %3$s"
+msgstr ""
+
+#. %s contains the name of the original product.
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:1427
+#, php-format
+msgid "%s (Copy)"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:212
+msgid "(Recommend at least 100 or higher)"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:203
+msgid "(Recommend at least 3000 or higher)"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"A helpful tool that allows you to bulk edit available attributes of products "
+"such as ID, Title, Content,..."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:344
+msgid "Action"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:242
+msgid "Actions"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:241
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:281
+msgid "Active"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:19
+msgid "Add"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:31
+msgid "Add file"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:27
+msgid "Add image"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:58
+msgid "Add image to selected cells"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:37
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:118
+msgid "Add new"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:317
+msgid "Add reply successfully"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:43
+msgid "Add variation"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:367
+msgid "After Date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:478
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:557
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:403
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:422
+msgid "All fields"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:752
+msgid "Allow backorder"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:82
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:458
+msgid "Allow free shipping"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:151
+msgid "Allowed emails"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:76
+msgid "Amount"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:687
+msgid "And"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:11
+msgid "Any..."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:346
+msgid "Approved"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:15
+msgid "Attribute"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:650
+msgid "Attributes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:60
+msgid "Author"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:83
+msgid "Author Email"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:76
+msgid "Author Name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:90
+msgid "Author URL"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:71
+msgid "Auto update key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:307
+msgid "Backorders"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:373
+msgid "Before Date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:663
+msgid "Begin"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:80
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:380
+msgid "Billing address 1"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:81
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:387
+msgid "Billing address 2"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:82
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:398
+msgid "Billing city"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:79
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:436
+msgid "Billing company"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:84
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:417
+msgid "Billing country"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:362
+msgid "Billing first name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:77
+msgid "Billing fisrt name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:78
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:369
+msgid "Billing last name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:87
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:443
+msgid "Billing phone"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:83
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:405
+msgid "Billing postcode"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:85
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:424
+msgid "Billing state"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:29
+msgid "Bulky"
+msgstr ""
+
+#. Name of the plugin
+msgid "Bulky - Bulk Edit Products for WooCommerce Premium"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:107
+msgid "Bulky - Bulk Edit Products for WooCommerce Premium Settings"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:677
+msgid "Button text"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:47
+msgid "Calculator"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:322
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:907
+msgid "Catalog visibility"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:334
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:770
+msgid "Categories"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:26
+msgid "Choose file"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:180
+msgid "Clear"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:238
+msgid "Column name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:240
+msgid "Column type"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:440
+msgid "Comments per page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:84
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:68
+msgid "Content"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:337
+msgid "Content, Author, Author Email, Author URL"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:443
+msgid "Coupon amount from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:448
+msgid "Coupon amount to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:42
+msgid "Coupon code"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:386
+msgid "Coupon date created from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:391
+msgid "Coupon date created to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:411
+msgid "Coupon expiry date from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:416
+msgid "Coupon expiry date to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:38
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:91
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:146
+msgid "Coupon is not exist"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:426
+msgid "Coupon status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:496
+msgid "Coupons per page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:44
+msgid "Create variations from all attributes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:48
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:61
+msgid "Created date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:821
+msgid "Cross-sells"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:38
+msgid "Custom attribute name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:12
+msgid "Custom product attribute"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:101
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:319
+msgid "Customer provided note"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:312
+msgid "Customer's email"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:342
+msgid "Date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:524
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:600
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:471
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:468
+msgid "day(s)"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:657
+msgid "Default attributes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:57
+msgid "Delete rows with selected cells"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:41
+msgid "Delete selected rows"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:62
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:629
+msgid "Description"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:687
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:61
+msgid "Disable"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:69
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:432
+msgid "Discount type"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:848
+msgid "Download expiry"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:833
+msgid "Download file"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:841
+msgid "Download limit"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:285
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:828
+msgid "Downloadable"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:90
+msgid "Draft"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:13
+msgid "Edit attributes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:54
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:55
+msgid "Edit Coupons"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:40
+msgid "Edit metadata"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:46
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:47
+msgid "Edit Orders"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:38
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:39
+msgid "Edit Products"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:62
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:63
+msgid "Edit Reviews"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:116
+msgid "Editor"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:86
+msgid "Email address"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:78
+msgid "Email invoice / order details to customer"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:665
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:402
+msgid "Empty"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:686
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:60
+msgid "Enable"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:170
+msgid "Enable hook that 3rd plugins need in save product processing"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:900
+msgid "Enable reviews"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:664
+msgid "End"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:34
+msgid "Enter a name for the new attribute term:"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:39
+msgid "Enter some text, or some attributes by \"|\" separating values."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:237
+msgid "Error: Please type your review text."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:661
+msgid "Exact"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:91
+msgid "Excerpt"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:142
+msgid "Exclude categories"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:486
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:565
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:411
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:430
+msgid "Exclude fields to edit"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:126
+msgid "Exclude products"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:113
+msgid "Exclude sale items"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:77
+msgid "Exit full screen"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:400
+msgid "Expire date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:88
+msgid "Expiry date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:328
+msgid "Feature Image"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:271
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:699
+msgid "Featured"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:477
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:556
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:402
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:421
+msgid "Fields to edit"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:30
+msgid "File URL"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:89
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:153
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:177
+msgid "Filter"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:483
+msgid "Filter include variation"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:54
+msgid "Find"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:48
+msgid "Find and Replace"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:77
+msgid "Full screen"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:643
+msgid "Gallery"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:79
+msgid "Get key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:252
+msgid "Get meta fields"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/enqueue.php:84
+msgid "Go to Bulk Editor page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:49
+msgid "Go to edit product page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:664
+msgid "Grouped"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:603
+msgid "GTIN, UPC, EAN, or ISBN"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:401
+msgid "Has expire date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:809
+msgid "Height"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:205
+msgid "Height from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:210
+msgid "Height to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:113
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:167
+msgid "History"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:117
+msgid "Hooks in save product processing"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://villatheme.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://villatheme.com/extensions/bulky-woocommerce-bulk-edit-products/"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:376
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:300
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:71
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:331
+msgid "ID (Use comma or minus for range)"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:597
+msgid "Image"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:107
+msgid "Individual use only"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:53
+msgid "Invalid or duplicated SKU"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:72
+msgid "Items"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:280
+msgid "Key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:797
+msgid "Length"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:220
+msgid "Length from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:225
+msgid "Length to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:660
+msgid "Like"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:163
+msgid "Limit usage to X items"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:428
+msgid "Load variations"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:736
+msgid "Manage stock"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:31
+msgid "max_input_vars is not enough:"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:101
+msgid "Maximum spend"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:895
+msgid "Menu order"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:99
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:157
+msgid "Meta fields"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:237
+msgid "Meta key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:103
+msgid "Method is not exist"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:95
+msgid "Minimum spend"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:29
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:279
+msgid "Name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:260
+msgid "new_meta_key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:460
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:273
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:287
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:296
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:328
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:431
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:396
+msgid "No"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:487
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:566
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:412
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:431
+msgid "No field"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:56
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:169
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:56
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:55
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/review-history.php:63
+msgid "No history id"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:586
+msgid "No meta field was found"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:21
+msgid "No round"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:918
+msgid "No shipping class"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:869
+msgid "None"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:662
+msgid "Not"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:688
+msgid "Not in"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:52
+msgid "Nothing change to save"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:25
+msgid "OK"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:16
+msgid "Option"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:686
+msgid "Or"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:511
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:590
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:452
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:455
+msgid "Order"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:132
+msgid "Order #"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:502
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:581
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:438
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:446
+msgid "Order by"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:330
+msgid "Order date from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:335
+msgid "Order date to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:727
+msgid "Order details manually sent to customer."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:38
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:91
+msgid "Order is not exist"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:75
+msgid "Order key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:102
+msgid "Order notes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:345
+msgid "Order status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:575
+msgid "Orders per page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:53
+msgid "Other"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:694
+msgid "Password"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:88
+msgid "Payment method"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:89
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:347
+msgid "Pending"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:51
+msgid "Please enter new product name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:86
+msgid "Please fill your key what you get from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:115
+msgid "Post date from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:120
+msgid "Post date to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:442
+msgid "Price"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:91
+msgid "Private"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:97
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:404
+msgid "Product"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:133
+msgid "Product categories"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:103
+msgid "Product ID"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:120
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:37
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:90
+msgid "Product is not exist"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:255
+msgid "Product status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:250
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:591
+msgid "Product type"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:671
+msgid "Product URL"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:119
+msgid "Products"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:422
+msgid "Products per page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:622
+msgid "Publish date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:87
+msgid "Published"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:889
+msgid "Purchase note"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:47
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:382
+msgid "Rating"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:80
+msgid "Regenerate download permissions"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:705
+msgid "Regular price"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:130
+msgid "Regular price from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:135
+msgid "Regular price to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:128
+msgid "Reload this page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:28
+msgid "Remove all"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:55
+msgid "Replace"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:358
+msgid "Reply"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:79
+msgid "Resend new order notification"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:56
+msgid "Revert all product in this point"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:357
+msgid "Review"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/review-history.php:147
+msgid "Review #"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:111
+msgid "Review Date"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/review-history.php:40
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/review-history.php:102
+msgid "Review is not exist"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:24
+msgid "Round down"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:23
+msgid "Round up"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:22
+msgid "Round with decimal"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:160
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:722
+msgid "Sale date from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:165
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:729
+msgid "Sale date to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:713
+msgid "Sale price"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:145
+msgid "Sale price from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:150
+msgid "Sale price to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:565
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:924
+msgid "Same as parent"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:14
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:123
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:221
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:256
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:310
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:388
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:182
+msgid "Save"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:187
+msgid "Save & Check key"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:391
+msgid "Save & Close"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:828
+msgid "Save column width failed"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:826
+msgid "Save column width successfully"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:530
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:606
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:477
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:474
+msgid "Save filter when reload page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:45
+msgid "Save new attributes before"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:88
+msgid "Scheduled"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:306
+msgid "Search by item name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:33
+msgid "Search products..."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:32
+msgid "Search tags..."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:88
+msgid "See guide"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:35
+msgid "Select all"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:774
+msgid "Select categories"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:36
+msgid "Select none"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:1016
+msgid "Select term"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:20
+msgid "Set default attributes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:117
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:94
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:155
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:70
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:71
+msgid "Settings"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:94
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:472
+msgid "Shipping address 1"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:95
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:479
+msgid "Shipping address 2"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:96
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:490
+msgid "Shipping city"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:914
+msgid "Shipping class"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:93
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:528
+msgid "Shipping company"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:98
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:509
+msgid "Shipping country"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:454
+msgid "Shipping first name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:91
+msgid "Shipping fisrt name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:92
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:461
+msgid "Shipping last name"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:867
+msgid "Shipping only"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:100
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:535
+msgid "Shipping phone"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:97
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:497
+msgid "Shipping postcode"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:99
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:516
+msgid "Shipping state"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:636
+msgid "Short Desc"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:105
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:445
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:609
+msgid "SKU"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:98
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:615
+msgid "Slug"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:294
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:758
+msgid "Sold individually"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:256
+msgid "Sorry, you must be logged in to reply to a review."
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:495
+msgid "Sort fields"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:348
+msgid "Spam"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:55
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:68
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:683
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:53
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:345
+msgid "Status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:741
+msgid "Stock"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:175
+msgid "Stock quantity from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:180
+msgid "Stock quantity to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:265
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:746
+msgid "Stock status"
+msgstr ""
+
+#. %d stock amount
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:434
+msgid "Stock: %d"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:192
+msgid "System status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:343
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:780
+msgid "Tags"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:877
+msgid "Tax class"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:859
+msgid "Tax status"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:863
+msgid "Taxable"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:162
+msgid "Taxonomies"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:106
+msgid "Taxonomy"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:255
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:309
+msgid "This action will reload editor"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:523
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:599
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:470
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:467
+msgid "Time to delete history"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:77
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:441
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:585
+msgid "Title"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:73
+msgid "Total"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:89
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:351
+msgid "Transaction ID"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:41
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:356
+msgid "Type"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:815
+msgid "Upsells"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:157
+msgid "Usage limit per coupon"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:169
+msgid "Usage limit per user"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:18
+msgid "Used for variations"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:343
+msgid "User"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:239
+msgid "Value format"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:46
+msgid "variations are added"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:42
+msgid "Variations cannot revert after save"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:119
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:397
+msgid "Verified"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:50
+msgid "View on Single product page"
+msgstr ""
+
+#. Author of the plugin
+msgid "VillaTheme"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:763
+msgid "Virtual"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:17
+msgid "Visible on the product page"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:791
+msgid "Weight"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:235
+msgid "Weight from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:240
+msgid "Weight to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:803
+msgid "Width"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:190
+msgid "Width from"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:195
+msgid "Width to"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:28
+msgid "WooCommerce Bulk Editor"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:470
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:550
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:396
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:415
+msgid "Wrap mode"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:459
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:272
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:286
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:295
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:328
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:430
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/reviews/reviews.php:395
+msgid "Yes"
+msgstr ""
+
+#: D:/git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:87
+msgid "You can auto update this plugin."
+msgstr ""

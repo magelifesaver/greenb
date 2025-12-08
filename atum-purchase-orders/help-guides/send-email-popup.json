@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Email Details",
+		"element": ".po-email-modal .po-modal__details",
+		"intro": "Welcome to the \"Sending PO\" modal. The interface should be straightforward, and we hope you like it. It should save you a lot of time generating PDFs and adding them to your email clients.<br><br>Please note that the \"PO Logs\" section will record your action every time you send an email. The record will include all the recipients as well. However, you must have the \"Action Logs\" premium add-on installed."
+	},
+	{
+		"title": "Attachments",
+		"element": ".po-email-modal .po-email-attachments__field",
+		"intro": "ATUM will automatically generate and attach the latest PDF version of this purchase order. Feel free to delete this attachment or add any additional files if required.<br><br>There are no limits in terms of the file type you use. Note that we recommend using up to a total of 10MB of attachments. The email may fail to arrive as some servers limit the size on the receiver end."
+	},
+	{
+		"title": "Email Template",
+		"element": ".po-email-modal .po-email-template__field",
+		"intro": "You can change the purchase order PDF template here.<br><br>By default, ATUM will use the one you have chosen within the \"ATUM >> Settings >> Purchase Orders >> PO PDF Template\" section. Click the blue plus \"+\" sign and click-select the one you want to use."
+	},
+	{
+		"title": "Email Body",
+		"element": ".po-email-modal #wp-po-email-body-wrap",
+		"intro": "Here is the email body. ATUM will use the text you pre-configured in settings (ATUM - Settings - Purchase Orders - Emails Template). However, you can adjust it from here if needed. The text field also supports HTML."
+	}
+]

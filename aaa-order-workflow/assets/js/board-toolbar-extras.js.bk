@@ -1,0 +1,226 @@
+/***********************************************************
+ * File: /aaa-order-workflow/assets/js/board-toolbar-extras.js
+ * Purpose:
+ * Header toolbar extras for Workflow Board (V1).
+ * Filters: Payment status, Envelope, Tip Type, Customer Type,
+ *          ID Expired, Payment Method, Driver, Created Via, Order Source.
+ * Also restores working search and dynamic driver/source/created via options.
+ ***********************************************************/
+;(function ($) {
+  'use strict';
+
+  const DASHBOARD_URL  = 'index.php';
+  const HEADER_H1_SEL  = '.wrap h1:first';
+  const BOARD_COLS_SEL = '#aaa-oc-board-columns';
+  const CARD_SEL       = '.aaa-oc-order-card';
+
+  const LS = {
+    SEARCH: 'aaaOC_toolbar_search',
+    PAY:    'aaaOC_toolbar_paystatus',
+    ENV:    'aaaOC_toolbar_envelope',
+    TIP:    'aaaOC_toolbar_tip',
+    CUST:   'aaaOC_toolbar_customer',
+    ID:     'aaaOC_toolbar_id',
+    PM:     'aaaOC_toolbar_paymethod',
+    DRV:    'aaaOC_toolbar_driver',
+    CV:     'aaaOC_toolbar_createdvia',
+    SRC:    'aaaOC_toolbar_ordersource',
+  };
+
+  function injectCssOnce() {
+    if (document.getElementById('aaa-oc-toolbar-extras-style')) return;
+    const style = document.createElement('style');
+    style.id = 'aaa-oc-toolbar-extras-style';
+    style.textContent = `
+      .aaa-oc-header-extras{
+        display:inline-flex; gap:.5rem; margin-left:.75rem; align-items:center; flex-wrap:wrap;
+      }
+      .aaa-oc-header-extras select,
+      .aaa-oc-header-extras input[type="search"]{
+        height:28px; padding:0 8px; border:1px solid #ccd0d4; border-radius:3px;
+      }
+      .aaa-oc-search{ min-width:260px; }
+      .aaa-oc-clear-filters{ margin-left:4px; text-decoration:underline; cursor:pointer; font-size:12px; opacity:.8; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function toolbarHtml() {
+    return `
+      <span class="aaa-oc-header-extras" role="region" aria-label="Board tools">
+        <a class="button-modern aaa-oc-exit" href="${DASHBOARD_URL}" target="_blank">Exit</a>
+        <a class="button-modern aaa-oc-today-orders" href="https://lokeydelivery.com/wp-admin/edit.php?layout=679290e3d0f8c&post_type=shop_order&todays_all=1" target="_blank">Orders</a>
+        <a class="button-modern aaa-oc-order-creator" href="admin.php?page=aaa-openia-order-creation-v4" target="_blank"> New Order</a>
+        <input class="aaa-oc-search" type="search" placeholder="Search: order #, customer, ID" />
+        <select class="aaa-oc-payfilter"><option value="all">Paid/Unpaid </option><option value="paid">Paid</option><option value="partial">Partial</option><option value="unpaid">Unpaid</option></select>
+        <select class="aaa-oc-envfilter"><option value="all">Envelope Status</option><option value="1">Outstanding</option><option value="0">Not Outstanding</option></select>
+        <select class="aaa-oc-tipfilter"><option value="all">Tip Type</option><option value="web">Web Tip</option><option value="epayment">E-Payment Tip</option><option value="none">No Tip</option></select>
+        <select class="aaa-oc-custfilter"><option value="all">New/Existing</option><option value="new">New</option><option value="existing">Existing</option></select>
+        <select class="aaa-oc-idfilter"><option value="all">ID Expired (All)</option><option value="expired">Expired</option><option value="valid">Valid</option></select>
+        <select class="aaa-oc-paymethodfilter"><option value="all">Method (All)</option><option value="pay_with_cash">Cash</option><option value="pay_with_zelle">Zelle</option><option value="pay_with_venmo">Venmo</option><option value="pay_with_applepay">ApplePay</option><option value="pay_with_cashapp">CashApp</option><option value="pay_with_creditcard">Credit Card</option></select>
+        <select class="aaa-oc-driverfilter"><option value="all">Filter Drivers</option></select>
+        <select class="aaa-oc-createdviafilter"><option value="all">Filter Type</option></select>
+        <select class="aaa-oc-ordersourcefilter"><option value="all">Filter Source</option></select>
+        <button type="button" class="button-modern aaa-oc-refresh-board">Refresh</button>
+        <span class="aaa-oc-clear-filters">Clear</span>
+      </span>
+    `;
+  }
+
+  function mountToolbar() {
+    const $h1 = $(HEADER_H1_SEL);
+    if (!$h1.length) return;
+    let $bar = $h1.find('.aaa-oc-header-extras');
+    if (!$bar.length) {
+      $bar = $(toolbarHtml());
+      $h1.append($bar);
+    }
+    // Restore saved state
+    const ls = (k, d='all') => localStorage.getItem(k) || d;
+    $bar.find('.aaa-oc-search').val(localStorage.getItem(LS.SEARCH) || '');
+    $bar.find('.aaa-oc-payfilter').val(ls(LS.PAY));
+    $bar.find('.aaa-oc-envfilter').val(ls(LS.ENV));
+    $bar.find('.aaa-oc-tipfilter').val(ls(LS.TIP));
+    $bar.find('.aaa-oc-custfilter').val(ls(LS.CUST));
+    $bar.find('.aaa-oc-idfilter').val(ls(LS.ID));
+    $bar.find('.aaa-oc-paymethodfilter').val(ls(LS.PM));
+    $bar.find('.aaa-oc-driverfilter').val(ls(LS.DRV));
+    $bar.find('.aaa-oc-createdviafilter').val(ls(LS.CV));
+    $bar.find('.aaa-oc-ordersourcefilter').val(ls(LS.SRC));
+  }
+
+  /** Populate dynamic driver, created via, and order source options */
+  function populateDynamicFilters() {
+    const drvSet = new Set(), cvSet = new Set(), srcSet = new Set();
+    document.querySelectorAll(CARD_SEL).forEach(card=>{
+      if (card.dataset.driverName) drvSet.add(card.dataset.driverName);
+      if (card.dataset.createdVia) cvSet.add(card.dataset.createdVia);
+      if (card.dataset.orderSource) srcSet.add(card.dataset.orderSource);
+    });
+    const $drv = $('.aaa-oc-driverfilter').empty().append('<option value="all">Driver (All)</option>');
+    Array.from(drvSet).sort().forEach(name=> $drv.append(`<option value="${name}">${name}</option>`));
+    const $cv = $('.aaa-oc-createdviafilter').empty().append('<option value="all">Created Via (All)</option>');
+    Array.from(cvSet).sort().forEach(name=> $cv.append(`<option value="${name}">${name}</option>`));
+    const $src = $('.aaa-oc-ordersourcefilter').empty().append('<option value="all">Source (All)</option>');
+    Array.from(srcSet).sort().forEach(name=> $src.append(`<option value="${name}">${name}</option>`));
+  }
+
+  function norm(s){ return (s||'').toString().toLowerCase(); }
+
+  function cardMatchesSearch(card, query) {
+    if (!query) return true;
+    const q = norm(query);
+    const $card = $(card);
+
+    // Extract searchable values
+    const orderId    = (card.dataset.orderId || '').toLowerCase();
+    const orderNum   = $card.find('.aaa-oc-order-number-large').text().toLowerCase();
+    const custName   = (card.dataset.customerName || '').toLowerCase();
+    const visibleName = $card.find('.aaa-oc-customer-name, .customer-name').text().toLowerCase();
+
+    // Match by order number, ID, or customer name (data or visible)
+    return (
+      orderId.includes(q) ||
+      orderNum.includes(q) ||
+      custName.includes(q) ||
+      visibleName.includes(q)
+    );
+  }
+
+  function cardMatchesFilters(card, $bar) {
+    const ds = card.dataset || {};
+    const want = {
+      pay:  norm($bar.find('.aaa-oc-payfilter').val() || 'all'),
+      env:  norm($bar.find('.aaa-oc-envfilter').val() || 'all'),
+      tip:  norm($bar.find('.aaa-oc-tipfilter').val() || 'all'),
+      cust: norm($bar.find('.aaa-oc-custfilter').val() || 'all'),
+      id:   norm($bar.find('.aaa-oc-idfilter').val() || 'all'),
+      pm:   norm($bar.find('.aaa-oc-paymethodfilter').val() || 'all'),
+      drv:  $bar.find('.aaa-oc-driverfilter').val() || 'all',
+      cv:   $bar.find('.aaa-oc-createdviafilter').val() || 'all',
+      src:  $bar.find('.aaa-oc-ordersourcefilter').val() || 'all',
+    };
+
+    if (want.pay !== 'all' && norm(ds.paymentStatus) !== want.pay) return false;
+    if (want.env !== 'all' && (ds.envelopeOutstanding||'') !== want.env) return false;
+
+    const epTip = parseFloat(ds.epaymentTip||'0');
+    const totTip = parseFloat(ds.totalOrderTip||'0');
+    const haveTip = (epTip>0) ? 'epayment' : ((totTip>0) ? 'web' : 'none');
+    if (want.tip !== 'all' && haveTip !== want.tip) return false;
+
+    if (want.cust !== 'all' && (ds.customerType||'') !== want.cust) return false;
+    if (want.id !== 'all' && ((ds.idExpired==='1')?'expired':'valid') !== want.id) return false;
+    if (want.pm !== 'all') {
+      const realPm = norm(ds.realPaymentMethod || '');
+      if (!realPm) return false;
+      // allow matching any comma-separated method (cash,zelle,venmo)
+      const methods = realPm.split(',').map(m => m.trim());
+      if (!methods.includes(want.pm)) return false;
+    }
+    if (want.drv !== 'all' && (ds.driverName||'') !== want.drv) return false;
+    if (want.cv !== 'all' && (ds.createdVia||'') !== want.cv) return false;
+    if (want.src !== 'all' && (ds.orderSource||'') !== want.src) return false;
+
+    return true;
+  }
+
+  function applyToolbarFilters() {
+    const $root = $(BOARD_COLS_SEL);
+    if (!$root.length) return;
+    const $bar = $(HEADER_H1_SEL).find('.aaa-oc-header-extras');
+    const query = ($bar.find('.aaa-oc-search').val() || '').trim();
+
+    localStorage.setItem(LS.SEARCH, query);
+    localStorage.setItem(LS.PAY, $bar.find('.aaa-oc-payfilter').val());
+    localStorage.setItem(LS.ENV, $bar.find('.aaa-oc-envfilter').val());
+    localStorage.setItem(LS.TIP, $bar.find('.aaa-oc-tipfilter').val());
+    localStorage.setItem(LS.CUST, $bar.find('.aaa-oc-custfilter').val());
+    localStorage.setItem(LS.ID, $bar.find('.aaa-oc-idfilter').val());
+    localStorage.setItem(LS.PM, $bar.find('.aaa-oc-paymethodfilter').val());
+    localStorage.setItem(LS.DRV, $bar.find('.aaa-oc-driverfilter').val());
+    localStorage.setItem(LS.CV, $bar.find('.aaa-oc-createdviafilter').val());
+    localStorage.setItem(LS.SRC, $bar.find('.aaa-oc-ordersourcefilter').val());
+
+    let shown=0;
+    $root.get(0).querySelectorAll(CARD_SEL).forEach(card=>{
+      const ok = cardMatchesSearch(card, query) && cardMatchesFilters(card, $bar);
+      card.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+
+    if(shown===0) console.warn('[AAA_OC] No cards match current filters');
+  }
+
+  function setupHandlers() {
+    $(document).on('click','.aaa-oc-refresh-board',function(){
+      if (typeof window.aaaOcRefreshBoard==='function') window.aaaOcRefreshBoard();
+    });
+    $(document).on('click','.aaa-oc-clear-filters',function(){
+      const $bar=$(HEADER_H1_SEL).find('.aaa-oc-header-extras');
+      $bar.find('input[type=search]').val('');
+      $bar.find('select').val('all');
+      Object.values(LS).forEach(k=>localStorage.removeItem(k));
+      applyToolbarFilters();
+    });
+    $(document).on('input','.aaa-oc-header-extras .aaa-oc-search',applyToolbarFilters);
+    $(document).on('change','.aaa-oc-header-extras select',applyToolbarFilters);
+  }
+
+  function setupReapply() {
+    const root=document.querySelector(BOARD_COLS_SEL);
+    if(!root) return;
+    const mo=new MutationObserver(()=>{ populateDynamicFilters(); applyToolbarFilters(); });
+    mo.observe(root,{childList:true,subtree:false});
+  }
+
+  $(function(){
+    injectCssOnce();
+    mountToolbar();
+    populateDynamicFilters();
+    setupHandlers();
+    setupReapply();
+    applyToolbarFilters();
+  });
+
+})(jQuery);

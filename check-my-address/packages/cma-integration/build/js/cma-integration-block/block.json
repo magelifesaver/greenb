@@ -1,0 +1,28 @@
+{
+  "apiVersion": 2,
+  "name": "check-my-address/cmaintegration",
+  "version": "2.0.0",
+  "title": "CheckMyAddress Integration",
+  "supports": {
+    "html": false,
+    "align": false,
+    "multiple": false,
+    "reusable": false
+  },
+  "parent": [
+    "woocommerce/checkout-shipping-address-block"
+  ],
+  "attributes": {
+    "lock": {
+      "type": "object",
+      "default": {
+        "remove": true,
+        "move": true
+      }
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

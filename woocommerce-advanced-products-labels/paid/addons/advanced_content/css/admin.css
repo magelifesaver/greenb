@@ -1,0 +1,9 @@
+.br_invalid {
+	-webkit-box-shadow: 0px 0px 5px 4px #F00 !important;
+	-moz-box-shadow: 0px 0px 5px 4px #F00 !important;
+	box-shadow: 0px 0px 5px 4px #F00 !important;
+}
+
+.br_non_clickable {
+	pointer-events: none;
+}

@@ -1,0 +1,978 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Shipping Zones by Drawing Premium for WooCommerce\n"
+"POT-Creation-Date: 2025-05-28 13:09+0200\n"
+"PO-Revision-Date: 2020-01-28 14:49+0100\n"
+"Last-Translator: Arosoft <info@arosoft.se>\n"
+"Language-Team: Arosoft <info@arosoft.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: shipping-zones-by-drawing.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: classes/class-szbd-admin.php:82
+msgid "New Order recipient"
+msgstr ""
+
+#: classes/class-szbd-admin.php:153 classes/class-szbd-shippingmethod.php:315
+#: shipping-zones-by-drawing.php:1218
+msgid "Shipping Origin"
+msgstr ""
+
+#: classes/class-szbd-admin.php:199 classes/class-szbd-admin.php:223
+msgid "Filter by Shipping Origin "
+msgstr ""
+
+#: classes/class-szbd-admin.php:242 classes/class-szbd-shippingmethod.php:153
+#: shipping-zones-by-drawing.php:481 shipping-zones-by-drawing.php:1122
+msgid "Main Location"
+msgstr ""
+
+#: classes/class-szbd-admin.php:404
+msgid "Import KML Polygon"
+msgstr ""
+
+#: classes/class-szbd-admin.php:414
+msgid "New Order Email"
+msgstr ""
+
+#: classes/class-szbd-admin.php:435
+msgid "Email address"
+msgstr ""
+
+#: classes/class-szbd-admin.php:436
+msgid ""
+"New order emails are sent to this address when a new order is received. This "
+"will override the default recipient(s)."
+msgstr ""
+
+#: classes/class-szbd-admin.php:450 classes/class-szbd-admin.php:462
+#, php-format
+msgid ""
+"Please enter a Google Maps API Key in the <a href=\"%s\" title=\"settings "
+"page\">settings page.</a>"
+msgstr ""
+
+#: classes/class-szbd-settings.php:14
+msgid "Shipping Zones by Drawing Premium"
+msgstr ""
+
+#: classes/class-szbd-settings.php:40
+msgid "Try to Geolocate and Pick the WooCommerce Store Address"
+msgstr ""
+
+#: classes/class-szbd-settings.php:44
+msgid "Search location..."
+msgstr ""
+
+#: classes/class-szbd-settings.php:53 includes/start-args-prem.php:11
+#: shipping-zones-by-drawing.php:985
+msgid "Settings"
+msgstr ""
+
+#: classes/class-szbd-settings.php:54 includes/start-args-prem.php:174
+msgid "Advanced"
+msgstr ""
+
+#: classes/class-szbd-settings.php:55
+msgid "Draw Shipping Zones"
+msgstr ""
+
+#: classes/class-szbd-settings.php:56
+msgid "Additional Shipping Origins"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:29
+#: classes/class-szbd-shippingmethod.php:72 classes/class-szbd-the-post.php:23
+#: classes/class-szbd-the-post.php:24 classes/class-szbd-the-post.php:26
+#: includes/start-args-prem.php:386 includes/start-args-prem.php:387
+#: includes/start-args-prem.php:389
+msgid "Shipping Zones by Drawing"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:30
+msgid "Shipping method to be used with a drawn delivery zone"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:132
+#: classes/class-szbd-shippingmethod.php:139
+msgid "By Radius"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:133
+#: classes/class-szbd-shippingmethod.php:140
+msgid "None"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:189
+msgid "Title"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:191
+msgid ""
+"Your customers will see the name of this shipping method during checkout."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:201
+msgid "Distance Unit"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:204
+msgid "Choose what distance unit to use."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:207
+msgid "Metric (km)"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:208
+msgid "Imperial (miles)"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:212
+msgid "Shipping Rate"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:218
+#: classes/class-szbd-shippingmethod.php:224
+msgid "Flat Rate"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:219
+msgid "By transportation distance"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:220
+msgid "By fixed rate + transportation distance"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:226
+msgid "Enter a cost (excl. tax) or sum, e.g. <code>10.00 * [qty]</code>."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:226
+msgid "Use <code> [weight] </code> for the total cart weight."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:226
+msgid ""
+"Use <code>[qty]</code> for the number of items, <br/><code>[cost]</code> for "
+"the total cost of items, and <code>[fee percent=\"10\" min_fee=\"20\" "
+"max_fee=\"\"]</code> for percentage based fees."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:237
+msgid "Coupon free shipping"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:238
+msgid "Free shipping with coupon code"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:240
+msgid "Make this shipping method free if a valid coupon exists."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:247
+msgid "Fixed Rate"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:249
+msgid "Enter a fixed shipping rate."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:259
+msgid "Distance Unit Rate"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:261
+msgid "Enter the rate per shipping distance unit."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:273
+msgid "Tax status"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:278
+msgid "Taxable"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:279
+msgctxt "Tax status"
+msgid "None"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:283
+msgid "Minimum order amount"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:285
+msgid "Select a minimum order amount."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:294
+msgid "Coupons discounts"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:295
+msgid "Apply minimum order rule before coupon discount"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:297
+msgid ""
+"If checked, this method will be available based on pre-discount order amount."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:303
+msgid "Transport mode"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:307
+msgid ""
+"Choose vehicle type to be used when calculating transportation distance och "
+"time."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:310
+msgid "By Car"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:311
+msgid "By Bike"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:317
+msgid "Choose shipping origin for this shipping method"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:323
+msgid "Restrict by Product Categories"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:325
+msgid ""
+"All products in cart must belong to one of the selected categories to "
+"activate this shipping method"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:329
+msgid "Product categories"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:331
+msgid "Leave empty to not restrict by product categories"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:339
+msgid "Restrict by Zone (Drawn zone or by Radius)"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:345
+msgid "Delivery Zone"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:347
+msgid "Select a drawn delivery area or specify the area by a radius"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:354
+msgid "Maximum radius"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:356
+msgid "Maximum radius (km/miles) from selected shipping origin."
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:366
+msgid "Restrict by Transportation Distance"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:371
+msgid "Maximum transportation distance"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:373
+msgid ""
+"Limit shipping by maximum transportation distance (km/miles) from selected "
+"store location and the selected mode (car/bike)"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:383
+msgid "Restrict by Transportation Time"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:388
+msgid "Max transportation time"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:390
+msgid ""
+"Limit shipping by maximum transportation time (minutes) from selected store "
+"location and the selected mode (car/bike)"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:409
+msgid "Shipping class costs"
+msgstr ""
+
+#. translators: %s: URL for link.
+#: classes/class-szbd-shippingmethod.php:413
+#, php-format
+msgid ""
+"These costs can optionally be added based on the <a href=\"%s\">product "
+"shipping class</a>."
+msgstr ""
+
+#. translators: %s: shipping class name
+#: classes/class-szbd-shippingmethod.php:421
+#, php-format
+msgid "\"%s\" shipping class cost"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:423
+#: classes/class-szbd-shippingmethod.php:437
+msgid "N/A"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:435
+msgid "No shipping class cost"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:448
+msgid "Calculation type"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:453
+msgid "Per class: Charge shipping for each shipping class individually"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:454
+msgid "Per order: Charge shipping for the most expensive shipping class"
+msgstr ""
+
+#: classes/class-szbd-shippingmethod.php:847
+msgid "(Cost is depending on your delivery address)"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:27
+#: classes/class-szbd-the-post-shipping-origin.php:28
+#: classes/class-szbd-the-post-shipping-origin.php:30
+#: includes/start-args-prem.php:442 includes/start-args-prem.php:443
+#: includes/start-args-prem.php:445
+msgid "Shipping Zones by Drawing Origins"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:29
+msgid "Shipping Zone Origins"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:31
+#: includes/start-args-prem.php:446
+msgid "Origin List"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:32
+#: includes/start-args-prem.php:447
+msgid "New Shipping Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:33
+#: includes/start-args-prem.php:448
+msgid "Add New Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:34
+#: includes/start-args-prem.php:449
+msgid "Edit Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:35
+#: includes/start-args-prem.php:450
+msgid "New Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:36
+#: includes/start-args-prem.php:451
+msgid "View Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:37
+#: includes/start-args-prem.php:452
+msgid "Search Origin"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:38
+#: classes/class-szbd-the-post.php:34 includes/start-args-prem.php:397
+#: includes/start-args-prem.php:453
+msgid "Nothing found"
+msgstr ""
+
+#: classes/class-szbd-the-post-shipping-origin.php:39
+#: classes/class-szbd-the-post.php:35 includes/start-args-prem.php:398
+#: includes/start-args-prem.php:454
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:25 includes/start-args-prem.php:388
+msgid "Shipping Zone Maps"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:27 includes/start-args-prem.php:390
+msgid "Zone List"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:28 includes/start-args-prem.php:391
+msgid "New Shipping Zone"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:29 includes/start-args-prem.php:392
+msgid "Add New Zone"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:30 includes/start-args-prem.php:393
+msgid "Edit Zone"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:31 includes/start-args-prem.php:394
+msgid "New Zone"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:32 includes/start-args-prem.php:395
+msgid "View Zone"
+msgstr ""
+
+#: classes/class-szbd-the-post.php:33 includes/start-args-prem.php:396
+msgid "Search Zone"
+msgstr ""
+
+#: includes/start-args-prem.php:14
+msgid "Read the"
+msgstr ""
+
+#: includes/start-args-prem.php:14
+msgid "documentation"
+msgstr ""
+
+#: includes/start-args-prem.php:14
+msgid "for more detailed instructions about the settings."
+msgstr ""
+
+#: includes/start-args-prem.php:18
+msgid "Google Maps API Key (Client)"
+msgstr ""
+
+#: includes/start-args-prem.php:23
+msgid ""
+" <p><a href=\"https://cloud.google.com/maps-platform/#get-started\" "
+"target=\"_blank\">Visit Google to get your API Key &raquo;</a> <br>Restrict "
+"this key to the following APIs,  Maps JavaScript API, Places API, Geocoding "
+"API and Directions API. Also restrict this key to your websites.</p>"
+msgstr ""
+
+#: includes/start-args-prem.php:26
+msgid "Google Maps API Key (Server)"
+msgstr ""
+
+#: includes/start-args-prem.php:30
+msgid ""
+" <p><a href=\"https://cloud.google.com/maps-platform/#get-started\" "
+"target=\"_blank\">Visit Google to get your API Key &raquo;</a> <br>Restrict "
+"this key to the Directions API & Geocode API. Also restrict this key to your "
+"server IP-address.</p>"
+msgstr ""
+
+#: includes/start-args-prem.php:34
+msgid "Show only lowest cost shipping method?"
+msgstr ""
+
+#: includes/start-args-prem.php:38
+msgid ""
+"At checkout, show only the \"Shipping Zones by Drawing\" shipping method "
+"with the lowest cost."
+msgstr ""
+
+#: includes/start-args-prem.php:41
+msgid "Hide shipping costs at cart page?"
+msgstr ""
+
+#: includes/start-args-prem.php:46
+msgid "At cart page, hide the shipping costs."
+msgstr ""
+
+#: includes/start-args-prem.php:49
+msgid "Enable at cart page?"
+msgstr ""
+
+#: includes/start-args-prem.php:54
+msgid "Make geolocation calculations at cart page."
+msgstr ""
+
+#: includes/start-args-prem.php:57
+msgid "Pick Precise Delivery Address from Map?"
+msgstr ""
+
+#: includes/start-args-prem.php:64
+msgid "Inactivate"
+msgstr ""
+
+#: includes/start-args-prem.php:65
+msgid "Always show the delivery map"
+msgstr ""
+
+#: includes/start-args-prem.php:66
+msgid "Show the delivey map when Google fail to geolocate the delivery address"
+msgstr ""
+
+#: includes/start-args-prem.php:69
+msgid ""
+"A map can be shown at checkout that let users pick their precise delivery "
+"location."
+msgstr ""
+
+#: includes/start-args-prem.php:72
+msgid "Checkout Map Type?"
+msgstr ""
+
+#: includes/start-args-prem.php:79
+msgid "Road map"
+msgstr ""
+
+#: includes/start-args-prem.php:80
+msgid "Satellite"
+msgstr ""
+
+#: includes/start-args-prem.php:81
+msgid "Hybrid - a mixture of road map and satellite"
+msgstr ""
+
+#: includes/start-args-prem.php:86
+msgid "Checkout Google Map ID"
+msgstr ""
+
+#: includes/start-args-prem.php:90
+msgid ""
+"Use a map ID to enable features and styling and manage your maps using the "
+"Google Cloud console. Map type must be Road Map."
+msgstr ""
+
+#: includes/start-args-prem.php:94
+msgid "Pick location from Plus Code?"
+msgstr ""
+
+#: includes/start-args-prem.php:99
+msgid "Enable the ability to pick location with a Google Plus Code."
+msgstr ""
+
+#: includes/start-args-prem.php:103
+msgid "Mandatory to precise at map?"
+msgstr ""
+
+#: includes/start-args-prem.php:108
+msgid "Make it mandatory to pick address from map?."
+msgstr ""
+
+#: includes/start-args-prem.php:111
+msgid "Auto insert saved location marker?"
+msgstr ""
+
+#: includes/start-args-prem.php:116
+msgid ""
+"For logged in users, automatically insert a map marker for the latest saved "
+"location. A shipping location is saved when a customer creates an order with "
+"a picked map position."
+msgstr ""
+
+#: includes/start-args-prem.php:119
+msgid "Auto insert location marker?"
+msgstr ""
+
+#: includes/start-args-prem.php:124
+msgid ""
+"Automatically insert a location marker on the map when an address is "
+"successfully geolocated."
+msgstr ""
+
+#: includes/start-args-prem.php:134
+msgid "Set Store Location"
+msgstr ""
+
+#: includes/start-args-prem.php:141
+msgid "Pick Store Location from Map"
+msgstr ""
+
+#: includes/start-args-prem.php:142
+msgid "Geolocate WooCommerce Store Address"
+msgstr ""
+
+#: includes/start-args-prem.php:145
+msgid ""
+"This location will be used as start point when calculating dynamic shipping "
+"rates and as center point when using radius as shipping method restriction. "
+"Warning! To geolocate the WooCommerce store address may lead to unnecessary "
+"amount of Google requests."
+msgstr ""
+
+#: includes/start-args-prem.php:152
+msgid "Pick Store Location"
+msgstr ""
+
+#: includes/start-args-prem.php:155
+msgid "Click on the map to set the store location. "
+msgstr ""
+
+#: includes/start-args-prem.php:180
+msgid "Server Mode? (Recommended)"
+msgstr ""
+
+#: includes/start-args-prem.php:184
+msgid ""
+"Mandatory when using blocks checkout. This mode requires the server Google "
+"API Key with the \"Directions\" and the \"Geocode\" libraries activated."
+msgstr ""
+
+#: includes/start-args-prem.php:189
+msgid "Show checkout message at server mode?"
+msgstr ""
+
+#: includes/start-args-prem.php:193
+msgid "Show a customer message at checkout if no methods are valid."
+msgstr ""
+
+#: includes/start-args-prem.php:198
+msgid "Deactivate Post Code restriction"
+msgstr ""
+
+#: includes/start-args-prem.php:202
+msgid ""
+"Deactivate Post code restriction. For areas with unreliable post code "
+"matches."
+msgstr ""
+
+#: includes/start-args-prem.php:207
+msgid "Select top shipping method?"
+msgstr ""
+
+#: includes/start-args-prem.php:211
+msgid ""
+"When changed address at checkout, select the top sorted shipping method."
+msgstr ""
+
+#: includes/start-args-prem.php:218
+msgid "Force Shortcode [szbd]?"
+msgstr ""
+
+#: includes/start-args-prem.php:226
+msgid "Monitor insertion of shortcode [szbd]?"
+msgstr ""
+
+#: includes/start-args-prem.php:236
+msgid "Debug Mode"
+msgstr ""
+
+#: includes/start-args-prem.php:240
+msgid "Show request and response data from Google calls."
+msgstr ""
+
+#: includes/start-args-prem.php:245
+msgid "Log Google Server Requests"
+msgstr ""
+
+#: includes/start-args-prem.php:249
+msgid "Save server to server requests in to a log file."
+msgstr ""
+
+#: includes/start-args-prem.php:254
+msgid "Display shipping origin data"
+msgstr ""
+
+#: includes/start-args-prem.php:258
+msgid ""
+"Display the shipping origin in the admin order table and in new order emails."
+msgstr ""
+
+#: includes/start-args-prem.php:263
+msgid "Map Placement"
+msgstr ""
+
+#: includes/start-args-prem.php:268
+msgid "Before Payment"
+msgstr ""
+
+#: includes/start-args-prem.php:269
+msgid "Before Customer Details"
+msgstr ""
+
+#: includes/start-args-prem.php:270
+msgid "First in Order Review"
+msgstr ""
+
+#: includes/start-args-prem.php:271
+msgid "After Order Notes"
+msgstr ""
+
+#: includes/start-args-prem.php:272
+msgid "After Billing Form"
+msgstr ""
+
+#: includes/start-args-prem.php:277
+msgid "Select where on checkout page to place the map"
+msgstr ""
+
+#: includes/start-args-prem.php:277
+msgid "Only for the old checkout page [woocommerce_checkout]"
+msgstr ""
+
+#: includes/start-args-prem.php:287
+msgid "Google Response Types"
+msgstr ""
+
+#: includes/start-args-prem.php:297
+msgid "Configure custom allowed Google response types "
+msgstr ""
+
+#: includes/start-args-prem.php:302
+msgid "Geocode Response Types (with map)"
+msgstr ""
+
+#: includes/start-args-prem.php:333
+msgid ""
+"Accepted response types for a geocode request when the map feature is "
+"activated"
+msgstr ""
+
+#: includes/start-args-prem.php:333 includes/start-args-prem.php:368
+msgid ""
+"<p><a href=\"https://developers.google.com/maps/documentation/geocoding/"
+"overview#Types\" target=\"_blank\">Learn more.</a></p>"
+msgstr ""
+
+#: includes/start-args-prem.php:336
+msgid "Geocode Response Types (without map)"
+msgstr ""
+
+#: includes/start-args-prem.php:368
+msgid ""
+"Accepted response types for a geocode request when the map feature is "
+"disabled or when calculating a dynamic shipping rate"
+msgstr ""
+
+#: includes/start-args-prem.php:444
+msgid "Shipping Zone Origin"
+msgstr ""
+
+#: packages/szbd-method-selection/szbd-method-selection.php:53
+msgid "Szbd_method_selection Blocks"
+msgstr ""
+
+#: packages/szbd-method-selection/szbd-method-selection.php:105
+msgid "The selected shipping method is not for your shipping mode."
+msgstr ""
+
+#: packages/szbd-shipping-map/src/js/szbd-shipping-map-block/block.js:312
+msgid "Please Precise Your Shipping Location"
+msgstr ""
+
+#: packages/szbd-shipping-map/src/js/szbd-shipping-map-block/block.js:312
+#: shipping-zones-by-drawing.php:911 shipping-zones-by-drawing.php:923
+msgid "Precise Address?"
+msgstr ""
+
+#: packages/szbd-shipping-map/src/js/szbd-shipping-map-block/block.js:335
+#: shipping-zones-by-drawing.php:963
+msgid "Find Location with Google Plus Code"
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map-blocks-integration.php:121
+msgid "Shipping Zones by drawing map"
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:116
+#: shipping-zones-by-drawing.php:627 shipping-zones-by-drawing.php:735
+msgid ""
+"More shipping alternatives may exist when a full shipping address is entered."
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:118
+#: shipping-zones-by-drawing.php:629 shipping-zones-by-drawing.php:737
+msgid "You have to precise a location at the map"
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:142
+#: shipping-zones-by-drawing.php:660 shipping-zones-by-drawing.php:768
+msgid "Your latest shipping location"
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:143
+#: shipping-zones-by-drawing.php:661 shipping-zones-by-drawing.php:769
+msgid "This was the shipping location for your last delivery."
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:192
+msgid "You have to pick a delivery point on the map."
+msgstr ""
+
+#: packages/szbd-shipping-map/szbd-shipping-map.php:488
+msgid "Shipping Map Blocks"
+msgstr ""
+
+#: packages/szbd-shipping-message/szbd-shipping-message-blocks-integration.php:97
+msgid "Shipping Zones by drawing Shipping message"
+msgstr ""
+
+#: packages/szbd-shipping-message/szbd-shipping-message.php:90
+msgid "Shipping Message Blocks"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:623 shipping-zones-by-drawing.php:731
+msgid ""
+"There are no shipping options available. Please ensure that your address has "
+"been entered correctly, or contact us if you need any help."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:624 shipping-zones-by-drawing.php:732
+msgid "Minimum order value is"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:625 shipping-zones-by-drawing.php:733
+msgid "You are too far away. We only make deliveries within"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:626 shipping-zones-by-drawing.php:734
+msgid "Some items in your cart don’t ship to your location"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:909
+msgid "Please Precise Your Location"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:964
+msgid "Enter Plus Code..."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:972
+msgid "Please precise your address at the map"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:986
+msgid "Documentation"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:997
+msgid "Shipping Zones by Drawing requires WooCommerce to be activated to work."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1002
+msgid ""
+"Shipping Zones by Drawing Premium can not be activated when the free version "
+"is active."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1047 shipping-zones-by-drawing.php:1052
+msgid "ID"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1141 shipping-zones-by-drawing.php:1293
+msgid "Plus Code"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1164 shipping-zones-by-drawing.php:1190
+#: shipping-zones-by-drawing.php:1197 shipping-zones-by-drawing.php:1204
+#: shipping-zones-by-drawing.php:1237 shipping-zones-by-drawing.php:1265
+msgid "Picked Delivery Location"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1165 shipping-zones-by-drawing.php:1191
+#: shipping-zones-by-drawing.php:1198 shipping-zones-by-drawing.php:1205
+#: shipping-zones-by-drawing.php:1238 shipping-zones-by-drawing.php:1266
+#: shipping-zones-by-drawing.php:1301 shipping-zones-by-drawing.php:1718
+#: shipping-zones-by-drawing.php:1759
+msgid "Open delivery location with Google Maps"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1247 shipping-zones-by-drawing.php:1272
+msgid "Shipping Pluscode"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1288
+msgid "Picked delivery location"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1558
+msgid "Minimum order value for your address is"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1559
+msgid "Your delivery address is too far away from us to make deliveries."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1559
+msgid "We do not make deliveries to your area."
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1562
+msgid "Your products must be of category"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1565
+msgid "They may also be of category"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1572
+msgid "or"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1577
+msgid "for the given address"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1721
+msgid "Customer shipping"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1726
+msgid "Latest shipping location"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1729
+msgid "Latitude"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1730
+msgid "Longitude"
+msgstr ""
+
+#: shipping-zones-by-drawing.php:1758
+msgid "Latest Picked Shipping Location"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Shipping Zones by Drawing Premium for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://shippingzonesplugin.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Limit shipping with drawn zones or transportation distances and times. "
+"Premium version."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Arosoft.se"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://arosoft.se"
+msgstr ""

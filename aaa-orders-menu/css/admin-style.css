@@ -1,0 +1,20 @@
+.aaa-menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.aaa-menu-item input[type="text"],
+.aaa-menu-item input[type="url"] {
+    margin-right: 10px;
+    padding: 5px;
+    flex: 1;
+}
+.aaa-remove-menu {
+    background-color: #dc3232;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.aaa-remove-menu:hover {
+    background-color: #a00;
+}

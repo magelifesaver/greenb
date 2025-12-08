@@ -1,0 +1,2051 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Account Funds for WooCommerce 4.0.0-dev.1\n"
+"Report-Msgid-Bugs-To: https://kestrelwp.com/contact/\n"
+"Last-Translator: gpt-po v1.2.3\n"
+"Language-Team: Kestrel <support@kestrelwp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-08-14 15:22+0900\n"
+"PO-Revision-Date: 2025-08-14 15:23+0900\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
+"Copyright: (C) 2025 Kestrel\n"
+
+#. Plugin Name of the plugin
+#: woocommerce-account-funds.php
+msgid "Account Funds for WooCommerce"
+msgstr "WooCommerce 账户资金"
+
+#. Plugin URI of the plugin
+#: woocommerce-account-funds.php
+msgid "https://woocommerce.com/products/account-funds/"
+msgstr "https://woocommerce.com/products/account-funds/"
+
+#. Description of the plugin
+#: woocommerce-account-funds.php
+msgid "Allow customers to deposit funds into their accounts and pay with account funds during checkout."
+msgstr "允许客户将资金存入他们的账户，并在结账时使用账户资金支付。"
+
+#. Author of the plugin
+#: woocommerce-account-funds.php
+msgid "Kestrel"
+msgstr "Kestrel"
+
+#. Author URI of the plugin
+#: woocommerce-account-funds.php
+msgid "http://kestrelwp.com"
+msgstr "http://kestrelwp.com"
+
+#. translators: Placeholders: %1$s - Refund amount, %2$s - Account funds label, e.g. "Account funds"
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:62
+#, php-format
+msgid "Refund %1$s via %2$s"
+msgstr "通过 %2$s 退款 %1$s"
+
+#. translators: Placeholders: %1$s - Refund amount, %2$s - Account funds label, e.g. "Account funds"
+#. translators: Placeholders: %1$s- refund amount, %2$s - payment gateway title
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:128
+#: src/Gateway.php:477
+#, php-format
+msgid "Refunded %1$s via %2$s."
+msgstr "已通过 %2$s 退款 %1$s。"
+
+#. Translators: Placeholders: %1$s - Store credit amount to be removed, %$2s - Customer store credit balance amount -  %3$s - Label used to describe store credit
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:178
+#, php-format
+msgid "Insufficient %1$s in customer's balance (%2$s) to remove the amount of %3$s."
+msgstr "客户余额中的 %1$s 不足（%2$s），无法扣除 %3$s 的金额。"
+
+#. Translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit
+#: legacy/includes/admin/class-wc-account-funds-admin-refunds.php:193
+#, php-format
+msgid "Removed %1$s in %2$s from customer's balance."
+msgstr "从客户余额中扣除了 %1$s 在 %2$s 的金额。"
+
+#. translators: Placeholder: %s - Average daily account funds deposits
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:97
+#, php-format
+msgid "%s average daily deposits"
+msgstr "%s 平均每日存款"
+
+#. translators: Placeholder: %s - Average monthly account funds deposits
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:102
+#, php-format
+msgid "%s average monthly deposits"
+msgstr "%s 平均每月存款"
+
+#. translators: Placeholder: %s - Total account funds deposits in a chosen period
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:108
+#, php-format
+msgid "%s total deposits in this period"
+msgstr "%s 在此期间的总存款"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:109
+msgid "This is the sum of the order totals after any refunds and including shipping and taxes."
+msgstr "这是订单总额在扣除任何退款后，包括运费和税费的总和。"
+
+#. translators: Placeholder: %s - Account funds deposits made in total for a chosen period
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:120
+#, php-format
+msgid "%s deposits made"
+msgstr "%s 已存款"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:135
+msgid "Year"
+msgstr "年度"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:136
+msgid "Last month"
+msgstr "上个月"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:137
+msgid "This month"
+msgstr "本月"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:138
+msgid "Last 7 days"
+msgstr "过去7天"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:201
+msgid "Number of deposits made"
+msgstr "存款次数"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:209
+msgid "Average sales amount"
+msgstr "平均销售金额"
+
+#: legacy/includes/class-wc-account-funds-deposits-by-date.php:219
+msgid "Deposits amount"
+msgstr "存款金额"
+
+#. translators: Placeholder- %s - minimum account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:154
+#, php-format
+msgid "The minimum amount that can be topped up is %s"
+msgstr "最低充值金额为 %s"
+
+#. translators: Placeholder: %s - maximum account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:158
+#, php-format
+msgid "The maximum amount that can be topped up is %s"
+msgstr "最高充值金额为 %s"
+
+#: legacy/includes/class-wc-account-funds-my-account.php:168
+msgid "View cart"
+msgstr "查看购物车"
+
+#. translators: Placeholder: %s - Account funds deposits top-up amount
+#: legacy/includes/class-wc-account-funds-my-account.php:170
+#, php-format
+msgid "Top-up of %1$s has been added to cart."
+msgstr "已将 %1$s 的充值添加到购物车。"
+
+#. translators: Account funds deposits
+#: legacy/includes/class-wc-account-funds-reports.php:24
+msgid "Deposits"
+msgstr "存款"
+
+#. translators: Account funds deposits overview
+#: legacy/includes/class-wc-account-funds-reports.php:28
+msgid "Overview"
+msgstr "概览"
+
+#. translators: Name of the account funds widget
+#: legacy/includes/class-wc-account-funds-widget.php:17
+msgid "My Account Funds"
+msgstr "我的账户资金"
+
+#. translators: Placeholders: %1$s - account funds amount, 2$s - account funds label, e.g. "Account Funds"
+#. translators: Placeholders: %1$s - Funds amount, %2$s - Label used to describe account funds
+#: legacy/includes/class-wc-account-funds-widget.php:45
+#: templates/myaccount/account-funds.php:38
+#, php-format
+msgid "You currently have <strong>%1$s</strong> worth of %2$s in your account."
+msgstr "您当前账户中有 <strong>%1$s</strong> 的 %2$s。"
+
+#. translators: Account funds deposits
+#: legacy/includes/class-wc-account-funds-widget.php:57
+msgid "View deposits"
+msgstr "查看存款"
+
+#. translators: Placeholder: %s - label used to describe account funds owned by the current user, e.g. "My account funds"
+#: legacy/includes/class-wc-account-funds-widget.php:85
+#, php-format
+msgid "My %s"
+msgstr "我的 %s"
+
+#: legacy/includes/class-wc-account-funds-widget.php:90
+msgid "Title:"
+msgstr "标题："
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:54
+#, php-format
+msgid "%s increase"
+msgstr "%s 增加"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:58
+#, php-format
+msgid "This email is sent to the customer when the %s amount is manually increased."
+msgstr "当 %s 金额被手动增加时，此邮件会发送给客户。"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:88
+#, php-format
+msgid "%s increased"
+msgstr "%s 增加"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. "Account Funds"
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:103
+#, php-format
+msgid "Your %s amount has increased to:"
+msgstr "您的 %s 金额已增加至："
+
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:129
+msgid "Message"
+msgstr "消息"
+
+#. translators: Placeholder: %s - list of available placeholders
+#: legacy/includes/emails/class-wc-account-funds-email-account-funds-increase.php:251
+#, php-format
+msgid "Available placeholders: %s."
+msgstr "可用占位符：%s。"
+
+#. translators: Placeholders: %s - list of available placeholders
+#: legacy/includes/wc-account-funds-functions.php:161
+#, php-format
+msgid "Available placeholders: %s"
+msgstr "可用占位符：%s"
+
+#: legacy/includes/wc-account-funds-order-functions.php:115
+msgid "Customer not found."
+msgstr "未找到客户。"
+
+#. translators: Placeholder: %s - label used to describe account funds, e.g. insufficient account funds amount
+#: legacy/includes/wc-account-funds-order-functions.php:129
+#, php-format
+msgid "Insufficient %s amount."
+msgstr "余额不足 %s。"
+
+#. translators: Placeholders: %1$s payment gateway title, %2$s account funds used (applied at checkout)
+#: legacy/includes/wc-account-funds-order-functions.php:150
+#, php-format
+msgid "%1$s payment applied: %2$s"
+msgstr "%1$s 支付应用：%2$s"
+
+#: src/Admin.php:86
+msgid "Account funds"
+msgstr "账户资金"
+
+#: src/Admin.php:191
+msgid "The store credit gateway is not enabled. Customers will not be able to pay for orders using their store credit."
+msgstr "商店信用网关未启用。客户将无法使用商店信用支付订单。"
+
+#: src/Admin.php:193
+msgid "View gateway settings"
+msgstr "查看网关设置"
+
+#: src/Admin.php:207
+msgid "Version 4.0.0 of Kestrel Account funds for WooCommerce is a major upgrade paving the way for many new features to reward customers with store credit and expand your business opportunities in building customer loyalty."
+msgstr "Kestrel 账户资金 for WooCommerce 4.0.0 版本是一次重大升级，为奖励客户商店信用和拓展您的业务机会，建立客户忠诚度铺平了道路。"
+
+#: src/Admin.php:209
+msgid "Learn more"
+msgstr "了解更多"
+
+#: src/Admin.php:216
+msgid "Account funds for WooCommerce"
+msgstr "WooCommerce 账户资金"
+
+#: src/Admin/Products.php:66
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:81
+#: src/Settings/Store_Credit_Label.php:87
+#: src/Store_Credit/Reward_Status.php:84
+msgid "Store credit"
+msgstr "商店信用"
+
+#: src/Admin/Products.php:137
+msgid "Store credit products can be purchased by customers to increase their store credit balance by an amount equal to the price paid."
+msgstr "客户可以购买商店信用产品，以增加其商店信用余额，金额等于支付的价格。"
+
+#: src/Admin/Products.php:138
+msgid "If a sale price is set, customers will pay the sale price and receive the full price amount in store credit instead."
+msgstr "如果设置了促销价格，客户将支付促销价，并以全价获得商店信用。"
+
+#: src/Admin/Products.php:139
+msgid "Important note: store credit products should not be taxed if you are charging tax on the purchase of products."
+msgstr "重要提示：如果您对产品的购买收取税费，商店信用产品不应征税。"
+
+#: src/Admin/Screens/Settings_Screen.php:78
+msgid "Settings"
+msgstr "设置"
+
+#: src/Admin/Screens/Settings_Screen.php:90
+msgid "Account funds settings"
+msgstr "账户资金设置"
+
+#: src/Admin/Screens/Settings_Screen.php:108
+msgid "Labels"
+msgstr "标签"
+
+#: src/Admin/Screens/Settings_Screen.php:109
+msgid "Determine how store credit is presented to customers. Leave blank to use the default \"Store credit\"."
+msgstr "确定商店信用如何呈现给客户。留空使用默认的“商店信用”。"
+
+#: src/Admin/Screens/Settings_Screen.php:113
+msgid "Funding"
+msgstr "资金"
+
+#: src/Admin/Screens/Settings_Screen.php:114
+msgid "Determine if customers are able to increase their store credit from their account page."
+msgstr "确定客户是否可以在其账户页面增加店铺信用额度。"
+
+#. translators: Placeholder: %1$s - opening link tag, %2$s - closing link tag
+#: src/Admin/Screens/Settings_Screen.php:163
+#, php-format
+msgid "To configure the store credit payment gateway and let customers pay with their store credit, please visit the %1$s store credit payment gateway settings%2$s."
+msgstr "要配置店铺信用支付网关并让客户使用店铺信用支付，请访问 %1$s 店铺信用支付网关设置 %2$s。"
+
+#: src/Admin/Screens/Settings_Screen.php:184
+msgid "Save changes"
+msgstr "保存更改"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:53
+#: src/Store_Credit/Reward_Type.php:65
+#: src/Store_Credit/Reward_Type.php:84
+#: src/System_Status_Report.php:121
+msgid "Cashback"
+msgstr "返现"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:67
+msgid "Edit cashback reward"
+msgstr "编辑返现奖励"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:70
+msgid "Add new cashback reward"
+msgstr "添加新的返现奖励"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:82
+msgid "Award store credit to customers when they make a purchase. Choose to award credit as percentage or fixed amount, relative to the whole order value or specific products within the order."
+msgstr "在客户购买时授予店铺信用。选择以百分比或固定金额授予信用，基于整个订单价值或订单中的特定产品。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:111
+msgid "Award cashback store credit when the customer pays for an order that fits the eligibility rules."
+msgstr "当客户支付符合资格规则的订单时授予返现店铺信用。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:115
+msgid "Award cashback store credit for every eligible product within a paid order."
+msgstr "为已支付订单中的每个符合条件的产品授予返现店铺信用。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:165
+msgid "Define who qualifies for cashback based on order value or contents."
+msgstr "根据订单价值或内容定义谁有资格获得返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:171
+msgid "Eligible orders"
+msgstr "符合条件的订单"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:175
+msgid "Award cashback only if the paid order meets the specified criteria."
+msgstr "仅在支付的订单符合指定条件时授予返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:183
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:349
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:188
+msgid "Products"
+msgstr "产品"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:184
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:350
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:189
+msgid "Search for products&hellip;"
+msgstr "搜索产品&hellip;"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:208
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:373
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:212
+msgid "Product categories"
+msgstr "产品类别"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:209
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:374
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:213
+msgid "Select categories&hellip;"
+msgstr "选择类别&hellip;"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:234
+msgid "Product types"
+msgstr "产品类型"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:241
+msgid "Select product types&hellip;"
+msgstr "选择产品类型&hellip;"
+
+#. translators: Placeholder: %s - Currency symbol
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:252
+#, php-format
+msgid "Minimum order value (%s)"
+msgstr "最低订单金额 (%s)"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:257
+msgid "The order must reach this value (after discounts, before tax and shipping) to qualify for cashback."
+msgstr "订单必须达到此金额（折扣后、税前和运费前）才能获得返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:258
+msgid "Leave blank for no minimum."
+msgstr "无最低限制请留空。"
+
+#. translators: Placeholder: %s - Currency symbol
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:269
+#, php-format
+msgid "Maximum order value (%s)"
+msgstr "最高订单金额 (%s)"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:274
+msgid "Award cashback only if the order total is less than this amount."
+msgstr "仅在订单总额低于此金额时授予返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:275
+msgid "Leave blank for no maximum."
+msgstr "无最高限制请留空。"
+
+#. translators: Context: Limit awarding store credit once per customer
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:282
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:410
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:249
+msgid "Award limits"
+msgstr "奖励限制"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:290
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:418
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:259
+msgid "Unlimited"
+msgstr "无限制"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:291
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:419
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:258
+msgid "Once per customer"
+msgstr "每客户一次"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:297
+msgid "Exclude free items"
+msgstr "排除免费商品"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:298
+msgid "Do not award cashback if the order contains any free products"
+msgstr "如果订单包含任何免费产品，则不授予返现"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:305
+msgid "Exclude items on sale"
+msgstr "排除促销商品"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:306
+msgid "Do not award cashback if the order contains any products marked on sale"
+msgstr "如果订单包含任何标记为促销的产品，则不授予返现"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:313
+msgid "Exclude coupons"
+msgstr "排除优惠券"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:314
+msgid "Do not award cashback if any coupon was applied to the order"
+msgstr "如果订单使用任何优惠券，则不授予返现"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:331
+msgid "Define who qualifies for cashback based on products within an order."
+msgstr "根据订单中的产品定义谁有资格获得返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:337
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:172
+msgid "Eligible products"
+msgstr "符合条件的产品"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:343
+msgid "Select the products that customers can buy to earn cashback."
+msgstr "选择客户可以购买以获得返现的产品。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:370
+msgid "Award cashback when the customer purchases any of the selected products."
+msgstr "当客户购买任何选定的产品时授予返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:392
+msgid "Award cashback when the customer purchases any products in the selected product categories."
+msgstr "当客户购买任何在选定产品类别中的产品时授予返现。"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:420
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:257
+msgid "Once per product"
+msgstr "每产品一次"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:426
+msgid "Product quantity"
+msgstr "产品数量"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:430
+msgid "Multiply cashback awarded for each eligible product by its quantity in the same order"
+msgstr "将每个符合条件的产品的返现乘以其在同一订单中的数量"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:431
+msgid "Award cashback once per eligible product ignoring its quantity in the same order"
+msgstr "每个符合条件的产品只授予一次返现，不考虑其在订单中的数量"
+
+#: src/Admin/Screens/Store_Credit/Cashback_Screen.php:451
+msgid "The maximum order amount defined by this cashback should not be less than the minimum order amount, otherwise the reward will be unapplicable."
+msgstr "由此返现定义的最大订单金额不得低于最低订单金额，否则奖励将不适用。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:50
+#: src/Store_Credit/Reward_Type.php:86
+#: src/System_Status_Report.php:134
+msgid "Milestones"
+msgstr "里程碑"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:64
+msgid "Edit milestone reward"
+msgstr "编辑里程碑奖励"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:67
+msgid "Add new milestone reward"
+msgstr "添加新的里程碑奖励"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:79
+msgid "Award store credit to customers when they perform specific actions in the shop."
+msgstr "当客户在商店执行特定操作时，授予店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:108
+msgid "Award milestone store credit when a guest customer signs up for an account."
+msgstr "当访客注册账户时，授予里程碑店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:112
+msgid "Award milestone store credit when a customer leaves a product review, based on the eligibility rules."
+msgstr "根据资格规则，客户发表评论时授予里程碑店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:166
+msgid "Define who qualifies for store credit by leaving a product review."
+msgstr "定义通过发表评论来获得店铺积分的资格条件。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:177
+msgid "Select the products that customers must review to earn the milestone award."
+msgstr "选择客户必须评论的产品以获得里程碑奖励。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:180
+msgid "Any product"
+msgstr "任何产品"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:181
+msgid "Specific products"
+msgstr "特定产品"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:182
+msgid "Products within specific categories"
+msgstr "特定类别中的产品"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:209
+msgid "Award store credit when the customer reviews any of the selected products."
+msgstr "当客户评论任何已选产品时，授予店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:231
+msgid "Award store credit when the customer reviews any products in the selected product categories."
+msgstr "当客户评论所选产品类别中的任何产品时，授予店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:267
+msgid "Verified purchase required"
+msgstr "需要验证购买"
+
+#: src/Admin/Screens/Store_Credit/Milestones_Screen.php:268
+msgid "Only reward reviews for products the customer has purchased"
+msgstr "仅奖励客户已购买的产品评论"
+
+#. translators: Context: Store credit configuration name
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:70
+msgid "Name"
+msgstr "名称"
+
+#. translators: Context: Store credit configuration status
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:72
+#: templates/myaccount/account-funds/deposit-item-data.php:37
+#: templates/myaccount/recent-deposits.php:29
+msgid "Status"
+msgstr "状态"
+
+#. translators: Context: Store credit financial amount (e.g. milestone, reward...) or percentage (e.g. cashback)
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:74
+#: src/Admin/User_Profiles.php:126
+msgid "Amount"
+msgstr "金额"
+
+#. translators: Context: Event name upon which store credit is awarded to a customer
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:76
+msgid "Awarded upon"
+msgstr "授予时间"
+
+#. translators: Context: Number of times a store credit has been awarded to customers
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:78
+msgid "Awarded times"
+msgstr "授予次数"
+
+#. translators: Context: Total amount of store credit awarded to customers
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:80
+msgid "Awarded total"
+msgstr "总授予"
+
+#. translators: Context: Button label to edit a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:157
+msgid "Edit"
+msgstr "编辑"
+
+#. translators: Context: Button label to soft-delete a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:160
+msgid "Trash"
+msgstr "回收站"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:163
+msgid "Credit configuration name"
+msgstr "积分配置名称"
+
+#. translators: Context: Button label to restore a credit configuration from the trash
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:169
+msgid "Restore"
+msgstr "还原"
+
+#. translators: Context: Button label to permanently delete a credit configuration
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:171
+msgid "Permanently delete"
+msgstr "永久删除"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:247
+msgid "Limited to once per customer"
+msgstr "每位客户限一次"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:249
+msgid "Limited to once per product"
+msgstr "每个产品限一次"
+
+#. translators: Placeholders: %1$s - current count of awarded store credit across customers, %2$s - remaining available redemptions
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:268
+#, php-format
+msgid "%1$s out of %2$s"
+msgstr "%1$s 已完成 %2$s"
+
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:329
+msgid "Empty trash"
+msgstr "清空回收站"
+
+#. translators: Placeholder: %d - count of all credit configuration tyes
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:341
+#, php-format
+msgid "All (%d)"
+msgstr "全部 (%d)"
+
+#. translators: Placeholder: %d - count of trashed credit configurations
+#: src/Admin/Screens/Store_Credit/Rewards_Table.php:356
+#, php-format
+msgid "Trash (%d)"
+msgstr "回收站 (%d)"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:143
+msgid "A customer will receive store credit every time they review a product."
+msgstr "每次客户评论产品时，都会获得店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:144
+msgid "A customer will receive store credit whe they review any product once only."
+msgstr "客户每评论一次任何产品，即获得店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:145
+msgid "A customer will receive store credit only once per product they review."
+msgstr "客户每评论一次某个产品，只能获得一次店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:149
+msgid "A customer will receive store credit every time they pay for an eligible order."
+msgstr "每次客户支付符合条件的订单时，都会获得店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:150
+msgid "A customer will receive store credit only once for an eligible order they have paid for."
+msgstr "客户每次支付符合条件的订单，只能获得一次店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:151
+msgid "A customer will receive store credit only once for each eligible product they purchase in any order."
+msgstr "客户在任何订单中购买的每个符合条件的产品，只能获得一次店铺积分。"
+
+#. translators: Placeholders: %1$s - date, %2$s - time
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:188
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s 于 %2$s"
+
+#. translators: Placeholder: %1$s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.), %2$s - opening <a> link tag, %3$s closning </a> link tag
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:300
+#, php-format
+msgid "1 %1$s moved to trash. %2$sUndo%3$s"
+msgstr "1 个 %1$s 已移至回收站。%2$s撤销%3$s"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:303
+#, php-format
+msgid "Could not move %s to trash."
+msgstr "无法将 %s 移至回收站。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:329
+#, php-format
+msgid "1 %s restored from trash."
+msgstr "1 个 %s 已从回收站还原。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:332
+#, php-format
+msgid "Could not restore %s from trash."
+msgstr "无法从回收站还原 %s。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:358
+#, php-format
+msgid "%s permanently deleted"
+msgstr "%s 已永久删除"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:361
+#, php-format
+msgid "Could not delete %s permanently."
+msgstr "无法永久删除 %s。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:385
+#, php-format
+msgid "No %s permanently deleted."
+msgstr "没有 %s 被永久删除。"
+
+#. translators: Placeholder: %d - number of deleted items, %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:389
+#, php-format
+msgid "%1$d %2$s permanently deleted."
+msgid_plural "%1$d %2$s permanently deleted."
+msgstr[0] "%1$d 个 %2$s 已被永久删除。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:425
+msgid "Configuration"
+msgstr "配置"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:433
+msgid "Details"
+msgstr "详情"
+
+#. translators: Placeholder: %s - singular name of the store credit type being created
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:474
+#, php-format
+msgid "%s name"
+msgstr "%s 名称"
+
+#. translators: Context: Label for the store credit label input field (indicates how the store credit will be displayed in the frontend)
+#. translators: Context: Label used to describe store credit in the frontend
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:477
+#: src/System_Status_Report.php:99
+msgid "Store credit label"
+msgstr "店铺积分标签"
+
+#. translators: Context: Store credit configuration rules
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:523
+msgid "Eligibility"
+msgstr "资格条件"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:607
+msgid "Customers will be awarded store credit as configured while its status is active."
+msgstr "在状态为激活时，客户将根据配置获得店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:609
+msgid "This store credit resource is deplete and it cannot be awarded to customers because it has reached its maximum usage limit. Increase the limit to reactivate it."
+msgstr "此店铺积分资源已耗尽，无法授予客户，因为其已达到最大使用限制。请增加限制以重新激活。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:613
+msgid "Status:"
+msgstr "状态："
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:643
+#, php-format
+msgid "The number of times this store credit %s has been awarded to customers, out of the maximum usage limit allowed by its configuration."
+msgstr "此店铺积分 %s 已授予客户的次数，受其配置允许的最大使用限制。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:650
+#, php-format
+msgid "The number of times this store credit %s has been awarded to customers."
+msgstr "此店铺积分 %s 已授予客户的次数。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:658
+#, php-format
+msgid "The total amount of store credit awarded to customers from this %s."
+msgstr "从此 %s 授予的店铺积分总金额。"
+
+#. translators: Context: Follows number of times store credit has been awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:664
+msgid "Awarded times:"
+msgstr "已授予次数："
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:665
+msgid "Total awarded:"
+msgstr "总授予："
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:666
+msgid "Created on:"
+msgstr "创建于："
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:667
+msgid "Last modified:"
+msgstr "最后修改："
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:690
+msgid "Move to trash"
+msgstr "移到垃圾桶"
+
+#. translators: Context: Button to create or update a credit configuration
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:700
+msgid "Create"
+msgstr "创建"
+
+#. translators: Context: Button to create or update a credit configuration
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:700
+msgid "Update"
+msgstr "更新"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:727
+msgid "Set the value of the store credit and choose the event that will trigger the reward."
+msgstr "设置店铺积分的值并选择触发奖励的事件。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:735
+msgid "Amount type"
+msgstr "金额类型"
+
+#. translators: Placeholder: %s - currency symbol for the store credit amount to be specified afterwards
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:741
+#, php-format
+msgid "Fixed (%s)"
+msgstr "固定 (%s)"
+
+#. translators: Context: percentage value of the store credit amount to be specified afterwards
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:743
+msgid "Percentage (%)"
+msgstr "百分比 (%)"
+
+#. translators: Context: Percentage amount of store credit awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:753
+msgid "Amount (%)"
+msgstr "金额 (%)"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:759
+#, php-format
+msgid "Percentage amount awarded as store credit to customers that meet the conditions defined by the %s eligibility rules."
+msgstr "符合 %s 资格规则条件的客户获得的百分比金额作为店铺积分。"
+
+#. translators: Placeholder: %s - currency symbol, in the context of store credit amount awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:766
+#, php-format
+msgid "Amount (%s)"
+msgstr "金额 (%s)"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:772
+#, php-format
+msgid "Fixed amount awarded as store credit to customers that meet the conditions defined by the %s eligibility rules."
+msgstr "符合 %s 资格规则条件的客户获得的固定金额作为店铺积分。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:778
+msgid "Award cap"
+msgstr "奖励上限"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:782
+msgid "Choose whether to limit the number of times this store credit can be awarded to customers."
+msgstr "选择是否限制此店铺积分的授予次数。"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:787
+#, php-format
+msgid "Keep awarding this %s indefinitely"
+msgstr "无限期继续授予此 %s"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:792
+#, php-format
+msgid "Limit the number of times the %s will trigger in the shop"
+msgstr "限制 %s 在商店中触发的次数"
+
+#. translators: Context: Limit to the number of times store credit can be awarded to customers
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:801
+msgid "Maximum awards"
+msgstr "最大奖励次数"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:805
+msgid "The maximum number of times the store credit can be awarded across all customers until depletion."
+msgstr "在全部客户中，店铺积分在耗尽前的最大授予次数。"
+
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:814
+msgid "Award trigger"
+msgstr "奖励触发"
+
+#. translators: Placeholder: %s - label of the credit type (e.g. "Cashback", "Milestone", "Reward", etc.)
+#: src/Admin/Screens/Store_Credit/Reward_Screen.php:841
+#, php-format
+msgid "%s successfully saved."
+msgstr "%s 已成功保存。"
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" by default
+#: src/Admin/User_Profiles.php:134
+#, php-format
+msgid "The amount of %s this user can use to purchase items."
+msgstr "此用户可用的 %s 用于购买商品的金额。"
+
+#: src/Admin/User_Profiles.php:184
+msgid "Store credit manually increased by a shop manager."
+msgstr "店铺管理员手动增加的店铺积分。"
+
+#: src/Admin/User_Profiles.php:194
+msgid "Store credit manually decreased by a shop manager."
+msgstr "店铺管理员手动减少的店铺积分。"
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:188
+#: src/API/Store/Cart_Extension_Endpoint.php:216
+#, php-format
+msgid "Invalid request data to handle %s."
+msgstr "处理 %s 时的请求数据无效。"
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:194
+#, php-format
+msgid "Session not available to handle %s."
+msgstr "无法处理 %s 的会话。"
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:199
+#, php-format
+msgid "Partial payments using %s are not allowed."
+msgstr "不允许使用 %s 进行部分支付。"
+
+#. translators: Placeholder: %s - Label used to describe store credit, e.g. "Store credit" (default)
+#: src/API/Store/Cart_Extension_Endpoint.php:204
+#, php-format
+msgid "Customer is not eligible to use %s."
+msgstr "客户不符合使用 %s 的资格。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:232
+msgid "The current state of store credit for the current cart session."
+msgstr "当前购物车会话的店铺积分当前状态。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:238
+msgid "The ID of the user."
+msgstr "用户的ID。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:243
+msgid "Whether partial payments using store credit are allowed."
+msgstr "是否允许使用店铺积分进行部分支付。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:248
+msgid "Whether the store credit payment gateway is available."
+msgstr "店铺积分支付网关是否可用。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:253
+msgid "Whether the cart contains a store credit deposit."
+msgstr "购物车中是否包含店铺积分存款。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:258
+msgid "The store credit balance available to the current user."
+msgstr "当前用户可用的店铺积分余额。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:262
+msgid "The amount of store credit available."
+msgstr "可用的店铺积分金额。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:271
+msgid "The store credit used in the current session."
+msgstr "当前会话中使用的店铺积分。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:275
+msgid "The amount of store credit used, in cents."
+msgstr "已使用的店铺积分金额（以分为单位）。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:284
+msgid "The store credit remaining to be used in the current session."
+msgstr "当前会话中剩余可用的店铺积分。"
+
+#: src/API/Store/Cart_Extension_Endpoint.php:288
+msgid "The amount of store credit remaining, in cents."
+msgstr "剩余的店铺积分金额（以分为单位）。"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Cart.php:203
+#, php-format
+msgid "Earn %1$s in %2$s for placing this order!"
+msgstr "通过下订单赚取 %1$s 的 %2$s！"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credits (default: "Store credit")
+#: src/Cart.php:467
+#, php-format
+msgid "Use <strong>%1$s</strong> from your %2$s balance."
+msgstr "从您的 %2$s 余额中使用 <strong>%1$s</strong>。"
+
+#. translators: Context: Button label to remove applied store credit from cart
+#: src/Cart.php:492
+msgid "Remove"
+msgstr "移除"
+
+#: src/Gateway.php:119
+msgid "This gateway allows customers to pay for an order at checkout using their available store credit."
+msgstr "此支付网关允许客户在结账时使用其可用的店铺积分支付订单。"
+
+#. translators: Placeholder: %s - literal {store_credit_balance} merge tag
+#. translators: Placeholder: %s - Store credit balance placeholder
+#: src/Gateway.php:132
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:126
+#, php-format
+msgid "Available balance: %s"
+msgstr "可用余额：%s"
+
+#. translators: Context: Payment gateway enabled or disabled status
+#: src/Gateway.php:169
+msgid "Enabled"
+msgstr "启用"
+
+#: src/Gateway.php:172
+msgid "Enable store credit"
+msgstr "启用 store credit"
+
+#. translators: Context: Payment gateway title
+#: src/Gateway.php:176
+msgid "Title"
+msgstr "标题"
+
+#: src/Gateway.php:178
+msgid "This controls the payment gateway title which the user sees during checkout."
+msgstr "这控制用户在结账时看到的支付网关标题。"
+
+#. translators: Placeholders: %1$s - opening HTML link tag, %2$s - closing HTML link tag
+#: src/Gateway.php:183
+#, php-format
+msgid "This value can be set and overridden by defining the customer-facing label for store credit in the plugin's %1$sgeneral settings%2$s."
+msgstr "此值可以通过在插件的 %1$sgeneral 设置%2$s 中定义面向客户的 store credit 标签来设置和覆盖。"
+
+#: src/Gateway.php:192
+msgid "Description"
+msgstr "描述"
+
+#. translators: Placeholder: %s - Literal {store_credit_balance} merge tag
+#: src/Gateway.php:196
+#, php-format
+msgid "Payment method description that the customer will see on your checkout. Available placeholder: %s."
+msgstr "客户在结账时看到的支付方式描述。可用占位符：%s。"
+
+#: src/Gateway.php:197
+msgid "Displays the current customer's store credit balance"
+msgstr "显示当前客户的 store credit 余额"
+
+#: src/Gateway.php:204
+msgid "Partial payment"
+msgstr "部分支付"
+
+#: src/Gateway.php:205
+msgid "Allow customers to apply available store credit and pay the difference via another gateway"
+msgstr "允许客户使用可用的 store credit 并通过其他网关支付差额"
+
+#: src/Gateway.php:206
+msgid "If disabled, users must pay for the entire order using store credit: if they don't have enough store credit, the gateway will not be available at checkout."
+msgstr "如果禁用，用户必须使用 store credit 支付整个订单：如果他们的 store credit 不够，结账时将无法使用该网关。"
+
+#: src/Gateway.php:354
+msgid "You must be logged in to use this payment method."
+msgstr "您必须登录才能使用此支付方式。"
+
+#. translators: Placeholder: %s - Error message
+#: src/Gateway.php:357
+#: src/Gateway.php:368
+#: src/Gateway.php:385
+#: src/Gateway.php:424
+#: src/Orders.php:166
+#, php-format
+msgid "Payment error: %s"
+msgstr "支付错误：%s"
+
+#: src/Gateway.php:365
+msgid "Order not found."
+msgstr "未找到订单。"
+
+#. translators: Placeholder: %s - Title of the payment gateway an order was paid via
+#: src/Gateway.php:554
+#, php-format
+msgid "Via %s"
+msgstr "通过 %s"
+
+#. translators: Placeholders: %1$s - Product name in cart (cart item), %2$s: Label for store credit (default: "Store credit")
+#: src/Integrations/PayPal.php:88
+#, php-format
+msgid "%1$s (with tax, discount, and %2$s applied)"
+msgstr "%1$s（含税、折扣和 %2$s）"
+
+#. translators: Placeholder: %s - May output the shop manager ID in parenthesis or empty string when undefined
+#: src/Lifecycle/Database.php:300
+#, php-format
+msgid "Store credit manually increased by a shop manager %s using update_user_meta() (deprecated)."
+msgstr "商店信用由店铺管理员 %s 使用 update_user_meta()（已弃用）手动增加。"
+
+#. translators: Placeholder: %s - May output the shop manager ID in parenthesis or empty string when undefined
+#: src/Lifecycle/Database.php:313
+#, php-format
+msgid "Store credit manually decreased by a shop manager %s using update_user_meta() (deprecated)."
+msgstr "商店信用由店铺管理员 %s 使用 update_user_meta()（已弃用）手动减少。"
+
+#: src/Lifecycle/Migrations/Upgrade_To_Version_4_0_0.php:163
+msgid "Account funds on registration"
+msgstr "注册时账户资金"
+
+#. translators: Placeholders: %1$s - opening <a> HTML link tag, %2$s - closing </a> HTML link tag
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:48
+#, php-format
+msgid "Success! %1$sA customer just paid for their order using store credit!%2$s"
+msgstr "成功！%1$s一位客户刚刚使用 store credit 支付了他们的订单！%2$s"
+
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:63
+msgid "Liking the experience so far? It helps us a bunch if you tell other WooCommerce users what made it work for you."
+msgstr "到目前为止体验还不错？如果你告诉其他 WooCommerce 用户是什么让它对你有效，这对我们帮助很大。"
+
+#: src/Lifecycle/Milestones/Customer_Paid_With_Store_Credit.php:64
+msgid "Leave a quick review"
+msgstr "留下简短评价"
+
+#: src/Lifecycle/Milestones/First_Store_Credit_Awarded.php:43
+msgid "Nice! A customer was awarded store credit!"
+msgstr "不错！一位客户获得了 store credit！"
+
+#. translators: Placeholders: %1$s - opening anchor tag, %2$s - closing anchor tag, %3$s - opening anchor tag, %4$s - closing anchor tag
+#: src/Lifecycle/Milestones/First_Store_Credit_Awarded.php:57
+#, php-format
+msgid "They can use the store credit they earned to pay for an order. Excited? Having questions or feedback? %1$sLeave a review%2$s or %3$sget in touch with us%4$s!"
+msgstr "他们可以使用赚取的 store credit 来支付订单。兴奋吗？有问题或反馈？%1$s留下评价%2$s或%3$s联系我们%4$s！"
+
+#: src/Lifecycle/Milestones/First_Store_Credit_Reward_Configured.php:43
+msgid "Awesome, your first store credit is live!"
+msgstr "太棒了，你的第一个 store credit 已上线！"
+
+#. translators: Placeholders: %1$s - opening <a> HTML link tag, %2$s - closing </a> HTML link tag
+#: src/Lifecycle/Milestones/First_Store_Credit_Reward_Configured.php:57
+#, php-format
+msgid "Want a say in what we build? %1$sJoin our newsletter%2$s for roadmap updates, early access, and the occasional bird pun. Then reply to the welcome email and tell us what you’d love to see next."
+msgstr "想参与我们开发的内容？%1$s加入我们的通讯%2$s，获取路线图更新、提前体验和偶尔的鸟类笑话。然后回复欢迎邮件，告诉我们你希望看到什么！"
+
+#: src/Orders.php:206
+msgid "Customer bought store credit top-up."
+msgstr "客户购买了 store credit 充值。"
+
+#: src/Orders.php:208
+msgid "Customer bought store credit deposit."
+msgstr "客户购买了 store credit 存款。"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:222
+#, php-format
+msgid "Added %1$s in %2$s to the customer's balance."
+msgstr "在客户余额中添加了 %1$s 到 %2$s。"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:339
+#, php-format
+msgid "Removed %1$s in %2$s from the customer's balance used to pay for the order."
+msgstr "从客户用于支付订单的余额中移除了 %1$s 在 %2$s。"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:389
+#, php-format
+msgid "Restored %1$s in %2$s from the customer's balance after the order was cancelled."
+msgstr "在订单取消后，从客户余额中恢复了 %1$s 在 %2$s。"
+
+#. translators: Placeholders: %1$s - Store credit amount, %2$s - Label used to describe store credit, e.g. "Store credit"
+#: src/Orders.php:458
+#, php-format
+msgid "Granted %1$s in %2$s to the customer after refunding order items."
+msgstr "在退款订单商品后，授予客户 %1$s 在 %2$s。"
+
+#. translators: Placeholder: %s - label used to describe store credit to customers, e.g. "store credit"
+#: src/Orders/Order.php:115
+#, php-format
+msgid "Unable to determine the order to pay with %s."
+msgstr "无法确定使用 %s 付款的订单。"
+
+#. translators: Placeholder: %s - label used to describe store credit to customers, e.g. "store credit"
+#: src/Orders/Order.php:127
+#, php-format
+msgid "A registered customer with a valid email is required to pay for the order using %s."
+msgstr "需要注册客户且拥有有效电子邮件才能使用 %s 付款订单。"
+
+#. translators: Placeholder: %s - label used to describe store credit, e.g. "Insufficient store credit amount".
+#: src/Orders/Order.php:135
+#, php-format
+msgid "Insufficient %s amount to pay for the order."
+msgstr "支付订单所需的 %s 数量不足。"
+
+#. translators: Placeholders: %1$s - Store credit label, %2$s - Amount paid using store credit
+#: src/Orders/Order.php:151
+#, php-format
+msgid "Customer paid with %1$s: %2$s."
+msgstr "客户使用 %1$s 支付：%2$s。"
+
+#. translators: Placeholder: %1$s - Total cashback amount awarded, %2$s - Comma-separated list of admin cashback sources (HTML links)
+#: src/Orders/Order.php:288
+#, php-format
+msgid "Awarded %1$s as %2$s cashback to customer via %3$s."
+msgstr "授予 %1$s 作为 %2$s 现金返还给客户，通过 %3$s。"
+
+#. translators: Placeholders: %1$s - Voided amount, %2$s - Store credit label
+#: src/Orders/Order.php:342
+#, php-format
+msgid "Voided %1$s from the awarded %2$s cashback for this order."
+msgstr "从本订单的已授予 %2$s 现金返还中作废 %1$s。"
+
+#: src/Plugin.php:147
+#: src/System_Status_Report.php:47
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#: assets/js/blocks/wc-account-funds-cart-checkout-block.js:1
+msgid "Account Funds"
+msgstr "账户资金"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Products.php:206
+#, php-format
+msgid "Earn %1$s in %2$s for reviewing this product!"
+msgstr "通过评价此产品赚取 %1$s 的 %2$s！"
+
+#. translators: Placeholders: %1$s - formatted store credit amount HTML, %2$s - store credit label
+#: src/Products.php:297
+#, php-format
+msgid "Earn up to %1$s in %2$s upon purchase!"
+msgstr "购买时最高可获得 %1$s 的 %2$s！"
+
+#. translators: Placeholders: %s - Account funds label, e.g. "Account funds"
+#. translators: Placeholder: %s - Label used to represent store credit (e.g. "Store credit top-up")
+#: src/Products/Store_Credit_Top_Up.php:98
+#: src/Settings/Store_Credit_Account_Top_Up.php:298
+#, php-format
+msgid "%s top-up"
+msgstr "%s 充值"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:70
+msgid "Enable \"My Account\" top-up"
+msgstr "启用“我的账户”充值"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:71
+msgid "Allow customers to top up their store credit via their account page"
+msgstr "允许客户通过其账户页面充值店铺余额"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:77
+msgid "Allow rewards"
+msgstr "允许奖励"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:78
+msgid "Top-up orders may trigger eligible rewards, when applicable"
+msgstr "充值订单可能会触发符合条件的奖励（如适用）"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:79
+msgid "For example, disabling this will prevent store credit cashback to be awarded to customers that top-up."
+msgstr "例如，禁用此功能将阻止向充值的客户发放店铺余额返现。"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:85
+msgid "Minimum top-up"
+msgstr "最低充值金额"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:86
+msgid "The minimum amount of store credit a customer is allowed to top up from their account page."
+msgstr "客户从其账户页面充值的最低店铺余额金额。"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:92
+msgid "Maximum top-up"
+msgstr "最高充值金额"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:93
+msgid "The maximum amount of store credit a customer is allowed to top up from their account page."
+msgstr "客户从其账户页面充值的最高店铺余额金额。"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:99
+msgid "Top-up image type"
+msgstr "充值图片类型"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:100
+msgid "The type of image to display for the top-up button."
+msgstr "显示在充值按钮上的图片类型。"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:105
+msgid "Use default image"
+msgstr "使用默认图片"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:106
+msgid "Use a custom image"
+msgstr "使用自定义图片"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:112
+msgid "Top-up image"
+msgstr "充值图片"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:114
+msgid "Choose or upload an image from the media gallery to use as the image shown in cart when the customer adds store credit for top-up."
+msgstr "选择或上传媒体库中的图片，用作客户在购物车中添加店铺余额充值时显示的图片。"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:144
+msgid "Top-up image used in the cart"
+msgstr "购物车中使用的充值图片"
+
+#: src/Settings/Store_Credit_Account_Top_Up.php:145
+msgid "Select image"
+msgstr "选择图片"
+
+#: src/Settings/Store_Credit_Label.php:60
+msgid "Singular label"
+msgstr "单数标签"
+
+#: src/Settings/Store_Credit_Label.php:61
+msgid "The label shown to customers when referring to store credit in its singular form."
+msgstr "在指代店铺余额时，向客户显示的单数标签。"
+
+#: src/Settings/Store_Credit_Label.php:68
+msgid "Plural label"
+msgstr "复数标签"
+
+#: src/Settings/Store_Credit_Label.php:69
+msgid "The label shown to customers when referring to store credit in its plural form."
+msgstr "在指代店铺余额时，向客户显示的复数标签。"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:81
+msgid "Order contains specific products"
+msgstr "订单包含特定产品"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:83
+msgid "Order does not contain specific products"
+msgstr "订单不包含特定产品"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:85
+msgid "Order contains product categories"
+msgstr "订单包含产品类别"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:87
+msgid "Order does not contain product categories"
+msgstr "订单不包含产品类别"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:89
+msgid "Order contains product types"
+msgstr "订单包含产品类型"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:91
+msgid "Order does not contain product types"
+msgstr "订单不包含产品类型"
+
+#: src/Store_Credit/Eligible_Orders_Group.php:94
+msgid "Any order"
+msgstr "任何订单"
+
+#: src/Store_Credit/Eligible_Products_Group.php:67
+msgid "Some products"
+msgstr "某些产品"
+
+#: src/Store_Credit/Eligible_Products_Group.php:69
+msgid "Some product categories"
+msgstr "某些产品类别"
+
+#: src/Store_Credit/Eligible_Products_Group.php:72
+msgid "All products"
+msgstr "所有产品"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:63
+msgid "Active"
+msgstr "激活"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:66
+msgid "Depleted"
+msgstr "已耗尽"
+
+#. translators: Context: Store credit status
+#: src/Store_Credit/Reward_Status.php:70
+msgid "Inactive"
+msgstr "未激活"
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:89
+#, php-format
+msgid "This %s configuration is active and will be awarded to customers when its conditions are met."
+msgstr "此 %s 配置已激活，当满足条件时将奖励客户。"
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:92
+#, php-format
+msgid "This %s configuration has reached its award limit and will no longer be awarded to customers."
+msgstr "此 %s 配置已达到奖励上限，不再奖励客户。"
+
+#. translators: Placeholder: %s - Store credit type label
+#: src/Store_Credit/Reward_Status.php:96
+#, php-format
+msgid "This %s configuration is inactive and will not be awarded to customers."
+msgstr "此 %s 配置未激活，不会奖励客户。"
+
+#: src/Store_Credit/Reward_Type.php:67
+msgid "Milestone"
+msgstr "里程碑"
+
+#: src/Store_Credit/Reward_Type.php:69
+msgid "Reward"
+msgstr "奖励"
+
+#: src/Store_Credit/Reward_Type.php:88
+msgid "Rewards"
+msgstr "奖励"
+
+#: src/Store_Credit/Wallet.php:351
+msgid "Cannot award store credit to a user account without an email."
+msgstr "无法向没有电子邮件的用户账户发放店铺余额。"
+
+#: src/Store_Credit/Wallet.php:359
+msgid "Credit transactions should have a positive amount."
+msgstr "余额交易应为正数金额。"
+
+#: src/Store_Credit/Wallet.php:384
+msgid "Cannot debit a user account without an email."
+msgstr "无法从没有电子邮件的用户账户扣款。"
+
+#: src/Store_Credit/Wallet.php:397
+msgid "Cannot debit an amount larger than the available store credit balance."
+msgstr "无法扣除超过可用店铺余额的金额。"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:93
+msgid "User action"
+msgstr "用户操作"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:95
+msgid "Customer account registration"
+msgstr "客户账户注册"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:97
+msgid "Product purchase"
+msgstr "产品购买"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:99
+msgid "Product review"
+msgstr "产品评价"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:101
+msgid "Order paid"
+msgstr "订单已支付"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:103
+msgid "Order refunded"
+msgstr "订单已退款"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:105
+msgid "Order cancelled"
+msgstr "订单已取消"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:107
+msgid "Data migration"
+msgstr "数据迁移"
+
+#: src/Store_Credit/Wallet/Transaction_Event.php:110
+msgid "Undefined event"
+msgstr "未定义事件"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:62
+msgid "Voided"
+msgstr "已作废"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:64
+msgid "Expired"
+msgstr "已过期"
+
+#: src/Store_Credit/Wallet/Transaction_Status.php:67
+msgid "Committed"
+msgstr "已提交"
+
+#. translators: Placeholders: %1$s - Minimum store credit top-up amount, %2$s - Maximum store credit top-up amount
+#: src/System_Status_Report.php:75
+#, php-format
+msgid "Minimum: %1$s - Maximum: %2$s"
+msgstr "最小：%1$s - 最大：%2$s"
+
+#: src/System_Status_Report.php:77
+msgid "No limit"
+msgstr "无限制"
+
+#: src/System_Status_Report.php:100
+msgid "Label used to display store credit in the frontend."
+msgstr "在前端显示店铺信用的标签。"
+
+#. translators: Placeholders: %1$s - Singular store credit label, %2$s - Plural store credit label
+#: src/System_Status_Report.php:102
+#, php-format
+msgid "Singular: \"%1$s\" - Plural: \"%2$s\""
+msgstr "单数：“%1$s” - 复数：“%2$s”"
+
+#: src/System_Status_Report.php:107
+msgid "Gateway enabled"
+msgstr "网关已启用"
+
+#: src/System_Status_Report.php:108
+msgid "Whether the store credit gateway is enabled."
+msgstr "是否启用店铺信用网关。"
+
+#: src/System_Status_Report.php:114
+msgid "Partial payments enabled"
+msgstr "启用部分支付"
+
+#: src/System_Status_Report.php:115
+msgid "Whether customers can use store credit for partial payments."
+msgstr "客户是否可以使用店铺信用进行部分支付。"
+
+#: src/System_Status_Report.php:122
+msgid "Number of configured cashback awards."
+msgstr "已配置的现金返还奖励次数。"
+
+#: src/System_Status_Report.php:135
+msgid "Number of configured milestone awards"
+msgstr "已配置的里程碑奖励次数"
+
+#: src/System_Status_Report.php:147
+msgid "Top-up enabled"
+msgstr "充值已启用"
+
+#: src/System_Status_Report.php:148
+msgid "Customers are allowed to top up store credit from their account page."
+msgstr "客户可以从其账户页面充值店铺信用。"
+
+#: src/System_Status_Report.php:163
+msgid "Top-up rewards allowed"
+msgstr "允许充值奖励"
+
+#: src/System_Status_Report.php:164
+msgid "Whether top-ups are excluded from earning rewards."
+msgstr "充值是否被排除在奖励之外。"
+
+#. translators: Placeholders: %1$s is the amount of store credit, %2$s is the pluralized store credit label
+#: src/Users.php:91
+#, php-format
+msgid "You will receive up to %1$s in %2$s when you create your account!"
+msgstr "创建账户时，您最多可以获得 %1$s 的 %2$s！"
+
+#: templates/myaccount/account-funds/deposit-item-data.php:29
+msgid "Order number"
+msgstr "订单编号"
+
+#: templates/myaccount/account-funds/deposit-item-data.php:34
+#: templates/myaccount/recent-deposits.php:28
+msgid "Date"
+msgstr "日期"
+
+#: templates/myaccount/account-funds/topup-in-cart-notice.php:29
+msgid "View Cart"
+msgstr "查看购物车"
+
+#. translators: Placeholder: %s - Account funds top-up product title, e.g. "Account funds"
+#: templates/myaccount/account-funds/topup-in-cart-notice.php:32
+#, php-format
+msgid "You have \"%s\" in your cart."
+msgstr "您的购物车中有“%s”。"
+
+#: templates/myaccount/recent-deposits.php:27
+msgid "Order"
+msgstr "订单"
+
+#: templates/myaccount/recent-deposits.php:34
+msgid "Recent deposits"
+msgstr "近期存款"
+
+#. translators: Placeholder: %s: Label used to describe account funds
+#: templates/myaccount/topup-form.php:34
+#, php-format
+msgid "Top-up %s"
+msgstr "充值 %s"
+
+#. translators: Placeholder: %s - Minimum account fund top-up amount
+#: templates/myaccount/topup-form.php:47
+#, php-format
+msgid "Minimum: <strong>%s</strong>."
+msgstr "最小值：<strong>%s</strong>。"
+
+#. translators: Placeholder: %s - Maximum account fund top-up amount
+#: templates/myaccount/topup-form.php:50
+#, php-format
+msgid "Maximum: <strong>%s</strong>."
+msgstr "最大值：<strong>%s</strong>。"
+
+#: templates/myaccount/topup-form.php:59
+msgid "Top-up"
+msgstr "充值"
+
+#. translators: Placeholders: %1$s is a list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:592
+#, php-format
+msgid "%1$s or %2$s"
+msgid_plural "%1$s, or %2$s"
+msgstr[0] "%1$s 或 %2$s"
+
+#. translators: Placeholders: %1$s is a comma separated list of items, %2$s is the last item
+#: vendor-scoped/kestrelwp/fenix/src/Helpers/Arrays.php:596
+#, php-format
+msgid "%1$s and %2$s"
+msgid_plural "%1$s, and %2$s"
+msgstr[0] "%1$s 和 %2$s"
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:673
+msgid "Every Minute"
+msgstr "每分钟"
+
+#: vendor-scoped/kestrelwp/fenix/src/Jobs/Background_Processing/Process.php:675
+#, php-format
+msgid "Every %d Minutes"
+msgstr "每 %d 分钟"
+
+#. translators: Placeholder: %s - User display name
+#: vendor-scoped/kestrelwp/fenix/src/Model/User.php:360
+#, php-format
+msgid "%s avatar"
+msgstr "%s 头像"
+
+#. translators: Placeholders: %1$s - Opening <a> link tag, %2$s - Closing </a> link tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:105
+#, php-format
+msgid "This plugin is localized into multiple languages. While English is our primary language, our goal is to serve merchants and their customers in their own native language. If you would like to provide localization feedback and help us build features that are relevant to you and to customers located in your region, please %1$sget in touch%2$s."
+msgstr "该插件已本地化为多种语言。虽然英语是我们的主要语言，但我们的目标是用您和您的客户的母语为商家提供服务。如果您想提供本地化反馈，帮助我们开发与您和您所在地区客户相关的功能，请 %1$s联系我们%2$s。"
+
+#. translators: Context: WordPress admin link to configure the plugin (verb)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:153
+msgid "Configure"
+msgstr "配置"
+
+#. translators: Context: Link to the plugin's documentation ("Docs" = "Documentation")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:157
+msgid "Docs"
+msgstr "文档"
+
+#. translators: Context: Link to reach out to customer support ("Support" = "Customer support")
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:161
+msgid "Support"
+msgstr "支持"
+
+#. translators: Context: Link to review the plugin ("Review" = "Review the plugin" as in verb action)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin.php:165
+msgid "Review"
+msgstr "评价"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:106
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#. translators: Placeholders: %1$s - Opening anchor tag, %2$s - Closing anchor tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dashboard.php:181
+#, php-format
+msgid "You have not completed setup. %1$sClick here to resume%2$s."
+msgstr "您尚未完成设置。%1$s点击这里继续%2$s。"
+
+#. translators: Context: Button label to cancel an action in a modal dialog.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dialogs/Modal_Button.php:257
+msgid "Close"
+msgstr "关闭"
+
+#. translators: Context: Button label to cancel an action in a modal dialog.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Admin/Dialogs/Modal_Button.php:271
+msgid "Cancel"
+msgstr "取消"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Invalid request."
+msgstr "请求无效。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Invalid parameter."
+msgstr "参数无效。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Unauthorized."
+msgstr "未授权。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Forbidden."
+msgstr "禁止访问。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Resource not found."
+msgstr "未找到资源。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot create resource."
+msgstr "无法创建资源。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot read resource."
+msgstr "无法读取资源。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot edit resource."
+msgstr "无法编辑资源。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Cannot delete resource."
+msgstr "无法删除资源。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/Response_Error.php:96
+msgid "Internal server error."
+msgstr "服务器内部错误。"
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:55
+msgid "Log level is required."
+msgstr "需要日志级别。"
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:58
+msgid "Invalid log level."
+msgstr "日志级别无效。"
+
+#. translators: Context: Text content of the debug message is a required value when logging an item to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:61
+msgid "Log message is required."
+msgstr "需要日志消息。"
+
+#. translators: Context: Unique identifier for the log (optional)
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:92
+msgid "The log ID (optional)."
+msgstr "日志ID（可选）。"
+
+#. translators: Context: Type of the debug message. E.g. 'warning', 'alert', 'emergency', etc.
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:98
+msgid "The log level. "
+msgstr "日志级别。"
+
+#. translators: Context: Debug log message
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:104
+msgid "The log message."
+msgstr "日志消息。"
+
+#. translators: Context: Debug log context, e.g. additional data to be logged to the debug log
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Logger_Controller.php:109
+msgid "The log context."
+msgstr "日志上下文。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarding status."
+msgstr "入职状态。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The current onboarding step."
+msgstr "当前入职步骤。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The current onboarding progress."
+msgstr "当前入职进度。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarding persona."
+msgstr "入职角色。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The onboarded version."
+msgstr "已入职版本。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Onboarding_Controller.php:178
+msgid "The last updated date or null if never updated."
+msgstr "最后更新时间或为空（从未更新过）。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin identifier."
+msgstr "插件标识符。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin name."
+msgstr "插件名称。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin file."
+msgstr "插件文件的绝对路径。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The absolute path to the plugin directory."
+msgstr "插件目录的绝对路径。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The path relative to the plugins directory in the WordPress installation."
+msgstr "相对于WordPress安装中的插件目录的路径。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin textdomain."
+msgstr "插件文本域。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin assets."
+msgstr "插件资源的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin root."
+msgstr "插件根目录的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin documentation."
+msgstr "插件文档的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin reviews."
+msgstr "插件评价的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin sales page."
+msgstr "插件销售页面的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin settings."
+msgstr "插件设置的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The URL to the plugin support."
+msgstr "插件支持的URL。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin vendor."
+msgstr "插件供应商。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Plugin_Controller.php:72
+msgid "The plugin version."
+msgstr "插件版本。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting name."
+msgstr "设置名称。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting type."
+msgstr "设置类型。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting attributes."
+msgstr "设置属性。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Whether the setting is required."
+msgstr "该设置是否为必填项。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Default setting value."
+msgstr "默认设置值。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting description."
+msgstr "设置描述。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting instructions."
+msgstr "设置说明。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting placeholder."
+msgstr "设置占位符。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting title."
+msgstr "设置标题。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting value."
+msgstr "设置值。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Formatted setting value."
+msgstr "格式化的设置值。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/API/REST/v1/Settings_Controller.php:260
+msgid "Setting store."
+msgstr "设置存储。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:441
+msgid "Visit dashboard"
+msgstr "访问仪表盘"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:444
+msgid "Configure settings"
+msgstr "配置设置"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:447
+msgid "Read documentation"
+msgstr "阅读文档"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle.php:449
+msgid "The plugin has been activated."
+msgstr "插件已激活。"
+
+#. translators: Placeholder: %s - Plugin name
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:86
+#, php-format
+msgid "Want to get more out of %s? Join the our newsletter for quick tips, features, and member-only offers."
+msgstr "想从 %s 中获得更多？加入我们的新闻通讯，获取快捷提示、功能和会员专享优惠。"
+
+#. translators: Placeholder: %1$s - Plugin name, %2$s - Opening HTML anchor tag, %3$s - Plugin vendor, %4$s - Closing HTML anchor tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:93
+#, php-format
+msgid "Want to get more out of %1$s? Join the %2$s%3$s newsletter%4$s for quick tips, features, and member-only offers."
+msgstr "想从 %1$s 中获得更多？加入 %2$s%3$s 新闻通讯%4$s，获取快捷提示、功能和会员专享优惠。"
+
+#. translators: Context: Button label to sign up to newsletter
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:102
+msgid "Sign up"
+msgstr "注册"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:275
+msgid "Subscribing..."
+msgstr "订阅中..."
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Lifecycle/Newsletter_Signup.php:289
+msgid "Thank you!"
+msgstr "谢谢！"
+
+#. translators: Placeholders: %1$s - opening link tag, %2$s - closing link tag
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Privacy.php:65
+#, php-format
+msgid "By using this plugin, you may be storing personal data or sharing data with an external service. %1$sContact the plugin developer for more information%2$s."
+msgstr "使用此插件时，您可能会存储个人数据或与外部服务共享数据。%1$s联系插件开发者获取更多信息%2$s。"
+
+#. translators: Placeholder: %s - Setting title
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Setting.php:262
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Settings_Group.php:160
+#, php-format
+msgid "\"%s\" is required."
+msgstr "“%s” 是必填项。"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:86
+#, php-format
+msgid "Could not validate %s into a valid amount"
+msgstr "无法验证 %s 为有效金额"
+
+#. translators: Placeholder: %d - Minimum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:91
+#, php-format
+msgid "The amount is below the minimum of %d"
+msgstr "金额低于最低值 %d"
+
+#. translators: Placeholder: %d - Maximum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Amount.php:95
+#, php-format
+msgid "The amount is above the maximum of %d"
+msgstr "金额高于最大值 %d"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Boolean.php:41
+#, php-format
+msgid "Could not validate %s into a boolean value"
+msgstr "无法验证 %s 为布尔值"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:105
+msgid "OpenSSL is required for credential encryption."
+msgstr "需要 OpenSSL 进行凭据加密。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:116
+msgid "Could not encrypt credential."
+msgstr "无法加密凭据。"
+
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Credential.php:142
+msgid "OpenSSL is required for credential decryption."
+msgstr "需要 OpenSSL 进行凭据解密。"
+
+#. translators: Placeholder: %s - Invalid email address
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Email.php:33
+#, php-format
+msgid "\"%s\" is not a valid email address"
+msgstr "\"%s\" 不是有效的电子邮件地址"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "string" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/JSON.php:31
+#, php-format
+msgid "Could not validate %s into a JSON value"
+msgstr "无法验证 %s 为 JSON 值"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:44
+#, php-format
+msgid "Could not validate %s into a number"
+msgstr "无法验证 %s 为数字"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Minimum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:48
+#, php-format
+msgid "%1$s is below the minimum allowed of %2$d"
+msgstr "%1$s 低于允许的最小值 %2$d"
+
+#. translators: Placeholders: %s - Numerical value submitted by the user, %d - Maximum amount
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:52
+#, php-format
+msgid "%1$s is above the maximum allowed of %2$d"
+msgstr "%1$s 高于允许的最大值 %2$d"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:56
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:56
+#, php-format
+msgid "\"%s\" is not among the list of accepted values"
+msgstr "\"%s\" 不在接受的值列表中"
+
+#. translators: Placeholder: %s - Numeric value submitted by the user
+#. translators: Placeholder: %s - String of text submitted by the user
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Number.php:60
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:60
+#, php-format
+msgid "\"%s\" does not match the required format"
+msgstr "\"%s\" 不符合所需格式"
+
+#. translators: Placeholder: %s - Invalid value type, e.g. "boolean" or "object"
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:42
+#, php-format
+msgid "Could not validate %s into a string"
+msgstr "无法验证 %s 为字符串"
+
+#. translators: Placeholder: %d - Minimum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:47
+#, php-format
+msgid "Length is below the minimum of %d"
+msgstr "长度低于最小值 %d"
+
+#. translators: Placeholder: %d - Maximum text length
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Text.php:51
+#, php-format
+msgid "Length is above the maximum of %d"
+msgstr "长度高于最大值 %d"
+
+#. translators: Placeholder: %s - Invalid URL
+#: vendor-scoped/kestrelwp/fenix/src/Plugin/Settings/Types/Url.php:30
+#, php-format
+msgid "\"%s\" is not a valid URL"
+msgstr "\"%s\" 不是有效的 URL"
+
+#: vendor-scoped/kestrelwp/fenix/src/WooCommerce/Admin.php:36
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#. translators: Placeholder: %s - Plugin name
+#: vendor-scoped/kestrelwp/fenix/src/WooCommerce/System_Status_Report.php:142
+#, php-format
+msgid "This section shows troubleshooting information about %s."
+msgstr "本节显示关于 %s 的故障排除信息。"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#, js-format
+msgid "Use %s from your %s"
+msgstr "使用您的 %s 来充值您的 %s"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+#, js-format
+msgid "Remove %s"
+msgstr "移除 %s"
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block.js:1
+msgid "Available balance:"
+msgstr "可用余额："
+
+#: assets/js/blocks/wc-account-funds-cart-checkout-block-partial-payment.js:1
+msgctxt "failed to apply account funds to order"
+msgid "An error occurred, please try again or try an alternate form of payment."
+msgstr "发生错误，请重试或尝试其他支付方式"

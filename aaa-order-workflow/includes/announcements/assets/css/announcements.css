@@ -1,0 +1,114 @@
+#aaa-oc-annc-overlay.aaa-oc-annc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000; /* above admin UI */
+  background: rgba(0,0,0,.35);
+}
+.aaa-oc-annc-modal {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  transform: translateX(-50%);
+  width: min(800px, 92vw);
+  max-height: 84vh;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #dcdcdc;
+}
+.aaa-oc-annc-header {
+  padding: 16px 20px;
+  background: #f6f7f7;
+  border-bottom: 1px solid #e2e2e2;
+}
+.aaa-oc-annc-header h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.aaa-oc-annc-content {
+  padding: 16px 20px;
+  overflow: auto;
+}
+.aaa-oc-annc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid #e2e2e2;
+  background: #fafafa;
+}
+.aaa-oc-annc-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.aaa-oc-annc-actions .button {
+  min-width: 180px;
+}
+/* --- Responsive media in announcement popup --- */
+.aaa-oc-annc-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 12px;
+}
+
+/* WP alignment helpers */
+.aaa-oc-annc-content .alignleft  { float: left;  margin: 0 12px 12px 0; }
+.aaa-oc-annc-content .alignright { float: right; margin: 0 0 12px 12px; }
+.aaa-oc-annc-content .aligncenter{ display: block; margin: 0 auto 12px; }
+
+/* Captions / figures */
+.aaa-oc-annc-content figure,
+.aaa-oc-annc-content .wp-caption { margin: 0 0 12px; }
+.aaa-oc-annc-content figcaption,
+.aaa-oc-annc-content .wp-caption-text {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+/* Video/embeds */
+.aaa-oc-annc-content iframe,
+.aaa-oc-annc-content embed,
+.aaa-oc-annc-content video {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto 12px;
+}
+
+/* Clear floats so the modal footer doesn't overlap */
+.aaa-oc-annc-content::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+/* --- Larger typography for announcements --- */
+.aaa-oc-annc-modal { 
+  font-size: 15px;        /* base text size */
+  line-height: 1.55;
+}
+
+.aaa-oc-annc-header h2 {
+  font-size: 20px;        /* title size */
+}
+
+.aaa-oc-annc-content p,
+.aaa-oc-annc-content li {
+  font-size: 17px;        /* body/list items */
+}
+
+.aaa-oc-annc-footer {
+  font-size: 14px;        /* checkbox + button area */
+}
+
+.aaa-oc-annc-actions .button {
+  font-size: 14px;
+}

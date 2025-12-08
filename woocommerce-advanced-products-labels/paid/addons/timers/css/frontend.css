@@ -1,0 +1,20 @@
+.berocket_label_preview_wrap .berocket_label_preview,
+.post-type-archive .br_timer_container,
+.woocommerce-product-gallery__wrapper .br_timer_container {
+    text-align: center;
+}
+
+.single-product .br_label_timer {
+    margin: 20px 0;
+    clear: both;
+}
+
+.woocommerce div.product div.images a.woocommerce-product-gallery__trigger {
+    z-index: 999;
+}
+
+.br_label_timer {
+	display: inline-block;
+	white-space: nowrap;
+}
+

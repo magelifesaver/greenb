@@ -1,0 +1,172 @@
+
+.wfc-cart-totals {
+
+    margin-top: 28px;
+
+    .hide-coupon-code & {
+        margin-top: 0;
+    }
+    
+
+    .shipping ul, .shipping p {
+        margin-bottom: 0.25em;
+    }
+
+    &__table {
+        max-width: 450px;
+        width: 100%;
+        margin-right: auto;
+        margin-bottom: 0;
+
+        th, td {
+            border: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        > tbody {
+            display: block;
+            > tr {
+                display: flex;
+                font-weight: 400;
+                font-size: 16px;
+                margin-bottom: 12px;
+                > th, > td {
+                    padding: 0;
+                    font-weight: inherit;
+                    vertical-align: middle;
+                    font-size: inherit;
+                    p {
+                        font-size: inherit;
+                    }
+                }
+                > td:last-child:not(:first-child) {
+                    text-align: right;
+                    margin-left: auto;
+                }
+                &.order-total {
+                    font-weight: 700;
+                }
+            }
+        }
+        
+    }
+    .is-style-side & {
+        &___table {
+            max-width: 100%;
+        }
+        @media screen and (min-width: #{$portrait-phone-max + 1}) {
+            h2, h4 {
+                @include sr-text();
+            }
+        }
+        .wfc-proceed-to-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+    .woocommerce-shipping-totals {
+        width: 100%;
+        > td {
+            display: block;
+            width: 100%;
+        }
+    }
+    .shipping__table, .woocommerce-shipping-totals {
+        &, tbody, tr {
+            width: 100%;
+        }
+        tr {
+            display: flex;
+            flex: 0 0 auto;
+        }
+        th {
+            margin-right: 12px;
+            fleX: 0 0 auto;
+        }
+        td {
+            width: 100%;
+        }
+        .shipping__list, .woocommerce-shipping-methods, ul#shipping_method {
+            padding: 0;
+            margin: 0;
+        }
+        .shipping__list_item, 
+        .woocommerce-shipping-methods li, 
+        ul#shipping_method li {
+            margin: 0 0 8px 0;
+            padding: 0;
+            text-align: right;
+            margin-left: auto;
+            .shipping__list_label, &, label {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                white-space: nowrap;
+                max-width: 240px;
+            }
+            label {
+                padding-left: 0;
+                text-indent: 0;
+                white-space: pre-line;
+                flex: 2 1 auto;
+                margin-bottom: 0;
+            }
+            input[type="hidden"] + label {
+                text-align: right;
+                display: block;
+            }
+            .shipping__list_label .amount, label .amount {
+                flex: 1 0 auto;
+                text-align: right;
+            }
+            input[type="radio"] {
+                width: 1em;
+                height: 1em;
+                appearance: auto;
+                margin-right: 12px;
+            }
+        }
+        .woocommerce-shipping-destination {
+            text-align: right;
+        }
+        .woocommerce-shipping-calculator {
+            .shipping-calculator-form {
+                margin-top: 8px;
+            }
+            text-align: right;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            select, input[type="text"] {
+                @extend %input;
+                width: 100%;
+            }
+            button.button[type="submit"] {
+                @extend %input;
+                background: $btn-bg-color;
+                color: $btn-color;
+                padding: 8px 12px;
+            }
+        }
+        p {
+            line-height: 1.4;
+            margin: 0.5em 0 0.5em auto;
+            max-width: 240px;
+        }
+    }
+
+    .hide-cart-subtotal & tr.cart-subtotal {
+        display: none;
+    }
+
+    @media (min-width: $responsive-break-up) {
+        .is-style-modal:not(.hide-coupon-code) & {
+            max-width: 420px;
+            margin-left: auto;
+            margin-top: calc( -24px - var(--wfc-coupon-height) );
+        }
+    }
+}

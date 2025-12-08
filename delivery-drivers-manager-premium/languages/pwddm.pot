@@ -1,0 +1,1436 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
+"PO-Revision-Date: 2024-04-22 18:14+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Eazy Po 1.0.0.0\n"
+
+#: delivery-drivers-manager.php:248 delivery-drivers-manager.php:263
+#: delivery-drivers-manager.php:423 delivery-drivers-manager.php:427
+msgid "Premium Feature"
+msgstr ""
+
+#: delivery-drivers-manager.php:264 delivery-drivers-manager.php:428
+msgid "You Discovered a Premium Feature!"
+msgstr ""
+
+#: delivery-drivers-manager.php:266
+msgid "With premium version you will be able to:"
+msgstr ""
+
+#: delivery-drivers-manager.php:429
+msgid "Upgrading to Premium will unlock it."
+msgstr ""
+
+#: delivery-drivers-manager.php:430
+msgid "UNLOCK PREMIUM"
+msgstr ""
+
+#: delivery-drivers-manager.php:519
+msgid ""
+"Delivery Drivers Manager is a WooCommerce add-on, you must activate a "
+"WooCommerce on your site."
+msgstr ""
+
+#: index.php:8
+msgid ""
+"Delivery drivers manager is a WooCommerce add-on, you must activate a "
+"WooCommerce on your site."
+msgstr ""
+
+#: index.php:12
+msgid ""
+"Delivery drivers manager is a local delivery drivers for woocommerce premium "
+"add-on, you must activate it on your site."
+msgstr ""
+
+#: index.php:88 includes/class-pwddm-order.php:457
+#: includes/class-pwddm-orders.php:387 includes/class-pwddm-orders.php:1152
+#: includes/class-pwddm-reports.php:58 includes/class-pwddm-reports.php:100
+#: includes/class-pwddm-reports.php:130 includes/class-pwddm-reports.php:197
+#: includes/class-pwddm-reports.php:1024 includes/class-pwddm-reports.php:1092
+#: includes/class-pwddm-route.php:850
+msgid "Driver assigned"
+msgstr ""
+
+#: index.php:89 includes/class-pwddm-order.php:458
+#: includes/class-pwddm-orders.php:388 includes/class-pwddm-orders.php:1153
+#: includes/class-pwddm-reports.php:59 includes/class-pwddm-reports.php:101
+#: includes/class-pwddm-reports.php:131 includes/class-pwddm-reports.php:198
+#: includes/class-pwddm-reports.php:1025 includes/class-pwddm-reports.php:1093
+#: includes/class-pwddm-route.php:851
+msgid "Out for delivery"
+msgstr ""
+
+#: index.php:90 includes/class-pwddm-order.php:459
+#: includes/class-pwddm-orders.php:389 includes/class-pwddm-orders.php:1154
+#: includes/class-pwddm-reports.php:61 includes/class-pwddm-reports.php:103
+#: includes/class-pwddm-reports.php:133 includes/class-pwddm-reports.php:200
+#: includes/class-pwddm-reports.php:1027 includes/class-pwddm-reports.php:1095
+#: includes/class-pwddm-route.php:852
+msgid "Failed delivery"
+msgstr ""
+
+#: index.php:102 includes/class-pwddm-order.php:471
+#: includes/class-pwddm-orders.php:403 includes/class-pwddm-orders.php:1168
+#: includes/class-pwddm-route.php:866
+msgid "Failed Delivery Attempt"
+msgstr ""
+
+#: index.php:204
+msgid "manager"
+msgstr ""
+
+#: index.php:227
+msgid "Are you sure?"
+msgstr ""
+
+#: index.php:229 includes/class-pwddm-route.php:1046
+msgid "hour"
+msgstr ""
+
+#: index.php:230 includes/class-pwddm-route.php:1047
+msgid "hours"
+msgstr ""
+
+#: index.php:231 includes/class-pwddm-route.php:1048
+msgid "mins"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:132 includes/class-pwddm-order.php:66
+#: includes/class-pwddm-orders.php:1081 includes/class-pwddm-password.php:37
+#: includes/class-pwddm-password.php:97
+msgid ""
+"Security Check Failure - This alert may occur when you are logged in as an "
+"administrator and as a delivery driver on the same browser and the same "
+"device. If you want to work on both panels please try to work with two "
+"different browsers."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:411
+msgid "Drivers manager panel"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:421
+msgid "Premium main features"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:433
+msgid "Manager initial screen"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:440
+msgid "Logo"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:447
+msgid "Title"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:455
+msgid "Subtitle"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:463
+msgid "Page background"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:471
+msgid "Text color"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:478
+msgid "Button text color"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:485
+msgid "Button background"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:507
+msgid "General Settings"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:564
+msgid "Developed by"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:564
+msgid "Premium"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:564
+msgid "Documents"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:574
+msgid "Drivers account"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:577
+msgid "Delivery manager"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:673
+msgid "Driver Manager"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:678
+msgid "Select the driver manager."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:699
+msgid "Delivery Drivers Manager"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:702
+msgid "Manager account status"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:705 includes/class-pwddm-driver.php:366
+msgid "Not active"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:707 includes/class-pwddm-driver.php:368
+msgid "Active"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:709
+msgid ""
+"Only managers with active accounts can access the delivery drivers manager."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:713
+msgid "Manager drivers"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:716 includes/class-pwddm-reports.php:1194
+msgid "Admin drivers only"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:721 includes/class-pwddm-reports.php:1190
+msgid "Manager & Admin drivers"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:722 includes/class-pwddm-reports.php:1192
+msgid "Manager drivers only"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:728
+msgid "Allow delivery manager to work with drivers."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:780 includes/class-pwddm-reports.php:1224
+msgid "The link above is the delivery driver's manager url."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:797
+msgid ""
+"Local delivery drivers for WooCommerce is a WooCommerce add-on, you must "
+"activate a WooCommerce on your site."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:852 admin/class-pwddm-admin.php:853
+msgid "General settings"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:858 admin/class-pwddm-admin.php:859
+msgid "Branding"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:932 includes/class-pwddm-screens.php:148
+msgid "WELCOME"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:948
+msgid "To the vendor delivery drivers manager"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:975
+msgid "Select an image"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:976
+msgid "Delete image"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1053
+msgid "Enable Drivers Manager to work with his own drivers."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1054
+msgid "Enable Drivers Manager to view the drivers routes."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1055
+msgid "Enable Drivers Manager to bulk update orders."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1056
+msgid "Enable full dashboard for Admin and Drivers Manager."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1057
+msgid "Enable full reports for Drivers Manager."
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1071
+msgid "Drivers Manager Settings"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1071
+msgid "Drivers Manager"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1072 includes/class-pwddm-reports.php:915
+#: includes/class-pwddm-screens.php:59 includes/class-pwddm-screens.php:263
+msgid "Dashboard"
+msgstr ""
+
+#: admin/class-pwddm-admin.php:1073 includes/class-pwddm-screens.php:101
+#: includes/class-pwddm-screens.php:326
+msgid "Settings"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:82
+msgid "Name"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:83 includes/class-pwddm-order.php:372
+#: includes/class-pwddm-reports.php:129 includes/class-pwddm-reports.php:196
+#: includes/class-pwddm-reports.php:777 includes/class-pwddm-reports.php:869
+#: includes/class-pwddm-reports.php:1023 includes/class-pwddm-reports.php:1091
+#: includes/class-pwddm-reports.php:1137 includes/class-pwddm-reports.php:1202
+msgid "Phone"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:84 includes/class-pwddm-login.php:58
+#: includes/class-pwddm-password.php:158 includes/class-pwddm-reports.php:778
+#: includes/class-pwddm-reports.php:870 includes/class-pwddm-reports.php:1138
+#: includes/class-pwddm-reports.php:1203
+msgid "Email"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:85 includes/class-pwddm-screens.php:97
+msgid "Account"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:86
+msgid "Claim"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:87 includes/class-pwddm-reports.php:780
+msgid "Availability"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:88 includes/class-pwddm-reports.php:782
+#: includes/class-pwddm-reports.php:1088 includes/class-pwddm-reports.php:1199
+msgid "Manager"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:147
+msgid "Drivers not found."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:234 includes/class-pwddm-order.php:605
+msgid "Photo"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:262 includes/class-pwddm-driver.php:264
+#: includes/class-pwddm-driver.php:462 includes/class-pwddm-driver.php:463
+msgid "First name"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:268 includes/class-pwddm-driver.php:270
+#: includes/class-pwddm-driver.php:466 includes/class-pwddm-driver.php:467
+msgid "Last name"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:274 includes/class-pwddm-driver.php:276
+msgid "Company"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:280 includes/class-pwddm-driver.php:282
+msgid "Address line 1"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:286 includes/class-pwddm-driver.php:288
+msgid "Address line 2"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:292 includes/class-pwddm-driver.php:294
+msgid "City"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:298 includes/class-pwddm-driver.php:300
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:314
+msgid "Country / Region"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:316
+msgid "Select Country / Region"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:324 includes/class-pwddm-driver.php:331
+msgid "State / County"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:326
+msgid "Select State / County"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:335 includes/class-pwddm-driver.php:337
+#: includes/class-pwddm-driver.php:470 includes/class-pwddm-driver.php:471
+msgid "Phone number"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:341 includes/class-pwddm-driver.php:474
+msgid "Email address"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:343 includes/class-pwddm-driver.php:475
+msgid "Enter email"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:348 includes/class-pwddm-driver.php:478
+#: includes/class-pwddm-driver.php:479 includes/class-pwddm-login.php:59
+msgid "Password"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:350
+msgid "Set New Password"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:353
+msgid "Enter password"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:356
+msgid "Cancel"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:363
+msgid "Driver account status"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:370
+msgid "Only drivers with active accounts can access the drivers' panel."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:375
+msgid "Driver availability"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:378 includes/class-pwddm-route.php:1529
+msgid "Unavailable"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:380 includes/class-pwddm-route.php:1527
+msgid "Available"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:382
+msgid "The delivery driver availability for work today."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:387
+msgid "Driver can claim orders"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:392
+msgid "No"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:393
+msgid "Yes"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:395
+msgid "Give the driver permission to claim orders."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:402
+msgid "Address Coordinates"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:403
+msgid "Leave blank for auto-filling."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:405
+msgid "Latitude"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:407
+msgid "latitude"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:408
+msgid "e.g. 37.819722"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:413
+msgid "Longitude"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:415
+msgid "longitude"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:416
+msgid "e.g. -122.478611"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:426 includes/class-pwddm-manager.php:104
+#: includes/class-pwddm-order.php:551
+msgid "Update"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:430 includes/class-pwddm-driver.php:503
+#: includes/class-pwddm-login.php:66 includes/class-pwddm-manager.php:108
+#: includes/class-pwddm-password.php:165 includes/class-pwddm-route.php:1002
+msgid "Loading"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:436 includes/class-pwddm-driver.php:602
+msgid "The driver does not belong to you."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:486
+msgid "Country"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:488
+msgid "Select country"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:499
+msgid "Submit"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:529 includes/class-pwddm-driver.php:690
+#: includes/class-pwddm-login.php:93 includes/class-pwddm-manager.php:136
+msgid ""
+"Security Check Failure - This alert may occur when you are logged in as an "
+"administrator and as a manager on the same browser and the same device. If "
+"you want to work on both panels please try to work with two different "
+"browsers."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:535 includes/class-pwddm-driver.php:695
+#: includes/class-pwddm-manager.php:142
+msgid "You are not a manager."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:559
+msgid "Driver number is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:564 includes/class-pwddm-driver.php:721
+#: includes/class-pwddm-login.php:105
+msgid "The email field is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:568 includes/class-pwddm-driver.php:729
+#: includes/class-pwddm-login.php:113
+msgid "The email is invalid."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:574
+msgid "Email exist for another user."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:578
+msgid "The user is not a driver."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:582 includes/class-pwddm-driver.php:738
+msgid "First name is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:585 includes/class-pwddm-driver.php:741
+msgid "Last name is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:588 includes/class-pwddm-driver.php:744
+msgid "Phone is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:591
+msgid "Address 1 is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:594
+msgid "City is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:597 includes/class-pwddm-driver.php:747
+msgid "Country is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:655
+msgid "The driver successfully updated."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:725 includes/class-pwddm-login.php:109
+msgid "The password field is empty."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:735 includes/class-pwddm-driver.php:777
+msgid "User is already exist in the system."
+msgstr ""
+
+#: includes/class-pwddm-driver.php:772
+msgid "New driver successfully created "
+msgstr ""
+
+#: includes/class-pwddm-driver.php:772
+msgid "View driver"
+msgstr ""
+
+#: includes/class-pwddm-driver.php:774
+msgid "An error occurred creating new driver."
+msgstr ""
+
+#: includes/class-pwddm-login.php:53 includes/class-pwddm-login.php:62
+#: includes/class-pwddm-password.php:204
+msgid "Login"
+msgstr ""
+
+#: includes/class-pwddm-login.php:54
+msgid "Enter your details below to continue."
+msgstr ""
+
+#: includes/class-pwddm-login.php:69
+msgid "Forgot password?"
+msgstr ""
+
+#: includes/class-pwddm-login.php:120 includes/class-pwddm-login.php:125
+msgid "Either the email or password you entered is invalid."
+msgstr ""
+
+#: includes/class-pwddm-login.php:128
+msgid "You are not a registered delivery manager."
+msgstr ""
+
+#: includes/class-pwddm-login.php:132
+msgid "Your account is not active, please contact your administrator."
+msgstr ""
+
+#: includes/class-pwddm-manager.php:46
+msgid "Select a manager"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:78
+msgid "Driver Commissions"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:81
+msgid "Select"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:82
+msgid "Fixed Price"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:83
+msgid "Delivery total percentage"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:84
+msgid "Order total percentage"
+msgstr ""
+
+#: includes/class-pwddm-manager.php:86
+msgid "Set commissions for your drivers only."
+msgstr ""
+
+#: includes/class-pwddm-manager.php:151
+msgid "The settings successfully updated."
+msgstr ""
+
+#: includes/class-pwddm-order.php:38
+msgid "Order status has been changed by the manager."
+msgstr ""
+
+#: includes/class-pwddm-order.php:47
+msgid "Order successfully updated."
+msgstr ""
+
+#: includes/class-pwddm-order.php:74 includes/class-pwddm-order.php:76
+#: includes/class-pwddm-order.php:78 includes/class-pwddm-order.php:80
+#: includes/class-pwddm-order.php:82 includes/class-pwddm-orders.php:1091
+#: includes/class-pwddm-orders.php:1093 includes/class-pwddm-orders.php:1095
+#: includes/class-pwddm-orders.php:1097 includes/class-pwddm-orders.php:1099
+msgid "Order status has been changed by manager."
+msgstr ""
+
+#: includes/class-pwddm-order.php:261
+msgid "Info"
+msgstr ""
+
+#: includes/class-pwddm-order.php:264 includes/class-pwddm-orders.php:1507
+msgid "Date"
+msgstr ""
+
+#: includes/class-pwddm-order.php:267 includes/class-pwddm-orders.php:1510
+msgid "Status"
+msgstr ""
+
+#: includes/class-pwddm-order.php:272
+msgid "Failed date"
+msgstr ""
+
+#: includes/class-pwddm-order.php:278
+msgid "Delivered date"
+msgstr ""
+
+#: includes/class-pwddm-order.php:285
+msgid "Payment method"
+msgstr ""
+
+#: includes/class-pwddm-order.php:291 includes/class-pwddm-order.php:650
+#: includes/class-pwddm-order.php:762 includes/class-pwddm-reports.php:62
+#: includes/class-pwddm-reports.php:104 includes/class-pwddm-reports.php:134
+#: includes/class-pwddm-reports.php:201 includes/class-pwddm-reports.php:1028
+#: includes/class-pwddm-reports.php:1096
+msgid "Total"
+msgstr ""
+
+#: includes/class-pwddm-order.php:309
+msgid "Order - Info"
+msgstr ""
+
+#: includes/class-pwddm-order.php:329
+msgid "Shipping Address"
+msgstr ""
+
+#: includes/class-pwddm-order.php:345
+msgid "Order - Shipping Address"
+msgstr ""
+
+#: includes/class-pwddm-order.php:366 includes/class-pwddm-orders.php:1508
+msgid "Customer"
+msgstr ""
+
+#: includes/class-pwddm-order.php:389
+msgid "Order - Customer"
+msgstr ""
+
+#: includes/class-pwddm-order.php:419
+msgid "Billing Address"
+msgstr ""
+
+#: includes/class-pwddm-order.php:435
+msgid "Order - Billing Address"
+msgstr ""
+
+#: includes/class-pwddm-order.php:496
+msgid "Choose action"
+msgstr ""
+
+#: includes/class-pwddm-order.php:497 includes/class-pwddm-order.php:498
+#: includes/class-pwddm-order.php:499 includes/class-pwddm-order.php:500
+#: includes/class-pwddm-order.php:501 includes/class-pwddm-orders.php:1219
+#: includes/class-pwddm-orders.php:1220 includes/class-pwddm-orders.php:1221
+#: includes/class-pwddm-orders.php:1222 includes/class-pwddm-orders.php:1223
+#: includes/class-pwddm-route.php:913 includes/class-pwddm-route.php:914
+#: includes/class-pwddm-route.php:915 includes/class-pwddm-route.php:916
+#: includes/class-pwddm-route.php:917
+msgid "Change status to"
+msgstr ""
+
+#: includes/class-pwddm-order.php:497 includes/class-pwddm-orders.php:390
+#: includes/class-pwddm-orders.php:1155 includes/class-pwddm-orders.php:1219
+#: includes/class-pwddm-route.php:853 includes/class-pwddm-route.php:913
+msgid "Processing"
+msgstr ""
+
+#: includes/class-pwddm-order.php:501 includes/class-pwddm-orders.php:1223
+#: includes/class-pwddm-orders.php:1275 includes/class-pwddm-route.php:917
+#: includes/class-pwddm-route.php:965
+msgid "Delivered"
+msgstr ""
+
+#: includes/class-pwddm-order.php:509 includes/pwddm-metaboxes.php:29
+msgid "Assign a driver"
+msgstr ""
+
+#: includes/class-pwddm-order.php:510 includes/class-pwddm-orders.php:1224
+#: includes/class-pwddm-route.php:919
+msgid "Unassign driver"
+msgstr ""
+
+#: includes/class-pwddm-order.php:536 includes/class-pwddm-orders.php:1246
+#: includes/class-pwddm-route.php:940 includes/pwddm-metaboxes.php:45
+msgid "drivers"
+msgstr ""
+
+#: includes/class-pwddm-order.php:566 includes/class-pwddm-order.php:573
+#: includes/class-pwddm-orders.php:598 includes/class-pwddm-orders.php:1511
+#: includes/class-pwddm-reports.php:193 includes/class-pwddm-reports.php:689
+#: includes/class-pwddm-reports.php:700 includes/class-pwddm-reports.php:866
+#: includes/class-pwddm-route.php:1911
+msgid "Driver"
+msgstr ""
+
+#: includes/class-pwddm-order.php:582
+msgid "Driver note"
+msgstr ""
+
+#: includes/class-pwddm-order.php:594
+msgid "Signature"
+msgstr ""
+
+#: includes/class-pwddm-order.php:619
+msgid "You don't have access to this order."
+msgstr ""
+
+#: includes/class-pwddm-order.php:643
+msgid "Products"
+msgstr ""
+
+#: includes/class-pwddm-order.php:648
+msgid "Item"
+msgstr ""
+
+#: includes/class-pwddm-order.php:725
+msgid "Discount"
+msgstr ""
+
+#: includes/class-pwddm-order.php:739
+msgid "Shipping"
+msgstr ""
+
+#: includes/class-pwddm-order.php:739
+msgid "via"
+msgstr ""
+
+#: includes/class-pwddm-order.php:766
+msgid "Refund"
+msgstr ""
+
+#: includes/class-pwddm-order.php:767
+msgid "Net Total"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:567 includes/class-pwddm-orders.php:1477
+msgid "<<"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:568 includes/class-pwddm-orders.php:1478
+msgid ">>"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:597 includes/class-pwddm-orders.php:1506
+msgid "Order"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:599
+msgid "Location"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:741 includes/class-pwddm-orders.php:746
+#: includes/class-pwddm-route.php:1247
+msgid "Pickup from"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:758
+msgid ""
+"\"ROOFTOP\" indicates that the returned result is a precise geocode for "
+"which we have location information accurate down to street address precision."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:764
+msgid ""
+"\"GEOMETRIC_CENTER\" indicates that the returned result is the geometric "
+"center of a result such as a polyline (for example, a street) or polygon "
+"(region)."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:770
+msgid "\"APPROXIMATE\" indicates that the returned result is approximate."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:775
+msgid ""
+"\"RANGE_INTERPOLATED\" indicates that the returned result reflects an "
+"approximation (usually on a road) interpolated between two precise points "
+"(such as intersections). Interpolated results are generally returned when "
+"rooftop geocodes are unavailable for a street address."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:779
+msgid "Address not found."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:790 includes/class-pwddm-orders.php:798
+#: includes/class-pwddm-orders.php:1630
+msgid "There are no orders."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1195 includes/class-pwddm-orders.php:1320
+#: includes/class-pwddm-route.php:899 includes/class-pwddm-route.php:991
+msgid "Filter"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1198 includes/class-pwddm-orders.php:1218
+#: includes/class-pwddm-route.php:902 includes/class-pwddm-route.php:912
+msgid "Bulk actions"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1209
+msgid "Bulk assign drivers to orders."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1210
+msgid "Bulk update order statuses."
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1250 includes/class-pwddm-route.php:944
+msgid "Assign to"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1260 includes/class-pwddm-route.php:953
+msgid "Apply"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1270
+msgid "All Statuses"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1281 includes/class-pwddm-route.php:970
+msgid "All Dates"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1282 includes/class-pwddm-reports.php:598
+#: includes/class-pwddm-route.php:971
+msgid "Today"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1283 includes/class-pwddm-reports.php:599
+#: includes/class-pwddm-route.php:972
+msgid "Yesterday"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1284 includes/class-pwddm-reports.php:600
+#: includes/class-pwddm-route.php:973
+msgid "This month"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1285 includes/class-pwddm-reports.php:601
+#: includes/class-pwddm-route.php:974
+msgid "Last month"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1291 includes/class-pwddm-route.php:979
+msgid "Filter By"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1294 includes/class-pwddm-route.php:980
+msgid "With drivers"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1297 includes/class-pwddm-route.php:981
+msgid "Without drivers"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1299 includes/class-pwddm-reports.php:128
+#: includes/class-pwddm-reports.php:209 includes/class-pwddm-reports.php:626
+#: includes/class-pwddm-reports.php:700 includes/class-pwddm-reports.php:776
+#: includes/class-pwddm-reports.php:881 includes/class-pwddm-reports.php:1205
+#: includes/class-pwddm-route.php:982 includes/class-pwddm-screens.php:71
+#: includes/class-pwddm-screens.php:245
+msgid "Drivers"
+msgstr ""
+
+#: includes/class-pwddm-orders.php:1509
+msgid "Shipping address"
+msgstr ""
+
+#: includes/class-pwddm-password.php:44
+msgid "Email field is empty."
+msgstr ""
+
+#: includes/class-pwddm-password.php:48
+msgid "The email you entered is invalid."
+msgstr ""
+
+#: includes/class-pwddm-password.php:54
+msgid "The email you entered was not found."
+msgstr ""
+
+#: includes/class-pwddm-password.php:58
+msgid "You are not a registered delivery driver."
+msgstr ""
+
+#: includes/class-pwddm-password.php:64
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+
+#: includes/class-pwddm-password.php:66
+#, php-format
+msgid "Email: %s"
+msgstr ""
+
+#: includes/class-pwddm-password.php:67
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+
+#: includes/class-pwddm-password.php:68
+msgid "To reset your password, visit the following address:"
+msgstr ""
+
+#: includes/class-pwddm-password.php:72
+msgid "Password reset"
+msgstr ""
+
+#: includes/class-pwddm-password.php:74
+msgid "An error occurred while sending mail."
+msgstr ""
+
+#: includes/class-pwddm-password.php:108
+msgid "The new password field is empty."
+msgstr ""
+
+#: includes/class-pwddm-password.php:112
+msgid "The confirm password field is empty."
+msgstr ""
+
+#: includes/class-pwddm-password.php:116
+msgid "New password and confirm password do not match."
+msgstr ""
+
+#: includes/class-pwddm-password.php:126
+msgid ""
+"This key is invalid or has already been used. Please reset your password "
+"again if needed."
+msgstr ""
+
+#: includes/class-pwddm-password.php:154
+msgid "Forgot your password?"
+msgstr ""
+
+#: includes/class-pwddm-password.php:155
+msgid "Enter your email, and we'll email you a link to change your password."
+msgstr ""
+
+#: includes/class-pwddm-password.php:161 includes/class-pwddm-password.php:285
+#: includes/class-pwddm-password.php:289 includes/class-pwddm-reports.php:615
+msgid "Send"
+msgstr ""
+
+#: includes/class-pwddm-password.php:169
+msgid "Back to login"
+msgstr ""
+
+#: includes/class-pwddm-password.php:201
+msgid "Your password has been changed successfully."
+msgstr ""
+
+#: includes/class-pwddm-password.php:202
+msgid "Please click on the login button to login with your new password"
+msgstr ""
+
+#: includes/class-pwddm-password.php:233
+msgid "Reset password"
+msgstr ""
+
+#: includes/class-pwddm-password.php:234
+msgid ""
+"A password reset link was sent. Click the link in the email to create a new "
+"password. If you do not receive an email within 5 minutes, please click on "
+"the resend email button below."
+msgstr ""
+
+#: includes/class-pwddm-password.php:236
+msgid "Resend email"
+msgstr ""
+
+#: includes/class-pwddm-password.php:239 includes/class-pwddm-password.php:294
+msgid "Back to forgot password"
+msgstr ""
+
+#: includes/class-pwddm-password.php:277
+msgid "Create a new password."
+msgstr ""
+
+#: includes/class-pwddm-password.php:279
+msgid "New password"
+msgstr ""
+
+#: includes/class-pwddm-password.php:280
+msgid "Confirm password"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:52
+msgid "Orders without drivers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:57 includes/class-pwddm-reports.php:97
+msgid "Ready for claim"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:60 includes/class-pwddm-reports.php:102
+#: includes/class-pwddm-reports.php:132 includes/class-pwddm-reports.php:199
+#: includes/class-pwddm-reports.php:1026 includes/class-pwddm-reports.php:1094
+msgid "Delivered today"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:75 includes/class-pwddm-reports.php:155
+#: includes/class-pwddm-reports.php:649 includes/class-pwddm-reports.php:1049
+msgid "No orders"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:123
+msgid "Drivers orders"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:587
+msgid "Drivers commissions"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:593
+msgid "Dates"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:602
+msgid "Custom"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:609
+msgid "From"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:610
+msgid "To"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:627 includes/class-pwddm-reports.php:690
+#: includes/class-pwddm-reports.php:701 includes/class-pwddm-route.php:1503
+#: includes/class-pwddm-route.php:1560 includes/class-pwddm-screens.php:88
+#: includes/class-pwddm-screens.php:350
+msgid "Orders"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:628
+msgid "Orders Total"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:629
+msgid "Shipping Total"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:630 includes/class-pwddm-reports.php:693
+#: includes/class-pwddm-reports.php:704
+msgid "Commission"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:691 includes/class-pwddm-reports.php:702
+msgid "Orders Price"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:692 includes/class-pwddm-reports.php:703
+msgid "Shipping Price"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:759
+msgid "Active drivers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:765 includes/class-pwddm-screens.php:77
+msgid "Add new driver"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:769 includes/class-pwddm-screens.php:82
+msgid "All drivers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:779 includes/class-pwddm-reports.php:871
+#: includes/class-pwddm-reports.php:1139 includes/class-pwddm-reports.php:1204
+msgid "Address"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:781
+msgid "Claim orders"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:791
+msgid "No drivers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:885
+msgid "Availables"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:885
+msgid "Unavailables"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:886
+msgid "Can claim"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:886
+msgid "Can't claim"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:898
+#, php-format
+msgid ""
+"The link above is the delivery driver's Mobile-Friendly panel URL. %1$s The "
+"delivery drivers can access it from their mobile phones. %2$s"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:899
+#, php-format
+msgid ""
+"Notice: If you want to be logged in as an manager and to check the drivers' "
+"panel on the same device, %1$s %2$syou must work with two different browsers "
+"otherwise you will log out from the manager panel and the drivers' panel "
+"won't function correctly.%3$s"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1018
+msgid "Manager drivers orders"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1022 includes/class-pwddm-reports.php:1105
+#: includes/class-pwddm-reports.php:1136 includes/class-pwddm-reports.php:1212
+msgid "Managers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1127
+msgid "Active managers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1128
+msgid "Add new manager"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1131
+msgid "All managers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1140
+msgid "Manage drivers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1149
+msgid "No managers"
+msgstr ""
+
+#: includes/class-pwddm-reports.php:1225
+#, php-format
+msgid ""
+"Notice: If you want to be logged in as an administrator and to check the "
+"managers' panel on the same device, %1$s %2$syou must work with two "
+"different browsers otherwise you will log out from the admin panel and the "
+"managers' panel won't function correctly.%3$s"
+msgstr ""
+
+#: includes/class-pwddm-route.php:139 includes/class-pwddm-route.php:262
+msgid "An unexpected error has occurred, please try again."
+msgstr ""
+
+#: includes/class-pwddm-route.php:162 includes/class-pwddm-route.php:168
+#: includes/class-pwddm-route.php:1290 includes/class-pwddm-screens.php:372
+msgid "Order #"
+msgstr ""
+
+#: includes/class-pwddm-route.php:162
+msgid "no route could be found between the origin and address."
+msgstr ""
+
+#: includes/class-pwddm-route.php:168
+msgid "origin and/or address could not be geocoded."
+msgstr ""
+
+#: includes/class-pwddm-route.php:318
+msgid ""
+"The route has been optimized by distance, if you want to make changes you "
+"can drag and drop orders manually."
+msgstr ""
+
+#: includes/class-pwddm-route.php:319
+msgid "Optimize route, please wait..."
+msgstr ""
+
+#: includes/class-pwddm-route.php:321
+msgid ""
+"The route is ready for optimization, you can make changes by drag and drop "
+"orders manually."
+msgstr ""
+
+#: includes/class-pwddm-route.php:322
+msgid "Please wait..."
+msgstr ""
+
+#: includes/class-pwddm-route.php:328 includes/class-pwddm-route.php:329
+msgid "Plan your route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:328
+msgid "Finish planning route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:551
+msgid "View Route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:881
+msgid "There are no routes for drivers."
+msgstr ""
+
+#: includes/class-pwddm-route.php:918
+msgid "Remove order location status"
+msgstr ""
+
+#: includes/class-pwddm-route.php:999
+msgid "Show orders on map"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1004
+msgid "Hide orders on map"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1280
+msgid "Order:"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1290
+msgid "selected"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1543
+msgid "Call driver:"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1543
+msgid "Send WhatsApp to driver"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1547
+msgid "Vehicle"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1550
+msgid "Licence plate"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1557
+msgid "Driver home"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1560
+msgid "Route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1560
+msgid "Direction"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1561
+msgid "Show/Hide route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1783 includes/class-pwddm-route.php:1784
+msgid "Driver doesn't have a route."
+msgstr ""
+
+#: includes/class-pwddm-route.php:1812
+msgid "Origin"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1813
+msgid "Destination"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1821 includes/class-pwddm-route.php:1824
+#: includes/class-pwddm-route.php:1831 includes/class-pwddm-route.php:1832
+msgid "Pickup"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1837
+msgid "last_address_on_route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1837
+msgid "Auto - Farthest / Last address on route."
+msgstr ""
+
+#: includes/class-pwddm-route.php:1842 includes/class-pwddm-route.php:1843
+msgid "Home"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1885
+msgid "Optimize route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1885
+msgid "View route"
+msgstr ""
+
+#: includes/class-pwddm-route.php:1929
+msgid "Driver Home:"
+msgstr ""
+
+#: includes/class-pwddm-route.php:2072
+msgid "Tracking is on"
+msgstr ""
+
+#: includes/class-pwddm-route.php:2076
+msgid "Tracking is off"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:62 includes/class-pwddm-screens.php:279
+msgid "Reports"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:66
+msgid "Routes"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:91
+msgid "All orders"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:104
+msgid "Log out"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:149
+msgid "To the delivery manager"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:185
+msgid "Get started"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:212
+msgid "New Driver"
+msgstr ""
+
+#: includes/class-pwddm-screens.php:299
+msgid "View drivers' routes on a map."
+msgstr ""
+
+#: includes/class-pwddm-screens.php:300
+msgid "View routes' duration and distance."
+msgstr ""

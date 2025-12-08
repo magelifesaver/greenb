@@ -1,0 +1,275 @@
+.aaa-img-modal-overlay {
+    cursor: pointer;
+}
+.aaa-img-modal-content img {
+    border: 4px solid white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+#aaa-product-table .aaa-stock-zero {
+  background-color: #f8d7da; /* or whatever shade you like */
+}
+.dropzone.dragover {
+    background-color: #e6f7ff;
+    border-color: #0056b3;
+}
+/* Global styling for AAA V4 Order Creator admin page */
+#aaa-v4-order-form {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  max-width: 1200px;
+}
+
+#aaa-v4-order-form h1,
+#aaa-v4-order-form h2,
+#aaa-v4-order-form h3 {
+  font-weight: 600;
+  margin-bottom: .75rem;
+  color: #222;
+}
+
+/* ========== SECTIONS ========== */
+.aaa-v4-section {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+
+.aaa-v4-section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+
+/* Two-column rows */
+.aaa-v4-section-meta,
+.aaa-v4-section-uploads,
+#aaa-v4-order-form .flex-row {
+  display: inline;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ========== INPUTS & SELECTS ========== */
+#aaa-v4-order-form input[type="text"],
+#aaa-v4-order-form input[type="email"],
+#aaa-v4-order-form input[type="number"],
+#aaa-v4-order-form input[type="date"],
+#aaa-v4-order-form select,
+#aaa-v4-order-form textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: border-color .2s, background .2s;
+}
+
+#aaa-v4-order-form input:focus,
+#aaa-v4-order-form select:focus,
+#aaa-v4-order-form textarea:focus {
+  border-color: #0073aa;
+  background: #fff;
+  outline: none;
+}
+/* ========== BUTTONS ========== */
+.button-modern {
+  display: inline-block;
+  padding: 0.3em 0.6em 0.5em 0.6em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+  text-decoration: none;
+  line-height: 1.2;
+  margin: 5px 0;
+}
+
+.button-modern:hover {
+    background: #006799;
+    color: #fff;
+}
+
+.button-modern.red {
+    background: #cc0000;
+}
+.button-modern.green {
+    background: #28a745;
+}
+.button-modern.orange {
+    background: #ff8c00;
+}
+
+/* ========== UPLOAD BOXES ========== */
+.aaa-v4-upload {
+  flex: 1;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  padding: 20px;
+  background: #f9fbfd;
+  text-align: center;
+  transition: border-color .3s, background .3s;
+}
+
+.aaa-v4-upload:hover {
+  border-color: #0073aa;
+  background: #eef7ff;
+}
+
+.dropzone.dragover {
+  background-color: #e6f7ff;
+  border-color: #0056b3;
+}
+
+/* ========== PRODUCT TABLE ========== */
+#aaa-product-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 13px;
+  border: 1px solid #48c;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#aaa-product-table th {
+  background: #f0f2f5;
+  padding: 8px;
+  text-align: left;
+  font-weight: 600;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+}
+
+#aaa-product-table td {
+  background: #fff;
+  padding: 6px;
+  border-top: 1px solid #eee;
+}
+
+#aaa-product-table tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+#aaa-product-table .aaa-stock-zero {
+  background-color: #f8d7da;
+}
+
+/* ========== CART SUMMARY ========== */
+#aaa-cart-summary {
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ========== IMAGE MODAL ========== */
+.aaa-img-modal-overlay {
+  cursor: pointer;
+}
+.aaa-img-modal-content img {
+  border: 4px solid white;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Required field marker */
+.required-label:after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+/* =====================================================
+   TWO-COLUMN LAYOUT (Delivery Section)
+   ===================================================== */
+.aaa-v4-two-col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 20px 0;
+}
+
+.aaa-v4-two-col-left,
+.aaa-v4-two-col-right {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Address blocks (billing + shipping side by side) */
+.aaa-v4-address-blocks {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.aaa-v4-address-box {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background: #f9f9f9;
+  min-width: 0; /* prevents overflow */
+}
+
+.aaa-v4-address-box strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Editable shipping fields under the row of address loaders */
+.aaa-v4-shipping-fields p {
+  margin: 0 0 10px;
+}
+
+/* Right column headings */
+.aaa-v4-two-col-right h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+  margin-top: 0;
+}
+
+/* Buttons alignment */
+.aaa-v4-address-box .button-modern {
+  margin-top: 8px;
+}
+
+/* Responsive: stack billing/shipping when narrow */
+@media (max-width: 768px) {
+  .aaa-v4-address-blocks {
+    flex-direction: column;
+  }
+}
+/* =====================================================
+   INLINE LAYOUT FOR STATE / ZIP / COUNTRY
+   ===================================================== */
+.aaa-v4-inline-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+
+.aaa-v4-inline-row p {
+  flex: 1;
+  margin: 0;
+}
+
+.aaa-v4-inline-row input {
+  width: 100% !important; /* allow flex to control sizing */
+  box-sizing: border-box;
+}

@@ -1,0 +1,10 @@
+/* File: /wp-content/plugins/aaa-fci/assets/css/aaa-fci-frontend.css Purpose: Styles for Kadence header login drawer (non-iframe). */
+.aaa-fci-login-error{
+  margin:0 0 .75rem;
+  padding:.6rem .8rem;
+  border:1px solid #e00;
+  background:#ffecec;
+  color:#900;
+  border-radius:6px;
+  font-size:.92rem;
+}

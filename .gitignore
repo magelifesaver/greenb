@@ -1,0 +1,23 @@
+# WordPress core files (optional)
+
+
+# Logs, caches, uploads
+*.log
+debug.log
+logs/
+
+
+# Environment/config
+.env
+
+# Composer & Node
+/vendor/
+/node_modules/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+/mmm-product-search-with-brand/

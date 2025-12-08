@@ -1,0 +1,76 @@
+/**
+ * File Path: /wp-content/plugins/aaa-age-gate/assets/css/aaa-age-gate.css
+ * Purpose: Basic modal styling
+ */
+.aaa-age-gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 20, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+.aaa-age-gate-overlay.open { display: flex; }
+html.aaa-age-gate-locked, html.aaa-age-gate-locked body { overflow: hidden; }
+
+.aaa-age-gate-modal {
+  background: #111;
+  color: #f7f7f7;
+  max-width: 560px;
+  width: 92%;
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  text-align: left;
+  line-height: 1.45;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.aaa-age-gate-modal h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  letter-spacing: .2px;
+  color:white;
+}
+.aaa-age-gate-modal p {
+  margin: 0 0 18px;
+  font-size: 15px;
+  opacity: .95;
+}
+
+.aaa-age-gate-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.aaa-age-gate-btn {
+  appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1;
+  border: 1px solid transparent;
+  transition: transform .06s ease, opacity .2s ease, background .2s ease;
+}
+
+.aaa-age-gate-btn.accept {
+  background: #fed701; /* green */
+  color: #000;
+}
+.aaa-age-gate-btn.accept:hover { transform: translateY(-1px); }
+
+.aaa-age-gate-btn.decline {
+  background: transparent;
+  color: #ddd;
+  border-color: rgba(255,255,255,0.25);
+}
+.aaa-age-gate-btn.decline:hover {
+  background: rgba(255,255,255,0.06);
+}
+.aaa-age-gate-title {
+    color: white;
+}

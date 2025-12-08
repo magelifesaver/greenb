@@ -1,0 +1,3907 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ATUM Purchase Orders\n"
+"POT-Creation-Date: 2025-10-14 17:47+0200\n"
+"PO-Revision-Date: 2020-02-06 12:38+0100\n"
+"Last-Translator: Salva Machí <Be Rebel>\n"
+"Language-Team: BE REBEL <https://berebel.studio>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: atum-purchase-orders.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+
+#: atum-purchase-orders.php:264
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM version %2$s or greater. Please update it."
+msgstr ""
+
+#: atum-purchase-orders.php:272
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Product Levels version %2$s or greater. Please "
+"update or disable it."
+msgstr ""
+
+#: atum-purchase-orders.php:280
+#, php-format
+msgid ""
+"The %1$s add-on requires ATUM Multi-Inventory version %2$s or greater. "
+"Please update or disable it."
+msgstr ""
+
+#: atum-purchase-orders.php:288
+#, php-format
+msgid ""
+"The %1$s add-on requires the WordPress %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#: atum-purchase-orders.php:296
+#, php-format
+msgid "The ATUM %s add-on requires WooCommerce to be activated."
+msgstr ""
+
+#: atum-purchase-orders.php:304
+#, php-format
+msgid ""
+"The %1$s add-on requires the WooCommerce %2$s version or greater. Please <a "
+"href='%3$s'>update it</a>."
+msgstr ""
+
+#: atum-purchase-orders.php:338
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires PHP version %2$s or greater. Please, update it "
+"or contact your hosting provider."
+msgstr ""
+
+#: atum-purchase-orders.php:346
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please <a href='%2$s'>install it</a>."
+msgstr ""
+
+#: atum-purchase-orders.php:354
+#, php-format
+msgid ""
+"The ATUM %1$s add-on requires the ATUM Inventory Management for WooCommerce "
+"plugin. Please enable it from <a href='%2$s'>plugins page</a>."
+msgstr ""
+
+#: classes/Abstracts/AtumPOOrders/AtumPOOrderPostType.php:180
+msgctxt "ATUM PO order status"
+msgid "Published"
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:107
+msgid "The country where the purchaser is."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:112
+msgid "The state where the purchaser is."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:117
+msgid "The city where the purchaser is."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:122
+msgid "The address of the purchaser."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:127
+msgid "The zip code for the purchaser address."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:132
+msgid "Whether the Purchase Order has the taxes enabled or not."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:137
+msgid "The number/name of the Purchase Order."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:142
+msgid "The ship via field value."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:147
+msgid "The code/id for the supplier."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:152
+msgid "The currency used by the supplier."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:157
+msgid "The discount to be applied to the items from the supplier."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:162
+msgid "The amount of decimal positions in the prices."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:167
+msgid "The exchange rate for the supplier currency."
+msgstr ""
+
+#: classes/Api/Extenders/PurchaseOrder.php:183
+#: classes/Api/Extenders/PurchaseOrder.php:190
+#: classes/Api/PurchaseOrdersApi.php:60 classes/Api/PurchaseOrdersApi.php:67
+#: classes/Deliveries/Deliveries.php:191 classes/Deliveries/Deliveries.php:198
+#: classes/Deliveries/DeliveryLocations.php:208
+#: classes/Deliveries/DeliveryLocations.php:215 classes/Inc/AddToPO.php:472
+#: classes/Inc/AddToPO.php:479 classes/Inc/Ajax.php:3227
+#: classes/Inc/Ajax.php:3234 classes/Inc/DuplicatePO.php:154
+#: classes/Inc/DuplicatePO.php:161 classes/Inc/Hooks.php:1301
+#: classes/Inc/Hooks.php:1308 classes/Inc/ReturningPOs.php:287
+#: classes/Inc/ReturningPOs.php:294 classes/Inc/Settings.php:661
+#: classes/Inc/Settings.php:668 classes/Integrations/MultiInventory.php:2896
+#: classes/Integrations/MultiInventory.php:2903
+#: classes/Integrations/ProductLevels.php:893
+#: classes/Integrations/ProductLevels.php:900 classes/Integrations/Wpml.php:306
+#: classes/Integrations/Wpml.php:314 classes/Invoices/Invoices.php:191
+#: classes/Invoices/Invoices.php:198 classes/ListTables/POListPage.php:275
+#: classes/ListTables/POListPage.php:283 classes/MetaBoxes/POMetaBoxes.php:751
+#: classes/MetaBoxes/POMetaBoxes.php:758
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: classes/Bootstrap.php:132
+#, php-format
+msgid ""
+"The ATUM Purchase Orders PRO add-on requires the Purchase Orders module to "
+"be enabled from <a href='%s'>ATUM Settings</a>. Please enable it."
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:92
+msgid "Deliveries"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:94
+msgctxt " post type singular name"
+msgid "Delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:95 classes/Deliveries/Deliveries.php:96
+msgid "Add New Delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:97 classes/Invoices/Invoices.php:97
+msgid "Edit"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:98 classes/MetaBoxes/POMetaBoxes.php:483
+msgid "Edit Delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:99
+msgid "New Delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:100 classes/Deliveries/Deliveries.php:101
+msgid "View Delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:102
+msgid "Search Deliveries"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:103
+msgid "No deliveries were found"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:104
+msgid "No deliveries found in trash"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:105
+msgid "Parent delivery"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:106
+msgctxt "Admin menu name"
+msgid "PO Deliveries"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:107
+msgid "Filter deliveries"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:108
+msgid "Deliveries navigation"
+msgstr ""
+
+#: classes/Deliveries/Deliveries.php:109
+msgid "Deliveries list"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:72
+msgid "Address"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:73
+msgid "The address (street, number, floor, door, etc) of the location."
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:76
+#: views/meta-boxes/po-data/data.php:307
+msgid "Address 2"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:77
+msgid "Additional info for the address."
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:80
+msgid "City"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:81
+msgid "The city/town for the location."
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:84
+msgid "State"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:85
+msgid "The state/region for the location."
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:88
+#: views/meta-boxes/po-data/data.php:327
+msgid "Postal Code"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:89
+msgid "The Zip code/postal code for the location."
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:92
+#: views/meta-boxes/po-data/data.php:335
+msgid "Country"
+msgstr ""
+
+#: classes/Deliveries/DeliveryLocations.php:93
+msgid "The country where the location is located."
+msgstr ""
+
+#: classes/Deliveries/Models/Delivery.php:117
+msgid "The Delivery cannot be saved without a parent PO"
+msgstr ""
+
+#: classes/Deliveries/Models/Delivery.php:145
+#: classes/Deliveries/Models/Delivery.php:371
+#, php-format
+msgid "Delivery %d"
+msgstr ""
+
+#: classes/Deliveries/Models/Delivery.php:318
+msgid "Stock levels increased:"
+msgstr ""
+
+#: classes/Deliveries/Models/Delivery.php:321
+msgid "Stock levels reduced:"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:73
+#, php-format
+msgid "Not a Purchase Order (%d)"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:247
+#, php-format
+msgid "Tax/VAT Number: %s"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:277
+#: classes/Exports/POExtendedPreview.php:136
+msgid "Ship Via:"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:282
+msgid "F.O.B.:"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:423
+#: classes/MetaBoxes/POMetaBoxes.php:239 views/meta-boxes/po-data/data.php:33
+#: views/meta-boxes/po-data/top-bar.php:33
+#: views/pdf-templates/default/purchase-order-html.php:70
+#: views/pdf-templates/template1/purchase-order-html.php:57
+#: views/pdf-templates/template2/purchase-order-html.php:58
+msgid "Purchase Order"
+msgstr ""
+
+#: classes/Exports/POExtendedExport.php:423
+#: views/meta-boxes/po-data/top-bar.php:33
+#: views/pdf-templates/default/purchase-order-html.php:70
+#: views/pdf-templates/template1/purchase-order-html.php:57
+#: views/pdf-templates/template2/purchase-order-html.php:58
+msgid "Returning PO"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:78
+msgid "Add to PO"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:107
+msgid "Add items to Purchase Order(s)"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:109
+msgid "Create PO"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:110
+msgid "Create POs"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:111 classes/MetaBoxes/POMetaBoxes.php:534
+msgid "No products found with the specified criteria"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:113 classes/MetaBoxes/POMetaBoxes.php:536
+msgid "No products found with the specified criteria for this supplier"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:114 classes/ListTables/Lists/ListTable.php:1656
+#: classes/MetaBoxes/POMetaBoxes.php:539
+msgid "OK"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:115
+msgid "PO created successfully"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:116
+msgid "POs created successfully"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:117 classes/ListTables/Lists/ListTable.php:243
+#: classes/MetaBoxes/POMetaBoxes.php:580 views/add-to-po/add-to-po-modal.php:68
+#: views/pdf-templates/default/purchase-order-html.php:89
+#: views/pdf-templates/template1/purchase-order-html.php:119
+#: views/pdf-templates/template2/purchase-order-html.php:126
+msgid "Supplier"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:136
+msgid "Please, select the items you want to add to the PO"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:179 classes/Inc/Ajax.php:443
+#: classes/Inc/Ajax.php:684 classes/Inc/Ajax.php:705 classes/Inc/Ajax.php:762
+#: classes/Inc/Ajax.php:783 classes/Inc/Ajax.php:970 classes/Inc/Ajax.php:1070
+#: classes/Inc/Ajax.php:1179 classes/Inc/Ajax.php:1247
+#: classes/Inc/Ajax.php:1551 classes/Inc/Ajax.php:1649
+#: classes/Inc/Ajax.php:1804 classes/Inc/Ajax.php:1846
+#: classes/Inc/Ajax.php:1882 classes/Inc/Ajax.php:1912
+#: classes/Inc/Ajax.php:1965 classes/Inc/Ajax.php:2007
+#: classes/Inc/Ajax.php:2735 classes/Inc/Ajax.php:2765
+#: classes/Inc/Ajax.php:2936 classes/Inc/Ajax.php:3063
+msgid "Invalid data"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:228
+#, php-format
+msgid "New purchase order (%s) created using the selected items."
+msgid_plural "New POs created using the selected items: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/AddToPO.php:318
+msgid "[ATUM] Create POs from orders"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:449
+msgid "The PO for the selected order was created successfully. "
+msgid_plural "The POs for the selected orders were created successfully. "
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/AddToPO.php:451
+#, php-format
+msgid "<a href='%s'>Go to the POs list.</a>"
+msgstr ""
+
+#: classes/Inc/AddToPO.php:454
+msgid "No POs were created. Something wrong happened"
+msgstr ""
+
+#: classes/Inc/Ajax.php:399 classes/Integrations/MultiInventory.php:423
+msgid "SKU"
+msgstr ""
+
+#: classes/Inc/Ajax.php:403 classes/Integrations/MultiInventory.php:427
+msgid "Sup. SKU"
+msgstr ""
+
+#: classes/Inc/Ajax.php:407 classes/Integrations/MultiInventory.php:431
+#: classes/Integrations/ProductLevels.php:156
+#: classes/Integrations/ProductLevels.php:186
+#: views/add-to-po/add-to-po-modal.php:71
+msgid "Stock"
+msgstr ""
+
+#: classes/Inc/Ajax.php:437 classes/Inc/Ajax.php:540 classes/Inc/Ajax.php:966
+#: classes/Inc/Ajax.php:1097 classes/Inc/Ajax.php:1136
+#: classes/Inc/Ajax.php:1175 classes/Inc/Ajax.php:1243
+#: classes/Inc/Ajax.php:1547 classes/Inc/Ajax.php:1645
+#: classes/Inc/Ajax.php:1800 classes/Inc/Ajax.php:1842
+#: classes/Inc/Ajax.php:1878 classes/Inc/Ajax.php:1908
+#: classes/Inc/Ajax.php:1961 classes/Inc/Ajax.php:2003
+msgid "You are not allowed to edit purchase orders"
+msgstr ""
+
+#: classes/Inc/Ajax.php:458
+msgid "Invalid purchase order"
+msgstr ""
+
+#: classes/Inc/Ajax.php:544
+msgid ""
+"At least one supplier ID is needed in order to retrieve its missing products"
+msgstr ""
+
+#: classes/Inc/Ajax.php:680 classes/Inc/Ajax.php:758
+msgid "You are not allowed to edit Purchase Orders"
+msgstr ""
+
+#: classes/Inc/Ajax.php:974
+msgid "A delivery must have items"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1066
+msgid "You are not allowed to delete purchase orders"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1081
+msgid "Delivery successfully removed"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1101 classes/Inc/Ajax.php:1140
+msgid "No delivery ID was specified"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1105
+msgid "Missing delivery files"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1111 classes/Inc/Ajax.php:1150
+msgid "Invalid delivery"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1120
+msgid "File linked to delivery successfully"
+msgid_plural "Files linked to delivery successfully"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Ajax.php:1144
+msgid "File not found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1159
+msgid "File deleted from this delivery successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1214 classes/Inc/Ajax.php:1391
+#: classes/Inc/Ajax.php:1499 classes/Inc/Ajax.php:3034
+msgid "Invalid Data"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1221
+msgid "The delivery no longer exists"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1253
+msgid ""
+"A delivery must have items.<br>If you want to remove all the items, you can "
+"delete the entire delivery instead."
+msgstr ""
+
+#: classes/Inc/Ajax.php:1260
+msgid "Delivery not found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1371
+msgid "The selected product doesn't exist"
+msgid_plural "The selected products don't exist"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Ajax.php:1521 classes/Inc/Ajax.php:3167
+#: classes/Inc/Ajax.php:3202
+msgid "Missing PO ID"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1527
+msgid "Invalid PO"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1555 classes/Inc/Ajax.php:1653
+msgid "An invoice must have items"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1662
+msgid "Invoice not found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1778
+msgid "The invoice could not be saved"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1892 classes/MetaBoxes/POMetaBoxes.php:497
+msgid "Invoice removed successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1927 classes/MetaBoxes/POMetaBoxes.php:490
+msgid "This file was already added to this PO"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1945
+msgid "File added successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:1987
+msgid "File description updated successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2030
+msgid "File removed successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2178
+msgid "Invalid or missing data"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2198
+msgid "Purchase Order not found."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2248 classes/MetaBoxes/POMetaBoxes.php:562
+msgid "The sender's email is missing"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2256 classes/Inc/Ajax.php:2267
+#: classes/Inc/Ajax.php:2274
+#, php-format
+msgid "Invalid sender's email: %s"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2279 classes/MetaBoxes/POMetaBoxes.php:541
+msgid "The recipient's email is missing"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2287 classes/Inc/Ajax.php:2298
+#: classes/Inc/Ajax.php:2305
+#, php-format
+msgid "Invalid recipient's email: %s"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2376 classes/MetaBoxes/POMetaBoxes.php:579
+msgid "The email's subject is missing"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2380 classes/Inc/Ajax.php:2881
+#: classes/Inc/Settings.php:491
+#, php-format
+msgid "&copy;%1$d %2$s. All rights reserved."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2388
+msgid "The email template wasn't found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2400
+msgid "The email couldn't be sent"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2441
+msgid "Invalid sales order number"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2447
+msgid "Sales order not found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2661
+msgid "Multiple suppliers"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2683
+msgid "Invalid data."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2706
+msgid "Can not merge a PO with itself."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2710
+msgid "The target PO's supplier doesn't match with the current PO's supplier."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2719
+msgid "The POs were successfully merged."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2741 classes/Inc/Ajax.php:3118
+#: classes/Inc/Ajax.php:3125
+msgid "PO not found"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2777
+msgid "PO saved successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2840 classes/Inc/Ajax.php:2849
+msgid "The Company"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2847 views/js-templates/email-modal.php:65
+#, php-format
+msgid "Purchase Order Request - #%s"
+msgstr ""
+
+#: classes/Inc/Ajax.php:2955 classes/Inc/Ajax.php:2961
+msgid "The PO number couldn't be saved. PO not found."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2965
+msgid "The PO number is required."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2973
+msgid ""
+"The number you have entered is already taken by another PO and it must be "
+"unique.<br>Please, try with a distinct one or auto-generate it."
+msgstr ""
+
+#: classes/Inc/Ajax.php:2995 classes/Inc/Ajax.php:3006
+msgid "The PO number couldn't be generated. PO not found."
+msgstr ""
+
+#: classes/Inc/Ajax.php:3070
+msgid "The percentage must be greater than 0 and equal or lower than 100"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3102
+msgid "All the purchase prices were updated successfully"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3137 classes/Inc/Helpers.php:441
+#: classes/ListTables/Lists/ListTable.php:910
+#: views/meta-boxes/po-data/data.php:26
+msgid "Unknown"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3145
+msgid "Clone PO"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3146
+msgid "Archive PO"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3147
+msgid "Print PO"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3173 classes/Inc/Ajax.php:3208
+msgid "The PO doesn't exist"
+msgstr ""
+
+#: classes/Inc/Ajax.php:3184
+#, php-format
+msgid ""
+"The Returning PO \"%s\" was created successfully.<br>Click \"OK\" to open it "
+"on a new tab."
+msgstr ""
+
+#: classes/Inc/Ajax.php:3214
+msgid "The items were returned successfully"
+msgstr ""
+
+#: classes/Inc/DuplicatePO.php:49
+msgid "No PO to duplicate has been supplied!"
+msgstr ""
+
+#: classes/Inc/DuplicatePO.php:60
+#, php-format
+msgid "PO creation failed, could not find original PO: %s"
+msgstr ""
+
+#: classes/Inc/Globals.php:31
+msgctxt "Atum Purchase Order status"
+msgid "Draft"
+msgstr ""
+
+#: classes/Inc/Globals.php:32
+msgctxt "ATUM Purchase Order status"
+msgid "New"
+msgstr ""
+
+#: classes/Inc/Globals.php:33
+msgctxt "ATUM Purchase Order status"
+msgid "Awaiting Approval"
+msgstr ""
+
+#: classes/Inc/Globals.php:34
+msgctxt "ATUM Purchase Order status"
+msgid "New (Approved)"
+msgstr ""
+
+#: classes/Inc/Globals.php:35
+msgctxt "ATUM Purchase Order status"
+msgid "Sent"
+msgstr ""
+
+#: classes/Inc/Globals.php:36
+msgctxt "ATUM Purchase Order status"
+msgid "Received by Vendor"
+msgstr ""
+
+#: classes/Inc/Globals.php:37
+msgctxt "ATUM Purchase Order status"
+msgid "On the Way In"
+msgstr ""
+
+#: classes/Inc/Globals.php:38
+msgctxt "ATUM Purchase Order status"
+msgid "Receiving"
+msgstr ""
+
+#: classes/Inc/Globals.php:39
+msgctxt "ATUM Purchase Order status"
+msgid "Partially Receiving"
+msgstr ""
+
+#: classes/Inc/Globals.php:40
+msgctxt "ATUM Purchase Order status"
+msgid "Quality Check"
+msgstr ""
+
+#: classes/Inc/Globals.php:41
+msgctxt "ATUM Purchase Order status"
+msgid "Added"
+msgstr ""
+
+#: classes/Inc/Globals.php:42
+msgctxt "ATUM Purchase Order status"
+msgid "Partially Added"
+msgstr ""
+
+#: classes/Inc/Globals.php:43
+msgctxt "ATUM Purchase Order status"
+msgid "Completed"
+msgstr ""
+
+#: classes/Inc/Globals.php:44
+msgctxt "ATUM Purchase Order status"
+msgid "Cancelled"
+msgstr ""
+
+#: classes/Inc/Globals.php:45
+msgctxt "ATUM Purchase Order status"
+msgid "Returning"
+msgstr ""
+
+#: classes/Inc/Globals.php:46
+msgctxt "ATUM Purchase Order status"
+msgid "Returned"
+msgstr ""
+
+#: classes/Inc/Globals.php:47
+msgctxt "ATUM Purchase Order status"
+msgid "Archived"
+msgstr ""
+
+#: classes/Inc/Globals.php:280
+msgctxt "ATUM Purchase Order shipping method"
+msgid "Ship"
+msgstr ""
+
+#: classes/Inc/Globals.php:281
+msgctxt "ATUM Purchase Order shipping method"
+msgid "Train"
+msgstr ""
+
+#: classes/Inc/Globals.php:282
+msgctxt "ATUM Purchase Order shipping method"
+msgid "Lorry"
+msgstr ""
+
+#: classes/Inc/Globals.php:283
+msgctxt "ATUM Purchase Order shipping method"
+msgid "Courier"
+msgstr ""
+
+#: classes/Inc/Helpers.php:276
+#, php-format
+msgid "PO #%s"
+msgstr ""
+
+#: classes/Inc/Helpers.php:386 classes/Inc/Helpers.php:412
+msgid "Default"
+msgstr ""
+
+#: classes/Inc/Helpers.php:390 classes/Inc/Helpers.php:416
+msgid "Template 1"
+msgstr ""
+
+#: classes/Inc/Helpers.php:394 classes/Inc/Helpers.php:420
+msgid "Template 2"
+msgstr ""
+
+#: classes/Inc/Helpers.php:938
+msgid "There are no deliveries on this PO yet."
+msgstr ""
+
+#: classes/Inc/Helpers.php:974
+msgid "There are no delivery items on this PO yet."
+msgstr ""
+
+#: classes/Inc/Hooks.php:270 classes/MetaBoxes/POMetaBoxes.php:533
+msgid "The PO must have a number"
+msgstr ""
+
+#: classes/Inc/Hooks.php:284
+msgid "The PO number must be unique. Your PO number change has been reverted."
+msgstr ""
+
+#: classes/Inc/Hooks.php:287
+msgid "The PO number must be unique. A new auto-number has been generated."
+msgstr ""
+
+#: classes/Inc/Hooks.php:423 classes/ListTables/Lists/ListTable.php:438
+#: views/meta-boxes/po-data/po-actions.php:64
+msgid "Archive"
+msgstr ""
+
+#: classes/Inc/Hooks.php:443
+#, php-format
+msgid "%s PO was archived."
+msgid_plural "%s POs were archived."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Hooks.php:445
+#, php-format
+msgid "%s PO was restored."
+msgid_plural "%s POs were restored."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Hooks.php:650
+msgid ""
+"Action wasn't applied to some selected POs due to status change restrictions."
+msgstr ""
+
+#: classes/Inc/Hooks.php:652
+#, php-format
+msgid "The failed PO is: #%s"
+msgid_plural "The failed POs are: #%s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Hooks.php:655
+msgid ""
+"Action wasn't applied to the selected PO due to status change restrictions."
+msgid_plural ""
+"Action wasn't applied to any of the selected POs due to status change "
+"restrictions."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/Hooks.php:972
+msgid "Edit PO"
+msgstr ""
+
+#: classes/Inc/Hooks.php:972
+msgid "Edit Returning PO"
+msgstr ""
+
+#: classes/Inc/ReturningPOs.php:79
+msgid "Returning PO: "
+msgid_plural "Returning POs: "
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/Inc/ReturningPOs.php:134
+msgid "All the delivery items on this PO have been already returned"
+msgstr ""
+
+#: classes/Inc/Settings.php:61 views/lists/list-page.php:24
+msgid "Purchase Orders"
+msgstr ""
+
+#: classes/Inc/Settings.php:64
+msgid "Purchase Orders PRO Options"
+msgstr ""
+
+#: classes/Inc/Settings.php:65
+msgid "PO PDF Template"
+msgstr ""
+
+#: classes/Inc/Settings.php:66
+msgid "PO Emails Template"
+msgstr ""
+
+#: classes/Inc/Settings.php:67
+msgid "POs List Table"
+msgstr ""
+
+#: classes/Inc/Settings.php:92
+msgid "Purchase Orders PRO"
+msgstr ""
+
+#: classes/Inc/Settings.php:98
+msgid "Numbering system"
+msgstr ""
+
+#: classes/Inc/Settings.php:99
+msgid "Choose a numbering system for your automatic PO numbers."
+msgstr ""
+
+#: classes/Inc/Settings.php:104
+msgid "Post IDs"
+msgstr ""
+
+#: classes/Inc/Settings.php:105
+msgid "Custom"
+msgstr ""
+
+#: classes/Inc/Settings.php:130
+msgid "Number pattern"
+msgstr ""
+
+#: classes/Inc/Settings.php:132
+#, php-format
+msgid ""
+"Set a special pattern for building the PO numbers. Available tags:"
+"<ul><li><strong>{counter}</strong> The current PO number.</"
+"li><li><strong>{year}</strong> Add the current year.</li><li><strong>{date:"
+"format}</strong> Add any valid %1$sPHP date format%2$s.</li></"
+"ul><pre><code>Example 1: <strong>PO{year}-{counter}</strong> would be "
+"converted to <strong>PO2023-0001</strong></code></pre><pre><code>Example 2: "
+"<strong>P{date:y}-{counter}</strong> would be converted to <strong>P22-0001</"
+"strong></code></pre>"
+msgstr ""
+
+#: classes/Inc/Settings.php:143
+msgid "PO counter"
+msgstr ""
+
+#: classes/Inc/Settings.php:144
+msgid ""
+"The next number to be used for your POs by replacing the {counter} tag in "
+"your number pattern above."
+msgstr ""
+
+#: classes/Inc/Settings.php:155
+msgid "Padding zeros"
+msgstr ""
+
+#: classes/Inc/Settings.php:156
+msgid ""
+"The number of padding zeros to be used when the counter's cipher doesn't "
+"reach the specified length. For example: 4 will convert the counter 1 to 0001"
+msgstr ""
+
+#: classes/Inc/Settings.php:167
+msgid "Require requisition"
+msgstr ""
+
+#: classes/Inc/Settings.php:168
+msgid ""
+"Enable to require all the Purchase Orders to be approved by a requisitioner."
+msgstr ""
+
+#: classes/Inc/Settings.php:175
+msgid "Supplier products restriction"
+msgstr ""
+
+#: classes/Inc/Settings.php:176
+msgid ""
+"When enabled, when you assign any supplier to a PO, only the products and "
+"inventories assigned to that same supplier will be available for adding. If "
+"you disable this, all the products will be available, always."
+msgstr ""
+
+#: classes/Inc/Settings.php:189
+msgid "No supplier products"
+msgstr ""
+
+#: classes/Inc/Settings.php:190
+msgid ""
+"Whether to show products with no supplier assigned when adding products to "
+"any PO with a supplier assigned."
+msgstr ""
+
+#: classes/Inc/Settings.php:197
+msgid "Enable taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:198
+msgid "Enable taxes on Purchase Orders."
+msgstr ""
+
+#: classes/Inc/Settings.php:219
+msgid "Use system taxes for new POs"
+msgstr ""
+
+#: classes/Inc/Settings.php:220
+msgid ""
+"When the PO supplier has no taxes assigned on their profile, use the default "
+"WooCommerce's taxes configuration. If disabled, won't add any taxes at all."
+msgstr ""
+
+#: classes/Inc/Settings.php:227
+msgid "Purchase price including taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:228
+msgid ""
+"Set up how you've entered your purchase prices for all your products. If "
+"you've entered the purchase prices as 'taxes inclusive', when you add any "
+"product to a PO, the taxes will be deducted from the purchase price and "
+"added to the tax column. however, if you've entered the purchase prices as "
+"'taxes exclusive', the taxes (if any) will be added apart and not deducted."
+msgstr ""
+
+#: classes/Inc/Settings.php:235
+msgid "Set purchase price's taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:236
+msgid ""
+"Select which behaviour you want regarding taxes when using the &quot;Set "
+"purchase price&quot; modal for any PO item."
+msgstr ""
+
+#: classes/Inc/Settings.php:241
+msgid "Save without any taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:242
+msgid "Add shop base taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:243
+msgid "Save with PO taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:251
+msgid "Auto-fill purchaser info"
+msgstr ""
+
+#: classes/Inc/Settings.php:252
+msgid ""
+"Choose whether you want to auto-fill new purchase orders with content when "
+"they are created."
+msgstr ""
+
+#: classes/Inc/Settings.php:265
+msgid "Purchaser info source"
+msgstr ""
+
+#: classes/Inc/Settings.php:266
+msgid ""
+"Select the source for the purchaser info that will be filled by default."
+msgstr ""
+
+#: classes/Inc/Settings.php:270 views/meta-boxes/po-data/data.php:292
+msgid "Store Details"
+msgstr ""
+
+#: classes/Inc/Settings.php:277
+msgid "Confirm status changes"
+msgstr ""
+
+#: classes/Inc/Settings.php:278
+msgid ""
+"When enabled, the system will ask for confirmation before setting any PO to "
+"a new status."
+msgstr ""
+
+#: classes/Inc/Settings.php:285 classes/MetaBoxes/POMetaBoxes.php:733
+msgid "PO status flow restriction"
+msgstr ""
+
+#: classes/Inc/Settings.php:287
+#, php-format
+msgid ""
+"When enabled, the status flow restriction will be active, what means that "
+"the PO status changes can only be made by following the status flow logic as "
+"explained %1$shere%2$s."
+msgstr ""
+
+#: classes/Inc/Settings.php:294
+msgid "Default PO description"
+msgstr ""
+
+#: classes/Inc/Settings.php:295
+msgid ""
+"If you want to auto-fill the &quot;description&quot; field for new POs when "
+"they are created, write it here."
+msgstr ""
+
+#: classes/Inc/Settings.php:302
+msgid "Default payment and delivery terms"
+msgstr ""
+
+#: classes/Inc/Settings.php:303
+msgid ""
+"If you want to auto-fill the &quot;payment and delivery terms&quot; field "
+"for new POs when they are created, write it here."
+msgstr ""
+
+#: classes/Inc/Settings.php:310
+msgid "Display PO item additional columns"
+msgstr ""
+
+#: classes/Inc/Settings.php:311
+msgid ""
+"Enable or disable the following columns to display them at the PO items "
+"table."
+msgstr ""
+
+#: classes/Inc/Settings.php:318
+msgid "Current stock"
+msgstr ""
+
+#: classes/Inc/Settings.php:319
+msgid "When enabled, the current stock is displayed in the PO Item lines."
+msgstr ""
+
+#: classes/Inc/Settings.php:323
+msgid "Last week sales"
+msgstr ""
+
+#: classes/Inc/Settings.php:324
+msgid ""
+"When enabled, the last week sales of each product are displayed in the PO "
+"Item lines."
+msgstr ""
+
+#: classes/Inc/Settings.php:328
+msgid "Inbound stock"
+msgstr ""
+
+#: classes/Inc/Settings.php:329
+msgid ""
+"When enabled, the inbound stock is displayed for each product in the PO Item "
+"lines."
+msgstr ""
+
+#: classes/Inc/Settings.php:333
+msgid "Recommended order quantity"
+msgstr ""
+
+#: classes/Inc/Settings.php:334
+msgid ""
+"When enabled, the recommended order quantity of each product is displayed in "
+"the PO Item lines."
+msgstr ""
+
+#: classes/Inc/Settings.php:341
+msgid "Copy customer shipping address"
+msgstr ""
+
+#: classes/Inc/Settings.php:343
+msgid ""
+"When this feature is enabled, creating a new Purchase Order from a "
+"WooCommerce Order will automatically set the customer's shipping address as "
+"the Purchaser's information.<br>This functionality is particularly useful "
+"for dropshipping."
+msgstr ""
+
+#: classes/Inc/Settings.php:350
+msgid "Default template"
+msgstr ""
+
+#: classes/Inc/Settings.php:351
+msgid "Select the template that will be used by default for all the PO PDFs."
+msgstr ""
+
+#: classes/Inc/Settings.php:361 classes/Inc/Settings.php:455
+msgid "Primary color"
+msgstr ""
+
+#: classes/Inc/Settings.php:362
+msgid "Select the primary color for the PDF template"
+msgstr ""
+
+#: classes/Inc/Settings.php:369 classes/Inc/Settings.php:463
+msgid "Company logo"
+msgstr ""
+
+#: classes/Inc/Settings.php:370 classes/Inc/Settings.php:464
+msgid "Upload/Select a logo to be used on the chosen template."
+msgstr ""
+
+#: classes/Inc/Settings.php:373
+msgid "Choose a company logo for the PDF template"
+msgstr ""
+
+#: classes/Inc/Settings.php:374 classes/Inc/Settings.php:468
+msgid "Use this logo"
+msgstr ""
+
+#: classes/Inc/Settings.php:380
+msgid "PDF fields"
+msgstr ""
+
+#: classes/Inc/Settings.php:381
+msgid "Select the optional fields you want to be displayed in your POs' PDFs."
+msgstr ""
+
+#: classes/Inc/Settings.php:387 views/meta-boxes/po-data/data.php:433
+msgid "Ship Via"
+msgstr ""
+
+#: classes/Inc/Settings.php:391 views/meta-boxes/po-data/data.php:450
+msgid "F.O.B."
+msgstr ""
+
+#: classes/Inc/Settings.php:395 views/meta-boxes/po-data/data.php:412
+#: views/pdf-templates/default/purchase-order-html.php:119
+#: views/pdf-templates/template1/purchase-order-html.php:165
+#: views/pdf-templates/template2/purchase-order-html.php:155
+msgid "Requisitioner"
+msgstr ""
+
+#: classes/Inc/Settings.php:399
+#: views/pdf-templates/default/purchase-order-html.php:131
+#: views/pdf-templates/template1/purchase-order-html.php:171
+#: views/pdf-templates/template2/purchase-order-html.php:167
+msgid "Delivery Terms"
+msgstr ""
+
+#: classes/Inc/Settings.php:403 views/meta-boxes/files/files-table.php:18
+#: views/meta-boxes/po-data/data.php:493
+msgid "Description"
+msgstr ""
+
+#: classes/Inc/Settings.php:407
+msgid "Product Thumbnails"
+msgstr ""
+
+#: classes/Inc/Settings.php:414
+msgid "Default sender's email"
+msgstr ""
+
+#: classes/Inc/Settings.php:415
+msgid ""
+"Email address that will be used as the sender when emailing POs to "
+"suppliers. You can change it later."
+msgstr ""
+
+#: classes/Inc/Settings.php:422
+msgid "Use an email template"
+msgstr ""
+
+#: classes/Inc/Settings.php:423
+msgid "Enable to use a template on all the emails sent to suppliers."
+msgstr ""
+
+#: classes/Inc/Settings.php:444
+msgid "Email template"
+msgstr ""
+
+#: classes/Inc/Settings.php:445
+msgid ""
+"Select the template that will be used by default for all the PO emails sent "
+"to suppliers."
+msgstr ""
+
+#: classes/Inc/Settings.php:456
+msgid "Select the primary color for the email template"
+msgstr ""
+
+#: classes/Inc/Settings.php:467
+msgid "Choose a company logo for the email template"
+msgstr ""
+
+#: classes/Inc/Settings.php:474
+msgid "Default email's body"
+msgstr ""
+
+#: classes/Inc/Settings.php:475
+msgid ""
+"Email body that will be used by default when emailing POs to suppliers. You "
+"can change it later."
+msgstr ""
+
+#: classes/Inc/Settings.php:478 views/js-templates/email-modal.php:129
+msgid "Dear Supplier,"
+msgstr ""
+
+#: classes/Inc/Settings.php:479 views/js-templates/email-modal.php:130
+msgid "Please, find a new Purchase Order attached."
+msgstr ""
+
+#: classes/Inc/Settings.php:480 views/js-templates/email-modal.php:131
+msgid "You can reply to this email when the order gets delivered."
+msgstr ""
+
+#: classes/Inc/Settings.php:481 views/js-templates/email-modal.php:132
+msgid "Thank you!"
+msgstr ""
+
+#: classes/Inc/Settings.php:487
+msgid "Default email's footer"
+msgstr ""
+
+#: classes/Inc/Settings.php:488
+msgid ""
+"Text that will be placed in the footer of all the emails sent to suppliers."
+msgstr ""
+
+#: classes/Inc/Settings.php:496 classes/ListTables/POListPage.php:197
+msgid "POs per page"
+msgstr ""
+
+#: classes/Inc/Settings.php:497
+msgid ""
+"Controls the number of purchase orders displayed per page within the POs "
+"List Table screen. Please note, you can set this value within the 'Screen "
+"Option' tab as well and this last value will have preference over this one "
+"as will be saved per user. Enter '-1' to remove the pagination and display "
+"all available POs on one page (not recommended if your store contains a "
+"large number of POs as it may affect the performance)."
+msgstr ""
+
+#: classes/Inc/Settings.php:508
+msgid "Due soon days"
+msgstr ""
+
+#: classes/Inc/Settings.php:509
+msgid ""
+"The number of days before the expected date that ATUM will use to consider a "
+"PO as \"Due Soon\"."
+msgstr ""
+
+#: classes/Inc/Settings.php:520
+msgid "Update purchase prices' taxes"
+msgstr ""
+
+#: classes/Inc/Settings.php:521
+msgid ""
+"Add or deduct the specified amount of taxes (in percentage) to/from purchase "
+"prices of all your products at once."
+msgstr ""
+
+#: classes/Inc/Settings.php:529 views/meta-boxes/comments/notes.php:55
+#: views/meta-boxes/po-items/items.php:371
+#: views/meta-boxes/po-items/items.php:432
+msgid "Add"
+msgstr ""
+
+#: classes/Inc/Settings.php:530
+msgid "Deduct"
+msgstr ""
+
+#: classes/Inc/Settings.php:541
+msgid "Update Now!"
+msgstr ""
+
+#: classes/Inc/Settings.php:543
+msgid "This will update the purchase prices for all your products at once."
+msgstr ""
+
+#: classes/Inc/Settings.php:565
+msgid "Error saving: the pattern must have at least a counter tag ({counter})."
+msgstr ""
+
+#: classes/Inc/Settings.php:587 classes/Inc/Settings.php:610
+#: views/js-templates/email-modal.php:120
+msgid "Preview"
+msgstr ""
+
+#: classes/Inc/Settings.php:633 classes/ListTables/Lists/ListTable.php:1643
+#: classes/MetaBoxes/POMetaBoxes.php:439
+msgid "Are you sure?"
+msgstr ""
+
+#: classes/Inc/Settings.php:634 classes/ListTables/Lists/ListTable.php:1646
+#: classes/MetaBoxes/POMetaBoxes.php:441
+msgid "Cancel"
+msgstr ""
+
+#: classes/Inc/Settings.php:635 classes/ListTables/Lists/ListTable.php:1650
+#: classes/MetaBoxes/POMetaBoxes.php:481
+msgid "Yes, do it!"
+msgstr ""
+
+#: classes/Inc/Settings.php:636
+msgid "Loading..."
+msgstr ""
+
+#: classes/Inc/Settings.php:637
+msgid "Next PO number"
+msgstr ""
+
+#: classes/Inc/Settings.php:641
+msgid ""
+"After disabling the requisitioner requisition, all the existing POs having "
+"the 'Awaiting Approval' or 'Approved' statuses will be changed to the 'New' "
+"status automatically."
+msgstr ""
+
+#: classes/Integrations/MultiInventory.php:726
+msgid "This item has Multi-Inventory enabled."
+msgstr ""
+
+#: classes/Integrations/MultiInventory.php:1127
+#: classes/Integrations/MultiInventory.php:1163
+#: classes/Integrations/MultiInventory.php:1348
+#: classes/Integrations/MultiInventory.php:1419
+#: classes/Integrations/MultiInventory.php:2871
+#, php-format
+msgid ""
+" Stock levels changed: [%1$s], %2$s &rarr; %3$s using inventory &quot;"
+"%4$s&quot;"
+msgstr ""
+
+#: classes/Integrations/MultiInventory.php:1727
+msgid "This item has Multi-Inventory enabled"
+msgstr ""
+
+#: classes/Integrations/MultiInventory.php:1824
+msgid "Batch Tracking"
+msgstr ""
+
+#: classes/Integrations/ProductLevels.php:159
+#: classes/Integrations/ProductLevels.php:189
+msgid "Calculated Stock"
+msgstr ""
+
+#: classes/Integrations/ProductLevels.php:269
+#: classes/Integrations/ProductLevels.php:322
+#: classes/Integrations/ProductLevels.php:384
+msgid "The PO item does not exist"
+msgstr ""
+
+#: classes/Integrations/ProductLevels.php:654
+#: classes/Integrations/ProductLevels.php:678
+msgid "This item has linked BOM"
+msgstr ""
+
+#: classes/Integrations/ProductLevels.php:657
+#: classes/Integrations/ProductLevels.php:694
+msgid "Toggle BOM tree"
+msgstr ""
+
+#: classes/Integrations/Wpml.php:121
+msgid "Language"
+msgstr ""
+
+#: classes/Integrations/Wpml.php:134
+msgid "Default Language"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:92
+msgid "Invoices"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:94
+msgctxt " post type singular name"
+msgid "Invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:95 classes/Invoices/Invoices.php:96
+msgid "Add New Invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:98 classes/MetaBoxes/POMetaBoxes.php:484
+msgid "Edit Invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:99
+msgid "New Invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:100 classes/Invoices/Invoices.php:101
+msgid "View Invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:102
+msgid "Search Invoices"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:103
+msgid "No invoices were found"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:104
+msgid "No invoices found in trash"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:105
+msgid "Parent invoice"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:106
+msgctxt "Admin menu name"
+msgid "PO Invoices"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:107
+msgid "Filter invoices"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:108
+msgid "Invoices navigation"
+msgstr ""
+
+#: classes/Invoices/Invoices.php:109
+msgid "Invoices list"
+msgstr ""
+
+#: classes/Invoices/Models/Invoice.php:146
+msgid "The Invoice cannot be saved without a parent PO"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:186
+#: views/meta-boxes/po-data/po-status-dropdown.php:56
+#, php-format
+msgid "%s (requisition)"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:238
+msgid "PO"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:239
+#: classes/ListTables/Lists/ListTable.php:1267
+msgid "Preview PO"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:240
+msgid "Date Created"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:241
+msgid "Created By"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:242
+msgid "Status"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:244
+msgid "Date Expected"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:245
+msgid "Added to Stock"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:246
+#: views/meta-boxes/po-items/items.php:132
+#: views/pdf-templates/default/purchase-order-html.php:159
+#: views/pdf-templates/default/purchase-order-html.php:431
+#: views/pdf-templates/template1/purchase-order-html.php:232
+#: views/pdf-templates/template1/purchase-order-html.php:506
+#: views/pdf-templates/template2/purchase-order-html.php:195
+#: views/pdf-templates/template2/purchase-order-html.php:474
+msgid "Total"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:247
+#: views/meta-boxes/deliveries/delivery.php:109
+#: views/meta-boxes/files/files-table.php:21
+#: views/meta-boxes/po-data/po-actions.php:27
+#: views/meta-boxes/po-items/items.php:143
+msgid "Actions"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:272
+#: classes/ListTables/Lists/ListTable.php:1405
+msgid "Unarchive"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:277
+#: classes/ListTables/Lists/ListTable.php:1406
+msgid "Delete Permanently"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:288
+msgid "Mark as Draft"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:291
+msgid "Draft"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:297
+msgid "Mark as New"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:300
+msgid "New"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:306
+msgid "Submit for Approval"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:309
+msgid "Awaiting Approval"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:315
+msgid "Mark as New (Approved)"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:318
+msgid "New (Approved)"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:324
+msgid "Mark as Sent"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:327
+msgid "Sent"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:333
+msgid "Mark as Received by Vendor"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:336
+msgid "Received by Vendor"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:342
+msgid "Mark as On the Way In"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:345
+msgid "On the Way In"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:351
+msgid "Mark as Receiving"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:354
+msgid "Receiving"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:360
+msgid "Mark as Partially Receiving"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:363
+msgid "Partially Receiving"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:369
+msgid "Mark as Quality Check"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:372
+msgid "Quality Check"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:378
+msgid "Mark as Added"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:381
+msgid "Added"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:387
+msgid "Mark as Partially Added"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:390
+msgid "Partially Added"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:396
+msgid "Mark as Completed"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:399
+msgid "Completed"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:405
+msgid "Mark as Cancelled"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:408
+msgid "Cancelled"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:414
+msgid "Mark as Returned"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:417
+#: views/meta-boxes/po-items/items.php:118
+msgid "Returned"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:423
+#: views/meta-boxes/po-data/po-actions.php:71
+msgid "Create Returning PO"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:441
+msgid "Archived"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:447
+#: classes/ListTables/Lists/ListTable.php:1378
+#: views/meta-boxes/po-data/po-actions.php:212
+#: views/meta-boxes/po-data/po-actions.php:215
+msgid "Print"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:452
+#: classes/ListTables/Lists/ListTable.php:1381
+#: views/meta-boxes/po-data/po-actions.php:36
+msgid "Clone"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:787
+msgid "No POs found"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:791
+#, php-format
+msgid " with query '%s'"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:834
+msgid "Date from..."
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:838
+msgid "to"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:840
+msgid "Date to..."
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:850
+msgid "Due Soon POs"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:851
+msgid "Late POs"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:858
+msgid "Extra filters..."
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:904
+msgid "All"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1134
+msgid "(Unknown)"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1201
+msgid "Late PO"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1205
+msgid "Due soon"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1209
+msgid "In time"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1353
+msgid "All the delivery items were added to stock"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1353
+msgid "Partially added to stock"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1546
+#: views/meta-boxes/deliveries/delivery.php:122
+msgid "Totals"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1558
+msgid ""
+"The total is being calculated in your shop's base currency and the exchange "
+"rates for every PO applied accordingly"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1647
+#: classes/MetaBoxes/POMetaBoxes.php:447
+msgid "Do you also want to clone Deliveries and Invoices?"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1648
+msgid "The selected PO was cloned successfully"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1649
+#: classes/MetaBoxes/POMetaBoxes.php:455
+msgid "Continue"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1651
+#: classes/MetaBoxes/POMetaBoxes.php:504
+msgid "Mark all as read"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1652
+#: classes/MetaBoxes/POMetaBoxes.php:505 views/meta-boxes/comments/note.php:24
+msgid "Mark as read"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1653
+#: classes/MetaBoxes/POMetaBoxes.php:523
+msgid "No"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1654
+msgid "No comments with mention have been found."
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1655
+#: classes/MetaBoxes/POMetaBoxes.php:537
+msgid "PO Notifications"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1657
+#: views/js-templates/add-invoice-modal.php:70
+msgid "or"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1660
+msgid "The returning PO was created successfully"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1661
+#: classes/MetaBoxes/POMetaBoxes.php:556
+#: views/meta-boxes/files/files-table.php:46
+#: views/meta-boxes/po-data/po-actions.php:88
+msgid "Save"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1662 views/lists/list-page.php:78
+#: views/meta-boxes/comments/actions.php:32
+msgid "Search"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1663
+msgid "Search barcode within POs"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1664
+msgid "Search BATCH/LOT numbers within POs"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1665
+msgid "Show mentions only"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1666
+msgid ""
+"According to the status flow restriction, this PO status can only be changed "
+"to: {values}"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1667
+#: classes/MetaBoxes/POMetaBoxes.php:572
+msgid ""
+"You are going to change the PO status from <strong>\"{origin}\"</strong> to "
+"<strong>\"{target}\"</strong>"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1669
+msgid "The PO status was changed successfully"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1670
+msgid "Status change not allowed!"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1673
+msgid "Track Barcode"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1674
+msgid "Track BATCH Number"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1675
+msgid "Type the barcode to trace"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1676
+msgid "Type the BATCH number to trace"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1678
+msgid "Warning"
+msgstr ""
+
+#: classes/ListTables/Lists/ListTable.php:1679
+#: classes/MetaBoxes/POMetaBoxes.php:590
+msgid "Yes"
+msgstr ""
+
+#: classes/ListTables/POListPage.php:112
+msgid "Purchase Orders Pro"
+msgstr ""
+
+#: classes/ListTables/POListPage.php:252
+msgid "Undo"
+msgstr ""
+
+#: classes/ListTables/POListPage.php:254
+#, php-format
+msgid "The PO was archived successfully. %s"
+msgid_plural "The POs were archived successfully. %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:249 views/js-templates/merge-modal.php:25
+msgid "PO Items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:249
+msgid "Returning PO Items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:261 views/js-templates/merge-modal.php:26
+msgid "PO Deliveries"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:275 views/js-templates/merge-modal.php:27
+msgid "PO Invoices"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:287 views/js-templates/merge-modal.php:28
+msgid "PO Files"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:287
+msgid "Returning PO Files"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:299 views/js-templates/merge-modal.php:29
+msgid "PO Comments"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:299
+msgid "Returning PO Comments"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:399
+msgid "Add All"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:400
+msgid "Add all items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:401
+msgid "Add all out of stock products"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:402
+msgid "Add all the out of stock products from the same supplier at once"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:403
+#: views/meta-boxes/deliveries/deliveries.php:113
+msgid "Add Delivery"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:404
+msgid "Add Delivery to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:405
+msgid "Add Fee"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:406
+msgid "Add Fee to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:406
+msgid "Add Fee to Returning PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:407
+msgid "Enter a fixed amount or a percentage to apply as a fee."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:408
+#: views/meta-boxes/deliveries/delivery.php:92
+#: views/meta-boxes/files/files-table.php:61
+msgid "Add File"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:409
+msgid "Add File to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:409
+msgid "Add File to Returning PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:410
+msgid "Add Inventory"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:411
+msgid "Do you want to add the new inventory to this PO?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:412
+#: views/meta-boxes/invoices/invoices.php:242
+msgid "Add Invoice"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:413
+msgid "Add Invoice to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:414
+msgid "Yes, add it!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:415
+msgid "Add Items to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:415
+msgid "Add Items to Returning PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:416
+msgid "Add new meta"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:417
+msgid "Add/Edit Meta"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:419
+#: views/js-templates/add-supplier-items.php:62
+#: views/meta-boxes/po-items/items.php:351
+msgid "Add Items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:420
+msgid ""
+"When clicked, it will set the remaining quantities for every item on the "
+"above list so you can add all of them at once."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:421
+msgid "Add Shipping Cost"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:422
+msgid "Add Shipping Cost to PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:422
+msgid "Add Shipping Cost to Returning PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:423
+msgid "Enter a fixed amount or a percentage to apply as a shipping cost."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:425
+msgid "Add to stock"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:426
+msgid "These delivery items were already added to stock"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:427
+msgid "All Done!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:428
+msgid "Apply"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:429
+msgid "Apply Changes"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:430
+msgid "Apply Conversion"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:431
+msgid "Apply new rate to all items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:432
+msgid ""
+"Restore the previous rate (if any) and apply the new rate to all the current "
+"PO items automatically. Also save this new rate to the PO for future usage."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:442
+msgid "This action cannot be undone"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:443 views/meta-boxes/po-data/data.php:252
+msgid "Check the actual exchange rate here."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:444
+msgid "Yes, change it"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:445
+msgid "All the changes were applied successfully"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:446
+msgid "You must choose something"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:448
+msgid "Confirm whether you want to update your items before applying"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:449
+msgid ""
+"Do you want to change the PO currency from <strong>{oldValue}</strong> to "
+"<strong>{newValue}</strong>?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:450
+msgid ""
+"ATUM will archive the Purchase Order.<br><br>You can preview all archived "
+"POs in the PO List View (ATUM - Purchase Orders PRO). Select the status "
+"\"Archived\" from the status filter or use the search bar."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:451
+msgid ""
+"Do you want to change all the PO items' discounts from <strong>{oldValue}</"
+"strong> to <strong>{newValue}</strong>?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:453
+msgid ""
+"Do you want to change all the PO items' taxes from <strong>{oldValue}</"
+"strong> to <strong>{newValue}</strong>?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:454
+msgid ""
+"This PO must be updated to reflect the new currency options in all its prices"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:456
+msgid "Create New Inventory"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:457 views/meta-boxes/po-data/data.php:159
+msgid "Currency"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:458
+msgid "Currency conflict detected"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:460
+msgid ""
+"The PO's currency does not match with your shop's default currency. In order "
+"to set the right purchase price to this item, please specify the exchange "
+"rate."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:461
+msgid "Change detected in currency options"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:463
+msgid ""
+"You are decreasing the quantity for this PO item and we've found that it was "
+"previously added to deliveries and/or invoices.<br>Please, make sure you "
+"update the quantities for this item there accordingly."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:464
+msgid "Manual change required!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:468
+msgid "Are you sure you want to delete this comment?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:470
+msgid "Yes, Archive it!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:471
+msgid "Delivery item removed successfully"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:472
+msgid "Delivery items updated successfully"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:475
+msgid ""
+"This delivery item will be removed and if it was previously added to stock, "
+"deducted"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:476
+msgid ""
+"As this is the last inventory in the last item in this delivery, the whole "
+"item and the delivery will be also removed and if the item was previously "
+"added to stock, deducted"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:477
+msgid ""
+"As this is the last item in this delivery, the whole delivery will be also "
+"removed and if the item was previously added to stock, deducted"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:478
+msgid ""
+"This delivery will be removed and any inner item that was previously added "
+"to stock, deducted"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:479
+#: views/meta-boxes/invoices/invoices.php:196
+#: views/meta-boxes/po-items/items.php:110
+#: views/meta-boxes/po-items/items.php:274
+#: views/pdf-templates/default/purchase-order-html.php:151
+#: views/pdf-templates/default/purchase-order-html.php:379
+#: views/pdf-templates/template1/purchase-order-html.php:224
+#: views/pdf-templates/template1/purchase-order-html.php:454
+#: views/pdf-templates/template2/purchase-order-html.php:187
+#: views/pdf-templates/template2/purchase-order-html.php:419
+msgid "Discount"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:480
+msgid "Discount Change Detected!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:482
+msgid "Duplicate"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:485
+msgid "Edit Items"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:486
+#: views/meta-boxes/po-data/po-actions.php:191
+msgid "Emailed"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:487
+msgid "Email sent"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:488
+msgid "The email was sent to your supplier successfully."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:489
+msgid "Error!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:492
+msgid "The selected files exceed the maximum limit"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:493
+msgid "Invoice item removed successfully"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:494
+msgid "This invoice item will be removed permanently"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:495
+msgid ""
+"As this is the last item in this invoice, the whole invoice will be also "
+"removed"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:496
+msgid "This invoice will be removed permanently"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:499
+msgid "Invalid email(s):"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:501
+msgid "Items added to stock successfully"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:502
+msgid "No, keep it!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:503
+msgid ""
+"This is the only inventory added to this PO product. Do you want to also "
+"remove the related product?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:506 views/meta-boxes/comments/note.php:29
+msgid "Mark as unread"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:507
+msgid "Maximize meta box"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:508
+msgid "Merge PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:509
+msgid "The merge PO is missing"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:510
+msgid "Merge POs"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:512
+msgid "Add/Edit item meta"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:513
+#: views/meta-boxes/po-items/item-meta.php:77
+msgid "Name (required)"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:514
+#: views/meta-boxes/po-items/item-meta.php:80
+msgid "Value (required)"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:515
+msgid ""
+"There is at least one PO item with no inventories assigned that cannot be "
+"delivered until fixed"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:516
+msgid "Minimize meta box"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:518
+msgid ""
+"There are items in this PO that have not been delivered yet. Do you want to "
+"continue anyway?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:519
+msgid ""
+"This item was related to a PO item that no longer exist and cannot be added "
+"to stock"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:520
+msgid ""
+"There are {missingItems} items in this delivery that were related to PO "
+"items that no longer exist, so they cannot be added to stock"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:521
+msgid ""
+"There are delivery items in this PO that have not been added to stock yet. "
+"Do you want to continue anyway?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:522
+msgid "Next &rarr;"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:524
+msgid ""
+"No delivery items were added to this PO yet. Do you wan to continue anyway?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:525
+#: views/js-templates/add-file-modal.php:25
+#: views/meta-boxes/deliveries/delivery.php:86
+msgid "No file added"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:526
+msgid "No file selected"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:527
+msgid "No items were added to this PO yet. Do you want to continue anyway?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:528
+msgid ""
+"No delivery items added to stock were found in this PO. Do you want to "
+"continue anyway?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:529
+msgid ""
+"There are no delivered items on this PO yet.<br>Only delivered items can be "
+"returned."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:530
+msgid "No delivery items to add to stock were found"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:531
+msgid "None"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:532
+msgid ""
+"We've detected some items added to this PO that were assigned to a distinct "
+"supplier. Please, note that this won't affect to items with no supplier "
+"assigned."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:535
+msgid "You must select a requisitioner"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:538
+msgid "You have no more unread notifications"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:542
+msgid "Remove"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:543
+msgid "Remove also the related items from deliveries"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:544
+msgid "Remove also the related items from invoices"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:545
+msgid "Remove also the related items from deliveries and invoices"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:546
+msgid "Remove Invoice"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:547
+msgid "Yes, Remove it!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:548
+msgid "Remove Item"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:549
+msgid "Do you want to remove PO items not belonging to this supplier?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:550
+msgid "Remove parent product?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:553
+msgid ""
+"If you proceed with the return, all the items added to this Returning PO "
+"that were previously added to stock on the original PO, will be discounted "
+"automatically.<br>Do you want to continue?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:554
+msgid ""
+"This will create a new Returning PO with all the items that have been "
+"delivered on this PO. You can edit them later.<br>Do you want to continue?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:557
+msgid "Save PO status"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:559
+msgid "Saving PO..."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:561
+msgid "Send"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:563
+msgid "Sending PO"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:564
+msgid "This PO has already been sent to your supplier previosuly."
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:565
+msgid "Set"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:566
+msgid ""
+"Do you want to set the customer address as the Purchaser's info on this PO?"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:567 views/meta-boxes/po-data/data.php:231
+msgid "Set exchange rate"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:568
+msgid "Set Purchase Price"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:573
+msgid "This status change isn't allowed"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:578
+msgid "This action will increase the stock for the selected item(s)"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:581
+msgid "Supplier details changes detected!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:582
+#: views/meta-boxes/invoices/invoices.php:183
+#: views/meta-boxes/po-items/items.php:137
+#: views/meta-boxes/po-items/items.php:258
+#: views/pdf-templates/default/purchase-order-html.php:156
+#: views/pdf-templates/template1/purchase-order-html.php:229
+#: views/pdf-templates/template2/purchase-order-html.php:192
+msgid "Tax"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:583 views/meta-boxes/po-data/data.php:134
+msgid "Tax Rate"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:584
+msgid "Unexpected error while processing the changes"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:585
+msgid "Update Delivery"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:586
+msgid "Update Invoice"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:587
+msgid "Yes, Update it!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:589
+msgid "Warning!"
+msgstr ""
+
+#: classes/MetaBoxes/POMetaBoxes.php:726
+msgid "PO Settings"
+msgstr ""
+
+#: classes/Models/POExtended.php:310
+msgid "The product doesn't exist"
+msgstr ""
+
+#: classes/Models/POExtended.php:1052
+#, php-format
+msgid "(includes %s)"
+msgstr ""
+
+#: classes/Models/POExtended.php:1954
+msgid ""
+"The custom numbering system must be enable from setttings to auto-generate "
+"new numbers"
+msgstr ""
+
+#: views/add-to-po/add-to-po-item.php:62
+#: views/add-to-po/multi-inventory/add-to-po-mi-item.php:69
+msgid "Remove item"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:42
+msgid "Enter the items' quantities to create the new PO(s)."
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:51
+msgid "Add products&hellip;"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:65
+#: views/js-templates/add-fee-modal.php:22
+#: views/js-templates/email-modal.php:43
+#: views/meta-boxes/files/files-table.php:17
+msgid "Name"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:74
+msgid "Backorders"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:77
+msgid "Qty to Add"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:93
+msgid "Multiple POs"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:94
+msgid "Create multiple POs (one per supplier)"
+msgstr ""
+
+#: views/add-to-po/add-to-po-modal.php:107
+#: views/js-templates/add-delivery-modal.php:215
+#: views/js-templates/add-invoice-modal.php:223
+#: views/js-templates/add-order-item-modal.php:129
+#: views/js-templates/edit-delivery-modal.php:68
+msgid "Total items:"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:20
+msgid "Add a delivery to this purchase order."
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:26
+msgid "Delivery Details"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:29
+msgid "Delivery Name"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:30
+msgid "Will be autogenerated if empty"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:34
+#: views/js-templates/add-invoice-modal.php:33
+#: views/meta-boxes/deliveries/delivery.php:41
+msgid "Date"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:38
+#: views/js-templates/add-invoice-modal.php:37
+msgid "Will be current date if empty"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:45
+#: views/meta-boxes/deliveries/delivery.php:53
+msgid "Document Number"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:46
+msgid "Add the document number"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:55
+#: views/js-templates/edit-delivery-modal.php:24
+msgid "Delivery Items"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:66
+#: views/js-templates/add-invoice-modal.php:96
+#: views/js-templates/edit-delivery-modal.php:35
+msgid "Please, first add items to the PO and save"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:72
+#: views/js-templates/add-invoice-modal.php:102
+#: views/js-templates/edit-delivery-modal.php:41
+msgid "Search for products&hellip;"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:79
+#: views/js-templates/add-invoice-modal.php:109
+#: views/js-templates/add-order-item-modal.php:113
+#: views/js-templates/edit-delivery-modal.php:48
+#: views/meta-boxes/po-items/items.php:68
+#: views/pdf-templates/default/purchase-order-html.php:146
+#: views/pdf-templates/template1/purchase-order-html.php:219
+#: views/pdf-templates/template2/purchase-order-html.php:182
+msgid "Item"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:80
+#: views/js-templates/edit-delivery-modal.php:49
+msgid "Expected"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:81
+#: views/js-templates/edit-delivery-modal.php:50
+#: views/meta-boxes/deliveries/delivery.php:105
+msgid "Already In"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:82
+#: views/js-templates/edit-delivery-modal.php:51
+#: views/meta-boxes/deliveries/deliveries.php:73
+#: views/meta-boxes/deliveries/delivery.php:106
+msgid "Delivered"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:141
+#: views/meta-boxes/deliveries/delivery-items.php:72
+#: views/meta-boxes/invoices/invoice-item.php:53
+#: views/meta-boxes/po-items/item.php:48
+msgid "This product does not exist"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:157
+#: views/js-templates/add-invoice-modal.php:141
+#: views/meta-boxes/deliveries/edit-delivery-item-rows.php:65
+#, php-format
+msgid "SKU: %s"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:166
+#: views/js-templates/add-invoice-modal.php:150
+#: views/meta-boxes/deliveries/edit-delivery-item-rows.php:74
+#, php-format
+msgid "Supplier SKU: %s"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:187
+#: views/js-templates/add-invoice-modal.php:165
+msgid "N/A"
+msgstr ""
+
+#: views/js-templates/add-delivery-modal.php:202
+msgid "All the items have been already delivered"
+msgstr ""
+
+#: views/js-templates/add-fee-modal.php:27
+msgid "Amount"
+msgstr ""
+
+#: views/js-templates/add-fee-modal.php:33
+#: views/meta-boxes/po-items/item-discount-cell.php:49
+#: views/meta-boxes/po-items/item-tax-cell.php:48
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:180
+msgid "Click to switch behaviour"
+msgstr ""
+
+#: views/js-templates/add-file-modal.php:15
+msgid "Add a file to this purchase order."
+msgstr ""
+
+#: views/js-templates/add-file-modal.php:23
+msgid "File"
+msgstr ""
+
+#: views/js-templates/add-file-modal.php:26
+msgid "Upload"
+msgstr ""
+
+#: views/js-templates/add-file-modal.php:33
+msgid "Description (optional)"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:19
+msgid "Add an invoice to this purchase order."
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:25
+msgid "Invoice Details"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:28
+msgid "Invoice Number"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:29
+msgid "Add document number"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:48
+msgid "Invoice File"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:51
+msgid "Link or upload file (optional)"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:56
+msgid "Select a supplier file..."
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:72
+msgid "Upload File"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:85
+msgid "Invoice Items"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:110
+#: views/js-templates/add-order-item-modal.php:115
+#: views/meta-boxes/po-items/items.php:128
+#: views/pdf-templates/default/purchase-order-html.php:147
+#: views/pdf-templates/template1/purchase-order-html.php:220
+#: views/pdf-templates/template2/purchase-order-html.php:183
+msgid "Qty"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:193
+#: views/meta-boxes/invoices/invoice-item-fee.php:38
+#: views/meta-boxes/po-items/item-fee.php:44
+#: views/pdf-templates/default/purchase-order-html.php:334
+#: views/pdf-templates/template1/purchase-order-html.php:408
+#: views/pdf-templates/template2/purchase-order-html.php:371
+msgid "Fee"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:201
+msgid "Fee Cost"
+msgstr ""
+
+#: views/js-templates/add-invoice-modal.php:201
+msgid "Shipping Cost"
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:77
+msgid "Select the items you want to add to the purchase order."
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:79
+msgid "Select the items you want to add to the returning purchase order."
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:89
+msgid "Only the items delivered on the original PO can be added here."
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:95
+msgid "Search products&hellip;"
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:105
+msgid "No items selected yet"
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:106
+msgid "Search for products manually or use the automatic filters below:"
+msgstr ""
+
+#: views/js-templates/add-order-item-modal.php:114
+#: views/meta-boxes/po-items/items.php:106
+msgid "Cost"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:12
+msgid ""
+"Add all the products which status is \"out of stock\" or \"on backorder\" "
+"from the current supplier at once"
+msgid_plural ""
+"Add all the products which status is \"out of stock\" or \"on backorder\" "
+"from the current suppliers at once"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/js-templates/add-supplier-items.php:17
+msgid ""
+"Add all the products that reached their low stock threshold from the current "
+"supplier at once"
+msgid_plural ""
+"Add all the products that reached their low stock threshold from the current "
+"suppliers at once"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/js-templates/add-supplier-items.php:22
+msgid ""
+"Add all the products in restock status from the current supplier at once"
+msgid_plural ""
+"Add all the products in restock status from the current suppliers at once"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/js-templates/add-supplier-items.php:28
+msgid "Add all the out-of-stock products at once"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:29
+msgid "Add all the products that reached their low stock threshold at once"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:30
+msgid "Add all the products in restock status at once"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:36
+msgid "Add all products with"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:41
+msgid "Out of stock status"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:48
+msgid "Low stock threshold"
+msgstr ""
+
+#: views/js-templates/add-supplier-items.php:55
+msgid "Restock status"
+msgstr ""
+
+#: views/js-templates/email-modal.php:38
+msgid "From"
+msgstr ""
+
+#: views/js-templates/email-modal.php:48
+msgid "To"
+msgstr ""
+
+#: views/js-templates/email-modal.php:53
+msgid "CC"
+msgstr ""
+
+#: views/js-templates/email-modal.php:58
+msgid "BCC"
+msgstr ""
+
+#: views/js-templates/email-modal.php:63
+msgid "Subject"
+msgstr ""
+
+#: views/js-templates/email-modal.php:69
+msgid "Attachments"
+msgstr ""
+
+#: views/js-templates/email-modal.php:77
+msgid "The maximum size of attachments is limited to 10 MB."
+msgstr ""
+
+#: views/js-templates/email-modal.php:85
+msgid "Template"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:24
+msgid "PO Info"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:38
+msgid "Merge the purchase order you wish."
+msgstr ""
+
+#: views/js-templates/merge-modal.php:45
+msgid "Select PO"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:48
+msgid "Select the purchase order you want to merge"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:51
+msgid "Select purchase order"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:62
+msgid "Select Sections"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:64
+msgid "Select the sections you want to merge."
+msgstr ""
+
+#: views/js-templates/merge-modal.php:85
+msgid "Replace PO Items"
+msgstr ""
+
+#: views/js-templates/merge-modal.php:86
+msgid "Check this option to replace items instead of merge them."
+msgstr ""
+
+#: views/lists/list-page.php:26
+msgid "Add New PO"
+msgstr ""
+
+#: views/lists/list-page.php:33
+#, php-format
+msgid "Late Purchase Orders (%d)"
+msgstr ""
+
+#: views/lists/list-page.php:34
+msgid "View"
+msgstr ""
+
+#: views/lists/list-page.php:56
+msgid "Reset Filters"
+msgstr ""
+
+#: views/lists/list-page.php:61
+msgid "Search in Column"
+msgstr ""
+
+#: views/lists/list-page.php:64 views/lists/list-page.php:68
+msgid "Search In"
+msgstr ""
+
+#: views/lists/list-page.php:75 views/meta-boxes/comments/actions.php:31
+msgid "Search..."
+msgstr ""
+
+#: views/meta-boxes/comments/actions.php:20
+msgid "Bulk Actions"
+msgstr ""
+
+#: views/meta-boxes/comments/actions.php:21
+msgid "Remove comments"
+msgstr ""
+
+#: views/meta-boxes/comments/actions.php:22
+msgid "Mark as Read"
+msgstr ""
+
+#: views/meta-boxes/comments/actions.php:24
+msgid "APPLY"
+msgstr ""
+
+#: views/meta-boxes/comments/actions.php:30
+msgid "Search POs:"
+msgstr ""
+
+#: views/meta-boxes/comments/note.php:56
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: views/meta-boxes/comments/note.php:64
+msgid "Delete comment"
+msgstr ""
+
+#: views/meta-boxes/comments/notes.php:47
+msgid "No Comments Added"
+msgstr ""
+
+#: views/meta-boxes/comments/notes.php:52
+msgid "Add Comments"
+msgstr ""
+
+#: views/meta-boxes/comments/notes.php:52
+msgid ""
+"Add any comment for your reference. You can mention to any other user in "
+"your personal comments by writing @ followed by the username."
+msgstr ""
+
+#: views/meta-boxes/comments/notes.php:63
+msgid "everyone"
+msgstr ""
+
+#: views/meta-boxes/comments/notes.php:64
+msgid "Notify to everyone"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:24
+msgid "No Deliveries Added"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:69
+#: views/meta-boxes/invoices/invoices.php:131
+msgid "Ordered"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:79
+msgid "Delivery items linked to missing PO items"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:80
+#: views/meta-boxes/invoices/invoices.php:142
+msgid "Missing"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:86
+#: views/meta-boxes/deliveries/delivery.php:107
+#: views/meta-boxes/invoices/invoices.php:151
+msgid "Pending"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:97
+#: views/meta-boxes/invoices/invoices.php:161
+msgid "Items"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:109
+msgid "You can't add deliveries while the PO is in a due status"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:123
+msgid ""
+"To edit the PO deliveries change the PO status to any other that allows "
+"editing"
+msgstr ""
+
+#: views/meta-boxes/deliveries/deliveries.php:123
+msgid "These deliveries are no longer editable."
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:60
+msgid "The PO item related to this delivery item is missing"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:68
+#: views/meta-boxes/invoices/invoice-item.php:49
+#: views/meta-boxes/po-items/item.php:54
+msgid "View Product"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:81
+#: views/meta-boxes/deliveries/multi-inventory/add-delivery-modal-inventory-items.php:41
+#: views/meta-boxes/deliveries/multi-inventory/delivery-inventory-items.php:85
+#: views/meta-boxes/deliveries/multi-inventory/edit-delivery-modal-inventory-items.php:55
+#: views/meta-boxes/invoices/invoice-item.php:59
+#: views/meta-boxes/po-items/item.php:61
+#: views/pdf-templates/default/purchase-order-html.php:205
+#: views/pdf-templates/template1/purchase-order-html.php:278
+#: views/pdf-templates/template2/purchase-order-html.php:241
+msgid "SKU:"
+msgid_plural "SKUs:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:88
+#: views/meta-boxes/deliveries/multi-inventory/add-delivery-modal-inventory-items.php:45
+#: views/meta-boxes/deliveries/multi-inventory/delivery-inventory-items.php:89
+#: views/meta-boxes/deliveries/multi-inventory/edit-delivery-modal-inventory-items.php:59
+#: views/meta-boxes/invoices/invoice-item.php:66
+#: views/meta-boxes/po-items/item.php:68
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:97
+#: views/pdf-templates/default/purchase-order-html.php:197
+#: views/pdf-templates/template1/purchase-order-html.php:270
+#: views/pdf-templates/template2/purchase-order-html.php:233
+msgid "Supplier SKU:"
+msgid_plural "Supplier SKUs:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:97
+msgid ""
+"This item's stock is not managed by WooCommerce at product level, so it "
+"won't be updated when adding this delivery to stock"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery-items.php:101
+msgid "This item was already added to stock on this delivery"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery.php:61
+msgid "Files"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery.php:71
+msgid "View file"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery.php:76
+msgid "Delete file"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery.php:104
+msgid "Product"
+msgstr ""
+
+#: views/meta-boxes/deliveries/delivery.php:136
+msgid "Add All Into Stock"
+msgstr ""
+
+#: views/meta-boxes/deliveries/multi-inventory/bom-mi-tree.php:47
+#: views/meta-boxes/deliveries/product-levels/bom-tree.php:48
+msgid "Expand all"
+msgstr ""
+
+#: views/meta-boxes/deliveries/multi-inventory/bom-mi-tree.php:48
+#: views/meta-boxes/deliveries/product-levels/bom-tree.php:49
+msgid "Collapse all"
+msgstr ""
+
+#: views/meta-boxes/deliveries/multi-inventory/delivery-inventory-items.php:72
+msgid ""
+"The PO inventory item related to this delivery inventory item is missing"
+msgstr ""
+
+#: views/meta-boxes/deliveries/multi-inventory/delivery-inventory-items.php:97
+msgid "This inventory item was already added to stock on this delivery"
+msgstr ""
+
+#: views/meta-boxes/deliveries/multi-inventory/edit-delivery-modal-inventory-items.php:80
+msgid "This inventory was fully added to another delivery"
+msgstr ""
+
+#: views/meta-boxes/files/files-table.php:29
+msgid "No Files Added"
+msgstr ""
+
+#: views/meta-boxes/files/files.php:21
+msgid "Our Files"
+msgstr ""
+
+#: views/meta-boxes/files/files.php:33
+msgid "Supplier Files"
+msgstr ""
+
+#: views/meta-boxes/files/files.php:50
+msgid ""
+"To edit the PO files change the PO status to any other that allows editing"
+msgstr ""
+
+#: views/meta-boxes/files/files.php:50
+msgid "These files are no longer editable."
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice-item-fee.php:29
+#: views/meta-boxes/invoices/invoice-item-shipping.php:29
+#: views/meta-boxes/invoices/invoice-item.php:36
+msgid "The PO item related to this invoice item is missing"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice-item-shipping.php:39
+#: views/meta-boxes/po-items/item-shipping.php:45
+#: views/meta-boxes/po-items/items.php:229
+#: views/pdf-templates/default/purchase-order-html.php:294
+#: views/pdf-templates/default/purchase-order-html.php:401
+#: views/pdf-templates/template1/purchase-order-html.php:368
+#: views/pdf-templates/template1/purchase-order-html.php:465
+#: views/pdf-templates/template2/purchase-order-html.php:331
+#: views/pdf-templates/template2/purchase-order-html.php:443
+msgid "Shipping"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice-item.php:71
+#: views/meta-boxes/po-items/item.php:73
+msgid "Variation ID:"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice-item.php:77
+#: views/meta-boxes/po-items/item.php:79
+#, php-format
+msgid "%s (No longer exists)"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice-item.php:100
+#, php-format
+msgid "%1$s of %2$s item invoiced"
+msgid_plural "%1$s of %2$s items invoiced"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/meta-boxes/invoices/invoice.php:61
+msgid "Show Items"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoice.php:62
+msgid "Hide Items"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:29
+msgid "No Invoices Added"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:37
+msgid "Invoice"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:41
+msgctxt "PO Invoice"
+msgid "File"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:45
+msgctxt "PO Invoice"
+msgid "Date"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:49
+msgctxt "PO Invoice"
+msgid "Items"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:53
+msgctxt "PO Invoice"
+msgid "Cost"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:57
+msgctxt "PO Invoice"
+msgid "Discount"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:61
+msgctxt "PO Invoice"
+msgid "Qty"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:65
+msgctxt "PO Invoice"
+msgid "Total"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:70
+msgctxt "PO Invoice"
+msgid "Tax"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:76
+msgctxt "PO Invoice"
+msgid "Actions"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:135
+msgid "Invoiced"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:141
+msgid "Invoice items linked to missing PO items"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:173
+#: views/pdf-templates/default/purchase-order-html.php:369
+#: views/pdf-templates/template1/purchase-order-html.php:444
+#: views/pdf-templates/template2/purchase-order-html.php:408
+msgid "Subtotal"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:208
+msgid "Total Invoiced"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:236
+msgid "You can't add invoices while the PO is in a due status"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:246
+msgid "Save Invoices"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:253
+msgid ""
+"To edit the PO invoices change the PO status to any other that allows editing"
+msgstr ""
+
+#: views/meta-boxes/invoices/invoices.php:253
+msgid "These invoices are no longer editable."
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:49
+msgid "Supplier's Info"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:78
+msgid "Select Supplier"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:81
+msgid "Search supplier&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:93
+msgid "Supplier Code"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:104
+msgid "Supplier's Reference"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:110
+msgid "Supplier's Discount"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:123
+msgid "Expected at Location Date"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:164
+msgid "Choose currency&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:177
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:187
+msgid "Select the currency options"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:189
+msgid "Currency options"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:202
+msgid "Currency position"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:206
+msgid "Left"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:207
+msgid "Right"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:208
+msgid "Left with space"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:209
+msgid "Right with space"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:217
+msgid "Thousand separator"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:221
+msgid "Decimal separator"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:225
+msgid "Number of decimals"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:232
+msgid ""
+"The exchange rate is always calculated against the shop base's currency and "
+"all the PO figures recalculated when changed."
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:267
+msgid "Purchaser's Info"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:277
+msgid "Delivery Location Name"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:278
+msgid ""
+"Choose a location from the list or write a name in the search box and hit "
+"enter to add a custom name"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:282
+msgid "Search ATUM Location&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:301
+msgid "Street Address"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:313
+msgid "City/Town"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:321
+msgid "State/Region"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:339 views/meta-boxes/po-data/data.php:462
+msgid "Choose country&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:362
+msgid "Internal Info"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:369
+msgid "PO Date"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:379
+msgid "Delivery Date"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:389
+msgid "Sales Order Number"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:392
+msgid "Search by Order ID&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:397
+msgid "Order #"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:403
+msgid "Customer's Name"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:411
+msgid ""
+"For adding a requisitioner, enable the Required Requisition option in ATUM "
+"Settings"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:416
+msgid "Search user&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:436
+msgid "Ship via&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:459
+msgid "Ships From"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:485
+msgid "Advanced Options"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:512
+msgid "Payment and Delivery Terms"
+msgstr ""
+
+#: views/meta-boxes/po-data/data.php:525
+msgid "PDF Template"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:58
+msgid "Merge"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:78
+msgid "Return Items"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:96
+#: views/meta-boxes/po-data/po-actions.php:97
+msgid "Save Draft"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:101
+#: views/meta-boxes/po-data/po-actions.php:102
+msgid "Place"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:109
+#: views/meta-boxes/po-data/po-actions.php:110
+msgid "Update"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:117
+#: views/meta-boxes/po-data/po-actions.php:118
+msgid "Request Approval"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:127
+#: views/meta-boxes/po-data/po-actions.php:128
+msgid "Approve"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:132
+#: views/meta-boxes/po-data/po-actions.php:133
+msgid "Pending Approval"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:163
+msgid "Communication"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:168
+msgid "Please, finish editing the PO and press the PLACE button first"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:177
+msgid "This PO must be approved by your requisitioner"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:181
+msgid "Awaiting approval from your requisitioner"
+msgstr ""
+
+#: views/meta-boxes/po-data/po-actions.php:191
+#: views/meta-boxes/po-data/po-actions.php:206
+msgid "Email"
+msgstr ""
+
+#: views/meta-boxes/po-data/top-bar.php:28
+msgid "New Purchase Order"
+msgstr ""
+
+#: views/meta-boxes/po-data/top-bar.php:45
+msgid "Open original PO"
+msgstr ""
+
+#: views/meta-boxes/po-data/top-bar.php:57
+msgid "Edit PO number"
+msgstr ""
+
+#: views/meta-boxes/po-data/top-bar.php:68
+msgid "Set PO number"
+msgstr ""
+
+#: views/meta-boxes/po-data/top-bar.php:73
+msgid "Auto-generate next PO number"
+msgstr ""
+
+#: views/meta-boxes/po-items/item-discount-cell.php:57
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:188
+msgid "Set default discount"
+msgstr ""
+
+#: views/meta-boxes/po-items/item-meta.php:46
+#: views/pdf-templates/default/purchase-order-html.php:244
+#: views/pdf-templates/template1/purchase-order-html.php:317
+#: views/pdf-templates/template2/purchase-order-html.php:280
+msgid "Order ID"
+msgstr ""
+
+#: views/meta-boxes/po-items/item-tax-cell.php:56
+msgid "Set default tax"
+msgstr ""
+
+#: views/meta-boxes/po-items/item.php:94
+msgid ""
+"This item's stock is not managed by WooCommerce at product level, so it "
+"won't be updated when processing this PO"
+msgstr ""
+
+#: views/meta-boxes/po-items/item.php:98
+msgid "This item's stock was already changed within this PO"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:48
+msgid ""
+"All the items added to this Returning PO that were previously added to stock "
+"on the original PO, will be discounted automatically when this order is "
+"marked as \"Returned\". Please, only leave here the items and quantities "
+"that you want to return."
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:57
+msgid "No Items Added"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:75
+msgid "Available Stock"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:76
+msgctxt "Purchase Order"
+msgid "Stock"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:83
+msgid "Last Week Sales"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:84
+msgctxt "Purchase Order"
+msgid "LWS"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:91
+msgid "Inbound Stock"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:92
+msgctxt "Purchase Order"
+msgid "Inbound"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:99
+msgid "Recommended Order Quantity"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:100
+msgid "ROQ"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:115
+msgid "Returned Items Ratio"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:120
+msgid "Returning"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:204
+msgid "Units Total"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:216
+#: views/pdf-templates/default/purchase-order-html.php:390
+#: views/pdf-templates/template1/purchase-order-html.php:476
+#: views/pdf-templates/template2/purchase-order-html.php:431
+msgid "Fees"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:248
+msgid "Items Subtotal"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:289
+msgid "PO TOTAL"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:323
+msgid ""
+"To edit the purchase order items change the PO status to any other that "
+"allows editing"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:323
+msgid "These purchase order items are no longer editable."
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:333
+msgid "Add item(s)"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:334
+msgid "Add fee"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:335
+msgid "Add shipping cost"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:341
+msgid "Save Items"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:353
+#: views/meta-boxes/po-items/items.php:391
+msgid "Close modal panel"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:362
+msgid "Search for a product&hellip;"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:389
+msgid "Add tax"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:401
+msgid "Rate name"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:402
+msgid "Tax class"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:403
+msgid "Rate code"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:404
+msgid "Rate %"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:423
+msgid "Or, enter tax rate ID:"
+msgstr ""
+
+#: views/meta-boxes/po-items/items.php:424
+msgid "Optional"
+msgstr ""
+
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:87
+msgid "This is the Main inventory"
+msgstr ""
+
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:91
+msgid ""
+"This inventory's stock is not managed at inventory level, so it won't be "
+"updated when processing this PO"
+msgstr ""
+
+#: views/meta-boxes/po-items/multi-inventory/inventory.php:94
+msgid "Toggle info"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:66
+#: views/pdf-templates/template1/purchase-order-html.php:111
+#: views/pdf-templates/template2/purchase-order-html.php:101
+#, php-format
+msgid "Tax/VAT number: %s"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:73
+#: views/pdf-templates/template1/purchase-order-html.php:60
+#: views/pdf-templates/template2/purchase-order-html.php:107
+msgid "Date:"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:77
+#: views/pdf-templates/template1/purchase-order-html.php:64
+#: views/pdf-templates/template2/purchase-order-html.php:112
+msgid "P.O. #:"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:97
+#: views/pdf-templates/template1/purchase-order-html.php:124
+#: views/pdf-templates/template2/purchase-order-html.php:134
+msgid "Ship To"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:148
+#: views/pdf-templates/template1/purchase-order-html.php:221
+#: views/pdf-templates/template2/purchase-order-html.php:184
+msgid "Unit Price"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:417
+#: views/pdf-templates/template1/purchase-order-html.php:492
+#: views/pdf-templates/template2/purchase-order-html.php:460
+msgid "Taxes"
+msgstr ""
+
+#: views/pdf-templates/default/purchase-order-html.php:446
+#: views/pdf-templates/template1/purchase-order-html.php:520
+#: views/pdf-templates/template2/purchase-order-html.php:489
+msgid "Notes"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "ATUM Purchase Orders PRO"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/addons/atum-purchase-orders"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Expands and improves the advantages that Purchase Orders had in ATUM free. "
+"It includes very useful and long requested features that allow the shop "
+"owners to manage their incoming stock in an effective way."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Stock Management Labs™"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://stockmanagementlabs.com/"
+msgstr ""

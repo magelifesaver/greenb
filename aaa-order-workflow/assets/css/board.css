@@ -1,0 +1,564 @@
+/***********************************************************
+ * AAA Order Workflow - Board CSS
+ * Path: /plugins/aaa-order-workflow/assets/css/board.css
+ ***********************************************************/
+
+/* 
+   MAIN BOARD WRAPPER
+   - Displays columns inline
+   - Allows horizontal scrolling (hidden scrollbar)
+*/
+#aaa-oc-board-columns {
+  display: inline-flex;
+  gap: 0.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* HIDE SCROLLBAR (modern approach) */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+#aaa-oc-board-columns::-webkit-scrollbar {
+ 
+}
+/*
+   EACH COLUMN
+   - Fixed width so columns stack horizontally
+   - Scroll vertically within each column (hidden scrollbar)
+*/
+.aaa-oc-column {
+  border: 1px solid #ccc;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  background: #dbdbdb;
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  /* Default to 300px wide (col-count-1) */
+  flex: 0 0 300px;
+  max-width: 300px;
+  
+  overflow-y: auto;
+
+  /* Example fixed max-height: adjust as you like */
+  max-height: calc(100vh - 150px);
+
+  /* HIDE VERTICAL SCROLLBAR */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+.aaa-oc-column::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 
+   OPTIONAL: If you have a "two-column" style 
+   (wider column) 
+*/
+.aaa-oc-column.col-count-1 {
+  flex: 1 1 auto;
+  min-width: 300px;    /* fallback if screen is small */
+  max-width: 600px;    /* so it can expand up to 600px if there's space */
+}
+
+/* 2-column style (10–29 orders) */
+.aaa-oc-column.col-count-2 {
+  flex: 1 1 auto;
+  min-width: 600px;
+  max-width: 1000px; 
+}
+
+/* 3-column style (30+ orders) */
+.aaa-oc-column.col-count-3 {
+  flex: 1 1 auto;
+  min-width: 900px;
+  max-width: 1400px;
+}
+
+/***********************************************************
+ * COLUMN TITLE
+ ***********************************************************/
+.aaa-oc-column-title {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #dbdbdb; /* or white, etc. */
+}
+.aaa-oc-column-title .aaa-oc-order-count {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/***********************************************************
+ * Individual Order Cards
+ ***********************************************************/
+.aaa-oc-order-card {
+  display: inline-block;
+  width: 280px;
+  margin: 0 0 1rem 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Large order number in the card */
+.aaa-oc-order-number-large {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+/* "NEW" badge */
+.aaa-oc-new-badge {
+  background: #f33;
+  color: #fff;
+  padding: 3px 6px;
+  font-weight: 700;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Daily order number styling */
+.aaa-oc-daily-order {
+  background: green;
+  color: #fff;
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-left: 6px;
+  font-size: 0.9em;
+}
+
+/* Customer name */
+.aaa-oc-customer-name {
+  font-size: 1.1em;
+  margin-top: 0.5rem;
+}
+
+/* Price + items row */
+.aaa-oc-order-totals {
+}
+.aaa-oc-total-price {
+  font-weight: 600;
+}
+
+.aaa-payrec-status.paid {
+	background: green;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.aaa-payrec-status.partial {
+	background: orange;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.aaa-payrec-status.unpaid {
+	background: red;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.aaa-payment-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.close-payment-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+/***********************************************************
+ * BUTTONS & PAGINATION
+ ***********************************************************/
+.aaa-oc-actions {
+  margin-top: 0.5rem;
+}
+
+
+#aaa-oc-modal-content .aaa-oc-order-card {
+  width: 100%;
+}
+.aaa-oc-order-card.expanded {
+  z-index: 9999;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+
+  /* NEW SCROLL BEHAVIOR */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.aaa-oc-order-card.expanded .aaa-customer-notes {
+  display: block !important;
+}
+.aaa-oc-order-card.expanded .aaa-nav2-buttons {
+display: flex !important;
+}
+.aaa-oc-order-card.expanded .aaa-nav-buttons {
+  display: flex !important;
+}
+.aaa-oc-order-card.expanded .aaa-delivery-info {
+  display: none !important;
+}
+
+/* Default: if .collapsed is on the card container, show collapsed-only, hide expanded-only */
+.aaa-oc-order-card.collapsed .collapsed-only {
+  display: block; 
+}
+.aaa-oc-order-card.collapsed .expanded-only {
+  display: none; 
+}
+
+/* When .expanded is on the card container, do the opposite */
+.aaa-oc-order-card.expanded .collapsed-only {
+  display: none !important;
+}
+.aaa-oc-order-card.expanded .expanded-only {
+  display: block !important;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* disable page-level scrolling */
+}
+/* Hide all admin notices in the WordPress dashboard */
+.notice,
+.update-nag,
+.updated,
+.error,
+.notice-success,
+.notice-error,
+.notice-warning,
+.notice-info {
+    display: none !important;
+}
+
+/***********************************************************
+ * EXPANDED
+ ***********************************************************/
+ 
+ .aaa-special-box {
+    background: blue;
+    padding: 10px 10px;
+    color: white;
+    border-radius: 10px;
+}
+.aaa-warning-box {
+    background: red;
+    padding: 10px 10px;
+    color: white;
+    border-radius: 10px;
+}
+/***********************************************************
+ * PAYMENT
+ ***********************************************************/
+
+/* Payment Modal Layout */
+.aaa-payment-fields {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Each field row */
+.payment-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-left:5px;
+}
+
+/* Labels */
+.payment-row label {
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Inputs and select dropdowns */
+.payment-row input[type="number"],
+.payment-row select {
+    flex: 1.5;
+    padding: 3px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Readonly fields for totals */
+.payment-row input[readonly] {
+    background-color: #f7f7f7;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Checkbox alignment */
+.payment-row input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+}
+
+/* Save button styling */
+.aaa-payment-fields .save-payment-button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+/* Optional: highlight status or balance rows */
+.payment-row.payment-totals,
+.payment-row.payment-status {
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+/***********************************************************
+ * PAYMENT MODAL
+ ***********************************************************/
+
+/* Outer Modal Wrapper */
+.aaa-payment-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99999;
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+}
+
+/* Modal Content Container */
+.aaa-payment-modal-inner {
+    background-color: #f5f5f5;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    min-width: 350px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 999999;
+    position: relative;
+}
+/***********************************************************
+ * PAYMENT ADD BUTTON
+ ***********************************************************/
+.aaa-lpm-buttons {
+    text-align: center;
+}
+.aaa-lpm-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+.payment-row.total-row {
+    border-top: 5px solid #ccc;
+    padding-top: 15px;
+    font-size: 20px;
+}
+.hidden-button { display: none !important; }
+
+
+/* Modern “flat” button style */
+.button-modern, button.button-modern, .aaa-wf-header-buttons, .aaa-wf-exit-dashboard, .aaa-oc-today-orders, .aaa-oc-feed-open, .button-link {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+  text-decoration: none;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+/* Hover / focus state */
+.button-modern:hover,
+.button-modern:focus {
+  background: linear-gradient(135deg, #48c, #5a9);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Active / pressed state */
+.button-modern:active {
+  background: linear-gradient(135deg, #3a8, #397);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateY(0);
+}
+
+/* Disabled state */
+.button-modern[disabled] {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+.aaa-oc-prev-status-icon.button-modern, .aaa-oc-next-status-icon.button-modern {
+    line-height: .5 !important;
+    padding: 3px 11px;
+}
+.aaa-order-card .open-order.button-modern {
+  /* only these get the modern look */
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.aaa-order-card .open-order.button-modern:hover {
+  background: linear-gradient(135deg, #48c, #5a9);
+  transform: translateY(-2px);
+}
+
+
+.pill-tip-et {
+    background: #cfc;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+.pill-tip-wt {
+    background: #ffdd57;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.aaa-oc-order-card.expanded::-webkit-scrollbar {
+  width: 8px;
+}
+.aaa-oc-order-card.expanded::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+.aaa-announcement p {
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
+}
+.future-delivery {
+    background: #3498db;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+}
+.aaa-oc-header-extras .button-modern {
+  padding: 4px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* add once in the injected CSS block */
+.aaa-oc-delivery-pill.pill-red { background:#d64040; } /* ASAP red */
+/* Delivery labels */
+.aaa-delivery-date.today-delivery {
+    background: #28a745; /* green */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.aaa-delivery-date.tomorrow-delivery {
+    background: #007bff; /* blue */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.aaa-delivery-date.future-delivery {
+    background: #6c757d; /* gray */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+div#aaa-oc-countdown-bar {
+    display: none;
+}
+.aaa-oc-header-extras select,
+.aaa-oc-header-extras input[type="search"],
+.aaa-oc-header-extras a.button-modern,
+.aaa-oc-header-extras button {
+    height:32px;
+    line-height:30px;
+    padding:0 10px;
+    border:1px solid #ccd0d4;
+    border-radius:4px;
+}
+.aaa-oc-header-extras select {
+    min-width:140px;
+    background:#fff;
+}
+.aaa-oc-header-extras .button-modern {
+    background:#2271b1;
+    color:#fff;
+    text-decoration:none;
+}
+.aaa-oc-header-extras .button-modern:hover {
+    background:#135e96;
+}
+
+.aaa-oc-pill-envelope {
+    background: #fff; /* yellow */
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 4px;
+    font-size: 24px;
+}

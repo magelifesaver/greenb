@@ -1,0 +1,1 @@
+(()=>{"use strict";(0,window.wp.plugins.registerPlugin)("szbd-method-selection",{render:()=>{},scope:"woocommerce-checkout"})})();

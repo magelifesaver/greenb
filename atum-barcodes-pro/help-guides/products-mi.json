@@ -1,0 +1,22 @@
+[
+	{
+		"title": "ATUM Barcodes meta box",
+		"element": "#atum_barcodes .inside",
+		"intro": "Here you will see the barcodes generated for the inventories of this product.<p><img src='{{pluginUrl}}help-guides/images/18.png'></p>It can be distinct to the above example depending on your configuration.<br>If you don't see any, make sure to fill in the barcode fields within each inventory and save the product.",
+		"load": "init"
+	},
+	{
+		"title": "Barcode field",
+		"element": ".multi-inventory-panel .inventory-group.main ._barcode_field",
+		"intro": "This is the barcode field. You can enter any barcode you want for this inventory here.<p><img src='{{pluginUrl}}help-guides/images/19.png'></p>",
+		"load": "lazy",
+		"onBeforeChange": "function() {  jQuery( '.product_data .inventory_tab > a').click(); jQuery( '.multi-inventory-panel .inventory-group.main .inventory-name.collapsed .toggle-indicator').click(); }"
+	},
+	{
+		"title": "Screen Options",
+		"element": "#screen-options-link-wrap",
+		"intro": "From the Screen Options tab, you can enable or disable the display of the barcodes meta box.",
+		"load": "init",
+        "markerPosition": "bottom-right"
+	}
+]

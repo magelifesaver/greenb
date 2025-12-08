@@ -1,0 +1,91 @@
+[
+	{
+		"title": "ATUM PO PRO help guide",
+		"intro": "Welcome to the Purchase Order Edit page! 👋.<br><br>This guide will show you the main features of the new Purchase Orders' Edit user interface.<br><br>Every section of this interface contains a Help Guide re-launch icon <i class=\"atum-icon atmi-indent-increase show-intro-guide\"></i>. Feel free to return to this guide any time you need."
+	},
+	{
+		"title": "Custom PO numbers",
+		"element": "#po-data-meta-box .po-number",
+		"intro": "Purchase Orders PRO will now let you set custom numbering patterns. All you need to do is visit the settings page \"ATUM - Settings - Purchase Orders - Numbering System\"."
+	},
+	{
+		"title": "PO Status",
+		"element": "#po-data-meta-box .po-status .select2",
+		"intro": "You can view and switch the PO status manually from the status selector. We have developed status change restrictions - you can call it a \"flow\". You will not be able to jump from status \"NEW\" to \"COMPLETE\", for example, unless you follow steps we think are necessary.<br><br>Preview the status flow logic <br><a href='https://stockmanagementlabs.crunch.help/atum-purchase-orders-pro/po-status-logic' target='_blank'>here</a>.<br><br>For the full status list explanation, please follow this <a href='https://stockmanagementlabs.crunch.help/atum-purchase-orders-pro/purchase-orders-statuses' target='_blank'>link</a>.<br><br>!!! IMPORTANT !!! You can remove the flow restrictions by going to ATUM settings (Purchase Orders - \"PO Status Flow Restriction\") and either select or deselect the restriction option.<br><br>The status change requires confirmation; if you do not want ATUM to ask you to confirm, please, disable the \"Confirm Status Change\" option."
+	},
+	{
+		"title": "Action Buttons",
+		"element": "#po-data-meta-box .action-buttons",
+		"intro": "By using the action buttons you can clone, merge or archive this PO."
+	},
+	{
+		"title": "Saving Buttons",
+		"element": "#po-data-meta-box .save-buttons",
+		"intro": "By using the saving buttons you can save as draft, place or update the PO."
+	},
+	{
+		"title": "Communication Buttons",
+		"element": "#po-data-meta-box .communication-buttons",
+		"intro": "By using the communication buttons you can print the PO or send an email to your supplier with this PO attached."
+	},
+	{
+		"title": "Supplier's Info",
+		"element": ".supplier-info-panel h4",
+		"intro": "On this section you can add your supplier to the PO and all its settings will be auto-imported from their profiles. You can change the imported info later (if necessary)."
+	},
+	{
+		"title": "Purchaser's Info",
+		"element": ".purchaser-info-panel h4",
+		"intro": "On this section you can add the PO purchaser (your company) and the delivery location. You can now add delivery addresses wtihin every ATUM Location term and will be auto-imported here."
+	},
+	{
+		"title": "Delivery Date",
+		"element": ".delivery-date-field .date-field",
+		"intro": "The delivery date is used to be able to know if a PO is due. You can later filter due POs in the POs list."
+	},
+	{
+		"title": "Requisitioner",
+		"element": ".requisitioner-field select",
+		"intro": "If you enable the require requisition from ATUM Settings and set any user as the requisitioner for this PO, it'll require a validation from the requisitioner before being placed."
+	},
+	{
+		"title": "Description",
+		"element": ".description-field > label",
+		"intro": "You can set a default PO description from ATUM settings and will be added by default to all the new POs. This can be changed later, individually.<br>The description will be shown when printing to PDF."
+	},
+	{
+		"title": "Paymend and Delivery terms",
+		"element": ".terms-field > label",
+		"intro": "You can set a default Payment and Delivery terms text from ATUM settings and will be added by default to all the new POs. This can be changed later, individually.<br>This text will be shown when printing to PDF."
+	},
+	{
+		"title": "PDF Template",
+		"element": ".pdf-template-field > label",
+		"intro": "You can set a default PDF template ATUM settings and will be used by default on all the new POs. This can be changed later, individually.<br>The chosen tenplate will be used when printing to PDF."
+	},
+	{
+		"title": "PO Items",
+		"element": "#atum_order_items .postbox-header h2",
+		"intro": "From the PO items meta box, you can add products, inventories, fees and shipping costs to your PO."
+	},
+	{
+		"title": "Deliveries",
+		"element": "#po_deliveries .postbox-header h2",
+		"intro": "Once you receive the PO items from your supplier and switched the PO status to 'Receiving', you can start adding deliveries (one if everything was delivered at once or multiple if you received part of the items).<br>After adding the deliveries, you can add the received items to stock."
+	},
+	{
+		"title": "Invoices",
+		"element": "#po_invoices .postbox-header h2",
+		"intro": "On this meta box, you can register the invoices received from your supplier and also attach the files to each one of them."
+	},
+	{
+		"title": "Files",
+		"element": "#po_files .postbox-header h2",
+		"intro": "You can attach any file related to this PO (for your records) in this section."
+	},
+	{
+		"title": "Comments",
+		"element": "#po_notes .postbox-header h2",
+		"intro": "Notes related to changes made in this PO will be added automatically, but you can also add personal notes. If you want to create a note for another user, just mention them with @username and they will receive a notification."
+	}
+]

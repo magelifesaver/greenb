@@ -1,0 +1,107 @@
+<?php
+/**
+ * File: /wp-content/plugins/aaa-delivery-blocks-coords/includes/class-adbc-fields.php
+ * Purpose: Register Additional Checkout Fields for coords + flag,
+ *          and persist them to order + user meta with server-side geocoding.
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use Automattic\WooCommerce\Blocks\Package;
+use Automattic\WooCommerce\Blocks\Domain\Services\CheckoutFields;
+
+class ADBC_Fields {
+
+	public static function register() {
+	    add_action( 'woocommerce_init', function () {
+	        if ( ! function_exists( 'woocommerce_register_additional_checkout_field' ) ) return;
+
+	        $opts = get_option( 'delivery_global', [] );
+	        $attrs = [ 'aria-hidden' => 'true' ];
+
+	        // --- Shipping coords fields ---
+	        if ( empty( $opts['hide_shipping_coords'] ) ) {
+	            woocommerce_register_additional_checkout_field( [
+	                'id'   => ADBC_FIELD_LAT,
+	                'label'=> 'Latitude',
+	                'location'=>'address','type'=>'text',
+	                'attributes'=>$attrs,
+	                'sanitize_callback'=>fn($v)=>is_numeric($v)?(string)(float)$v:''
+	            ] );
+	            woocommerce_register_additional_checkout_field( [
+	                'id'   => ADBC_FIELD_LNG,
+	                'label'=> 'Longitude',
+	                'location'=>'address','type'=>'text',
+	                'attributes'=>$attrs,
+	                'sanitize_callback'=>fn($v)=>is_numeric($v)?(string)(float)$v:''
+	            ] );
+	        }
+
+	        // --- Shipping coords verification flag ---
+	        if ( empty( $opts['hide_shipping_flag'] ) ) {
+	            woocommerce_register_additional_checkout_field( [
+	                'id'   => ADBC_FIELD_FLAG,
+	                'label'=> 'Coords Verified',
+	                'location'=>'address','type'=>'text',
+	                'attributes'=>$attrs,
+	                'sanitize_callback'=>fn($v)=>$v==='yes'?'yes':'no'
+	            ] );
+	        }
+
+	        // --- CSS hiding (only if options demand hiding) ---
+	        add_action( 'wp_enqueue_scripts', function () use ( $opts ) {
+	            $css = '';
+	            if ( ! empty( $opts['hide_shipping_coords'] ) ) {
+	                $css .= '[data-additional-field-id="' . ADBC_FIELD_LAT . '"],
+	                         [data-additional-field-id="' . ADBC_FIELD_LNG . '"]{display:none!important;}';
+	            }
+	            if ( ! empty( $opts['hide_shipping_flag'] ) ) {
+	                $css .= '[data-additional-field-id="' . ADBC_FIELD_FLAG . '"]{display:none!important;}';
+	            }
+	            if ( $css ) {
+	                wp_add_inline_style( 'woocommerce-blocks-style', $css );
+	            }
+	        } );
+
+	        ADBC_Logger::log( 'Checkout fields registered w/ options', $opts );
+	    } );
+
+	    add_action( 'woocommerce_store_api_checkout_update_order_meta', [__CLASS__, 'save_coords'], 10, 1 );
+	}
+
+	public static function save_coords( WC_Order $order ) {
+		try {
+			$cf = Package::container()->get( CheckoutFields::class );
+
+			$lat_b = (string) $cf->get_field_from_object( ADBC_FIELD_LAT,  $order, 'billing' );
+			$lng_b = (string) $cf->get_field_from_object( ADBC_FIELD_LNG,  $order, 'billing' );
+			$lat_s = (string) $cf->get_field_from_object( ADBC_FIELD_LAT,  $order, 'shipping' );
+			$lng_s = (string) $cf->get_field_from_object( ADBC_FIELD_LNG,  $order, 'shipping' );
+
+			$flag_b = ( $lat_b !== '' && $lng_b !== '' ) ? 'yes' : 'no';
+			$flag_s = ( $lat_s !== '' && $lng_s !== '' ) ? 'yes' : 'no';
+
+			$order->update_meta_data( CheckoutFields::BILLING_FIELDS_PREFIX  . ADBC_FIELD_LAT,  $lat_b );
+			$order->update_meta_data( CheckoutFields::BILLING_FIELDS_PREFIX  . ADBC_FIELD_LNG,  $lng_b );
+			$order->update_meta_data( CheckoutFields::BILLING_FIELDS_PREFIX  . ADBC_FIELD_FLAG, $flag_b );
+			$order->update_meta_data( CheckoutFields::SHIPPING_FIELDS_PREFIX . ADBC_FIELD_LAT,  $lat_s );
+			$order->update_meta_data( CheckoutFields::SHIPPING_FIELDS_PREFIX . ADBC_FIELD_LNG,  $lng_s );
+			$order->update_meta_data( CheckoutFields::SHIPPING_FIELDS_PREFIX . ADBC_FIELD_FLAG, $flag_s );
+
+			if ( $uid = $order->get_user_id() ) {
+				update_user_meta( $uid, '_wc_billing/'  . ADBC_FIELD_LAT,  $lat_b );
+				update_user_meta( $uid, '_wc_billing/'  . ADBC_FIELD_LNG,  $lng_b );
+				update_user_meta( $uid, '_wc_billing/'  . ADBC_FIELD_FLAG, $flag_b );
+				update_user_meta( $uid, '_wc_shipping/' . ADBC_FIELD_LAT,  $lat_s );
+				update_user_meta( $uid, '_wc_shipping/' . ADBC_FIELD_LNG,  $lng_s );
+				update_user_meta( $uid, '_wc_shipping/' . ADBC_FIELD_FLAG, $flag_s );
+			}
+
+			ADBC_Logger::log( 'Coords saved', [
+				'bill_lat' => $lat_b, 'bill_lng' => $lng_b, 'bill_flag' => $flag_b,
+				'ship_lat' => $lat_s, 'ship_lng' => $lng_s, 'ship_flag' => $flag_s,
+			] );
+		} catch ( \Throwable $e ) {
+			ADBC_Logger::log( 'Save error', [ 'err' => $e->getMessage() ] );
+		}
+	}
+}

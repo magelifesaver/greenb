@@ -1,0 +1,16 @@
+#woogc_ps table {width: 100%}
+#woogc_ps small {font-size: 10px}
+#woogc_ps .shop_ps > .hide{ display: none}
+#woogc_ps table { }
+#woogc_ps table tr.odd td, #woogc_ps table tr.even td {background: #f9f9f9;}
+#woogc_ps table th, #woogc_ps table td {display: table-cell !important;padding: 1em !important;vertical-align: top;line-height: 1.75em;text-align: left;}
+#woogc_ps table td.shop_title {width: 200px}
+#woogc_ps table td.shop_title h4 {margin: 0px; margin-bottom: -8px;}
+#woogc_ps table td.shop_title p {margin: 0px; padding: 5px 0px}
+#woogc_ps table td.shop_title small.site-url {}
+#woogc_ps table td.shop_title a {text-decoration: none}
+#woogc_ps table .woogc-input-toggle {box-shadow: none}
+#woogc_ps table .option_title {text-align: right; width: 200px}
+#woogc_ps table.shop_ps_items td {padding: 7px 1em !important}
+#woogc_ps .woocommerce-input-toggle.small {height: 10px; width: 21px;}
+#woogc_ps .woocommerce-input-toggle.small::before {width: 12px; height: 12px; top: -1px}

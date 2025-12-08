@@ -1,0 +1,204 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+
+/* <fs_premium_only> */
+
+.pwddm_media_preview {
+    border: 1px solid #cccccc;
+    width: 300px;
+    height: 199px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pwddm_media_preview img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.pwddm_icon {
+    box-shadow: none !important;
+    outline: none !important;
+    display: inline-block;
+    line-height: 11px;
+}
+
+.pwddm-toggle-off {
+    height: 20px;
+    width: 20px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pwddm-toggle-on {
+    height: 20px;
+    width: 20px;
+    background-color: #28a745;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+/* </fs_premium_only> */
+
+.pwddm-text-center {
+    text-align: center !important;
+}
+
+.pwddm_admin_bar {
+    margin-bottom: 15px;
+}
+
+.column-pwddm_manager_claim,
+.column-pwddm_manager_availability,
+.column-pwddm_manager_account {
+    text-align: center !important;
+}
+
+.pwddm_premium_icon {
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+.manager_app {
+    margin-top: 25px;
+}
+
+.manager_app img {
+    float: left;
+    margin-right: 10px;
+}
+
+.pwddm-text-center a {
+    transition: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#pwddm_dates_custom_range,
+#pwddm_dates_range_select,
+#pwddm_dates_range_submit {
+    margin-right: 15px;
+    float: left;
+}
+
+#pwddm_dates_range_wrap {
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+}
+
+.pwddm_order_image {
+    display: inline-block;
+}
+
+body.rtl .driver_app a {
+    direction: ltr;
+    display: inline-block;
+}
+
+body.rtl .driver_app img {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.pwddm_premium_feature {
+    position: relative;
+    display: inline-block;
+}
+
+.pwddm_premium_feature_note h2,
+.pwddm_premium_feature_note p {
+    margin: 0px !important;
+    color: #000 !important;
+}
+
+.pwddm_premium_feature_note h2 {
+    margin-bottom: 4px !important;
+}
+
+.pwddm_premium_feature_note {
+    position: absolute;
+    width: 250px;
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    top: -172px;
+    left: -167px;
+}
+
+.pwddm_star_button {
+    margin-right: 5px;
+}
+
+.pwddm_star_button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.pwddm_star_button svg {
+    position: relative;
+}
+
+.pwddm_premium_feature_note:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 186px;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #fff;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -9px;
+    margin-bottom: -20px;
+}
+
+.pwddm_premium_close {
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
+    color: #575758 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    height: 16px !important;
+}
+
+.pwddm_premium_buynow {
+    display: inline-block !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    border-radius: .25rem !important;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: #fff !important;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    text-decoration: none !important;
+    margin-top: 10px !important;
+    margin-bottom: 6px !important;
+}
+
+.pwddm_premium_buynow:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34 !important;
+    color: #fff !important;
+}

@@ -1,0 +1,15 @@
+[
+	{
+		"title": "ATUM Barcodes meta box",
+		"element": "#atum_barcodes .inside",
+		"intro": "Here you will see the barcode generated for this ATUM Order.<p><img src='{{pluginUrl}}help-guides/images/1.png'></p>It can be distinct to the above example depending on your configuration.<br>By default, the post ID will be used for the barcode but if you want to change it, click on the field, enter a new custom number and save.<p><img src='/wp-content/plugins/atum-barcodes-pro/help-guides/images/2.png'></p>",
+		"load": "init"
+	},
+	{
+		"title": "Screen Options",
+		"element": "#screen-options-link-wrap",
+		"intro": "From the Screen Options tab, you can enable or disable the display of the barcodes meta box.",
+		"load": "init",
+        "markerPosition": "bottom-right"
+	}
+]

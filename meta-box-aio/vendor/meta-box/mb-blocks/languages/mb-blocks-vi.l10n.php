@@ -1,0 +1,2 @@
+<?php
+return ['domain'=>'mb-blocks','plural-forms'=>'nplurals=1; plural=0;','language'=>'vi','project-id-version'=>'MB Blocks','pot-creation-date'=>'2019-07-19 10:12+0700','po-revision-date'=>'2019-07-19 10:13+0700','x-generator'=>'Poedit 2.2.3','messages'=>[]];

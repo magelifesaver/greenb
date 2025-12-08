@@ -1,0 +1,3 @@
+.pac-container[data-force-hide="1"] {
+  display: none !important;
+}

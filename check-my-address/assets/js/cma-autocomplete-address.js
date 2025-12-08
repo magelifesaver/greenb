@@ -1,0 +1,101 @@
+var CmaAutoComplete_shipping = CmaAutoComplete_shipping || {};
+CmaAutoComplete_shipping.method = {
+	IdSeparator: "",
+	autocomplete: "",
+	initialize: async function() {
+
+		const { Map } = await google.maps.importLibrary("maps");
+		const { Geo } = await google.maps.importLibrary("geometry");
+		const { Geocode } = await google.maps.importLibrary("geocoding");
+		const { Autocomplete } = await google.maps.importLibrary("places");
+
+		this.autocomplete = new google.maps.places.Autocomplete(
+			(document.getElementById('autocomplete_cma')), {
+				types: _.toArray(cmadel.autocomplete_types),
+				fields: ["types"]
+			});
+		var $this = this;
+		google.maps.event.addListener(this.autocomplete, 'place_changed', function(event) {
+			var response = $this.autocomplete.getPlace();
+			if (response.types !== undefined && response.types.length) {
+				document.getElementById('cma_bshipping_address_1').value = 'ok';
+				jQuery(document.body).trigger("cma_new_shipping_address");
+			}
+		});
+	
+		var cma_bshipping_address = document.getElementById("autocomplete_cma");
+		if (cma_bshipping_address != null) {
+			cma_bshipping_address.addEventListener("focus", function(event) {
+				CmaAutoComplete_shipping.method.setAutocompleteCountry();
+				if (cmadel.geolocate_user == 1) {
+					CmaAutoComplete_shipping.method.geolocate();
+				}
+			}, true);
+		}
+		var cma_bshipping_country = document.getElementById("cma_bshipping_country");
+		if (cma_bshipping_country != null) {
+			cma_bshipping_country.addEventListener("change", function(event) {
+				CmaAutoComplete_shipping.method.setAutocompleteCountry();
+			}, true);
+		}
+	},
+	geolocate: function() {
+		var auto = this.autocomplete;
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var geolocation = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				var circle = new google.maps.Circle({
+					center: geolocation,
+					radius: position.coords.accuracy
+				});
+				auto.setBounds(circle.getBounds());
+			});
+		}
+	},
+	setAutocompleteCountry: function() {
+		var country;
+		if (document.getElementById('cma_bshipping_country') === null) {
+			country = '';
+		} else {
+		 country = document.getElementById('cma_bshipping_country').value;
+		}
+		
+		if (cmadel.restrict_country == 'no' && country != '') {
+			this.autocomplete.setComponentRestrictions({
+				'country': country
+			});
+		}
+	},
+	disableDefault: function() {
+		if ((document.getElementById('autocomplete_cma') != null)) {
+			var shipaddr = document.getElementById('autocomplete_cma');
+			shipaddr.addEventListener('keydown', function(e) {
+				if (e.keyCode == 13 || e.which == 13) {
+					e.preventDefault();
+				}
+			});
+		}
+	}
+};
+window.addEventListener('load', function() {
+	if (jQuery("#autocomplete_cma").length && !jQuery("#autocomplete_cma").parents('div[data-elementor-type="popup"]').length) {
+
+		CmaAutoComplete_shipping.method.initialize();
+		CmaAutoComplete_shipping.method.disableDefault();
+	}
+});
+
+//Support for Elementor popups
+window.addEventListener('elementor/popup/show', function() {
+
+			let popupelement = jQuery('div[data-elementor-type="popup"]').find("#autocomplete_cma");
+			if (popupelement.length) {
+				
+				CmaAutoComplete_shipping.method.initialize();
+				CmaAutoComplete_shipping.method.disableDefault();
+			}
+		});
+

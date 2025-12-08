@@ -1,0 +1,1 @@
+window.addEventListener("barn2_setup_wizard_changed",(a=>{const t=!a.detail.fast_cart_display||"checkout"!==a.detail.fast_cart_display,e=!a.detail.fast_cart_display||"cart"!==a.detail.fast_cart_display,d=a.detail.showStep,i=a.detail.hideStep;!1===t?i("cart"):d("cart"),!1===t&&!1===e?i("pages"):d("pages")}),!1);

@@ -1,0 +1,132 @@
+
+.wfc-open-cart-button {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    right: 30px;
+    // the !important is to override uncode
+    width: 60px !important;
+    max-width: 80%;
+    min-height: 60px !important;
+    height: fit-content;
+    z-index: #{ $base-z-index - 2};
+
+    border: 2px solid transparent;
+    //border-color: var(--wfc-btn-bg-color);
+    opacity: 0.9;
+
+    box-shadow: 1px 0 10px 0 rgba(51,51,51,0.31);
+    text-decoration: none!important;
+    transition: 0.4s;
+    @media (prefers-reduced-motion: reduce) {
+        transition: 0s;
+    }
+
+    &.at-top {
+        top: 30px;
+        .admin-bar & {
+            top: 55px;
+        }
+    }
+    &.at-bottom {
+        bottom: 30px;
+    }
+    &.at-center {
+        bottom: calc(50% - 30px);
+    }
+    &.at-content {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    &.has-text {
+        width: fit-content!important;
+        padding: .4rem .9rem;
+
+        &.has-icon {
+            svg {
+                margin-right: .5rem;
+                min-width: 24px;
+            }
+        }
+    }
+
+    svg {
+        width: 32px;
+        height: 32px;
+        transform: translate(-1px,0);
+        fill: currentColor;
+    }
+    &:hover, &:active {
+        opacity: 1;
+    }
+    &[aria-hidden="true"].at-bottom {
+        transform: translate(0,200px);
+    }
+    &[aria-hidden="true"].at-top {
+        transform: translate(0,-200px);
+    }
+    &[aria-hidden="true"].at-center {
+        transform: translate(200px,0);
+    }
+
+    &__count {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 23px;
+        height: 23px;
+        transform: translate(-25%,-25%);
+
+        border-radius: 23px;
+
+        font-size: 14px;
+        font-family: $system-font;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        line-height: 1;
+
+
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:empty {
+            display: none;
+        }
+
+        &.is-over-99 {
+            font-size: 0;
+            color: transparent;
+            &::before {
+                content: '';
+                display: block;
+                width: 10px;
+                height: 10px;
+                background: currentColor;
+                border-radius: 8px;
+            }
+        }
+    }
+
+    &:focus, &:active {
+        outline: none;
+        border-color: var(--wfc-btn-notification-bg);
+    }
+
+    .wfc-checkout-is-open &,
+    .wfc-modal-is-open &,
+    .wfc-side-is-open &,
+    .wc-block-checkout__form &,
+    .woocommerce-checkout &,
+    .woocommerce-cart & {
+        display: none;
+    }
+}

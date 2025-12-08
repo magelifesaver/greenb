@@ -1,0 +1,2 @@
+<?php
+return ['domain'=>'mb-term-meta','plural-forms'=>'nplurals=2; plural=n != 1;','language'=>'de_DE','project-id-version'=>'MB Term Meta','pot-creation-date'=>'2025-04-08 17:31+0000','po-revision-date'=>'2025-04-08 17:32+0000','x-generator'=>'Loco https://localise.biz/','messages'=>['Term added.'=>'Begriff hinzugefügt.']];

@@ -1,0 +1,144 @@
+/* Custom: Background */
+
+.pmmi-background-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pmmi-background-input .input {
+  display: flex;
+  flex-direction: column;
+}
+
+.pmmi-background-input-subfields {
+  display: flex;
+  gap: 10px;
+}
+
+.pmmi-background-input-subfields .input {
+  flex: 1;
+}
+
+/* Custom: Image Select */
+
+.pmmi-img-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pmmi-img-select-item {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #d8d8d8;
+  border-radius: 3px;
+  padding: 2px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.pmmi-img-select-item:hover,
+.pmmi-img-select-item:has(:checked) {
+  border-color: #37474f;
+}
+
+.pmmi-img-select-item__img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.pmmi-img-select-item__input[type="radio"] {
+  display: none;
+}
+
+/* Custom: Cloneable */
+
+.pmmi-cloneable-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pmxi-cloneable-mode .pmxi-switcher-target {
+  max-width: none;
+}
+
+.pmmi-cloneable-row {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
+  gap: 10px;
+}
+
+.pmmi-cloneable-row > .field {
+  padding: 0;
+}
+
+.pmmi-cloneable-row > .field:not(.field-type-repeater) {
+  border: none;
+}
+
+.pmmi-cloneable-row > .field-type-repeater {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.pmmi-cloneable-row > .field > .label {
+  display: none;
+}
+
+.pmmi-cloneable-remove-row {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  color: #ccc;
+  transition: 0.3s color ease-in-out;
+  cursor: pointer;
+  align-self: flex-start;
+  position: relative;
+  top: 10px;
+}
+
+.pmmi-cloneable-remove-row:hover {
+  color: #dc3232;
+}
+
+.pmmi-cloneable:not(.is-fixed) :where(.pmmi-cloneable-remove-row, .pmmi-cloneable-actions) {
+  display: none;
+}
+
+/* Custom: Key Value */
+.field-type-text_list .pmmi-group,
+.field-type-key_value .pmmi-group,
+.field-type-fieldset_text .pmmi-group {
+  gap: 10px;
+}
+
+.field-type-text_list .field,
+.field-type-key_value .field,
+.field-type-fieldset_text .field {
+  border-top: none;
+  padding: 0;
+}
+
+.field-type-text_list .pmmi-cloneable-remove-row,
+.field-type-key_value .pmmi-cloneable-remove-row,
+.field-type-fieldset_text .pmmi-cloneable-remove-row {
+  align-self: center;
+}
+
+/* Custom: Groups */
+
+.pmmi-group--inline {
+  display: flex;
+}
+
+.pmmi-group--inline > .pmmi-group-subfield {
+  flex: 1;
+}

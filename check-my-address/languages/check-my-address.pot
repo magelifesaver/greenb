@@ -1,0 +1,408 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Check My Address for WooCommerce\n"
+"POT-Creation-Date: 2024-01-25 13:44+0100\n"
+"PO-Revision-Date: 2020-12-16 10:55+0100\n"
+"Last-Translator: Arosoft <info@arosoft.se>\n"
+"Language-Team: Arosoft <info@arosoft.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: check-my-address.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: check-my-address.php:174
+msgid "Check My Address requires WooCommerce to be activated to work."
+msgstr ""
+
+#: check-my-address.php:202 classes/class-cma-settings.php:30
+#: includes/start-args.php:8
+msgid "Settings"
+msgstr ""
+
+#: classes/class-cma-checker.php:94
+msgid "We are not able to make deliveries to this address."
+msgstr ""
+
+#: classes/class-cma-checker.php:95
+msgid "We deliver to your address for a cost of "
+msgstr ""
+
+#: classes/class-cma-checker.php:96
+msgid " We deliver to your address for free."
+msgstr ""
+
+#: classes/class-cma-checker.php:97
+msgid " We make deliveries to your address"
+msgstr ""
+
+#: classes/class-cma-checker.php:98 classes/class-cma-checker.php:207
+msgid "Please enter a valid delivery address."
+msgstr ""
+
+#: classes/class-cma-checker.php:99
+msgid "We make deliveries to your address from"
+msgstr ""
+
+#: classes/class-cma-checker.php:100
+msgid "Free shipping on orders over "
+msgstr ""
+
+#: classes/class-cma-checker.php:101
+msgid "Please precise your address with a street number"
+msgstr ""
+
+#: classes/class-cma-checker.php:102
+msgid "Not available"
+msgstr ""
+
+#: classes/class-cma-checker.php:103
+msgid "The cart contents can´t be delivered to your location."
+msgstr ""
+
+#: classes/class-cma-checker.php:104
+msgid "The delivery cost are depending on your cart contents."
+msgstr ""
+
+#: classes/class-cma-checker.php:105
+msgid "when the order is above"
+msgstr ""
+
+#: classes/class-cma-checker.php:106
+msgid "for"
+msgstr ""
+
+#: classes/class-cma-checker.php:107
+msgid "and"
+msgstr ""
+
+#: classes/class-cma-checker.php:108
+msgid "For Your Cart:"
+msgstr ""
+
+#: classes/class-cma-checker.php:109
+msgid "Shipment of one item"
+msgstr ""
+
+#: classes/class-cma-checker.php:111
+msgid "for this address"
+msgstr ""
+
+#: classes/class-cma-checker.php:120
+msgid "Minimum order value for delivery is"
+msgstr ""
+
+#: classes/class-cma-checker.php:121
+msgid "Minimum items for delivery is"
+msgstr ""
+
+#: classes/class-cma-checker.php:122
+msgid "Make sure all required fields are filled in."
+msgstr ""
+
+#: classes/class-cma-checker.php:140 includes/cma-template-functions.php:135
+msgid "Locate my address"
+msgstr ""
+
+#: classes/class-cma-checker.php:141
+msgid "No address found"
+msgstr ""
+
+#: classes/class-cma-checker.php:142 includes/cma-template-functions.php:133
+msgid "Delivery Address?"
+msgstr ""
+
+#: classes/class-cma-checker.php:164
+msgid "Precise your delivery location"
+msgstr ""
+
+#: classes/class-cma-checker.php:165
+msgid "Confirm Location"
+msgstr ""
+
+#: classes/class-cma-checker.php:169
+msgid "Please precise your delivery location by marking a position at the map."
+msgstr ""
+
+#: classes/class-cma-checker.php:188
+msgid "Delivery Address..."
+msgstr ""
+
+#: classes/class-cma-checker.php:191
+msgid "Sorry, we are not able to make deliveries to your address."
+msgstr ""
+
+#: classes/class-cma-checker.php:204
+msgid "Home delivery?"
+msgstr ""
+
+#: classes/class-cma-checker.php:218
+msgid "Delivery specification"
+msgstr ""
+
+#: classes/class-cma-settings.php:10
+msgid "Check My Address"
+msgstr ""
+
+#: classes/class-cma-settings.php:31
+msgid "Advanced"
+msgstr ""
+
+#: includes/cma-template-functions.php:141
+msgid "Check Address"
+msgstr ""
+
+#: includes/cma-template-functions.php:146
+msgid "Use this address at checkout?"
+msgstr ""
+
+#: includes/start-args.php:11
+msgid ""
+"Insert the Address Checker with shortcode [checkmyaddress] or "
+"[checkmyaddress current_cart=\"true\"] if you like to the validation result "
+"to reflect the actual cart contents."
+msgstr ""
+
+#: includes/start-args.php:14
+msgid "Google Maps API Key"
+msgstr ""
+
+#: includes/start-args.php:18
+msgid ""
+" <p><a href=\"https://cloud.google.com/maps-platform/#get-started\" "
+"target=\"_blank\">Visit Google to get your API Key &raquo;</a></p>"
+msgstr ""
+
+#: includes/start-args.php:21
+msgid "Pick Delivery Location from Map"
+msgstr ""
+
+#: includes/start-args.php:26
+msgid "Disable"
+msgstr ""
+
+#: includes/start-args.php:27
+msgid "When address geolocation fails"
+msgstr ""
+
+#: includes/start-args.php:34
+msgid "Geolocate user position?"
+msgstr ""
+
+#: includes/start-args.php:39
+msgid "Add the ability for users to geolocate their position."
+msgstr ""
+
+#: includes/start-args.php:42
+msgid "Geolocation accuracy"
+msgstr ""
+
+#: includes/start-args.php:46
+msgid "Maximum accepted accuracy in meters."
+msgstr ""
+
+#: includes/start-args.php:50
+msgid "Do address validation if geolocation succeeds?"
+msgstr ""
+
+#: includes/start-args.php:55
+msgid "Directly validate the address found by a user position request."
+msgstr ""
+
+#: includes/start-args.php:58
+msgid "Use Address at checkout?"
+msgstr ""
+
+#: includes/start-args.php:63
+msgid ""
+"Let users choose if they like to use a validated address at checkout. The "
+"address will then be the default address at checkout page."
+msgstr ""
+
+#: includes/start-args.php:66
+msgid "Show colors as validation feedback?"
+msgstr ""
+
+#: includes/start-args.php:71
+msgid ""
+"Color code delivery messages and forms depending on positive or negative "
+"validation result."
+msgstr ""
+
+#: includes/start-args.php:74
+msgid "Positive Feedback Color"
+msgstr ""
+
+#: includes/start-args.php:81
+msgid "Negative Feedback Color"
+msgstr ""
+
+#: includes/start-args.php:88
+msgid "Delivery message format"
+msgstr ""
+
+#: includes/start-args.php:93
+msgid "Popup"
+msgstr ""
+
+#: includes/start-args.php:94
+msgid "Print out"
+msgstr ""
+
+#: includes/start-args.php:96
+msgid "Choose how to show standard delivery messages."
+msgstr ""
+
+#: includes/start-args.php:100
+msgid "Default Popup Message"
+msgstr ""
+
+#: includes/start-args.php:105
+msgid "Add shipping cost suffix to the delivery notice?"
+msgstr ""
+
+#: includes/start-args.php:110
+msgid ""
+"Add shipping cost suffix to the delivery notice that shows after address "
+"validation."
+msgstr ""
+
+#: includes/start-args.php:121
+msgid "Advanced Settings"
+msgstr ""
+
+#: includes/start-args.php:126
+msgid "Simulate cart quantity?"
+msgstr ""
+
+#: includes/start-args.php:131
+msgid ""
+"When doing address validation not using shortcode argument \"currrent_cart\" "
+"set to \"true\" or when cart is empty it is not possible to perform shipping "
+"cost calculations with regards to [qty] shortcode. This option will simulate "
+"cost calculation with cart quantity set to 1."
+msgstr ""
+
+#: includes/start-args.php:135
+msgid "Force Enqueue Google Maps JS"
+msgstr ""
+
+#: includes/start-args.php:140
+msgid "Do not check for other enqueued google scripts"
+msgstr ""
+
+#: includes/start-args.php:143
+msgid "Deactivate Google Maps JS"
+msgstr ""
+
+#: includes/start-args.php:148
+msgid ""
+"Might be helpful if Google Maps is already activated from another plugin or "
+"Theme"
+msgstr ""
+
+#: includes/start-args.php:151
+msgid "Do not restrict Google Autocomplete to IP-located country"
+msgstr ""
+
+#: includes/start-args.php:156
+msgid "Allow Google Autocomplete to suggest addresses from whole world"
+msgstr ""
+
+#: includes/start-args.php:159
+msgid "Geolocate user for improved Autocomplete suggestions"
+msgstr ""
+
+#: includes/start-args.php:164
+msgid "Let browser geolocate the user for improved address suggestions."
+msgstr ""
+
+#: includes/start-args.php:167
+msgid "Advanced Google Response Options"
+msgstr ""
+
+#: includes/start-args.php:172
+msgid "View advanced options"
+msgstr ""
+
+#: includes/start-args.php:175
+msgid "Autocomplete Suggestion Types"
+msgstr ""
+
+#: includes/start-args.php:183
+msgid "geocode (Recommended)"
+msgstr ""
+
+#: includes/start-args.php:184
+msgid "address"
+msgstr ""
+
+#: includes/start-args.php:185
+msgid "establishment"
+msgstr ""
+
+#: includes/start-args.php:187
+msgid ""
+"You may restrict results from a address autocomplete request to be of a "
+"certain type."
+msgstr ""
+
+#: includes/start-args.php:187
+msgid ""
+"<p><a href=\"https://developers.google.com/maps/documentation/places/web-"
+"service/supported_types#table3\" target=\"_blank\">Learn more.</a></p>"
+msgstr ""
+
+#: includes/start-args.php:190
+msgid "Geocode Response Types"
+msgstr ""
+
+#: includes/start-args.php:214
+msgid ""
+"You may restrict results from a address geocode request to be of a certain "
+"type."
+msgstr ""
+
+#: includes/start-args.php:214
+msgid ""
+"<p><a href=\"https://developers.google.com/maps/documentation/geocoding/"
+"overview#Types\" target=\"_blank\">Learn more.</a></p>"
+msgstr ""
+
+#: includes/start-args.php:217
+msgid "Delete settings?"
+msgstr ""
+
+#: includes/start-args.php:221
+msgid "Delete all settings on plugin removal?"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Check My Address for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://checkmyaddressplugin.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Let users check if their address is deliverable."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Arosoft.se"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://arosoft.se"
+msgstr ""

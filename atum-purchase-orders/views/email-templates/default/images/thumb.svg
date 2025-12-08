@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="90.5631555px" height="108.61558px" viewBox="0 0 90.5631555 108.61558" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>email-tamplate-th-default</title>
+    <g id="email-tamplate-th-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M89.9863201,101.522187 C89.9863201,104.8011 87.3349616,107.460095 84.0641435,107.460095 L7.07584739,107.460095 C3.80502924,107.460095 1.15367077,104.8011 1.15367077,101.522187 L1.15367077,6.51565095 C1.15367077,3.23673787 3.80502924,0.577742448 7.07584739,0.577742448 L84.0641435,0.577742448 C87.3349616,0.577742448 89.9863201,3.23673787 89.9863201,6.51565095 L89.9863201,101.522187 Z" id="Fill-1" fill="#F8F9FA"></path>
+        <g id="Group-39" transform="translate(11.153671, 0.942552)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="13" width="68" height="70"></rect>
+            <rect id="Rectangle-Copy-2" fill="#ADB5BD" x="0" y="0" width="68" height="13"></rect>
+            <polygon id="Stroke-7" fill="#FFFFFF" points="24.4304712 9 24.4304712 5 44.4304712 5 44.4304712 9"></polygon>
+            <polygon id="Stroke-10" fill="#ADB5BD" points="12.4304712 89 12.4304712 87 56.4304712 87 56.4304712 89"></polygon>
+            <polygon id="Stroke-10-Copy" fill="#ADB5BD" points="6.43047116 94 6.43047116 92 62.4304712 92 62.4304712 94"></polygon>
+            <polygon id="Stroke-10-Copy-2" fill="#ADB5BD" points="16.4304712 99 16.4304712 97 52.4304712 97 52.4304712 99"></polygon>
+            <polygon id="Stroke-13" fill="#ADB5BD" points="3.43047116 42 3.43047116 40 64.4304712 40 64.4304712 42"></polygon>
+            <polygon id="Stroke-13-Copy" fill="#ADB5BD" points="3.43047116 47 3.43047116 45 64.4304712 45 64.4304712 47"></polygon>
+            <polygon id="Stroke-13-Copy-3" fill="#ADB5BD" points="3.43047116 52 3.43047116 50 64.4304712 50 64.4304712 52"></polygon>
+            <polygon id="Stroke-13-Copy-4" fill="#ADB5BD" points="3.43047116 57 3.43047116 55 64.4304712 55 64.4304712 57"></polygon>
+            <polygon id="Stroke-13-Copy-2" fill="#ADB5BD" points="3.43047116 62 3.43047116 60 37.4304712 60 37.4304712 62"></polygon>
+            <polygon id="Stroke-21" fill="#ADB5BD" points="3.43047116 37 3.43047116 35 14.4304712 35 14.4304712 37"></polygon>
+            <polygon id="Stroke-21-Copy-3" fill="#ADB5BD" points="3.43047116 74 3.43047116 72 10.4304712 72 10.4304712 74"></polygon>
+            <polygon id="Stroke-21-Copy-4" fill="#ADB5BD" points="3.43047116 77 3.43047116 75 14.4304712 75 14.4304712 77"></polygon>
+            <polygon id="Stroke-21-Copy-2" fill="#E9ECEF" points="0.430471161 30 0.430471161 29 67.4304712 29 67.4304712 30"></polygon>
+            <polygon id="Stroke-21-Copy" fill="#ADB5BD" points="11.4304712 23 11.4304712 19 56.4304712 19 56.4304712 23"></polygon>
+        </g>
+    </g>
+</svg>

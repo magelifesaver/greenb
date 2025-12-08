@@ -1,0 +1,14 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+#pdami .inside table {
+	text-align: left;
+	width: 100%;
+}
+#pdami .inside table .h-key {
+	width: 30%;
+}
+#pdami .inside table .h-value {
+	width: 70%;
+}

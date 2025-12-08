@@ -1,0 +1,1 @@
+<img src="<?php echo esc_attr($imageUrl); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" class="<?php echo esc_attr($class); ?>" />

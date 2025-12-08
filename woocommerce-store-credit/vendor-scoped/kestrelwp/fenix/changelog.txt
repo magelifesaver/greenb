@@ -1,0 +1,63 @@
+*** Fenix Plugin Framework Changelog ***
+
+2025-06-16 - version 1.5.2
+ * Dev - Update dependencies and ensure compatibility with PHP 7.4+
+
+2025-06-11 - version 1.5.1
+ * Tweak - Expand the jobs component to also handle Action Scheduler tasks
+
+2025-06-10 - version 1.5.0
+ * Feature - Import the WP Background Processing library into the framework to handle background tasks
+
+2025-06-09 - version 1.4.0
+ * Feature - Add more type helpers
+ * Fix - When handling an empty credential setting, do not attempt to encrypt or decrypt it
+ * Dev - Move the multilingual check to display an admin notice in the `Admin` handler
+
+2025-04-23 - version 1.3.0
+ * Feature - Add a `System_Status_Report` handler which WooCommerce extensions can implement to add data to the system status report page and endpoint
+ * Feature - Add a boolean helper to handle boolean values to strings conversion
+ * Dev - The `Integration::initialize()` method no longer forces to return void, making it compatible with the `Is_Handler` trait
+
+2025-03-14 - version 1.2.0
+ * Feature - Add an admin `Screen` component to handle admin screens registration and rendering
+ * Feature - Add an admin `Metabox` component to handle metaboxes registration and rendering in WordPress admin screens
+ * Feature - Automatically add a dismissible activation notice upon plugin's activation
+ * Feature - Add `Plugin` methods to return translations and templates paths
+ * Tweak - Add `utm_source` and `utm_medium` query parameters to the plugin's admin links redirecting to external resources
+ * Tweak - Improve plugin `Requirements` handling component 
+ * Dev - Implement a `WordPress_Plugin` contract in the `Plugin` main class to pass down the handlers to ease mock testing and type consistency
+ * Dev - Implement a `WooCommerce_Extension` contract that extends the `WordPress_Plugin` contract to pass down the WooCommerce handlers
+ * Dev - Removed `Migration::rollback()` method as we don't have a mechanism to leverage rollbacks at the moment
+
+2024-12-10 - version 1.1.4
+ * Tweak - Add a `REST_API` class with helper functions for the WordPress REST API
+ * Tweak - Allow adding an informative admin notice to international users who are not using the plugin in its default language 
+
+2024-12-06 - version 1.1.3
+ * Fix - Ensure that a concrete REST API handler is correctly initialized and the routes are registered upon `rest_api_init`
+
+2024-12-04 - version 1.1.2
+ * Fix - Prevent a possible recursion loop with the cache handler when verifying a value change
+
+2024-12-03 - version 1.1.1
+ * Fix - Use the correct relative path to the local plugin's translations folder
+
+2024-11-25 - version 1.1.0
+ * Feature - Add components for the WordPress block editor
+ * Feature - Add components to handle additional plugin requirements
+ * Feature - Add a `Collection` class to handle collections of models and other iterable items
+ * Feature - Add a `Customer` model for WooCommerce instances
+ * Feature - Add a `User_Meta` data store for models
+ * Feature - Add a `Mime_Types` helper class for handling mime types
+ * Feature - Add WordPress avatar handling components
+ * Feature - Bundle the `commerceguys/addressing` library for address handling
+ * Tweak - Remove constants access declaration from the loader class for increased PHP environment compatibility
+ * Tweak - Move assets functions from the main `Plugin` class to its own `Assets` handler
+ * Fix - Ensure the `Strings` helper can successfully convert a camel case string to snake case in some edge cases 
+ * Fix - Ensure that the `Has_Named_Constructor` trait works with constants using underscores
+ * Fix - Remove `is_admin()` check from the `Dashboard` admin handler constructor 
+ * Fix - Do not pass null, pass empty string instead to `_doing_it_wrong()` when no version needs to be specified
+
+2024-09-17 - version 1.0.0
+ * Misc - Initial release

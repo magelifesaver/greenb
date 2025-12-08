@@ -1,0 +1,170 @@
+/** 1.3.10 - 2025.11.14 **/
+- Updated: Show a warning message if the regular price field exists and the entered value is invalid when updating the sale price field.
+- Updated: Change the fixed columns to ID, Type, and Rating.
+- Added: The product name column for the review on the edit page.
+- Added: Add a button that takes you to the review edit page on click.
+- Added: Filter reviews by product.
+
+/** 1.3.9- 2025.09.18 **/
+- Added: Include a 'GTIN, UPC, EAN, or ISBN' column on the bulk edit products page
+- Updated: Compatible with VARGAL
+– Fixed: Cannot auto delete history revision
+
+/** 1.3.8- 2025.03.20 **/
+- Updated: Only arrange the fields to be displayed in the edit table
+- Updated: Close the sidebar after saving settings or filter
+
+/** 1.3.7- 2025.01.16 **/
+- Fixed: The product list failed to load because some attributes have too many options.
+– Fixed: Filter Coupons
+– Fixed: Compatible with WooCommerce HPOS(COT)
+– Fixed: Settings for each user
+
+/** 1.3.6- 2024.12.27 **/
+- Fixed: Errors from customers' feedback
+- Updated: Compatible with WC 9.5
+
+/** 1.3.5 - 2024.10.04 **/
+- Added: The table wrap mode
+- Fixed: Fix distance of data lazy loading
+- Fixed: Errors from customers' feedback
+
+/** 1.3.4 - 2024.09.05 **/
+- Updated: Retain newline characters in attribute value
+- Updated: Add gallery meta type
+- Updated: Filter feature image
+- Updated: Data lazy loading
+- Updated: Compatible with WC 9.2.3 and PHP 8.1
+- Fixed: Save data
+
+/** 1.3.3 - 2024.07.18 **/
+- Fixed: Automatically create slug when not duplicated
+
+/** 1.3.2 - 2024.06.07 **/
+– Fixed: Product information copied incorrectly, generate slug for copied products
+- Fixed: Clear data after closed text editor
+- Fixed: Get global attribute
+- Fixed: Errors of function add attributes to products
+- Updated: Save column width
+
+/** 1.3.1 - 2024.04.25 **/
+– Fixed: Save order metadata
+- Fixed: External link in wp editor
+- Fixed: Sort when paging
+– Updated: Compatible with wp 6.5
+- Updated: Update support file
+
+/** 1.3.0 - 2024.03.25 **/
+– Updated: Edit reviews
+– Updated: Slug query with behavior IN
+
+/** 1.2.9 - 2024.03.23 **/
+– Updated: Settings for each user
+
+/** 1.2.8 - 2024.01.26 **/
+– Updated: Added check hook woocommerce_process_product_meta_product_type
+
+/** 1.2.7 - 2024.01.23 **/
+– Updated: Notification when encountering issue max_input_vars
+– Updated: Hook bulky_filter_meta_arr
+
+/** 1.2.6 - 2023.10.10 **/
+– Fix: Special character of attributes
+– Fix: Sort by SKU
+
+/** 1.2.5 - 2023.07.31 **/
+– Updated: Compatible with WooCommerce HPOS(COT)
+– Updated: Fill number feature for number column type
+– Fix: Filter default attribute column
+
+/** 1.2.4 - 2023.04.28 **/
+- Fix: DOMPurify exclude object
+
+/** 1.2.3 - 2023.04.21 **/
+- Fix: Validate input data
+
+/** 1.2.2 - 2023.03.28 **/
+- Update: Add bulk remove product attributes feature
+- Fix: Calculate price with small price
+- Fix: Variation filter
+- Update: Sort fields
+
+/** 1.2.1 - 2022.07.15 **/
+- Update: Change icon of array meta to string
+- Fix: Get saved taxonomies as array
+- Update: Exclude meta key wpfoof-exclude-product, wpfoof-identifier_exists
+
+/** 1.2.0 - 2022.06.24 **/
+- Fixed: Display RTL
+- Fixed: Search from 0 to 0
+– Fixed: SKU is removed when filter edit fields
+– Fixed: Change option Orderby regular/sale price to orderby price
+– Fixed: Paste data from clipboard
+- Update: Calculate sale price base on regular price
+- Update: Add images to galleries
+- Update: Add attributes to products
+- Update: Select & multiselect for custom meta fields
+- Update: Filter include variation
+
+/** 1.1.8 - 2022.03.30 **/
+- Update: VillaTheme_Support
+
+/** 1.1.7 - 2022.03.23 **/
+- Update: VillaTheme_Support
+
+/** 1.1.6 - 2022.03.01 **/
+- Fixed: Product thumbnail with .jpeg type
+
+/** 1.1.5 - 2021.12.28 **/
+- Fixed: Add image to gallery
+- Update: Mark selected row
+
+/** 1.1.4 - 2021.11.22 **/
+- Fixed: Select fields to edit
+- Update: Copy data between columns same type
+
+/** 1.1.3 - 2021.11.10 **/
+-Update: Change select categories with using select2
+-Update: Find & replace categories
+-Fixed: Get users
+-Fixed: Format variation title
+
+/** 1.1.2 - 2021.10.11 **/
+-Update: Find and replace tags
+
+/** 1.1.1 - 2021.10.11 **/
+-Fix: Calculator for number type
+
+/** 1.1.0 - 2021.10.11 **/
+- Update: Edit orders, coupons in bulk
+
+/** 1.0.4 - 2021.09.02 **/
+-Fix: Clear tags, cross-sell, upsell column
+-Fix: Copy cell is object
+-Fix: Use for variation not save
+-Update: Edit publish date
+-Update: Edit multiple calendar cells
+-Update: Delete cell content when select column
+
+/** 1.0.3 - 2021.08.20 **/
+-Fix: Scroll bar not working after close select upsell/cross-sell column
+-Fix: Curency format
+-Update: Duplicate product
+
+/** 1.0.2 - 2021.08.16 **/
+-Fix: Show all categories
+-Fix: Remove other plugin scripts
+-Fix: meta data texteditor
+-Fix: Undo for texteditor column type
+-Fix: Display upsells
+
+/** 1.0.1 - 2021.08.07 **/
+-Fix: Close image cell
+-Fix: Check image url contain some special character
+-Fix: urldecode slug
+
+/** 1.0.0.1 - 2021.03.08 **/
+- Update: Add auto update ID
+
+/** 1.0.0 - 2021.08.02 **/
+~ The first released.

@@ -1,0 +1,1235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulky - Bulk Edit Products fo Woo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-13 08:46+0000\n"
+"PO-Revision-Date: 2022-09-15 10:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.2; wp-6.0.2\n"
+"X-Domain: woocommerce-bulk-editor"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/handle-order.php:161
+#, php-format
+msgid "%1$s at %2$s by %3$s"
+msgstr "%1$s tại %2$s bằng %3$s"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:178
+msgid "(Recommend at least 3000 or higher)"
+msgstr "(Đề xuất 3000 hoặc cao hơn)"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:307
+msgid "Action"
+msgstr "Thao tác"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:212
+msgid "Actions"
+msgstr "Thao tác"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:211
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:248
+msgid "Active"
+msgstr "Kích hoạt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:19
+msgid "Add"
+msgstr "Thêm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:31
+msgid "Add file"
+msgstr "Thêm tệp"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:27
+msgid "Add image"
+msgstr "Thêm ảnh"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:58
+msgid "Add image to selected cells"
+msgstr "Thêm ảnh vào cột được chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:37
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:101
+msgid "Add new"
+msgstr "Thêm mới"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:43
+msgid "Add variation"
+msgstr "Thêm biến thể"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:465
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:542
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:373
+msgid "All fields"
+msgstr "Tất cả trường"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:684
+msgid "Allow backorder"
+msgstr "Cho phép đặt hàng trước"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:81
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:450
+msgid "Allow free shipping"
+msgstr "Cho phép miễn phí vận chuyển"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:150
+msgid "Allowed emails"
+msgstr "Allowed emails"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:75
+msgid "Amount"
+msgstr "Giá trị"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:562
+msgid "And"
+msgstr "Và"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:11
+msgid "Any..."
+msgstr "Bất kỳ..."
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:15
+msgid "Attribute"
+msgstr "Thuộc tính"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:582
+msgid "Attributes"
+msgstr "Thuộc tính"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:50
+msgid "Author"
+msgstr "Tác giả"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:71
+msgid "Auto update key"
+msgstr "Mã tự động cập nhật"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:297
+msgid "Backorders"
+msgstr "Đặt hàng trước"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:538
+msgid "Begin"
+msgstr "Bắt đầu với"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:79
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:370
+msgid "Billing address 1"
+msgstr "Địa chỉ thanh toán 1"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:80
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:377
+msgid "Billing address 2"
+msgstr "Địa chỉ thanh toán 2"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:81
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:388
+msgid "Billing city"
+msgstr "Địa chỉ thành phố thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:78
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:426
+msgid "Billing company"
+msgstr "Công ty thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:83
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:407
+msgid "Billing country"
+msgstr "Quốc gia thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:352
+msgid "Billing first name"
+msgstr "Tên thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:76
+msgid "Billing fisrt name"
+msgstr "Tên thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:77
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:359
+msgid "Billing last name"
+msgstr "Tên họ thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:86
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:433
+msgid "Billing phone"
+msgstr "Số điện thoại thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:82
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:395
+msgid "Billing postcode"
+msgstr "Mã bưu điện thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:84
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:414
+msgid "Billing state"
+msgstr "Địa chỉ bang thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:28
+msgid "Bulky"
+msgstr "Bulky"
+
+#. Name of the plugin
+msgid "Bulky - Bulk Edit Products for WooCommerce Premium"
+msgstr "Bulky - Bulk Edit Products for WooCommerce Premium"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:94
+msgid "Bulky - Bulk Edit Products for WooCommerce Premium Settings"
+msgstr "Cài Đặt Bulky - Bulk Edit Products for WooCommerce Premium"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:609
+msgid "Button text"
+msgstr "Tiêu đề nút"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:47
+msgid "Calculator"
+msgstr "Máy tính"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:312
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:839
+msgid "Catalog visibility"
+msgstr "Mức độ hiển thị catalog"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:318
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:702
+msgid "Categories"
+msgstr "Danh mục"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:26
+msgid "Choose file"
+msgstr "Chọn tệp"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:155
+msgid "Clear"
+msgstr "Xóa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:208
+msgid "Column name"
+msgstr "Tên cột"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:210
+msgid "Column type"
+msgstr "Kiểu cột"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:74
+msgid "Content"
+msgstr "Nội dung"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:435
+msgid "Coupon amount from"
+msgstr "Giá trị phiếu giảm giá từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:440
+msgid "Coupon amount to"
+msgstr "Giá trị phiếu giảm giá đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:41
+msgid "Coupon code"
+msgstr "Mã giảm giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:378
+msgid "Coupon date created from"
+msgstr "Ngày tạo phiếu giảm giá từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:383
+msgid "Coupon date created to"
+msgstr "Ngày tạo phiếu giảm giá đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:403
+msgid "Coupon expiry date from"
+msgstr "Ngày hết hạn phiếu giảm giá từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:408
+msgid "Coupon expiry date to"
+msgstr "Ngày hết hạn phiếu giảm giá từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:144
+msgid "Coupon is not exist"
+msgstr "Phiếu giảm giá không tồn tại"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:418
+msgid "Coupon status"
+msgstr "Tình trạng Phiếu giảm giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:483
+msgid "Coupons per page"
+msgstr "Phiếu giảm giá trên mỗi trang"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:44
+msgid "Create variations from all attributes"
+msgstr "Tạo biến thể từ tất cả thuộc tính"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:47
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:60
+msgid "Created date"
+msgstr "Ngày tạo"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:753
+msgid "Cross-sells"
+msgstr "Bán chéo"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:38
+msgid "Custom attribute name"
+msgstr "Tên thuộc tính tùy chỉnh"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:12
+msgid "Custom product attribute"
+msgstr "Thuộc tính sản phẩm tùy chỉnh"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:100
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:309
+msgid "Customer provided note"
+msgstr "Ghi chú của khách hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:302
+msgid "Customer's email"
+msgstr "Địa chỉ email của khách hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:305
+msgid "Date"
+msgstr "Ngày"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:508
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:585
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:440
+msgid "day(s)"
+msgstr "ngày"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:589
+msgid "Default attributes"
+msgstr "Thuộc tính mặc định"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:57
+msgid "Delete rows with selected cells"
+msgstr "Xóa hàng với những ô đã chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:41
+msgid "Delete selected rows"
+msgstr "Xóa hàng đã chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:61
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:561
+msgid "Description"
+msgstr "Mô tả"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:619
+msgid "Disable"
+msgstr "Tắt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:68
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:424
+msgid "Discount type"
+msgstr "Kiểu giảm giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:780
+msgid "Download expiry"
+msgstr "Giới hạn ngày tải xuống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:765
+msgid "Download file"
+msgstr "Tệp để tải"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:773
+msgid "Download limit"
+msgstr "Giới hạn tải xuống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:275
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:760
+msgid "Downloadable"
+msgstr "Có thể tải xuống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:76
+msgid "Draft"
+msgstr "Nháp"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:13
+msgid "Edit attributes"
+msgstr "Chỉnh sửa thuộc tính"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:53
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:54
+msgid "Edit Coupons"
+msgstr "Chỉnh sửa Phiếu giảm giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:40
+msgid "Edit metadata"
+msgstr "Chỉnh sửa metadata"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:45
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:46
+msgid "Edit Orders"
+msgstr "Chỉnh sửa Đơn hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:37
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:38
+msgid "Edit Products"
+msgstr "Chỉnh sửa Sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:91
+msgid "Editor"
+msgstr "Trình chỉnh sửa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:85
+msgid "Email address"
+msgstr "Địa chỉ email"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:540
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:394
+msgid "Empty"
+msgstr "Trống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:618
+msgid "Enable"
+msgstr "Bật"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:157
+msgid "Enable hook that 3rd plugins need in save product processing"
+msgstr "Bật móc nối (hook) mà plugin thứ 3 cần để lưu quá trình xử lý sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:832
+msgid "Enable reviews"
+msgstr "Cho phép bình luận"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:539
+msgid "End"
+msgstr "Kết thúc với"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:34
+msgid "Enter a name for the new attribute term:"
+msgstr "Điền tên cho giá trị thuộc tính mới:"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:39
+msgid "Enter some text, or some attributes by \"|\" separating values."
+msgstr "Điền giá trị, hoặc một vài thuộc tính được ngăn cách bởi dấu \"|\"."
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:536
+msgid "Exact"
+msgstr "Chính xác"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:81
+msgid "Excerpt"
+msgstr "Tóm tắt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:141
+msgid "Exclude categories"
+msgstr "Loại trừ danh mục"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:473
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:550
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:381
+msgid "Exclude fields to edit"
+msgstr "Loại trừ các trường để chỉnh sửa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:125
+msgid "Exclude products"
+msgstr "Loại trừ sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:112
+msgid "Exclude sale items"
+msgstr "Loại trừ sản phẩm khuyến mãi"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:66
+msgid "Exit full screen"
+msgstr "Thoát toàn màn hình"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:392
+msgid "Expire date"
+msgstr "Ngày hết hạn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:87
+msgid "Expiry date"
+msgstr "Ngày hết hạn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:261
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:631
+msgid "Featured"
+msgstr "Nổi bật"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:464
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:541
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:372
+msgid "Fields to edit"
+msgstr "Trường để chỉnh sửa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:30
+msgid "File URL"
+msgstr "Liên kết tệp"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:77
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:132
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:152
+msgid "Filter"
+msgstr "Lọc"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:452
+msgid "Filter include variation"
+msgstr "Lọc bao gồm biến thể"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:54
+msgid "Find"
+msgstr "Tìm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:48
+msgid "Find and Replace"
+msgstr "Tìm và Thay thế"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:66
+msgid "Full screen"
+msgstr "Toàn màn hình"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:575
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:222
+msgid "Get meta fields"
+msgstr "Lấy các trường meta"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/enqueue.php:213
+msgid "Go to Bulk Editor page"
+msgstr "Đến trang Chỉnh sửa hàng loạt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:49
+msgid "Go to edit product page"
+msgstr "Đến trang chỉnh sửa sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:596
+msgid "Grouped"
+msgstr "Nhóm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:393
+msgid "Has expire date"
+msgstr "Có ngày hết hạn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:741
+msgid "Height"
+msgstr "Chiều cao"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:195
+msgid "Height from"
+msgstr "Chiều cao từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:200
+msgid "Height to"
+msgstr "Chiều cao đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:97
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:142
+msgid "History"
+msgstr "Lịch sử"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:104
+msgid "Hooks in save product processing"
+msgstr "Móc nối (hooks) trong quá trình lưu sản phẩm"
+
+#. Author URI of the plugin
+msgid "https://villatheme.com"
+msgstr "https://villatheme.com"
+
+#. URI of the plugin
+msgid "https://villatheme.com/extensions/bulky-woocommerce-bulk-edit-products/"
+msgstr ""
+"https://villatheme.com/extensions/bulky-woocommerce-bulk-edit-products/"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:368
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:296
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:61
+msgid "ID (Use comma or minus for range)"
+msgstr "ID (dùng dấu phẩy hoặc dấu trừ cho phạm vi)"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:535
+msgid "Image"
+msgstr "Ảnh"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:106
+msgid "Individual use only"
+msgstr "Chỉ dùng cho cá nhân"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:53
+msgid "Invalid or duplicated SKU"
+msgstr "Không khả dụng hoặc trùng SKU"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:71
+msgid "Items"
+msgstr "Sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:247
+msgid "Key"
+msgstr "Mã"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:729
+msgid "Length"
+msgstr "Chiều dài"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:210
+msgid "Length from"
+msgstr "Chiều dài từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:215
+msgid "Length to"
+msgstr "Chiều dài đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:535
+msgid "Like"
+msgstr "Giống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:162
+msgid "Limit usage to X items"
+msgstr "Giới hạn sử dụng đến X sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:397
+msgid "Load variations"
+msgstr "Tải biến thể"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:668
+msgid "Manage stock"
+msgstr "Quản lý kho hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:29
+msgid "max_input_vars is not enough:"
+msgstr "max_input_vars không đủ:"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:100
+msgid "Maximum spend"
+msgstr "Chi tiêu tối đa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:827
+msgid "Menu order"
+msgstr "Thứ tự ưu tiên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:85
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:134
+msgid "Meta fields"
+msgstr "Trường Meta"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:207
+msgid "Meta key"
+msgstr "Khóa Meta"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:97
+msgid "Method is not exist"
+msgstr "Phương thức không tồn tại"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:94
+msgid "Minimum spend"
+msgstr "Chi tiêu tối thiểu"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:29
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:246
+msgid "Name"
+msgstr "Tên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:228
+msgid "new_meta_key"
+msgstr "new_meta_key"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:452
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:263
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:277
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:286
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:400
+msgid "No"
+msgstr "Không"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:474
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:551
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:382
+msgid "No field"
+msgstr "Không có trường"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:165
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:60
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:60
+msgid "No history id"
+msgstr "Không có lịch sử id"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/ajax.php:383
+msgid "No meta field was found"
+msgstr "Không tìm thấy trường meta nào"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:21
+msgid "No round"
+msgstr "Không làm tròn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:801
+msgid "None"
+msgstr "Không có"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:537
+msgid "Not"
+msgstr "Không bao gồm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:563
+msgid "Not in"
+msgstr "Không bao gồm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:52
+msgid "Nothing change to save"
+msgstr "Không có thay đổi để lưu"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:25
+msgid "OK"
+msgstr "OK"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:16
+msgid "Option"
+msgstr "Tùy chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:561
+msgid "Or"
+msgstr "Hoặc"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:498
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:575
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:421
+msgid "Order"
+msgstr "Đơn hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:134
+msgid "Order #"
+msgstr "Đơn hàng #"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:489
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:566
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:407
+msgid "Order by"
+msgstr "Sắp xếp theo"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:320
+msgid "Order date from"
+msgstr "Ngày đặt hàng từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:325
+msgid "Order date to"
+msgstr "Ngày đặt hàng tới"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:42
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/order-history.php:93
+msgid "Order is not exist"
+msgstr "Đơn hàng không tồn tại"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:74
+msgid "Order key"
+msgstr "Mã đơn hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:101
+msgid "Order notes"
+msgstr "Ghi chú đơn hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:335
+msgid "Order status"
+msgstr "Trạng thái đơn hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:560
+msgid "Orders per page"
+msgstr "Số đơn hàng trên một trang"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:52
+msgid "Other"
+msgstr "Khác"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:626
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:87
+msgid "Payment method"
+msgstr "Phương thức thanh toán"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:75
+msgid "Pending"
+msgstr "Đang duyệt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:51
+msgid "Please enter new product name"
+msgstr "Vui lòng điền tên sản phẩm mới"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:86
+msgid "Please fill your key what you get from"
+msgstr "Vui lòng điền mã được lấy từ "
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:105
+msgid "Post date from"
+msgstr "Ngày đăng bài từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:110
+msgid "Post date to"
+msgstr "Ngày đăng bài đến "
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:411
+msgid "Price"
+msgstr "Giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:77
+msgid "Private"
+msgstr "Riêng tư"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:132
+msgid "Product categories"
+msgstr "Danh mục sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupon-history.php:120
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:42
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/product-history.php:93
+msgid "Product is not exist"
+msgstr ""
+"Sản phẩm không tồn tại\n"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:245
+msgid "Product status"
+msgstr "Trạng thái sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:240
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:529
+msgid "Product type"
+msgstr "Loại sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:603
+msgid "Product URL"
+msgstr "Liên kết sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:118
+msgid "Products"
+msgstr "Sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:391
+msgid "Products per page"
+msgstr "Số sản phẩm trên một trang"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:554
+msgid "Publish date"
+msgstr "Ngày đăng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:73
+msgid "Published"
+msgstr "Đã đăng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:821
+msgid "Purchase note"
+msgstr "Ghi chú mua hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:637
+msgid "Regular price"
+msgstr "Giá bán thường"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:120
+msgid "Regular price from"
+msgstr "Giá bán thường từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:125
+msgid "Regular price to"
+msgstr "Giá bán thường đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:108
+msgid "Reload this page"
+msgstr "Tải lại trang"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:28
+msgid "Remove all"
+msgstr "Xóa tất cả"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:55
+msgid "Replace"
+msgstr "Thay thế"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:100
+msgid "require PHP version at least 7.0"
+msgstr "yêu cầu PHP phiên bản 7.0 trở lên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:110
+msgid "require WooCommerce is activated"
+msgstr "cần WooCommerce được kích hoạt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:115
+msgid "require WooCommerce version at least 4.0"
+msgstr "cần WooCommerce phiên bản 4.0 trở lên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:105
+msgid "require WordPress version at least 5.0"
+msgstr "cần WordPress phiên bản 5.0 trở lên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:56
+msgid "Revert all product in this point"
+msgstr "Hoàn nguyên tất cả sản phẩm trong điểm này"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:24
+msgid "Round down"
+msgstr "Làm tròn xuống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:23
+msgid "Round up"
+msgstr "Làm tròn lên"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:22
+msgid "Round with decimal"
+msgstr "Làm tròn với số thập phân"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:150
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:654
+msgid "Sale date from"
+msgstr "Ngày giảm giá từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:155
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:661
+msgid "Sale date to"
+msgstr "Ngày giảm giá đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:645
+msgid "Sale price"
+msgstr "Giá khuyến mãi"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:135
+msgid "Sale price from"
+msgstr "Giá khuyến mãi từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:140
+msgid "Sale price to"
+msgstr "Giá khuyến mãi đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:503
+msgid "Same as parent"
+msgstr "Như bản gốc"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:14
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:104
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:191
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:225
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:275
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:351
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:169
+msgid "Save"
+msgstr "Lưu"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:174
+msgid "Save & Check key"
+msgstr "Lưu & Kiểm tra"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:354
+msgid "Save & Close"
+msgstr "Lưu & Đóng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:514
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:591
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:446
+msgid "Save filter when reload page"
+msgstr "Lưu bộ lọc khi tải lại trang"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:45
+msgid "Save new attributes before"
+msgstr "Lưu thuộc tính mới trước đó"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/helper.php:74
+msgid "Scheduled"
+msgstr "Đã lên lịch"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:33
+msgid "Search products..."
+msgstr "Tìm sản phẩm..."
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:32
+msgid "Search tags..."
+msgstr "Tìm thẻ..."
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:88
+msgid "See guide"
+msgstr "Xem hướng dẫn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:35
+msgid "Select all"
+msgstr "Chọn tất cả"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:706
+msgid "Select categories"
+msgstr "Chọn danh mục"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:36
+msgid "Select none"
+msgstr "Không chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:944
+msgid "Select term"
+msgstr "Chọn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:20
+msgid "Set default attributes"
+msgstr "Đặt thuộc tính mặc định"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products.php:92
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:81
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:133
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:61
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:62
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:93
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:462
+msgid "Shipping address 1"
+msgstr "Địa chỉ giao hàng 1"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:94
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:469
+msgid "Shipping address 2"
+msgstr "Địa chỉ giao hàng 2"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:95
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:480
+msgid "Shipping city"
+msgstr "Thành phố giao hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:846
+msgid "Shipping class"
+msgstr "Loại hình giao hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:92
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:518
+msgid "Shipping company"
+msgstr "Công ty nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:97
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:499
+msgid "Shipping country"
+msgstr "Quốc gia nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:444
+msgid "Shipping first name"
+msgstr "Tên nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:90
+msgid "Shipping fisrt name"
+msgstr "Tên người nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:91
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:451
+msgid "Shipping last name"
+msgstr "Tên họ người nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:799
+msgid "Shipping only"
+msgstr "Chỉ giao hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:99
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:525
+msgid "Shipping phone"
+msgstr "Số điện thoại nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:96
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:487
+msgid "Shipping postcode"
+msgstr "Mã bưu điện nhận hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:98
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:506
+msgid "Shipping state"
+msgstr "Địa chỉ bang nhận giao hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:568
+msgid "Short Desc"
+msgstr "Mô Tả Ngắn"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:95
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:414
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:541
+msgid "SKU"
+msgstr "SKU"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:88
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:547
+msgid "Slug"
+msgstr "Slug"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:284
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:690
+msgid "Sold individually"
+msgstr "Bán riêng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:54
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:67
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:615
+msgid "Status"
+msgstr "Trạng thái"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:673
+msgid "Stock"
+msgstr "Kho hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:165
+msgid "Stock quantity from"
+msgstr "Số lượng trong kho từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:170
+msgid "Stock quantity to"
+msgstr "Số lượng trong kho đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:255
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:678
+msgid "Stock status"
+msgstr "Trạng thái kho hàng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:167
+msgid "System status"
+msgstr "Trạng thái hệ thống"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:326
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:712
+msgid "Tags"
+msgstr "Thẻ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:809
+msgid "Tax class"
+msgstr "Loại hình thuế"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:791
+msgid "Tax status"
+msgstr "Tình trạng thuế"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:795
+msgid "Taxable"
+msgstr "Có thuế"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:138
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:91
+msgid "Taxonomy"
+msgstr "Taxonomy"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:224
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:274
+msgid "This action will reload editor"
+msgstr "Thao tác này sẽ tải lại trang chỉnh sửa"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:507
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:584
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:439
+msgid "Time to delete history"
+msgstr "Thời hạn xóa lịch sử"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:67
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:410
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:523
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:72
+msgid "Total"
+msgstr "Tổng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:88
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/orders/orders.php:341
+msgid "Transaction ID"
+msgstr "ID giao dịch"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:747
+msgid "Upsells"
+msgstr "Upsells"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:156
+msgid "Usage limit per coupon"
+msgstr "Giới hạn sử dụng cho mỗi mã giảm giá"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:168
+msgid "Usage limit per user"
+msgstr "Giới hạn sử dụng trên mỗi người dùng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:18
+msgid "Used for variations"
+msgstr "Sử dụng cho biến thể"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:306
+msgid "User"
+msgstr "Người dùng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/abstracts/bulky-abstract.php:209
+msgid "Value format"
+msgstr "Định dạng giá trị"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:46
+msgid "variations are added"
+msgstr "Biến thể đã được thêm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:42
+msgid "Variations cannot revert after save"
+msgstr "Biến thể không thể hoàn nguyên sau khi lưu"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:50
+msgid "View on Single product page"
+msgstr "Xem trên Trang sản phẩm đơn lẻ"
+
+#. Author of the plugin
+msgid "VillaTheme"
+msgstr "VillaTheme"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:695
+msgid "Virtual"
+msgstr "Sản phẩm ảo"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/i18n.php:17
+msgid "Visible on the product page"
+msgstr "Hiển thị trên trang sản phẩm"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:723
+msgid "Weight"
+msgstr "Khối lượng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:225
+msgid "Weight from"
+msgstr "Khối lượng từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:230
+msgid "Weight to"
+msgstr "Khối lượng đến"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:735
+msgid "Width"
+msgstr "Chiều rộng"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:180
+msgid "Width from"
+msgstr "Chiều rộng từ"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:185
+msgid "Width to"
+msgstr "Chiều rộng đến"
+
+#. Description of the plugin
+msgid ""
+"WooCommerce Bulk Edit Products helps easily work with products in bulk. The "
+"plugin offers sufficient simple and advanced tools to help filter various "
+"available attributes of simple and variable products such as  ID, Title, "
+"Content, Excerpt, Slugs, SKU, Post date, range of regular price and sale "
+"price, Sale date, range of stock quantity, Product type, Categories.... "
+"Users can quickly search for wanted products fields and work with the "
+"product fields in bulk. The plugin promises to help users to save time and "
+"optimize manipulation when working with products in bulk."
+msgstr ""
+"WooCommerce Bulk Edit Products giúp dễ dàng quản lý và chỉnh sửa các sản "
+"phẩm hàng loạt. Plugin cung cấp các công cụ đơn giản và nâng cao để giúp lọc "
+"các thuộc tính có sẵn khác nhau của các sản phẩm đơn giản và biến thể như ID,"
+" Tiêu đề, Nội dung, Đoạn trích, Slug, Mã hàng, Ngày đăng, khoảng giá thông "
+"thường và giá ưu đãi, Ngày bán, Số lượng, Loại sản phẩm, Danh mục .... Người "
+"dùng có thể nhanh chóng tìm kiếm các trường sản phẩm mong muốn và tiến hành "
+"chỉnh sửa/quản lý với số lượng lớn. Plugin tiềm năng sẽ giúp người dùng tiết "
+"kiệm thời gian và tối ưu hóa thao tác khi làm việc với nhiều sản phẩm."
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/admin/admin.php:27
+msgid "WooCommerce Bulk Editor"
+msgstr "WooCommerce Bulk Editor"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/coupons/coupons.php:451
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:262
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:276
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:285
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/includes/products/products.php:399
+msgid "Yes"
+msgstr "Có"
+
+#: D:/Git/bulky-woocommerce-bulk-edit-products/bulky-woocommerce-bulk-edit-products/support/define-support.php:87
+msgid "You can auto update this plugin."
+msgstr "Plugin có thể tự động cập nhật."

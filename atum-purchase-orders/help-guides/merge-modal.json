@@ -1,0 +1,17 @@
+[
+	{
+		"title": "Select PO",
+		"element": ".po-merge-modal .po-merge-select-po",
+		"intro": "Welcome to the \"Merge POs\" modal. There may come a time you need to merge two existing purchase orders.<br><br>ATUM will help you merge an existing purchase order, \"the one you select here,\" into the currently edited purchase order."
+	},
+	{
+		"title": "Data to Merge",
+		"element": ".po-merge-modal .po-merge-settings-list",
+		"intro": "The following switches represent the sections to merge from the selected purchase order into the currently edited purchase order.<br><br>Deselect the switches of sections you do not want to include in the merge."
+	},
+	{
+		"title": "Replace Items",
+		"element": ".po-merge-modal .po-merge-replace-items",
+		"intro": "The \"Replace PO Items\" switch controls the product merging.<br><br>If left deactivated, ATUM adds products from the above-selected PO to the currently edited PO. ATUM will add the volumes/inventories on top if matching products are present.<br>When activated, ATUM replaces products and their volumes/inventories in the currently edited PO with products from the above-selected PO."
+	}
+]

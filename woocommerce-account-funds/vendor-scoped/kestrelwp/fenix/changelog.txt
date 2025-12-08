@@ -1,0 +1,126 @@
+*** Fenix Plugin Framework Changelog ***
+
+2025-11-05 - version 1.8.2
+ * Fix - If the plugin update is triggered in contexts other than frontend, ensure the newsletter signup component bails to avoid an error
+ * Dev - Ensure the `Settings_Registry::$array` is initialized to avoid potential notices in PHP 7.4
+ * Dev - The `Setting::deregister()` method name contained a typo and it has been corrected
+ * Dev - The custom table method in the `Custom_Table` data store should not be called statically
+
+2025-11-03 - version 1.8.1
+ * Tweak - When a cached request fails, remove the failed response data from the cache bucket, but don't destroy the bucket altogether
+ * Fix - Ensure that the cache of cached requests is properly updated when a cached value was previously set
+ * Fix - Address an issue with the `Customer` model when the metadata for billing phone, email and shipping phone is not a string, in some less common occurrences
+
+2025-10-29 - version 1.8.0
+ * Feature - Add a `Modal` component to generate and output dialogs in the WordPress admin screens
+ * Feature - Add a `Marketing\Newsletter` component to invite plugin admins to sign up for a newsletter as indicated by a concrete plugin during plugin lifecycle updates
+ * Dev - `Settings_Group::save()` will collect individual validation errors and store them in the corresponding exception, which can be retrieved using the `Setting_Exception::get_messages()` method
+
+2025-09-11 - version 1.7.2
+ * Tweak - Allow requests to be cacheable by setting a `Cache` object in a custom request's property 
+ * Tweak - `Cache` methods to set and get the current expiration value are now public
+ * Tweak - `Invalid_Request_Exception` should extend from `Request_Exception` instead of the base `Http_Exception` class
+ * Tweak - Add a `Cron_Job` handler to manage cron-like tasks using the Action Scheduler, when available
+ * Fix - Ensure the address formatter is available when the adapter is called too early during the plugin initialization
+ * Fix - Ensure the address properties coming from WordPress metadata are of the correct types to avoid type errors
+
+2025-08-26 - version 1.7.1
+ * Tweak - Add a `WordPress\Site` repository helper with site-related utility methods
+ * Tweak - Move custom settings output hooks to a dedicated handler so they can work outside of a WooCommerce settings page in the admin
+ * Tweak - Allow setting request bodies to other types than arrays
+ * Tweak - Allow logging exceptions upon instantiation (useful when debug mode in a plugin is enabled to log automatically exceptions)
+ * Tweak - Log the previous exception message as log context when the `Exception::log()` method is called (overrideable by providing context directly)
+ * Fix - Set the subject in context to a dynamic property instead of static among the type helpers to avoid issues with static calls
+ * Fix - Ensure that setting titles are adapted to labels when output individually
+ * Fix - Ensure that the `Setting_Exception` previous exception is of a nullable type
+ * Dev - Automatically load a `functions.php` file from the plugin's root directory if it exists, containing template functions in the global namespace meant for for the plugin's public API
+ 
+2025-08-05 - version 1.7.0
+ * Feature - Provide a mechanism for a WooCommerce extension implementing the framework to register payment gateways using a base `Gateway` class
+ * Tweak - Add a method to the main `Plugin` class to help determining if the plugin has been upgraded from a given version to the current
+ * Tweak - Add support for global notices that persist their dismissal flag in a WordPress option instead of user meta, so they are not displayed for each admin
+ * Tweak - Ensure any lingering background processing batch data in the options table is cleaned up upon job completion
+ * Tweak - Do not autoload certain options that do not need to be accessed frequently
+ * Dev - `Milestone::should_trigger()` now receives arguments from the trigger method that implementations can use to determine if the milestone should be triggered
+ * Dev - The financial `Amount` setting now uses the `Text` setting type as its base type instead of `Number` 
+
+2025-07-10 - version 1.6.1
+ * Tweak - Ensure the default lifecycle notices have the `manage_options` capability check for dispatching them
+ * Fix - Milestones should have an admin or shop manager capability check to be displayed
+ * Dev - Remove the default call to action from the default milestone notice prompting for a review
+ * Dev - Explicitly check for `null` before setting a notice title to the plugin name instead of empty string, allowing empty overrides to disable the title
+
+2025-07-08 version 1.6.0
+ * Feature - Add a milestone component to trigger plugin milestones and display delayed notices in the admin when achieved
+ * Feature - Allow dispatching migrations in background using background processing jobs
+ * Feature - Add an overrideable `Privacy` handler for adding a WordPress-compliant privacy policy handler and optionally define data exporters and erasers
+ * Feature - Add a `Currency` helper for basic WooCommerce currency handling
+ * Feature - Add a `Custom_Table` data store for models using custom database tables
+ * Tweak - Update the `Has_Named_Constructor::name()` trait method to return the current constant name, and use the `value()` method to return its value
+ * Tweak - Add WooCommerce repository methods to determine if cart and checkout blocks are being used
+ * Tweak - Uses the AES-256-GCM encryption algorithm in the `Credential` handler instead of AES-256-CBC
+ * Fix - Ensure that the `Credential::sanitize_subtype()` method does encrypt its value
+ * Dev - Add a basic WordPress `Database` handler and a `Table` object to perform database operations
+ * Dev - The `Lifecycle` handler will pass the `Plugin` instance to a `Migration` object when instantiating
+
+2025-06-16 - version 1.5.2
+ * Dev - Update dependencies and ensure compatibility with PHP 7.4+
+
+2025-06-11 - version 1.5.1
+ * Tweak - Expand the jobs component to also handle Action Scheduler tasks
+
+2025-06-10 - version 1.5.0
+ * Feature - Import the WP Background Processing library into the framework to handle background tasks
+
+2025-06-09 - version 1.4.0
+ * Feature - Add more type helpers
+ * Fix - When handling an empty credential setting, do not attempt to encrypt or decrypt it
+ * Dev - Move the multilingual check to display an admin notice in the `Admin` handler
+
+2025-04-23 - version 1.3.0
+ * Feature - Add a `System_Status_Report` handler which WooCommerce extensions can implement to add data to the system status report page and endpoint
+ * Feature - Add a boolean helper to handle boolean values to strings conversion
+ * Dev - The `Integration::initialize()` method no longer forces to return void, making it compatible with the `Is_Handler` trait
+
+2025-03-14 - version 1.2.0
+ * Feature - Add an admin `Screen` component to handle admin screens registration and rendering
+ * Feature - Add an admin `Metabox` component to handle metaboxes registration and rendering in WordPress admin screens
+ * Feature - Automatically add a dismissible activation notice upon plugin's activation
+ * Feature - Add `Plugin` methods to return translations and templates paths
+ * Tweak - Add `utm_source` and `utm_medium` query parameters to the plugin's admin links redirecting to external resources
+ * Tweak - Improve plugin `Requirements` handling component
+ * Dev - Implement a `WordPress_Plugin` contract in the `Plugin` main class to pass down the handlers to ease mock testing and type consistency
+ * Dev - Implement a `WooCommerce_Extension` contract that extends the `WordPress_Plugin` contract to pass down the WooCommerce handlers
+ * Dev - Removed `Migration::rollback()` method as we don't have a mechanism to leverage rollbacks at the moment
+
+2024-12-10 - version 1.1.4
+ * Tweak - Add a `REST_API` class with helper functions for the WordPress REST API
+ * Tweak - Allow adding an informative admin notice to international users who are not using the plugin in its default language
+
+2024-12-06 - version 1.1.3
+ * Fix - Ensure that a concrete REST API handler is correctly initialized and the routes are registered upon `rest_api_init`
+
+2024-12-04 - version 1.1.2
+ * Fix - Prevent a possible recursion loop with the cache handler when verifying a value change
+
+2024-12-03 - version 1.1.1
+ * Fix - Use the correct relative path to the local plugin's translations folder
+
+2024-11-25 - version 1.1.0
+ * Feature - Add components for the WordPress block editor
+ * Feature - Add components to handle additional plugin requirements
+ * Feature - Add a `Collection` class to handle collections of models and other iterable items
+ * Feature - Add a `Customer` model for WooCommerce instances
+ * Feature - Add a `User_Meta` data store for models
+ * Feature - Add a `Mime_Types` helper class for handling mime types
+ * Feature - Add WordPress avatar handling components
+ * Feature - Bundle the `commerceguys/addressing` library for address handling
+ * Tweak - Remove constants access declaration from the loader class for increased PHP environment compatibility
+ * Tweak - Move assets functions from the main `Plugin` class to its own `Assets` handler
+ * Fix - Ensure the `Strings` helper can successfully convert a camel case string to snake case in some edge cases
+ * Fix - Ensure that the `Has_Named_Constructor` trait works with constants using underscores
+ * Fix - Remove `is_admin()` check from the `Dashboard` admin handler constructor
+ * Fix - Do not pass null, pass empty string instead to `_doing_it_wrong()` when no version needs to be specified
+
+2024-09-17 - version 1.0.0
+ * Misc - Initial release

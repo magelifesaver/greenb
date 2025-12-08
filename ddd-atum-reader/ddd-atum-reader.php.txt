@@ -1,0 +1,335 @@
+<?php
+/**
+ * Plugin Name: DDD ATUM Log Viewer
+ * Description: Query ATUM logs by Product Name and display a sortable, filterable, exportable table (with sticky per-user preferences).
+ * Version: 1.2.1
+ * Author: Dev Tool
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+class DDD_ATUM_Log_Viewer {
+
+    public function __construct() {
+        add_action('admin_menu', [$this, 'ddd_register_menu']);
+        add_action('admin_enqueue_scripts', [$this, 'ddd_enqueue_assets']);
+    }
+
+    public function ddd_register_menu() {
+        add_menu_page(
+            'ATUM Logs',
+            'ATUM Logs',
+            'manage_options',
+            'ddd-atum-logs',
+            [$this, 'ddd_render_page'],
+            'dashicons-database',
+            80
+        );
+    }
+
+    public function ddd_enqueue_assets($hook) {
+        if ($hook !== 'toplevel_page_ddd-atum-logs') return;
+
+        // DataTables + extensions
+        wp_enqueue_style('datatable-css', 'https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css');
+        wp_enqueue_style('datatable-fixedheader-css', 'https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css');
+        wp_enqueue_style('datatable-buttons-css', 'https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css');
+
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('datatable-js', 'https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js', ['jquery'], null, true);
+        wp_enqueue_script('datatable-fixedheader-js', 'https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js', ['datatable-js'], null, true);
+        wp_enqueue_script('datatable-buttons-js', 'https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js', ['datatable-js'], null, true);
+        wp_enqueue_script('datatable-jszip', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js', [], null, true);
+        wp_enqueue_script('datatable-buttons-html5', 'https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js', ['datatable-buttons-js'], null, true);
+        wp_enqueue_script('datatable-buttons-print', 'https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js', ['datatable-buttons-js'], null, true);
+
+        // Modern CSS (nowdoc to avoid interpolation)
+        $custom_css = <<<'CSS'
+#ddd-atum-table_wrapper { font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+#ddd-controls { display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin:10px 0 4px; }
+#ddd-atum-table { border-collapse: separate !important; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+#ddd-atum-table thead { background: #f7f9fc; font-weight: 600; }
+#ddd-atum-table tbody tr:nth-child(even) { background: #fafafa; }
+#ddd-atum-table td, #ddd-atum-table th { padding: 10px; vertical-align: middle; }
+#ddd-atum-table td.movement-pos { color: #1a7f37; font-weight: 600; }
+#ddd-atum-table td.movement-neg { color: #d93025; font-weight: 600; }
+#ddd-atum-table td.movement-zero { color: #5f6368; font-style: italic; }
+#ddd-event-checkboxes { display:flex; gap:12px; flex-wrap:wrap; }
+#ddd-event-checkboxes label { display:inline-flex; gap:6px; align-items:center; background:#f2f5f9; padding:6px 8px; border-radius:6px; border:1px solid #e4e9f1; }
+#ddd-date-range { display:flex; gap:8px; align-items:center; }
+#ddd-date-range input[type="date"] { padding:4px 6px; }
+CSS;
+        wp_add_inline_style('datatable-css', $custom_css);
+
+        // Expose user ID to JS (after the script is enqueued)
+        $uid = get_current_user_id();
+        $js_preamble = "window.DDD_ATUM_USER_ID = " . intval($uid) . ";";
+        wp_add_inline_script('datatable-js', $js_preamble);
+
+        // DataTables init JS (nowdoc)
+        $init_js = <<<'JS'
+jQuery(document).ready(function($){
+    var userId = window.DDD_ATUM_USER_ID || 0;
+    var storeKey = function(k){ return 'ddd_atum_' + userId + '_' + k; };
+
+    var initialLen = 50;
+    var savedLen = localStorage.getItem(storeKey('pageLength'));
+    if (savedLen && /^\d+$/.test(savedLen)) initialLen = parseInt(savedLen, 10);
+
+    var table = $("#ddd-atum-table").DataTable({
+        pageLength: initialLen,
+        lengthMenu: [[10, 20, 30, 50, 100, 500], [10, 20, 30, 50, 100, 500]],
+        columnDefs: [
+            { targets: [6,7,8,9], type: "num" } // Old/New/Qty/Movement numeric
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            { extend: 'csvHtml5',   text: 'Export CSV',   exportOptions: { columns: ':visible' } },
+            { extend: 'excelHtml5', text: 'Export Excel', exportOptions: { columns: ':visible' } },
+            { extend: 'print',      text: 'Print' },
+            { extend: 'colvis',     text: 'Columns' }
+        ],
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+
+            // Restore column visibility
+            var savedCols = localStorage.getItem(storeKey('colVis'));
+            if (savedCols) {
+                try {
+                    var vis = JSON.parse(savedCols);
+                    if (Array.isArray(vis)) {
+                        vis.forEach(function(v, idx){
+                            if (typeof v === 'boolean') api.column(idx).visible(v);
+                        });
+                    }
+                } catch(e){}
+            }
+            api.on('column-visibility.dt', function(){
+                var vis = [];
+                api.columns().every(function(i){ vis.push(this.visible()); });
+                localStorage.setItem(storeKey('colVis'), JSON.stringify(vis));
+            });
+
+            // Build Event multi-checkbox filter
+            var eventSet = {};
+            api.column(2).data().each(function(d){ if(d){ eventSet[d]=true; }});
+            var events = Object.keys(eventSet).sort();
+            $('#ddd-event-filter').html('<div id="ddd-event-checkboxes"></div>');
+            var savedEvents = localStorage.getItem(storeKey('events'));
+            var checkedSet = {};
+            if (savedEvents) {
+                try { (JSON.parse(savedEvents) || []).forEach(function(v){ checkedSet[v]=true; }); } catch(e){}
+            }
+            events.forEach(function(d){
+                var isChecked = savedEvents ? !!checkedSet[d] : true; // default all checked
+                $('#ddd-event-checkboxes').append(
+                    '<label><input type="checkbox" class="ddd-event-check" value="'+$('<div>').text(d).html()+'" '+(isChecked?'checked':'')+'> '+d+'</label>'
+                );
+            });
+            var applyEventFilter = function(){
+                var selected = [];
+                $('.ddd-event-check:checked').each(function(){ selected.push($(this).val()); });
+                localStorage.setItem(storeKey('events'), JSON.stringify(selected));
+                if (selected.length) {
+                    // Build simple alternation; use regex true, anchor to whole cell
+                    var regex = selected.map(function(s){
+                        return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    }).join('|');
+                    api.column(2).search('^(' + regex + ')$', true, false).draw();
+                } else {
+                    api.column(2).search('').draw();
+                }
+            };
+            $(document).on('change','.ddd-event-check', applyEventFilter);
+            applyEventFilter();
+
+            // User dropdown filter
+            var userSelect = $('<select><option value="">Filter by User</option></select>')
+                .appendTo('#ddd-user-filter')
+                .on('change', function(){
+                    var val = $(this).val() || '';
+                    localStorage.setItem(storeKey('user'), val);
+                    api.column(3).search(val).draw();
+                });
+            var users = {};
+            api.rows().every(function(){
+                var name = $(this.node()).find('td[data-user]').data('user');
+                if (name && !users[name]) {
+                    users[name] = true;
+                    userSelect.append('<option value="'+$('<div>').text(name).html()+'">'+name+'</option>');
+                }
+            });
+            var savedUser = localStorage.getItem(storeKey('user'));
+            if (savedUser) {
+                userSelect.val(savedUser);
+                api.column(3).search(savedUser).draw();
+            }
+
+            // Date range filter (uses data-ts on Date/Time cell)
+            var savedFrom = localStorage.getItem(storeKey('date_from')) || '';
+            var savedTo   = localStorage.getItem(storeKey('date_to'))   || '';
+            $('#ddd-date-from').val(savedFrom);
+            $('#ddd-date-to').val(savedTo);
+
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
+                if (settings.nTable !== table.table().node()) return true;
+                var node = table.row(dataIndex).node();
+                var ts = parseInt($(node).find('td[data-ts]').data('ts'), 10); // unix ts seconds
+                if (!ts) return true;
+                var fromVal = $('#ddd-date-from').val();
+                var toVal   = $('#ddd-date-to').val();
+                if (!fromVal && !toVal) return true;
+                var pass = true;
+                if (fromVal) {
+                    var fromTs = Date.parse(fromVal + 'T00:00:00Z')/1000;
+                    if (ts < fromTs) pass = false;
+                }
+                if (toVal) {
+                    var toTs = Date.parse(toVal + 'T23:59:59Z')/1000;
+                    if (ts > toTs) pass = false;
+                }
+                return pass;
+            });
+
+            var applyDate = function(){
+                var fv = $('#ddd-date-from').val()||'';
+                var tv = $('#ddd-date-to').val()||'';
+                localStorage.setItem(storeKey('date_from'), fv);
+                localStorage.setItem(storeKey('date_to'),   tv);
+                api.draw();
+            };
+            $('#ddd-date-from, #ddd-date-to').on('change', applyDate);
+
+            // Sticky page length
+            table.on('length.dt', function(e, settings, len){
+                localStorage.setItem(storeKey('pageLength'), String(len));
+            });
+        }
+    });
+});
+JS;
+        wp_add_inline_script('datatable-buttons-print', $init_js);
+    }
+
+    public function ddd_render_page() {
+        global $wpdb;
+        $product_name = isset($_POST['ddd_product_name']) ? sanitize_text_field($_POST['ddd_product_name']) : '';
+        ?>
+        <div class="wrap">
+            <h1>ATUM Log Viewer</h1>
+            <form method="post" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <label>Product Name:</label>
+                <input type="text" name="ddd_product_name" value="<?php echo esc_attr($product_name); ?>" required style="width:300px;" />
+                <button type="submit" class="button button-primary">Search</button>
+
+                <span id="ddd-date-range">
+                    <label>From:</label>
+                    <input type="date" id="ddd-date-from" />
+                    <label>To:</label>
+                    <input type="date" id="ddd-date-to" />
+                </span>
+            </form>
+
+            <div id="ddd-controls">
+                <span id="ddd-event-filter" title="Toggle event types"></span>
+                <span id="ddd-user-filter" title="Filter by user"></span>
+            </div>
+            <hr>
+        <?php
+
+        if ($product_name) {
+            $like = '%' . $wpdb->esc_like($product_name) . '%';
+
+            $logs = $wpdb->get_results($wpdb->prepare("
+                SELECT l.id AS log_id,
+                       l.`time` AS unix_ts,
+                       FROM_UNIXTIME(l.`time`) AS log_time,
+                       l.entry,
+                       u.ID AS user_id,
+                       u.display_name AS display_name,
+                       CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(l.data,'s:8:\"order_id\";i:',-1),';',1) AS UNSIGNED) AS order_id,
+                       CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(l.data,'s:10:\"product_id\";i:',-1),';',1) AS UNSIGNED) AS product_id,
+                       CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(l.data,'s:9:\"old_stock\";i:',-1),';',1) AS SIGNED) AS old_stock,
+                       CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(l.data,'s:9:\"new_stock\";i:',-1),';',1) AS SIGNED) AS new_stock,
+                       CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(l.data,'s:3:\"qty\";i:',-1),';',1) AS SIGNED) AS qty
+                FROM {$wpdb->prefix}atum_logs l
+                LEFT JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
+                WHERE l.data LIKE %s
+                ORDER BY l.`time` DESC
+            ", $like));
+
+            if ($logs) {
+                echo '<table id="ddd-atum-table" class="display" style="width:100%">';
+                echo '<thead><tr>
+                        <th>Log ID</th>
+                        <th>Date/Time</th>
+                        <th>Event</th>
+                        <th>User</th>
+                        <th>Order</th>
+                        <th>Product ID</th>
+                        <th>Old Stock</th>
+                        <th>New Stock</th>
+                        <th>Qty</th>
+                        <th>Movement</th>
+                      </tr></thead><tbody>';
+
+                foreach ($logs as $log) {
+                    // Event mapping
+                    $event_map = [
+                        'wc-order-stock-level'        => 'Order Item Sold',
+                        'wc-order-add-product'        => 'Order Item Added',
+                        'wc-order-edit-order-item'    => 'Order Item Edited',
+                        'woocommerce_restore_order_stock' => 'Order Item Returned',
+                        'mi-inventory-edit'           => 'Inventory Changed',
+                        'mi-product-edit'             => 'Product Edited',
+                        'atum-purchase-order'         => 'Purchase Order Created/Updated',
+                        'atum-purchase-order-receipt' => 'Delivery Received',
+                        'supplier-change'             => 'Supplier Changed',
+                        'supplier-price-change'       => 'Supplier Price Updated',
+                        'settings-change'             => 'Settings Changed',
+                        'system'                      => 'System Event',
+                        'background-task'             => 'Background Task',
+                        'atum-export'                 => 'Data Export',
+                        'atum-import'                 => 'Data Import',
+                    ];
+                    $entry = isset($log->entry) ? $log->entry : '';
+                    $event = isset($event_map[$entry]) ? $event_map[$entry] : 'Other (' . esc_html($entry) . ')';
+
+                    $user_text = $log->display_name ? $log->display_name : 'System/Auto';
+                    $user_link = $log->user_id ? '<a href="' . esc_url( admin_url('user-edit.php?user_id='.(int)$log->user_id) ) . '">' . esc_html($user_text) . '</a>' : esc_html($user_text);
+                    $order_link = $log->order_id ? '<a href="' . esc_url( admin_url('post.php?post='.(int)$log->order_id.'&action=edit') ) . '">#' . (int)$log->order_id . '</a>' : '';
+
+                    $has_numbers = is_numeric($log->old_stock) && is_numeric($log->new_stock);
+                    $movement = $has_numbers ? ( (int)$log->old_stock - (int)$log->new_stock ) : '';
+                    $movement_class = '';
+                    if ($movement !== '' && $movement > 0) $movement_class = 'movement-pos';
+                    elseif ($movement !== '' && $movement < 0) $movement_class = 'movement-neg';
+                    elseif ($movement !== '' && $movement === 0) $movement_class = 'movement-zero';
+
+                    $movement_title = $has_numbers ? ' title="' . esc_attr( $log->old_stock . ' → ' . $log->new_stock . ' (Δ ' . $movement . ')' ) . '"' : '';
+
+                    echo '<tr>
+                            <td>' . esc_html($log->log_id) . '</td>
+                            <td data-ts="' . esc_attr( (int)$log->unix_ts ) . '">' . esc_html($log->log_time) . '</td>
+                            <td>' . esc_html($event) . '</td>
+                            <td data-user="' . esc_attr($user_text) . '">' . $user_link . '</td>
+                            <td>' . $order_link . '</td>
+                            <td>' . esc_html($log->product_id) . '</td>
+                            <td>' . esc_html($log->old_stock) . '</td>
+                            <td>' . esc_html($log->new_stock) . '</td>
+                            <td>' . esc_html($log->qty) . '</td>
+                            <td class="' . esc_attr($movement_class) . '"' . $movement_title . '>' . esc_html($movement) . '</td>
+                          </tr>';
+                }
+                echo '</tbody></table>';
+            } else {
+                echo '<p>No log entries found for product name: <strong>' . esc_html($product_name) . '</strong></p>';
+            }
+        }
+
+        echo '</div>';
+    }
+}
+
+new DDD_ATUM_Log_Viewer();

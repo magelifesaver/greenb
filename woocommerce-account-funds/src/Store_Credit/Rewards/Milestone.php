@@ -1,0 +1,88 @@
+<?php
+/**
+ * Account Funds for WooCommerce
+ *
+ * This source file is subject to the GNU General Public License v3.0 that is bundled with this plugin in the file license.txt.
+ *
+ * Please do not modify this file if you want to upgrade this plugin to newer versions in the future.
+ * If you want to customize this file for your needs, please review our developer documentation.
+ * Join our developer program at https://kestrelwp.com/developers
+ *
+ * @author    Kestrel
+ * @copyright Copyright (c) 2015-2025 Kestrel Commerce LLC [hey@kestrelwp.com]
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
+ */
+
+declare( strict_types = 1 );
+
+namespace Kestrel\Account_Funds\Store_Credit\Rewards;
+
+defined( 'ABSPATH' ) or exit;
+
+use Kestrel\Account_Funds\Scoped\Kestrel\Fenix\Collection;
+use Kestrel\Account_Funds\Store_Credit\Reward;
+use Kestrel\Account_Funds\Store_Credit\Reward_Type;
+use Kestrel\Account_Funds\Store_Credit\Rewards\Traits\Has_Eligible_Products;
+
+/**
+ * Store credit as milestone.
+ *
+ * Milestones are a type of store credit that is issued to customers as a form of appreciation or incentive, allowing them to redeem it for future purchases.
+ *
+ * For example, a milestone could be when they register an account, leave a review, etc.
+ *
+ * @since 4.0.0
+ *
+ * @method static Milestone find( int $identifier )
+ * @method static Collection<int, Milestone> find_many( array $args = [] )
+ */
+final class Milestone extends Reward {
+	use Has_Eligible_Products;
+
+	/** @var string */
+	protected const TYPE = Reward_Type::MILESTONE;
+
+	/**
+	 * Determines if only verified product reviews are eligible for the milestone award.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return bool
+	 */
+	public function requires_verified_product_reviews() : ?bool {
+
+		$rules = $this->get_rules();
+
+		if ( ! is_array( $rules ) || ! isset( $rules['verified_product_review'] ) ) {
+			return null;
+		}
+
+		return wc_string_to_bool( $rules['verified_product_review'] );
+	}
+
+	/**
+	 * Sets whether only verified product reviews are eligible for the milestone award.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param bool|null $verified_product_review
+	 * @return self
+	 */
+	public function set_require_verified_product_reviews( ?bool $verified_product_review ) : self {
+
+		$rules = $this->get_rules();
+
+		if ( ! is_array( $rules ) ) {
+			$rules = [];
+		}
+
+		if ( null === $verified_product_review ) {
+			unset( $rules['verified_product_review'] );
+		} else {
+			$rules['verified_product_review'] = wc_bool_to_string( $verified_product_review );
+		}
+
+		return $this->set_rules( $rules );
+	}
+
+}

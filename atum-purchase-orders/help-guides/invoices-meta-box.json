@@ -1,0 +1,42 @@
+[
+	{
+		"title": "Add Invoice",
+		"element": "#po_invoices .add-invoice",
+		"intro": "Click the 'Add Invoice' button to open the modal that you can use to add new invoices when you receive from your supplier.<br>You can add just one or multiple invoices."
+	},
+	{
+		"title": "Invoice Number",
+		"element": "#po_invoices .invoices__table thead .invoice_number",
+		"intro": "On the 'Invoice' column, it'll be displayed the invoice number sent by your supplier."
+	},
+	{
+		"title": "Invoice File",
+		"element": "#po_invoices .invoices__table thead .file",
+		"intro": "On the 'File' column, if you attached any file when creating the invoice, an icon with a link to that file will be displayed."
+	},
+	{
+		"title": "Invoice Items",
+		"element": "#po_invoices .invoices__table thead .items",
+		"intro": "On the 'Items' column, will be displayed all the items that were part of the invoice (one per row).<br>You also have some helpful info regarding the item (like how many items are still not invoiced)."
+	},
+	{
+		"title": "Item Cost",
+		"element": "#po_invoices .invoices__table thead .cost",
+		"intro": "On the 'Cost' column, you can set the cost for each item in the current invoice."
+	},
+	{
+		"title": "Item Discount",
+		"element": "#po_invoices .invoices__table thead .discount",
+		"intro": "On the 'Discount' column, you can set the discount applied to each item in the current invoice (if any)."
+	},
+	{
+		"title": "Item Qty",
+		"element": "#po_invoices .invoices__table thead .qty",
+		"intro": "On the 'Qty' column, you can set the number of invoiced items for each row."
+	},
+	{
+		"title": "Item Tax",
+		"element": "#po_invoices .invoices__table thead .tax",
+		"intro": "On the 'Tax' column, you can set the tax for every invoiced item (if any)."
+	}
+]

@@ -1,0 +1,61 @@
+#form_data td {vertical-align: top; padding-right: 40px;}
+#form_data a {text-decoration: none;}
+#form_data label{ padding-top: 5px; margin:0px; font-weight: bold;}
+#form_data .postbox {padding: 15px 20px}
+#form_data .postbox h4.heading {margin: 0px; padding-bottom: 10px}
+#form_data .postbox .text-input {width: 100%; padding: 5px 5px; margin: 0px;}
+#form_data .postbox .explain {padding-top: 10px; color: gray; font-style: italic; font-size: 11px; line-height: 17px;}    
+#form_data .important {    color: #ca4a1f;}
+#form_data .hide {display: none}
+#form_data.checkout_type_single_checkout ._show_on_single_checkout {display: table-row; }
+#form_data.checkout_type_each_store ._show_on_each_store {display: table-row}
+
+#use_global_cart_for_sites div p:first-child {margin-top: -5px;}
+#use_global_cart_for_sites div p {margin: 1.5em 0}
+
+#wpgc-header {background-color: #3d4350; margin-left: -35px; padding: 10px 0px;}
+#wpgc-header h1 {color:#FFF; padding: 0px 0px 0px 20px; font-weight: normal; font-size: 1.8em; }
+#wpgc-header h1 img {vertical-align: middle; padding: 0px 20px 0px 15px; margin: -10px 0px; width: 80px; height: 80px}
+#wpgc-header h1 .plugin-mark {padding: 5px 7px 7px 7px; vertical-align: unset;}
+#wpgc .form-table p {margin-bottom: 20px}
+#wpgc .form-table input[type="text"]{width: 100%;  max-width: 360px; }
+#wpgc .nav-tab-wrapper { background-color: #FFF; margin-left: -20px; padding: 10px 0px 13px 20px;}
+#wpgc .nav-tab-wrapper {}
+#wpgc .nav-tab-wrapper a {text-decoration: none; font-weight: normal; color: #3c434a; margin-right: 30px; padding: 10px 0 7px 0; display: inline-block; font-size: 0.8em;}
+#wpgc .nav-tab-wrapper.split a {  padding: 10px 5px 7px 5px; margin-right: 10px; position:relative; border-bottom: 2px solid #FFF }
+#wpgc .nav-tab-wrapper.split a:after {content: "";  display: inline-block;  height: 15px;  width: 1px;  background-color:#e3e3e3;  margin-right: 10px;  vertical-align: middle; position: absolute; right: -16px; top: 14px;}
+#wpgc .nav-tab-wrapper.split a:last-child::after {background-color:transparent}
+#wpgc .nav-tab-wrapper a:hover { border-bottom: 2px solid #0073aa; }
+#wpgc .nav-tab-wrapper a::focus {outline: none;    border: 0;}
+#wpgc .nav-tab-wrapper .wpgc-nav-tab-active {border-bottom: 2px solid #0073aa !important; font-weight: bold}
+
+#wpgc #wpgc-notices {margin-left: -20px; padding-top: 20px}
+#wpgc #wpgc-notices .notice {margin-right: 0px; border-right: none;}
+#wpgc #wpgc-notices.no-wrap {padding-top: 10px}
+#wpgc #wpgc-notices.no-wrap .notice {margin-left: 0px;}
+
+.start-container {    background-color: #fff;    border-left: 4px solid #cc99c2;    overflow: hidden;    padding: 10px 20px 10px 30px;    position: relative; min-height: 140px;}
+.start-container::before {    color: #eee2ec;    content: "\f111";    content: "\f332";    display: block;    font-family: dashicons;    font-size: 232px;    line-height: 1;    position: absolute;    right: 0;    text-align: center;    top: 10%;    width: 1em; z-index: 1}
+.start-container.licence-key::before { content: "\f112"; }
+.start-container .text {position: relative;z-index: 2}
+.start-container h2, .start-container p {position: relative}
+.start-container input[type="text"] {width: 740px; max-width: 100%;}
+.start-container .warning {color: #ca4a1f}
+
+.help-box {background-color: #fbfbfb;  padding: 10px 20px;  box-sizing: border-box;  overflow: hidden;  position: relative;  border-left: 1px solid #f1f1f1;  flex-grow: 1;margin-top: 30px;max-width: 780px;}
+.help-box::before {  color: #ececec;  content: "\f118";  display: block;  font-family: dashicons;  font-size: 232px;  line-height: 1;  position: absolute;  right: 20px;  text-align: center;  top: 10%;  width: 1em;  z-index: 1;}
+.help-box p, .help-box ul {position: relative; z-index: 2; padding-left: 40px}
+.help-box ul {margin-left: 10px}
+.help-box ul li { list-style: square;}
+.help-box .dashicons { font-size: 40px; width: auto; height: 38px; float: left; margin-left: -50px}
+
+
+table.form-table th{text-align: right; font-weight: normal; width: 20%}
+table tr.title th {padding: 0px 10px 0px 0}
+table tr.title td{padding: 0px}
+table th h4 {margin: 0px;}
+
+@media screen and (max-width: 782px) {
+ table.form-table th {text-align: left}   
+}
+        
