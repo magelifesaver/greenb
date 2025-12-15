@@ -7,7 +7,6 @@ namespace PremiumAddons\Includes;
 
 // Premium Addons Pro Classes.
 use PremiumAddonsPro\Includes\White_Label\Helper;
-
 use PremiumAddons\Admin\Includes\Admin_Helper;
 
 // Elementor Classes.
@@ -548,7 +547,7 @@ class Helper_Functions {
 
 		$vimeo_data = get_transient( 'premium_vimeo_' . $video_id );
 
-		if( $vimeo_data === false ) {
+		if ( $vimeo_data === false ) {
 
 			$vimeo_data = wp_remote_get( 'http://www.vimeo.com/api/v2/video/' . intval( $video_id ) . '.php' );
 
@@ -577,7 +576,6 @@ class Helper_Functions {
 
 				}
 			}
-
 		}
 
 		return $vimeo_data;
@@ -734,7 +732,21 @@ class Helper_Functions {
 	}
 
 	/**
-	 * Valide HTML Tag
+	 * Check Elementor Version
+	 *
+	 * Check if Elementor is installed and activated
+	 *
+	 * @since 4.11.54
+	 * @access public
+	 *
+	 * @return boolean
+	 */
+	public static function check_elementor_version() {
+		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
+	}
+
+	/**
+	 * Validate HTML Tag
 	 *
 	 * Validates an HTML tag against a safe allowed list.
 	 *
@@ -1148,6 +1160,34 @@ class Helper_Functions {
 		return str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, $path );
 	}
 
+	public static function get_safe_url( $url ) {
+		if ( is_ssl() ) {
+			$url = wp_parse_url( $url );
+
+			if ( ! empty( $url['host'] ) ) {
+				$url['scheme'] = 'https';
+			}
+
+			return self::unparse_url( $url );
+		}
+
+		return $url;
+	}
+
+	public static function unparse_url( $parsed_url ) {
+		$scheme   = isset( $parsed_url['scheme'] ) ? $parsed_url['scheme'] . '://' : '';
+		$host     = isset( $parsed_url['host'] ) ? $parsed_url['host'] : '';
+		$port     = isset( $parsed_url['port'] ) ? ':' . $parsed_url['port'] : '';
+		$user     = isset( $parsed_url['user'] ) ? $parsed_url['user'] : '';
+		$pass     = isset( $parsed_url['pass'] ) ? ':' . $parsed_url['pass'] : '';
+		$pass     = ( $user || $pass ) ? "$pass@" : '';
+		$path     = isset( $parsed_url['path'] ) ? $parsed_url['path'] : '';
+		$query    = isset( $parsed_url['query'] ) ? '?' . $parsed_url['query'] : '';
+		$fragment = isset( $parsed_url['fragment'] ) ? '#' . $parsed_url['fragment'] : '';
+
+		return "$scheme$user$pass$host$port$path$query$fragment";
+	}
+
 	/**
 	 * Check if the current post type should include addons.
 	 *
@@ -1300,98 +1340,6 @@ class Helper_Functions {
 	}
 
 	/**
-	 * Get Contact Form Body
-	 *
-	 * @since 4.10.2
-	 * @access public
-	 *
-	 * @param string $preset form preset.
-	 *
-	 * @return void
-	 */
-	public static function get_cf_form_body( $preset ) {
-
-		$forms_array = array(
-
-			'preset1' => '<div class="premium-cf-full"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-            [submit "Subscribe"]',
-
-			'preset2' => '<div class="premium-cf-full"><label class="premium-cf-label">Name</label>
-            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-
-            [submit "Send"]',
-
-			'preset3' => '<div class="premium-cf-full"><label class="premium-cf-label">Name</label>
-            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
-            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
-
-            [submit "Send"]',
-
-			'preset4' => '<div class="premium-cf-half"><label class="premium-cf-label">Name</label>
-            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
-            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
-
-            [submit "Send"]',
-
-			'preset5' => '<div class="premium-cf-half"><label class="premium-cf-label">First Name</label>
-            [text* text-1 class:premium-cf-field placeholder "John"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Last Name</label>
-            [text* text-2 class:premium-cf-field placeholder "Smith"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Phone</label>
-            [tel* tel-1 class:premium-cf-field placeholder "+13137262547"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Gender</label>
-            [select menu-1 "Male" "Female"]</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
-            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
-            [submit "Send"]',
-
-			'preset6' => '<div class="premium-cf-half"><label class="premium-cf-label">First Name</label>
-            [text* text-1 class:premium-cf-field placeholder "John"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Last Name</label>
-            [text* text-2 class:premium-cf-field placeholder "Smith"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
-            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
-
-            <div class="premium-cf-half"><label class="premium-cf-label">Phone</label>
-            [tel* tel-1 class:premium-cf-field placeholder "+13137262547"]</div>
-
-			<div class="premium-cf-full"><label class="premium-cf-label">Company Size</label>
-            [radio radio-1 default:1 "1-10 employees" "11-30 employees" "30-50 employees" "Above 50 employee"]
-			</div>
-
-            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
-            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
-            [submit "Send"]',
-
-		);
-
-		return $forms_array[ $preset ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
 	 * Render Rating Stars
 	 *
 	 * @since 4.10.13
@@ -1518,6 +1466,21 @@ class Helper_Functions {
 			)
 		);
 
+		$elem->add_control(
+			'button_hover_effect_notice',
+			array(
+				'raw'             => __( 'Important: You need to set a background to the button to see the effects.', 'premium-addons-for-elementor' ),
+				'type'            => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
+				'condition'       => array_merge(
+					$conditions,
+					array(
+						'premium_button_hover_effect!' => 'none',
+					)
+				),
+			)
+		);
+
 		do_action( 'pa_button_hover_controls', $elem, $conditions );
 
 		$elem->add_control(
@@ -1615,7 +1578,7 @@ class Helper_Functions {
 
 		if ( ! self::check_papro_version() ) {
 
-			$pro_link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/#get-pa-pro', $keyword, 'wp-editor', 'get-pro' );
+			$pro_link = self::get_campaign_link( 'https://premiumaddons.com/pro/#get-pa-pro', $keyword, 'wp-editor', 'get-pro' );
 
 			$element->start_controls_section(
 				'section_pro_features_field',
@@ -1630,12 +1593,47 @@ class Helper_Functions {
 					'type'        => Controls_Manager::NOTICE,
 					'notice_type' => 'info',
 					'dismissible' => false,
-					'content'     => __( '<b>Build smarter and faster</b> with premium widgets, 580+ container blocks, and advanced customization controls — all available in the <a href="'. esc_url( $pro_link ) .'" target="_blank">PA Pro</a>. <b>Save up to 35%!</b>.', 'premium-addons-for-elementor' ),
+					'content'     => __( '<b>Build smarter and faster</b> with premium widgets, 580+ container blocks, and advanced customization controls — all available in the <a href="' . esc_url( $pro_link ) . '" target="_blank">PA Pro</a>. <b>Save up to $105!</b>.', 'premium-addons-for-elementor' ),
 				)
 			);
 
 			$element->end_controls_section();
 		}
+	}
+
+	/**
+	 * Register Element Feedback Controls
+	 *
+	 * @since 4.11.36
+	 * @access public
+	 *
+	 * @param object $element widget object.
+	 */
+	public static function register_element_feedback_controls( $element ) {
+
+		$element->add_control(
+			'feedback_message',
+			array(
+				'label'       => __( 'Feedback & Feature Request', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'placeholder' => __( 'Share your feedback or feature request here...', 'premium-addons-for-elementor' ),
+				'label_block' => true,
+				'render_type' => 'ui',
+				'ai'          => array(
+					'active' => false,
+				),
+			)
+		);
+
+		$element->add_control(
+			'feedback_message_submit',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<form onsubmit="submitFeedbackMessage(this,\'' . $element->get_title() . '\');" action="javascript:void(0);"><input type="submit" value="Send Feedback" class="elementor-button" style="background-color: rgba(207, 211, 215, 0.35); color: #000;"></form>',
+				'label_block' => true,
+			)
+		);
+
 	}
 
 	/**
@@ -1770,7 +1768,7 @@ class Helper_Functions {
 		// If icon library is SVG, then go to Elementor. Used for widgets where this function is called in all cases.
 		if ( false === strpos( $icon['library'], 'fa-' ) ) {
 
-			if( is_string( $attributes ) ) {
+			if ( is_string( $attributes ) ) {
 				$attributes = str_replace( '"', '', $attributes );
 			}
 
@@ -1898,5 +1896,148 @@ class Helper_Functions {
 		$template_content = $frontend->get_builder_content_for_display( $id, true );
 
 		return $template_content;
+	}
+
+	/**
+	 * Get Device Type
+	 *
+	 * @since 4.11.50
+	 * @access public
+	 *
+	 * @return string device type.
+	 */
+	public static function get_device_type() {
+
+		static $device_type = null;
+
+		// Return cached result if already detected.
+		if ( null !== $device_type ) {
+			return $device_type;
+		}
+
+		// Default to desktop.
+		$device_type = 'desktop';
+
+		// Only load Device_Detector if not already loaded.
+		if ( ! class_exists( 'PremiumAddons\Includes\Helpers\Device_Detector' ) ) {
+			require_once PREMIUM_ADDONS_PATH . 'includes/helpers/device-detector.php';
+		}
+
+		$detect = new Helpers\Device_Detector();
+
+		// Detect device type with priority: tablet > mobile > desktop.
+		if ( $detect->isTablet() ) {
+			$device_type = 'tablet';
+		} elseif ( $detect->isMobile() ) {
+			$device_type = 'mobile';
+		}
+
+		return $device_type;
+	}
+
+	/**
+	 * Get Widget Class Name
+	 *
+	 * @since 4.11.51
+	 * @access public
+	 *
+	 * @param string $widget_key Widget slug/key, e.g. 'premium-banner'.
+	 * @return string|false Fully-qualified class name on success, false on failure.
+	 */
+	public static function get_widget_class_name( $widget_key ) {
+
+		static $classes_list = null;
+
+		$default_namespace = 'PremiumAddons\\Widgets\\';
+
+		// load the map once.
+		if ( null === $classes_list ) {
+
+			$map_file = PREMIUM_ADDONS_PATH . 'includes/helpers/widget-class-map.php';
+
+			if ( file_exists( $map_file ) ) {
+
+				$map          = include $map_file;
+				$classes_list = is_array( $map ) ? $map : array();
+			} else {
+				$classes_list = array();
+			}
+		}
+
+		if ( empty( $widget_key ) || ! is_string( $widget_key ) ) {
+			return false;
+		}
+
+		if ( ! isset( $classes_list[ $widget_key ] ) ) {
+			return false;
+		}
+
+		$class_name = $classes_list[ $widget_key ];
+
+		if ( is_string( $class_name ) && false !== strpos( $class_name, '\\' ) ) {
+			return $class_name;
+		}
+
+		// Otherwise treat as short class name and prepend the default namespace.
+		$short_class = (string) $class_name;
+		$full_class  = rtrim( $default_namespace, '\\' ) . '\\' . ltrim( $short_class, '\\' );
+
+		return $full_class;
+	}
+
+	/**
+	 * Get Enabled Widgets
+	 *
+	 * @since 4.11.54
+	 * @access public
+	 *
+	 * @return array enabled widgets.
+	 */
+	public static function get_enabled_widgets() {
+
+		$enabled_elements = Admin_Helper::get_enabled_elements();
+
+		$enabled_elements = array_filter(
+			$enabled_elements,
+			function ( $value, $key ) {
+				return ( strpos( $key, 'premium-' ) === 0 || strpos( $key, 'mini-' ) === 0 || strpos( $key, 'woo-' ) === 0 ) && filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+			},
+			ARRAY_FILTER_USE_BOTH
+		);
+
+		return array_keys( $enabled_elements );
+	}
+
+	/*
+	 * Get Enabled Widgets Names
+	 *
+	 * @since 4.11.54
+	 * @access public
+	 *
+	 * @return array enabled widgets names.
+	 */
+	public static function get_enabled_widgets_names() {
+
+		$enabled_elements = self::get_enabled_widgets();
+
+		$enabled_names = array();
+
+		$map_file = PREMIUM_ADDONS_PATH . 'includes/helpers/widget-name-map.php';
+
+		if ( file_exists( $map_file ) ) {
+
+			$map        = include $map_file;
+			$names_list = is_array( $map ) ? $map : array();
+		} else {
+			$names_list = array();
+		}
+
+		foreach ( $enabled_elements as $key ) {
+
+			$widget_name     = isset( $names_list[ $key ] ) ? $names_list[ $key ] : $key;
+			$enabled_names[] = $widget_name;
+		}
+
+		return $enabled_names;
 	}
 }

@@ -1,24 +1,2 @@
-# WordPress core files (optional)
-user.ini
-wp-config.php
-/wp-admin/
-/wp-includes/
-
-# Logs, caches, uploads
+cat > .gitignore << 'EOF'
 *.log
-*.sql
-*.sqlite
-/wp-content/
-
-# Environment/config
-.env
-
-# Composer & Node
-/vendor/
-/node_modules/
-
-# OS / IDE
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/

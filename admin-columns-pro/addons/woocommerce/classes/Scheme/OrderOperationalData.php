@@ -12,5 +12,6 @@ interface OrderOperationalData
     public const WOOCOMMERCE_VERSION = 'woocommerce_version';
     public const CREATED_VIA = 'created_via';
     public const DISCOUNT_TOTAL_AMOUNT = 'discount_total_amount';
+    public const DISCOUNT_TAX_AMOUNT = 'discount_tax_amount';
 
 }

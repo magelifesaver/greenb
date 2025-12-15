@@ -1395,17 +1395,6 @@ class Premium_Facebook_Feed extends Widget_Base {
 			return;
 		}
 
-		add_filter(
-			'pa_facebook_feed',
-			function ( $feed_arr ) {
-
-				$id              = $this->get_id();
-				$feed_arr[ $id ] = $this->get_facebook_feed();
-
-				return $feed_arr;
-			}
-		);
-
 		$layout_class = 'list' === $settings['layout_style'] ? 'list-layout' : 'grid-layout';
 
 		$template = 'list' === $settings['layout_style'] ? 'list-template.php' : 'grid-template.php';
@@ -1420,6 +1409,7 @@ class Premium_Facebook_Feed extends Widget_Base {
 			'id'       => $this->get_id(),
 			'layout'   => $layout_class,
 			'template' => plugins_url( '/templates/', __FILE__ ) . $template,
+            'feedObject' => $this->get_facebook_feed()
 		);
 
 		if ( 'yes' === $settings['equal_height_switcher'] ) {

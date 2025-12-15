@@ -20,12 +20,19 @@
 
 	<rule ref="WordPress.PHP.NoSilencedErrors">
 		<properties>
-			<property name="customAllowedFunctionsList" type="array" value="ini_get,exif_read_data,ob_end_flush"/>
+			<property name="customAllowedFunctionsList" type="array">
+				<element value="ini_get"/>
+				<element value="exif_read_data"/>
+				<element value="ob_end_flush"/>
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.NamingConventions.ValidVariableName">
 		<properties>
-			<property name="allowed_custom_properties" type="array" value="Version,Name" />
+			<property name="allowed_custom_properties" type="array">
+				<element value="Version"/>
+				<element value="Name"/>
+			</property>
 		</properties>
 	</rule>
 

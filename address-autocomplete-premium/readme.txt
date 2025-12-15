@@ -4,7 +4,7 @@ Tags: address, autocomplete, form, woocommerce
 Requires at least: 5.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.7.1
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,6 +47,13 @@ You only need to [get a Google Maps API key](https://wpsunshine.com/documentatio
 4. Get the CSS selectors for your form and put into the settings
 
 == Changelog ==
+
+= 1.7.1 =
+* New: Paid Memberships Pro - Shipping add-on integration
+
+= 1.7 =
+* New integration! Easy Digital Downloads checkout and edit profile
+* New: Field delay replacement option for dynamic address forms
 
 = 1.6.2 =
 * Fix: WooCommerce - Also set billing address in datastore when "same as billing" is checked

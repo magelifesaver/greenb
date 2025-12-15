@@ -6,9 +6,8 @@ use AC;
 use AC\Asset\Location;
 use AC\Asset\Script;
 use ACA;
-use ACP;
 use ACP\Editing\ApplyFilter;
-use ACP\Editing\EditableDataFactory;
+use ACP\Editing\Encoder\TableDataEncoder;
 use ACP\Editing\Preference;
 use WP_List_Table;
 use WP_User;
@@ -16,31 +15,19 @@ use WP_User;
 final class Table extends Script
 {
 
-    /**
-     * @var AC\ListScreen
-     */
-    private $list_screen;
+    private AC\ListScreen $list_screen;
 
-    /**
-     * @var array
-     */
-    private $active_states;
+    private array $active_states;
 
-    /**
-     * @var EditableDataFactory
-     */
-    private $editable_data_factory;
+    private TableDataEncoder $table_encoder;
 
-    /**
-     * @var Preference\EditState
-     */
-    private $edit_state;
+    private Preference\EditState $edit_state;
 
     public function __construct(
         string $handle,
         Location $location,
         AC\ListScreen $list_screen,
-        EditableDataFactory $editable_data_factory,
+        TableDataEncoder $table_encoder,
         Preference\EditState $edit_state,
         array $active_states
     ) {
@@ -51,7 +38,7 @@ final class Table extends Script
         );
 
         $this->list_screen = $list_screen;
-        $this->editable_data_factory = $editable_data_factory;
+        $this->table_encoder = $table_encoder;
         $this->edit_state = $edit_state;
         $this->active_states = $active_states;
     }
@@ -61,14 +48,18 @@ final class Table extends Script
         parent::register();
 
         // Allow JS to access the column data for this list screen on the edit page
-        wp_localize_script($this->get_handle(), 'acp_editing_columns', $this->editable_data_factory->create());
+        wp_localize_script(
+            $this->get_handle(),
+            'acp_editing_columns',
+            $this->table_encoder->encode($this->list_screen)
+        );
 
         wp_localize_script($this->get_handle(), 'acp_editing', [
             'inline_edit' => [
                 'active'       => $this->active_states['inline_edit'],
-                'toggle_state' => $this->edit_state->is_active($this->list_screen->get_key()),
+                'toggle_state' => $this->edit_state->is_active($this->list_screen->get_table_id()),
                 'persistent'   => $this->is_persistent_editing(),
-                'version'      => apply_filters('acp/editing/inline/deprecated_style', false) ? 'v1' : 'v2',
+                'version'      => 'v2',
             ],
             'bulk_edit'   => [
                 'active'                     => $this->active_states['bulk_edit'],
@@ -99,6 +90,7 @@ final class Table extends Script
                 'show'           => __('Show', 'codepress-admin-columns'),
                 'hide'           => __('Hide', 'codepress-admin-columns'),
                 'download'       => __('Download', 'codepress-admin-columns'),
+                'loading'        => __('Loading', 'codepress-admin-columns'),
                 'errors'         => [
                     'field_required' => __('This field is required.', 'codepress-admin-columns'),
                     'invalid_float'  => __('Please enter a valid float value.', 'codepress-admin-columns'),
@@ -117,6 +109,7 @@ final class Table extends Script
                 'replace_with'   => __('Replace with', 'codepress-admin-columns'),
                 'add'            => __('Add', 'codepress-admin-columns'),
                 'remove'         => __('Remove', 'codepress-admin-columns'),
+                'add_to_gallery' => __('Add to gallery', 'codepress-admin-columns'),
                 'operators'      => [
                     'subtract' => __('Subtract', 'codepress-admin-columns'),
                     'add'      => __('Add', 'codepress-admin-columns'),
@@ -262,7 +255,7 @@ final class Table extends Script
     private function get_reassign_user_name(): string
     {
         $user = $this->get_reassign_user();
-        $name = ac_helper()->user->get_display_name($user);
+        $name = ac_helper()->user->get_formatted_name($user);
 
         if (get_current_user_id() === $user->ID) {
             $name = sprintf('%s (%s)', $name, __('current user', 'codepress-admin-columns'));
@@ -298,29 +291,31 @@ final class Table extends Script
 
     private function show_bulk_edit_confirmation(): bool
     {
-        return (bool)apply_filters('acp/editing/bulk/show_confirmation', true);
+        return (bool)apply_filters('ac/editing/bulk/show_confirmation', true);
     }
 
     private function get_bulk_delete_component(): string
     {
+        $table_screen = $this->list_screen->get_table_screen();
+
         switch (true) {
-            case $this->list_screen instanceof ACP\ListScreen\Post:
+            case $table_screen instanceof AC\PostType:
                 if ('trash' === get_query_var('post_status', null)) {
                     return 'trash';
                 }
 
                 return 'post';
-            case $this->list_screen instanceof ACA\WC\ListScreen\Order:
-                return 'post';
-            case $this->list_screen instanceof ACP\ListScreen\User:
+            case $table_screen instanceof AC\TableScreen\User:
                 return 'user';
-            case $this->list_screen instanceof ACP\ListScreen\Comment:
+            case $table_screen instanceof AC\TableScreen\Comment:
                 $comment_status = isset($_REQUEST['comment_status']) ? wp_unslash($_REQUEST['comment_status']) : '';
                 if ('trash' === $comment_status) {
                     return 'trash';
                 }
 
                 return 'comment';
+            case $table_screen instanceof ACA\WC\TableScreen\Order:
+                return 'post';
             default:
                 return '';
         }
@@ -328,17 +323,25 @@ final class Table extends Script
 
     private function is_persistent_editing(): bool
     {
-        return (bool)apply_filters('acp/editing/persistent', false, $this->list_screen);
+        return (bool)apply_filters('ac/editing/persistent', false, $this->list_screen);
     }
 
     private function get_updated_rows_per_iteration(): int
     {
-        return (int)apply_filters('acp/editing/bulk/updated_rows_per_iteration', 250, $this->list_screen);
+        return (int)apply_filters(
+            'ac/editing/bulk/updated_rows_per_iteration',
+            250,
+            $this->list_screen
+        );
     }
 
     private function get_deleted_rows_per_iteration(): int
     {
-        return (int)apply_filters('acp/delete/bulk/deleted_rows_per_iteration', 250, $this->list_screen);
+        return (int)apply_filters(
+            'ac/delete/bulk/deleted_rows_per_iteration',
+            250,
+            $this->list_screen
+        );
     }
 
 }

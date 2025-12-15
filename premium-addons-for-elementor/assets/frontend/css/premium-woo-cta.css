@@ -175,8 +175,8 @@
 .premium-wrapper-woo-cta .product-quantity-message {
   display: block;
   margin-bottom: 10px;
-  -webkit-flex-basis: 100%;
   -ms-flex-preferred-size: 100%;
+  -webkit-flex-basis: 100%;
   flex-basis: 100%;
 }
 .premium-wrapper-woo-cta .premium-variations,

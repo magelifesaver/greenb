@@ -55,13 +55,9 @@ if ( ! class_exists( 'PA_Core' ) ) {
 			// Load plugin necessary files.
 			\PremiumAddons\Admin\Includes\Admin_Helper::get_instance();
 
-			$check_dynamic_assets = \PremiumAddons\Admin\Includes\Admin_Helper::check_element_by_key( 'premium-assets-generator' );
-
-			if ( $check_dynamic_assets ) {
-				\PremiumAddons\Includes\Assets_Manager::get_instance();
-			}
-
 			Addons_Integration::get_instance();
+
+			include_once PREMIUM_ADDONS_PATH . 'includes/cm-pointer.php';
 		}
 
 		/**
@@ -108,7 +104,7 @@ if ( ! class_exists( 'PA_Core' ) ) {
 					)
 				);
 
-                set_transient( 'pa_activation_redirect', true, 30 );
+				set_transient( 'pa_activation_redirect', true, 30 );
 			}
 		}
 

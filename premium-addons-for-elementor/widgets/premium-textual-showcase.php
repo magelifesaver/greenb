@@ -333,7 +333,6 @@ class Premium_Textual_Showcase extends Widget_Base {
 				'label'       => __( 'HTML Tag', 'premium-addons-for-elementor' ),
 				'description' => __( 'Select an HTML tag for the text.', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'span',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -345,6 +344,7 @@ class Premium_Textual_Showcase extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
+				'default'     => 'span',
 				'label_block' => true,
 				'condition'   => array(
 					'item_type' => 'text',
@@ -962,7 +962,6 @@ class Premium_Textual_Showcase extends Widget_Base {
 				'label'       => __( 'HTML Tag', 'premium-addons-for-elementor' ),
 				'description' => __( 'Select an HTML tag for the text.', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'span',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -974,6 +973,7 @@ class Premium_Textual_Showcase extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
+				'default'     => 'span',
 				'label_block' => true,
 				'condition'   => array(
 					'item_type_hov' => 'text',
@@ -2091,6 +2091,8 @@ class Premium_Textual_Showcase extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 	}

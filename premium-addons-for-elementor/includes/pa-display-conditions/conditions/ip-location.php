@@ -102,7 +102,7 @@ class Ip_Location extends Condition {
 
 			$location_data = json_decode( wp_remote_retrieve_body( $location_data ), true );
 
-			if( null == $location_data ) {
+			if ( null == $location_data ) {
 				return;
 			}
 

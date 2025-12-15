@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: AAA The Printer
+Plugin Name: AAA The Printer (XHV98-WF)
 Plugin URI:  https://yourwebsite.com/aaa-the-printer
 Description: A WooCommerce receipt printing plugin that renders an HTML template, converts it to PDF for 80mm thermal printers, and integrates with PrintNode.
 Version:     1.0

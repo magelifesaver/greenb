@@ -4,22 +4,24 @@ namespace AC\Table;
 
 use AC\Registerable;
 
-final class ScreenTools implements Registerable {
+final class ScreenTools implements Registerable
+{
 
 	public function register(): void
-    {
-		add_action( 'ac/table', function ( Screen $screen ) {
+	{
+		add_action('ac/table', function (Screen $screen) {
 			$list_screen = $screen->get_list_screen();
 
-			if ( ! $list_screen->has_id() ) {
+			if ( ! $list_screen) {
 				return;
 			}
 
-			add_filter( 'screen_settings', [ $this, 'render' ] );
-		} );
+			add_filter('screen_settings', [$this, 'render']);
+		});
 	}
 
-	public function render( $html ) {
+	public function render($html): string
+	{
 		ob_start();
 
 		?>

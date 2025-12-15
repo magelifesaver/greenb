@@ -23,7 +23,7 @@ class Starred extends ACP\Search\Comparison
     {
         $starred_value = $operator === ACP\Search\Operators::IS_EMPTY ? 0 : 1;
 
-        return (new Bindings)->where(sprintf('`is_starred` = %d', $starred_value));
+        return (new Bindings())->where(sprintf('`is_starred` = %d', $starred_value));
     }
 
 }

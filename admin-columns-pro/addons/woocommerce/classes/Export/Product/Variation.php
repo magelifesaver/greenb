@@ -2,22 +2,24 @@
 
 namespace ACA\WC\Export\Product;
 
-use ACA\WC\Column;
+use AC\Type\Value;
+use ACA\WC\Value\Formatter\Product\VariationsCollection;
 use ACP;
 
 class Variation implements ACP\Export\Service
 {
 
-    private $column;
-
-    public function __construct(Column\Product\Variation $column)
-    {
-        $this->column = $column;
-    }
-
     public function get_value($id): string
     {
-        return (string)count($this->column->get_raw_value($id));
+        $collection = (new VariationsCollection())->format(new Value((int)$id));
+
+        $values = [];
+
+        foreach ($collection as $item) {
+            $values[] = (string)$item;
+        }
+
+        return implode(', ', $values);
     }
 
 }

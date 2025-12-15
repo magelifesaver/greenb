@@ -11,14 +11,14 @@ use AC\Registerable;
 class WPML implements Registerable
 {
 
-    private $storage;
+    private Storage $storage;
 
     public function __construct(Storage $storage)
     {
         $this->storage = $storage;
     }
 
-    function register(): void
+    public function register(): void
     {
         // Display correct flags on the list tables
         add_action('ac/table/list_screen', [$this, 'replace_flags']);
@@ -27,7 +27,7 @@ class WPML implements Registerable
         add_action('init', [$this, 'register_column_labels'], 300);
 
         // Enable the WPML translation of column headings
-        add_filter('ac/headings/label', [$this, 'register_translated_label'], 100);
+        add_filter('ac/column/heading/label', [$this, 'register_translated_label'], 100);
     }
 
     public function replace_flags()
@@ -71,7 +71,7 @@ class WPML implements Registerable
 
         foreach ($this->storage->find_all() as $list_screen) {
             foreach ($list_screen->get_columns() as $column) {
-                $label = $column->get_custom_label();
+                $label = $column->get_setting('label')->get_input()->set_value($column->get_label());
 
                 do_action(
                     'wpml_register_single_string',

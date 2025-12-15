@@ -7,7 +7,7 @@ use ACP;
 class StockThreshold implements ACP\Export\Service
 {
 
-    public function get_value($id)
+    public function get_value($id): string
     {
         return (string)wc_get_product($id)->get_low_stock_amount();
     }

@@ -496,10 +496,10 @@ class Pa_Nav_Menu_Walker extends \Walker_Nav_Menu {
 
 			if ( 'true' == $item_meta->mega_content_enabled && class_exists( 'Elementor\Plugin' ) ) {
 
-				$temp_id       = $this->get_mega_content_id( $data_object->ID );
-				$content       = Helper_Functions::render_elementor_template( $temp_id, true );
-				$style         = 'width:' . $item_meta->mega_content_width;
-				$output       .= sprintf( '<div id="premium-mega-content-%1$s" class="premium-mega-content-container" style="%2$s">%3$s</div>', $data_object->ID, $style, $content );
+				$temp_id = $this->get_mega_content_id( $data_object->ID );
+				$content = Helper_Functions::render_elementor_template( $temp_id, true );
+				$style   = 'width:' . $item_meta->mega_content_width;
+				$output .= sprintf( '<div id="premium-mega-content-%1$s" class="premium-mega-content-container" style="%2$s">%3$s</div>', $data_object->ID, $style, $content );
 			}
 		}
 

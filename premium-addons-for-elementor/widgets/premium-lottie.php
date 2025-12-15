@@ -95,6 +95,18 @@ class Premium_Lottie extends Widget_Base {
 	}
 
 	/**
+	 * Retrieve Widget Keywords.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget keywords.
+	 */
+	public function get_keywords() {
+		return array( 'pa', 'premium', 'premium lottie', 'animation', 'json', 'vector', 'motion' );
+	}
+
+	/**
 	 * Retrieve Widget Categories.
 	 *
 	 * @since 1.5.1
@@ -323,7 +335,7 @@ class Premium_Lottie extends Widget_Base {
 			array(
 				'label'      => __( 'Size', 'premium-addons-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em', '%' ),
+				'size_units' => array( 'px', 'em', '%', 'vw' ),
 				'default'    => array(
 					'unit' => 'px',
 					'size' => 200,
@@ -533,6 +545,8 @@ class Premium_Lottie extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 

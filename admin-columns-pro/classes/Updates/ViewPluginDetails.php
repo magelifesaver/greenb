@@ -2,9 +2,9 @@
 
 namespace ACP\Updates;
 
-use AC\Entity\Plugin;
 use AC\Registerable;
-use ACP\API\Request;
+use ACP\AdminColumnsPro;
+use ACP\API\Request\ProductInformation;
 use ACP\ApiFactory;
 use WP_Error;
 
@@ -18,7 +18,7 @@ class ViewPluginDetails implements Registerable
 
     private $api_factory;
 
-    public function __construct(Plugin $plugin, ApiFactory $api_factory)
+    public function __construct(AdminColumnsPro $plugin, ApiFactory $api_factory)
     {
         $this->plugin = $plugin;
         $this->api_factory = $api_factory;
@@ -49,7 +49,7 @@ class ViewPluginDetails implements Registerable
         }
 
         $response = $this->api_factory->create()->dispatch(
-            new Request\ProductInformation($slug)
+            new ProductInformation($slug)
         );
 
         if ($response->has_error()) {

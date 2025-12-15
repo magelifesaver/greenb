@@ -56,9 +56,7 @@ class Module {
 	private $has_woo = false;
 
 	/**
-	 * Display conditions.
-	 *
-	 * Class Constructor Function.
+	 * Constructor
 	 *
 	 * @param bool $has_acf Whether ACF is active.
 	 * @param bool $has_woo Whether WooCommerce is active.
@@ -125,45 +123,36 @@ class Module {
 
 		$controls_obj = new PA_Controls_Handler();
 
-		$options = $controls_obj::$conditions;
+		$options = PA_Controls_Handler::$conditions;
 
 		if ( $this->has_acf ) {
-			$options = array_merge(
-				array(
-					'acf' => array(
-						'label'   => __( 'ACF (PRO)', 'premium-addons-for-elementor' ),
-						'options' => array(
-							'acf_choice'  => __( 'Choice', 'premium-addons-for-elementor' ),
-							'acf_text'    => __( 'Text', 'premium-addons-for-elementor' ),
-							'acf_boolean' => __( 'True/False', 'premium-addons-for-elementor' ),
-						),
-					),
-				),
-				$options
+			$options['acf'] = array(
+				'label'   => __( 'ACF (PRO)', 'premium-addons-for-elementor' ),
+				'options' => array(
+					'acf_choice'  => __( 'Choice', 'premium-addons-for-elementor' ),
+					'acf_text'    => __( 'Text', 'premium-addons-for-elementor' ),
+					'acf_boolean' => __( 'True/False', 'premium-addons-for-elementor' ),
+				)
 			);
 		}
 
 		if ( $this->has_woo ) {
-			$options = array_merge(
-				$options,
-				array(
-					'woocommerce' => array(
-						'label'   => __( 'WooCommerce (PRO)', 'premium-addons-for-elementor' ),
-						'options' => array(
-							'woo_cat_page'          => __( 'Current Category Page', 'premium-addons-for-elementor' ),
-							'woo_product_cat'       => __( 'Current Product Category', 'premium-addons-for-elementor' ),
-							'woo_product_price'     => __( 'Current Product Price', 'premium-addons-for-elementor' ),
-							'woo_product_stock'     => __( 'Current Product Stock', 'premium-addons-for-elementor' ),
-							'woo_orders'            => __( 'Purchased/In Cart Orders', 'premium-addons-for-elementor' ),
-							'woo_category'          => __( 'Purchased/In Cart Categories', 'premium-addons-for-elementor' ),
-							'woo_last_purchase'     => __( 'Last Purchase In Cart', 'premium-addons-for-elementor' ),
-							'woo_total_price'       => __( 'Amount In Cart', 'premium-addons-for-elementor' ),
-							'woo_cart_products'     => __( 'Products In Cart', 'premium-addons-for-elementor' ),
-							'woo_purchase_products' => __( 'Purchased Products', 'premium-addons-for-elementor' ),
-						),
-					),
+			$options['woocommerce'] = array(
+				'label'   => __( 'WooCommerce (PRO)', 'premium-addons-for-elementor' ),
+				'options' => array(
+					'woo_cat_page'          => __( 'Current Category Page', 'premium-addons-for-elementor' ),
+					'woo_product_cat'       => __( 'Current Product Category', 'premium-addons-for-elementor' ),
+					'woo_product_price'     => __( 'Current Product Price', 'premium-addons-for-elementor' ),
+					'woo_product_stock'     => __( 'Current Product Stock', 'premium-addons-for-elementor' ),
+					'woo_orders'            => __( 'Purchased/In Cart Orders', 'premium-addons-for-elementor' ),
+					'woo_category'          => __( 'Purchased/In Cart Categories', 'premium-addons-for-elementor' ),
+					'woo_last_purchase'     => __( 'Last Purchase In Cart', 'premium-addons-for-elementor' ),
+					'woo_total_price'       => __( 'Amount In Cart', 'premium-addons-for-elementor' ),
+					'woo_cart_products'     => __( 'Products In Cart', 'premium-addons-for-elementor' ),
+					'woo_purchase_products' => __( 'Purchased Products', 'premium-addons-for-elementor' ),
 				)
 			);
+
 		}
 
 		$options = apply_filters( 'pa_display_conditions', $options );
@@ -343,6 +332,8 @@ class Module {
 	 * @since 4.9.39
 	 * @access private
 	 * @param object $element for current element.
+	 *
+	 * @return void
 	 */
 	private function add_helpful_information( $element ) {
 
@@ -376,7 +367,7 @@ class Module {
 				'pa_condition_doc_' . $doc_index,
 				array(
 					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => sprintf( '<a href="%s" target="_blank">%s</a>', $doc_url, $title ),
+					'raw'             => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $doc_url ), esc_html( $title ) ),
 					'content_classes' => 'editor-pa-doc',
 					'condition'       => array(
 						'pa_display_conditions_switcher' => 'yes',
@@ -413,7 +404,7 @@ class Module {
 
 			self::$load_script = true;
 
-			remove_action( 'elementor/frontend/before_render', array( $this, 'check_script_enqueue' ) );
+			// remove_action( 'elementor/frontend/before_render', array( $this, 'check_script_enqueue' ) );
 		}
 	}
 

@@ -291,6 +291,7 @@ class WPSunshine_Address_Autocomplete_Options {
 								<div class="wps-aaa-field">
 									<input type="text" name="fields[<?php echo $i; ?>][selector]" value="<?php echo esc_attr( $field['selector'] ); ?>" placeholder="<?php echo esc_attr( __( 'CSS selector, e.g. #address1 or .city', 'address-autocomplete-anything' ) ); ?>" />
 									<input type="text" name="fields[<?php echo $i; ?>][data]" value="<?php echo ( ! empty( $field['data'] ) ) ? esc_attr( $field['data'] ) : ''; ?>" />
+									<input type="number" step=".5" name="fields[<?php echo $i; ?>][delay]" value="<?php echo ( ! empty( $field['delay'] ) ) ? esc_attr( $field['delay'] ) : ''; ?>" placeholder="<?php echo esc_attr( __( 'Delay (ms)', 'address-autocomplete-anything' ) ); ?>" style="width: 80px;" />
 									<span class="wps-aa-place-components">
 										<a href="#" class="wps-aa-select-place-components"><?php _e( 'Select data', 'address-autocomplete-anything' ); ?></a>
 									</span>
@@ -311,6 +312,7 @@ class WPSunshine_Address_Autocomplete_Options {
 							<div class="wps-aaa-field">
 								<input type="text" name="fields[%ID%][selector]" placeholder="<?php echo esc_attr( __( 'CSS selector, e.g. #address1 or .city', 'address-autocomplete-anything' ) ); ?>" /></label>
 								<input type="text" name="fields[%ID%][data]" /></label>
+								<input type="number" step=".5" name="fields[%ID%][delay]" placeholder="<?php echo esc_attr( __( 'Delay (ms)', 'address-autocomplete-anything' ) ); ?>" style="width: 80px;" />
 								<span class="wps-aa-place-components">
 									<a href="#" class="wps-aa-select-place-components"><?php _e( 'Select data', 'address-autocomplete-anything' ); ?></a>
 								</span>
@@ -453,6 +455,7 @@ class WPSunshine_Address_Autocomplete_Options {
 				$fields[] = array(
 					'selector' => isset( $field['selector'] ) ? sanitize_text_field( stripslashes( $field['selector'] ) ) : '',
 					'data'     => isset( $field['data'] ) ? sanitize_text_field( stripslashes( $field['data'] ) ) : '',
+					'delay'    => isset( $field['delay'] ) && $field['delay'] !== '' ? floatval( $field['delay'] ) : '',
 				);
 			}
 			$instances[ $key ] = array(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA FluentCRM Opt-in (Checkout Blocks)
+ * Plugin Name: AAA FluentCRM Opt-in (Checkout Blocks) (XHV98-FLU)
  * Description: Adds a marketing opt-in checkbox to WooCommerce Checkout Blocks and syncs consent to FluentCRM (lists/tags). Classic checkout remains handled by FluentCRM’s own setting.
  * Version: 1.1.0
  * Author: AAA Workflow

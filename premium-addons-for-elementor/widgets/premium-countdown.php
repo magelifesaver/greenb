@@ -937,6 +937,8 @@ class Premium_Countdown extends Widget_Base {
 			)
 		);
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'countdown' );
@@ -1015,25 +1017,25 @@ class Premium_Countdown extends Widget_Base {
 		);
 
 		// $this->add_control(
-		// 	'premium_countdown_timer_digit_bg_color',
-		// 	array(
-		// 		'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
-		// 		'type'      => Controls_Manager::COLOR,
-		// 		'global'    => array(
-		// 			'default' => Global_Colors::COLOR_PRIMARY,
-		// 		),
-		// 		'selectors' => array(
-		// 			'{{WRAPPER}} .countdown-amount, {{WRAPPER}} .inn' => 'background-color: {{VALUE}};',
-		// 		),
-		// 	)
+		// 'premium_countdown_timer_digit_bg_color',
+		// array(
+		// 'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
+		// 'type'      => Controls_Manager::COLOR,
+		// 'global'    => array(
+		// 'default' => Global_Colors::COLOR_PRIMARY,
+		// ),
+		// 'selectors' => array(
+		// '{{WRAPPER}} .countdown-amount, {{WRAPPER}} .inn' => 'background-color: {{VALUE}};',
+		// ),
+		// )
 		// );
 
 		$this->add_group_control(
 			Premium_Background::get_type(),
 			array(
-				'name'     => 'premium_countdown_timer_digit_bg',
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .countdown-amount, {{WRAPPER}} .inn',
+				'name'           => 'premium_countdown_timer_digit_bg',
+				'types'          => array( 'classic', 'gradient' ),
+				'selector'       => '{{WRAPPER}} .countdown-amount, {{WRAPPER}} .inn',
 				'fields_options' => array(
 					'background' => array(
 						'default' => 'classic',
@@ -1809,6 +1811,10 @@ class Premium_Countdown extends Widget_Base {
 				$last_target = $target_date;
 			}
 
+			if ( $last_target instanceof DateTime ) {
+				$last_target = $last_target->format( 'Y-m-d H:i:s' );
+			}
+
 			$is_date_passed = strtotime( $last_target ) < strtotime( current_time( 'mysql' ) );
 
 			if ( $is_date_passed ) {
@@ -1881,7 +1887,6 @@ class Premium_Countdown extends Widget_Base {
 			} elseif ( 'circle' === $settings['style'] ) {
 				$this->add_render_attribute( 'inner_counter', 'class', 'premium-addons__v-hidden' );
 			}
-
 		} else {
 
 			$countdown_settings = array(

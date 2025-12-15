@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: A Order Workflow Board LIVE
+ * Plugin Name: A Order Workflow Board LIVE (XHV98-WF)
  * Description: Displays a workflow board using existing WooCommerce statuses, partial DOM updates for new orders. Includes a countdown bar toggle in settings, dynamic columns, and a popup-based order expansion.
  * Version:     1.5.0
  * Author:      Webmaster Delivery

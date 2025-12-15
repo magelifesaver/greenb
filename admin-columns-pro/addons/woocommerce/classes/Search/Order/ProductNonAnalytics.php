@@ -50,7 +50,7 @@ class ProductNonAnalytics extends Comparison
     {
         global $wpdb;
 
-        $results = $wpdb->get_col(
+        return $wpdb->get_col(
             $wpdb->prepare(
                 "
 	        SELECT DISTINCT(order_items.order_id)
@@ -63,8 +63,6 @@ class ProductNonAnalytics extends Comparison
                 $product_id
             )
         );
-
-        return $results;
     }
 
 }

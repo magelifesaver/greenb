@@ -17,9 +17,23 @@ class Group implements ListTable
         $this->table = $table;
     }
 
-    public function get_column_value(string $column, $id): string
+    public function render_cell(string $column_id, $row_id): string
     {
-        return (string)apply_filters('bp_groups_admin_get_group_custom_column', '', $column, $this->get_group($id));
+        $method = 'column_' . $column_id;
+
+        if (method_exists($this->table, $method)) {
+            ob_start();
+            (string)call_user_func([$this->table, $method], $this->get_group($row_id));
+
+            return ob_get_clean();
+        }
+
+        return (string)apply_filters(
+            'bp_groups_admin_get_group_custom_column',
+            '',
+            $column_id,
+            $this->get_group($row_id)
+        );
     }
 
     public function render_row($id): string
@@ -31,9 +45,9 @@ class Group implements ListTable
         return ob_get_clean();
     }
 
-    private function get_group(int $id): array
+    private function get_group(string $id): array
     {
-        return (array)groups_get_group($id);
+        return (array)groups_get_group((int)$id);
     }
 
 }

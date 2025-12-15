@@ -7,6 +7,6 @@ namespace ACP\Storage;
 interface DecoderFactory
 {
 
-    public function create( array $encoded_data ): Decoder;
+    public function create(array $encoded_data): Decoder;
 
 }

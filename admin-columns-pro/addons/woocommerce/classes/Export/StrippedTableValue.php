@@ -2,26 +2,32 @@
 
 namespace ACA\WC\Export;
 
-use AC;
+use ACA\WC\ListTable\Orders;
 use ACP;
+use Automattic;
 
 class StrippedTableValue implements ACP\Export\Service
 {
 
     protected $column;
 
-    public function __construct(AC\Column $column)
+    public function __construct(string $column_name)
     {
-        $this->column = $column;
+        $this->column = $column_name;
     }
 
-    public function get_value($id)
+    private function get_list_table(): Orders
     {
-        $list_screen = $this->column->get_list_screen();
+        return new Orders(
+            wc_get_container()->get(Automattic\WooCommerce\Internal\Admin\Orders\ListTable::class)
+        );
+    }
 
-        return $this->column->get_list_screen() instanceof AC\ListScreen\ListTable
-            ? strip_tags($list_screen->list_table()->get_column_value($this->column->get_name(), $id))
-            : '';
+    public function get_value($id): string
+    {
+        return strip_tags(
+            $this->get_list_table()->render_cell($this->column, $id)
+        );
     }
 
 }

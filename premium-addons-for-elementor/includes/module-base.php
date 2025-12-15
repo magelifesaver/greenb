@@ -74,9 +74,8 @@ abstract class Module_Base {
 	public function __construct() {
 		$this->reflection = new \ReflectionClass( $this );
 
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			add_action( 'elementor/widgets/register', array( $this, 'init_widgets' ) );
-		}
+		add_action( 'elementor/widgets/register', array( $this, 'init_widgets' ) );
+
 	}
 
 	/**

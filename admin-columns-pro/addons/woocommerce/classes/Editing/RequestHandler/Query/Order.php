@@ -9,9 +9,6 @@ use ACP\Editing\ApplyFilter;
 class Order implements ACP\Editing\RequestHandler
 {
 
-    /**
-     * @var Request
-     */
     private $request;
 
     public function handle(Request $request)

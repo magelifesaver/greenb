@@ -450,9 +450,11 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
          */
         public function set_styles() {
             $options = $this->get_option();
-            $previous_options = $this->get_option();
-            $custom_css = berocket_sanitize_array($options[ 'custom_css' ], array($this->cc->values[ 'settings_name' ]), $previous_options);
-            echo '<style>' . $custom_css . '</style>';
+            if( ! empty($options[ 'custom_css' ]) ) {
+                $previous_options = $this->get_option();
+                $custom_css = berocket_sanitize_array($options[ 'custom_css' ], array($this->cc->values[ 'settings_name' ]), $previous_options);
+                echo '<style>' . $custom_css . '</style>';
+            }
         }
         public function set_scripts() {
             $options = $this->get_option();

@@ -106,8 +106,6 @@ class Conditional implements IComparable
 
     private bool $noFormatSet = false;
 
-    private int $priority = 0;
-
     /**
      * Create a new Conditional.
      */
@@ -115,18 +113,6 @@ class Conditional implements IComparable
     {
         // Initialise values
         $this->style = new Style(false, true);
-    }
-
-    public function getPriority(): int
-    {
-        return $this->priority;
-    }
-
-    public function setPriority(int $priority): self
-    {
-        $this->priority = $priority;
-
-        return $this;
     }
 
     public function getNoFormatSet(): bool
@@ -269,16 +255,8 @@ class Conditional implements IComparable
     /**
      * Get Style.
      */
-    public function getStyle(mixed $cellData = null): Style
+    public function getStyle(): Style
     {
-        if ($this->conditionType === self::CONDITION_COLORSCALE && $cellData !== null && $this->colorScale !== null && is_numeric($cellData)) {
-            $style = new Style();
-            $style->getFill()->setFillType(Fill::FILL_SOLID);
-            $style->getFill()->getStartColor()->setARGB($this->colorScale->getColorForValue((float) $cellData));
-
-            return $style;
-        }
-
         return $this->style;
     }
 

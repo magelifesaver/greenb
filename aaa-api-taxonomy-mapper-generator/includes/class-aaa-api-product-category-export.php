@@ -1,12 +1,29 @@
 <?php
 /**
- * File: wp-content/plugins/aaa-api-taxonomy-mapper-generator/includes/class-aaa-api-product-category-export.php
+ * File: includes/class-aaa-api-product-category-export.php
  *
  * Handles product-category-based export profiles and JSON generation.
+ *
+ * This version introduces a per-file debug constant
+ * (`AAA_API_PRODUCT_CATEGORY_EXPORT_DEBUG`) which controls whether
+ * diagnostic messages are written to the error log.  The constant
+ * inherits the value of `AAA_API_MAPPER_DEBUG` by default.  Define it
+ * in `wp-config.php` to enable or disable debug logging for this
+ * specific module.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
+
+// Ensure per-file debug constant is defined.  It inherits the global
+// debug flag when not explicitly set.
+if ( ! defined( 'AAA_API_PRODUCT_CATEGORY_EXPORT_DEBUG' ) ) {
+    if ( defined( 'AAA_API_MAPPER_DEBUG' ) ) {
+        define( 'AAA_API_PRODUCT_CATEGORY_EXPORT_DEBUG', AAA_API_MAPPER_DEBUG );
+    } else {
+        define( 'AAA_API_PRODUCT_CATEGORY_EXPORT_DEBUG', false );
+    }
 }
 
 class AAA_API_ProductCategoryExport {
@@ -25,11 +42,11 @@ class AAA_API_ProductCategoryExport {
     private static $attribute_index = [];
 
     public function __construct() {
-				$upload_dir = wp_upload_dir();
+        $upload_dir = wp_upload_dir();
 
-				// ✅ Force correct site-specific uploads subdirectory for mapping files
-				$this->output_dir = trailingslashit( $upload_dir['basedir'] ) . 'sites/9/mappings/';
-				$this->output_url = trailingslashit( $upload_dir['baseurl'] ) . 'sites/9/mappings/';
+        // ✅ Force correct site-specific uploads subdirectory for mapping files
+        $this->output_dir = trailingslashit( $upload_dir['basedir'] ) . 'sites/9/mappings/';
+        $this->output_url = trailingslashit( $upload_dir['baseurl'] ) . 'sites/9/mappings/';
 
         add_action( 'admin_init', [ $this, 'handle_post' ] );
         add_action( 'aaa_tm_render_product_exports_tab', [ $this, 'render_tab' ] );
@@ -37,7 +54,8 @@ class AAA_API_ProductCategoryExport {
         // Tie product export profiles into the same cron hook as the taxonomy mapper.
         add_action( 'tm_mapper_cron_rebuild', [ $this, 'cron_run_all_profiles' ] );
 
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        // Debug message when the module is constructed
+        if ( AAA_API_PRODUCT_CATEGORY_EXPORT_DEBUG ) {
             error_log( '[AAA_API_ProductCategoryExport] Module constructed.' );
         }
     }
@@ -547,6 +565,7 @@ class AAA_API_ProductCategoryExport {
         $result = file_put_contents( $file, $json );
 
         if ( false === $result ) {
+            // Always log write failures, regardless of debug setting.
             error_log( '[AAA_API_ProductCategoryExport] Failed to write ' . $file );
             return false;
         }

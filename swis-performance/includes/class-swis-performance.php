@@ -108,6 +108,13 @@ final class SWIS_Performance {
 	public $minify_js;
 
 	/**
+	 * SWIS Lazify CSS object.
+	 *
+	 * @var object|\SWIS\Lazify_CSS
+	 */
+	public $lazify_css;
+
+	/**
 	 * SWIS GZIP object.
 	 *
 	 * @var object|\SWIS\GZIP
@@ -120,6 +127,13 @@ final class SWIS_Performance {
 	 * @var object|\SWIS\Optimize_Fonts
 	 */
 	public $fonts;
+
+	/**
+	 * SWIS Preload_Assets object.
+	 *
+	 * @var object|\SWIS\Preload_Assets
+	 */
+	public $preload_assets;
 
 	/**
 	 * SWIS Prefetch object.
@@ -162,6 +176,13 @@ final class SWIS_Performance {
 	 * @var object|\SWIS\Test_Async_Request
 	 */
 	public $test_async;
+
+	/**
+	 * SWIS Speculation (Loading) object.
+	 *
+	 * @var object|\SWIS\Speculation
+	 */
+	public $speculation;
 
 	/**
 	 * SWIS Slim object.
@@ -237,9 +258,12 @@ final class SWIS_Performance {
 		self::$instance->defer_css      = new \SWIS\Defer_CSS();
 		self::$instance->minify_js      = new \SWIS\Minify_JS();
 		self::$instance->minify_css     = new \SWIS\Minify_CSS();
+		self::$instance->lazify_css     = new \SWIS\Lazify_CSS();
 		self::$instance->gzip           = new \SWIS\GZIP();
 		self::$instance->fonts          = new \SWIS\Optimize_Fonts();
+		self::$instance->preload_assets = new \SWIS\Preload_Assets();
 		self::$instance->prefetch       = new \SWIS\Prefetch();
+		self::$instance->speculation    = new \SWIS\Speculation();
 		self::$instance->slim           = new \SWIS\Slim();
 
 		// Background/Async classes.
@@ -272,7 +296,7 @@ final class SWIS_Performance {
 	 */
 	private function wp_supported() {
 		global $wp_version;
-		if ( version_compare( $wp_version, '6.1' ) >= 0 ) {
+		if ( version_compare( $wp_version, '6.5' ) >= 0 ) {
 			return true;
 		}
 		add_action( 'network_admin_notices', array( self::$instance, 'unsupported_wp_notice' ) );
@@ -361,14 +385,20 @@ final class SWIS_Performance {
 		require_once SWIS_PLUGIN_PATH . 'includes/class-minify-js.php';
 		// The CSS minify class & functions.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-minify-css.php';
+		// The CSS lazify class & functions.
+		require_once SWIS_PLUGIN_PATH . 'includes/class-lazify-css.php';
 		// The JS delaying class & functions.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-delay-js.php';
 		// The class to auto-insert GZIP and other rules.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-gzip.php';
 		// The class to auto-detect Google Fonts, inline and pre-connect them.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-optimize-fonts.php';
+		// The class to insert preload directives.
+		require_once SWIS_PLUGIN_PATH . 'includes/class-preload-assets.php';
 		// The class to auto-insert DNS prefetch hints.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-prefetch.php';
+		// The class to modify the built-in Speculative Loading API configuration.
+		require_once SWIS_PLUGIN_PATH . 'includes/class-speculation.php';
 		// The class to eliminate unused JS/CSS and related tools.
 		require_once SWIS_PLUGIN_PATH . 'includes/class-slim.php';
 		// The class to run plugin updates.
@@ -405,10 +435,23 @@ final class SWIS_Performance {
 			$this->cache->on_deactivation( $network_wide );
 		}
 		if ( ! empty( $old_settings['cache'] ) && ! empty( $new_settings['cache'] ) ) {
-			$cache_clear_settings = array( 'defer_css', 'defer_js', 'minify_css', 'minify_js', 'critical_css', 'optimize_fonts', 'self_host_fonts', 'cdn_domain', 'test_mode' );
+			$cache_clear_settings = array(
+				'defer_css',
+				'defer_js',
+				'minify_css',
+				'minify_js',
+				'critical_css',
+				'optimize_fonts',
+				'self_host_fonts',
+				'cdn_domain',
+				'speculation_mode',
+				'speculation_level',
+				'speculation_exclude',
+				'test_mode',
+			);
 			foreach ( $cache_clear_settings as $key ) {
 				if ( isset( $old_settings[ $key ] ) && isset( $new_settings[ $key ] ) && $old_settings[ $key ] !== $new_settings[ $key ] ) {
-					$this->cache->clear_complete_cache();
+					$this->cache->clear_site_cache();
 				}
 			}
 		}
@@ -417,7 +460,7 @@ final class SWIS_Performance {
 			isset( $new_settings['cache_settings']['webp'] ) &&
 			(bool) $old_settings['cache_settings']['webp'] !== (bool) $new_settings['cache_settings']['webp']
 		) {
-			$this->cache->clear_complete_cache();
+			$this->cache->clear_site_cache();
 		}
 		if ( $this->settings->background_mode_enabled() ) {
 			if ( empty( $old_settings['cache_preload'] ) && ! empty( $new_settings['cache_preload'] ) ) {

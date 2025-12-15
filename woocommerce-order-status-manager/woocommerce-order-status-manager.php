@@ -6,7 +6,7 @@
  * Description: Easily create custom order statuses and trigger custom emails when order status changes
  * Author: SkyVerge
  * Author URI: http://www.woocommerce.com
- * Version: 1.15.6
+ * Version: 1.15.7
  * Text Domain: woocommerce-order-status-manager
  * Domain Path: /i18n/languages/
  *
@@ -23,7 +23,7 @@
  *
  * Woo: 588398:51fd9ab45394b4cad5a0ebf58d012342
  * WC requires at least: 3.9.4
- * WC tested up to: 9.8.5
+ * WC tested up to: 10.3.6
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -90,7 +90,7 @@ class WC_Order_Status_Manager_Loader {
 	 */
 	public function __clone() {
 
-		_doing_it_wrong( __FUNCTION__, sprintf( 'You cannot clone instances of %s.', get_class( $this ) ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html( sprintf( 'You cannot clone instances of %s.', get_class( $this ) ) ), '1.0.0' );
 	}
 
 
@@ -101,7 +101,7 @@ class WC_Order_Status_Manager_Loader {
 	 */
 	public function __wakeup() {
 
-		_doing_it_wrong( __FUNCTION__, sprintf( 'You cannot unserialize instances of %s.', get_class( $this ) ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html( sprintf( 'You cannot unserialize instances of %s.', get_class( $this ) ) ), '1.0.0' );
 	}
 
 
@@ -180,7 +180,7 @@ class WC_Order_Status_Manager_Loader {
 
 			$this->deactivate_plugin();
 
-			wp_die( self::PLUGIN_NAME . ' could not be activated. ' . $this->get_environment_message() );
+			wp_die( esc_html( self::PLUGIN_NAME . ' could not be activated. ' . $this->get_environment_message() ) );
 		}
 	}
 

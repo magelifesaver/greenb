@@ -2,25 +2,26 @@
 
 namespace ACA\WC\Export\Product;
 
-use ACA\WC\Column;
 use ACP;
 
-class Downloads implements ACP\Export\Service {
+class Downloads implements ACP\Export\Service
+{
 
-	private $column;
+    public function get_value($id): string
+    {
+        $product = wc_get_product($id);
 
-	public function __construct( Column\Product\Downloads $column ) {
-		$this->column = $column;
-	}
+        if ( ! $product) {
+            return '';
+        }
 
-	public function get_value( $id ) {
-		$values = [];
+        $values = [];
 
-		foreach ( $this->column->get_raw_value( $id ) as $download ) {
-			$values[] = $download->get_file();
-		}
+        foreach ($product->get_downloads() as $download) {
+            $values[] = $download->get_file();
+        }
 
-		return implode( $this->column->get_separator(), $values );
-	}
+        return implode(', ', $values);
+    }
 
 }

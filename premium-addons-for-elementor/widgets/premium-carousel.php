@@ -177,7 +177,7 @@ class Premium_Carousel extends Widget_Base {
 				'render_type'  => 'template',
 				'options'      => array(
 					'template' => __( 'Templates', 'premium-addons-for-elementor' ),
-					'gallery'  => __( 'Gallery', 'premium-addons-for-elementor' ),
+					'gallery'  => __( 'Image Gallery', 'premium-addons-for-elementor' ),
 				),
 				'default'      => 'template',
 			)
@@ -300,6 +300,9 @@ class Premium_Carousel extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
 				'description' => __( 'Use this to add an element selector to be used to navigate to this slide. For example #slide-1', 'premium-addons-for-elementor' ),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -402,7 +405,6 @@ class Premium_Carousel extends Widget_Base {
 			)
 		);
 
-
 		$this->add_control(
 			'mscroll',
 			array(
@@ -444,7 +446,7 @@ class Premium_Carousel extends Widget_Base {
 		$this->add_control(
 			'premium_carousel_dot_position',
 			array(
-				'label'     => __( 'Position', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Dots Position', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'below',
 				'options'   => array(
@@ -542,7 +544,7 @@ class Premium_Carousel extends Widget_Base {
 		$this->add_control(
 			'premium_carousel_navigation_effect',
 			array(
-				'label'        => __( 'Ripple Effect', 'premium-addons-for-elementor' ),
+				'label'        => __( 'Hover Ripple Effect', 'premium-addons-for-elementor' ),
 				'description'  => __( 'Enable a ripple effect when the active dot is hovered/clicked', 'premium-addons-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'premium-carousel-ripple-',
@@ -933,6 +935,8 @@ class Premium_Carousel extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 
@@ -1512,7 +1516,7 @@ class Premium_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'progress_height',
 			array(
-				'label'     => __( 'Height', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Progress Bar Height', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'selectors' => array(
 					'{{WRAPPER}} .premium-carousel-nav-progressbar' => 'height: {{SIZE}}px;',

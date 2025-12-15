@@ -46,12 +46,21 @@ final class Cache_Engine {
 	public static $request_uri = '';
 
 	/**
+	 * The (temporary) debug buffer for cache operations.
+	 *
+	 * @access public
+	 * @var string $debug
+	 */
+	public static $debug = '';
+
+	/**
 	 * Start the cache engine.
 	 *
 	 * @return bool True if engine started, false otherwise.
 	 */
 	public static function start() {
 		self::get_request_uri();
+		self::debug_message( __METHOD__ . ' request uri is ' . self::$request_uri );
 		if ( self::should_start() ) {
 			new self();
 		}
@@ -90,7 +99,16 @@ final class Cache_Engine {
 	 */
 	public static function debug_message( $message ) {
 		if ( function_exists( 'swis' ) && class_exists( '\SWIS\Cache' ) && is_object( swis()->cache ) ) {
+			if ( ! empty( self::$debug ) ) {
+				Base::$debug .= self::$debug;
+				self::$debug  = '';
+			}
 			swis()->cache->debug_message( $message );
+		} elseif ( \is_string( $message ) ) {
+			$message      = \str_replace( "\n\n\n", '<br>', $message );
+			$message      = \str_replace( "\n\n", '<br>', $message );
+			$message      = \str_replace( "\n", '<br>', $message );
+			self::$debug .= "$message<br>";
 		}
 	}
 
@@ -215,7 +233,7 @@ final class Cache_Engine {
 		}
 		self::debug_message( 'not from index.php' );
 		// NOTE: Only keeping this here if we need to debug something.
-		if ( false && isset( $_SERVER['SCRIPT_NAME'] ) ) {
+		if ( isset( $_SERVER['SCRIPT_NAME'] ) ) {
 			self::debug_message( 'from ' . stripslashes( $_SERVER['SCRIPT_NAME'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		}
 		return false;

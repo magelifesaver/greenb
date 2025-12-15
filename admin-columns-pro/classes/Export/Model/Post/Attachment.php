@@ -2,25 +2,30 @@
 
 namespace ACP\Export\Model\Post;
 
-use AC\Column;
+use AC\Type\Value;
+use AC\Value\Formatter\Post\Attachments;
 use ACP\Export\Service;
 
-class Attachment implements Service {
+class Attachment implements Service
+{
 
-	private $column;
+    public function get_value($id): string
+    {
+        $urls = [];
 
-	public function __construct( Column\Post\Attachment $column ) {
-		$this->column = $column;
-	}
+        $formatter = new Attachments();
 
-	public function get_value( $id ) {
-		$urls = [];
+        foreach ($formatter->format(new Value((int)$id)) as $value) {
+            $media_id = (string)$value;
 
-		foreach ( $this->column->get_attachment_ids( (int) $id ) as $media_id ) {
-			$urls[] = wp_get_attachment_url( (int) $media_id );
-		}
+            if ( ! is_numeric($media_id)) {
+                continue;
+            }
 
-		return implode( ', ', $urls );
-	}
+            $urls[] = wp_get_attachment_url((int)$media_id);
+        }
+
+        return implode(', ', $urls);
+    }
 
 }

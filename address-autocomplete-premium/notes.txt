@@ -1,0 +1,340 @@
+// This works with the shadow dom
+
+const attachShadow = Element.prototype.attachShadow;
+
+		Element.prototype.attachShadow = function (init) {
+
+		  // Check if we are the new Google places autocomplete element...
+		  if (this.localName === "gmp-place-autocomplete") {
+
+		    // If we are, we need to override the default behaviour of attachShadow() to
+		    // set the mode to open to allow us to crowbar a style element into the shadow DOM.
+		    const shadow = attachShadow.call(this, {
+
+		      ...init,
+		      mode: "open"
+		    });
+
+		    var field_wrapper_obj = $(this).closest('[data-type="googleaddress"]');
+
+		    // Wait for the widget-container to be added to the shadow DOM
+		    const observer = new MutationObserver((mutations, obs) => {
+
+		      const widget_container = shadow.querySelector('.widget-container');
+
+		      if(widget_container) {
+
+		        // Process widget container
+		        ws_this.google_address_process_widget_container(field_wrapper_obj, $(widget_container));
+		        
+		        // Stop observing once found
+		        obs.disconnect();
+		      }
+		    });
+		    
+		    // Start observing the shadow root for changes
+		    observer.observe(shadow, {
+
+		      childList: true,
+		      subtree: true
+		    });
+
+		    // Set the shadowRoot property to the new shadow root that has our styles in it.
+		    return shadow;
+		  }
+
+		  // ...for other elements, proceed with the original behaviour of attachShadow().
+		  return attachShadow.call(this, init);
+		};
+
+		// Initiate Place Autocomplete element
+		const pac = new google.maps.places.PlaceAutocompleteElement(args);
+
+		// Place Autocomplete ID
+		google_address.id_pac = google_address.id + '-pac';
+
+		// Place Autocomplete obj
+		google_address.obj_pac_wrapper = $('#' + google_address.id_pac, ws_this.form_canvas_obj);
+
+		// Add to form
+		google_address.obj_pac_wrapper.append(pac);
+
+		// gmp-select event listener
+		pac.addEventListener('gmp-select', async ({ placePrediction }) => {
+
+			var place = placePrediction.toPlace();
+
+			await place.fetchFields({
+
+				fields: [
+
+					'addressComponents',
+					'businessStatus',
+					'formattedAddress',
+					'nationalPhoneNumber',
+					'internationalPhoneNumber',
+					'location',
+					'displayName',
+					'id',
+					'plusCode',
+					'rating',
+					'userRatingCount',
+					'googleMapsURI',
+					'websiteURI',
+				]
+			});
+
+			// Convert to legacy format
+			place = ws_this.place_legacy(place);
+
+			// Process field mapping
+			ws_this.google_address_place_set(google_address, place, false);
+		});
+
+
+So you can capture when shadows are generated on the page. Its a bit of a cluster fuck but I finally call:
+
+ws_this.google_address_process_widget_container(field_wrapper_obj, $(widget_container));
+
+... and it passes my overall field wrapper (easy bit) and the Google Places Autocomplete widget container that you usually can't access from the DOM. In my google_address_process_widget_container method I can then add event handlers to the Google address input, add styles etc.
+4:36
+	// Google address - Process - Places API (Legacy)
+	$.WS_Form.prototype.google_address_process_widget_container = function(field_wrapper_obj, widget_container_obj) {
+
+		// Get WS Form input object
+		var field_input_obj = $('> input', field_wrapper_obj);
+
+		// Get Google Places Autocomplete input object
+		var pac_input_obj = $('input', widget_container_obj);
+
+		// Placeholder
+		var placeholder = field_input_obj.attr('placeholder') ? field_input_obj.attr('placeholder') : '';
+		if(placeholder == '') { placeholder = this.language('google_address_placeholder'); }
+		pac_input_obj.attr('placeholder', placeholder);
+
+		// Style shadow root
+		const style = document.createElement('style');
+		style.textContent = `:host .input-container input {
+	-webkit-appearance: none !important;
+	color: var(--wsf-field-color) !important;
+	font-family: var(--wsf-field-font-family) !important;
+	font-size: var(--wsf-field-font-size) !important;
+	font-style: var(--wsf-field-font-style) !important;
+	font-weight: var(--wsf-field-font-weight) !important;
+	letter-spacing: var(--wsf-field-letter-spacing) !important;
+	line-height: var(--wsf-field-line-height) !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	text-decoration: var(--wsf-field-text-decoration) !important;
+	text-size-adjust: 100% !important;
+	text-transform: var(--wsf-field-text-transform) !important;
+}
+
+:host .input-container input::placeholder {
+	color: var(--wsf-field-color-placeholder) !important;
+}
+
+:host .focus-ring {
+	display: none !important;
+}
+
+:host-context(:not(.full-window-autocomplete-dialog)) .autocomplete-icon {
+	height: auto !important;
+	margin-right: calc(var(--wsf-field-padding-horizontal) - 4px);
+	width: auto !important;
+}
+
+:host-context(:not(.full-window-autocomplete-dialog)) .clear-button {
+	height: auto !important;
+	width: auto !important;
+}
+`;
+		$(style).insertBefore(pac_input_obj);
+
+		// Sync hidden input field with Google Place Autocomplete input field
+		field_input_obj.on('input change', function(e) {
+
+			var value = $(this).val();
+
+			var trigger = (value != pac_input_obj.val());
+
+			pac_input_obj.val(value);
+
+			if(trigger) {
+
+				pac_input_obj[0].dispatchEvent(new Event(e.type, { bubbles: true }));
+			}
+		});
+		pac_input_obj.on('input change', function(e) {
+
+			var value = $(this).val();
+
+			var trigger = (value != field_input_obj.val());
+
+			field_input_obj.val(value);
+
+			if(trigger) {
+
+				field_input_obj.trigger(e.type);
+			}
+		});
+	}
+
+
+
+
+
+
+
+// ------------- Other code from Mark
+
+		// Initiate Place Autocomplete element
+		const pac = new google.maps.places.PlaceAutocompleteElement(args);
+
+		// Attempt to customize input
+		var pac_input = pac.Fg;
+		if(pac_input) {
+
+			// Placeholder
+			var placeholder = google_address.obj.attr('placeholder') ? google_address.obj.attr('placeholder') : '';
+			if(placeholder == '') { placeholder = ws_this.language('google_address_placeholder'); }
+			if(typeof(pac_input.placeholder) == 'string') {
+
+				pac_input.placeholder = placeholder;
+			}
+
+			// Style shadow root
+			const style = document.createElement('style');
+			style.textContent = `.widget-container .input-container input {
+
+	// Base
+	-webkit-appearance: none !important;
+	color: var(--wsf-field-color) !important;
+	font-family: var(--wsf-field-font-family) !important;
+	font-size: var(--wsf-field-font-size) !important;
+	font-style: var(--wsf-field-font-style) !important;
+	font-weight: var(--wsf-field-font-weight) !important;
+	letter-spacing: var(--wsf-field-letter-spacing) !important;
+	line-height: var(--wsf-field-line-height) !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	text-decoration: var(--wsf-field-text-decoration) !important;
+	text-size-adjust: 100% !important;
+	text-transform: var(--wsf-field-text-transform) !important;
+}
+
+.widget-container .input-container input::placeholder {
+	color: var(--wsf-field-color-placeholder) !important;
+}
+
+.widget-container .autocomplete-icon,
+.widget-container .back-button,
+.widget-container .focus-ring,
+.widget-container .clear-button {
+	display: none !important;
+}`;
+
+			pac_input.parentNode.insertBefore(style, pac_input.nextSibling);
+		}
+
+		// Place Autocomplete ID
+		google_address.id_pac = google_address.id + '-pac';
+
+		// Place Autocomplete obj
+		google_address.obj_pac_wrapper = $('#' + google_address.id_pac, ws_this.form_canvas_obj);
+
+		// Add to form
+		google_address.obj_pac_wrapper.append(pac);
+
+		// Store Place Autocomplete object
+		google_address.obj_pac = $(pac);
+
+		// Sync hidden input field with Google Place Autocomplete input field
+		google_address.obj.on('input change', function(e) {
+
+			if(
+				(typeof(google_address.obj_pac[0].Fg) == 'object') &&
+				(typeof(google_address.obj_pac[0].Fg.value) == 'string')
+			) {
+				var value = $(this).val();
+
+				var trigger = (value != google_address.obj_pac[0].Fg.value);
+
+				google_address.obj_pac[0].Fg.value = value;
+
+				if(trigger) {
+
+					google_address.obj_pac[0].Fg.dispatchEvent(new Event(e.type, { bubbles: true }));
+				}
+			}
+		});
+		google_address.obj_pac.on('input change', function(e) {
+
+			if(
+				(typeof(google_address.obj_pac[0].Fg) == 'object') &&
+				(typeof(google_address.obj_pac[0].Fg.value) == 'string')
+			) {
+				var value = google_address.obj_pac[0].Fg.value;
+
+				var trigger = (value != google_address.obj.val());
+
+				google_address.obj.val(value);
+
+				if(trigger) {
+
+					google_address.obj.trigger('change');
+				}
+			}
+		});
+
+		// gmp-select event listener
+		google_address.obj_pac.on('gmp-select', async function(e) {
+
+			var place = e.originalEvent.placePrediction.toPlace();
+
+			await place.fetchFields({
+
+				fields: [
+
+					'addressComponents',
+					'businessStatus',
+					'formattedAddress',
+					'nationalPhoneNumber',
+					'internationalPhoneNumber',
+					'location',
+					'displayName',
+					'id',
+					'plusCode',
+					'rating',
+					'userRatingCount',
+					'googleMapsURI',
+					'websiteURI'
+				]
+			});
+
+			// Convert to legacy format
+			place = ws_this.place_legacy(place);
+
+			// Process field mapping
+			ws_this.google_address_place_set(google_address, place, false);
+		});
+
+/* Additional notes:
+
+pac.Fg is where the magic happens.
+5:32
+Literally took me 3 days to work that all out.
+5:32
+Claude / OpenAPI had no idea about any of this shit.
+5:33
+google_address is that code is an object I have that contains settings about how the field is set up in WS Form.
+5:34
+I have a hidden field (google_address.obj) alongside that element that stores what the user types, hence the google_address.obj_pac.on('input change', function(e) {
+5:36
+I'm inject a style element into that new google.maps.places.PlaceAutocompleteElement(args)
+5:37
+Example args into that are:
+args.includedRegionCodes = ['us'];    // US only
+args.includedPrimaryTypes = ['establishment'];    // Business only
+
+*/

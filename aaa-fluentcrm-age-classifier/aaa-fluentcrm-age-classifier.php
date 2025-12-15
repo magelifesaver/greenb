@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA FluentCRM Age Classifier
+ * Plugin Name: AAA FluentCRM Age Classifier (XHV98-FLU)
  * Description: Computes age & bracket from FluentCRM date_of_birth, writes to FluentCRM custom fields, and manages MEDICAL/RECREATIONAL + bracket + DOB Missing tags. Daily cron + “Run Now”.
  * Version: 1.0.1
  * Author: Workflow

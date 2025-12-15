@@ -43,6 +43,14 @@ final class Disk_Cache {
 	public static $cache_constant_setup = false;
 
 	/**
+	 * The (temporary) debug buffer for cache operations.
+	 *
+	 * @access public
+	 * @var string $debug
+	 */
+	public static $debug = '';
+
+	/**
 	 * List of directories that have been cleared.
 	 *
 	 * @var array
@@ -88,8 +96,17 @@ final class Disk_Cache {
 	 * @param string $message Debug information to add to the log.
 	 */
 	public static function debug_message( $message ) {
-		if ( function_exists( 'swis' ) && class_exists( '\SWIS\Cache' ) ) {
+		if ( function_exists( 'swis' ) && class_exists( '\SWIS\Cache' ) && is_object( swis()->cache ) ) {
+			if ( ! empty( self::$debug ) ) {
+				Base::$debug .= self::$debug;
+				self::$debug  = '';
+			}
 			swis()->cache->debug_message( $message );
+		} elseif ( \is_string( $message ) ) {
+			$message      = \str_replace( "\n\n\n", '<br>', $message );
+			$message      = \str_replace( "\n\n", '<br>', $message );
+			$message      = \str_replace( "\n", '<br>', $message );
+			self::$debug .= "$message<br>";
 		}
 	}
 
@@ -261,11 +278,14 @@ final class Disk_Cache {
 	 * @param string $dir The directory path.
 	 * @param bool   $skip_child_dir  Whether or not child directories should be skipped.
 	 */
-	private static function clear_dir( $dir, $skip_child_dir = false ) {
+	public static function clear_dir( $dir, $skip_child_dir = false ) {
 		self::debug_message( __METHOD__ );
 		$dir = untrailingslashit( $dir );
 		self::debug_message( microtime( true ) );
 
+		if ( empty( $dir ) ) {
+			return;
+		}
 		if ( ! is_dir( $dir ) ) {
 			return;
 		}
@@ -274,6 +294,9 @@ final class Disk_Cache {
 		}
 		if ( ! is_writable( $dir ) ) {
 			return;
+		}
+		if ( ! \str_contains( $dir, self::$cache_dir ) ) {
+			self::debug_message( "refusing to clear non-cache dir: $dir" );
 		}
 
 		self::debug_message( "clearing cache for $dir" );
@@ -289,7 +312,7 @@ final class Disk_Cache {
 				self::clear_dir( $dir_object );
 			} elseif ( is_file( $dir_object ) && is_writable( $dir_object ) ) {
 				self::debug_message( "removing $dir_object" );
-				unlink( $dir_object );
+				@unlink( $dir_object );
 			}
 		}
 
@@ -300,9 +323,9 @@ final class Disk_Cache {
 		clearstatcache();
 		$dir_objects = self::get_dir_objects( $dir );
 
-		// If the directory is empty now. No need to do error suppression here.
-		if ( empty( $dir_objects ) ) {
-			rmdir( $dir );
+		// If the directory is empty now, and is not the root cache directory.
+		if ( empty( $dir_objects ) && $dir !== self::$cache_dir ) {
+			@rmdir( $dir );
 		}
 		clearstatcache();
 	}

@@ -16,9 +16,9 @@ class Changelog implements Type\QueryAware
             : admin_url('plugin-install.php');
 
         $this->set_url($url);
-        $this->add_one('tab', 'plugin-information');
-        $this->add_one('section', 'changelog');
-        $this->add_one('plugin', $plugin_name);
+        $this->add('tab', 'plugin-information');
+        $this->add('section', 'changelog');
+        $this->add('plugin', $plugin_name);
     }
 
 }

@@ -2,7 +2,7 @@
 
 if ( ! defined( 'WPS_AA_VERSION' ) ) {
 
-	define( 'WPS_AA_VERSION', '1.2.2' );
+	define( 'WPS_AA_VERSION', '1.2.5' );
 	define( 'WPS_AA_PLUGIN_FILE', __FILE__ );
 	define( 'WPS_AA_PATH', plugin_dir_path( __FILE__ ) );
 	define( 'WPS_AA_URL', plugin_dir_url( __FILE__ ) );

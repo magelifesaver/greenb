@@ -1348,6 +1348,8 @@ class Premium_Grid extends Widget_Base {
 
 		}
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'grid' );
@@ -2801,13 +2803,13 @@ class Premium_Grid extends Widget_Base {
 				$image_id = apply_filters( 'wpml_object_id', $image['premium_gallery_img']['id'], 'attachment', true );
 
 				// Check for Image ID, but not for the default Elementor placeholder.
-				if ( false === strpos( $image['premium_gallery_img']['url'], 'placeholder.png' ) && ! $image['premium_gallery_video'] && ! $image_id && empty( $image['premium_gallery_img']['url'] ) ) {
-					continue;
-				}
+				// if ( false === strpos( $image['premium_gallery_img']['url'], 'placeholder.png' ) && ! $image['premium_gallery_video'] && ! $image_id && empty( $image['premium_gallery_img']['url'] ) ) {
+				// 	continue;
+				// }
 
 				$image_by_id = get_post( $image_id );
 
-				$alt = $this->get_lightbox_title( $image_by_id );
+				$alt = $image_by_id ? $this->get_lightbox_title( $image_by_id ) : '';
 
 				$this->add_render_attribute(
 					$key,

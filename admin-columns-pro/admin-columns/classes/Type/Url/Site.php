@@ -11,9 +11,13 @@ class Site implements Type\Url
 
     public const URL = 'https://www.admincolumns.com';
 
+    public const PAGE_CHANGELOG = '/changelog';
     public const PAGE_PRICING = '/pricing-purchase';
     public const PAGE_ABOUT_PRO = '/admin-columns-pro';
+    public const PAGE_FEATURES = '/features';
     public const PAGE_ACCOUNT_SUBSCRIPTIONS = '/my-account/subscriptions';
+    public const PAGE_FORUM = '/topics';
+    public const PAGE_FORUM_BETA = '/forums/forum/beta-feedback/';
     public const PAGE_ADDONS = '/add-ons';
     public const PAGE_ADDON_ACF = '/advanced-custom-fields';
     public const PAGE_ADDON_BUDDYPRESS = '/buddypress';
@@ -25,12 +29,35 @@ class Site implements Type\Url
     public const PAGE_ADDON_TOOLSET_TYPES = '/toolset-types';
     public const PAGE_ADDON_WOOCOMMERCE = '/woocommerce-columns';
     public const PAGE_ADDON_YOAST_SEO = '/yoast-seo';
+    public const PAGE_ADDON_RANK_MATH = '/rank-math';
+    public const PAGE_ADDON_SEOPRESS = '/seo-press';
+    public const PAGE_SUPPORT = '/documentation';
 
-    public function __construct(string $path = null)
+    public function __construct(?string $path = null)
     {
         if ($path) {
             $this->set_path($path);
         }
+    }
+
+    public static function create_pricing(): self
+    {
+        return new self(self::PAGE_PRICING);
+    }
+
+    public static function create_admin_columns_pro(): self
+    {
+        return new self(self::PAGE_ABOUT_PRO);
+    }
+
+    public static function create_support(): self
+    {
+        return new self(self::PAGE_SUPPORT);
+    }
+
+    public static function create_changelog(): self
+    {
+        return new self(self::PAGE_CHANGELOG);
     }
 
     public function get_url(): string

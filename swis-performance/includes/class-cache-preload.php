@@ -37,9 +37,12 @@ final class Cache_Preload extends Page_Parser {
 
 		if ( $this->background_mode_enabled() ) {
 			if ( ! defined( 'SWIS_AUTO_PRELOAD' ) || SWIS_AUTO_PRELOAD ) {
-				// Any time the cache is cleared, kick off the preloader.
-				add_action( 'swis_site_cache_cleared', array( $this, 'start_preload' ) );
+				// Any time the cache is cleared, queue up the preloader.
+				// For site/complete purge, creates a transient that triggers the preload on a subsequent request.
+				add_action( 'swis_site_cache_cleared', array( $this, 'queue_site_preload' ) );
+				add_action( 'swis_complete_cache_cleared', array( $this, 'queue_preload' ) );
 				add_action( 'swis_cache_by_url_cleared', array( $this, 'start_preload_url' ) );
+				add_action( 'init', array( $this, 'maybe_start_preload' ) );
 			}
 
 			// If the SWIS cache is not in use...
@@ -49,13 +52,18 @@ final class Cache_Preload extends Page_Parser {
 			}
 
 			// Add handler to manually start the (async) preloader.
-			add_action( 'admin_action_swis_cache_preload_manual', array( $this, 'manual_preload_action' ) );
-			add_action( 'admin_action_swis_cache_preload_resume_manual', array( $this, 'manual_preload_resume_action' ) );
+			\add_action( 'admin_action_swis_cache_preload_manual', array( $this, 'manual_preload_action' ) );
+			\add_action( 'admin_action_swis_cache_preload_resume_manual', array( $this, 'manual_preload_resume_action' ) );
+			// This one starts preload for one site, and sets preload_needed options for all the others.
+			\add_action( 'admin_action_swis_network_start_manual_preload', array( $this, 'network_start_manual_preload' ) );
+
+			\add_action( 'admin_notices', array( $this, 'preload_needed_notice' ) );
+			\add_action( 'network_admin_notices', array( $this, 'network_preload_needed_notice' ) );
 		} else {
 			// Any time the cache is cleared, clear the preload queue.
-			add_action( 'swis_complete_cache_cleared', array( $this, 'stop_preload' ) );
-			add_action( 'swis_site_cache_cleared', array( $this, 'stop_preload' ) );
-			add_action( 'swis_cache_by_url_cleared', array( $this, 'stop_preload' ) );
+			\add_action( 'swis_complete_cache_cleared', array( $this, 'stop_preload' ) );
+			\add_action( 'swis_site_cache_cleared', array( $this, 'stop_preload' ) );
+			\add_action( 'swis_cache_by_url_cleared', array( $this, 'stop_preload' ) );
 		}
 
 		// Actions to process preload via AJAX.
@@ -157,6 +165,109 @@ final class Cache_Preload extends Page_Parser {
 	}
 
 	/**
+	 * Set an option to alert the user that a preload is needed.
+	 */
+	public function queue_preload() {
+		$this->debug_message( 'complete cache cleared, setting preload needed (usually for network)' );
+		\update_site_option( 'swis_preload_needed', 1 );
+	}
+
+	/**
+	 * Set an option to trigger site preload on a subsequent request.
+	 */
+	public function queue_site_preload() {
+		$this->debug_message( 'site cache cleared, setting (site) preload needed to delay preloading for a bit' );
+		// Uses time() so that we wait a short time before starting (in case race conditions, though that still might happen).
+		\update_option( 'swis_site_preload_needed', time() );
+	}
+
+	/**
+	 * Check if preload is needed during admin_init and then start it up.
+	 */
+	public function maybe_start_preload() {
+		if ( is_multisite() ) {
+			return;
+		}
+		$preload_needed = \get_option( 'swis_site_preload_needed' );
+		if ( $preload_needed && $preload_needed < time() - 30 ) {
+			\update_option( 'swis_site_preload_needed', '' );
+			$this->start_preload();
+			return;
+		}
+	}
+
+	/**
+	 * Action handler to start preload and queue on all sub-sites of a network install.
+	 */
+	public function network_start_manual_preload() {
+		$permissions = \apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( ! \current_user_can( $permissions ) || ! \check_admin_referer( 'swis_cache_preload_nonce', 'swis_cache_preload_nonce' ) ) {
+			\wp_die( \esc_html__( 'Access denied', 'swis-performance' ) );
+		}
+		if ( \get_option( 'swis_site_preload_needed' ) ) {
+			\update_option( 'swis_site_preload_needed', '' );
+			$this->start_preload();
+		} elseif ( \get_site_option( 'swis_preload_needed' ) ) {
+			\update_site_option( 'swis_preload_needed', '' );
+			$this->start_preload();
+			$current_blog_id = \get_current_blog_id();
+			$blog_ids        = $this->get_blog_ids();
+			// Switch to each site in network.
+			foreach ( $blog_ids as $blog_id ) {
+				if ( (int) $current_blog_id === (int) $blog_id ) {
+					continue;
+				}
+				\switch_to_blog( $blog_id );
+				\update_option( 'swis_site_preload_needed', time() );
+				\restore_current_blog();
+			}
+		}
+		$base_url = admin_url( 'options-general.php?page=swis-performance-options' );
+		\wp_safe_redirect( $base_url );
+		exit;
+	}
+
+	/**
+	 * Check if network/complete cache was purged and prompt user to start preload.
+	 */
+	public function preload_needed_notice() {
+		$permissions = \apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( \current_user_can( $permissions ) && ( \get_site_option( 'swis_preload_needed' ) || \get_option( 'swis_site_preload_needed' ) ) ) {
+			// Usually multi-site, but theoretically possible on single-site.
+			$preload_nonce      = wp_create_nonce( 'swis_cache_preload_nonce' );
+			$cache_preload_link = admin_url( 'admin.php?action=swis_network_start_manual_preload&swis_cache_preload_nonce=' . $preload_nonce );
+			?>
+			<div class="notice notice-info">
+				<p>
+					<?php esc_html_e( 'The SWIS page cache has been cleared, start the cache preload when ready.', 'swis-performance' ); ?>
+				</p>
+				<p>
+					<a class="button button-secondary" href="<?php echo esc_url( $cache_preload_link ); ?>">
+						<?php esc_html_e( 'Start Preload', 'swis-performance' ); ?>
+					</a>
+				</p>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Check if network/complete cache was purged and let user know to visit each site to start preload.
+	 */
+	public function network_preload_needed_notice() {
+		$permissions = \apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( \current_user_can( $permissions ) && \get_site_option( 'swis_preload_needed' ) ) {
+			?>
+			<div class="notice notice-info">
+				<p>
+					<?php esc_html_e( 'The SWIS page cache has been cleared, please visit each site to begin cache preloading.', 'swis-performance' ); ?>
+				</p>
+			</div>
+			<?php
+		}
+	}
+
+	/**
 	 * Begin preload process.
 	 */
 	public function start_preload() {
@@ -207,9 +318,9 @@ final class Cache_Preload extends Page_Parser {
 	 */
 	public function start_preload_ajax() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		$permissions = apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
-		if ( ! current_user_can( $permissions ) || ! check_ajax_referer( 'swis_cache_preload_nonce', 'swis_cache_preload_nonce', false ) ) {
-			die( wp_json_encode( array( 'error' => esc_html__( 'Access token has expired, please reload the page.', 'swis-performance' ) ) ) );
+		$permissions = \apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( ! \current_user_can( $permissions ) || ! \check_ajax_referer( 'swis_cache_preload_nonce', 'swis_cache_preload_nonce', false ) ) {
+			die( \wp_json_encode( array( 'error' => \esc_html__( 'Access token has expired, please reload the page.', 'swis-performance' ) ) ) );
 		}
 		$remaining_urls = (int) swis()->cache_preload_background->count_queue();
 		$completed      = 0;
@@ -552,7 +663,7 @@ final class Cache_Preload extends Page_Parser {
 
 		$cache_settings = swis()->cache->get_settings();
 		if ( ! empty( $cache_settings['excluded_query_strings'] ) ) {
-			$query_string_regex = self::$settings['excluded_query_strings'];
+			$query_string_regex = $cache_settings['excluded_query_strings'];
 		} else {
 			$query_string_regex = '/^(?!(fbclid|ref|mc_(cid|eid)|utm_(source|medium|campaign|term|content|expid)|gclid|fb_(action_ids|action_types|source)|age-verified|usqp|cn-reloaded|_ga|_ke)).+$/';
 		}

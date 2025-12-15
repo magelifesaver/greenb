@@ -106,7 +106,7 @@ $pro_elements = array(
 				</div>
 			</div>
 			<span class="pa-wz-ticker-sub-heading"><?php echo esc_html__( 'STARTING FROM', 'premium-addons-for-elementor' ) . wp_kses_post( ' <b>$39 </b>' ); ?>
-				<span class="papro-sale-notice"><?php echo esc_html__( '( UP TO 35% OFF! )', 'premium-addons-for-elementor' ); ?></span>
+				<span class="papro-sale-notice"><?php echo esc_html__( '( UP TO $105 OFF! )', 'premium-addons-for-elementor' ); ?></span>
 			</span>
 			<a class="pa-upgrade-btn" href="<?php echo esc_url( Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/#get-pa-pro', 'wizard', 'wp-dash', 'wizard' ) ); ?>" target="_blank" aria-label="<?php echo esc_attr_e( 'upgrade now.', 'premium-addons-for-elementor' ); ?>"><?php echo esc_html_e( 'Upgrade Now', 'premium-addons-for-elementor' ); ?></a>
 			<a class="next-arrow pa-wz-free-user" type="button" role="button" aria-label="<?php echo esc_attr_e( 'maybe later..', 'premium-addons-for-elementor' ); ?>" pa-step-id="3"><?php echo esc_html_e( 'maybe later..', 'premium-addons-for-elementor' ); ?></a>

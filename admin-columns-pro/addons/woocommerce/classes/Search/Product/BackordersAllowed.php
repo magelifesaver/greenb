@@ -14,8 +14,6 @@ class BackordersAllowed extends Comparison\Meta
     {
         $operators = new Operators([
             Operators::EQ,
-            Operators::IS_EMPTY,
-            Operators::NOT_IS_EMPTY,
         ]);
 
         parent::__construct($operators, '_backorders');

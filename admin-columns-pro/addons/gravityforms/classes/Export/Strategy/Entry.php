@@ -2,42 +2,68 @@
 
 namespace ACA\GravityForms\Export\Strategy;
 
-use AC;
-use ACA\GravityForms\ListScreen;
-use ACA\GravityForms\ListTable;
+use ACA\GravityForms;
 use ACA\GravityForms\Utils\Hooks;
+use ACP\Export\Exporter\TableDataFactory;
+use ACP\Export\ResponseFactory;
 use ACP\Export\Strategy;
 
 class Entry extends Strategy
 {
 
-    public function __construct(ListScreen\Entry $list_screen)
-    {
-        parent::__construct($list_screen);
+    private $response_factory;
+
+    private $table_data_factory;
+
+    private $table_screen;
+
+    public function __construct(
+        GravityForms\TableScreen\Entry $table_screen,
+        TableDataFactory $table_data_factory,
+        ResponseFactory $response_factory
+    ) {
+        $this->table_screen = $table_screen;
+        $this->response_factory = $response_factory;
+        $this->table_data_factory = $table_data_factory;
     }
 
-    protected function ajax_export(): void
+    public function handle_export(): void
     {
         add_filter('gform_get_entries_args_entry_list', [$this, 'set_pagination_args'], 11);
         add_action(Hooks::get_load_form_entries(), [$this, 'delayed_export']);
     }
 
+    public function get_total_items(): ?int
+    {
+        return null;
+    }
+
     public function delayed_export(): void
     {
-        $table = $this->list_screen->get_list_table();
+        $table = $this->table_screen->get_list_table();
         $table->prepare_items();
 
-        $this->export(wp_list_pluck($table->items, 'id'));
+        $rows = wp_list_pluck($table->items, 'id');
+
+        $this->response_factory->create(
+            $this->table_data_factory->create(
+                $this->columns,
+                $rows,
+                0 === $this->counter
+            )
+        );
+
+        exit;
     }
 
     public function set_pagination_args(array $args): array
     {
-        $per_page = $this->get_num_items_per_iteration();
+        $per_page = $this->get_items_per_iteration();
 
         $args['paging']['page_size'] = $per_page;
-        $args['paging']['offset'] = $this->get_export_counter() * $per_page;
+        $args['paging']['offset'] = $this->counter * $per_page;
 
-        $ids = $this->get_requested_ids();
+        $ids = $this->ids;
 
         if ($ids) {
             $args['search_criteria']['field_filters'] = [
@@ -50,11 +76,6 @@ class Entry extends Strategy
         }
 
         return $args;
-    }
-
-    protected function get_list_table(): AC\ListTable
-    {
-        return new ListTable($this->list_screen->get_list_table());
     }
 
 }

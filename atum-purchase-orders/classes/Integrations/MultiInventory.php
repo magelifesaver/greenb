@@ -681,10 +681,10 @@ class MultiInventory {
 						$inventory = MIHelpers::get_inventory( $inventory_id, $product_id );
 
 						if ( $cloned_po->is_returning() ) {
-							$returned_qty  = floatval( $returned_po_items[ "$inventory->product_id:$inventory_id" ] ) ?? 0;
-							$delivered_qty = $delivered_po_items[ "$inventory->product_id:$inventory_id" ] ?? 0;
+							$returned_qty  = floatval( $returned_po_items[ "$inventory->product_id:$inventory_id" ] ?? 0 );
+							$delivered_qty = floatval( $delivered_po_items[ "$inventory->product_id:$inventory_id" ] ?? 0 );
 							$qty           = max( $delivered_qty - $returned_qty, 0 );
-							$total         = $subtotal = ( $cloned_order_item_inventory->subtotal / $cloned_order_item_inventory->qty ) * $qty;
+							$total         = $subtotal = $cloned_order_item_inventory->qty > 0 ? ( ( $cloned_order_item_inventory->subtotal / $cloned_order_item_inventory->qty ) * $qty ) : 0;
 						}
 						else {
 							$qty      = $cloned_order_item_inventory->qty;

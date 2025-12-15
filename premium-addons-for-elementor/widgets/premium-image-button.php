@@ -147,7 +147,7 @@ class Premium_Image_Button extends Widget_Base {
 	 * @since 1.0.0
 	 * @access public
 	 *
-	 * @return string Widget keywords.
+	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
 		return array( 'pa', 'premium', 'premium image button', 'cta', 'call', 'link', 'btn' );
@@ -1080,6 +1080,8 @@ class Premium_Image_Button extends Widget_Base {
 
 		}
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'img-button' );
@@ -1481,7 +1483,7 @@ class Premium_Image_Button extends Widget_Base {
 			array(
 				'name'           => 'premium_image_button_background_hover',
 				'types'          => array( 'classic', 'gradient' ),
-				'selector'       => '{{WRAPPER}} .premium-image-button:hover, {{WRAPPER}} .premium-image-button-none:after,{{WRAPPER}} .premium-button-style8:hover,{{WRAPPER}} .premium-image-button-style4-icon-wrapper,{{WRAPPER}} .premium-image-button-style1:before,{{WRAPPER}} .premium-image-button-style3:hover,{{WRAPPER}} .premium-image-button-overlap-effect-horizontal:hover,{{WRAPPER}} .premium-image-button-overlap-effect-vertical:hover,{{WRAPPER}} .premium-button-style6-bg,{{WRAPPER}} .premium-button-style6:before',
+				'selector'       => '{{WRAPPER}} .premium-image-button-none:after,{{WRAPPER}} .premium-button-style8:hover,{{WRAPPER}} .premium-image-button-style4-icon-wrapper,{{WRAPPER}} .premium-image-button-style1:before,{{WRAPPER}} .premium-image-button-style3:hover,{{WRAPPER}} .premium-image-button-overlap-effect-horizontal:hover,{{WRAPPER}} .premium-image-button-overlap-effect-vertical:hover,{{WRAPPER}} .premium-button-style6-bg,{{WRAPPER}} .premium-button-style6:before',
 				'fields_options' => array(
 					'background' => array(
 						'default' => 'classic',

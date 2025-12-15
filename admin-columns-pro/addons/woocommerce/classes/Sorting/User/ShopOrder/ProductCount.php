@@ -3,9 +3,9 @@
 namespace ACA\WC\Sorting\User\ShopOrder;
 
 use ACP\Query\Bindings;
+use ACP\Query\SqlTrait;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
-use ACP\Sorting\Model\SqlTrait;
 use ACP\Sorting\Type\ComputationType;
 use ACP\Sorting\Type\Order;
 
@@ -16,7 +16,7 @@ class ProductCount implements QueryBindings
 
     private $status;
 
-    public function __construct(array $status = null)
+    public function __construct(?array $status = null)
     {
         if (null === $status) {
             $status = ['wc-completed'];

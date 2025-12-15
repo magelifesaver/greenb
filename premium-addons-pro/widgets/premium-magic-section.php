@@ -2646,7 +2646,9 @@ class Premium_Magic_Section extends Widget_Base {
 
 		</div>
 
-		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'overlay' ) ); ?>></div>
+        <?php if ( 'yes' === $settings['premium_magic_section_overlay'] ) : ?>
+			<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'overlay' ) ); ?>></div>
+		<?php endif; ?>
 
 		<?php
 	}

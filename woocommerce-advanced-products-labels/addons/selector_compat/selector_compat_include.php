@@ -62,18 +62,21 @@ class BeRocket_products_label_selector_compat_addon_include {
             "label_for"=> __('%ID% will be replacced with product ID it must be specific selector for product block', 'BeRocket_products_label_domain'),
             "name"     => "selector_post_id",
             "value"    => ".post-%ID%",
+            'tr_class' => 'bapl_selectors_compat'
         );
         $data['Advanced']['selector_image'] = array(
             "type"     => "text",
             "label"    => __('Main image selector', 'BeRocket_products_label_domain'),
             "name"     => "selector_image",
             "value"    => ".wp-post-image",
+            'tr_class' => 'bapl_selectors_compat'
         );
         $data['Advanced']['selector_title'] = array(
             "type"     => "text",
             "label"    => __('Title selector', 'BeRocket_products_label_domain'),
             "name"     => "selector_title",
             "value"    => ".title",
+            'tr_class' => 'bapl_selectors_compat'
         );
         return $data;
     }

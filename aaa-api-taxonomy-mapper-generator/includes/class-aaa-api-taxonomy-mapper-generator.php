@@ -1,13 +1,28 @@
 <?php
 /**
- * File: wp-content/plugins/aaa-api-taxonomy-mapper-generator/includes/class-aaa-api-taxonomy-mapper-generator.php
+ * File: includes/class-aaa-api-taxonomy-mapper-generator.php
  *
  * Core taxonomy mapper generator class.
- * Handles brands, categories, suppliers, locations, and attributes JSON mappings.
+ * Handles brands, categories, suppliers, locations, and attributes JSON
+ * mappings.  This version introduces a per-file debug constant
+ * (`AAA_API_TAXONOMY_MAPPER_GENERATOR_DEBUG`) which can be defined
+ * in `wp-config.php` to enable or disable diagnostic logging for this
+ * class.  The constant inherits the global `AAA_API_MAPPER_DEBUG`
+ * flag by default.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
+
+// Ensure per-file debug constant is defined.  Inherit the global flag if
+// not set explicitly.
+if ( ! defined( 'AAA_API_TAXONOMY_MAPPER_GENERATOR_DEBUG' ) ) {
+    if ( defined( 'AAA_API_MAPPER_DEBUG' ) ) {
+        define( 'AAA_API_TAXONOMY_MAPPER_GENERATOR_DEBUG', AAA_API_MAPPER_DEBUG );
+    } else {
+        define( 'AAA_API_TAXONOMY_MAPPER_GENERATOR_DEBUG', false );
+    }
 }
 
 class AAA_API_TaxonomyMapperGenerator {
@@ -32,7 +47,8 @@ class AAA_API_TaxonomyMapperGenerator {
         add_action( 'tm_mapper_cron_rebuild', [ $this, 'generate_all_json' ] );
         $this->schedule_cron();
 
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        // Debug message when the core class is constructed
+        if ( AAA_API_TAXONOMY_MAPPER_GENERATOR_DEBUG ) {
             error_log( '[AAA_API_TaxonomyMapperGenerator] Core class constructed.' );
         }
     }
@@ -260,6 +276,7 @@ class AAA_API_TaxonomyMapperGenerator {
         );
 
         if ( false === $result ) {
+            // Always log write failures.
             error_log( 'Taxonomy Mapper Error: failed to write ' . $file );
             add_action(
                 'admin_notices',
@@ -273,59 +290,59 @@ class AAA_API_TaxonomyMapperGenerator {
     /** ------------------------------
      *  DATA FETCHERS
      *  ------------------------------ */
-private function get_terms_data( $taxonomy ) {
-    $terms = get_terms(
-        [
-            'taxonomy'   => $taxonomy,
-            'hide_empty' => false,
-        ]
-    );
-    if ( is_wp_error( $terms ) ) {
-        return [];
+    private function get_terms_data( $taxonomy ) {
+        $terms = get_terms(
+            [
+                'taxonomy'   => $taxonomy,
+                'hide_empty' => false,
+            ]
+        );
+        if ( is_wp_error( $terms ) ) {
+            return [];
+        }
+
+        $base = home_url();
+
+        return array_map(
+            static function ( $t ) use ( $taxonomy, $base ) {
+
+                // Determine correct archive base
+                $path = '';
+                switch ( $taxonomy ) {
+                    case 'product_cat':
+                        // Front-end base for categories
+                        $path = '/preroll/';
+                        break;
+
+                    case 'berocket_brand':
+                        // Front-end base for brands
+                        $path = '/brands/';
+                        break;
+
+                    case 'pa_classification':
+                        // Front-end base for classification attribute
+                        $path = '/classification/';
+                        break;
+
+                    default:
+                        // Generic fallback to taxonomy slug
+                        $path = '/' . sanitize_title( $taxonomy ) . '/';
+                        break;
+                }
+
+                // Construct full URL
+                $url = trailingslashit( $base . $path . $t->slug );
+
+                return [
+                    'id'   => $t->term_id,
+                    'name' => $t->name,
+                    'slug' => $t->slug,
+                    'url'  => $url,
+                ];
+            },
+            $terms
+        );
     }
-
-    $base = home_url();
-
-    return array_map(
-        static function ( $t ) use ( $taxonomy, $base ) {
-
-            // Determine correct archive base
-            $path = '';
-            switch ( $taxonomy ) {
-                case 'product_cat':
-                    // Front-end base for categories
-                    $path = '/preroll/';
-                    break;
-
-                case 'berocket_brand':
-                    // Front-end base for brands
-                    $path = '/brands/';
-                    break;
-
-                case 'pa_classification':
-                    // Front-end base for classification attribute
-                    $path = '/classification/';
-                    break;
-
-                default:
-                    // Generic fallback to taxonomy slug
-                    $path = '/' . sanitize_title( $taxonomy ) . '/';
-                    break;
-            }
-
-            // Construct full URL
-            $url = trailingslashit( $base . $path . $t->slug );
-
-            return [
-                'id'   => $t->term_id,
-                'name' => $t->name,
-                'slug' => $t->slug,
-                'url'  => $url,
-            ];
-        },
-        $terms
-    );
-}
 
     private function get_suppliers_data() {
         if ( taxonomy_exists( 'atum_supplier' ) ) {

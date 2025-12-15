@@ -1,15 +1,15 @@
 === Premium Addons for Elementor - Powerful Elementor Templates & Widgets ===
 Contributors: Leap13, Rimoun
-Tags: elementor, elementor addons, widgets, elementor elements, elementor templates
+Tags: elementor, elementor addons, elementor widgets, elementor mega menu, elementor templates
 Donate Link: https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme
 Requires at least: 5.0
-Tested Up To: 6.8.3
+Tested Up To: 6.9
 Requires PHP: 7.4
-Stable Tag: 4.11.49
+Stable Tag: 4.11.56
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
-90+ Elementor widgets and 580+ templates. It includes elements like Nav Mega Menu, Carousel and Blog, WooCommerce widgets, Display Conditions.
+90+ Elementor widgets and 580+ templates. It includes elements like Nav Mega Menu, Carousel, Blog, WooCommerce widgets, Display Conditions.
 
 == Description ==
 
@@ -20,10 +20,27 @@ Supercharge your [Elementor Page Builder](https://wordpress.org/plugins/elemento
 ### Useful Links
 [Support](https://my.leap13.com/contact-support/) | [Docs](https://premiumaddons.com/docs/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=docs) | [Video Tutorials](https://www.youtube.com/channel/UCXcJ9BeO2sKKHor7Q9VglTQ) | [Facebook Group](https://facebook.com/groups/premiumAddons) | [Upgrade to Pro](https://premiumaddons.com/pro/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=upgrade-pro)
 
-### New: Image Carousel Option
-We have recently added Source option in our Premium Carousel widget which helps you to create an image carousel/slider in a second just by selecting the images you want from site's media library.
+## KEY FEATURES
 
-### New: Performance and Speed Improvements
+- Modular & Lightweight
+- 90+ Free and Pro Elementor Widgets
+- 17+ Powerful Elementor Addons
+- 580+ Ready made Elementor Container & Full Page Templates
+- Carousel & Advanced Media Carousel Widgets
+- Advanced Mega Menu Builder
+- Mobile Menu Builder Widget
+- Magazine Widgets Bundle (Smart Post Listing, Weather Forecast, World Clock, News Ticker, Tags Cloud and Recent Posts Notification)
+- WooCommerce Widgets Bundle (Products Listing, Products Carousel, Categories Listing, Woo CTA, Woo Mini Cart)
+- Advanced Display Conditions Addon
+- Apple's Liquid Glass Effect & Glassmorphism Addon
+- Equal Height Elementor Containers Addon
+- Lottie Animations Integration
+- Cross Domain Copy Paste Elements
+- Elementor Page and Post Duplicator
+- 100% WPML Ready
+- Fully Responsive & Cross Browser Ready
+
+### Performance and Speed Improvements
 Premium Addons for Elementor is now much faster than ever. Only the required JS files will be loaded on your page to boost your page loading speed and site performance. All the editor loading issues have been fixed to make your site faster and minimize the time it takes for Elementor editor to load.
 
 ### New: Liquid Glass Addon
@@ -44,35 +61,26 @@ Add animated shape dividers for Elementor flexbox containers. You can select bet
 ### Advanced Media Carousel Widget
 You can now create carousel using images, videos, Elementor templates to create the carousel you want. Select between four animations and dozens of customization options. [Check it out now!](https://premiumaddons.com/elementor-advanced-carousel-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=advanced-carousel).
 
-### Magazine Bundle
-Smart Post Listing, Weather, World Clock, News Ticker, Tags Cloud and Recent Posts Notification widgets newly added to create the magazine website you ever dreamed. [Check it out now!](https://premiumaddons.com/elementor-news-magazine-widgets-bundle/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=magazine-bundle).
-
 ### Elementor Navigation/Mega Menu Widget
 Now, you build outstanding navigation menus and mega menus using Premium Navigation/Mega Menu Widget which allows you to select between four different layouts with dozens of options to create a responsive menu. [Check it out now!](https://premiumaddons.com/elementor-mega-menu-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=mega-menu).
 
 ### Elementor Display Conditions
-Premium Addons is proudly offering you a professional way to manage your website content with specific conditions which is perfect for marketers and eCommerce websites. You can show/hide content dynamically based on location, browser, operating system, user role, URL parameters, device type, Woocommerce display conditions such as WooCommerce product and WooCommerce shopping cart data, ACF fields, etc. [Check the demo page](https://premiumaddons.com/elementor-display-conditions/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=display-conditions)
+A professional way to manage your website content with specific conditions. You can show/hide content dynamically based on location, browser, operating system, user role, URL parameters, device type, Woocommerce display conditions such as WooCommerce product and WooCommerce shopping cart data, ACF fields, etc. [Check the demo page](https://premiumaddons.com/elementor-display-conditions/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=display-conditions)
 
 ### Equal Height Feature
 Now, you can make your containers, widgets or any selector you want the same height with just ONE click using [Equal Height feature](https://premiumaddons.com/docs/elementor-column-equal-height/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=equal-height) in container settings -> Advanced tab.
 
 ### Container and Full Page Elementor Templates
-Ever-growing [Container/Page Templates Library](https://premiumaddons.com/premium-elementor-templates-library/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=templates-library) Available on both Premium Addons Free and PRO versions. Browse, preview, and insert the template you like in your page/post with just ONE click. You can also select to insert the templates without media files (images, videos, etc.) to prevent overloading your WordPress Media Library with large files.
+Ever-growing [Container/Page Templates Library](https://premiumaddons.com/premium-elementor-templates-library/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=templates-library) Available on both Premium Addons Free and PRO versions. Browse, preview, and insert the template you like in your page/post with just ONE click.
 
 ### Lottie Animations Integration
-You can now use [Lottie Animations in ALL our widgets](https://premiumaddons.com/elementor-lottie-animations-container-addon/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=lottie-animations). Whatever widget that have an image or icon option now have also the option to add a Lottie animation. Lottie animations are open source, lightweight and available for free, Use them now to make your Elementor pages more eye-catching.
+You can now use [Lottie Animations in ALL our widgets](https://premiumaddons.com/elementor-lottie-animations-container-addon/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=lottie-animations). Whatever widget that have an image or icon option now have also the option to add a Lottie animation.
 
 ### Post and Page Duplicator
 Duplicate any post, page or template on your website with just ONE click. Check the documentation article from [here](https://premiumaddons.com/docs/how-to-use-pa-duplicator/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=duplicator).
 
-### Modular & Lightweight
+### Modular & Instant Loading
 Premium Addons for Elementor is fully modular. You can enable/disable specific elements to prevent overloading your website with code you will not actually use which helps your website have a blazing fast performance.
-
-### WPML Ready
-You can use Premium Addons to build multilingual websites easily as our plugin is 100%  compatible with WPML.
-
-### Fully Responsive & Cross Browser Ready
-Each widget and addon has been tested on different screen sizes, mobile devices, and tablets keeping in mind to add special responsive controls for the tricky widgets and addons we create. We always test Premium Addons on [BrowserStack](https://www.browserstack.com) to make sure that everything is stable.
 
 ### Editor Panel Not Loading
 [How to resolve Elementor editor panel loading issue when Premium Addons is active](https://premiumaddons.com/docs/fix-elementor-editor-panel-loading-issues/).
@@ -246,6 +254,47 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 14. Premium Progress Bar Widget
 
 == Changelog ==
+
+= 4.11.56 - 14/12/2025 =
+
+- New: Show banner to disable unused widgets for faster editor loading speed.
+- Tweak: Added responsive control to Zoom control in Google Maps widget.
+- Fixed: Console error warning when dynamic asset is enabled.
+
+= 4.11.55 - 10/12/2025 =
+
+- New: Now, you can send feedback or feature requests from widgets settings -> Help & Docs tab.
+
+= 4.11.54 - 10/12/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Tweak: Dynamic Assets Generate optimized for faster loading speed.
+- Tweak: Banner widget code refactored for better performance.
+- Tweak: Added Open on Cart Update option in Woo Mini Cart widget.
+- Tweak: Image Button hover transition improved.
+- Tweak: Security Enhancement.
+- Fixed: PHP warning in Weather Forecast widget.
+- Fixed: Free Shipping conflict with multi shipping zones in Woo Mini Cart widget.
+- Fixed: Conflicts between dynamic assets and caching plugins.
+
+= 4.11.53 - 30/11/2025 =
+
+- Fixed: Admin notice can't be dismissed.
+
+= 4.11.52 - 30/11/2025 =
+
+- Fixed: Products Per Page not working with Main Query in Woo Products Listing widget.
+- Fixed: Fatal error with evergreen option in Countdown widget.
+
+= 4.11.51 - 27/11/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Tweak: Added file size limits for TikTok videos download to improve security.
+
+= 4.11.50 - 25/11/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Fixed: Woo Mini Cart widget blocks widgets click on editor page.
 
 = 4.11.49 - 23/11/2025 =
 

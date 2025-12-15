@@ -37,6 +37,9 @@ if( ! class_exists('BeRocket_url_parse_paid_nice_url') ) {
         public function get_regex($regex, $instance) {
             $options = $this->main_class->get_option();
             $permalink_data = $this->get_permalinks_options();
+            if( strpos($permalink_data['value'], 'values') === FALSE ) {
+                return $regex;
+            }
             $values = explode('values', $permalink_data['value']);
             if( $values > 1 ) {
                 $regex['filter'] = '/(([\w_-]+)'.$this->escrex($values[0]).'(%val_sym%)'.$this->escrex($values[1]).')(?:$|'.$this->escrex($permalink_data['split']).')/u';
@@ -137,7 +140,7 @@ if( ! class_exists('BeRocket_url_parse_paid_nice_url') ) {
                 $option_permalink = array();
             }
             $option_permalink = array_merge( (empty($options['nice_urls']) ? $this->default_nn_permalink : $this->default_permalink), $option_permalink);
-            return $option_permalink;
+            return apply_filters('bapf_nice_urls_get_permalinks_options', $option_permalink);
         }
         public function remove_filters_from_link($result, $instance, $link) {
             if( $result === null ) {

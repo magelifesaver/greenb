@@ -40,14 +40,16 @@ class Addons_Integration {
 	 */
 	public function __construct() {
 
+        if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+            return;
+        }
+
 		self::$modules = Admin_Helper::get_enabled_elements();
 
 		$load_prev_scripts = in_array( true, array( self::$modules['premium-blob'], self::$modules['premium-parallax'], self::$modules['premium-image-hotspots'], self::$modules['premium-img-layers'] ), true );
 
 		// Load widgets files.
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			add_action( 'elementor/widgets/register', array( $this, 'widgets_register' ) );
-		}
+        add_action( 'elementor/widgets/register', array( $this, 'register_pro_elements' ) );
 
 		// Enqueue Editor assets.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_editor_scripts' ) );
@@ -77,61 +79,10 @@ class Addons_Integration {
 		add_action( 'wp_ajax_clear_reviews_data', array( $this, 'clear_reviews_data' ) );
 		add_action( 'wp_ajax_get_papro_key', array( $this, 'get_papro_key' ) );
 
-		add_action( 'elementor/frontend/widget/after_render', array( $this, 'handle_facebook_feed' ) );
-
 		$this->load_papro_extensions();
-	}
 
-	/**
-	 * Handle Facebook feed widgets.
-	 *
-	 *  @since 1.0.0
-	 * @access public
-	 * @param \Elementor\Widget_Base $widget.
-	 */
-	public function handle_facebook_feed( $widget ) {
-
-		$name = $widget->get_name();
-
-		$assets_gen_enabled = isset( self::$modules['premium-assets-generator'] ) && self::$modules['premium-assets-generator'] ? true : false;
-
-		if ( ! $assets_gen_enabled || ( 'premium-facebook-feed' !== $name && 'premium-behance-feed' !== $name ) ) {
-			return;
-		}
-
-		$dir    = 'min-js';
-		$suffix = '.min';
-
-		if ( 'premium-facebook-feed' === $name ) {
-
-			wp_enqueue_script(
-				'papro-fbfeed',
-				PREMIUM_PRO_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-facebook-feed' . $suffix . '.js',
-				array(),
-				PREMIUM_PRO_ADDONS_VERSION,
-				true
-			);
-
-			$fb_data = apply_filters( 'pa_facebook_feed', array() );
-
-			wp_localize_script( 'papro-fbfeed', 'PaFbFeed', $fb_data );
-
-		}
-
-		if ( 'premium-behance-feed' === $name ) {
-
-			wp_enqueue_script(
-				'papro-behance',
-				PREMIUM_PRO_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-behance-feed' . $suffix . '.js',
-				array(),
-				PREMIUM_PRO_ADDONS_VERSION,
-				true
-			);
-
-			$behance_data = apply_filters( 'pa_behance_feed', array() );
-
-			wp_localize_script( 'papro-behance', 'PaBehFeed', $behance_data );
-
+		if (  self::$modules['premium-behance'] ) {
+			define( 'PREMIUM_BEHANCE_API_KEY', 'XQhsS66hLTKjUoj8Gky7FOFJxNMh23uu' );
 		}
 	}
 
@@ -463,31 +414,78 @@ class Addons_Integration {
 	 * @since 1.0.0
 	 * @access public
 	 */
-	public function widgets_register() {
-		$this->premium_pro_widgets_area();
+	public function register_pro_elements( $widgets_manager ) {
+
+        static $classes_list = null;
+
+        $enabled_elements = array_filter(
+			self::$modules,
+			function( $value, $key ) {
+				return strpos( $key, 'premium-' ) === 0 && filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+			},
+			ARRAY_FILTER_USE_BOTH
+		);
+
+        if ( null === $classes_list ) {
+
+            $map_file = PREMIUM_PRO_ADDONS_PATH . 'includes/helpers/widget-class-map.php';
+
+            if ( file_exists( $map_file ) ) {
+
+				$classes_list = include $map_file;
+
+                $enabled_elements = array_intersect_key( $enabled_elements, $classes_list );
+
+            } else {
+                $enabled_elements = array();
+            }
+
+        }
+
+		foreach ( $enabled_elements as $key => $value ) {
+
+			$class = PAPRO_Helper::get_widget_class_name( $key );
+
+			if( ! $class ) {
+				continue;
+			}
+
+			$this->load_widget_files( $class );
+
+			$widgets_manager->register( new $class() );
+
+		}
+
 	}
 
-	/**
-	 * Premium PRO Widgets Area
+    /**
+	 * Load widget files
 	 *
-	 * Register PAPRO widgets
-	 *
-	 * @since 1.0.0
-	 * @access private
+	 * @param string $class widget class
+     *
+     * @since 2.9.52
+	 * @access public
+     *
+	 * @return void
 	 */
-	private function premium_pro_widgets_area() {
+	public function load_widget_files( $class ) {
 
-		$widget_settings = self::$modules;
+		$social_classes = array(
+			'PremiumAddonsPro\Widgets\Premium_Facebook_Reviews',
+			'PremiumAddonsPro\Widgets\Premium_Yelp_Reviews',
+			'PremiumAddonsPro\Widgets\Premium_Google_Reviews',
+			'PremiumAddonsPro\Widgets\Premium_Instagram_Feed',
+		);
 
-		foreach ( glob( PREMIUM_PRO_ADDONS_PATH . 'widgets/*.php' ) as $file ) {
-			$slug = basename( $file, '.php' );
+		if ( in_array( $class, $social_classes, true ) ) {
+            require_once PREMIUM_ADDONS_PATH . 'widgets/dep/urlopen.php';
+            require_once PREMIUM_PRO_ADDONS_PATH . 'includes/deps/reviews.php';
+        }
 
-			$enabled = isset( $widget_settings[ $slug ] ) ? $widget_settings[ $slug ] : '';
-
-			if ( filter_var( $enabled, FILTER_VALIDATE_BOOLEAN ) || ! $widget_settings ) {
-				$this->register_addon( $file );
-			}
+		if ( 'PremiumAddonsPro\Widgets\Premium_Smart_Post_Listing' === $class ) {
+			require_once PREMIUM_PRO_ADDONS_PATH . 'includes/pa-smart-post-listing-helper.php';
 		}
+
 	}
 
 	/**
@@ -511,6 +509,17 @@ class Addons_Integration {
 			'nonce'        => wp_create_nonce( 'papro-feed' ),
 			'magicSection' => $magic_section ? true : false,
 		);
+
+		if ( self::$modules['premium-behance'] ) {
+            wp_localize_script(
+                'elementor-frontend',
+                'PaBehanceSettings',
+                array(
+                    'key' => PREMIUM_BEHANCE_API_KEY
+                )
+            );
+
+		}
 
 		if ( $site_cursor_enabled ) {
 
@@ -552,7 +561,8 @@ class Addons_Integration {
 			)
 		);
 
-		if ( ! wp_script_is( 'pa-frontend', 'enqueued' ) ) {
+        if( ! self::$modules['premium-assets-generator'] ) {
+
 			wp_register_script(
 				'premium-pro',
 				PREMIUM_PRO_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-addons' . $suffix . '.js',
@@ -564,7 +574,7 @@ class Addons_Integration {
 			wp_localize_script( 'premium-pro', 'PremiumProSettings', $data );
 
 		} else {
-			wp_localize_script( 'pa-frontend', 'PremiumProSettings', $data );
+			wp_localize_script( 'elementor-frontend', 'PremiumProSettings', $data );
 		}
 
 		wp_register_script(
@@ -842,49 +852,6 @@ class Addons_Integration {
 	}
 
 	/**
-	 * Register addon by file name
-	 *
-	 * @param string $file widget file
-	 * .
-	 * @return void
-	 */
-	public function register_addon( $file ) {
-
-		$widgets_manager = \Elementor\Plugin::instance()->widgets_manager;
-
-		$base           = basename( str_replace( '.php', '', $file ) );
-		$class          = ucwords( str_replace( '-', ' ', $base ) );
-		$class          = str_replace( ' ', '_', $class );
-		$class          = sprintf( 'PremiumAddonsPro\Widgets\%s', $class );
-		$social_classes = array(
-			'PremiumAddonsPro\Widgets\Premium_Facebook_Reviews',
-			'PremiumAddonsPro\Widgets\Premium_Yelp_Reviews',
-			'PremiumAddonsPro\Widgets\Premium_Google_Reviews',
-			'PremiumAddonsPro\Widgets\Premium_Instagram_Feed',
-		);
-
-		require $file;
-
-		if ( in_array( $class, $social_classes, true ) ) {
-			require_once PREMIUM_ADDONS_PATH . 'widgets/dep/urlopen.php';
-
-			if ( in_array( $class, $social_classes, true ) ) {
-				require_once PREMIUM_PRO_ADDONS_PATH . 'includes/deps/reviews.php';
-			}
-		}
-
-		if ( 'PremiumAddonsPro\Widgets\Premium_Smart_Post_Listing' === $class ) {
-			require_once PREMIUM_PRO_ADDONS_PATH . 'includes/pa-smart-post-listing-helper.php';
-		}
-
-		if ( class_exists( $class ) ) {
-
-			$widgets_manager->register( new $class() );
-
-		}
-	}
-
-	/**
 	 * Load PAPRO Extensions
 	 *
 	 * @since 2.9.24
@@ -893,7 +860,7 @@ class Addons_Integration {
 	public function load_papro_extensions() {
 
         //Load PAPRO Extensions only on Elementor pages.
-		// if( PAPRO_Helper::is_dashboard_page() ) {
+		// if ( is_admin() && ! Helper_Functions::is_edit_mode() ) {
 		// 	return;
 		// }
 

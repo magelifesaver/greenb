@@ -1141,7 +1141,6 @@ class Premium_Search_Form extends Widget_Base {
 			array(
 				'label'       => __( 'Title HTML Tag', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'h2',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -1153,6 +1152,7 @@ class Premium_Search_Form extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
+				'default'     => 'h2',
 				'label_block' => true,
 			)
 		);

@@ -29,7 +29,7 @@ $account_link = Helper_Functions::get_campaign_link( 'https://my.leap13.com/', '
 								<span>
 									<?php echo __( 'Get ', 'premium-addons-for-elementor' ); ?>
 									<a href="<?php echo esc_url( $get_license ); ?>" target="_blank"><?php echo __( 'Premium Addons Pro', 'premium-addons-for-elementor' ); ?></a>
-									<?php echo __( 'now. ', 'premium-addons-for-elementor' ); ?></span><b style="text-decoration: underline; color: #FF6000"><?php echo __( 'SAVE UP TO 35%', 'premium-addons-for-elementor' ); ?></b>.</span>
+									<?php echo __( 'now. ', 'premium-addons-for-elementor' ); ?></span><b style="text-decoration: underline; color: #FF6000"><?php echo __( 'SAVE UP TO $105', 'premium-addons-for-elementor' ); ?></b>.</span>
 							</li>
 
 							<li>

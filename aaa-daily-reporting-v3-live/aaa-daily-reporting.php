@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA Daily Reporting (v3.1 Updated) dev
+ * Plugin Name: AAA Daily Reporting (v3.1 Updated) (XHV98-ADMIN)
  * Description: Updated v3 loader with sorting JS support + email delivery. Report only generates on user action.
  * Version: 3.1.1
  * Author: WebMaster

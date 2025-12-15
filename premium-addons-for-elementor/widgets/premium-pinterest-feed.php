@@ -43,7 +43,7 @@ class Premium_Pinterest_Feed extends Widget_Base {
 		return 'premium-pinterest-feed';
 	}
 
-/**
+	/**
 	 * Check Premium Addons Pro Version.
 	 *
 	 * @var bool $papro_activated
@@ -1182,6 +1182,8 @@ class Premium_Pinterest_Feed extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 	}
@@ -2540,6 +2542,8 @@ class Premium_Pinterest_Feed extends Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
+
+		$this->papro_activated = Helper_Functions::check_papro_version();
 
 		if ( ! $this->papro_activated || version_compare( PREMIUM_PRO_ADDONS_VERSION, '2.9.2', '<' ) ) {
 

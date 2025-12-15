@@ -33,14 +33,23 @@ final class Minify_CSS extends Page_Parser {
 		if ( ! $this->get_option( 'minify_css' ) ) {
 			return;
 		}
-		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+		if ( \defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			return;
+		}
+		if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) {
+			return;
+		}
+		if ( $this->is_jetpack_boost_option_enabled( 'minify-css' ) ) {
 			return;
 		}
 		parent::__construct();
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 
-		$uri = add_query_arg( '', '' );
+		$this->validate_user_exclusions();
+		$uri = \add_query_arg( '', '' );
 		$this->debug_message( "request uri is $uri" );
+
+		\add_filter( 'swis_skip_css_minify_by_page', array( $this, 'skip_page' ), 10, 2 );
 
 		/**
 		 * Allow pre-empting CSS minify by page.
@@ -48,34 +57,32 @@ final class Minify_CSS extends Page_Parser {
 		 * @param bool Whether to skip parsing the page.
 		 * @param string $uri The URL of the page.
 		 */
-		if ( apply_filters( 'swis_skip_css_minify_by_page', false, $uri ) ) {
+		if ( \apply_filters( 'swis_skip_css_minify_by_page', false, $uri ) ) {
 			return;
 		}
 
 		$this->cache_dir = $this->content_dir . 'cache/css/';
-		if ( ! is_dir( $this->cache_dir ) ) {
-			if ( ! wp_mkdir_p( $this->cache_dir ) ) {
-				add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
+		if ( ! \is_dir( $this->cache_dir ) ) {
+			if ( ! \wp_mkdir_p( $this->cache_dir ) ) {
+				\add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
 				return;
 			}
 		}
-		if ( ! is_writable( $this->cache_dir ) ) {
-			add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
+		if ( ! \is_writable( $this->cache_dir ) ) {
+			\add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
 			return;
 		}
 		$this->cache_dir_url = $this->content_url . 'cache/css/';
 
 		// Overrides for user exclusions.
-		add_filter( 'swis_skip_css_minify', array( $this, 'skip_css_minify' ), 10, 2 );
+		\add_filter( 'swis_skip_css_minify', array( $this, 'skip_css_minify' ), 10, 2 );
 
 		// Get all the stylesheet URLs and minify them (if necessary).
-		add_filter( 'style_loader_src', array( $this, 'minify_styles' ) );
-		add_filter( 'swis_elements_link_href', array( $this, 'minify_styles' ) );
+		\add_filter( 'style_loader_src', array( $this, 'minify_styles' ) );
+		\add_filter( 'swis_elements_link_href', array( $this, 'minify_styles' ) );
 
 		// Minify any custom CSS.
-		add_filter( 'wp_get_custom_css', array( $this, 'minify_raw_css' ), 20 );
-
-		$this->validate_user_exclusions();
+		\add_filter( 'wp_get_custom_css', array( $this, 'minify_raw_css' ), 20 );
 	}
 
 	/**
@@ -97,7 +104,9 @@ final class Minify_CSS extends Page_Parser {
 			'/comet-cache/',
 			'cornerstone/assets/',
 			'Divi/includes/builder/',
+			'Divi/core/admin/',
 			'/Divi/style.css',
+			'/elementor/css/',
 			'/et-cache/',
 			'jch-optimize',
 			'/plg_jchoptimize/',
@@ -109,12 +118,17 @@ final class Minify_CSS extends Page_Parser {
 
 		$user_exclusions = $this->get_option( 'minify_css_exclude' );
 		if ( ! empty( $user_exclusions ) ) {
-			if ( is_string( $user_exclusions ) ) {
+			if ( \is_string( $user_exclusions ) ) {
 				$user_exclusions = array( $user_exclusions );
 			}
-			if ( is_array( $user_exclusions ) ) {
+			if ( \is_array( $user_exclusions ) ) {
 				foreach ( $user_exclusions as $exclusion ) {
-					if ( ! is_string( $exclusion ) ) {
+					if ( ! \is_string( $exclusion ) ) {
+						continue;
+					}
+					$exclusion = \trim( $exclusion );
+					if ( 0 === \strpos( $exclusion, 'page:' ) ) {
+						$this->user_page_exclusions[] = \str_replace( 'page:', '', $exclusion );
 						continue;
 					}
 					$this->user_exclusions[] = $exclusion;
@@ -150,6 +164,9 @@ final class Minify_CSS extends Page_Parser {
 	 */
 	public function purge_cache() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		if ( empty( $this->cache_dir ) ) {
+			return;
+		}
 		$this->clear_dir( $this->cache_dir );
 	}
 
@@ -181,6 +198,7 @@ final class Minify_CSS extends Page_Parser {
 			$minifier->minify( $cache_file );
 		}
 		if ( $this->is_file( $cache_file ) && ! empty( $cache_url ) ) {
+			\do_action( 'swis_replace_preload_url', $url, $cache_url );
 			return $cache_url;
 		}
 		return $url;

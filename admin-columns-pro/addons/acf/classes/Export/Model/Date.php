@@ -1,32 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ACA\ACF\Export\Model;
 
-use AC\Column;
+use AC\Setting\Formatter;
+use AC\Type\Value;
 use ACA;
 use ACP;
 use DateTime;
 
-class Date implements ACP\Export\Service {
+class Date implements ACP\Export\Service
+{
 
-	private $column;
+    private Formatter $formatter;
 
-	public function __construct( Column $column ) {
-		$this->column = $column;
-	}
+    public function __construct(Formatter $formatter)
+    {
+        $this->formatter = $formatter;
+    }
 
-	public function get_value( $id ) {
-		$value = $this->column->get_raw_value( $id );
+    public function get_value($id): string
+    {
+        $value = $this->formatter->format(new Value($id));
 
-		if ( ! $value ) {
-			return '';
-		}
+        if ( ! $value instanceof Value) {
+            return '';
+        }
 
-		$date = DateTime::createFromFormat( 'Ymd', $value );
+        $date = DateTime::createFromFormat('Ymd', $value->get_value());
 
-		return $date
-			? $date->format( 'Y-m-d' )
-			: '';
-	}
+        return $date
+            ? $date->format('Y-m-d')
+            : '';
+    }
 
 }

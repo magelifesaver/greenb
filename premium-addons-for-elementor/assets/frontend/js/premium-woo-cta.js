@@ -9,8 +9,7 @@
             grouped_products = $container.find('.grouped_product_qty'),
             minusButton = $container.find('.quantity-button.minus'),
             plusButton = $container.find('.quantity-button.plus'),
-            redirectToCart = $button.data('redirect-to-cart'),
-            connectToMC = $container.data('pa-mc-id');
+            redirectToCart = $button.data('redirect-to-cart');
 
 
         minusButton.on('click', function () {
@@ -59,9 +58,6 @@
                 }
             });
         });
-
-        // var cart = PAWooCTASettings.cart_contents; // Get cart data
-
 
         var btn_text = $button.find('.premium-woo-btn-text'),
             wishlistRemoveText = $button.attr('data-wishlist-remove-text'),
@@ -186,12 +182,6 @@
                                     $button.after('<a href="' + response.data.cart_url + '" target="_blank" class="view-cart-button" style="margin-inline-start: 10px;">' + PAWooCTASettings.view_cart + '</a>');
 
                                 }
-                            }
-
-                            // check if it is connected to premium mc
-                            if (connectToMC) {
-                                $(connectToMC + '.elementor-widget-premium-mini-cart').find('.pa-woo-mc__inner-container').trigger('click.paToggleMiniCart');
-                                $(document.body).trigger('wc_fragment_refresh');
                             }
 
                         } else {

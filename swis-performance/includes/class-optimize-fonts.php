@@ -144,6 +144,9 @@ final class Optimize_Fonts extends Page_Parser {
 	 * @return string The URL for the resource, minus fonts if a cached version is available.
 	 */
 	public function replace_font_stylesheet( $url, $handle = '' ) {
+		if ( empty( $url ) ) {
+			return $url;
+		}
 		if ( ! $this->is_frontend() ) {
 			return $url;
 		}
@@ -166,7 +169,9 @@ final class Optimize_Fonts extends Page_Parser {
 						}
 						if ( $this->is_file( $replace_style['cache_file'] ) ) {
 							$this->debug_message( "{$replace_style['cache_file']} exists, all good!" );
-							$url = str_replace( $replace_style['original_url'], $replace_style['cache_url'], $url );
+							$cache_url = str_replace( $replace_style['original_url'], $replace_style['cache_url'], $url );
+							\do_action( 'swis_replace_preload_url', $url, $cache_url );
+							$url = $cache_url;
 						}
 					}
 				}
@@ -278,8 +283,8 @@ final class Optimize_Fonts extends Page_Parser {
 		}
 
 		$this->set_option( 'optimize_fonts_css', '' );
-		$this->set_option( 'optimize_fonts_list', $font_list );
-		$this->set_option( 'optimize_fonts_replace', $replace_fonts );
+		$this->set_option( 'optimize_fonts_list', '' );
+		$this->set_option( 'optimize_fonts_replace', '' );
 
 		set_transient( 'swis_font_css_removed', 1 );
 

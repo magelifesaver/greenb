@@ -14,7 +14,7 @@ if ( ! class_exists( 'AAA_OC_PayConfirm_Admin_Actions' ) ) :
 class AAA_OC_PayConfirm_Admin_Actions {
 
 	/** Per-file debug toggle (set to false to silence just this file) */
-	const DEBUG_THIS_FILE = true;
+	const DEBUG_THIS_FILE = false;
 
 	/** Bootstrap hooks. */
 	public static function init() {

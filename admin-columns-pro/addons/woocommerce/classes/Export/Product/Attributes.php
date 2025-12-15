@@ -2,43 +2,46 @@
 
 namespace ACA\WC\Export\Product;
 
-use ACA\WC\Column;
 use ACP;
+use WC_Product;
 
-class Attributes implements ACP\Export\Service {
+class Attributes implements ACP\Export\Service
+{
 
-	protected $column;
+    private function get_delimiter(): string
+    {
+        return defined('WC_DELIMITER') && WC_DELIMITER
+            ? (string)WC_DELIMITER
+            : ' | ';
+    }
 
-	public function __construct( Column\Product\Attributes $column ) {
-		$this->column = $column;
-	}
+    public function get_value($id): string
+    {
+        $product = wc_get_product($id);
 
-	private function get_delimiter(): string {
-		return defined( 'WC_DELIMITER' ) && WC_DELIMITER
-			? (string) WC_DELIMITER
-			: ' | ';
-	}
+        if ( ! $product instanceof WC_Product) {
+            return '';
+        }
 
-	public function get_value( $id ) {
-		$values = [];
+        $attributes = [];
 
-		foreach ( $this->column->get_raw_value( $id ) as $name => $attribute ) {
-			$options = $attribute->get_options();
+        foreach ($product->get_attributes() as $attribute) {
+            if ($attribute->is_taxonomy()) {
+                $label = wc_attribute_label($attribute->get_name(), $product);
+                $options = wc_get_product_terms($product->get_id(), $attribute->get_name(), ['fields' => 'names']);
+            } else {
+                $label = $attribute->get_name();
+                $options = $attribute->get_options();
+            }
 
-			if ( $attribute->is_taxonomy() ) {
-				$options = wc_get_product_terms( $id, $name, [ 'fields' => 'names' ] );
-			}
+            $attributes[] = $label . ': ' . implode(' ' . $this->get_delimiter() . ' ', $options);
+        }
 
-			$value = implode( ' ' . $this->get_delimiter() . ' ', $options );
+        if ( ! $attributes) {
+            return '';
+        }
 
-			if ( ! $this->column->get_attribute() ) {
-				$value = wc_attribute_label( $name ) . ': ' . $value;
-			}
-
-			$values[] = $value;
-		}
-
-		return implode( ', ', $values );
-	}
+        return implode(', ', $attributes);
+    }
 
 }

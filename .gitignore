@@ -1,17 +1,58 @@
 # WordPress core files (optional)
 
 
+/ddd*
+/atum*
+/woocommerce*
+/shopmagic*
+/jwt*
+/elementor*
+/premium*
+/object*
+/index*
+/postie*
+/puredev*
+/easy*
+/wc*
+/wp*
+/woo*
+/user*
+/time*
+/simply*
+/permalink*
+/local*
+/seo*
+/shipping*
+/check*
+/coupon*
+/my-php*
+/aaa-order-workflow/.gitignore
 # Logs, caches, uploads
 *.log
 debug.log
 logs/
+*.sql
+*.sqlite
+
+
+/dominant-color-images/
+/health-check/
+/interactive-code-block/
+/optimization-detective/
+/plugin-check/
+/secure-custom-fields/
+/speculation-rules/
+/theme-check/
+/view-transitions/
+/web-worker-offloading/
+
 
 
 # Environment/config
 .env
 
 # Composer & Node
-/vendor/
+**/vendor/
 /node_modules/
 
 # OS / IDE

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( defined( 'AAA_OC_PAYCONFIRM_LOADER_READY' ) ) { return; }
 define( 'AAA_OC_PAYCONFIRM_LOADER_READY', true );
 
-if ( ! defined( 'AAA_OC_PAYCONFIRM_DEBUG' ) )   define( 'AAA_OC_PAYCONFIRM_DEBUG', true );
+if ( ! defined( 'AAA_OC_PAYCONFIRM_DEBUG' ) )   define( 'AAA_OC_PAYCONFIRM_DEBUG', false );
 if ( ! defined( 'AAA_OC_PAYCONFIRM_VERSION' ) ) define( 'AAA_OC_PAYCONFIRM_VERSION', '1.4.8' );
 
 /** --------------------------

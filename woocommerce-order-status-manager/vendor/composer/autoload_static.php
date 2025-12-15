@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit99cd887da24521c7a4d9d0c70de09481
+class ComposerStaticInitWooCommerceOrderStatusManager
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -109,9 +109,9 @@ class ComposerStaticInit99cd887da24521c7a4d9d0c70de09481
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit99cd887da24521c7a4d9d0c70de09481::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit99cd887da24521c7a4d9d0c70de09481::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit99cd887da24521c7a4d9d0c70de09481::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitWooCommerceOrderStatusManager::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitWooCommerceOrderStatusManager::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitWooCommerceOrderStatusManager::$classMap;
 
         }, null, ClassLoader::class);
     }

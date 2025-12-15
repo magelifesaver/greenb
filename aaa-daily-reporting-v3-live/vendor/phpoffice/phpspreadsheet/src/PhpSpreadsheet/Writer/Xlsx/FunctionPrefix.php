@@ -216,18 +216,6 @@ class FunctionPrefix
      */
     public static function addFunctionPrefixStripEquals(string $functionString): string
     {
-        $functionString = Preg::replace(
-            [
-                '/\b(CEILING|FLOOR)[.]ODS\s*[(]/',
-                '/\b(CEILING|FLOOR)[.]XCL\s*[(]/',
-            ],
-            [
-                '$1.MATH(',
-                '$1(',
-            ],
-            $functionString
-        );
-
         return self::addFunctionPrefix(substr($functionString, 1));
     }
 }

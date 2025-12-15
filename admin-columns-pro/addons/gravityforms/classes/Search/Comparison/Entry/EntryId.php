@@ -4,6 +4,7 @@ namespace ACA\GravityForms\Search\Comparison\Entry;
 
 use ACA\GravityForms\Search\Query\Bindings;
 use ACP;
+use ACP\Search\Helper\Sql\ComparisonFactory;
 use ACP\Search\Value;
 
 class EntryId extends ACP\Search\Comparison
@@ -23,9 +24,9 @@ class EntryId extends ACP\Search\Comparison
 
     protected function create_query_bindings(string $operator, Value $value): ACP\Query\Bindings
     {
-        $comparison = ACP\Search\Helper\Sql\ComparisonFactory::create('id', $operator, $value);
+        $comparison = ComparisonFactory::create('id', $operator, $value);
 
-        return (new Bindings)->where($comparison());
+        return (new Bindings())->where($comparison());
     }
 
 }

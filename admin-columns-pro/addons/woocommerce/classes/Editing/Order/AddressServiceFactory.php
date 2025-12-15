@@ -45,7 +45,7 @@ final class AddressServiceFactory
     {
         switch ($property) {
             case 'country':
-                return new ACP\Editing\View\Select(WC()->countries->get_countries());
+                return new ACP\Editing\View\Select(WC()->countries ? WC()->countries->get_countries() : []);
             case 'email':
                 return new ACP\Editing\View\Email();
             default:

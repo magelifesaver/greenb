@@ -22,16 +22,83 @@ class PAPRO_Promotion {
 
 	public function __construct() {
 
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_parallax_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_particles_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_badge_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_cursor_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_blob_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_gradient_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_kenburns_controls' ), 10 );
-		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_lottie_controls' ), 10 );
+		add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_all_promotion_controls' ), 10 );
 
 		add_action( 'elementor/element/common/_section_style/after_section_end', array( $this, 'register_magic_scroll_controls' ), 10 );
+	}
+
+	public function register_all_promotion_controls( $element ) {
+
+		$promotions = array(
+			'parallax'  => array(
+				'title'    => __( 'Parallax', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Select between 7 neat parallax effects to be applied on Elementor containers.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-parallax-container-addon/',
+			),
+			'particles' => array(
+				'title'    => __( 'Particles', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Create eye-catching particles background with many customization options.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/particles-container-addon-for-elementor-page-builder/',
+			),
+			'badge'     => array(
+				'title'    => __( 'Badge', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Add an icon, image, Lottie animation, or SVG blob shape badge to Elementor container.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-badge-global-addon/',
+			),
+			'cursor'    => array(
+				'title'    => __( 'Custom Mouse Cursor', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Add an image, icon or Lottie animation mouse cursor to any container, widget or the whole page.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-custom-mouse-cursor-global-addon',
+			),
+			'blob'      => array(
+				'title'    => __( 'Animated Blob', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Add multiple animated blob layers to your containers with a wide range of smart customization options.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-animated-blob-generator/',
+			),
+			'gradient'  => array(
+				'title'    => __( 'Animated Gradient', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Subtle animated gradients effect that makes your backgrounds attractive.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-container-animated-gradients-addon/',
+			),
+			'kenburns'  => array(
+				'title'    => __( 'Ken Burns', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Add multiple images to your container background and animate them with the popular Ken Burns effect.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/ken-burns-container-addon-for-elementor-page-builder/',
+			),
+			'lottie'    => array(
+				'title'    => __( 'Lottie Background', 'premium-addons-for-elementor' ),
+				'messages' => __( 'Add multiple Lottie Animations easily to container with a lot of customization and interactivity options.', 'premium-addons-for-elementor' ),
+				'demo'     => 'https://premiumaddons.com/elementor-lottie-animations-container-addon/',
+			),
+
+		);
+
+		foreach ( $promotions as $key => $data ) {
+			$element->start_controls_section(
+				"section_premium_{$key}",
+				array(
+					'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', $data['title'] ),
+					'tab'   => Controls_Manager::TAB_LAYOUT,
+				)
+			);
+
+			$element->add_control(
+				"{$key}_promoter",
+				array(
+					'type' => Controls_Manager::RAW_HTML,
+					'raw'  => $this->promote_template(
+						array(
+							'title'    => 'Premium ' . $data['title'],
+							'messages' => $data['messages'],
+							'demo'     => $data['demo'],
+							'addon'    => $key,
+						)
+					),
+				)
+			);
+
+			$element->end_controls_section();
+		}
 	}
 
 	public function promote_template( $texts ) {
@@ -98,235 +165,11 @@ class PAPRO_Promotion {
             ' . __( 'Check Demo', 'premium-addons-for-elementor' ) . '
             </a>
             <a class="premium-promote-upgrade elementor-button elementor-button-default" href="' . esc_url( $upgrade_link ) . '" target="_blank">
-            ' . __( 'Get PRO (35% OFF)', 'premium-addons-for-elementor' ) . '
+            ' . __( 'Get PRO ($105 OFF)', 'premium-addons-for-elementor' ) . '
             </a>
         </div>';
 
 		return $html;
-	}
-
-	public function register_parallax_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_parallax',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Parallax', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'parallax_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Parallax', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Select between 7 neat parallax effects to be applied on Elementor containers.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-parallax-container-addon/',
-						'addon'    => 'parallax',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_particles_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_particles',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Particles', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'particles_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Particles', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Create eye-catching particles background with many customization options.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/particles-container-addon-for-elementor-page-builder/',
-						'addon'    => 'particles',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_badge_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_badge',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Badge', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'badge_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Badge', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Add an icon, image, Lottie animation, or SVG blob shape badge to Elementor container.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-badge-global-addon/',
-						'addon'    => 'badge',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_cursor_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_cursor',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Custom Mouse Cursor', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'cursor_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Mouse Cursor', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Add an image, icon or Lottie animation mouse cursor to any container, widget or the whole page.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-custom-mouse-cursor-global-addon',
-						'addon'    => 'cursor',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_blob_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_blob',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Animated Blob', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'blob_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Blob Generator', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Add multiple animated blob layers to your containers with a wide range of smart customization options.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-animated-blob-generator/',
-						'addon'    => 'blob',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_gradient_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_gradient',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Animated Gradient', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'gradient_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Animated Gradient', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Subtle animated gradients effect that makes your backgrounds attractive.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-container-animated-gradients-addon/',
-						'addon'    => 'gradient',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_kenburns_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_kenburns',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Ken Burns', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'kenburns_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Ken Burns', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Add multiple images to your container background and animate them with the popular Ken Burns effect.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/ken-burns-container-addon-for-elementor-page-builder/',
-						'addon'    => 'kenburns',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
-	}
-
-	public function register_lottie_controls( $element ) {
-
-		$element->start_controls_section(
-			'section_premium_lottie',
-			array(
-				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Lottie Background', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
-			)
-		);
-
-		$element->add_control(
-			'lottie_promoter',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => $this->promote_template(
-					array(
-						'title'    => __( 'Premium Lottie Background', 'premium-addons-for-elementor' ),
-						'messages' => __( 'Add multiple Lottie Animations easily to container with a lot of customization and interactivity options.', 'premium-addons-for-elementor' ),
-						'demo'     => 'https://premiumaddons.com/elementor-lottie-animations-container-addon/',
-						'addon'    => 'lottie',
-					)
-				),
-			)
-		);
-
-		$element->end_controls_section();
 	}
 
 	public function register_magic_scroll_controls( $element ) {

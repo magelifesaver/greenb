@@ -254,4 +254,55 @@ class PAPRO_Helper {
         return $bg_control_class;
 
     }
+
+    /**
+	 * Get Widget Class Name
+	 *
+	 * @since 2.9.52
+	 * @access public
+	 *
+	 * @param string $widget_key Widget slug/key, e.g. 'premium-banner'.
+	 * @return string|false Fully-qualified class name on success, false on failure.
+	 */
+	public static function get_widget_class_name( $widget_key ) {
+
+		static $classes_list = null;
+
+		$default_namespace = 'PremiumAddonsPro\\Widgets\\';
+
+		// load the map once.
+		if ( null === $classes_list ) {
+
+			$map_file = PREMIUM_PRO_ADDONS_PATH . 'includes/helpers/widget-class-map.php';
+
+			if ( file_exists( $map_file ) ) {
+
+				$map = include $map_file;
+				$classes_list = is_array( $map ) ? $map : [];
+			} else {
+				$classes_list = [];
+			}
+		}
+
+		if ( empty( $widget_key ) || ! is_string( $widget_key ) ) {
+			return false;
+		}
+
+		if ( ! isset( $classes_list[ $widget_key ] ) ) {
+			return false;
+		}
+
+		$class_name = $classes_list[ $widget_key ];
+
+		if ( is_string( $class_name ) && false !== strpos( $class_name, '\\' ) ) {
+			return $class_name;
+		}
+
+		// Otherwise treat as short class name and prepend the default namespace.
+		$short_class = (string) $class_name;
+		$full_class = rtrim( $default_namespace, '\\' ) . '\\' . ltrim( $short_class, '\\' );
+
+		return $full_class;
+	}
+
 }

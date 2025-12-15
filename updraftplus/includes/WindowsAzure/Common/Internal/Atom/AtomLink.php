@@ -132,7 +132,7 @@ class AtomLink extends AtomBase
         }
 
         if (!empty($attributes['length'])) {
-            $this->length = (integer)$attributes['length'];
+            $this->length = (int)$attributes['length'];
         }
 
         $undefinedContent = (string)$atomLinkXml;

@@ -245,6 +245,8 @@ if ( ! class_exists( 'Premium_Templates_Manager' ) ) {
 		 */
 		public function insert_inner_template() {
 
+			check_ajax_referer( 'pa-templates-nonce', 'nonce' );
+
 			if ( ! current_user_can( 'edit_posts' ) ) {
 				wp_send_json_error();
 			}

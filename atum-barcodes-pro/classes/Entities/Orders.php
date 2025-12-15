@@ -337,11 +337,12 @@ class Orders {
 				SELECT product_id FROM $atum_product_data_table 
                 WHERE barcode LIKE %s
 			)
-			OR oi.order_id LIKE %s
-            OR pm.meta_value LIKE %s )", $barcode_like_term, $barcode_like_term, $barcode_like_term ),
+			OR oi.order_id LIKE %s )
+            OR pm.meta_value LIKE %s
+            OR p.ID = %s", $barcode_like_term, $barcode_like_term, $barcode_like_term, $barcode ),
 		) );
 
-		// Return all the order ids that includes a product with the barcode or their ID matches the barcode (if has no barcode saved) or have that specific barcode.
+		// Return all the order ids that include a product with the barcode or their ID matches the barcode (if has no barcode saved) or have that specific barcode.
 		// phpcs:disable WordPress.DB.PreparedSQL
 		return apply_filters( 'atum/barcodes_pro/orders/matching_orders', $wpdb->get_col( "
 			SELECT DISTINCT p.ID 

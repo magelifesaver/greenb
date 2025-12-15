@@ -29,10 +29,10 @@ final class Defer_CSS extends Page_Parser {
 	 * Register actions and filters for CSS Defer.
 	 */
 	public function __construct() {
-		if ( false !== strpos( add_query_arg( '', '' ), 'swis_ccss' ) ) {
+		if ( \str_contains( add_query_arg( '', '' ), 'swis_ccss' ) ) {
 			return;
 		}
-		if ( false !== strpos( add_query_arg( '', '' ), 'swis_test_ccss' ) ) {
+		if ( \str_contains( add_query_arg( '', '' ), 'swis_test_ccss' ) ) {
 			return;
 		}
 		if ( ! $this->get_option( 'defer_css' ) ) {
@@ -41,8 +41,11 @@ final class Defer_CSS extends Page_Parser {
 		parent::__construct();
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 
-		$uri = add_query_arg( '', '' );
+		$this->validate_user_exclusions();
+		$uri = \add_query_arg( '', '' );
 		$this->debug_message( "request uri is $uri" );
+
+		\add_filter( 'swis_skip_css_defer_by_page', array( $this, 'skip_page' ), 10, 2 );
 
 		/**
 		 * Allow pre-empting CSS defer by page.
@@ -50,18 +53,16 @@ final class Defer_CSS extends Page_Parser {
 		 * @param bool Whether to skip parsing the page.
 		 * @param string $uri The URL of the page.
 		 */
-		if ( apply_filters( 'swis_skip_css_defer_by_page', false, $uri ) ) {
+		if ( \apply_filters( 'swis_skip_css_defer_by_page', false, $uri ) ) {
 			return;
 		}
 
 		// Overrides for user exclusions.
-		add_filter( 'swis_skip_css_defer', array( $this, 'skip_css_defer' ), 10, 2 );
+		\add_filter( 'swis_skip_css_defer', array( $this, 'skip_css_defer' ), 10, 2 );
 
 		// Get all the script/css urls and rewrite them (if enabled).
-		add_filter( 'style_loader_tag', array( $this, 'defer_css' ), 20, 2 );
-		add_filter( 'swis_elements_link_tag', array( $this, 'defer_css' ) );
-
-		$this->validate_user_exclusions();
+		\add_filter( 'style_loader_tag', array( $this, 'defer_css' ), 20, 2 );
+		\add_filter( 'swis_elements_link_tag', array( $this, 'defer_css' ) );
 	}
 
 	/**
@@ -70,12 +71,17 @@ final class Defer_CSS extends Page_Parser {
 	public function validate_user_exclusions() {
 		$user_exclusions = $this->get_option( 'defer_css_exclude' );
 		if ( ! empty( $user_exclusions ) ) {
-			if ( is_string( $user_exclusions ) ) {
+			if ( \is_string( $user_exclusions ) ) {
 				$user_exclusions = array( $user_exclusions );
 			}
-			if ( is_array( $user_exclusions ) ) {
+			if ( \is_array( $user_exclusions ) ) {
 				foreach ( $user_exclusions as $exclusion ) {
-					if ( ! is_string( $exclusion ) ) {
+					if ( ! \is_string( $exclusion ) ) {
+						continue;
+					}
+					$exclusion = \trim( $exclusion );
+					if ( \str_starts_with( $exclusion, 'page:' ) ) {
+						$this->user_page_exclusions[] = \str_replace( 'page:', '', $exclusion );
 						continue;
 					}
 					$this->user_exclusions[] = $exclusion;
@@ -100,13 +106,13 @@ final class Defer_CSS extends Page_Parser {
 		}
 		if ( $this->user_exclusions ) {
 			foreach ( $this->user_exclusions as $exclusion ) {
-				if ( false !== strpos( $tag, $exclusion ) ) {
+				if ( \str_contains( $tag, $exclusion ) ) {
 					$this->debug_message( __METHOD__ . "(); user excluded $tag via $exclusion" );
 					return true;
 				}
 			}
 		}
-		if ( false !== strpos( $tag, 'dashicons' ) && is_admin_bar_showing() ) {
+		if ( \str_contains( $tag, 'dashicons' ) && is_admin_bar_showing() ) {
 			return true;
 		}
 		return $skip;
@@ -124,32 +130,35 @@ final class Defer_CSS extends Page_Parser {
 		if ( ! $this->is_frontend() ) {
 			return $tag;
 		}
-		if ( strpos( $tag, 'admin-bar.min.css' ) ) {
+		if ( \str_contains( $tag, 'admin-bar.min.css' ) ) {
 			return $tag;
 		}
-		if ( false !== strpos( $tag, 'async' ) ) {
+		if ( \str_contains( $tag, 'async' ) ) {
 			return $tag;
 		}
-		if ( false !== strpos( $tag, 'defer' ) ) {
+		if ( \str_contains( $tag, 'defer' ) ) {
 			return $tag;
 		}
-		if ( false !== strpos( $tag, 'asset-clean' ) ) {
+		if ( \str_contains( $tag, 'asset-clean' ) ) {
 			return $tag;
 		}
 		if ( apply_filters( 'swis_skip_css_defer', false, $tag, $handle ) ) {
 			return $tag;
 		}
-		if ( false === strpos( $tag, 'preload' ) && false === strpos( $tag, 'data-swis' ) ) {
+		if ( ! \str_contains( $tag, 'preload' ) && ! \str_contains( $tag, 'data-swis' ) ) {
 			$this->debug_message( trim( $tag ) );
+			$this->debug_message( 'valid tag, attempting to replace media=all' );
 			$async_tag = str_replace( " media='all'", " media='print' data-swis='loading' onload='this.media=\"all\";this.dataset.swis=\"loaded\"'", $tag );
 			if ( $tag === $async_tag ) {
+				$this->debug_message( 'media=all not found, trying empty media' );
 				$async_tag = str_replace( " media=''", " media='print' data-swis='loading' onload='this.media=\"all\";this.dataset.swis=\"loaded\"'", $tag );
 			}
 			// If we got a new tag, let's go!
 			if ( $async_tag && $tag !== $async_tag ) {
 				// Run it through for preloading if possible.
 				$async_tag = $this->preload_css( $async_tag, $tag );
-				$this->debug_message( 'tag altered, replacing' . trim( $async_tag ) );
+				$this->debug_message( 'tag altered, replacing with deferred version:' );
+				$this->debug_message( trim( $async_tag ) );
 				return $async_tag . '<noscript>' . trim( $tag ) . "</noscript>\n";
 			}
 		}
@@ -164,7 +173,7 @@ final class Defer_CSS extends Page_Parser {
 	 * @return string The tag with a preloader added, if applicable.
 	 */
 	public function preload_css( $async_tag, $tag ) {
-		if ( false !== strpos( $tag, "rel='stylesheet'" ) ) {
+		if ( \str_contains( $tag, "rel='stylesheet'" ) ) {
 			$allowed_to_preload = array(
 				'avada-styles/',              // Avada dynamic CSS.
 				'bb-plugin/cache/',           // Beaver Builder dynamic CSS.
@@ -189,13 +198,16 @@ final class Defer_CSS extends Page_Parser {
 				'wp-content/themes/',         // Theme CSS.
 				'/zionbuilder/cache/',        // Zion Builder dynamic CSS.
 			);
-			$allowed_to_preload = apply_filters( 'swis_defer_css_preload_list', $allowed_to_preload );
+			$allowed_to_preload = \apply_filters( 'swis_defer_css_preload_list', $allowed_to_preload );
 			foreach ( $allowed_to_preload as $allowed ) {
 				if ( empty( $allowed ) ) {
 					continue;
 				}
-				if ( false !== strpos( $tag, $allowed ) ) {
-					$async_tag = str_replace( array( " rel='stylesheet'", " id='" ), array( " rel='preload' as='style'", " data-id='" ), $tag ) . $async_tag;
+				if ( \str_contains( $tag, $allowed ) ) {
+					$href = $this->get_attribute( $tag, 'href' );
+					\do_action( 'swis_replace_preload_url', $href, '' );
+					$async_tag = \str_replace( array( " rel='stylesheet'", " id='" ), array( " rel='preload' as='style'", " data-id='" ), $tag ) . $async_tag;
+					break;
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: A OpenIA Order Creation V4 (live)
+ * Plugin Name: A OpenIA Order Creation V4 (live)(XHV98-WF)
  * Description: Create WooCommerce orders from pasted HTML content and external order numbers, with AI fallback matching.
  * Version: 4.6.0
  * Author: WebMaster Delivery

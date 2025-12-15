@@ -2,11 +2,6 @@
 
 namespace PhpOffice\PhpSpreadsheet\Shared;
 
-use Composer\Pcre\Preg;
-use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
-use PhpOffice\PhpSpreadsheet\Exception as SpreadsheetException;
-use Stringable;
-
 class StringHelper
 {
     /**
@@ -18,8 +13,6 @@ class StringHelper
 
     /**
      * SYLK Characters array.
-     *
-     * @var string[]
      */
     private static array $SYLKCharacters = [];
 
@@ -41,7 +34,7 @@ class StringHelper
     /**
      * Is iconv extension avalable?
      */
-    private static ?bool $isIconvEnabled = null;
+    private static ?bool $isIconvEnabled;
 
     /**
      * iconv options.
@@ -488,16 +481,14 @@ class StringHelper
 
     /**
      * Splits a UTF-8 string into an array of individual characters.
-     *
-     * @return string[]
      */
     public static function mbStrSplit(string $string): array
     {
         // Split at all position not after the start: ^
         // and not before the end: $
-        $split = Preg::split('/(?<!^)(?!$)/u', $string);
+        $split = preg_split('/(?<!^)(?!$)/u', $string);
 
-        return $split;
+        return ($split === false) ? [] : $split;
     }
 
     /**
@@ -527,11 +518,9 @@ class StringHelper
 
     private static function getLocaleValue(string $key, string $altKey, string $default, bool $trimAlt = false): string
     {
-        /** @var string[] */
         $localeconv = localeconv();
         $rslt = $localeconv[$key];
         // win-1252 implements Euro as 0x80 plus other symbols
-        // Not suitable for Composer\Pcre\Preg
         if (preg_match('//u', $rslt) !== 1) {
             $rslt = '';
         }
@@ -655,51 +644,20 @@ class StringHelper
         return strlen("$string");
     }
 
-    /** @param bool $convertBool If true, convert bool to locale-aware TRUE/FALSE rather than 1/null-string */
-    public static function convertToString(mixed $value, bool $throw = true, string $default = '', bool $convertBool = false): string
-    {
-        if ($convertBool && is_bool($value)) {
-            return $value ? Calculation::getTRUE() : Calculation::getFALSE();
-        }
-        if (is_float($value)) {
-            $string = (string) $value;
-            // look out for scientific notation
-            if (!Preg::isMatch('/[^-+0-9.]/', $string)) {
-                $minus = $value < 0 ? '-' : '';
-                $positive = abs($value);
-                $floor = floor($positive);
-                $oldFrac = (string) ($positive - $floor);
-                $frac = Preg::replace('/^0[.](\d+)$/', '$1', $oldFrac);
-                if ($frac !== $oldFrac) {
-                    return "$minus$floor.$frac";
-                }
-            }
-
-            return $string;
-        }
-        if ($value === null || is_scalar($value) || $value instanceof Stringable) {
-            return (string) $value;
-        }
-
-        if ($throw) {
-            throw new SpreadsheetException('Unable to convert to string');
-        }
-
-        return $default;
-    }
-
     /**
-     * Assist with POST items when samples are run in browser.
-     * Never run as part of unit tests, which are command line.
+     * Php introduced str_increment with Php8.3,
+     * but didn't issue deprecation notices till 8.5.
      *
      * @codeCoverageIgnore
      */
-    public static function convertPostToString(string $index, string $default = ''): string
+    public static function stringIncrement(string &$str): string
     {
-        if (isset($_POST[$index])) {
-            return htmlentities(self::convertToString($_POST[$index], false, $default));
+        if (function_exists('str_increment')) {
+            $str = str_increment($str);
+        } else {
+            ++$str;
         }
 
-        return $default;
+        return $str;
     }
 }

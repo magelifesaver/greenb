@@ -631,31 +631,41 @@ td.br_colorpicker_field.colorpicker_removed:after {
     display: none!important;
 }
 .braapf_widget_color_pick tr.element-depth-1 td:first-child:before,
+.braapf_valuename_change_list .element-depth-1:before,
 .braapf_include_exclude_list .element-depth-1:before {
     content: "- ";
 }
 .braapf_widget_color_pick tr.element-depth-2 td:first-child:before,
+.braapf_valuename_change_list .element-depth-2:before,
 .braapf_include_exclude_list .element-depth-2:before {
     content: "- - ";
 }
 .braapf_widget_color_pick tr.element-depth-3 td:first-child:before,
+.braapf_valuename_change_list .element-depth-3:before,
 .braapf_include_exclude_list .element-depth-3:before {
     content: "- - - ";
 }
 .braapf_widget_color_pick tr.element-depth-4 td:first-child:before,
+.braapf_valuename_change_list .element-depth-4:before,
 .braapf_include_exclude_list .element-depth-4:before {
     content: "- - - - ";
 }
 .braapf_widget_color_pick tr.element-depth-5 td:first-child:before,
+.braapf_valuename_change_list .element-depth-5:before,
 .braapf_include_exclude_list .element-depth-5:before {
     content: "- - - - - ";
 }
 .braapf_widget_color_pick tr.element-depth-6 td:first-child:before,
+.braapf_valuename_change_list .element-depth-6:before,
 .braapf_include_exclude_list .element-depth-6:before {
     content: "- - - - - - ";
 }
 
-
+.braapf_include_exclude_list,
+.braapf_valuename_change_list {
+    max-height: 300px;
+    overflow: auto;
+}
 
 /* NEW DESIGN FOR ADMIN SIDE (WITHOUT SETTINGS PAGE) */
 
@@ -761,7 +771,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     cursor: pointer;
 }
 .section_conditions_hide_this_on label input,
-.br_current_cond label input {
+.br_current_cond label input[type="checkbox"] {
     margin-right: 1px;
     margin-left: 5px;
     width: 14px;
@@ -771,7 +781,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     border-radius: 3px;
     border: 1px solid #d1d3d7;
 }
-.br_current_cond label input {
+.br_current_cond label input[type="checkbox"] {
     margin-right: 5px;
     margin-left: 0;
     width: 16px;
@@ -1682,5 +1692,10 @@ td.br_colorpicker_field.colorpicker_removed:after {
 @media screen and (max-width: 1300px) {
     .ajax_filters_submit_form .braapf_templates_list_sfa .braapf_style > div:first-child {
         min-width: auto;
+    }
+}
+@media screen and (max-width: 782px) {
+    .berocket_seo_meta_title_elements label {
+        line-height: 3em;
     }
 }

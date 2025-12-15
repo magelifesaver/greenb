@@ -122,17 +122,16 @@ final class CDN extends Page_Parser {
 		}
 		if ( $this->is_easyio_active() ) {
 			$this->parsing_exactdn = true;
-			add_filter( 'swis_cdn_skip_image', '__return_true' );
+			\add_filter( 'swis_cdn_skip_image', '__return_true' );
 			$this->debug_message( 'bypassing images for ExactDN' );
 		}
 
-		// Images in post content and galleries.
-
-		$uri = add_query_arg( '', '' );
+		$this->validate_user_exclusions();
+		$uri = \add_query_arg( '', '' );
 		$this->debug_message( "request uri is $uri" );
 
 		if ( ! $this->scheme ) {
-			$site_url = get_home_url();
+			$site_url = \get_home_url();
 			$scheme   = 'http';
 			if ( false !== strpos( $site_url, 'https://' ) ) {
 				$this->debug_message( 'site URL contains https' );
@@ -149,13 +148,15 @@ final class CDN extends Page_Parser {
 			$this->scheme = $scheme;
 		}
 
+		\add_filter( 'swis_skip_cdn_by_page', array( $this, 'skip_page' ), 10, 2 );
+
 		/**
 		 * Allow pre-empting the parsers by page.
 		 *
 		 * @param bool Whether to skip parsing the page.
 		 * @param string $uri The URL of the page.
 		 */
-		if ( apply_filters( 'swis_skip_cdn_by_page', false, $uri ) ) {
+		if ( \apply_filters( 'swis_skip_cdn_by_page', false, $uri ) ) {
 			return;
 		}
 
@@ -164,55 +165,55 @@ final class CDN extends Page_Parser {
 		}
 
 		// Get all the script/css urls and rewrite them (if enabled).
-		add_filter( 'style_loader_src', array( $this, 'parse_enqueue' ), 10000 );
-		add_filter( 'script_loader_src', array( $this, 'parse_enqueue' ), 10000 );
+		\add_filter( 'style_loader_src', array( $this, 'parse_enqueue' ), 10000 );
+		\add_filter( 'script_loader_src', array( $this, 'parse_enqueue' ), 10000 );
 
 		if ( $this->parsing_exactdn ) {
-			add_filter( 'exactdn_the_page', array( $this, 'filter_page_output' ), 5 );
+			\add_filter( 'exactdn_the_page', array( $this, 'filter_page_output' ), 5 );
 		} else {
-			add_filter( 'the_content', array( $this, 'filter_the_content' ), 1000000 );
+			\add_filter( 'the_content', array( $this, 'filter_the_content' ), 1000000 );
 			// Hook onto the output buffer filter.
-			add_filter( $this->prefix . 'filter_page_output', array( $this, 'filter_page_output' ), 5 );
+			\add_filter( $this->prefix . 'filter_page_output', array( $this, 'filter_page_output' ), 5 );
 		}
 
 		if ( ! $this->parsing_exactdn ) {
-			add_filter( 'swis_cdn_rewrite_url', array( $this, 'plugin_get_image_url' ) );
-			add_filter( 'eio_lazy_placeholder', array( $this, 'plugin_get_image_url' ) );
-			add_filter( 'wp_get_attachment_thumb_url', array( $this, 'plugin_get_image_url' ) ); // $param1 is the image URL.
-			add_filter( 'wp_get_attachment_url', array( $this, 'plugin_get_image_url' ) ); // $param1 is the image URL.
-			add_filter( 'wp_get_attachment_image_src', array( $this, 'get_attachment_image_src' ) ); // $param1[0] is the image URL.
-			add_filter( 'get_image_tag', array( $this, 'filter_img_tag' ) ); // tag/html is $param1.
+			\add_filter( 'swis_cdn_rewrite_url', array( $this, 'plugin_get_image_url' ) );
+			\add_filter( 'eio_lazy_placeholder', array( $this, 'plugin_get_image_url' ) );
+			\add_filter( 'wp_get_attachment_thumb_url', array( $this, 'plugin_get_image_url' ) ); // $param1 is the image URL.
+			\add_filter( 'wp_get_attachment_url', array( $this, 'plugin_get_image_url' ) ); // $param1 is the image URL.
+			\add_filter( 'wp_get_attachment_image_src', array( $this, 'get_attachment_image_src' ) ); // $param1[0] is the image URL.
+			\add_filter( 'get_image_tag', array( $this, 'filter_img_tag' ) ); // tag/html is $param1.
 
 			// Allow parsing of certain "admin" requests.
-			add_filter( 'swis_cdn_admin_allow_image_srcset', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
-			add_filter( 'swis_cdn_admin_allow_plugin_image_url', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
-			add_filter( 'swis_cdn_admin_allow_get_attachment_image_src', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
-			add_filter( 'swis_cdn_admin_allow_img_tag', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
+			\add_filter( 'swis_cdn_admin_allow_image_srcset', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
+			\add_filter( 'swis_cdn_admin_allow_plugin_image_url', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
+			\add_filter( 'swis_cdn_admin_allow_get_attachment_image_src', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
+			\add_filter( 'swis_cdn_admin_allow_img_tag', array( $this, 'allow_admin_image_rewriting' ), 10, 2 );
 
 			// Check REST API requests to see if CDN rewriter should be running.
-			add_filter( 'rest_request_before_callbacks', array( $this, 'parse_restapi_maybe' ), 11, 3 );
+			\add_filter( 'rest_request_before_callbacks', array( $this, 'parse_restapi_maybe' ), 11, 3 );
 
 			// Responsive image srcset substitution.
-			add_filter( 'wp_calculate_image_srcset', array( $this, 'filter_srcset_array' ), 11, 1 );
+			\add_filter( 'wp_calculate_image_srcset', array( $this, 'filter_srcset_array' ), 11, 1 );
 
 			// Filter for NextGEN image URLs within JS.
-			add_filter( 'ngg_pro_lightbox_images_queue', array( $this, 'ngg_pro_lightbox_images_queue' ) );
-			add_filter( 'ngg_get_image_url', array( $this, 'plugin_get_image_url' ) );
+			\add_filter( 'ngg_pro_lightbox_images_queue', array( $this, 'ngg_pro_lightbox_images_queue' ) );
+			\add_filter( 'ngg_get_image_url', array( $this, 'plugin_get_image_url' ) );
 
 			// Filter for Envira image URLs.
-			add_filter( 'envira_gallery_output_item_data', array( $this, 'envira_gallery_output_item_data' ) );
-			add_filter( 'envira_gallery_image_src', array( $this, 'plugin_get_image_url' ) );
+			\add_filter( 'envira_gallery_output_item_data', array( $this, 'envira_gallery_output_item_data' ) );
+			\add_filter( 'envira_gallery_image_src', array( $this, 'plugin_get_image_url' ) );
 
 			// Filter for legacy WooCommerce API endpoints.
-			add_filter( 'woocommerce_api_product_response', array( $this, 'woocommerce_api_product_response' ) );
+			\add_filter( 'woocommerce_api_product_response', array( $this, 'woocommerce_api_product_response' ) );
 		}
 
 		// Overrides for user exclusions.
-		add_filter( 'swis_cdn_skip_image', array( $this, 'cdn_skip_user_exclusions' ), 9, 2 );
-		add_filter( 'swis_cdn_skip_url', array( $this, 'cdn_skip_user_exclusions' ), 9, 2 );
+		\add_filter( 'swis_cdn_skip_image', array( $this, 'cdn_skip_user_exclusions' ), 9, 2 );
+		\add_filter( 'swis_cdn_skip_url', array( $this, 'cdn_skip_user_exclusions' ), 9, 2 );
 
 		// DNS prefetching.
-		add_filter( 'wp_resource_hints', array( $this, 'dns_prefetch' ), 10, 2 );
+		\add_filter( 'wp_resource_hints', array( $this, 'dns_prefetch' ), 10, 2 );
 
 		$upload_url_parts = $this->parse_url( $this->content_url() );
 		if ( empty( $upload_url_parts ) ) {
@@ -241,7 +242,6 @@ final class CDN extends Page_Parser {
 		$this->allowed_domains = apply_filters( 'swis_cdn_allowed_domains', $this->allowed_domains );
 		$this->debug_message( 'allowed domains: ' . implode( ',', $this->allowed_domains ) );
 		$this->get_allowed_paths();
-		$this->validate_user_exclusions();
 	}
 
 	/**
@@ -295,24 +295,28 @@ final class CDN extends Page_Parser {
 	public function validate_user_exclusions() {
 		$user_exclusions = $this->get_option( 'cdn_exclude' );
 		if ( ! empty( $user_exclusions ) ) {
-			if ( is_string( $user_exclusions ) ) {
+			if ( \is_string( $user_exclusions ) ) {
 				$user_exclusions = array( $user_exclusions );
 			}
-			if ( is_array( $user_exclusions ) ) {
+			if ( \is_array( $user_exclusions ) ) {
 				foreach ( $user_exclusions as $exclusion ) {
-					if ( ! is_string( $exclusion ) ) {
+					if ( ! \is_string( $exclusion ) ) {
 						continue;
 					}
-					if ( $this->content_path && false !== strpos( $exclusion, $this->content_path ) ) {
-						$exclusion = preg_replace( '#([^"\'?>]+?)?' . $this->content_path . '/#i', '', $exclusion );
+					$exclusion = \trim( $exclusion );
+					if ( 0 === \strpos( $exclusion, 'page:' ) ) {
+						$this->user_page_exclusions[] = \str_replace( 'page:', '', $exclusion );
+						continue;
 					}
-					$this->user_exclusions[] = ltrim( $exclusion, '/' );
+					if ( $this->content_path && false !== \strpos( $exclusion, $this->content_path ) ) {
+						$exclusion = \preg_replace( '#([^"\'?>]+?)?' . $this->content_path . '/#i', '', $exclusion );
+					}
+					$this->user_exclusions[] = \ltrim( $exclusion, '/' );
 				}
 			}
 		}
 		$this->user_exclusions[] = 'plugins/anti-captcha/';
 		$this->user_exclusions[] = 'fusion-app';
-		$this->user_exclusions[] = 'themes/Avada/';
 		$this->user_exclusions[] = 'plugins/fusion-builder/';
 	}
 

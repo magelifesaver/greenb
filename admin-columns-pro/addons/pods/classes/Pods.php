@@ -5,16 +5,21 @@ namespace ACA\Pods;
 use AC;
 use AC\Registerable;
 use AC\Services;
+use AC\Setting\ContextFactory;
+use AC\Vendor\DI;
 use ACP\Service\IntegrationStatus;
 
 class Pods implements Registerable
 {
 
-    private $location;
+    private AC\Asset\Location\Absolute $location;
 
-    public function __construct(AC\Asset\Location\Absolute $location)
+    private DI\Container $container;
+
+    public function __construct(AC\Asset\Location\Absolute $location, DI\Container $container)
     {
         $this->location = $location;
+        $this->container = $container;
     }
 
     public function register(): void
@@ -25,14 +30,23 @@ class Pods implements Registerable
             return;
         }
 
+        $context_factory = $this->container->get(ContextFactory::class);
+
+        if ($context_factory instanceof AC\Setting\ContextFactory\Aggregate) {
+            $context_factory->add($this->container->get(Setting\ContextFieldFactory::class));
+        }
+
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\PodFactory::class));
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\PodsDeprecatedFactory::class));
+
         $this->create_services()->register();
     }
 
     private function create_services(): Services
     {
         return new Services([
-            new Service\Columns(),
-            new Service\Scripts($this->location),
+            new Service\Columns($this->location),
+            new Service\MetaFix(),
             new IntegrationStatus('ac-addon-pods'),
         ]);
     }

@@ -13,6 +13,7 @@ class Documentation implements Type\Url
     private const URL = 'https://docs.admincolumns.com';
 
     public const ARTICLE_ACF_UPGRADE_V2_TO_V3 = '/article/103-how-to-upgrade-the-acf-integration-from-v2-to-v3';
+    public const ARTICLE_GETTING_STARTED = '/article/25-basics-how-to-use-admin-columns-pro';
     public const ARTICLE_ACTIONS_FILTERS = '/article/15-hooks-and-filters';
     public const ARTICLE_BULK_EDITING = '/article/67-how-to-use-bulk-editing';
     public const ARTICLE_COLUMN_SETS = '/article/72-how-to-create-column-sets';
@@ -30,9 +31,10 @@ class Documentation implements Type\Url
     public const ARTICLE_SORTING = '/article/34-how-to-enable-sorting';
     public const ARTICLE_SUBSCRIPTION_QUESTIONS = '/article/96-subscription-or-license-questions';
     public const ARTICLE_UPGRADE_V3_TO_V4 = '/article/91-how-to-upgrade-from-v3-to-v4';
+    public const ARTICLE_UPGRADE_V6_TO_V7 = '/article/117-how-to-upgrade-from-v6-to-v7';
     public const ARTICLE_RELEASE_6 = '/article/109-admin-columns-pro-6-0-changes';
 
-    public function __construct(string $path = null, string $fragment = null)
+    public function __construct(?string $path = null, ?string $fragment = null)
     {
         if ($path) {
             $this->set_path($path);
@@ -57,6 +59,11 @@ class Documentation implements Type\Url
     public static function create_with_path(string $path): self
     {
         return new self($path);
+    }
+
+    public static function create_local_storage(?string $fragment = null): self
+    {
+        return new self(self::ARTICLE_LOCAL_STORAGE, $fragment);
     }
 
     public function __toString(): string

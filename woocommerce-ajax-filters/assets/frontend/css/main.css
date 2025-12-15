@@ -1238,6 +1238,38 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 .bapf_sfilter .brapf_disabled_checkbox input, .bapf_sfilter .brapf_disabled_checkbox label {
     cursor: default!important;
 }
+.bapf_sfilter .bapf_body .bapf_slidr_main .ui-slider-handle {
+    border-style: solid;
+}
+
+.bapf_ckbox_search {
+    position: relative;
+    margin-bottom: 10px;
+}
+.bapf_ckbox_search input {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    padding: 6px;
+    line-height: 1em;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    margin: 0;
+}
+.bapf_ckbox_search:after {
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    content: "\f002";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    color: #777;
+}
 .bapf_sfilter.bapf_button_berocket .bapf_button {
     font-size: 20px;
     padding: 8px 30px;
@@ -1815,8 +1847,8 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 .bapf_sfilter.bapf_cksquare .bapf_body ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    justify-content: space-between;
+    gap: 12px;
+    justify-content: start;
 }
 .bapf_sfilter.bapf_cksquare .bapf_body ul li {
     width: 70px;
@@ -1836,13 +1868,18 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     bottom: 0;
     left: 0;
     right: 0;
-    line-height: 70px;
+    line-height: 1.2em;
     vertical-align: middle;
     text-align: center;
     border: 2px solid #CECEFF;
     z-index: 10;
     background-color: #EFEFFF;
     overflow: hidden;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    word-wrap: anywhere;
 }
 .bapf_sfilter.bapf_cksquare .bapf_body ul li input:checked + label {
     background-color: #CECEFF;
@@ -2772,8 +2809,8 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     margin-top: 6px !important;
 }
 
-.divi_checkbox_class_item .bapf_ochild,
-.divi_checkbox_class_item .bapf_cchild {
+.divi_checkbox_class_item .bapf_ochild.fa-plus,
+.divi_checkbox_class_item .bapf_cchild.fa-minus {
     height: 1em;
     width: 1em;
     position: relative;
@@ -2782,10 +2819,10 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     cursor: pointer;
     transition: all 0.1s;
 }
-.divi_checkbox_class_item .bapf_ochild::before,
-.divi_checkbox_class_item .bapf_cchild::before,
-.divi_checkbox_class_item .bapf_ochild::after,
-.divi_checkbox_class_item .bapf_cchild::after {
+.divi_checkbox_class_item .bapf_ochild.fa-plus::before,
+.divi_checkbox_class_item .bapf_cchild.fa-minus::before,
+.divi_checkbox_class_item .bapf_ochild.fa-plus::after,
+.divi_checkbox_class_item .bapf_cchild.fa-minus::after {
     content: '';
     display: block;
     border-top: 1px solid #6d6d6d;
@@ -2794,15 +2831,15 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     top: 50%;
     width: 0.6em;
 }
-.divi_checkbox_class_item .bapf_ochild::after {
+.divi_checkbox_class_item .bapf_ochild.fa-plus::after {
     transform: rotateZ(90deg);
 }
 
-.divi_checkbox_class_item .bapf_cchild::before {
+.divi_checkbox_class_item .bapf_cchild.fa-minus::before {
     transform: rotateZ(45deg);
     width: 0.7em;
 }
-.divi_checkbox_class_item .bapf_cchild::after {
+.divi_checkbox_class_item .bapf_cchild.fa-minus::after {
     transform: rotateZ(-45deg);
     width: 0.7em;
 }
@@ -3170,20 +3207,22 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 }
 .irs--bapf-flat .irs-handle {
   top: 25px;
-  width: 12px;
-  height: 12px;
+  font-size: 12px;
+  width: 1em;
+  height: 1em;
   background-color: transparent;
 }
 .irs--bapf-flat .irs-handle > i:first-child {
   position: absolute;
+  font-size: inherit;
   display: block;
   top: 0;
-  left: 50%;
+  left: 0.5em;
   width: 100%;
   height: 100%;
   margin-left: -6px;
   background-color: #516bd5;
-  border-radius: 8px;
+  border-radius: 80px;
 }
 .irs--bapf-flat .irs-handle.state_hover > i:first-child,
 .irs--bapf-flat .irs-handle:hover > i:first-child {
@@ -3528,6 +3567,7 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 .bapf_tag_cloud input[type=checkbox] + label {
     padding: 3px!important;
     background-color: #eee;
+    line-height: 1.2em;
 }
 .bapf_tag_cloud input[type=checkbox] + label,
 .bapf_tag_cloud input[type=checkbox] + label * {
@@ -3541,11 +3581,11 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 .bapf_tag_cloud ul {
     text-align: center;
 }
-.bapf_tag_cloud ul li {
-    display: inline-block!important;
-    line-height: 34px;
+.bapf_sfilter.bapf_tag_cloud ul li {
+    display: inline-block !important;
+    line-height: 1em;
     vertical-align: baseline;
-    margin: 2px!important;
+    margin: 6px !important;
 }
 .bapf_tag_cloud .bapf_tag_size_10 * {
     font-size: 10px;

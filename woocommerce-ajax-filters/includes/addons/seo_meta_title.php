@@ -122,12 +122,14 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
         function plugins_loaded() {
             add_action('get_header', array($this, 'get_header'));
             add_filter('document_title_parts', array($this, 'document_title_parts'));
+            add_filter('pre_get_document_title', array($this, 'pre_get_document_title'), 9999);
             add_filter('wpseo_title', array($this, 'wpseo_title'), 10, 1);
             do_action('braapf_seo_meta_title', $this);
             $options = $this->get_options();
             if( ! empty($options['seo_element_header']) ) {
                 add_filter('the_title', array($this, 'the_title'), 10, 2);
-                add_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 2);
+                add_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 1);
+                add_filter('bapf_page_title_text_custom', array($this, 'header_set_specific'), 10, 1);
                 do_action('braapf_seo_meta_header', $this);
             }
             if( ! empty($options['seo_element_description']) ) {
@@ -148,10 +150,12 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
             $terms_name = array();
             if( isset($data['filters']) && is_array($data['filters']) ) {
                 foreach($data['filters'] as $filter) {
-                    if( in_array($filter['type'], array('taxonomy', 'attribute')) ) {
+                    if( in_array($filter['type'], array('taxonomy', 'attribute', 'grouped_taxonomy')) ) {
                         if( ! isset($terms_name[$filter['taxonomy']]) ) {
                             $taxonomy = get_taxonomy($filter['taxonomy']);
-                            if( ! empty($taxonomy->labels->singular_name) ) {
+                            if( empty($taxonomy) ) {
+                                $taxonomy_label = '';
+                            } elseif( ! empty($taxonomy->labels->singular_name) ) {
                                 $taxonomy_label = $taxonomy->labels->singular_name;
                             } else {
                                 $taxonomy_label = $taxonomy->label;
@@ -256,12 +260,23 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
             }
             return apply_filters('berocket_aapf_seo_meta_filters_text_return', $filters, $text, $section, $this->terms_filtered);
         }
+        function header_set_specific($title) {
+            $title = $this->get_filters_string($title, 'header');
+            return $title;
+        }
+        function header_set($title) {
+            $title = $this->get_filters_string($title, 'header');
+            if( ! $this->ready_elements['header'] ) {
+                remove_filter('the_title', array($this, 'the_title'), 10, 2);
+                remove_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 1);
+                add_filter('bapf_page_title_text_default', array($this, 'header_set_specific'), 10, 1);
+                $this->ready_elements['header'] = true;
+            }
+            return $title;
+        }
         function the_title($title, $id = 0) {
             if( get_queried_object_id() === $id && ! $this->the_title_backtrace_exclude() ) {
-                $title = $this->get_filters_string($title, 'header');
-                remove_filter('the_title', array($this, 'the_title'), 10, 2);
-                remove_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 2);
-                $this->ready_elements['header'] = true;
+                $title = $this->header_set($title);
             }
             return $title;
         }
@@ -279,10 +294,7 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
             return false;
         }
         function woocommerce_page_title($title) {
-            $title = $this->get_filters_string($title, 'header');
-            remove_filter('the_title', array($this, 'the_title'), 10, 2);
-            remove_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 2);
-            $this->ready_elements['header'] = true;
+            $title = $this->header_set($title);
             return $title;
         }
         function document_title_parts($title) {
@@ -293,6 +305,12 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
             if( ! empty($options['seo_element_title']) ) {
                 $title['title'] = $this->get_filters_string($title['title'], 'title');
                 $this->ready_elements['title'] = true;
+            }
+            return $title;
+        }
+        function pre_get_document_title($title) {
+            if( ! empty($title) ) {
+                $title = $this->wpseo_title($title);
             }
             return $title;
         }

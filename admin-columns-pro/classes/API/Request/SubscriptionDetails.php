@@ -3,7 +3,7 @@
 namespace ACP\API\Request;
 
 use AC\Integration;
-use AC\IntegrationRepository;
+use AC\Integration\IntegrationRepository;
 use ACP\API\Request;
 use ACP\Type\ActivationToken;
 use ACP\Type\SiteUrl;

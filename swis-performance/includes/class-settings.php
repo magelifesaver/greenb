@@ -39,6 +39,9 @@ final class Settings extends Base {
 		add_action( 'admin_action_swis_retest_background_mode', array( $this, 'retest_background_optimization' ) );
 		add_action( 'admin_action_swis_view_debug_log', array( $this, 'view_debug_log' ) );
 		add_action( 'admin_action_swis_delete_debug_log', array( $this, 'delete_debug_log' ) );
+		add_action( 'admin_action_swis_clear_all_transients', array( $this, 'clear_transients' ) );
+		add_action( 'admin_action_swis_clear_expired_transients', array( $this, 'clear_transients' ) );
+		add_action( 'wp_ajax_swis_transient_status', array( $this, 'transient_status_ajax' ) );
 		add_action( 'wp_ajax_swis_cache_preload_status', array( $this, 'cache_preload_status_ajax' ) );
 		add_action( 'wp_ajax_swis_generate_css_status', array( $this, 'generate_css_status_ajax' ) );
 		add_action( 'shutdown', array( $this, 'debug_log' ), PHP_INT_MAX );
@@ -63,7 +66,7 @@ final class Settings extends Base {
 				SWIS_SL_STORE_URL,
 				SWIS_PLUGIN_FILE,
 				array(
-					'version' => '2.3.0',
+					'version' => '2.6.0',
 					'license' => get_option( 'swis_license' ),
 					'item_id' => SWIS_SL_ITEM_ID,
 					'author'  => 'Shane Bishop',
@@ -79,7 +82,7 @@ final class Settings extends Base {
 	public function admin_init() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$this->upgrade();
-		register_setting( 'swis_performance_options', 'swis_performance', array( $this, 'validate_settings' ) );
+		\register_setting( 'swis_performance_options', 'swis_performance', array( $this, 'validate_settings' ) );
 		$this->activate_license();
 	}
 
@@ -90,35 +93,35 @@ final class Settings extends Base {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		if (
 			isset( $_GET['swis_activation_nonce'] ) &&
-			check_admin_referer( 'swis_activation_nonce', 'swis_activation_nonce' ) &&
+			\check_admin_referer( 'swis_activation_nonce', 'swis_activation_nonce' ) &&
 			isset( $_GET['swis_activation'] )
 		) {
 			if ( empty( $_GET['swis_activation'] ) && ! empty( $_GET['message'] ) ) {
-				$message = urldecode( sanitize_text_field( wp_unslash( $_GET['message'] ) ) );
+				$message = \urldecode( \sanitize_text_field( \wp_unslash( $_GET['message'] ) ) );
 				?>
 				<div id="swis-activation-failed" class="error">
 					<p>
-						<?php echo esc_html( $message ); ?>
+						<?php echo \esc_html( $message ); ?>
 					</p>
 				</div>
 				<?php
 			} elseif ( ! empty( $_GET['swis_activation'] ) ) {
 				echo '<div class="notice notice-success is-dismissible"><p>' .
-					esc_html__( 'License activation successful.', 'swis-performance' ) .
+					\esc_html__( 'License activation successful.', 'swis-performance' ) .
 					'</p></div>';
 			}
 		}
-		$permissions = apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
-		if ( current_user_can( $permissions ) && $this->get_option( 'test_mode' ) ) {
+		$permissions = \apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( \current_user_can( $permissions ) && $this->get_option( 'test_mode' ) ) {
 			echo '<div class="notice notice-info"><p>' .
 				sprintf(
 					/* translators: %s: plugin settings (link) */
-					esc_html__( 'SWIS Performance is currently in Test Mode. When you are done making a mess, be sure to disable Test Mode in the %s!', 'swis-performance' ),
-					'<a href="' . esc_url( admin_url( 'options-general.php?page=swis-performance-options' ) ) . '">' . esc_html__( 'plugin settings', 'swis-performance' ) . '</a>'
+					\esc_html__( 'SWIS Performance is currently in Test Mode. When you are done making a mess, be sure to disable Test Mode in the %s!', 'swis-performance' ),
+					'<a href="' . \esc_url( \admin_url( 'options-general.php?page=swis-performance-options' ) ) . '">' . \esc_html__( 'plugin settings', 'swis-performance' ) . '</a>'
 				) .
 				'</p></div>';
 		}
-		delete_option( 'swis_activation' );
+		\delete_option( 'swis_activation' );
 	}
 
 	/**
@@ -149,34 +152,40 @@ final class Settings extends Base {
 			return array();
 		}
 		return array(
-			'background_processing'  => ! empty( $settings['background_processing'] ),
-			'debug'                  => ! empty( $settings['debug'] ),
-			'defer_js'               => ! empty( $settings['defer_js'] ),
-			'defer_jquery_safe'      => false,
-			'defer_js_exclude'       => ! empty( $settings['defer_js_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['defer_js_exclude'] ) : '',
-			'defer_css'              => ! empty( $settings['defer_css'] ),
-			'defer_css_exclude'      => ! empty( $settings['defer_css_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['defer_css_exclude'] ) : '',
-			'minify_js'              => ! empty( $settings['minify_js'] ),
-			'minify_js_exclude'      => ! empty( $settings['minify_js_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['minify_js_exclude'] ) : '',
-			'minify_css'             => ! empty( $settings['minify_css'] ),
-			'minify_css_exclude'     => ! empty( $settings['minify_css_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['minify_css_exclude'] ) : '',
-			'critical_css'           => ! empty( $settings['critical_css'] ) ? sanitize_textarea_field( $settings['critical_css'] ) : '',
-			'critical_css_key'       => ! empty( $settings['critical_css_key'] ) ? sanitize_textarea_field( $settings['critical_css_key'] ) : '',
-			'pre_hint_domains'       => ! empty( $settings['pre_hint_domains'] ) ? $this->sanitize_textarea_exclusions( $settings['pre_hint_domains'] ) : '',
-			'cdn_domain'             => ! empty( $settings['cdn_domain'] ) ? $this->sanitize_cdn_domain( $settings['cdn_domain'] ) : '',
-			'cdn_all_the_things'     => true,
-			'cdn_exclude'            => ! empty( $settings['cdn_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['cdn_exclude'] ) : '',
-			'slim_js_css'            => isset( $settings['slim_js_css'] ) ? $settings['slim_js_css'] : $this->get_option( 'slim_js_css' ),
-			'cache'                  => ! empty( $settings['cache'] ),
-			'cache_settings'         => ! empty( $settings['cache_settings'] ) ? swis()->cache->validate_settings( $settings['cache_settings'] ) : swis()->cache->validate_settings( swis()->cache->get_settings() ),
-			'cache_preload'          => ! empty( $settings['cache_preload'] ),
-			'optimize_fonts'         => ! empty( $settings['optimize_fonts'] ),
-			'optimize_fonts_css'     => ! empty( $settings['optimize_fonts_css'] ) ? sanitize_textarea_field( $settings['optimize_fonts_css'] ) : '',
-			'optimize_fonts_list'    => ! empty( $settings['optimize_fonts_list'] ) ? $this->sanitize_textarea_exclusions( $settings['optimize_fonts_list'] ) : '',
-			'optimize_fonts_replace' => ! empty( $settings['optimize_fonts_replace'] ) ? $settings['optimize_fonts_replace'] : $this->get_option( 'optimize_fonts_replace' ),
-			'crossorigin_fonts'      => ! empty( $settings['crossorigin_fonts'] ),
-			'self_host_fonts'        => ! empty( $settings['self_host_fonts'] ),
-			'test_mode'              => ! empty( $settings['test_mode'] ),
+			'asset_cache_iterator'      => ! empty( $settings['asset_cache_iterator'] ) ? (int) $settings['asset_cache_iterator'] : 0,
+			'background_processing'     => ! empty( $settings['background_processing'] ),
+			'cache'                     => ! empty( $settings['cache'] ),
+			'cache_settings'            => ! empty( $settings['cache_settings'] ) ? swis()->cache->validate_settings( $settings['cache_settings'] ) : swis()->cache->validate_settings( swis()->cache->get_settings() ),
+			'cache_preload'             => ! empty( $settings['cache_preload'] ),
+			'defer_js'                  => ! empty( $settings['defer_js'] ),
+			'defer_jquery_safe'         => false,
+			'defer_js_exclude'          => ! empty( $settings['defer_js_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['defer_js_exclude'] ) : '',
+			'defer_css'                 => ! empty( $settings['defer_css'] ),
+			'defer_css_exclude'         => ! empty( $settings['defer_css_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['defer_css_exclude'] ) : '',
+			'minify_js'                 => ! empty( $settings['minify_js'] ),
+			'minify_js_exclude'         => ! empty( $settings['minify_js_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['minify_js_exclude'] ) : '',
+			'minify_css'                => ! empty( $settings['minify_css'] ),
+			'minify_css_exclude'        => ! empty( $settings['minify_css_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['minify_css_exclude'] ) : '',
+			'critical_css'              => ! empty( $settings['critical_css'] ) ? \sanitize_textarea_field( $settings['critical_css'] ) : '',
+			'critical_css_key'          => ! empty( $settings['critical_css_key'] ) ? \sanitize_text_field( $settings['critical_css_key'] ) : '',
+			'critical_css_auto_refresh' => ! empty( $settings['critical_css_auto_refresh'] ),
+			'optimize_fonts'            => ! empty( $settings['optimize_fonts'] ),
+			'optimize_fonts_css'        => ! empty( $settings['optimize_fonts_css'] ) ? \sanitize_textarea_field( $settings['optimize_fonts_css'] ) : '',
+			'optimize_fonts_list'       => ! empty( $settings['optimize_fonts_list'] ) ? $this->sanitize_textarea_exclusions( $settings['optimize_fonts_list'] ) : '',
+			'optimize_fonts_replace'    => ! empty( $settings['optimize_fonts_replace'] ) ? $settings['optimize_fonts_replace'] : $this->get_option( 'optimize_fonts_replace' ),
+			'crossorigin_fonts'         => ! empty( $settings['crossorigin_fonts'] ),
+			'self_host_fonts'           => ! empty( $settings['self_host_fonts'] ),
+			'preload_assets'            => ! empty( $settings['preload_assets'] ) ? $this->sanitize_textarea_urls( $settings['preload_assets'] ) : '',
+			'pre_hint_domains'          => ! empty( $settings['pre_hint_domains'] ) ? $this->sanitize_textarea_exclusions( $settings['pre_hint_domains'] ) : '',
+			'speculation_mode'          => ! empty( $settings['speculation_mode'] ) ? \sanitize_text_field( $settings['speculation_mode'] ) : 'auto',
+			'speculation_level'         => ! empty( $settings['speculation_level'] ) ? \sanitize_text_field( $settings['speculation_level'] ) : 'auto',
+			'speculation_exclude'       => ! empty( $settings['speculation_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['speculation_exclude'], false ) : '',
+			'cdn_domain'                => ! empty( $settings['cdn_domain'] ) ? $this->sanitize_cdn_domain( $settings['cdn_domain'] ) : '',
+			'cdn_all_the_things'        => true,
+			'cdn_exclude'               => ! empty( $settings['cdn_exclude'] ) ? $this->sanitize_textarea_exclusions( $settings['cdn_exclude'] ) : '',
+			'slim_js_css'               => isset( $settings['slim_js_css'] ) ? $settings['slim_js_css'] : $this->get_option( 'slim_js_css' ),
+			'debug'                     => ! empty( $settings['debug'] ),
+			'test_mode'                 => ! empty( $settings['test_mode'] ),
 		);
 	}
 
@@ -186,35 +195,43 @@ final class Settings extends Base {
 	public function set_defaults() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$defaults = array(
-			'debug'                  => false,
-			'defer_js'               => false,
-			'defer_jquery_safe'      => true,
-			'defer_js_exclude'       => '',
-			'defer_css'              => false,
-			'defer_css_exclude'      => '',
-			'minify_js'              => false,
-			'minify_js_exclude'      => '',
-			'minify_css'             => false,
-			'minify_css_exclude'     => '',
-			'critical_css'           => '',
-			'critical_css_key'       => '',
-			'pre_hint_domains'       => '',
-			'cdn_domain'             => '',
-			'cdn_all_the_things'     => true,
-			'cdn_exclude'            => '',
-			'slim_js_css'            => '',
-			'cache'                  => ! swis()->cache->should_disable_caching() && ! swis()->cache->server_cache_detected(),
-			'cache_settings'         => array(),
-			'cache_preload'          => false,
-			'optimize_fonts'         => false,
-			'optimize_fonts_css'     => '',
-			'optimize_fonts_list'    => '',
-			'optimize_fonts_replace' => array(),
-			'crossorigin_fonts'      => false,
-			'self_host_fonts'        => false,
-			'test_mode'              => false,
+			'asset_cache_iterator'      => 0,
+			'cache'                     => ! swis()->cache->should_disable_caching() && ! swis()->cache->server_cache_detected(),
+			'cache_settings'            => array(),
+			'cache_preload'             => false,
+			'defer_js'                  => false,
+			'defer_jquery_safe'         => true,
+			'defer_js_exclude'          => '',
+			'defer_css'                 => false,
+			'defer_css_exclude'         => '',
+			'minify_js'                 => false,
+			'minify_js_exclude'         => '',
+			'minify_css'                => false,
+			'minify_css_exclude'        => '',
+			'critical_css'              => '',
+			'critical_css_key'          => '',
+			'critical_css_auto_refresh' => false,
+			'optimize_fonts'            => false,
+			'optimize_fonts_css'        => '',
+			'optimize_fonts_list'       => '',
+			'optimize_fonts_replace'    => array(),
+			'crossorigin_fonts'         => false,
+			'self_host_fonts'           => false,
+			'preload_assets'            => array(),
+			'pre_hint_domains'          => '',
+			'speculation_mode'          => 'auto',
+			'speculation_level'         => 'auto',
+			'speculation_exclude'       => '',
+			'cdn_domain'                => '',
+			'cdn_all_the_things'        => true,
+			'cdn_exclude'               => '',
+			'slim_js_css'               => array(),
+			'debug'                     => false,
+			'test_mode'                 => false,
 		);
-		add_option( 'swis_performance', $defaults, '', true );
+		\add_option( 'swis_performance', $defaults, '', true );
+		\add_option( 'swis_site_preload_needed', '' );
+		\add_site_option( 'swis_preload_needed', '' );
 	}
 
 	/**
@@ -238,20 +255,12 @@ final class Settings extends Base {
 			if ( get_option( 'swis_version' ) && get_option( 'swis_version' ) < 200 && $this->get_option( 'slim_js_css' ) ) {
 				swis()->slim->migrate_user_exclusions();
 			}
-			if ( get_option( 'swis_version' ) && get_option( 'swis_version' ) < 204.1 ) {
-				$swis_option = \get_option( 'swis_performance' );
-				if ( ! isset( $swis_option['crossorigin_fonts'] ) ) {
-					$this->set_option( 'crossorigin_fonts', false );
-				}
+			$swis_option = \get_option( 'swis_performance' );
+			if ( ! isset( $swis_option['crossorigin_fonts'] ) ) {
+				$this->set_option( 'crossorigin_fonts', false );
 			}
-			if ( $this->get_option( 'cdn_domain' ) ) {
-				if ( 'external' === get_option( 'elementor_css_print_method' ) ) {
-					update_option( 'elementor_css_print_method', 'internal' );
-				}
-				if ( function_exists( 'et_get_option' ) && function_exists( 'et_update_option' ) && 'on' === et_get_option( 'et_pb_static_css_file', 'on' ) ) {
-					et_update_option( 'et_pb_static_css_file', 'off' );
-					et_update_option( 'et_pb_css_in_footer', 'off' );
-				}
+			if ( ! isset( $swis_option['asset_cache_iterator'] ) ) {
+				$this->set_option( 'asset_cache_iterator', 0 );
 			}
 			if ( is_file( $this->content_dir . 'debug.log' ) && is_writable( $this->content_dir . 'debug.log' ) ) {
 				unlink( $this->content_dir . 'debug.log' );
@@ -573,6 +582,7 @@ final class Settings extends Base {
 		}
 		$this->debug_message( 'critical css in use: ' . ( $this->get_option( 'critical_css' ) ? 'yes' : 'nope' ) );
 		$this->debug_message( 'critical css key active: ' . ( $this->get_option( 'critical_css_key' ) ? 'yes' : 'nope' ) );
+		$this->debug_message( 'critical css auto refresh: ' . ( $this->get_option( 'critical_css_auto_refresh' ) ? 'yes' : 'nope' ) );
 		$this->debug_message( 'minify css: ' . ( $this->get_option( 'minify_css' ) ? 'on' : 'off' ) );
 		$this->debug_message( 'minify css exclusions:' );
 		if ( $this->get_option( 'minify_css_exclude' ) ) {
@@ -598,9 +608,19 @@ final class Settings extends Base {
 		$this->debug_message( 'mixed font CSS cached: ' . ( $this->get_option( 'optimize_fonts_replace' ) ? 'yes' : 'no' ) );
 		$this->debug_message( 'self-host Google fonts: ' . ( $this->get_option( 'self_host_fonts' ) ? 'on' : 'off' ) );
 		$this->debug_message( 'cross-origin Easy IO font preconnect: ' . ( $this->get_option( 'crossorigin_fonts' ) ? 'yes' : 'not detected' ) );
+		$this->debug_message( 'preload asset URLs:' );
+		if ( $this->get_option( 'preload_assets' ) ) {
+			$this->debug_message( implode( "\n", $this->get_option( 'preload_assets' ) ) );
+		}
 		$this->debug_message( 'pre* hint domains:' );
 		if ( $this->get_option( 'pre_hint_domains' ) ) {
 			$this->debug_message( implode( "\n", $this->get_option( 'pre_hint_domains' ) ) );
+		}
+		$this->debug_message( 'speculation mode: ' . $this->get_option( 'speculation_mode' ) );
+		$this->debug_message( 'speculation level: ' . $this->get_option( 'speculation_level' ) );
+		$this->debug_message( 'speculation exclusions:' );
+		if ( $this->get_option( 'speculation_exclude' ) ) {
+			$this->debug_message( implode( "\n", $this->get_option( 'speculation_exclude' ) ) );
 		}
 		$this->debug_message( 'CDN domain: ' . $this->get_option( 'cdn_domain' ) );
 		$this->debug_message( 'CDN exclusions:' );
@@ -648,11 +668,12 @@ final class Settings extends Base {
 	 * Displays the settings page (single-site for now).
 	 */
 	public function display_settings() {
-		swis()->gzip->insert_htaccess_rules();
+		\swis()->gzip->insert_htaccess_rules();
 		$this->debug_info();
+		global $wp_version;
 		global $swis_upgrading;
 		// HS Beacon data.
-		$current_user = wp_get_current_user();
+		$current_user = \wp_get_current_user();
 		$help_email   = $current_user->user_email;
 		$hs_debug     = '';
 		if ( ! empty( self::$debug ) ) {
@@ -665,17 +686,30 @@ final class Settings extends Base {
 		} else {
 			$license_error = '';
 		}
+		// Just like we do in EWWW IO, clear these transients on the SWIS settings page to revalidate their key and resume async CCSS generation.
+		\delete_transient( 'swis_generate_css_invalid' );
+		\delete_transient( 'swis_generate_css_paused' );
 
-		$cache_settings     = swis()->cache->get_settings();
-		$cache_exclude      = ! empty( $cache_settings['exclusions'] ) ? implode( "\n", $cache_settings['exclusions'] ) : '';
-		$defer_css_exclude  = $this->get_option( 'defer_css_exclude' ) ? implode( "\n", $this->get_option( 'defer_css_exclude' ) ) : '';
-		$minify_css_exclude = $this->get_option( 'minify_css_exclude' ) ? implode( "\n", $this->get_option( 'minify_css_exclude' ) ) : '';
-		$defer_js_exclude   = $this->get_option( 'defer_js_exclude' ) ? implode( "\n", $this->get_option( 'defer_js_exclude' ) ) : '';
-		$minify_js_exclude  = $this->get_option( 'minify_js_exclude' ) ? implode( "\n", $this->get_option( 'minify_js_exclude' ) ) : '';
-		$ll_exclude         = $this->get_option( 'll_exclude' ) ? implode( "\n", $this->get_option( 'll_exclude' ) ) : '';
-		$pre_hint_domains   = $this->get_option( 'pre_hint_domains' ) ? implode( "\n", $this->get_option( 'pre_hint_domains' ) ) : '';
-		$cdn_exclude        = $this->get_option( 'cdn_exclude' ) ? implode( "\n", $this->get_option( 'cdn_exclude' ) ) : '';
-		$fonts_list         = $this->get_option( 'optimize_fonts_list' ) ? implode( "\n", $this->get_option( 'optimize_fonts_list' ) ) : '';
+		if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) {
+			if ( $this->get_option( 'minify_css' ) ) {
+				$this->set_option( 'minify_css', false );
+			}
+			if ( $this->get_option( 'minify_js' ) ) {
+				$this->set_option( 'minify_js', false );
+			}
+		}
+
+		$cache_settings      = swis()->cache->get_settings();
+		$cache_exclude       = ! empty( $cache_settings['exclusions'] ) ? implode( "\n", $cache_settings['exclusions'] ) : '';
+		$defer_css_exclude   = $this->get_option( 'defer_css_exclude' ) ? implode( "\n", $this->get_option( 'defer_css_exclude' ) ) : '';
+		$minify_css_exclude  = $this->get_option( 'minify_css_exclude' ) ? implode( "\n", $this->get_option( 'minify_css_exclude' ) ) : '';
+		$defer_js_exclude    = $this->get_option( 'defer_js_exclude' ) ? implode( "\n", $this->get_option( 'defer_js_exclude' ) ) : '';
+		$minify_js_exclude   = $this->get_option( 'minify_js_exclude' ) ? implode( "\n", $this->get_option( 'minify_js_exclude' ) ) : '';
+		$preload_assets      = $this->get_option( 'preload_assets' ) ? implode( "\n", $this->get_option( 'preload_assets' ) ) : '';
+		$pre_hint_domains    = $this->get_option( 'pre_hint_domains' ) ? implode( "\n", $this->get_option( 'pre_hint_domains' ) ) : '';
+		$speculation_exclude = $this->get_option( 'speculation_exclude' ) ? implode( "\n", $this->get_option( 'speculation_exclude' ) ) : '';
+		$cdn_exclude         = $this->get_option( 'cdn_exclude' ) ? implode( "\n", $this->get_option( 'cdn_exclude' ) ) : '';
+		$fonts_list          = $this->get_option( 'optimize_fonts_list' ) ? implode( "\n", $this->get_option( 'optimize_fonts_list' ) ) : '';
 		?>
 <div id='swis-settings-wrap' class='wrap'>
 	<h1 style='display:none'>SWIS Performance</h1>
@@ -713,439 +747,550 @@ final class Settings extends Base {
 		<form id='swis-settings-form' method='post' action='options.php'>
 			<?php settings_fields( 'swis_performance_options' ); ?>
 			<input type='hidden' name='swis_performance[background_processing]' value='<?php echo ( $this->get_option( 'background_processing' ) ? 1 : 0 ); ?>'>
-			<table class='form-table'>
+			<input type='hidden' name='swis_performance[asset_cache_iterator]' value='<?php echo (int) $this->get_option( 'asset_cache_iterator' ); ?>'>
+			<div class='swis-settings-panel'>
 		<?php if ( ! swis()->cache->should_disable_caching() ) : ?>
-				<tr>
-					<th scope='row'>
-						<label for='swis_cache'><?php esc_html_e( 'Page Caching', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_cache' name='swis_performance[cache]' value='true' <?php checked( $this->get_option( 'cache' ) ); ?> />
-						<?php esc_html_e( 'Stores static copies of your pages to improve site response times.', 'swis-performance' ); ?>
-			<?php if ( swis()->cache->server_cache_detected() ) : ?>
-						<p class='description'>
-							<?php esc_html_e( '*Your site may already have a server-based page cache. A server-based cache typically offers better performance than a plugin-based cache, but you may enable page caching in SWIS to extend the cache lifetime.', 'swis-performance' ); ?>
-						</p>
-			<?php endif; ?>
-					</td>
-				</tr>
-				<tr id="swis_cache_expires_container"<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
-					<th>&nbsp;</th>
-					<td>
-						<input type='text' id='swis_cache_expires' name='swis_performance[cache_settings][expires]' class='small-text' value='<?php echo (int) $cache_settings['expires']; ?>' />
-						<label for='swis_cache_expires'><strong><?php esc_html_e( 'Expiration', 'swis-performance' ); ?></strong></label>
-						<p class='description'>
-							<?php esc_html_e( 'How long should pages be cached (in hours, set to 0 for no expiration).', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr id="swis_cache_webp_container"<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
-					<th>&nbsp;</th>
-					<td>
-			<?php if ( class_exists( '\EWWW\ExactDN' ) || class_exists( '\EasyIO\ExactDN' ) ) : ?>
-						<input type='checkbox' id='swis_cache_webp' name='swis_performance[cache_settings][webp]' value='true' disabled />
-						<label for='swis_cache_webp'><strong><?php esc_html_e( 'WebP Variant', 'swis-performance' ); ?></strong></label>
-						<p class='description'>
-							<?php esc_html_e( 'Easy IO automatically converts images to WebP.', 'swis-performance' ); ?>
-						</p>
-			<?php else : ?>
-						<input type='checkbox' id='swis_cache_webp' name='swis_performance[cache_settings][webp]' value='true' <?php checked( $cache_settings['webp'] ); ?> />
-						<label for='swis_cache_webp'><strong><?php esc_html_e( 'WebP Variant', 'swis-performance' ); ?></strong></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
-						<p class='description'>
-							<?php
-							printf(
-								/* translators: %s: EWWW Image Optimizer (linked to plugin search page) */
-								esc_html__( 'Create an additional cached variant for browsers that support WebP. Convert your images to WebP with %s.', 'swis-performance' ),
-								'<a href="' . esc_url( admin_url( 'plugin-install.php?s=ewww+image+optimizer&tab=search&type=term' ) ) . '">EWWW Image Optimizer</a>'
-							);
-							?>
-						</p>
-			<?php endif; ?>
-					</td>
-				</tr>
-				<tr id="swis_cache_exclusions_container"<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_cache_exclusions'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_cache_exclusions' name='swis_performance[cache_settings][exclusions]' rows='3'><?php echo esc_html( $cache_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the page(s) you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-		<?php else : ?>
-				<tr>
-					<td>&nbsp;</td>
-					<td>
-						<p class='description'>
-							<?php esc_html_e( 'SWIS Page Caching is disabled because your site appears to have a page caching plugin already.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-		<?php endif; ?>
-				<tr>
-					<th scope='row'>
-						<label for='swis_cache_preload'><?php esc_html_e( 'Cache Preload', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_cache_preload' name='swis_performance[cache_preload]' value='true' <?php checked( $this->get_option( 'cache_preload' ) ); ?> />
-						<?php esc_html_e( 'Automatically generate cache files. SWIS will preload pages linked from your homepage and those listed in sitemaps.', 'swis-performance' ); ?>
-		<?php if ( $this->get_option( 'cache_preload' ) && ! $this->background_mode_enabled() && ! $swis_upgrading ) : ?>
-						<p>
-							<strong><?php esc_html_e( 'Async/Background operations are not working, but you may manually preload the cache.', 'swis-performance' ); ?></strong>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_defer_css'><?php esc_html_e( 'Optimize CSS Loading', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/104-optimize-css-js-loading', '60ca8a7800fd0d7c253f6f7b' ); ?>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_defer_css' name='swis_performance[defer_css]' value='true' <?php checked( $this->get_option( 'defer_css' ) ); ?> />
-						<?php esc_html_e( 'Prevent CSS from slowing down your pages. Pre-loads theme CSS files.', 'swis-performance' ); ?>
-					</td>
-				</tr>
-				<tr id="swis_defer_css_exclude_container"<?php echo $this->get_option( 'defer_css' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_defer_css_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_defer_css_exclude' name='swis_performance[defer_css_exclude]' rows='3'><?php echo esc_html( $defer_css_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the CSS files you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<?php esc_html_e( 'Critical CSS', 'swis-performance' ); ?>
-						<?php $this->help_link( 'https://docs.ewww.io/article/98-finding-critical-css', '5fa2e2f64cedfd0016109a64' ); ?>
-					</th>
-					<td>
-						<p>
-							<?php esc_html_e( 'Use Critical CSS to prevent a FOUC (Flash of Unstyled Content) due to deferred/optimized CSS loading.', 'swis-performance' ); ?>
-		<?php if ( false && ! $this->get_option( 'critical_css_key' ) ) : ?>
-							<br>
-							<?php
-							printf(
-								/* translators: %s: tools */
-								esc_html__( 'We recommend the CriticalCSS.com API for optimal results, but there are several %s available to manually generate Critical CSS.', 'swis-performance' ),
-								"<a href='https://docs.ewww.io/article/98-finding-critical-css' target='_blank'>" . esc_html__( 'free tools', 'swis-performance' ) . '</a>'
-							);
-							?>
-		<?php endif; ?>
-						</p>
-		<?php if ( $this->is_jetpack_boost_option_enabled( 'critical-css' ) ) : ?>
-						<p class='description'>
-							<?php esc_html_e( 'Disable the Critical CSS option in Jetpack Boost if you wish to use SWIS Performance for Critical CSS instead.', 'swis-performance' ); ?>
-						</p>
-		<?php endif; ?>
-		<?php if ( ! $this->get_option( 'critical_css_key' ) && ! \get_option( 'swis_license' ) ) : ?>
-						<p class='description'>
-							<?php
-							printf(
-								/* translators: %s: license key (linked) */
-								esc_html__( 'Activate your %s in the sidebar to automatically generate and deliver page-specific critical CSS.', 'swis-performance' ),
-								"<a href='https://ewww.io/file-downloads/' target='_blank'>" . esc_html__( 'license key', 'swis-performance' ) . '</a>'
-							);
-							?>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-		<?php if ( ! $this->is_jetpack_boost_option_enabled( 'critical-css' ) ) : ?>
-			<?php if ( $this->get_option( 'critical_css_key' ) ) : ?>
-				<tr>
-					<th scope='row'>
-						&nbsp;
-					</th>
-					<td>
-						<strong><label for='swis_critical_css_key'><?php esc_html_e( 'CriticalCSS.com API Key', 'swis-performance' ); ?></label></strong>
-						<br>
-						<input type='<?php echo ! empty( $this->get_option( 'critical_css_key' ) ) ? 'password' : 'text'; ?>' id='swis_critical_css_key' name='swis_performance[critical_css_key]' size='40' value='<?php echo esc_attr( $this->get_option( 'critical_css_key' ) ); ?>' />
-						<p class='description'>
-							<?php
-							printf(
-								/* translators: %s: CriticalCSS.com (link) */
-								esc_html__( 'Enter your %s API key to automatically generate and deliver page-specific critical CSS.', 'swis-performance' ),
-								"<a href='https://criticalcss.com/account/api-keys?aff=11590&c=5TUd6lbe' target='_blank'>" . esc_html__( 'CriticalCSS.com', 'swis-performance' ) . '</a>'
-							);
-							?>
-				<?php if ( false && ! $this->get_option( 'critical_css_key' ) ) : ?>
-							<br>
-							<a href='https://criticalcss.com?aff=11590&c=5TUd6lbe' target='_blank'>
-								<?php esc_html_e( 'SWIS Performance users get an exclusive 10% lifetime discount at CriticalCSS.com.', 'swis-performance' ); ?>
-							</a>
-				<?php endif; ?>
-						</p>
-					</td>
-				</tr>
-			<?php endif; ?>
-				<tr>
-					<th scope='row'>
-						&nbsp;
-					</th>
-					<td>
-						<strong><label for='swis_critical_css'><?php \esc_html_e( 'Fallback CSS', 'swis-performance' ); ?></label></strong>
-						<br>
-						<textarea id='swis_critical_css' name='swis_performance[critical_css]' rows='6'><?php echo \wp_kses( $this->get_option( 'critical_css' ), 'strip' ); ?></textarea>
-						<p class='description'>
-							<?php \esc_html_e( 'The fallback CSS will be used for any page where the Critical CSS API cannot generate CSS, or in case an API key is not provided.', 'swis-performance' ); ?><br>
-						</p>
-					</td>
-				</tr>
-		<?php endif; ?>
-				<tr>
-					<th scope='row'>
-						<label for='swis_minify_css'><?php \esc_html_e( 'Minify CSS', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/105-minify-css-js', '60ca8dbb8556b07a28846d7e' ); ?>
-					</th>
-					<td>
-		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
-						<p class='description'><?php \esc_html_e( 'CSS resources are minified automatically by Easy IO.', 'swis-performance' ); ?></p>
-		<?php elseif ( $this->is_jetpack_boost_option_enabled( 'minify-css' ) ) : ?>
-						<p class='description'>
-							<?php esc_html_e( 'CSS resources are already minified by Jetpack Boost.', 'swis-performance' ); ?>
-						</p>
-		<?php else : ?>
-						<input type='checkbox' id='swis_minify_css' name='swis_performance[minify_css]' value='true' <?php checked( $this->get_option( 'minify_css' ) ); ?> />
-						<?php \esc_html_e( 'Make your stylesheets as small as possible by removing whitespace, comments, etc.', 'swis-performance' ); ?>
-					</td>
-				</tr>
-				<tr id="swis_minify_css_exclude_container"<?php echo $this->get_option( 'minify_css' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_minify_css_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_minify_css_exclude' name='swis_performance[minify_css_exclude]' rows='3'><?php echo esc_html( $minify_css_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the CSS files you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_defer_js'><?php esc_html_e( 'Optimize JS Loading', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/104-optimize-css-js-loading', '60ca8a7800fd0d7c253f6f7b' ); ?>
-					</th>
-					<td>
-		<?php if ( $this->is_jetpack_boost_option_enabled( 'render-blocking-js' ) ) : ?>
-						<p class='description'>
-							<?php esc_html_e( 'JS resources are already deferred by Jetpack Boost.', 'swis-performance' ); ?>
-						</p>
-		<?php else : ?>
-						<input type='checkbox' id='swis_defer_js' name='swis_performance[defer_js]' value='true' <?php checked( $this->get_option( 'defer_js' ) ); ?> />
-						<?php esc_html_e( 'Defer scripts to prevent them from render-blocking and slowing down your pages.', 'swis-performance' ); ?>
-						<p class='description'>
-							<?php esc_html_e( 'Use the front-end SWIS menu to manage JS defer and delay on each page.', 'swis-performance' ); ?>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr id="swis_defer_js_exclude_container"<?php echo $this->get_option( 'defer_js' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_defer_js_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_defer_js_exclude' name='swis_performance[defer_js_exclude]' rows='3'><?php echo esc_html( $defer_js_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the JS files you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_minify_js'><?php esc_html_e( 'Minify JS', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/105-minify-css-js', '60ca8dbb8556b07a28846d7e' ); ?>
-					</th>
-					<td>
-		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
-						<p class='description'><?php esc_html_e( 'JS resources are minified automatically by Easy IO.', 'swis-performance' ); ?></p>
-		<?php elseif ( $this->is_jetpack_boost_option_enabled( 'minify-js' ) ) : ?>
-						<p class='description'>
-							<?php esc_html_e( 'JS resources are already minified by Jetpack Boost.', 'swis-performance' ); ?>
-						</p>
-		<?php else : ?>
-						<input type='checkbox' id='swis_minify_js' name='swis_performance[minify_js]' value='true' <?php checked( $this->get_option( 'minify_js' ) ); ?> />
-						<?php esc_html_e( 'Make your scripts as small as possible by removing whitespace, comments, etc.', 'swis-performance' ); ?>
-					</td>
-				</tr>
-				<tr id="swis_minify_js_exclude_container"<?php echo $this->get_option( 'minify_js' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_minify_js_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_minify_js_exclude' name='swis_performance[minify_js_exclude]' rows='3'><?php echo esc_html( $minify_js_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the JS files you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_optimize_fonts'><?php esc_html_e( 'Optimize Google Fonts', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/106-optimize-google-fonts', '60ca973b05ff892e6bc281e3' ); ?>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_optimize_fonts' name='swis_performance[optimize_fonts]' value='true' <?php checked( $this->get_option( 'optimize_fonts' ) ); ?> />
-						<?php esc_html_e( 'Speed up the loading of Google Fonts. Inlines the font CSS and adds a preconnect directive for supported browsers.', 'swis-performance' ); ?>
-						<p class='description'>
-							<?php esc_html_e( 'After enabling this option, loading any of your pages while logged in with admin permissions will allow SWIS to auto-detect your Google Fonts.', 'swis-performance' ); ?>
-						</p>
-		<?php if ( $this->get_option( 'crossorigin_fonts' ) ) : ?>
-						<input type='hidden' id='swis_crossorigin_fonts' name='swis_performance[crossorigin_fonts]' value='true' />
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr id="swis_optimize_fonts_css_container"<?php echo $this->get_option( 'optimize_fonts' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_optimize_fonts_css'><strong><?php esc_html_e( 'Google Fonts CSS', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_optimize_fonts_css' name='swis_performance[optimize_fonts_css]' rows='6'><?php echo wp_kses( $this->get_option( 'optimize_fonts_css' ), 'strip' ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'This field should be auto-populated when you load any page while logged in with admin permissions. You may edit the auto-detected CSS, or specify the font CSS manually.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr id="swis_optimize_fonts_list_container"<?php echo $this->get_option( 'optimize_fonts' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_optimize_fonts_list'><strong><?php esc_html_e( 'Remove Font CSS', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_optimize_fonts_list' name='swis_performance[optimize_fonts_list]' rows='3'><?php echo esc_html( $fonts_list ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'Once the Google Fonts CSS is inlined, SWIS will suppress external CSS files for Google Fonts.', 'swis-performance' ); ?><br>
-							<?php esc_html_e( 'This field should also be auto-populated, but you may edit the stylesheet handles manually if necessary, one per line.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_self_host_fonts'><?php esc_html_e( 'Self-host Google Fonts', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/106-optimize-google-fonts', '60ca973b05ff892e6bc281e3' ); ?>
-					</th>
-					<td>
-		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
-						<p class='description'><?php esc_html_e( 'Google Font resources are delivered automatically by Easy IO with enhanced user privacy.', 'swis-performance' ); ?></p>
-		<?php else : ?>
-						<input type='checkbox' id='swis_self_host_fonts' name='swis_performance[self_host_fonts]' value='true' <?php checked( $this->get_option( 'self_host_fonts' ) ); ?> />
-						<?php esc_html_e( 'Improve user privacy of using Google Fonts and eliminate extra HTTP/DNS requests by downloading font resources and delivering them locally.', 'swis-performance' ); ?>
-						<p class='description'>
-			<?php if ( $this->get_option( 'optimize_fonts' ) && ! $this->get_option( 'self_host_fonts' ) && $this->get_option( 'optimize_fonts_css' ) ) : ?>
-							<?php esc_html_e( 'To self-host Google Fonts, you will need to remove the previously-detected Font CSS above to allow SWIS to download your Google Fonts.', 'swis-performance' ); ?>
-			<?php elseif ( $this->get_option( 'optimize_fonts' ) && $this->get_option( 'self_host_fonts' ) && $this->get_option( 'optimize_fonts_css' ) ) : ?>
-							<?php esc_html_e( 'To download or update self-hosted Google Fonts, remove the previously-detected Font CSS above.', 'swis-performance' ); ?>
-			<?php elseif ( ! $this->get_option( 'optimize_fonts' ) ) : ?>
-							<?php esc_html_e( 'To self-host Google Fonts, you must also enable Optimize Google Fonts.', 'swis-performance' ); ?>
-			<?php endif; ?>
-						</p>
-		<?php endif; ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_pre_hint_domains'><?php esc_html_e( 'Pre* Hint Domains', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/108-pre-hint-domains', '60cabdd405ff892e6bc28224' ); ?>
-					</th>
-					<td>
-						<textarea id='swis_pre_hint_domains' name='swis_performance[pre_hint_domains]' rows='3'><?php echo esc_html( $pre_hint_domains ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'SWIS will automatically add DNS Prefetch and Preconnect hints to speed up third-party resources, but you may provide additional domains if any are missing.', 'swis-performance' ); ?><br>
-						</p>
-					</td>
-				</tr>
-		<?php if ( ! $this->is_easyio_active() || ( ! \get_option( 'exactdn_all_the_things' ) && ! \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
-				<tr>
-					<th scope='row'>
-						<label for='swis_cdn_domain'><?php esc_html_e( 'CDN Domain', 'swis-performance' ); ?></label>
-						<?php $this->help_link( 'https://docs.ewww.io/article/107-cdn-domain-rewriting', '60caabcd9e87cb3d01244800' ); ?>
-					</th>
-					<td>
-						<input type='text' id='swis_cdn_domain' name='swis_performance[cdn_domain]' size='40' value='<?php echo esc_attr( $this->get_option( 'cdn_domain' ) ); ?>' />
-						<p class='description'>
-							<?php esc_html_e( 'Enter a CDN domain to deliver all static resources from speedy servers: JS, CSS, images, etc.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr id="swis_cdn_exclude_container"<?php echo $this->get_option( 'cdn_domain' ) ? '' : ' style="display:none"'; ?>>
-					<td>&nbsp;</td>
-					<td>
-						<label for='swis_cdn_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
-						<textarea id='swis_cdn_exclude' name='swis_performance[cdn_exclude]' rows='3'><?php echo esc_html( $cdn_exclude ); ?></textarea>
-						<p class='description'>
-							<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the files you wish to exclude.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-		<?php endif; ?>
-				<tr>
-					<th scope='row'>
-						<?php esc_html_e( 'Eliminate Unused CSS/JS (Slim)', 'swis-performance' ); ?>
-						<?php $this->help_link( 'https://docs.ewww.io/article/97-disabling-unused-css-and-js', '5fa2c6604cedfd00165ad105' ); ?>
-					</th>
-					<td>
-						<p><?php esc_html_e( 'Enter rules to unload any JS/CSS files you choose, on any page(s) you choose.', 'swis-performance' ); ?></p>
-						<div id="swis-slim-rules">
-							<?php swis()->slim->display_backend_rules(); ?>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_cache'><?php esc_html_e( 'Page Caching', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
 						</div>
-						<div id="swis-slim-add-rule" class="swis-slim-rule">
-							<div class="swis-slim-header"><?php esc_html_e( 'Add New Rule', 'swis-performance' ); ?></div>
-							<div class="swis-slim-row">
-								<div class="swis-slim-control-group">
-									<input type="text" id="swis_slim_new_handle" name="swis_slim_new_handle" />
-									<strong><label for='swis_slim_new_handle'><?php esc_html_e( 'JS/CSS Handle', 'swis-performance' ); ?></label></strong>
-								</div>
-								<div class="swis-slim-row">
-									<input type="radio" id="swis_slim_new_mode_include" class="swis-slim-new-radio" name="swis_slim_new_mode" value="include" />
-									<strong><label for='swis_slim_new_mode_include'><?php esc_html_e( 'disable everywhere except:', 'swis-performance' ); ?></label></strong>
-								</div>
-								<div class="swis-slim-row">
-									<input type="radio" id="swis_slim_new_mode_exclude" class="swis-slim-new-radio" name="swis_slim_new_mode" value="exclude" />
-									<strong><label for='swis_slim_new_mode_exclude'><?php esc_html_e( 'disable on:', 'swis-performance' ); ?></label></strong>
-								</div>
-								<div class="swis-slim-row" style="display:none">
-									<input type="radio" id="swis_slim_new_mode_all" class="swis-slim-new-radio" name="swis_slim_new_mode" value="all" checked />
-									<strong><label for='swis_slim_new_mode_all'><?php esc_html_e( 'disable everywhere', 'swis-performance' ); ?></label></strong>
-								</div>
-							</div>
-							<div class="swis-slim-error-message"></div>
-							<div class="swis-slim-row">
-								<input type="text" id="swis_slim_new_exclusions" name="swis-slim-new-exclusions" placeholder="<?php esc_html_e( 'Leave blank to disable everywhere', 'swis-performance' ); ?>"/>
-								<button type="button" class="button-primary swis-slim-rule-add"><?php esc_html_e( 'Add Rule', 'swis-performance' ); ?></button>
-							</div>
-							<p class="description">
-								<label for='swis_slim_new_exclusions'>
-									<?php esc_html_e( 'Comma-separated list of pages, URL patterns (use * as wildcard), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
-								</label>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_cache' name='swis_performance[cache]' value='true' <?php checked( $this->get_option( 'cache' ) ); ?> />
+							<?php esc_html_e( 'Stores static copies of your pages to improve site response times.', 'swis-performance' ); ?>
+			<?php if ( swis()->cache->server_cache_detected() ) : ?>
+							<p class='description'>
+								<?php esc_html_e( '*Your site may already have a server-based page cache. A server-based cache typically offers better performance than a plugin-based cache, but you may enable page caching in SWIS to extend the cache lifetime.', 'swis-performance' ); ?>
+							</p>
+			<?php endif; ?>
+						</div>
+					</div>
+					<div id='swis_cache_expires_container' class='swis-settings-row'<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<input type='text' id='swis_cache_expires' name='swis_performance[cache_settings][expires]' class='small-text' value='<?php echo (int) $cache_settings['expires']; ?>' />
+							<label for='swis_cache_expires'><strong><?php esc_html_e( 'Expiration', 'swis-performance' ); ?></strong></label>
+							<p class='description'>
+								<?php esc_html_e( 'How long should pages be cached (in hours, set to 0 for no expiration).', 'swis-performance' ); ?>
 							</p>
 						</div>
-						<p>
-							*<?php esc_html_e( 'Visit any page while logged in and use the SWIS menu in the WP Admin Bar to disable, defer or delay individual JS/CSS resources.', 'swis-performance' ); ?>
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_test_mode'><?php esc_html_e( 'Test Mode', 'swis-performance' ); ?></label>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_test_mode' name='swis_performance[test_mode]' value='true' <?php checked( $this->get_option( 'test_mode' ) ); ?> />
-						<?php esc_html_e( 'Limits JS/CSS optimizations to logged-in admins so you can change your SWIS settings and Slim rules without impacting visitors.', 'swis-performance' ); ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope='row'>
-						<label for='swis_debug'><?php esc_html_e( 'Debugging', 'swis-performance' ); ?></label>
-					</th>
-					<td>
-						<input type='checkbox' id='swis_debug' name='swis_performance[debug]' value='true' <?php checked( $this->get_option( 'debug' ) ); ?> />
-						<?php esc_html_e( 'Use this to log information for troubleshooting problems you might encounter.', 'swis-performance' ); ?>
-						<p class='description'><a href='#TB_inline?&width=820&height=450&inlineId=swis-debug' class='thickbox'><?php esc_html_e( 'System Information', 'swis-performance' ); ?></a></p>
-					</td>
-				</tr>
-			</table>
+					</div>
+					<div id='swis_cache_webp_container' class='swis-settings-row'<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+			<?php if ( class_exists( '\EWWW\ExactDN' ) || class_exists( '\EasyIO\ExactDN' ) ) : ?>
+							<input type='checkbox' id='swis_cache_webp' name='swis_performance[cache_settings][webp]' value='true' disabled />
+							<label for='swis_cache_webp'><strong><?php esc_html_e( 'WebP Variant', 'swis-performance' ); ?></strong></label>
+							<p class='description'>
+								<?php esc_html_e( 'Easy IO automatically converts images to WebP.', 'swis-performance' ); ?>
+							</p>
+			<?php else : ?>
+							<input type='checkbox' id='swis_cache_webp' name='swis_performance[cache_settings][webp]' value='true' <?php checked( $cache_settings['webp'] ); ?> />
+							<label for='swis_cache_webp'><strong><?php esc_html_e( 'WebP Variant', 'swis-performance' ); ?></strong></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
+							<p class='description'>
+								<?php
+								printf(
+									/* translators: %s: EWWW Image Optimizer (linked to plugin search page) */
+									esc_html__( 'Create an additional cached variant for browsers that support WebP. Convert your images to WebP with %s.', 'swis-performance' ),
+									'<a href="' . esc_url( admin_url( 'plugin-install.php?s=ewww+image+optimizer&tab=search&type=term' ) ) . '">EWWW Image Optimizer</a>'
+								);
+								?>
+							</p>
+			<?php endif; ?>
+						</div>
+					</div>
+					<div id="swis_cache_exclusions_container" class='swis-settings-row'<?php echo $this->get_option( 'cache' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_cache_exclusions'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_cache_exclusions' name='swis_performance[cache_settings][exclusions]' rows='3' placeholder='<?php echo "/checkout/ \naccount"; ?>'><?php echo esc_html( $cache_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the page(s) you wish to exclude.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+		<?php else : ?>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<p class='description'>
+								<?php esc_html_e( 'SWIS Page Caching is disabled because your site appears to have a page caching plugin already.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+		<?php endif; ?>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_cache_preload'><?php esc_html_e( 'Cache Preload', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/103-page-caching', '60ca687061c60c534bd66abd' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_cache_preload' name='swis_performance[cache_preload]' value='true' <?php checked( $this->get_option( 'cache_preload' ) ); ?> />
+							<?php esc_html_e( 'Automatically generate cache files. SWIS will preload pages linked from your homepage and those listed in sitemaps.', 'swis-performance' ); ?>
+		<?php if ( $this->get_option( 'cache_preload' ) && ! $this->background_mode_enabled() && ! $swis_upgrading ) : ?>
+							<p>
+								<strong><?php esc_html_e( 'Async/Background operations are not working, but you may manually preload the cache.', 'swis-performance' ); ?></strong>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_defer_css'><?php esc_html_e( 'Optimize CSS Loading', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/104-optimize-css-js-loading', '60ca8a7800fd0d7c253f6f7b' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_defer_css' name='swis_performance[defer_css]' value='true' <?php checked( $this->get_option( 'defer_css' ) ); ?> />
+							<?php esc_html_e( 'Prevent CSS from slowing down your pages. Pre-loads theme CSS files.', 'swis-performance' ); ?>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_defer_css_exclude_container"<?php echo $this->get_option( 'defer_css' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_defer_css_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_defer_css_exclude' name='swis_performance[defer_css_exclude]' rows='3' placeholder='<?php echo "themes/hello/css/style.css \nplugins/nice-plugin/ \npage:checkout"; ?>'><?php echo esc_html( $defer_css_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the CSS files you wish to exclude.', 'swis-performance' ); ?>
+								<?php esc_html_e( 'Exclude entire pages with page:/xyz/ syntax.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<?php esc_html_e( 'Critical CSS', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/98-finding-critical-css', '5fa2e2f64cedfd0016109a64' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<p>
+								<?php esc_html_e( 'Use Critical CSS to prevent a FOUC (Flash of Unstyled Content) due to deferred/optimized CSS loading.', 'swis-performance' ); ?>
+		<?php if ( false && ! $this->get_option( 'critical_css_key' ) ) : ?>
+								<br>
+								<?php
+								printf(
+									/* translators: %s: tools */
+									esc_html__( 'We recommend the CriticalCSS.com API for optimal results, but there are several %s available to manually generate Critical CSS.', 'swis-performance' ),
+									"<a href='https://docs.ewww.io/article/98-finding-critical-css' target='_blank'>" . esc_html__( 'free tools', 'swis-performance' ) . '</a>'
+								);
+								?>
+		<?php endif; ?>
+							</p>
+		<?php if ( $this->is_jetpack_boost_option_enabled( 'critical-css' ) ) : ?>
+							<p class='description'>
+								<?php esc_html_e( 'Disable the Critical CSS option in Jetpack Boost if you wish to use SWIS Performance for Critical CSS instead.', 'swis-performance' ); ?>
+							</p>
+		<?php endif; ?>
+		<?php if ( ! $this->get_option( 'critical_css_key' ) && ! \get_option( 'swis_license' ) ) : ?>
+							<p class='description'>
+								<?php
+								printf(
+									/* translators: %s: license key (linked) */
+									esc_html__( 'Activate your %s in the sidebar to automatically generate and deliver page-specific critical CSS.', 'swis-performance' ),
+									"<a href='https://ewww.io/file-downloads/' target='_blank'>" . esc_html__( 'license key', 'swis-performance' ) . '</a>'
+								);
+								?>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+		<?php if ( ! $this->is_jetpack_boost_option_enabled( 'critical-css' ) ) : ?>
+			<?php if ( $this->get_option( 'critical_css_key' ) ) : ?>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<strong><label for='swis_critical_css_key'><?php esc_html_e( 'CriticalCSS.com API Key', 'swis-performance' ); ?></label></strong>
+							<br>
+							<input type='<?php echo ! empty( $this->get_option( 'critical_css_key' ) ) ? 'password' : 'text'; ?>' id='swis_critical_css_key' name='swis_performance[critical_css_key]' size='40' value='<?php echo esc_attr( $this->get_option( 'critical_css_key' ) ); ?>' />
+							<p class='description'>
+								<?php
+								printf(
+									/* translators: %s: CriticalCSS.com (link) */
+									esc_html__( 'Enter your %s API key to automatically generate and deliver page-specific critical CSS.', 'swis-performance' ),
+									"<a href='https://criticalcss.com/account/api-keys?aff=11590&c=5TUd6lbe' target='_blank'>" . esc_html__( 'CriticalCSS.com', 'swis-performance' ) . '</a>'
+								);
+								?>
+				<?php if ( false && ! $this->get_option( 'critical_css_key' ) ) : ?>
+								<br>
+								<a href='https://criticalcss.com?aff=11590&c=5TUd6lbe' target='_blank'>
+									<?php esc_html_e( 'SWIS Performance users get an exclusive 10% lifetime discount at CriticalCSS.com.', 'swis-performance' ); ?>
+								</a>
+				<?php endif; ?>
+							</p>
+						</div>
+					</div>
+			<?php endif; ?>
+					<div class='swis-settings-row'/>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_critical_css_auto_refresh' name='swis_performance[critical_css_auto_refresh]' value='true' <?php checked( $this->get_option( 'critical_css_auto_refresh' ) ); ?> />
+							<label for='swis_critical_css_auto_refresh'><strong><?php esc_html_e( 'Auto Refresh', 'swis-performance' ); ?></strong></label>
+							<p class='description'>
+								<?php esc_html_e( 'Automatically regenerate Critical CSS when a page is modified.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<strong><label for='swis_critical_css'><?php \esc_html_e( 'Fallback CSS', 'swis-performance' ); ?></label></strong>
+							<br>
+							<textarea id='swis_critical_css' name='swis_performance[critical_css]' rows='6'><?php echo \wp_kses( $this->get_option( 'critical_css' ), 'strip' ); ?></textarea>
+							<p class='description'>
+								<?php \esc_html_e( 'The fallback CSS will be used for any page where the Critical CSS API cannot generate CSS, or in case an API key is not provided.', 'swis-performance' ); ?><br>
+							</p>
+						</div>
+					</div>
+		<?php endif; ?>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_minify_css'><?php \esc_html_e( 'Minify CSS', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/105-minify-css-js', '60ca8dbb8556b07a28846d7e' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
+							<p class='description'><?php \esc_html_e( 'CSS resources are minified automatically by Easy IO.', 'swis-performance' ); ?></p>
+							<input style='display: none;' type='checkbox' id='swis_minify_css' name='swis_performance[minify_css]' value='true' <?php checked( $this->get_option( 'minify_css' ) ); ?> />
+		<?php elseif ( $this->is_jetpack_boost_option_enabled( 'minify-css' ) ) : ?>
+							<p class='description'><?php esc_html_e( 'CSS resources are already minified by Jetpack Boost.', 'swis-performance' ); ?></p>
+							<input style='display: none;' type='checkbox' id='swis_minify_css' name='swis_performance[minify_css]' value='true' <?php checked( $this->get_option( 'minify_css' ) ); ?> />
+		<?php else : ?>
+							<input type='checkbox' id='swis_minify_css' name='swis_performance[minify_css]' value='true' <?php checked( $this->get_option( 'minify_css' ) ); ?> />
+							<?php \esc_html_e( 'Make your stylesheets as small as possible by removing whitespace, comments, etc.', 'swis-performance' ); ?>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_minify_css_exclude_container"<?php echo $this->get_option( 'minify_css' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_minify_css_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_minify_css_exclude' name='swis_performance[minify_css_exclude]' rows='3' placeholder='<?php echo "builder.css \nthemes/nice-theme/ \npage:checkout"; ?>'><?php echo esc_html( $minify_css_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the CSS files you wish to exclude.', 'swis-performance' ); ?>
+								<?php esc_html_e( 'Exclude entire pages with page:/xyz/ syntax.', 'swis-performance' ); ?>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_defer_js'><?php esc_html_e( 'Optimize JS Loading', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/104-optimize-css-js-loading', '60ca8a7800fd0d7c253f6f7b' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+		<?php if ( $this->is_jetpack_boost_option_enabled( 'render-blocking-js' ) ) : ?>
+							<p class='description'>
+								<?php esc_html_e( 'JS resources are already deferred by Jetpack Boost.', 'swis-performance' ); ?>
+							</p>
+		<?php else : ?>
+							<input type='checkbox' id='swis_defer_js' name='swis_performance[defer_js]' value='true' <?php checked( $this->get_option( 'defer_js' ) ); ?> />
+							<?php esc_html_e( 'Defer scripts to prevent them from render-blocking and slowing down your pages.', 'swis-performance' ); ?>
+							<p class='description'>
+								<?php esc_html_e( 'Use the front-end SWIS menu to manage JS defer and delay on each page.', 'swis-performance' ); ?>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_defer_js_exclude_container"<?php echo $this->get_option( 'defer_js' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_defer_js_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_defer_js_exclude' name='swis_performance[defer_js_exclude]' rows='3' placeholder='<?php echo "super-slider.min.js \nplugins/nice-plugin/ \npage:checkout"; ?>'><?php echo esc_html( $defer_js_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the JS files you wish to exclude.', 'swis-performance' ); ?>
+								<?php esc_html_e( 'Exclude entire pages with page:/xyz/ syntax.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_minify_js'><?php esc_html_e( 'Minify JS', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/105-minify-css-js', '60ca8dbb8556b07a28846d7e' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
+							<p class='description'><?php esc_html_e( 'JS resources are minified automatically by Easy IO.', 'swis-performance' ); ?></p>
+							<input style='display:none' type='checkbox' id='swis_minify_js' name='swis_performance[minify_js]' value='true' <?php checked( $this->get_option( 'minify_js' ) ); ?> />
+		<?php elseif ( $this->is_jetpack_boost_option_enabled( 'minify-js' ) ) : ?>
+							<p class='description'><?php esc_html_e( 'JS resources are already minified by Jetpack Boost.', 'swis-performance' ); ?></p>
+							<input style='display:none' type='checkbox' id='swis_minify_js' name='swis_performance[minify_js]' value='true' <?php checked( $this->get_option( 'minify_js' ) ); ?> />
+		<?php else : ?>
+							<input type='checkbox' id='swis_minify_js' name='swis_performance[minify_js]' value='true' <?php checked( $this->get_option( 'minify_js' ) ); ?> />
+							<?php esc_html_e( 'Make your scripts as small as possible by removing whitespace, comments, etc.', 'swis-performance' ); ?>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_minify_js_exclude_container"<?php echo $this->get_option( 'minify_js' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_minify_js_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_minify_js_exclude' name='swis_performance[minify_js_exclude]' rows='3' placeholder='<?php echo "checkout.min.js \nthemes/nice-theme/ \npage:my-account"; ?>'><?php echo esc_html( $minify_js_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the JS files you wish to exclude.', 'swis-performance' ); ?>
+								<?php esc_html_e( 'Exclude entire pages with page:/xyz/ syntax.', 'swis-performance' ); ?>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_optimize_fonts'><?php esc_html_e( 'Optimize Google Fonts', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/106-optimize-google-fonts', '60ca973b05ff892e6bc281e3' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_optimize_fonts' name='swis_performance[optimize_fonts]' value='true' <?php checked( $this->get_option( 'optimize_fonts' ) ); ?> />
+							<?php esc_html_e( 'Speed up the loading of Google Fonts. Inlines the font CSS and adds a preconnect directive for supported browsers.', 'swis-performance' ); ?>
+							<p class='description'>
+								<?php esc_html_e( 'After enabling this option, loading any of your pages while logged in with admin permissions will allow SWIS to auto-detect your Google Fonts.', 'swis-performance' ); ?>
+							</p>
+		<?php if ( $this->get_option( 'crossorigin_fonts' ) ) : ?>
+							<input type='hidden' id='swis_crossorigin_fonts' name='swis_performance[crossorigin_fonts]' value='true' />
+		<?php endif; ?>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_optimize_fonts_css_container"<?php echo $this->get_option( 'optimize_fonts' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_optimize_fonts_css'><strong><?php esc_html_e( 'Google Fonts CSS', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_optimize_fonts_css' name='swis_performance[optimize_fonts_css]' rows='6'><?php echo wp_kses( $this->get_option( 'optimize_fonts_css' ), 'strip' ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'This field should be auto-populated when you load any page while logged in with admin permissions. You may edit the auto-detected CSS, or specify the font CSS manually.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_optimize_fonts_list_container"<?php echo $this->get_option( 'optimize_fonts' ) ? '' : ' style="display:none"'; ?>>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_optimize_fonts_list'><strong><?php esc_html_e( 'Remove Font CSS', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_optimize_fonts_list' name='swis_performance[optimize_fonts_list]' rows='3'><?php echo esc_html( $fonts_list ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'Once the Google Fonts CSS is inlined, SWIS will suppress external CSS files for Google Fonts.', 'swis-performance' ); ?><br>
+								<?php esc_html_e( 'This field should also be auto-populated, but you may edit the stylesheet handles manually if necessary, one per line.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_self_host_fonts'><?php esc_html_e( 'Self-host Google Fonts', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/106-optimize-google-fonts', '60ca973b05ff892e6bc281e3' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+		<?php if ( $this->is_easyio_active() && ( \get_option( 'exactdn_all_the_things' ) || \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
+							<p class='description'><?php esc_html_e( 'Google Font resources are delivered automatically by Easy IO with enhanced user privacy.', 'swis-performance' ); ?></p>
+							<input style='display:none;' type='checkbox' id='swis_self_host_fonts' name='swis_performance[self_host_fonts]' value='true' <?php checked( $this->get_option( 'self_host_fonts' ) ); ?> />
+		<?php else : ?>
+							<input type='checkbox' id='swis_self_host_fonts' name='swis_performance[self_host_fonts]' value='true' <?php checked( $this->get_option( 'self_host_fonts' ) ); ?> />
+							<?php esc_html_e( 'Improve user privacy of using Google Fonts and eliminate extra HTTP/DNS requests by downloading font resources and delivering them locally.', 'swis-performance' ); ?>
+							<p class='description'>
+			<?php if ( $this->get_option( 'optimize_fonts' ) && ! $this->get_option( 'self_host_fonts' ) && $this->get_option( 'optimize_fonts_css' ) ) : ?>
+								<?php esc_html_e( 'To self-host Google Fonts, you will need to remove the previously-detected Font CSS above to allow SWIS to download your Google Fonts.', 'swis-performance' ); ?>
+			<?php elseif ( $this->get_option( 'optimize_fonts' ) && $this->get_option( 'self_host_fonts' ) && $this->get_option( 'optimize_fonts_css' ) ) : ?>
+								<?php esc_html_e( 'To download or update self-hosted Google Fonts, remove the previously-detected Font CSS above.', 'swis-performance' ); ?>
+			<?php elseif ( ! $this->get_option( 'optimize_fonts' ) ) : ?>
+								<?php esc_html_e( 'To self-host Google Fonts, you must also enable Optimize Google Fonts.', 'swis-performance' ); ?>
+			<?php endif; ?>
+							</p>
+		<?php endif; ?>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_preload_assets'><?php esc_html_e( 'Preload Assets', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/135-preload-assets', '6890d2f129b904474100a6cd' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<textarea id='swis_preload_assets' name='swis_performance[preload_assets]' rows='6'><?php echo esc_html( $preload_assets ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'Enter URLs of fonts, JS, CSS or images that should be preloaded before anything else. You may use the registered handle for JS/CSS, one per line.', 'swis-performance' ); ?><br>
+								<?php esc_html_e( 'Theme and page builder CSS will automatically be preloaded when Optimize CSS Loading is enabled.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_pre_hint_domains'><?php esc_html_e( 'Pre* Hint Domains', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/108-pre-hint-domains', '60cabdd405ff892e6bc28224' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<textarea id='swis_pre_hint_domains' name='swis_performance[pre_hint_domains]' rows='3'><?php echo esc_html( $pre_hint_domains ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'SWIS will automatically add DNS Prefetch and Preconnect hints to speed up third-party resources, but you may provide additional domains if any are missing.', 'swis-performance' ); ?><br>
+							</p>
+						</div>
+					</div>
+				</div>
+		<?php if ( version_compare( $wp_version, '6.8' ) >= 0 ) : ?>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<?php esc_html_e( 'Speculative Loading', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/136-speculative-loading', '6891ff1469727762e276c8ed' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_speculation_mode'><strong><?php esc_html_e( 'Mode', 'swis-performance' ); ?></strong></label><br>
+							<select id='swis_speculation_mode' name='swis_performance[speculation_mode]'>
+								<option value='auto' <?php selected( $this->get_option( 'speculation_mode' ), 'auto' ); ?>><?php esc_html_e( 'Auto', 'swis-performance' ); ?></option>
+								<option value='prefetch' <?php selected( $this->get_option( 'speculation_mode' ), 'prefetch' ); ?>><?php esc_html_e( 'Prefetch', 'swis-performance' ); ?></option>
+								<option value='prerender' <?php selected( $this->get_option( 'speculation_mode' ), 'prerender' ); ?>><?php esc_html_e( 'Prerender', 'swis-performance' ); ?></option>
+								<option value='off' <?php selected( $this->get_option( 'speculation_mode' ), 'off' ); ?>><?php esc_html_e( 'Disabled', 'swis-performance' ); ?></option>
+							</select>
+							<p class='description'>
+								<?php esc_html_e( 'Auto sets the mode to the current WordPress default, currently equivalent to Prefetch.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_speculation_level'><strong><?php esc_html_e( 'Eagerness', 'swis-performance' ); ?></strong></label><br>
+							<select id='swis_speculation_level' name='swis_performance[speculation_level]'>
+								<option value='auto' <?php selected( $this->get_option( 'speculation_level' ), 'auto' ); ?>><?php esc_html_e( 'Auto', 'swis-performance' ); ?></option>
+								<option value='conservative' <?php selected( $this->get_option( 'speculation_level' ), 'conservative' ); ?>><?php esc_html_e( 'Conservative', 'swis-performance' ); ?></option>
+								<option value='moderate' <?php selected( $this->get_option( 'speculation_level' ), 'moderate' ); ?>><?php esc_html_e( 'Moderate', 'swis-performance' ); ?></option>
+								<option value='eager' <?php selected( $this->get_option( 'speculation_level' ), 'eager' ); ?>><?php esc_html_e( 'Eager', 'swis-performance' ); ?></option>
+							</select>
+							<p class='description'>
+								<?php esc_html_e( 'Auto sets the mode to the current WordPress default, currently equivalent to Conservative.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_speculation_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_speculation_exclude' name='swis_performance[speculation_exclude]' rows='3' placeholder='<?php echo "/cart/ \n/personalized-area/*"; ?>'><?php echo esc_html( $speculation_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'Prevent URLs from being prefetched by the browser. Use relative paths, one exclusion per line.', 'swis-performance' ); ?>
+								<a href='https://urlpattern.spec.whatwg.org/'>
+									<?php esc_html_e( 'Wildcards are permitted per the URL Pattern web specification.', 'swis-performance' ); ?>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+		<?php else : ?>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<?php \esc_html_e( 'Speculative Loading', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/136-speculative-loading', '6891ff1469727762e276c8ed' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<p class='description'><?php \esc_html_e( 'Requires WordPress 6.8+.', 'swis-performance' ); ?></p>
+						</div>
+					</div>
+				</div>
+		<?php endif; ?>
+		<?php if ( ! $this->is_easyio_active() || ( ! \get_option( 'exactdn_all_the_things' ) && ! \get_site_option( 'exactdn_all_the_things' ) ) ) : ?>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_cdn_domain'><?php esc_html_e( 'CDN Domain', 'swis-performance' ); ?></label>
+							<?php $this->help_link( 'https://docs.ewww.io/article/107-cdn-domain-rewriting', '60caabcd9e87cb3d01244800' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='text' id='swis_cdn_domain' name='swis_performance[cdn_domain]' size='40' value='<?php echo esc_attr( $this->get_option( 'cdn_domain' ) ); ?>' />
+							<p class='description'>
+								<?php esc_html_e( 'Enter a CDN domain to deliver all static resources from speedy servers: JS, CSS, images, etc.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+					<div class='swis-settings-row' id="swis_cdn_exclude_container">
+						<div class='swis-setting-header'>&nbsp;</div>
+						<div class='swis-setting-detail'>
+							<label for='swis_cdn_exclude'><strong><?php esc_html_e( 'Exclusions', 'swis-performance' ); ?></strong></label><br>
+							<textarea id='swis_cdn_exclude' name='swis_performance[cdn_exclude]' rows='3' placeholder='<?php echo "captcha \n.m4v \npage:edit-profile"; ?>'><?php echo esc_html( $cdn_exclude ); ?></textarea>
+							<p class='description'>
+								<?php esc_html_e( 'One exclusion per line, no wildcards (*) needed. Use any string that matches the files you wish to exclude.', 'swis-performance' ); ?>
+								<?php esc_html_e( 'Exclude entire pages with page:/xyz/ syntax.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+				</div>
+		<?php endif; ?>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<?php esc_html_e( 'Eliminate Unused CSS/JS (Slim)', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/97-disabling-unused-css-and-js', '5fa2c6604cedfd00165ad105' ); ?>
+						</div>
+						<div class='swis-setting-detail'>
+							<p><?php esc_html_e( 'Enter rules to unload any JS/CSS files you choose, on any page(s) you choose.', 'swis-performance' ); ?></p>
+							<div id="swis-slim-rules">
+								<?php swis()->slim->display_backend_rules(); ?>
+							</div>
+							<div id="swis-slim-add-rule" class="swis-slim-rule">
+								<div class="swis-slim-header"><?php esc_html_e( 'Add New Rule', 'swis-performance' ); ?></div>
+								<div class="swis-slim-row">
+									<div class="swis-slim-control-group">
+										<input type="text" id="swis_slim_new_handle" name="swis_slim_new_handle" />
+										<strong><label for='swis_slim_new_handle'><?php esc_html_e( 'JS/CSS Handle', 'swis-performance' ); ?></label></strong>
+									</div>
+									<div class="swis-slim-row">
+										<input type="radio" id="swis_slim_new_mode_include" class="swis-slim-new-radio" name="swis_slim_new_mode" value="include" />
+										<strong><label for='swis_slim_new_mode_include'><?php esc_html_e( 'disable everywhere except:', 'swis-performance' ); ?></label></strong>
+									</div>
+									<div class="swis-slim-row">
+										<input type="radio" id="swis_slim_new_mode_exclude" class="swis-slim-new-radio" name="swis_slim_new_mode" value="exclude" />
+										<strong><label for='swis_slim_new_mode_exclude'><?php esc_html_e( 'disable on:', 'swis-performance' ); ?></label></strong>
+									</div>
+									<div class="swis-slim-row" style="display:none">
+										<input type="radio" id="swis_slim_new_mode_all" class="swis-slim-new-radio" name="swis_slim_new_mode" value="all" checked />
+										<strong><label for='swis_slim_new_mode_all'><?php esc_html_e( 'disable everywhere', 'swis-performance' ); ?></label></strong>
+									</div>
+								</div>
+								<div class="swis-slim-error-message"></div>
+								<div class="swis-slim-row">
+									<input type="text" id="swis_slim_new_exclusions" name="swis-slim-new-exclusions" placeholder="<?php esc_html_e( 'Leave blank to disable everywhere', 'swis-performance' ); ?>"/>
+									<button type="button" class="button-primary swis-slim-rule-add"><?php esc_html_e( 'Add Rule', 'swis-performance' ); ?></button>
+								</div>
+								<p class="description">
+									<label for='swis_slim_new_exclusions'>
+										<?php esc_html_e( 'Comma-separated list of pages, Regex (must use *), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+									</label>
+									<?php $this->help_link( 'https://docs.ewww.io/article/134-customize-slim-rules', '67f6a6b6cde52c31fd6d518a' ); ?>
+								</p>
+							</div>
+							<p>
+								*<?php esc_html_e( 'Visit any page while logged in and use the SWIS menu in the WP Admin Bar to disable, defer or delay individual JS/CSS resources.', 'swis-performance' ); ?>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class='swis-settings-section'>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_test_mode'><?php esc_html_e( 'Test Mode', 'swis-performance' ); ?></label>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_test_mode' name='swis_performance[test_mode]' value='true' <?php checked( $this->get_option( 'test_mode' ) ); ?> />
+							<?php esc_html_e( 'Limits JS/CSS optimizations to logged-in admins so you can change your SWIS settings and Slim rules without impacting visitors.', 'swis-performance' ); ?>
+						</div>
+					</div>
+					<div class='swis-settings-row'>
+						<div class='swis-setting-header'>
+							<label for='swis_debug'><?php esc_html_e( 'Debugging', 'swis-performance' ); ?></label>
+						</div>
+						<div class='swis-setting-detail'>
+							<input type='checkbox' id='swis_debug' name='swis_performance[debug]' value='true' <?php checked( $this->get_option( 'debug' ) ); ?> />
+							<?php esc_html_e( 'Use this to log information for troubleshooting problems you might encounter.', 'swis-performance' ); ?>
+							<p class='description'><a href='#TB_inline?&width=820&height=450&inlineId=swis-debug' class='thickbox'><?php esc_html_e( 'System Information', 'swis-performance' ); ?></a></p>
+						</div>
+					</div>
+				</div>
+			</div>
 		<?php if ( ! empty( self::$debug ) ) : ?>
 			<div id='swis-debug'>
 				<p class="debug-actions">
@@ -1232,11 +1377,16 @@ final class Settings extends Base {
 			<h2><?php esc_html_e( 'Critical CSS', 'swis-performance' ); ?></h2>
 			<?php $this->generate_css_status(); ?>
 			<hr>
-			<?php $this->display_asset_purge(); ?>
-		<?php elseif ( $this->get_option( 'minify_js' ) || $this->get_option( 'minify_css' ) ) : ?>
+			<?php $this->display_criticalcss_purge(); ?>
+		<?php endif; ?>
+		<?php if ( $this->get_option( 'minify_js' ) || $this->get_option( 'minify_css' ) ) : ?>
 			<hr>
 			<?php $this->display_asset_purge(); ?>
+		<?php elseif ( apply_filters( 'eio_lazify_external_css', false ) ) : ?>
+			<hr>
+			<?php $this->display_lazycss_purge(); ?>
 		<?php endif; ?>
+		<div id='swis-transient-status'></div>
 		</div><!-- end #swis-right -->
 	</div><!-- end #swis-flex-wrap -->
 </div>
@@ -1371,7 +1521,7 @@ final class Settings extends Base {
 	 */
 	public function background_mode_status() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		if ( ! $this->get_option( 'cache_preload' ) ) {
+		if ( ! $this->get_option( 'cache_preload' ) && ! $this->get_option( 'defer_css' ) ) {
 			return;
 		}
 		global $swis_upgrading;
@@ -1693,6 +1843,33 @@ final class Settings extends Base {
 	}
 
 	/**
+	 * Display Critical CSS purge button.
+	 */
+	public function display_criticalcss_purge() {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		// Show the clear cache button.
+		$clear_cache_url = wp_nonce_url(
+			add_query_arg(
+				array(
+					'_cache'  => 'swis-cache',
+					'_action' => 'swis_ccss_cache_clear',
+				)
+			),
+			'swis_cache_clear_nonce'
+		);
+		?>
+		<p id="swis-clear-criticalcss-cache-container">
+			<a class="button button-secondary" href="<?php echo esc_url( $clear_cache_url ); ?>">
+				<?php esc_html_e( 'Clear Critical CSS', 'swis-performance' ); ?>
+			</a>
+		</p>
+		<p class="description">
+			*<?php esc_html_e( 'Removes all Critical CSS files.', 'swis-performance' ); ?>
+		</p>
+		<?php
+	}
+
+	/**
 	 * Display asset purge button.
 	 */
 	public function display_asset_purge() {
@@ -1714,9 +1891,148 @@ final class Settings extends Base {
 			</a>
 		</p>
 		<p class="description">
-			*<?php esc_html_e( 'Removes minified JS/CSS and all critical CSS files.', 'swis-performance' ); ?>
+			*<?php esc_html_e( 'Removes minified JS/CSS files.', 'swis-performance' ); ?>
 		</p>
 		<?php
+	}
+
+	/**
+	 * Display purge button for lazified CSS.
+	 */
+	public function display_lazycss_purge() {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		// Show the clear cache button.
+		$clear_cache_url = wp_nonce_url(
+			add_query_arg(
+				array(
+					'_cache'  => 'swis-cache',
+					'_action' => 'swis_asset_cache_clear',
+				)
+			),
+			'swis_cache_clear_nonce'
+		);
+		?>
+		<p id="swis-clear-asset-cache-container">
+			<a class="button button-secondary" href="<?php echo esc_url( $clear_cache_url ); ?>">
+				<?php esc_html_e( 'Clear CSS Cache', 'swis-performance' ); ?>
+			</a>
+		</p>
+		<?php
+	}
+
+	/**
+	 * Return the transient status output via AJAX.
+	 */
+	public function transient_status_ajax() {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		$permissions = apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( ! current_user_can( $permissions ) || ! check_ajax_referer( 'swis-performance-settings', '_wpnonce', false ) ) {
+			die( wp_json_encode( array( 'error' => esc_html__( 'Access token has expired, please reload the page.', 'swis-performance' ) ) ) );
+		}
+		ob_start();
+		$this->transient_status();
+		$transient_html = trim( ob_get_clean() );
+		die( wp_json_encode( array( 'html' => $transient_html ) ) );
+	}
+
+	/**
+	 * Display the transient info/cleanup section.
+	 *
+	 * @global object $wpdb
+	 */
+	public function transient_status() {
+		global $wpdb;
+		$transients      = $wpdb->get_results( "SELECT * FROM {$wpdb->options} WHERE option_name LIKE '_transient_%'", ARRAY_A );
+		$transient_count = 0;
+		if ( $this->is_iterable( $transients ) ) {
+			foreach ( $transients as $transient ) {
+				if ( ! str_contains( $transient['option_name'], '_transient_timeout_' ) ) {
+					++$transient_count;
+				}
+			}
+		}
+		$site_transients = $wpdb->get_results( "SELECT * FROM {$wpdb->options} WHERE option_name LIKE '_site_transient_%'", ARRAY_A );
+		if ( $this->is_iterable( $site_transients ) ) {
+			foreach ( $site_transients as $site_transient ) {
+				if ( ! str_contains( $site_transient['option_name'], '_transient_timeout_' ) ) {
+					++$transient_count;
+				}
+			}
+		}
+		if ( ! $transient_count ) {
+			if ( ! wp_using_ext_object_cache() ) {
+				echo '<hr><p>' . esc_html__( 'No transients found.', 'swis-performance' ) . '</p>';
+			}
+			return;
+		}
+		/* translators: %d: number of transients */
+		echo '<hr><p>' . esc_html( sprintf( _n( '%d transient in database.', '%d transients in database.', $transient_count, 'swis-performance' ), $transient_count ) ) . '</p>';
+		// Build the clear transients links.
+		$clear_all_transients_url     = wp_nonce_url(
+			add_query_arg(
+				array(
+					'action' => 'swis_clear_all_transients',
+				),
+				admin_url( 'admin.php' )
+			),
+			'swis_clear_transients_nonce'
+		);
+		$clear_expired_transients_url = wp_nonce_url(
+			add_query_arg(
+				array(
+					'action' => 'swis_clear_expired_transients',
+				),
+				admin_url( 'admin.php' )
+			),
+			'swis_clear_transients_nonce'
+		);
+		?>
+		<p id="swis-clear-expired-transients-container">
+			<a class="button button-secondary" href="<?php echo esc_url( $clear_expired_transients_url ); ?>">
+				<?php esc_html_e( 'Clear Expired Transients', 'swis-performance' ); ?>
+			</a>
+		</p>
+		<p id="swis-clear-all-transients-container">
+			<a class="button button-secondary" href="<?php echo esc_url( $clear_all_transients_url ); ?>">
+				<?php esc_html_e( 'Clear All Transients', 'swis-performance' ); ?>
+			</a>
+		</p>
+		<?php
+	}
+
+	/**
+	 * Process a request to clear the Critical CSS cache.
+	 */
+	public function process_criticalcss_cache_request() {
+		// Check if this is a cache clear request.
+		if (
+			empty( $_GET['_cache'] ) || // The _cache arg is empty.
+			empty( $_GET['_action'] ) || // The _action arg is empty.
+			'swis-cache' !== $_GET['_cache'] || // The _cache arg isn't what it ought to be.
+			'swis_criticalcss_cache_clear' !== $_GET['_action'] // The _action param isn't one we recognize.
+		) {
+			return;
+		}
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+
+		// Verify nonce.
+		if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'swis_cache_clear_nonce' ) ) {
+			return;
+		}
+
+		// Check user has permissions to clear cache.
+		if ( ! $this->user_can_clear_cache() ) {
+			return;
+		}
+
+		swis()->critical_css->purge_cache();
+
+		if ( is_admin() ) {
+			set_transient( $this->get_cache_cleared_transient_name(), 1 );
+		}
+
+		wp_safe_redirect( remove_query_arg( array( '_cache', '_action', '_wpnonce' ) ) );
+		exit;
 	}
 
 	/**
@@ -1744,10 +2060,11 @@ final class Settings extends Base {
 			return;
 		}
 
-		swis()->critical_css->purge_cache();
+		swis()->lazify_css->purge_cache();
 		swis()->minify_css->purge_cache();
 		swis()->minify_js->purge_cache();
 
+		$this->set_option( 'asset_cache_iterator', $this->get_option( 'asset_cache_iterator' ) + 1 );
 		if ( is_admin() ) {
 			set_transient( $this->get_cache_cleared_transient_name(), 1 );
 		}
@@ -1799,7 +2116,7 @@ final class Settings extends Base {
 				$this->debug_message( "response code: $http_code" );
 			} else {
 				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-				if ( false === $license_data->success ) {
+				if ( false === $license_data->success && ! empty( $license_data->error ) ) {
 					switch ( $license_data->error ) {
 						case 'expired':
 							$message = sprintf(
@@ -1838,6 +2155,36 @@ final class Settings extends Base {
 							break;
 					}
 					$this->debug_message( 'license error code: ' . $license_data->error );
+				} elseif ( false === $license_data->success && ! empty( $license_data->license ) ) {
+					$this->debug_message( 'license check error status: ' . $license_data->license );
+					switch ( $license_data->license ) {
+						case 'expired':
+							$message = sprintf(
+								/* translators: %s: expiration date */
+								__( 'Your license key expired on %s.', 'swis-performance' ),
+								wp_date( get_option( 'date_format' ), strtotime( $license_data->expires ) )
+							);
+							break;
+
+						case 'disabled':
+						case 'revoked':
+							$message = __( 'Your license key has been disabled.', 'swis-performance' );
+							break;
+						case 'invalid':
+						case 'item_name_mismatch':
+						case 'key_mismatch':
+							$message = __( 'This appears to be an invalid license key for SWIS Performance.', 'swis-performance' );
+							break;
+
+						default:
+							$message = __( 'An error occurred, please contact support.', 'swis-performance' );
+							break;
+					}
+				} elseif ( false === $license_data->success ) {
+					$message = __( 'An error occurred, please contact support.', 'swis-performance' );
+					if ( $this->function_exists( 'print_r' ) ) {
+						$this->debug_message( 'license response: ' . print_r( $response, true ) );
+					}
 				}
 			}
 
@@ -1907,6 +2254,72 @@ final class Settings extends Base {
 		delete_option( 'swis_license_status' );
 		$base_url = admin_url( 'options-general.php?page=swis-performance-options' );
 		wp_safe_redirect( $base_url );
+		exit;
+	}
+
+	/**
+	 * Process a request to clear transients.
+	 *
+	 * @global object $wpdb
+	 */
+	public function clear_transients() {
+		$permissions = apply_filters( 'swis_performance_admin_permissions', 'manage_options' );
+		if ( ! current_user_can( $permissions ) || ! check_admin_referer( 'swis_clear_transients_nonce' ) ) {
+			wp_die( esc_html__( 'Access denied', 'swis-performance' ) );
+		}
+
+		// Check if this is a transient clear request.
+		if (
+			empty( $_GET['action'] ) ||
+			( 'swis_clear_all_transients' !== $_GET['action'] && 'swis_clear_expired_transients' !== $_GET['action'] )
+		) {
+			wp_die( esc_html__( 'Invalid request', 'swis-performance' ) );
+		}
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+
+		global $wpdb;
+		$transients_cleaned = 0;
+		if ( 'swis_clear_all_transients' === $_GET['action'] ) {
+			$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_%'" );
+			$transients_cleaned += $wpdb->rows_affected;
+			$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_site_transient_%'" );
+			$transients_cleaned += $wpdb->rows_affected;
+		} else {
+			$now = time(); // Use the start time for the purge, instead of checking the current time for each transient.
+
+			$transients = $wpdb->get_results( "SELECT * FROM {$wpdb->options} WHERE option_name LIKE '_transient_%'", ARRAY_A );
+			if ( $this->is_iterable( $transients ) ) {
+				foreach ( $transients as $transient ) {
+					if ( str_contains( $transient['option_name'], '_transient_timeout_' ) ) {
+						$expiration = (int) $transient['option_value'];
+						if ( $expiration < $now ) {
+							$transient_name = str_replace( '_transient_timeout_', '_transient_', $transient['option_name'] );
+							$wpdb->delete( $wpdb->options, array( 'option_name' => $transient_name ) );
+							$wpdb->delete( $wpdb->options, array( 'option_name' => $transient['option_name'] ) );
+							++$transients_cleaned;
+						}
+					}
+				}
+			}
+			$site_transients = $wpdb->get_results( "SELECT * FROM {$wpdb->options} WHERE option_name LIKE '_site_transient_%'", ARRAY_A );
+			if ( $this->is_iterable( $site_transients ) ) {
+				foreach ( $site_transients as $site_transient ) {
+					if ( str_contains( $site_transient['option_name'], '_transient_timeout_' ) ) {
+						$expiration = (int) $site_transient['option_value'];
+						if ( $expiration < $now ) {
+							$transient_name = str_replace( '_transient_timeout_', '_transient_', $site_transient['option_name'] );
+							$wpdb->delete( $wpdb->options, array( 'option_name' => $transient_name ) );
+							$wpdb->delete( $wpdb->options, array( 'option_name' => $site_transient['option_name'] ) );
+							++$transients_cleaned;
+						}
+					}
+				}
+			}
+		}
+
+		$this->debug_message( "transients cleaned: $transients_cleaned" );
+		$sendback = wp_get_referer();
+		wp_safe_redirect( $sendback );
 		exit;
 	}
 

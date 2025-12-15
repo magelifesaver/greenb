@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA – WooGC Attribute & Brand Sync Fix
+ * Plugin Name: AAA – WooGC Attribute & Brand Sync Fix (XHV98-ADMIN)
  * Description: Ensures attribute/brand terms map by slug during WP Global Cart product sync so values attach correctly on child sites.
  * Version: 1.1.0
  * Author: Webmaster Workflow

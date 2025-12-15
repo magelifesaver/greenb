@@ -634,7 +634,6 @@ class Premium_Title extends Widget_Base {
 			array(
 				'label'     => __( 'HTML Tag', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h2',
 				'options'   => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -645,6 +644,7 @@ class Premium_Title extends Widget_Base {
 					'div'  => 'div',
 					'span' => 'span',
 				),
+				'default'   => 'h2',
 				'separator' => 'before',
 			)
 		);

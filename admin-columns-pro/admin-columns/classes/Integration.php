@@ -3,38 +3,47 @@
 namespace AC;
 
 use AC\Type\Url;
-use AC\Type\Url\UtmTags;
 
 abstract class Integration
 {
 
-    private $slug;
+    private string $slug;
 
-    private $title;
+    private string $title;
 
-    private $logo;
+    private string $logo;
 
-    private $description;
+    private Url $url;
 
-    private $url;
+    private Url $plugin_link;
+
+    private string $description;
 
     public function __construct(
         string $slug,
         string $title,
         string $logo,
         string $description,
-        Url $url
+        ?Url $plugin_link = null,
+        ?Url $url = null
     ) {
+        if (null === $plugin_link) {
+            $plugin_link = new Url\PluginSearch($title);
+        }
+
+        if (null === $url) {
+            $url = new Url\UtmTags(new Url\Site(Url\Site::PAGE_PRICING), 'addon', $slug);
+        }
+
         $this->slug = $slug;
         $this->title = $title;
         $this->logo = $logo;
         $this->description = $description;
-        $this->url = new UtmTags($url, 'addon', $slug);
+        $this->plugin_link = $plugin_link;
+        $this->url = $url;
     }
 
     abstract public function is_plugin_active(): bool;
-
-    abstract public function show_placeholder(ListScreen $list_screen): bool;
 
     abstract public function show_notice(Screen $screen): bool;
 
@@ -58,9 +67,22 @@ abstract class Integration
         return $this->description;
     }
 
-    public function get_url(): Url
+    public function get_link(): string
     {
-        return $this->url;
+        return $this->url->get_url();
+    }
+
+    public function get_plugin_link(): string
+    {
+        return $this->plugin_link->get_url();
+    }
+
+    /**
+     * Determines when the placeholder column is shown for a particular list screen.
+     */
+    public function show_placeholder(TableScreen $table_screen): bool
+    {
+        return true;
     }
 
 }

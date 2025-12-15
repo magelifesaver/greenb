@@ -99,7 +99,6 @@ if ( ! class_exists( 'Premium_Templates_API' ) ) {
 
 			return $this->config['base'] . $this->config['path'] . $this->config['endpoints'][ $flag ];
 		}
-
 	}
 
 }

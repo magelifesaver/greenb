@@ -18,6 +18,7 @@ use Elementor\Repeater;
 use Elementor\Group_Control_Typography;
 use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Background;
 
 // PremiumAddons Classes.
 use PremiumAddons\Includes\Helper_Functions;
@@ -282,7 +283,7 @@ class Premium_Hscroll extends Widget_Base {
 		);
 
 		$temp_repeater->add_group_control(
-			PAPRO_Helper::get_bg_control_class()::get_type(),
+			Group_Control_Background::get_type(),
 			array(
 				'name'      => 'scroll_bg',
 				'types'     => array( 'classic' ),

@@ -1,20 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ACA\MetaBox;
 
 use AC;
 use AC\Registerable;
 use AC\Services;
+use AC\Setting\ContextFactory;
+use ACA\MetaBox\TableScreen\MenuGroupFactory;
 use ACP\Service\IntegrationStatus;
 
-class MetaBox implements Registerable
+final class MetaBox implements Registerable
 {
 
-    private $location;
+    private AC\Asset\Location\Absolute $location;
 
-    public function __construct(AC\Asset\Location\Absolute $location)
+    private AC\Vendor\DI\Container $container;
+
+    public function __construct(AC\Asset\Location\Absolute $location, AC\Vendor\DI\Container $container)
     {
         $this->location = $location;
+        $this->container = $container;
     }
 
     public function register(): void
@@ -22,6 +29,20 @@ class MetaBox implements Registerable
         if ( ! $this->is_metabox_active()) {
             return;
         }
+
+        $context_factory = $this->container->get(ContextFactory::class);
+
+        if ($context_factory instanceof AC\Setting\ContextFactory\Aggregate) {
+            $context_factory->add($this->container->get(Setting\ContextFieldFactory::class));
+            $context_factory->add($this->container->get(Setting\ContextRelationFactory::class));
+        }
+
+        AC\Admin\MenuGroupFactory\Aggregate::add(new MenuGroupFactory());
+
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\FieldFactory::class));
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\MetaBoxFactory::class));
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\PostTypeFactory::class));
+        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\RelationFactory::class));
 
         $this->create_services()->register();
     }
@@ -32,7 +53,7 @@ class MetaBox implements Registerable
             return true;
         }
 
-        // All in One loader needs MetaBox to be disabled, all logic is loaded in the `admin_init` hook
+        // All-in-one loader needs MetaBox to be disabled, all logic is loaded in the `admin_init` hook
         if (class_exists('MBAIO\Loader', false)) {
             return true;
         }
@@ -43,12 +64,9 @@ class MetaBox implements Registerable
     private function create_services(): Services
     {
         return new Services([
-            new Service\Columns(new ColumnFactory(), new RelationColumnFactory(), new RelationshipRepository()),
-            new Service\ColumnInstantiate(new RelationshipRepository()),
+            new Service\ColumnGroups($this->location),
             new Service\QuickAdd(),
-            new Service\ListScreens(),
             new Service\Scripts($this->location),
-            new Service\Storage(),
             new IntegrationStatus('ac-addon-metabox'),
         ]);
     }

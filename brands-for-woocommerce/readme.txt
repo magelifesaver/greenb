@@ -4,8 +4,8 @@ Contributors: dholovnia, berocket
 Donate link: https://berocket.com/?utm_source=wordpress_org&utm_medium=donate&utm_campaign=product_brand
 Tags: brands, manufacturer, supplier, product brand, brands for products, woocommerce brands, woocommerce manufacturer, woocommerce supplier, wc brands, wc product brands, wc showcase brands, brand page, widget, plugin, brands plugin, brands widget, brands slider, slider with brands, showcase brands, page for brands, brands page plugin, brands images display, berocket, berocket brands for woocommerce
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 3.8.6.3
+Tested up to: 6.9
+Stable tag: 3.8.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,10 @@ If none of the previous listed actions helps you to solve the problem, then, sub
 ---
 
 == Changelog ==
+
+= 3.8.6.4 =
+* Enhancement - Compatibility version: Wordpress 6.9
+* Fix - SQL vulnerability in shortcodes
 
 = 3.8.6.3 =
 * Enhancement - Compatibility version: WooCommerce 10.3

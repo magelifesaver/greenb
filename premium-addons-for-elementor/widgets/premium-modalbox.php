@@ -262,9 +262,9 @@ class Premium_Modalbox extends Widget_Base {
 		$this->add_control(
 			'show_again_exit',
 			array(
-				'label'       => apply_filters( 'pa_pro_label', __( 'Show Again on Page Exit (Pro)', 'premium-addons-for-elementor' ) ),
-				'type'        => Controls_Manager::SWITCHER,
-				'condition'   => array(
+				'label'     => apply_filters( 'pa_pro_label', __( 'Show Again on Page Exit (Pro)', 'premium-addons-for-elementor' ) ),
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => array(
 					'premium_modal_box_display_on!' => 'exit',
 				),
 			)
@@ -276,19 +276,19 @@ class Premium_Modalbox extends Widget_Base {
 				'raw'             => __( 'When you are logged in, the modal box will normally show on page load. To try this option, you need to be logged out. This option uses localstorage to show the modal box for the first time only.', 'premium-addons-for-elementor' ),
 				'type'            => Controls_Manager::RAW_HTML,
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
-				'conditions'       => [
+				'conditions'      => array(
 					'relation' => 'or',
-					'terms' => [
-						[
-							'name'     => 'premium_modal_box_display_on',
-							'value'    => 'exit',
-						],
-						[
-							'name'     => 'show_again_exit',
-							'value'    => 'yes',
-						],
-					],
-				]
+					'terms'    => array(
+						array(
+							'name'  => 'premium_modal_box_display_on',
+							'value' => 'exit',
+						),
+						array(
+							'name'  => 'show_again_exit',
+							'value' => 'yes',
+						),
+					),
+				),
 			)
 		);
 
@@ -1312,6 +1312,8 @@ class Premium_Modalbox extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 
@@ -2559,7 +2561,7 @@ class Premium_Modalbox extends Widget_Base {
 		}
 
 		$modal_settings = array(
-			'trigger' => $trigger,
+			'trigger'      => $trigger,
 			'show_on_exit' => 'yes' === $settings['show_again_exit'],
 		);
 

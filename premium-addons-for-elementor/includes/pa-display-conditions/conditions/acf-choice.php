@@ -9,7 +9,7 @@ namespace PremiumAddons\Includes\PA_Display_Conditions\Conditions;
 use Elementor\Controls_Manager;
 
 // PA Classes.
-use PremiumAddons\Includes\ACF_Helper;
+use PremiumAddons\Includes\Helpers\ACF_Helper;
 use PremiumAddons\Includes\Helper_Functions;
 use PremiumAddons\Includes\Controls\Premium_Acf_Selector;
 

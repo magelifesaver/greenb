@@ -6,9 +6,9 @@
 namespace PremiumAddons\Includes;
 
 use Elementor\Plugin;
-use Elementor\Utils;
 use PremiumAddons\Includes\Helper_Functions;
 use PremiumAddons\Admin\Includes\Admin_Helper;
+use PremiumAddons\Admin\Includes\Admin_Bar;
 
 require_once PREMIUM_ADDONS_PATH . 'widgets/dep/urlopen.php';
 
@@ -20,6 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * PA Assets Manager Class.
  */
 class Assets_Manager {
+
+	/**
+	 * Assets Key.
+	 */
+	const ASSETS_KEY = '_pa_widget_elements';
 
 	/**
 	 * Class Instance.
@@ -34,87 +39,255 @@ class Assets_Manager {
 	 *
 	 * @var string|null post_id.
 	 */
-	public static $post_id = null;
+	protected $post_id = null;
 
 	/**
-	 * Templates ids loaded in a post.
+	 * Enabled Elements.
 	 *
-	 * @var array temp_ids.
+	 * @var array|null
 	 */
-	public static $temp_ids = array();
+	protected $enabled_elements = null;
 
 	/**
-	 * All elements loaded in a post.
+	 * Integrations.
 	 *
-	 * @var array temp_elements.
+	 * @var array|null
 	 */
-	public static $temp_elements = array();
-
-	/**
-	 * Is page assets updated.
-	 *
-	 * @var boolean is_updated.
-	 */
-	public static $is_updated = null;
+	protected $integrations = null;
 
 	/**
 	 * Class Constructor.
 	 */
-	public function __construct() {
+	public function __construct( $enabled_elements, $integrations ) {
 
-		add_action( 'elementor/editor/after_save', array( $this, 'handle_post_save' ), 10, 2 );
+		$this->enabled_elements = $enabled_elements;
+		$this->integrations     = $integrations;
 
-		// Check if the elments are cached.
-		add_action( 'wp', array( $this, 'set_assets_vars' ) );
-
-		// Save the elements on the current page.
-		add_filter( 'elementor/frontend/builder_content_data', array( $this, 'manage_post_data' ), 10, 2 );
-
-		add_action( 'wp_footer', array( $this, 'cache_post_assets' ) );
-
-		add_action( 'wp_trash_post', array( $this, 'delete_cached_options' ) );
+		$this->register_hooks();
 	}
 
 	/**
-	 * Sets Edit Time upon editor save.
+	 * Register Hooks.
+	 *
+	 * @access protected
+	 * @since 4.6.1
+	 */
+	protected function register_hooks() {
+
+		$is_dynamic_assets_enabled = $this->enabled_elements['premium-assets-generator'];
+
+		if( $is_dynamic_assets_enabled ) {
+
+			// Register AJAX Hooks for regenerate assets.
+			add_action( 'wp_ajax_pa_clear_cached_assets', array( $this, 'pa_clear_cached_assets' ) );
+
+			add_action( 'elementor/editor/after_save', array( $this, 'handle_post_save' ), 10, 2 );
+
+			add_action( 'elementor/theme/register_locations', array( $this, 'get_asset_per_location' ), 20 );
+			add_filter( 'elementor/files/file_name', array( $this, 'load_asset_per_file' ) );
+
+			add_action( 'wp_enqueue_scripts', array( $this, 'handle_assets_load' ), 100 );
+
+			// Delete cached options on post delete.
+			add_action( 'wp_trash_post', array( $this, 'delete_trashed_post_data' ) );
+
+			add_action( 'elementor/frontend/before_enqueue_styles', array( $this, 'before_enqueue_styles' ) );
+
+			// Add admin bar tools for dynamic assets clear.
+			$row_meta = Helper_Functions::is_hide_row_meta();
+
+			if ( ! is_admin() && ! $row_meta ) {
+				Admin_Bar::get_instance();
+			}
+
+		}
+
+		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_frontend_styles' ) );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_frontend_scripts' ) );
+
+
+	}
+
+	/**
+	 * Handle Assets Load.
 	 *
 	 * @access public
 	 * @since 4.6.1
 	 */
-	public function handle_post_save( $post_id ) {
+	public function handle_assets_load() {
 
-		if ( wp_doing_cron() ) {
-			return;
+		// Set current post id.
+		$this->set_post_id();
+
+		// This will run only on frontend.
+		$this->get_pa_elements_list();
+
+		// Handle generate and enqueue assets for editor.
+		if ( $this->is_edit() ) {
+			$this->enqueue_asset( null, 'edit' );
 		}
-
-		// The post is saved, then we need to remove the assets related to it.
-		$this->set_post_id( $post_id );
-		self::remove_files();
-
-		update_option( 'pa_edit_time', strtotime( 'now' ) );
 	}
 
 	/**
-	 * Mange Post Data.
+	 * Before Enqueue Styles.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 */
+	public function before_enqueue_styles() {
+
+		if ( $this->is_edit() ) {
+			return false;
+		}
+
+		$this->post_id = get_the_ID();
+
+		// Check for content changes and update assets data.
+		$this->get_pa_elements_list( $this->post_id );
+
+		$elements = get_post_meta( $this->post_id, self::ASSETS_KEY, true );
+
+		if ( ! empty( $elements ) ) {
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
+	}
+
+	public function get_asset_per_location( $instance ) {
+
+		if ( is_admin() || ! ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) ) {
+			return false;
+		}
+
+		$locations = $instance->get_locations();
+
+		foreach ( $locations as $location => $_unused ) {
+
+			$documents_module = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+
+			if ( method_exists( $documents_module, 'get_locations_manager' ) && method_exists( $documents_module->get_locations_manager(), 'get_documents_for_location' ) ) {
+				$documents = $documents_module->get_locations_manager()->get_documents_for_location( $location );
+			} else {
+				$documents = $documents_module->get_conditions_manager()->get_documents_for_location( $location );
+			}
+
+			foreach ( $documents as $document ) {
+				if ( ! is_object( $document ) ) {
+					continue;
+				}
+
+				$post_id = $document->get_post()->ID;
+
+				$this->post_id = $post_id;
+				$this->get_pa_elements_list( $this->post_id );
+				$elements = get_post_meta( $this->post_id, self::ASSETS_KEY, true );
+
+				if ( ! empty( $elements ) ) {
+					$this->enqueue_asset( $this->post_id, $elements );
+				}
+			}
+		}
+	}
+
+	public function load_asset_per_file( $file_name ) {
+
+		if ( empty( $file_name ) ) {
+			return $file_name;
+		}
+
+		$post_id = preg_replace( '/[^0-9]/', '', $file_name );
+
+		if ( $post_id < 1 ) {
+			return $file_name;
+		}
+
+		$this->post_id = $post_id;
+
+		$this->get_pa_elements_list( $this->post_id );
+		$elements = get_post_meta( $this->post_id, self::ASSETS_KEY, true );
+
+		if ( ! empty( $elements ) ) {
+			$this->enqueue_asset( $this->post_id, $elements );
+		}
+
+		return $file_name;
+	}
+
+	/**
+	 * Enqueue Asset.
+	 *
+	 * Enqueue dynamic CSS/JS file for the current post.
 	 *
 	 * @access public
 	 * @since 4.6.1
 	 *
-	 * @param array      $data  post data.
-	 * @param int|string $post_id  post id.
-	 *
-	 * @return array
+	 * @param int    $post_id post id.
+	 * @param string $location edit|front.
 	 */
-	public function manage_post_data( $data, $post_id ) {
+	public function enqueue_asset( $post_id = null, $location = 'front' ) {
 
-		if ( ! self::$is_updated ) {
-			$pa_elems = $this->extract_pa_elements( $data );
+		$dynamic_asset_id = ( $post_id ? '-' . $post_id : '' );
 
-			self::$temp_ids[]    = $post_id;
-			self::$temp_elements = array_unique( array_merge( self::$temp_elements, $pa_elems ) );
+		// If no CSS file found, then generate it.
+		if ( ! $this->has_asset_file( $post_id, 'css' ) ) {
+			$this->generate_new_asset_file( $post_id, $location, 'css' );
 		}
 
-		return $data;
+		wp_enqueue_style(
+			'pafe' . $dynamic_asset_id,
+			Helper_Functions::get_safe_url( PREMIUM_ASSETS_URL . '/' . 'pafe' . $dynamic_asset_id . '.css' ),
+			array(),
+			get_post_modified_time()
+		);
+
+		// If no JS file found, then generate it.
+		if ( ! $this->has_asset_file( $post_id, 'js' ) ) {
+			$this->generate_new_asset_file( $post_id, $location, 'js' );
+		}
+
+		// Check again to prevent case where no JS file generated (independent widgets only).
+		if ( $this->has_asset_file( $post_id, 'js' ) ) {
+			wp_enqueue_script(
+				'pafe' . $dynamic_asset_id,
+				Helper_Functions::get_safe_url( PREMIUM_ASSETS_URL . '/' . 'pafe' . $dynamic_asset_id . '.js' ),
+				array(),
+				get_post_modified_time(),
+				true
+			);
+		}
+	}
+
+	/**
+	 * Has Asset File.
+	 *
+	 * Check if the current post ID has an asset file.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 *
+	 * @param int    $post_id post id.
+	 * @param string $ext js|css.
+	 *
+	 * @return bool if has asset file.
+	 */
+	public function has_asset_file( $post_id, $ext = 'css' ) {
+
+		if ( file_exists( Helper_Functions::get_safe_path( PREMIUM_ASSETS_PATH . '/' . 'pafe' . ( $post_id ? '-' . $post_id : '' ) . '.' . $ext ) ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Handle Post Save.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 */
+	public function handle_post_save( $post_id, $data ) {
+
+		$widget_list = $this->extract_pa_elements( $data );
+		$this->save_pa_widgets_list( $post_id, $widget_list );
 	}
 
 	/**
@@ -123,15 +296,11 @@ class Assets_Manager {
 	 * @access public
 	 * @since 4.6.1
 	 *
-	 * @param int|string $id  post id.
+	 * @return void
 	 */
-	public function set_post_id( $id = 'default' ) {
+	public function set_post_id() {
 
-		$post_id = 'default' === $id ? 'pa_assets_' . get_queried_object_id() : 'pa_assets_' . $id;
-
-		if ( null === self::$post_id ) {
-			self::$post_id = Helper_Functions::generate_unique_id( $post_id );
-		}
+		$this->post_id = get_the_ID();
 	}
 
 	/**
@@ -152,17 +321,11 @@ class Assets_Manager {
 
 		$pa_names = Admin_Helper::get_pa_elements_names();
 
-		$social_revs = array(
-			'premium-yelp-reviews',
-			'premium-google-reviews',
-			'premium-facebook-reviews',
-		);
-
 		$pa_elems = array();
 
 		Plugin::$instance->db->iterate_data(
 			$data,
-			function ( $element ) use ( &$pa_elems, $pa_names, $social_revs ) {
+			function ( $element ) use ( &$pa_elems, $pa_names  ) {
 
 				if ( isset( $element['elType'] ) ) {
 
@@ -172,20 +335,8 @@ class Assets_Manager {
 
 						if ( in_array( $widget_type, $pa_names, true ) && ! in_array( $widget_type, $pa_elems, true ) ) {
 
-							$widget_type = in_array( $widget_type, $social_revs, true ) ? 'premium-reviews' : $widget_type;
-
-							if ( in_array( $widget_type, array( 'premium-twitter-feed', 'premium-facebook-feed' ), true ) && ! in_array( 'social-common', $pa_elems, true ) ) {
-								array_push( $pa_elems, 'social-common' );
-							}
-
 							array_push( $pa_elems, $widget_type );
 
-							if ( 'premium-woo-products' === $widget_type ) {
-
-								if ( Helper_Functions::check_papro_version() ) {
-									array_push( $pa_elems, 'premium-woo-products-pro' );
-								}
-							}
 						}
 					}
 				}
@@ -196,7 +347,7 @@ class Assets_Manager {
 	}
 
 	/**
-	 * Get Global Wiget Type.
+	 * Get Global Widget Type.
 	 *
 	 * @access public
 	 * @since 4.6.1
@@ -226,199 +377,33 @@ class Assets_Manager {
 	}
 
 	/**
-	 * Sets Assets Variables.
-	 * Sets Post ID & Is_updated Flag.
+	 * Generate New Asset File.
 	 *
-	 * @access public
-	 * @since 4.6.1
-	 */
-	public function set_assets_vars() {
-
-		$is_edit_mode = Helper_Functions::is_edit_mode();
-
-		if ( ! $this->is_built_with_elementor() || $is_edit_mode ) {
-			return;
-		}
-
-		$this->set_post_id();
-
-		self::$is_updated = self::is_ready_for_generate();
-	}
-
-	/**
-	 * Is Built With Elementor.
+	 * Generates a new CSS/JS file for the current post.
 	 *
 	 * @access public
 	 * @since 4.6.1
 	 *
-	 * @return boolean
+	 * @param int    $post_id post id.
+	 * @param string $location edit|front.
+	 * @param string $ext js|css.
 	 */
-	public function is_built_with_elementor() {
+	public function generate_new_asset_file( $post_id, $location, $ext ) {
 
-		if ( ! class_exists( 'Elementor\Plugin' ) ) {
-			return false;
-		}
-
-		$type = get_post_type();
-
-		if ( 'page' !== $type && 'post' !== $type ) {
-			return false;
-		}
-
-		$current_id = get_the_ID();
-
-		if ( ! $current_id || $current_id < 0 ) {
-			return false;
-		}
-
-		$document = Plugin::$instance->documents->get( get_the_ID() );
-
-		if ( ! $document ) {
-			return false;
-		}
-
-		return $document->is_built_with_elementor();
-	}
-
-	/**
-	 * Check if assets is updated.
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 *
-	 * @return boolean
-	 */
-	public static function is_ready_for_generate() {
-
-		$editor_time = get_option( 'pa_edit_time', false );
-
-		// If no post/page was saved after the feature is enabled.
-		if ( ! $editor_time ) {
-			update_option( 'pa_edit_time', strtotime( 'now' ) );
-		}
-
-		$post_edit_time = get_option( 'pa_edit_' . self::$post_id, false );
-
-		// If the time of the last update is not equal to the time the current post was last changed. This means another post was saved, then load the default assets.
-		// In this case, we need to load the default assets until the elements in the page needs to be cached first.
-		if ( ! $post_edit_time || (int) $editor_time !== (int) $post_edit_time ) {
-			// A change was made in the page elements, then we need to force the assets to be regenerated
-			self::remove_files();
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Cached post assets.
-	 *
-	 * Update post options in db on page load.
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 */
-	public function cache_post_assets() {
-
-		$is_edit_mode = Helper_Functions::is_edit_mode();
-		$cond         = $this->is_built_with_elementor() && ! $is_edit_mode;
-
-		if ( ! self::$is_updated && $cond ) {
-			update_option( 'pa_elements_' . self::$post_id, self::$temp_elements, false );
-			update_option( 'pa_edit_' . self::$post_id, get_option( 'pa_edit_time' ), false );
-		}
-	}
-
-	/**
-	 * Delete Cached Options.
-	 * Delete post options from db on post delete.
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 *
-	 * @param int $post_id  post id.
-	 */
-	public function delete_cached_options( $post_id ) {
-
-		$id = substr( md5( 'pa_assets_' . $post_id ), 0, 9 );
-
-		delete_option( 'pa_elements_' . $id );
-		delete_option( 'pa_edit_' . $id );
-	}
-
-	/**
-	 * Generate Assets files.
-	 * Adds assets into pa-frontend.min.(js|css).
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 *
-	 * @param string $ext  assets extensions (js|css).
-	 */
-	public static function generate_asset_file( $ext ) {
-
-		$main_file_name = Helper_Functions::get_safe_path( PREMIUM_ASSETS_PATH . '/pa-frontend-' . self::$post_id . '.min.' . $ext );
-
-		// If the file already exists, then there is no need to regenerate a new one.
-		if ( file_exists( $main_file_name ) ) {
-			return;
-		}
-
-		$content = self::get_asset_file_content( $ext );
-
-		// If no premium elements exist on the page, then don't generate files
-		if ( empty( $content ) || 'empty' === $content ) {
-			return 'empty';
-		}
-
+		// If no directory found, then create it.
 		if ( ! file_exists( PREMIUM_ASSETS_PATH ) ) {
 			wp_mkdir_p( PREMIUM_ASSETS_PATH );
 		}
 
-		if ( 'css' === $ext ) {
+		// Generate dynamic asset file content.
+		$file_content = $this->get_asset_file_content( $post_id, $location, $ext );
 
-			if ( empty( $content['main'] ) ) {
-				return 'empty';
-			}
+		if ( ! empty( $file_content ) ) {
 
-			file_put_contents( $main_file_name, '@charset "UTF-8";' . $content['main'] ); // phpcs:ignore
+			$name      = 'pafe' . ( $post_id ? '-' . $post_id : '' ) . '.' . $ext;
+			$file_path = Helper_Functions::get_safe_path( PREMIUM_ASSETS_PATH . DIRECTORY_SEPARATOR . $name );
 
-		} else {
-			file_put_contents( $main_file_name, $content );  // phpcs:ignore
-		}
-	}
-
-
-	/**
-	 * Clear cached file.
-	 * Delete file if it exists.
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 *
-	 * @param string $file_name  file name.
-	 */
-	public static function clear_cached_file( $file_name ) {
-
-		if ( file_exists( $file_name ) ) {
-			wp_delete_file( $file_name );
-		}
-	}
-
-	/**
-	 * Remove files
-	 *
-	 * @since 4.6.1
-	 */
-	public static function remove_files() {
-
-		$ext = array( 'css', 'js' );
-
-		foreach ( $ext as $e ) {
-
-			$path = PREMIUM_ASSETS_PATH . '/pa-frontend-' . self::$post_id . '.min.' . $e;
-
-			self::clear_cached_file( $path );
+			file_put_contents( $file_path, $file_content );  // phpcs:ignore
 		}
 	}
 
@@ -430,52 +415,40 @@ class Assets_Manager {
 	 * @access public
 	 * @since 4.6.1
 	 *
+	 * @param int    $post_id post id.
+	 * @param string $location edit|front.
 	 * @param string $ext js|css.
 	 *
 	 * @return string|array $content
 	 */
-	public static function get_asset_file_content( $ext ) {
-
-		// Get the cached elements of the current post/page.
-		$pa_elements = get_option( 'pa_elements_' . self::$post_id, array() );
-
-		if ( empty( $pa_elements ) ) {
-			return '';
-		}
+	public function get_asset_file_content( $post_id, $location, $ext ) {
 
 		$content = '';
 
-		$pa_elements = self::prepare_pa_elements( $pa_elements, $ext );
+		if ( 'edit' === $location ) {
+			//For editor, generate assets based on the enabled elements.
+			$elements = Helper_Functions::get_enabled_widgets_names();
+		} else {
+			$elements = get_post_meta( $post_id, self::ASSETS_KEY, true );
+		}
 
-		foreach ( $pa_elements as $element ) {
+		if ( empty( $elements ) ) {
+			return '';
+		}
 
-			$path = self::get_file_path( $element, $ext );
+		$elements = $this->prepare_pa_elements( $elements, $ext );
+
+		foreach ( $elements as $element ) {
+
+			$path = $this->get_file_path( $element, $ext );
 
 			if ( ! $path ) {
 				continue;
 			}
 
-			$file_content = self::get_file_content( $path );
-
-			if ( 'not_found' === $file_content ) {
-				continue;
-			}
-
-			if ( 'empty' === $file_content ) {
-				return 'empty';
-			}
+			$file_content = $this->get_file_content( Helper_Functions::get_safe_path( $path ) );
 
 			$content .= $file_content;
-		}
-
-		if ( 'css' === $ext ) {
-
-			$content = array(
-				'main' => $content,
-			);
-
-			// Fix: at-rule or selector expected css error.
-			$content = str_replace( '@charset "UTF-8";', '', $content );
 		}
 
 		return $content;
@@ -492,24 +465,55 @@ class Assets_Manager {
 	 *
 	 * @return array
 	 */
-	public static function prepare_pa_elements( $elements, $ext ) {
+	public function prepare_pa_elements( $elements, $ext ) {
+
+		if( Helper_Functions::check_papro_version() ) {
+
+			$social_revs = array(
+				'premium-yelp-reviews',
+				'premium-google-reviews',
+				'premium-facebook-reviews',
+			);
+
+			$if_has_social_reviews = array_intersect( $social_revs, $elements );
+
+			if( ! empty( $if_has_social_reviews ) ) {
+				$elements[] = 'premium-reviews';
+			}
+
+			$social_feed = array(
+				'premium-twitter-feed',
+				'premium-facebook-feed',
+			);
+
+			$if_has_social_feed = array_intersect( $social_feed, $elements );
+
+			if( ! empty( $if_has_social_feed ) ) {
+				$elements[] = 'social-common';
+			}
+
+		}
 
 		if ( 'css' === $ext ) {
-			$common_assets = self::has_free_elements( $elements ) ? array( 'common' ) : array();
-			$common_assets = self::has_pro_elements( $elements ) ? array_merge( $common_assets, array( 'common-pro' ) ) : $common_assets;
+			$common_assets = $this->has_free_elements( $elements ) ? array( 'common' ) : array();
+			$common_assets = $this->has_pro_elements( $elements ) ? array_merge( $common_assets, array( 'common-pro' ) ) : $common_assets;
 
 			$elements       = array_merge( $elements, $common_assets );
 			$indep_elements = array(
 				'premium-world-clock',
-				'premium-svg-drawer'
+				'premium-svg-drawer',
 			);
+
+			// Load CSS files for PRO Woo Products skins handled for editor/frontend.
+			$if_woo_products = array_intersect( array( 'woo-products', 'premium-woo-products' ), $elements );
+
+			if( $if_woo_products && Helper_Functions::check_papro_version() ) {
+				$elements[] = 'premium-woo-products-pro';
+			}
 
 		} else {
 			$indep_elements = array(
 				'social-common',
-				'premium-hscroll',
-				'premium-facebook-feed',
-				'premium-behance-feed',
 				'premium-lottie',
 				'premium-vscroll',
 				'premium-hscroll',
@@ -519,12 +523,9 @@ class Assets_Manager {
 				'premium-woo-products-pro',
 				'premium-mini-cart',
 				'premium-woo-cta',
-				// 'premium-addon-testimonials',
 				'premium-smart-post-listing',
-				'premium-addon-pricing-table',
-				'premium-addon-image-separator',
 				'premium-notifications',
-				'premium-site-logo'
+				'premium-site-logo',
 			);
 
 		}
@@ -543,34 +544,13 @@ class Assets_Manager {
 	 */
 	public static function get_file_content( $path ) {
 
-		$file_content = Utils::file_get_contents( Helper_Functions::get_safe_path( $path ) );
-
-		if( ! $file_content ) {
-			return 'empty';
+		if ( ! file_exists( $path ) ) {
+			return '';
 		}
 
-		return self::clean_content( $file_content );
-	}
+		$file_content = file_get_contents( $path );
 
-	/**
-	 * Clean Content
-	 * Removes Page Html if it's returned as result.
-	 *
-	 * @param string $content file content.
-	 *
-	 * @return string
-	 */
-	public static function clean_content( $content ) {
-
-		if ( stripos( $content, '<!DOCTYPE' ) ) {
-			$content = 'empty';
-		}
-
-		// if ( strpos( $content, '<!doctype html>' ) ) {
-		// $content = explode( '<!doctype html>', $content )[0];
-		// }
-
-		return $content;
+		return $file_content;
 	}
 
 	/**
@@ -582,15 +562,19 @@ class Assets_Manager {
 	 *
 	 * @return string file path.
 	 */
-	public static function get_file_path( $element, $ext ) {
+	public function get_file_path( $element, $ext ) {
 
-		$is_pro = self::is_pro_widget( $element );
+		$is_pro = $this->is_pro_widget( $element );
 
 		if ( ! Helper_Functions::check_papro_version() && $is_pro ) {
 			return false;
 		}
 
 		$element = str_replace( '-addon', '', $element );
+
+		if ( 0 === strpos( $element, 'woo-' ) || 0 === strpos( $element, 'mini-' ) ) {
+			$element = 'premium-' . $element;
+		}
 
 		$path = $is_pro ? PREMIUM_PRO_ADDONS_PATH : PREMIUM_ADDONS_PATH;
 
@@ -608,9 +592,9 @@ class Assets_Manager {
 	 *
 	 * @return bool
 	 */
-	public static function is_pro_widget( $widget ) {
+	public function is_pro_widget( $widget ) {
 
-		$pro_names = array_merge( array( 'common-pro', 'premium-reviews', 'premium-woo-products-pro', 'social-common' ), self::get_pro_widgets_names() );
+		$pro_names = array_merge( array( 'common-pro', 'premium-reviews', 'premium-woo-products-pro', 'social-common' ), $this->get_pro_widgets_names() );
 
 		return in_array( $widget, $pro_names, true );
 	}
@@ -622,14 +606,14 @@ class Assets_Manager {
 	 * @access public
 	 * @since 4.6.1
 	 *
-	 * @param array $post_elems post elements.
+	 * @param array $post_elements post elements.
 	 *
 	 * @return boolean
 	 */
-	public static function has_pro_elements( $post_elems ) {
+	public function has_pro_elements( $post_elements ) {
 
-		$papro_elems = self::get_pro_widgets_names();
-		$has_pro     = array_intersect( $post_elems, $papro_elems ) ? true : false;
+		$pro_elements = $this->get_pro_widgets_names();
+		$has_pro      = array_intersect( $post_elements, $pro_elements ) ? true : false;
 
 		return $has_pro;
 	}
@@ -641,17 +625,17 @@ class Assets_Manager {
 	 * @access public
 	 * @since 4.6.1
 	 *
-	 * @param array $post_elems post elements.
+	 * @param array $post_elements post elements.
 	 *
 	 * @return boolean
 	 */
-	public static function has_free_elements( $post_elems ) {
+	public function has_free_elements( $post_elements ) {
 
-		$pa_elems = Admin_Helper::get_free_widgets_names();
+		$free_elements = Admin_Helper::get_free_widgets_names();
 
 		// add some other pro widgets.
-		$pa_elems = array_merge(
-			$pa_elems,
+		$free_elements = array_merge(
+			$free_elements,
 			array(
 				'premium-smart-post-listing',
 				'premium-addon-instagram-feed',
@@ -663,7 +647,7 @@ class Assets_Manager {
 			)
 		);
 
-		$has_free = array_intersect( $post_elems, $pa_elems ) ? true : false;
+		$has_free = array_intersect( $post_elements, $free_elements ) ? true : false;
 
 		return $has_free;
 	}
@@ -676,18 +660,853 @@ class Assets_Manager {
 	 *
 	 * @return array
 	 */
-	public static function get_pro_widgets_names() {
+	public function get_pro_widgets_names() {
 
-		$pro_elems = Admin_Helper::get_pro_elements();
-		$pro_names = array();
+		$pro_elements = Admin_Helper::get_pro_elements();
+		$pro_names    = array();
 
-		foreach ( $pro_elems as $element ) {
+		foreach ( $pro_elements as $element ) {
 			if ( isset( $element['name'] ) ) {
 				array_push( $pro_names, $element['name'] );
 			}
 		}
 
 		return $pro_names;
+	}
+
+	/**
+	 * Clear Cached Assets.
+	 *
+	 * Deletes assets options from DB And
+	 * deletes assets files from uploads/premium-addons-for-elementor via AJAX
+	 * directory.
+	 *
+	 * @access public
+	 * @since 4.9.3
+	 */
+	public function pa_clear_cached_assets() {
+
+		check_ajax_referer( 'pa-generate-nonce', 'security' );
+
+		$post_id = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
+		$this->clear_dynamic_assets_data( $post_id );
+
+		wp_send_json_success( 'Cached Assets Cleared' );
+	}
+
+	/**
+	 * Clear Dynamic Assets Data.
+	 *
+	 * Deletes assets options from DB And
+	 * deletes assets files from uploads/premium-addons-for-elementor
+	 * directory.
+	 *
+	 * @access public
+	 * @since 4.10.51
+	 *
+	 * @param string $id post ID.
+	 */
+	public function clear_dynamic_assets_data( $id = '' ) {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to do this action', 'premium-addons-for-elementor' ) );
+		}
+
+		if ( Helper_Functions::check_elementor_version() ) {
+			Plugin::$instance->files_manager->clear_cache();
+		}
+
+		if( ! empty ( $id ) ) {
+			delete_post_meta( $id, self::ASSETS_KEY );
+		}
+
+		// Purge All LS Cache
+		do_action( 'litespeed_purge_all', 'Premium Addons for Elementor' );
+
+		$this->delete_assets_files( $id );
+	}
+
+	/**
+	 * Delete Assets Options.
+	 *
+	 * @access public
+	 * @since 4.9.3
+	 */
+	public function delete_trashed_post_data( $id = '' ) {
+
+		$this->delete_assets_files( $id );
+
+		delete_post_meta( $id, self::ASSETS_KEY );
+	}
+
+	/**
+	 * Delete Assets Files.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 *
+	 * @param string $id post id.
+	 */
+	public static function delete_assets_files( $id = '' ) {
+
+		$path = PREMIUM_ASSETS_PATH;
+
+		if ( ! is_dir( $path ) ) {
+			return;
+		}
+
+		if ( empty( $id ) ) {
+			foreach ( scandir( $path ) as $file ) {
+				if ( '.' === $file || '..' === $file ) {
+					continue;
+				}
+
+				unlink( Helper_Functions::get_safe_path( $path . DIRECTORY_SEPARATOR . $file ) );
+			}
+		} else {
+
+			foreach ( glob( PREMIUM_ASSETS_PATH . '/*' . $id . '*' ) as $file ) {
+				unlink( Helper_Functions::get_safe_path( $file ) );
+			}
+		}
+	}
+
+	/**
+	 * Get PA Elements List.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 *
+	 * @return boolean
+	 */
+	public function get_pa_elements_list() {
+
+		if ( is_object( Plugin::instance()->editor ) && Plugin::instance()->editor->is_edit_mode() ) {
+			return false;
+		}
+
+		$post_id = $this->post_id;
+
+		if ( $this->has_assets_data( $post_id ) ) {
+			return false;
+		}
+
+		$document = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : array();
+		$data     = is_object( $document ) ? $document->get_elements_data() : array();
+		$data     = $this->extract_pa_elements( $data );
+
+		$this->save_pa_widgets_list( $post_id, $data );
+
+		return true;
+	}
+
+	/**
+	 * Save PA Widgets List.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 *
+	 * @param int   $post_id  post id.
+	 * @param array $list  widgets list.
+	 *
+	 * @return boolean
+	 */
+	public function save_pa_widgets_list( $post_id, $list ) {
+
+		if ( \defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
+		$documents = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : array();
+
+		if ( ! in_array( get_post_status( $post_id ), array( 'publish', 'private' ) ) || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
+			return false;
+		}
+
+		if ( in_array( get_post_meta( $post_id, '_elementor_template_type', true ), array( 'kit' ) ) ) {
+			return false;
+		}
+
+		// No new elements added.
+		$existing_elements = get_post_meta( $post_id, self::ASSETS_KEY, true );
+		if ( $list === $existing_elements || serialize( $list ) === serialize( $existing_elements ) ) {
+			return false;
+		}
+
+		try {
+
+			update_post_meta( $post_id, self::ASSETS_KEY, $list );
+
+			$this->delete_assets_files( $post_id );
+
+			if ( $this->has_assets_data( $post_id ) ) {
+				$this->update_assets_files( $post_id, $list );
+			}
+
+			return true;
+		} catch ( \Exception $e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Update Assets Files.
+	 *
+	 * @access public
+	 * @since 4.6.1
+	 *
+	 * @param int   $post_id  post id.
+	 * @param array $elements  elements.
+	 */
+	public function update_assets_files( $post_id, $elements ) {
+
+		$this->generate_new_asset_file( $post_id, 'front', 'css' );
+		$this->generate_new_asset_file( $post_id, 'front', 'js' );
+	}
+
+	public function is_edit() {
+		return (
+			Plugin::instance()->editor->is_edit_mode() ||
+			Plugin::instance()->preview->is_preview_mode() ||
+			is_preview()
+		);
+	}
+
+	/**
+	 * Has Assets Data.
+	 *
+	 * @access public
+	 * @since 4.10.54
+	 *
+	 * @param int $post_id post id.
+	 *
+	 * @return boolean
+	 */
+	public function has_assets_data( $post_id ) {
+
+		$status = get_post_meta( $post_id, self::ASSETS_KEY, true );
+
+		return ! empty( $status );
+	}
+
+	/**
+	 * Exclude PA assets from WP Optimize
+	 *
+	 * @since 4.10.73
+	 * @access public
+	 */
+	function exclude_pa_assets_from_wp_optimize( $excluded_handles ) {
+
+		$excluded_handles[] = 'pa-frontend';
+
+		return $excluded_handles;
+	}
+
+	/**
+	 * Register Frontend CSS files
+	 *
+	 * @since 2.9.0
+	 * @access public
+	 */
+	public function register_frontend_styles() {
+
+		$dir    = Helper_Functions::get_styles_dir();
+		$suffix = Helper_Functions::get_assets_suffix();
+
+		wp_register_style(
+			'font-awesome-5-all',
+			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/all.min.css',
+			false,
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_style(
+			'pa-flipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/flipster' . $suffix . '.css',
+			false,
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_style(
+			'pa-prettyphoto',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/prettyphoto' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-btn',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/button-line' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-load-animations',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/load-animations' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-share-btn',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/share-button' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-image-effects',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/image-effects' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-slick',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/slick' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-world-clock',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-world-clock' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'tooltipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/tooltipster.min.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-gTooltips',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-gtooltips' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-shape-divider',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-sh-divider' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-odometer',
+			PREMIUM_ADDONS_URL . 'assets/frontend/min-css/odometer.min.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-glass',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/liquid-glass' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		if( ! $this->enabled_elements['premium-assets-generator'] ) {
+
+			wp_enqueue_style(
+				'premium-addons',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-addons' . $suffix . '.css',
+				array(),
+				PREMIUM_ADDONS_VERSION,
+				'all'
+			);
+
+		}
+	}
+
+	/**
+	 * Registers required JS files
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function register_frontend_scripts() {
+
+		$maps_settings = $this->integrations;
+
+		$dir    = Helper_Functions::get_scripts_dir();
+		$suffix = Helper_Functions::get_assets_suffix();
+
+		wp_localize_script(
+			'elementor-frontend',
+			'PremiumSettings',
+			array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'   => wp_create_nonce( 'pa-blog-widget-nonce' ),
+
+			)
+		);
+
+		if( ! $this->enabled_elements['premium-assets-generator'] ) {
+			wp_register_script(
+				'premium-addons',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-addons' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+		}
+
+		wp_register_script(
+			'pa-scrolldir',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/pa-scrolldir' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'prettyPhoto-js',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/prettyPhoto' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'tooltipster-bundle',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/tooltipster' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-vticker',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/vticker' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-typed',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/typed' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'countdown-translator',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/countdown-translator' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-countdown',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/jquery-countdown' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'isotope-js',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/isotope' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-modal',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/modal' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-maps',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-maps' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-vscroll',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-vscroll' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-slimscroll',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/jquery-slimscroll' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-iscroll',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/iscroll' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-tilt',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/universal-tilt' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'lottie-js',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/lottie' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-odometer',
+			PREMIUM_ADDONS_URL . 'assets/frontend/min-js/odometer.min.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-tweenmax',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/TweenMax' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-headroom',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/headroom' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_script(
+			'pa-menu',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-nav-menu' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		if ( $maps_settings['premium-map-cluster'] ) {
+			wp_register_script(
+				'pa-maps-cluster',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/markerclusterer.min.js',
+				array(),
+				'1.0.1',
+				true
+			);
+		}
+
+		if ( $maps_settings['premium-map-disable-api'] && '1' !== $maps_settings['premium-map-api'] ) {
+
+			$locale = $maps_settings['premium-map-locale'] ?? 'en';
+
+			$api = sprintf( 'https://maps.googleapis.com/maps/api/js?key=%1$s&libraries=marker&callback=initMap&language=%2$s&loading=async', $maps_settings['premium-map-api'], $locale );
+
+			wp_register_script(
+				'pa-maps-api',
+				$api,
+				array(),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+		}
+
+		wp_register_script(
+			'pa-slick',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/slick' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-flipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/flipster' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_script(
+			'pa-anime',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/anime' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-feffects',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-float-effects' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-gTooltips',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-gtooltips' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-shape-divider',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-sh-divider' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'pa-shape-divider',
+			'PaShapeDividerSettings',
+			array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'   => wp_create_nonce( 'pa-shape-nonce' ),
+			)
+		);
+
+		wp_localize_script(
+			'pa-gTooltips',
+			'PremiumSettings',
+			array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'   => wp_create_nonce( 'pa-blog-widget-nonce' ),
+			)
+		);
+
+		wp_register_script(
+			'pa-eq-height',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-eq-height' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-dis-conditions',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-dis-conditions' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-gsap',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/pa-gsap' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-motionpath',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/motionpath' . $suffix . '.js',
+			array(
+				'jquery',
+			),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-scrolltrigger',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/scrollTrigger' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-notifications',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-notifications' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-luxon',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/luxon' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'mousewheel-js',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/jquery-mousewheel' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-wrapper-link',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-wrap-link' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		// We need to make sure premium-woocommerce.js will not be loaded twice if assets are generated.
+		if ( class_exists( 'woocommerce' ) ) {
+
+			wp_register_script(
+				'premium-woo-cats',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-woo-categories' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'premium-mini-cart',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-mini-cart' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'premium-woo-cart',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-woo-cart' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'premium-woo-cta',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-woo-cta' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'premium-woocommerce',
+				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-woo-products' . $suffix . '.js',
+				array( 'jquery' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'premium-woo-cta',
+				'PAWooCTASettings',
+				array(
+					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'cta_nonce'       => wp_create_nonce( 'pa-woo-cta-nonce' ),
+					'view_cart'       => __( 'View cart', 'woocommerce' ),
+					'mini_cart_nonce' => wp_create_nonce( 'pa-mini-cart-nonce' ),
+					'qv_nonce'        => wp_create_nonce( 'pa-woo-qv-nonce' ),
+				)
+			);
+
+			wp_localize_script(
+				'premium-mini-cart',
+				'PAWooMCartSettings',
+				array(
+					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'cta_nonce'       => wp_create_nonce( 'pa-woo-cta-nonce' ),
+					'view_cart'       => __( 'View cart', 'woocommerce' ),
+					'mini_cart_nonce' => wp_create_nonce( 'pa-mini-cart-nonce' ),
+					'qv_nonce'        => wp_create_nonce( 'pa-woo-qv-nonce' ),
+					'stock_msg'       => __( '*The current stock is only ', 'premium-addons-for-elementor' ),
+				)
+			);
+
+			wp_localize_script(
+				'premium-woocommerce',
+				'PAWooProductsSettings',
+				array(
+					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'products_nonce'  => wp_create_nonce( 'pa-woo-products-nonce' ),
+					'qv_nonce'        => wp_create_nonce( 'pa-woo-qv-nonce' ),
+					'cta_nonce'       => wp_create_nonce( 'pa-woo-cta-nonce' ),
+					'woo_cart_url'    => get_permalink( wc_get_page_id( 'cart' ) ),
+					'view_cart'       => __( 'View cart', 'woocommerce' ),
+					'mini_cart_nonce' => wp_create_nonce( 'pa-mini-cart-nonce' ),
+				)
+			);
+
+		}
+
+		// Localize jQuery with required data for Global Add-ons.
+		if ( $this->enabled_elements['premium-floating-effects'] ) {
+			wp_localize_script(
+				'pa-feffects',
+				'PremiumFESettings',
+				array(
+					'papro_installed' => Helper_Functions::check_papro_version(),
+				)
+			);
+		}
+
+		// Localize jQuery with required data for Global Add-ons.
+		if ( $this->enabled_elements['premium-countdown'] ) {
+
+			wp_localize_script(
+				'pa-countdown',
+				'premiumCountDownStrings',
+				array(
+					'single' => array(
+						__( 'Year', 'premium-addons-for-elementor' ),
+						__( 'Month', 'premium-addons-for-elementor' ),
+						__( 'Week', 'premium-addons-for-elementor' ),
+						__( 'Day', 'premium-addons-for-elementor' ),
+						__( 'Hour', 'premium-addons-for-elementor' ),
+						__( 'Minute', 'premium-addons-for-elementor' ),
+						__( 'Second', 'premium-addons-for-elementor' ),
+					),
+					'plural' => array(
+						__( 'Years', 'premium-addons-for-elementor' ),
+						__( 'Months', 'premium-addons-for-elementor' ),
+						__( 'Weeks', 'premium-addons-for-elementor' ),
+						__( 'Days', 'premium-addons-for-elementor' ),
+						__( 'Hours', 'premium-addons-for-elementor' ),
+						__( 'Minutes', 'premium-addons-for-elementor' ),
+						__( 'Seconds', 'premium-addons-for-elementor' ),
+					),
+				)
+			);
+		}
 	}
 
 	/**
@@ -698,11 +1517,11 @@ class Assets_Manager {
 	 *
 	 * @return object
 	 */
-	public static function get_instance() {
+	public static function get_instance( $enabled_elements, $integrations ) {
 
 		if ( ! isset( self::$instance ) ) {
 
-			self::$instance = new self();
+			self::$instance = new self( $enabled_elements, $integrations );
 
 		}
 

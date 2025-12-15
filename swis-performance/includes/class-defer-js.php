@@ -96,8 +96,11 @@ final class Defer_JS extends Page_Parser {
 		parent::__construct();
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 
-		$uri = add_query_arg( '', '' );
+		$this->validate_user_exclusions();
+		$uri = \add_query_arg( '', '' );
 		$this->debug_message( "request uri is $uri" );
+
+		\add_filter( 'swis_skip_js_defer_by_page', array( $this, 'skip_page' ), 10, 2 );
 
 		/**
 		 * Allow pre-empting JS defer by page.
@@ -118,8 +121,6 @@ final class Defer_JS extends Page_Parser {
 		// Get all the <script> elements and rewrite them (if enabled).
 		add_filter( 'script_loader_tag', array( $this, 'defer_scripts' ), 20, 2 );
 		add_filter( 'swis_elements_script_tag', array( $this, 'defer_scripts' ), 10, 2 );
-
-		$this->validate_user_exclusions();
 	}
 
 	/**
@@ -128,12 +129,17 @@ final class Defer_JS extends Page_Parser {
 	public function validate_user_exclusions() {
 		$user_exclusions = $this->get_option( 'defer_js_exclude' );
 		if ( ! empty( $user_exclusions ) ) {
-			if ( is_string( $user_exclusions ) ) {
+			if ( \is_string( $user_exclusions ) ) {
 				$user_exclusions = array( $user_exclusions );
 			}
-			if ( is_array( $user_exclusions ) ) {
+			if ( \is_array( $user_exclusions ) ) {
 				foreach ( $user_exclusions as $exclusion ) {
-					if ( ! is_string( $exclusion ) ) {
+					if ( ! \is_string( $exclusion ) ) {
+						continue;
+					}
+					$exclusion = \trim( $exclusion );
+					if ( 0 === \strpos( $exclusion, 'page:' ) ) {
+						$this->user_page_exclusions[] = \str_replace( 'page:', '', $exclusion );
 						continue;
 					}
 					$this->user_exclusions[] = $exclusion;

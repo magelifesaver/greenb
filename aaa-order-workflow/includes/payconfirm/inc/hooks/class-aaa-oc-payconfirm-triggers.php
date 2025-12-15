@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( ! class_exists( 'AAA_OC_PayConfirm_Triggers' ) ) :
 class AAA_OC_PayConfirm_Triggers {
 
-	const DEBUG_THIS_FILE = true;
+	const DEBUG_THIS_FILE = false;
 
 	public static function init() {
 		// 1) Primary: when Postie finishes creating the post

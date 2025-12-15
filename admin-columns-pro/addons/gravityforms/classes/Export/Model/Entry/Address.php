@@ -2,19 +2,24 @@
 
 namespace ACA\GravityForms\Export\Model\Entry;
 
-use AC\Column;
+use ACA\GravityForms\Field\Field;
 use ACP\Export;
 
-class Address implements Export\Service {
+class Address implements Export\Service
+{
 
-	private $column;
+    private $field;
 
-	public function __construct( Column $column ) {
-		$this->column = $column;
-	}
+    public function __construct(Field $field)
+    {
+        $this->field = $field;
+    }
 
-	public function get_value( $id ) {
-		return strip_tags( str_replace( '<br />', '; ', $this->column->get_value( $id ) ) );
-	}
+    public function get_value($id): string
+    {
+        $address = $this->field->get_entry_value((int)$id);
+
+        return strip_tags(str_replace('<br />', '; ', $address));
+    }
 
 }

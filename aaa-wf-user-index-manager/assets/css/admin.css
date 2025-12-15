@@ -1,5 +1,0 @@
-.wfuim-row { display:flex; align-items:center; gap:8px; margin:6px 0; }
-.wfuim-col input[type=text]{ width:180px; }
-.wfuim-handle { cursor:move; }
-.link-button { background:none; border:none; color:#2271b1; cursor:pointer; text-decoration:underline; }
-.link-button.delete { color:#b32d2e; }

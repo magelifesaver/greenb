@@ -18,10 +18,10 @@ class ListTable implements AC\ListTable
         $this->table = $table;
     }
 
-    public function get_column_value(string $column, $id): string
+    public function render_cell(string $column_id, $row_id): string
     {
         ob_start();
-        $this->table->column_default(GFAPI::get_entry($id), $column);
+        $this->table->column_default(GFAPI::get_entry($row_id), $column_id);
 
         return ob_get_clean();
     }
@@ -37,6 +37,11 @@ class ListTable implements AC\ListTable
         $this->table->single_row(GFAPI::get_entry($id));
 
         return ob_get_clean();
+    }
+
+    public function get_list_table(): GF_Entry_List_Table
+    {
+        return $this->table;
     }
 
 }

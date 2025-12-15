@@ -35,8 +35,8 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
     include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     load_plugin_textdomain('BeRocket_domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
     class BeRocket_Framework {
-        public static $framework_version = '3.0.3.9';
-        public $plugin_framework_version = '3.0.3.9';
+        public static $framework_version = '3.0.4';
+        public $plugin_framework_version = '3.0.4';
         public $licenses_current = array('free');
         public static $settings_name = '';
         public $addons;
@@ -450,9 +450,11 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
          */
         public function set_styles() {
             $options = $this->get_option();
-            $previous_options = $this->get_option();
-            $custom_css = berocket_sanitize_array($options[ 'custom_css' ], array($this->cc->values[ 'settings_name' ]), $previous_options);
-            echo '<style>' . $custom_css . '</style>';
+            if( ! empty($options[ 'custom_css' ]) ) {
+                $previous_options = $this->get_option();
+                $custom_css = berocket_sanitize_array($options[ 'custom_css' ], array($this->cc->values[ 'settings_name' ]), $previous_options);
+                echo '<style>' . $custom_css . '</style>';
+            }
         }
         public function set_scripts() {
             $options = $this->get_option();

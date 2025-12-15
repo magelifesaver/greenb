@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace ACA\MLA\Export;
 
-use AC;
-use AC\ThirdParty\MediaLibraryAssistant\ListTable;
 use AC\ThirdParty\MediaLibraryAssistant\WpListTableFactory;
-use ACA\MLA\ListScreen;
 use ACP;
+use ACP\Export\Exporter\TableDataFactory;
+use ACP\Export\ResponseFactory;
 
 class Strategy extends ACP\Export\Strategy
 {
 
-    public function __construct(ListScreen\MediaLibrary $list_screen)
-    {
-        parent::__construct($list_screen);
-    }
+    private ResponseFactory $response_factory;
 
-    private function get_wp_list_table_factory(): WpListTableFactory
-    {
-        return new WpListTableFactory();
-    }
+    private TableDataFactory $table_data_factory;
 
-    protected function get_list_table(): ?AC\ListTable
-    {
-        return new ListTable($this->get_wp_list_table_factory()->create());
+    public function __construct(
+        ResponseFactory $response_factory,
+        TableDataFactory $table_data_factory
+    ) {
+        $this->response_factory = $response_factory;
+        $this->table_data_factory = $table_data_factory;
     }
 
     public function get_total_items(): ?int
@@ -34,24 +30,23 @@ class Strategy extends ACP\Export\Strategy
         return 1;
     }
 
-    protected function ajax_export(): void
+    public function handle_export(): void
     {
         add_filter('mla_list_table_query_final_terms', [$this, 'query'], 1e6);
         add_action('mla_list_table_prepare_items', [$this, 'prepare_items'], 10, 2);
+
         add_filter('posts_clauses', [$this, 'filter_ids']);
 
         // Trigger above hooks early by initiating list table. This prevents "headers already sent".
-        $this->get_wp_list_table_factory()->create();
+        (new WpListTableFactory())->create()->prepare_items();
     }
 
     public function filter_ids($clauses)
     {
         global $wpdb;
 
-        $ids = $this->get_requested_ids();
-
-        if ($ids) {
-            $clauses['where'] .= sprintf("\nAND $wpdb->posts.ID IN( %s )", implode(',', $ids));
+        if ($this->ids) {
+            $clauses['where'] .= sprintf("\nAND $wpdb->posts.ID IN( %s )", implode(',', $this->ids));
         }
 
         return $clauses;
@@ -59,18 +54,25 @@ class Strategy extends ACP\Export\Strategy
 
     public function query($request)
     {
-        $per_page = $this->get_num_items_per_iteration();
-
-        $request['offset'] = $this->get_export_counter() * $per_page;
-        $request['posts_per_page'] = $per_page;
-        $request['posts_per_archive_page'] = $per_page;
+        $request['offset'] = $this->counter * $this->items_per_iteration;
+        $request['posts_per_page'] = $this->items_per_iteration;
+        $request['posts_per_archive_page'] = $this->items_per_iteration;
 
         return $request;
     }
 
     public function prepare_items($query): void
     {
-        $this->export(wp_list_pluck($query->items, 'ID'));
+        $data = $this->table_data_factory->create(
+            $this->columns,
+            wp_list_pluck($query->items, 'ID'),
+            0 === $this->counter
+        );
+
+        $this->response_factory->create(
+            $data
+        );
+        exit;
     }
 
 }

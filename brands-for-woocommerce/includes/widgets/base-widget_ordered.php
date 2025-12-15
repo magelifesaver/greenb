@@ -161,6 +161,7 @@ class BeRocket_Brand_Base_Ordered_Widget extends BeRocket_Brand_Base_Widget {
         global $wpdb, $wp_query;
         $hide_empty = empty( $atts['hide_empty'] ) ? '' : "AND tt.count <> ''";
         $match_id_list = '/^[0-9, .]*$/';
+        
         $exclude = empty( $atts['exclude'] ) || !preg_match( $match_id_list, $atts['exclude'] ) ? '' : "AND t.term_id NOT IN ({$atts['exclude']})";
         $include = empty( $atts['include'] ) || !preg_match( $match_id_list, $atts['include'] ) ? '' : "AND t.term_id IN ({$atts['include']})";
         $order = strtoupper( $atts['order'] ) == 'DESC' ? 'DESC' : 'ASC';
@@ -220,7 +221,7 @@ class BeRocket_Brand_Base_Ordered_Widget extends BeRocket_Brand_Base_Widget {
             $brands_include_checked = array();
             foreach($brands_include as $brand_include) {
                 if( ! empty($brand_include) ) {
-                    $brands_include_checked[] = trim($brand_include);
+                    $brands_include_checked[] = sanitize_title_for_query(trim($brand_include));
                 }
             }
             $query['where'] .= " AND t.name IN ('" . implode("','", $brands_include_checked) . "')";

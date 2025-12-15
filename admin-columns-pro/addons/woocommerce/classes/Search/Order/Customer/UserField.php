@@ -15,7 +15,7 @@ class UserField extends ACP\Search\Comparison
 
     private $field;
 
-    public function __construct(string $field, Operators $operators = null, string $value_type = null)
+    public function __construct(string $field, ?Operators $operators = null, ?string $value_type = null)
     {
         $operators = $operators
             ?: new Operators([

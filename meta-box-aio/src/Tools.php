@@ -198,7 +198,7 @@ class Tools {
 								<span class="mb-box__title"><?php esc_html_e( 'Remove Orphan Fields', 'meta-box-aio' ); ?></span>
 							</div>
 							<div class="mb-box__body">
-								<p><?php esc_html_e( 'This tool will remove all custom fields in the post, term and user meta tables that don\'t attached to a valid post, term or user.', 'meta-box-aio' ); ?></p>
+								<p><?php esc_html_e( 'This tool will remove all custom fields in the post, term and user meta tables that aren\'t linked to a valid post, term or user.', 'meta-box-aio' ); ?></p>
 								<p><strong><?php esc_html_e( 'Please backup your database before doing this. This can\'t be reversed.', 'meta-box-aio' ); ?></strong></p>
 
 								<form class="mb-form mb-flex">

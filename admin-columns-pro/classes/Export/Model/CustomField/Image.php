@@ -2,29 +2,35 @@
 
 namespace ACP\Export\Model\CustomField;
 
-use AC\Column;
+use AC\Storage\MetaData;
 use ACP\Export\Service;
 
-class Image implements Service {
+class Image implements Service
+{
 
-	private $column;
+    private $storage;
 
-	public function __construct( Column $column ) {
-		$this->column = $column;
-	}
+    private $meta_key;
 
-	public function get_value( $id ) {
-		$urls = [];
+    public function __construct(MetaData $storage, string $meta_key)
+    {
+        $this->storage = $storage;
+        $this->meta_key = $meta_key;
+    }
 
-		foreach ( (array) $this->column->get_raw_value( $id ) as $url ) {
-			if ( is_numeric( $url ) ) {
-				$url = wp_get_attachment_url( $url );
-			}
+    public function get_value($id): string
+    {
+        $urls = [];
 
-			$urls[] = strip_tags( $url );
-		}
+        foreach ((array)$this->storage->get($id, $this->meta_key) as $url) {
+            if (is_numeric($url)) {
+                $url = wp_get_attachment_url($url);
+            }
 
-		return implode( ', ', $urls );
-	}
+            $urls[] = strip_tags($url);
+        }
+
+        return implode(', ', $urls);
+    }
 
 }

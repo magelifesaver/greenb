@@ -183,7 +183,7 @@ var br_something_changed = false;
         });
         $(document).on('click', '.berocket_select_fontawesome .berocket_remove_fa',function(event) {
             event.preventDefault();
-            $(this).parents('.berocket_select_fontawesome').find('.berocket_selected_fa').html('');
+            $(this).parents('.berocket_select_fontawesome').find('.berocket_selected_fa').html('<i class="fa_select_removed"></i>');
             $(this).parents('.berocket_select_fontawesome').find('.berocket_fa_value').val('').trigger('change');
         });
         $(document).on('keyup', '.berocket_select_fontawesome .berocket_fa_search', function() {

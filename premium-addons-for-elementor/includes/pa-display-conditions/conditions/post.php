@@ -32,16 +32,15 @@ class Post extends Condition {
 	public function get_control_options() {
 
 		return array(
-			'label'         => __( 'Value', 'premium-addons-pro' ),
-			'type'          => Premium_Post_Filter::TYPE,
-			'label_block'   => true,
-			'multiple'      => true,
-			'source'        => 'post',
+			'label'       => __( 'Value', 'premium-addons-pro' ),
+			'type'        => Premium_Post_Filter::TYPE,
+			'label_block' => true,
+			'multiple'    => true,
+			'source'      => 'post',
 			'condition'   => array(
 				'pa_condition_key' => 'post',
 			),
 		);
-
 	}
 
 	/**

@@ -1002,7 +1002,13 @@
 				settings = $elem.data("settings"),
 				loadingSpeed = settings.delay || 2500,
 				$animatedText = $elem.find('.premium-atext__text'),
-				startEffectOn = $elem.data('start-effect');
+				startEffectOn = $elem.data('start-effect'),
+				isAlreadyLoaded = $scope.data("is-loaded");
+
+			if (isAlreadyLoaded)
+				return;
+
+			$scope.attr("data-is-loaded", true);
 
 			function escapeHtml(unsafe) {
 				return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(
@@ -2817,7 +2823,8 @@
 		/****** Premium Grow Effect Handler ******/
 		var PremiumButtonHandler = function ($scope, $) {
 
-			var $btnGrow = $scope.find('.premium-button-style6-bg');
+			var $btnGrow = $scope.find('.premium-button-style6-bg'),
+				$basicBtn = $scope.find('.premium-image-button-none');
 
 			if ($btnGrow.length !== 0 && $scope.hasClass('premium-mouse-detect-yes')) {
 				$scope.on('mouseenter mouseleave', '.premium-button-style6', function (e) {
@@ -2834,6 +2841,23 @@
 				});
 			}
 
+			// Fix: Small gap appears when hover background color is the same as the border color && border-radius is applied.
+			if ($basicBtn.length) {
+				var btnHoverAttr = getComputedStyle($basicBtn[0], '::after'),
+					hoverStyle = {},
+					bgColor = btnHoverAttr.backgroundColor,
+					bgImage = btnHoverAttr.backgroundImage;
+
+				if (bgColor) {
+					hoverStyle['background-color'] = bgColor;
+				}
+
+				if (bgImage && (bgImage.startsWith("linear-gradient") || bgImage.startsWith("radial-gradient"))) {
+					hoverStyle['background-image'] = bgImage;
+				}
+
+				$basicBtn.hover(function () { $(this).css(hoverStyle); }, function () { $(this).css({ 'background-color': '', 'background-image': '' }); });
+			}
 		};
 
 		var PremiumMaskHandler = function ($scope, $) {

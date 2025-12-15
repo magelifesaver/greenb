@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA Promo - Promo25
+ * Plugin Name: AAA Promo - Promo25 (XHV98-PROMO)
  * Description: Creates and applies the "promo25" coupon ($25 off every $100 spent, one-time use).
  * Version: 1.0.2
  * Author: AAA Workflow

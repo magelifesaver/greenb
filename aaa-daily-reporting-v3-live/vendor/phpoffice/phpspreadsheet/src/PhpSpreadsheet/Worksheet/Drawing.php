@@ -92,7 +92,7 @@ class Drawing extends BaseDrawing
      *
      * @return $this
      */
-    public function setPath(string $path, bool $verifyFile = true, ?ZipArchive $zip = null): static
+    public function setPath(string $path, bool $verifyFile = true, ?ZipArchive $zip = null, bool $allowExternal = true): static
     {
         $this->isUrl = false;
         if (preg_match('~^data:image/[a-z]+;base64,~', $path) === 1) {
@@ -106,6 +106,9 @@ class Drawing extends BaseDrawing
         if (filter_var($path, FILTER_VALIDATE_URL) || (preg_match('/^([\w\s\x00-\x1f]+):/u', $path) && !preg_match('/^([\w]+):/u', $path))) {
             if (!preg_match('/^(http|https|file|ftp|s3):/', $path)) {
                 throw new PhpSpreadsheetException('Invalid protocol for linked drawing');
+            }
+            if (!$allowExternal) {
+                return $this;
             }
             // Implicit that it is a URL, rather store info than running check above on value in other places.
             $this->isUrl = true;
@@ -190,6 +193,20 @@ class Drawing extends BaseDrawing
     public function getIsURL(): bool
     {
         return $this->isUrl;
+    }
+
+    /**
+     * Set isURL.
+     *
+     * @return $this
+     *
+     * @deprecated 3.7.0 not needed, property is set by setPath
+     */
+    public function setIsURL(bool $isUrl): self
+    {
+        $this->isUrl = $isUrl;
+
+        return $this;
     }
 
     /**

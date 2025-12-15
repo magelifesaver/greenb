@@ -714,6 +714,8 @@ class Premium_Fancytext extends Widget_Base {
 
 		}
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'fancy-text' );

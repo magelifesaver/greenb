@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA Admin Order Refund Reason (live)(net)(addon)
+ * Plugin Name: AAA Admin Order Refund Reason (live)(net)(addon)(XHV98)
  * Description: Forces admins to enter a refund reason before processing refunds in WooCommerce order edit screen.
  * Version: 1.0.0
  * Author: AAA Workflow

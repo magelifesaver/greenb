@@ -32,11 +32,11 @@ class Woo_Cart_Products extends Condition {
 	public function get_control_options() {
 
 		return array(
-			'label'         => __( 'Value', 'premium-addons-pro' ),
-			'type'          => Premium_Post_Filter::TYPE,
-			'label_block'   => true,
-			'multiple'      => true,
-			'source'        => 'product',
+			'label'       => __( 'Value', 'premium-addons-pro' ),
+			'type'        => Premium_Post_Filter::TYPE,
+			'label_block' => true,
+			'multiple'    => true,
+			'source'      => 'product',
 			'condition'   => array(
 				'pa_condition_key' => 'woo_cart_products',
 			),

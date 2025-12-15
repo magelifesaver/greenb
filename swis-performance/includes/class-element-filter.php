@@ -46,7 +46,7 @@ final class Element_Filter extends Page_Parser {
 		if ( $this->is_iterable( $links ) ) {
 			$this->debug_message( 'found ' . count( $links ) . ' CSS links to run through filters' );
 			foreach ( $links as $index => $link ) {
-				if ( false === strpos( $link, 'stylesheet' ) && false === strpos( $link, '.css' ) ) {
+				if ( ! \str_contains( $link, 'stylesheet' ) || ! \str_contains( $link, '.css' ) ) {
 					continue;
 				}
 				$handle = '';
@@ -82,15 +82,15 @@ final class Element_Filter extends Page_Parser {
 
 				$this->debug_message( 'running link through filters:' );
 				$this->debug_message( trim( $link ) );
-				$link = apply_filters( 'swis_elements_link_tag', $link, $handle );
+				$link = \apply_filters( 'swis_elements_link_tag', $link, $handle );
 				if ( $link && $link !== $links[ $index ] ) {
 					$this->debug_message( 'link modified:' );
 					$this->debug_message( trim( $link ) );
 					// Replace original element with modified version.
-					$content = str_replace( $links[ $index ], $link, $content );
+					$content = \str_replace( $links[ $index ], $link, $content );
 				} elseif ( ! $link ) {
 					$this->debug_message( 'removing ' . $links[ $index ] );
-					$content = str_replace( $links[ $index ], '', $content );
+					$content = \str_replace( $links[ $index ], '', $content );
 				}
 			} // End foreach().
 		} // End if();
@@ -98,7 +98,7 @@ final class Element_Filter extends Page_Parser {
 		// Look for script elements (but we only want resources, not inline ones).
 		$scripts = $this->get_script_elements_from_html( $search_buffer );
 		if ( $this->is_iterable( $scripts ) ) {
-			$this->debug_message( 'found ' . count( $scripts ) . ' script tags to run through filters' );
+			$this->debug_message( 'found ' . \count( $scripts ) . ' script tags to run through filters' );
 			foreach ( $scripts as $index => $script ) {
 				$script_parts = $this->script_parts( $script );
 				if ( ! $script_parts || empty( $script_parts['open'] ) ) {
@@ -107,7 +107,7 @@ final class Element_Filter extends Page_Parser {
 				}
 				$handle = '';
 				// Used to ignore inline scripts, not any more...
-				if ( false === strpos( $script_parts['open'], ' src' ) ) {
+				if ( false === \strpos( $script_parts['open'], ' src' ) ) {
 					/* continue; */
 				}
 				$src = $this->get_attribute( $script_parts['open'], 'src' );

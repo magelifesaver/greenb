@@ -1,7 +1,7 @@
 <?php
 /**
  * File: /plugins/aaa-add-custom-product-status/aaa-add-custom-product-status.php
- * Plugin Name: A A Add Custom Product Status 2.0 (visibility-only)
+ * Plugin Name: A A Add Custom Product Status 2.0 (visibility-only)(XHV98)
  * Description: Keeps post_status stable; archives out-of-stock via meta and hides them from admin lists. Compatible with sync/global cart.
  * Version: 2.0.0
  * Author: WebMaster

@@ -44,18 +44,19 @@ class GroupedProducts extends Comparison\Meta
 
     private function get_grouped_products(): array
     {
+        $options = [];
+
         foreach (wc_get_products(['type' => 'grouped']) as $grouped_product) {
             if ( ! $grouped_product instanceof WC_Product) {
                 continue;
             }
-            $options = [];
 
             foreach ($grouped_product->get_children() as $child) {
                 $options[] = $child;
             }
         }
 
-        return $options;
+        return array_unique($options);
     }
 
     public function format_label($value): string

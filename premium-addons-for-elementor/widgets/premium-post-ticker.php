@@ -344,6 +344,7 @@ class Premium_Post_Ticker extends Widget_Base {
 			)
 		);
 
+		$this->papro_activated = Helper_Functions::check_papro_version();
 		if ( ! $this->papro_activated ) {
 
 			$get_pro = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro', 'ticker-widget', 'wp-editor', 'get-pro' );
@@ -1086,7 +1087,6 @@ class Premium_Post_Ticker extends Widget_Base {
 			array(
 				'label'       => __( 'Title HTML Tag', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'h4',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -1098,6 +1098,7 @@ class Premium_Post_Ticker extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
+				'default'     => 'h4',
 				'label_block' => true,
 				'conditions'  => array(
 					'relation' => 'or',
@@ -1756,8 +1757,7 @@ class Premium_Post_Ticker extends Widget_Base {
 			)
 		);
 
-
-
+		$this->papro_activated = Helper_Functions::check_papro_version();
 		if ( $this->papro_activated ) {
 			do_action( 'pa_ticker_stock_query', $this );
 
@@ -2084,6 +2084,8 @@ class Premium_Post_Ticker extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 	}
@@ -2644,6 +2646,7 @@ class Premium_Post_Ticker extends Widget_Base {
 			)
 		);
 
+		$this->papro_activated = Helper_Functions::check_papro_version();
 		if ( $this->papro_activated ) {
 			do_action( 'pa_ticker_stock_style', $this );
 		}
@@ -3144,6 +3147,8 @@ class Premium_Post_Ticker extends Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
+
+		$this->papro_activated = Helper_Functions::check_papro_version();
 
 		if ( ! $this->papro_activated && ( in_array( $settings['layout'], array( 'layout-3', 'layout-4' ), true ) || ! in_array( $settings['post_type_filter'], array( 'post', 'text' ), true ) ) ) {
 			?>

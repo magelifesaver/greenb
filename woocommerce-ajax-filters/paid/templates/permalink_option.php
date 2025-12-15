@@ -10,15 +10,49 @@ if( ! empty($plugin_option['nice_urls']) ) {
     <input type="text" placeholder="filters" id="berocket_permalinks_variable" name="berocket_permalink_option[variable]" value="<?php echo br_get_value_from_array($options, 'variable'); ?>">
     <span>/taxonomy_name</span>
     <select name="berocket_permalink_option[value]" id="berocket_permalinks_value">
-        <option <?php if( br_get_value_from_array($options, 'value') == '/values' ) echo 'selected'; ?> value="/values">/values</option>
-        <option <?php if( br_get_value_from_array($options, 'value') == '[values]' ) echo 'selected'; ?> value="[values]">[values]</option>
-        <option <?php if( br_get_value_from_array($options, 'value') == '=values' ) echo 'selected'; ?> value="=values" disabled>=values</option>
-        <option <?php if( br_get_value_from_array($options, 'value') == '=[values]' ) echo 'selected'; ?> value="=[values]" disabled>=[values]</option>
+    <?php
+        $permalink_values = array(
+            '/values' => array(
+                'name' => '/values',
+            ),
+            '[values]' => array(
+                'name' => '[values]',
+            ),
+            '=values' => array(
+                'name' => '=values',
+                'disabled' => true,
+            ),
+            '=[values]' => array(
+                'name' => '=[values]',
+                'disabled' => true,
+            ),
+        );
+        $permalink_values = apply_filters('bapf_berocket_permalink_option_values', $permalink_values);
+        $selected_permalink_value = br_get_value_from_array($options, 'value');
+        foreach($permalink_values as $permalink_slug => $permalink_value) {
+            echo '<option value="' . $permalink_slug . '"' . ($selected_permalink_value == $permalink_slug ? ' selected' : '') . (empty($permalink_value['disabled']) ? '' : ' disabled') . '>'. $permalink_value['name'] . '</option>';
+        }
+        ?>
     </select>
     <select name="berocket_permalink_option[split]" id="berocket_permalinks_split">
-        <option <?php if( br_get_value_from_array($options, 'split') == '/' ) echo 'selected'; ?> value="/">/</option>
-        <option <?php if( br_get_value_from_array($options, 'split') == '|' ) echo 'selected'; ?> value="|">|</option>
-        <option <?php if( br_get_value_from_array($options, 'split') == '&' ) echo 'selected'; ?> value="&">&</option>
+        <?php
+        $permalink_splits = array(
+            '/' => array(
+                'name' => '/',
+            ),
+            '|' => array(
+                'name' => '|',
+            ),
+            '&' => array(
+                'name' => '&',
+            ),
+        );
+        $permalink_splits = apply_filters('bapf_berocket_permalink_option_splits', $permalink_splits);
+        $selected_permalink_split = br_get_value_from_array($options, 'split');
+        foreach($permalink_splits as $permalink_slug => $permalink_value) {
+            echo '<option value="' . $permalink_slug . '"' . ($selected_permalink_split == $permalink_slug ? ' selected' : '') . (empty($permalink_value['disabled']) ? '' : ' disabled') . '>'. $permalink_value['name'] . '</option>';
+        }
+        ?>
     </select>
 </div>
 <div class="br_permalink_example">

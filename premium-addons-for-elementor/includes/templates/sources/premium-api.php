@@ -78,8 +78,8 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 		$response = wp_remote_get(
 			$api_url . $tab,
 			array(
-				'timeout'   => 20,
-				'sslverify' => false,
+				'timeout'   => 10,
+				'sslverify' => true,
 			)
 		);
 
@@ -121,7 +121,7 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 			$api_url . $tab,
 			array(
 				'timeout'   => 20,
-				'sslverify' => false,
+				'sslverify' => true,
 			)
 		);
 
@@ -163,7 +163,7 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 			$api_url . $tab,
 			array(
 				'timeout'   => 20,
-				'sslverify' => false,
+				'sslverify' => true,
 			)
 		);
 
@@ -309,7 +309,7 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 			$request,
 			array(
 				'timeout'   => 20,
-				'sslverify' => false,
+				'sslverify' => true,
 			)
 		);
 
@@ -324,9 +324,9 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 			);
 		}
 
-		$content         = isset( $body['content'] ) ? $body['content'] : '';
-		$type            = isset( $body['type'] ) ? $body['type'] : '';
-		$license         = isset( $body['license'] ) ? $body['license'] : '';
+		$content = isset( $body['content'] ) ? $body['content'] : '';
+		$type    = isset( $body['type'] ) ? $body['type'] : '';
+		$license = isset( $body['license'] ) ? $body['license'] : '';
 
 		if ( ! empty( $content ) ) {
 			$content = $this->replace_elements_ids( $content );
@@ -343,50 +343,50 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 
 	// public function get_papro_license_status( $license_key ) {
 
-	// 	if ( ! Helper_Functions::check_papro_version() ) {
-	// 		return true;
-	// 	}
+	// if ( ! Helper_Functions::check_papro_version() ) {
+	// return true;
+	// }
 
-	// 	if ( ! $license_key ) {
-	// 		return 'false';
-	// 	}
+	// if ( ! $license_key ) {
+	// return 'false';
+	// }
 
-	// 		$url = add_query_arg(
-	// 			array(
-	// 				'edd_action' => 'check_license',
-	// 				'license'    => $license_key,
-	// 				'item_id'    => 361,
-	// 			),
-	// 			'https://my.leap13.com/'
-	// 		);
+	// $url = add_query_arg(
+	// array(
+	// 'edd_action' => 'check_license',
+	// 'license'    => $license_key,
+	// 'item_id'    => 361,
+	// ),
+	// 'https://my.leap13.com/'
+	// );
 
-	// 		$response = wp_remote_get(
-	// 			$url,
-	// 			array(
-	// 				'timeout'     => 10,
-	// 				'sslverify'   => false, // Match your cURL setup
-	// 				'redirection' => 5,
-	// 			)
-	// 		);
+	// $response = wp_remote_get(
+	// $url,
+	// array(
+	// 'timeout'     => 10,
+	// 'sslverify'   => false, // Match your cURL setup
+	// 'redirection' => 5,
+	// )
+	// );
 
-	// 		// Check for errors
-	// 		if ( is_wp_error( $response ) ) {
-	// 			return;
-	// 		}
+	// Check for errors
+	// if ( is_wp_error( $response ) ) {
+	// return;
+	// }
 
-	// 		$response_code = wp_remote_retrieve_response_code( $response );
-	// 		if ( 200 !== $response_code ) {
-	// 			return;
-	// 		}
+	// $response_code = wp_remote_retrieve_response_code( $response );
+	// if ( 200 !== $response_code ) {
+	// return;
+	// }
 
-	// 		$response_body = wp_remote_retrieve_body( $response );
-	// 		$body          = json_decode( $response_body, true );
+	// $response_body = wp_remote_retrieve_body( $response );
+	// $body          = json_decode( $response_body, true );
 
-	// 		if ( isset( $body['license'] ) ) {
-	// 			return $body['license'];
-	// 		}
+	// if ( isset( $body['license'] ) ) {
+	// return $body['license'];
+	// }
 
-	// 		return true;
+	// return true;
 	// }
 
 	/**

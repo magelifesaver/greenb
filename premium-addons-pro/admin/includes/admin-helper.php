@@ -87,9 +87,22 @@ class Admin_Helper {
 
 		$settings_link = sprintf( '<a href="%1$s">%2$s</a>', admin_url( 'admin.php?page=' . $this->page_slug . '#tab=general' ), __( 'Settings', 'premium-addons-pro' ) );
 
-		array_push( $links, $settings_link );
+        $new_links = array( $settings_link );
 
-		return $links;
+        $license_info = get_transient( 'pa_license_info' );
+
+		if( isset( $license_info['id'] ) && '4' !== $license_info['id'] ) {
+			$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/upgrade-premium-addons-license/', 'plugins-page', 'wp-dash', 'upgrade-pro' );
+
+
+			$upgrade_link = sprintf( '<a href="%s" title="Upgrade to Lifetime by paying the difference only with an additional 35%% OFF" target="_blank" style="color: #FF6000; font-weight: bold;">%s</a>', $link, __( 'Upgrade to Lifetime (35% OFF)', 'premium-addons-pro' ) );
+
+			array_push( $new_links, $upgrade_link );
+		}
+
+        $new_links = array_merge( $links, $new_links );
+
+		return $new_links;
 	}
 
 

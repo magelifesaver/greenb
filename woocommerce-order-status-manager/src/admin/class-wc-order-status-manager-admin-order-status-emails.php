@@ -219,14 +219,14 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 
 								<tr class="condition">
 									<td>
-										<select name="_email_dispatch_condition[<?php echo $key; ?>][from]">
+										<select name="_email_dispatch_condition[<?php echo esc_attr( $key ); ?>][from]">
 											<?php foreach ( $status_options as $slug => $name ) : ?>
 												<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $slug, $condition['from'] ); ?>><?php echo esc_html( $name ); ?></option>
 											<?php endforeach; ?>
 										</select>
 									</td>
 									<td>
-										<select name="_email_dispatch_condition[<?php echo $key; ?>][to]">
+										<select name="_email_dispatch_condition[<?php echo esc_attr( $key ); ?>][to]">
 											<?php foreach ( $status_options as $slug => $name ) : ?>
 												<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $slug, $condition['to'] ); ?>><?php echo esc_html( $name ); ?></option>
 											<?php endforeach; ?>
@@ -339,9 +339,9 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 	 */
 	public function save_order_status_email_meta( $post_id, \WP_Post $post ) {
 
-		update_post_meta( $post_id, '_email_type',  $_POST['_email_type'] );
+		update_post_meta( $post_id, '_email_type',  wc_clean( $_POST['_email_type'] ) );
 
-		$dispatch_on_new_order = ! empty( $_POST['_email_dispatch_on_new_order'] ) ? $_POST['_email_dispatch_on_new_order'] : 'no';
+		$dispatch_on_new_order = ! empty( $_POST['_email_dispatch_on_new_order'] ) ? wc_clean( $_POST['_email_dispatch_on_new_order'] ) : 'no';
 
 		update_post_meta( $post_id, '_email_dispatch_on_new_order', $dispatch_on_new_order );
 
@@ -351,7 +351,7 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 		// Add in new dispatch conditions
 		if ( ! empty( $_POST['_email_dispatch_condition'] ) ) {
 
-			foreach ( $_POST['_email_dispatch_condition'] as $condition ) {
+			foreach ( wc_clean( $_POST['_email_dispatch_condition'] ) as $condition ) {
 				add_post_meta( $post_id, '_email_dispatch_condition', $condition['from'] . '_to_' . $condition['to'] );
 			}
 		}
@@ -373,13 +373,13 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 			case 'type':
 
 				if ( $type = get_post_meta( $post_id, '_email_type', true ) ) {
-					echo isset( $this->email_types[ $type ] ) ? $this->email_types[ $type ] : '';
+					echo isset( $this->email_types[ $type ] ) ? esc_html( $this->email_types[ $type ] ) : '';
 				}
 
 			break;
 
 			case 'description':
-				echo isset( $post->post_excerpt ) ? $post->post_excerpt : '';
+				echo isset( $post->post_excerpt ) ? wp_kses_post( $post->post_excerpt ) : '';
 			break;
 
 			case 'status':
@@ -409,9 +409,9 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 
 				printf( '<a href="%1$s" class="tips badge %2$s" data-tip="%3$s">%4$s</a>',
 					esc_url( $url ),
-					sanitize_title( $status ),
-					$tip,
-					$status
+					esc_attr( sanitize_title( $status ) ),
+					esc_attr( $tip ),
+					esc_html( $status )
 				);
 
 			break;
@@ -455,7 +455,7 @@ class WC_Order_Status_Manager_Admin_Order_Status_Emails {
 
 		?>
 		<div class="notice notice-warning">
-			<p><?php _e( 'Emails will not be sent while a dispatch condition\'s To and From statuses are both \'Any\'', 'woocommerce-order-status-manager' ); ?></p>
+			<p><?php esc_html_e( 'Emails will not be sent while a dispatch condition\'s To and From statuses are both \'Any\'', 'woocommerce-order-status-manager' ); ?></p>
 		</div>
 
 		<?php

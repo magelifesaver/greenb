@@ -107,7 +107,7 @@
 						url: paMenuSettings.ajaxurl,
 						type: 'POST',
 						data: {
-							action: 'get_pa_menu_item_settings',
+							action: 'pa_get_menu_item_settings',
 							security: paMenuSettings.nonce,
 							item_id: _this.currentItemId
 						},
@@ -209,7 +209,7 @@
 					url: paMenuSettings.ajaxurl,
 					type: 'POST',
 					data: {
-						action: 'save_pa_menu_item_settings',
+						action: 'pa_save_menu_item_settings',
 						security: paMenuSettings.nonce,
 						settings: itemSettings
 					},

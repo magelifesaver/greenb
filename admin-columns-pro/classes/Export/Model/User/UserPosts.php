@@ -19,9 +19,9 @@ class UserPosts implements ACP\Export\Service
         $this->post_stati = $post_stati;
     }
 
-    public function get_value($id)
+    public function get_value($id): string
     {
-        return ac_helper()->post->count_user_posts((int)$id, $this->post_types, $this->post_stati);
+        return (string)ac_helper()->post->count_user_posts((int)$id, $this->post_types, $this->post_stati);
     }
 
 }

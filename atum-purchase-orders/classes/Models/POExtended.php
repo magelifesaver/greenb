@@ -1926,6 +1926,13 @@ class POExtended extends PurchaseOrder {
 
 		}
 
+		// Make sure the current PO is being created and is not a PO without a number meta.
+		// IMPORTANT: if we don't check this, the custom counter was being increased even when accessing the PO list if there were any of them without a number meta.
+		// NOTE: If a new PO is created via API, the status can be send in the request and it could be distinct from auto-draft.
+		if (  ! AtumHelpers::is_rest_request() && ( empty( $this->post ) || 'auto-draft' !== $this->post->post_status ) ) {
+			return;
+		}
+
 		$po_number = $this->generate_next_po_number();
 
 		if ( ! is_wp_error( $po_number ) ) {

@@ -2,13 +2,15 @@
 
 namespace ACA\GravityForms\Field\Type;
 
-class Email extends Input {
+class Email extends Input
+{
 
-	/**
-	 * @return string
-	 */
-	public function get_input_type() {
-		return 'email';
-	}
+    /**
+     * @return string
+     */
+    public function get_input_type()
+    {
+        return 'email';
+    }
 
 }

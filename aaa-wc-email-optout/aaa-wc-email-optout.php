@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA WC Email Opt-out by Meta
+ * Plugin Name: AAA WC Email Opt-out by Meta (XHV98-ADMIN)
  * Description: Blocks WooCommerce customer emails to users with meta 'uuu_disable_emails' truthy. Also removes them at wp_mail level.
  * Author: AAA Workflow
  * Version: 1.0.0

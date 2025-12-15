@@ -19,22 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Page_Parser extends Base {
 
 	/**
-	 * The directory in which to store cache files.
-	 *
-	 * @access protected
-	 * @var string $cache_dir
-	 */
-	protected $cache_dir = '';
-
-	/**
-	 * The URL to the directory where cache files are stored.
-	 *
-	 * @access protected
-	 * @var string $cache_dir_url
-	 */
-	protected $cache_dir_url = '';
-
-	/**
 	 * Allowed image extensions.
 	 *
 	 * @access protected
@@ -83,6 +67,14 @@ class Page_Parser extends Base {
 	protected $request_uri = '';
 
 	/**
+	 * List/map of CSS comments found during parsing a CSS file/block.
+	 *
+	 * @access protected
+	 * @var array $comments_map
+	 */
+	protected $comments_map = array();
+
+	/**
 	 * Match all images and any relevant <a> tags in a block of HTML.
 	 *
 	 * The hyperlinks param implies that the src attribute is required, but not the other way around.
@@ -99,6 +91,9 @@ class Page_Parser extends Base {
 		$images          = array();
 		$unquoted_images = array();
 
+		if ( empty( $content ) ) {
+			return $images;
+		}
 		$unquoted_pattern = '';
 		$search_pattern   = '#(?P<img_tag><img\s[^\\\\>]*?>)#is';
 		if ( $hyperlinks ) {
@@ -161,7 +156,7 @@ class Page_Parser extends Base {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$images = array();
 
-		if ( preg_match_all( '#(?P<noscript_tag><noscript[^>]*?>\s*)(?P<img_tag><img[^>]*?\s+?src\s*=\s*["\'](?P<img_url>[^\s]+?)["\'][^>]*?>){1}(?:\s*</noscript>)?#is', $content, $images ) ) {
+		if ( ! empty( $content ) && \preg_match_all( '#(?P<noscript_tag><noscript[^>]*?>\s*)(?P<img_tag><img[^>]*?\s+?src\s*=\s*["\'](?P<img_url>[^\s]+?)["\'][^>]*?>){1}(?:\s*</noscript>)?#is', $content, $images ) ) {
 			foreach ( $images as $key => $unused ) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if ( is_numeric( $key ) && $key > 0 ) {
@@ -182,7 +177,7 @@ class Page_Parser extends Base {
 	public function get_picture_tags_from_html( $content ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$pictures = array();
-		if ( preg_match_all( '#(?:<picture[^>]*?>\s*)(?:<source[^>]*?>)+(?:.*?</picture>)?#is', $content, $pictures ) ) {
+		if ( ! empty( $content ) && \preg_match_all( '#(?:<picture[^>]*?>\s*)(?:<source[^>]*?>)+(?:.*?</picture>)?#is', $content, $pictures ) ) {
 			return $pictures[0];
 		}
 		return array();
@@ -197,7 +192,7 @@ class Page_Parser extends Base {
 	public function get_style_elements_from_html( $content ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$styles = array();
-		if ( preg_match_all( '#<style[^>]*?>.*?</style>#is', $content, $styles ) ) {
+		if ( ! empty( $content ) && \preg_match_all( '#<style[^>]*?>.*?</style>#is', $content, $styles ) ) {
 			return $styles[0];
 		}
 		return array();
@@ -212,7 +207,7 @@ class Page_Parser extends Base {
 	public function get_script_elements_from_html( $content ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$scripts = array();
-		if ( preg_match_all( '#<script[^>]*?>.*?</script>#is', $content, $scripts ) ) {
+		if ( ! empty( $content ) && \preg_match_all( '#<script[^>]*?>.*?</script>#is', $content, $scripts ) ) {
 			return $scripts[0];
 		}
 		return array();
@@ -226,10 +221,10 @@ class Page_Parser extends Base {
 	 */
 	public function script_parts( $element ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		if ( preg_match( '#(?P<open><script[^>]*?>)(?P<content>.*?)(?P<close></script>)#is', $element, $script_parts ) ) {
+		if ( ! empty( $element ) && \preg_match( '#(?P<open><script[^>]*?>)(?P<content>.*?)(?P<close></script>)#is', $element, $script_parts ) ) {
 			foreach ( $script_parts as $key => $unused ) {
 				// Simplify the output as much as possible.
-				if ( is_numeric( $key ) ) {
+				if ( \is_numeric( $key ) ) {
 					unset( $script_parts[ $key ] );
 				}
 			}
@@ -248,13 +243,65 @@ class Page_Parser extends Base {
 	 */
 	public function get_elements_from_html( $content, $tag_name ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		if ( ! ctype_alpha( $tag_name ) ) {
+		if ( ! \ctype_alpha( \str_replace( '-', '', $tag_name ) ) ) {
 			return array();
 		}
-		if ( preg_match_all( '#<' . $tag_name . '\s[^\\\\>]+?>#is', $content, $elements ) ) {
+		if ( ! empty( $content ) && \preg_match_all( '#<' . $tag_name . '\s[^\\\\>]+?>#is', $content, $elements ) ) {
 			return $elements[0];
 		}
 		return array();
+	}
+
+	/**
+	 * Try to determine height and width from strings WP appends to resized image filenames.
+	 *
+	 * @param string $src The image URL.
+	 * @return array An array consisting of width and height.
+	 */
+	public function get_dimensions_from_filename( $src ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		$width_height_string = array();
+		$this->debug_message( "looking for dimensions in $src" );
+		$width  = false;
+		$height = false;
+		if ( \preg_match( '#-(\d+)x(\d+)(@2x)?\.(?:' . \implode( '|', $this->extensions ) . '){1}(?:\?.+)?$#i', $src, $width_height_string ) ) {
+			$width  = (int) $width_height_string[1];
+			$height = (int) $width_height_string[2];
+
+			if ( \strpos( $src, '@2x' ) ) {
+				$width  = 2 * $width;
+				$height = 2 * $height;
+			}
+			if ( $width && $height ) {
+				$this->debug_message( "found w$width h$height" );
+				return array( $width, $height );
+			}
+		}
+		return array( $width, $height );
+	}
+
+	/**
+	 * Get dimensions of a file from the URL.
+	 *
+	 * @param string $url The URL of the image.
+	 * @return array The width and height, in pixels.
+	 */
+	public function get_image_dimensions_by_url( $url ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		$this->debug_message( "getting dimensions for $url" );
+
+		list( $width, $height ) = $this->get_dimensions_from_filename( $url, ! empty( $this->parsing_exactdn ) );
+		if ( empty( $width ) || empty( $height ) ) {
+			// Couldn't get it from the URL directly, see if we can get the actual filename.
+			$file = $this->get_local_path( $url );
+			if ( $file && $this->is_file( $file ) ) {
+				list( $width, $height ) = \wp_getimagesize( $file );
+			}
+		}
+		$width  = $width && \is_numeric( $width ) ? (int) $width : false;
+		$height = $height && \is_numeric( $height ) ? (int) $height : false;
+
+		return array( $width, $height );
 	}
 
 	/**
@@ -281,6 +328,63 @@ class Page_Parser extends Base {
 	}
 
 	/**
+	 * Check if a URL is relative.
+	 *
+	 * @param string $url URL to check.
+	 * @return bool True if the URL is relative, false if absolute.
+	 */
+	protected function is_url_relative( $url ) {
+		return \str_starts_with( '.', $url ) || empty( \wp_parse_url( $url, PHP_URL_HOST ) );
+	}
+
+	/**
+	 * Make a URL absolute.
+	 *
+	 * @param string $url The URL to make absolute.
+	 * @param string $base_url Optional. The base URL to use for relative URLs. If not provided, the site URL will be used.
+	 * @return string The absolute URL, or an empty string on failure.
+	 */
+	public function absolutize_url( $url, $base_url = '' ) {
+		// If the URL is already absolute, return it as-is.
+		if ( ! $this->is_url_relative( $url ) ) {
+			$this->debug_message( "url $url is already absolute" );
+			return $url;
+		}
+
+		if ( empty( $base_url ) && str_starts_with( $url, '.' ) ) {
+			$this->debug_message( "cannot resolve relative URL $url without a base URL" );
+			return '';
+		}
+
+		if ( ! empty( $base_url ) ) {
+			$this->debug_message( "resolving relative URL $url against base $base_url" );
+			$parsed_base = $this->parse_url( $base_url );
+
+			// Handle root-relative URLs.
+			if ( \str_starts_with( $url, '/' ) ) {
+				if ( ! empty( $parsed_base['scheme'] ) && ! empty( $parsed_base['host'] ) ) {
+					return $parsed_base['scheme'] . '://' . $parsed_base['host'] . $url;
+				}
+				return rtrim( $base_url, '/' ) . $url;
+			}
+
+			// Handle relative URLs.
+			if ( ! empty( $parsed_base['scheme'] ) && ! empty( $parsed_base['host'] ) ) {
+				$path = ! empty( $parsed_base['path'] ) ? trailingslashit( dirname( $parsed_base['path'] ) ) : '/';
+				if ( str_starts_with( $url, './' ) ) {
+					$url = substr( $url, 2 );
+				}
+				while ( str_starts_with( $url, '../' ) ) {
+					$path = trailingslashit( dirname( $path ) );
+					$url  = substr( $url, 3 );
+				}
+				return $parsed_base['scheme'] . '://' . $parsed_base['host'] . $path . ltrim( $url, './' );
+			}
+		}
+		return \trailingslashit( \home_url() ) . ltrim( $url, './' );
+	}
+
+	/**
 	 * Get a CSS background-image URL.
 	 *
 	 * @param string $attribute An element's style attribute. Do not pass a full HTML element.
@@ -288,11 +392,34 @@ class Page_Parser extends Base {
 	 */
 	public function get_background_image_url( $attribute ) {
 		if ( ( false !== strpos( $attribute, 'background:' ) || false !== strpos( $attribute, 'background-image:' ) ) && false !== strpos( $attribute, 'url(' ) ) {
-			if ( preg_match( '#url\(([^)]+)\)#', $attribute, $prop_match ) ) {
-				return trim( html_entity_decode( $prop_match[1], ENT_QUOTES | ENT_HTML401 ), "'\"\t\n\r " );
+			if ( \preg_match( '#url\(([^)]+)\)#', $attribute, $prop_match ) ) {
+				return \trim( \html_entity_decode( $prop_match[1], ENT_QUOTES | ENT_HTML401 ), "'\"\t\n\r " );
 			}
 		}
 		return '';
+	}
+
+	/**
+	 * Get one (or more) CSS background-image URLs.
+	 *
+	 * @param string $css_section An element's style attribute, or a CSS rule/section. Do not pass a full HTML element or CSS file.
+	 * @return array The URLs from the background/background-image property.
+	 */
+	public function get_background_image_urls( $css_section ) {
+		if ( ( \str_contains( $css_section, 'background:' ) || \str_contains( $css_section, 'background-image:' ) ) && \str_contains( $css_section, 'url(' ) ) {
+			if ( \preg_match_all( '#(?<wrapper>url\([\s\'"]*(?<url>[^)]+)[\s\'"]*\))#', $css_section, $url_matches ) ) {
+				if ( ! empty( $url_matches['url'] ) ) {
+					return $url_matches;
+				}
+			}
+		} elseif ( \str_contains( $css_section, 'url(' ) ) {
+			if ( \preg_match_all( '#(?<wrapper>url\([\s\'"]*(?<url>[^)]+)[\s\'"]*\))#', $css_section, $url_matches ) ) {
+				if ( ! empty( $url_matches['url'] ) ) {
+					return $url_matches;
+				}
+			}
+		}
+		return array();
 	}
 
 	/**
@@ -302,12 +429,53 @@ class Page_Parser extends Base {
 	 * @return array The URLs with background/background-image properties.
 	 */
 	public function get_background_images( $html ) {
-		if ( ( false !== strpos( $html, 'background:' ) || false !== strpos( $html, 'background-image:' ) ) && false !== strpos( $html, 'url(' ) ) {
-			if ( preg_match_all( '#background(-image)?:\s*?[^;}]*?url\([^)]+\)#', $html, $matches ) ) {
+		if ( ( false !== \strpos( $html, 'background:' ) || false !== \strpos( $html, 'background-image:' ) ) && false !== \strpos( $html, 'url(' ) ) {
+			if ( \preg_match_all( '#background(-image)?:\s*?[^;}]*?url\([^)]+\)#', $html, $matches ) ) {
 				return $matches[0];
 			}
 		}
 		return array();
+	}
+
+	/**
+	 * Clean a CSS selector, removing pseudo-classes and pseudo-elements.
+	 *
+	 * @param string $selector The CSS selector to clean.
+	 * @return string The cleaned selector.
+	 */
+	public function clean_css_selector( $selector ) {
+		// Because there might actually be multiple selectors in a single rule, we need to split them out.
+		$selectors = explode( ',', $selector );
+
+		// The longer focus-* variants need to be first, so that they match before the shorter :focus.
+		$pseudo_classes = array(
+			':focus-within',
+			':focus-visible',
+			':active',
+			':after',
+			':before',
+			':first-letter',
+			':first-line',
+			':focus',
+			':hover',
+			':visited',
+		);
+
+		// Combinators need to be suffixed with an '*' if there is nothing following the combinator.
+		$combinators = array( '>', '+', '~', '&' );
+
+		foreach ( $selectors as $index => $single_selector ) {
+			$single_selector = preg_replace( '/::[\w-]+/', '', $single_selector ); // Remove pseudo-elements.
+			foreach ( $pseudo_classes as $pseudo_class ) {
+				$single_selector = str_replace( $pseudo_class, '', $single_selector );
+			}
+			if ( in_array( substr( trim( $single_selector ), -1 ), $combinators, true ) ) {
+				$single_selector .= '*';
+			}
+			$selectors[ $index ] = $single_selector;
+		}
+
+		return implode( ',', $selectors );
 	}
 
 	/**

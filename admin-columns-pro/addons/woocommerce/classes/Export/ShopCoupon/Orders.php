@@ -5,16 +5,19 @@ namespace ACA\WC\Export\ShopCoupon;
 use AC\Column;
 use ACP;
 
-class Orders implements ACP\Export\Service {
+class Orders implements ACP\Export\Service
+{
 
-	private $column;
+    private $column;
 
-	public function __construct( Column $column ) {
-		$this->column = $column;
-	}
+    public function __construct(Column $column)
+    {
+        $this->column = $column;
+    }
 
-	public function get_value( $id ) {
-		return implode( ', ', $this->column->get_raw_value( $id ) );
-	}
+    public function get_value($id): string
+    {
+        return implode(', ', $this->column->get_raw_value($id));
+    }
 
 }

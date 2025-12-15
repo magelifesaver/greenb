@@ -136,6 +136,9 @@ if( ! class_exists('BeRocket_AAPF_search_field_apply') ) {
                     if( strpos(br_get_value_from_array($berocket_query_var_title, 'searchf_suggest'), 'products') !== FALSE ) {
 						$query_vars['paged'] = 0;
                         $query_vars['fields'] = "all";
+                        if( ! isset($query_vars['post_type']) ) {
+                            $query_vars['post_type'] = 'product';
+                        }
                         $posts = get_posts($query_vars);
                         foreach($posts as $post) {
                             $post_content[$post->ID] = apply_filters('brapf_searchf_suggest_post_content', array(

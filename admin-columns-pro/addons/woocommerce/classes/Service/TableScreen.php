@@ -5,372 +5,346 @@ namespace ACA\WC\Service;
 use AC;
 use AC\Asset\Location\Absolute;
 use AC\Registerable;
+use AC\Type\TableId;
+use ACA\WC;
 use ACA\WC\Asset\Script\Table;
-use ACA\WC\ListScreen;
-use ACA\WC\Settings\HideOnScreen\FilterOrderCustomer;
-use ACA\WC\Settings\HideOnScreen\FilterOrderDate;
-use ACA\WC\Settings\HideOnScreen\FilterOrderSubType;
-use ACA\WC\Settings\HideOnScreen\FilterProductCategory;
-use ACA\WC\Settings\HideOnScreen\FilterProductStockStatus;
-use ACA\WC\Settings\HideOnScreen\FilterProductType;
-use ACA\WC\Settings\HideOnScreen\FilterSubscriptionCustomer;
-use ACA\WC\Settings\HideOnScreen\FilterSubscriptionPayment;
-use ACA\WC\Settings\HideOnScreen\FilterSubscriptionProduct;
-use ACA\WC\TableScreen\HideOrderFilter;
-use ACA\WC\TableScreen\HideProductFilter;
-use ACA\WC\TableScreen\HideSubscriptionsFilter;
-use ACP\ListScreen\Taxonomy;
+use ACA\WC\Setting\TableElement\FilterOrderCustomer;
+use ACA\WC\Setting\TableElement\FilterOrderDate;
+use ACA\WC\Setting\TableElement\FilterOrderSubType;
+use ACA\WC\Setting\TableElement\FilterProductCategory;
+use ACA\WC\Setting\TableElement\FilterProductStockStatus;
+use ACA\WC\Setting\TableElement\FilterProductType;
+use ACA\WC\Setting\TableElement\FilterSubscriptionCustomer;
+use ACA\WC\Setting\TableElement\FilterSubscriptionPayment;
+use ACA\WC\Setting\TableElement\FilterSubscriptionProduct;
 use WC_Admin_List_Table_Orders;
-use WP_Post;
 
 final class TableScreen implements Registerable
 {
 
-    /**
-     * @var AC\ListScreen
-     */
-    private $current_list_screen;
+	/**
+	 * @var AC\ListScreen
+	 */
+	private $list_screen;
 
-    private $location;
+	private $location;
 
-    private $use_product_variations;
+	private $use_product_variations;
 
-    public function __construct(Absolute $location, bool $use_product_variations)
-    {
-        $this->location = $location;
-        $this->use_product_variations = $use_product_variations;
-    }
+	private $list_keys_factory;
 
-    public function register(): void
-    {
-        add_action('ac/table/list_screen', [$this, 'set_current_list_screen']);
-        add_action('ac/table_scripts', [$this, 'table_scripts']);
-        add_action('ac/table_scripts/editing', [$this, 'table_scripts_editing']);
-        add_action('admin_enqueue_scripts', [$this, 'product_scripts'], 100);
-        add_action('admin_head', [$this, 'display_width_styles']);
-        add_filter('ac/editing/role_group', [$this, 'set_editing_role_group'], 10, 2);
+	public function __construct(
+			WC\Admin\WcListKeysFactory $list_keys_factory,
+			Absolute $location,
+			bool $use_product_variations
+	) {
+		$this->location = $location;
+		$this->use_product_variations = $use_product_variations;
+		$this->list_keys_factory = $list_keys_factory;
+	}
 
-        // Add quick action to product overview
-        if ($this->use_product_variations) {
-            add_filter('post_row_actions', [$this, 'add_quick_action_variation'], 10, 2);
-            add_action('manage_product_posts_custom_column', [$this, 'add_quick_link_variation'], 11, 2);
-        }
+	public function register(): void
+	{
+		add_action('ac/table/list_screen', [$this, 'set_list_screen']);
+		add_action('ac/table_scripts', [$this, 'table_scripts']);
+		add_action('ac/table_scripts/editing', [$this, 'table_scripts_editing']);
+		add_action('admin_enqueue_scripts', [$this, 'product_scripts'], 100);
+		add_action('admin_head', [$this, 'display_width_styles']);
+		add_filter('ac/editing/role_group', [$this, 'set_editing_role_group'], 10, 2);
 
-        add_action('ac/table_scripts', [$this, 'hide_filters']);
-    }
+		// Add quick action to product overview
+		if ($this->use_product_variations) {
+			add_filter('post_row_actions', [$this, 'add_quick_action_variation'], 10, 2);
+			add_action('manage_product_posts_custom_column', [$this, 'add_quick_link_variation'], 11, 2);
+		}
 
-    public function hide_filters(AC\ListScreen $list_screen): void
-    {
-        global $wc_list_table;
+		add_action('ac/table_scripts', [$this, 'hide_filters']);
+	}
 
-        if ($wc_list_table instanceof WC_Admin_List_Table_Orders && (new FilterOrderCustomer())->is_hidden(
-                $list_screen
-            )) {
-            remove_action('restrict_manage_posts', [$wc_list_table, 'restrict_manage_posts']);
-        }
+	public function hide_filters(AC\ListScreen $list_screen): void
+	{
+		global $wc_list_table;
 
-        $services = [
-            new HideProductFilter($list_screen, new FilterProductType(), 'product_type'),
-            new HideProductFilter($list_screen, new FilterProductCategory(), 'product_category'),
-            new HideProductFilter($list_screen, new FilterProductStockStatus(), 'stock_status'),
+		$table_screen = $list_screen->get_table_screen();
 
-            new HideOrderFilter($list_screen, new FilterOrderDate()),
-            new HideOrderFilter($list_screen, new FilterOrderSubType()),
-            new HideOrderFilter($list_screen, new FilterOrderCustomer()),
-        ];
+		if (
+				$wc_list_table instanceof WC_Admin_List_Table_Orders &&
+				! (new FilterOrderCustomer())->is_enabled($list_screen)
+		) {
+			remove_action('restrict_manage_posts', [$wc_list_table, 'restrict_manage_posts']);
+		}
 
-        if ($list_screen instanceof ListScreen\Subscriptions) {
-            $services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionProduct());
-            $services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionPayment());
-            $services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionCustomer());
-        }
+		$services = [
+				new HideProductFilter($list_screen, new FilterProductType(), 'product_type'),
+				new HideProductFilter($list_screen, new FilterProductCategory(), 'product_category'),
+				new HideProductFilter($list_screen, new FilterProductStockStatus(), 'stock_status'),
+				new HideOrderFilter($list_screen, new FilterOrderCustomer()),
+				new HideOrderFilter($list_screen, new FilterOrderSubType()),
+				new HideOrderFilter($list_screen, new FilterOrderDate()),
+		];
 
-        if ($list_screen instanceof ListScreen\Order) {
-            $services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionCustomer());
-        }
+		if ($table_screen instanceof AC\PostType && $table_screen->get_post_type()->equals('shop_subscription')) {
+			$services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionProduct());
+			$services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionPayment());
+			$services[] = new HideSubscriptionsFilter($list_screen, new FilterSubscriptionCustomer());
+		}
 
-        foreach ($services as $service) {
-            $service->register();
-        }
-    }
+		foreach ($services as $service) {
+			$service->register();
+		}
+	}
 
-    /**
-     * @param AC\ListScreen $list_screen
-     */
-    public function set_current_list_screen($list_screen): void
-    {
-        if ( ! $list_screen) {
-            return;
-        }
+	public function set_list_screen(AC\ListScreen $list_screen): void
+	{
+		$this->list_screen = $list_screen;
+	}
 
-        $this->current_list_screen = $list_screen;
-    }
+	public function is_wc_table_screen(AC\TableScreen $table_screen): bool
+	{
+		foreach ($this->list_keys_factory->create() as $key) {
+			if ($key->equals($table_screen->get_id())) {
+				return true;
+			}
+		}
 
-    public function get_current_list_screen()
-    {
-        return $this->current_list_screen;
-    }
+		return false;
+	}
 
-    /**
-     * @param AC\ListScreen $list_screen
-     *
-     * @return bool
-     */
-    private function is_wc_list_screen($list_screen)
-    {
-        return $list_screen instanceof ListScreen\ShopOrder ||
-               $list_screen instanceof ListScreen\Order ||
-               $list_screen instanceof ListScreen\ShopCoupon ||
-               $list_screen instanceof ListScreen\Product ||
-               $list_screen instanceof ListScreen\ProductVariation ||
-               $list_screen instanceof ListScreen\Subscriptions ||
-               $list_screen instanceof ListScreen\OrderSubscription ||
-               $list_screen instanceof AC\ListScreen\User ||
-               ($list_screen instanceof Taxonomy && $list_screen->get_taxonomy() === 'product_cat');
-    }
+	public function table_scripts_editing(AC\ListScreen $list_screen): void
+	{
+		$table_screen = $list_screen->get_table_screen();
 
-    /**
-     * @param AC\ListScreen $list_screen
-     */
-    public function table_scripts_editing($list_screen)
-    {
-        if ( ! $this->is_wc_list_screen($list_screen)) {
-            return;
-        }
+		if ( ! $this->is_wc_table_screen($table_screen)) {
+			return;
+		}
 
-        wp_localize_script('acp-editing-table', 'acp_woocommerce_vars', [
-            'stock_status_options' => wc_get_product_stock_status_options(),
-        ]);
+		wp_localize_script('acp-editing-table', 'acp_woocommerce_vars', [
+				'stock_status_options' => wc_get_product_stock_status_options(),
+		]);
 
-        // Translations
-        wp_localize_script('acp-editing-table', 'acp_woocommerce_i18n', [
-            'woocommerce' => [
-                'add_note'                  => __('Add note', 'woocommerce'),
-                'added_by'                  => __('by', 'woocommerce'),
-                'custom_note_alert'         => __(
-                    'This note will be send to the customer by email',
-                    'codepress-admin-columns'
-                ),
-                'backorder'                 => __('On backorder', 'woocommerce'),
-                'cancel'                    => __('Cancel'),
-                'clear_sale_price'          => __('Clear Sale Price', 'codepress-admin-columns'),
-                'decimals'                  => __('Decimals', 'codepress-admin-columns'),
-                'decrease_by'               => __('Decrease by', 'codepress-admin-columns'),
-                'downloadable'              => __('Downloadable', 'woocommerce'),
-                'height'                    => __('Height', 'woocommerce'),
-                'in_stock'                  => __('In stock', 'woocommerce'),
-                'increase_by'               => __('Increase by', 'codepress-admin-columns'),
-                'length'                    => __('Length', 'woocommerce'),
-                'manage_stock'              => __('Manage stock', 'woocommerce'),
-                'no_notes'                  => __('No notes', 'woocommerce'),
-                'out_of_stock'              => __('Out of stock', 'woocommerce'),
-                'price'                     => __('Price', 'woocommerce'),
-                'regular'                   => __('Regular', 'codepress-admin-columns'),
-                'regular_price'             => __('Regular Price', 'codepress-admin-columns'),
-                'replace'                   => __('Replace', 'codepress-admin-columns'),
-                'sale'                      => __('Sale', 'woocommerce'),
-                'sale_price'                => __('Sale price', 'woocommerce'),
-                'sale_from'                 => __('Sale from', 'codepress-admin-columns'),
-                'sale_to'                   => __('Sale To', 'codepress-admin-columns'),
-                'set_new'                   => __('Set New', 'codepress-admin-columns'),
-                'set_sale_based_on_regular' => __(
-                    'Set the sale price based on the regular price',
-                    'codepress-admin-columns'
-                ),
-                'schedule'                  => __('Schedule', 'woocommerce'),
-                'schedule_from'             => _x('From', 'schedule', 'codepress-admin-columns'),
-                'schedule_to'               => _x('To', 'schedule', 'codepress-admin-columns'),
-                'scheduled'                 => __('Scheduled', 'codepress-admin-columns'),
-                'stock_status'              => __('Stock status', 'woocommerce'),
-                'stock_qty'                 => __('Stock Qty', 'woocommerce'),
-                'usage_limit_per_coupon'    => __('Usage limit per coupon', 'woocommerce'),
-                'usage_limit_per_user'      => __('Usage limit per user', 'woocommerce'),
-                'usage_limit_products'      => __('Usage limit products', 'woocommerce'),
-                'width'                     => __('Width', 'woocommerce'),
-                'rounding_none'             => __('No Rounding', 'codepress-admin-columns'),
-                'rounding_up'               => __('Round up', 'codepress-admin-columns'),
-                'rounding_down'             => __('Round down', 'codepress-admin-columns'),
-                'rounding_example'          => __('Example:', 'codepress-admin-columns'),
-                'virtual'                   => __('Virtual', 'woocommerce'),
-                'delete_note'               => __('Delete note', 'codepress-admin-columns'),
-                'delete_note_confirm'       => __(
-                    'Are you sure you want to delete this note?',
-                    'codepress-admin-columns'
-                ),
-            ],
-        ]);
+		// Translations
+		wp_localize_script('acp-editing-table', 'acp_woocommerce_i18n', [
+				'woocommerce' => [
+						'add_note'                  => __('Add note', 'woocommerce'),
+						'added_by'                  => __('by', 'woocommerce'),
+						'custom_note_alert'         => __(
+								'This note will be send to the customer by email',
+								'codepress-admin-columns'
+						),
+						'backorder'                 => __('On backorder', 'woocommerce'),
+						'cancel'                    => __('Cancel'),
+						'clear_sale_price'          => __('Clear Sale Price', 'codepress-admin-columns'),
+						'decimals'                  => __('Decimals', 'codepress-admin-columns'),
+						'decrease_by'               => __('Decrease by', 'codepress-admin-columns'),
+						'downloadable'              => __('Downloadable', 'woocommerce'),
+						'height'                    => __('Height', 'woocommerce'),
+						'in_stock'                  => __('In stock', 'woocommerce'),
+						'increase_by'               => __('Increase by', 'codepress-admin-columns'),
+						'length'                    => __('Length', 'woocommerce'),
+						'manage_stock'              => __('Manage stock', 'woocommerce'),
+						'no_notes'                  => __('No notes', 'woocommerce'),
+						'out_of_stock'              => __('Out of stock', 'woocommerce'),
+						'price'                     => __('Price', 'woocommerce'),
+						'regular'                   => __('Regular', 'codepress-admin-columns'),
+						'regular_price'             => __('Regular Price', 'codepress-admin-columns'),
+						'replace'                   => __('Replace', 'codepress-admin-columns'),
+						'sale'                      => __('Sale', 'woocommerce'),
+						'sale_price'                => __('Sale price', 'woocommerce'),
+						'sale_from'                 => __('Sale from', 'codepress-admin-columns'),
+						'sale_to'                   => __('Sale To', 'codepress-admin-columns'),
+						'set_new'                   => __('Set New', 'codepress-admin-columns'),
+						'set_sale_based_on_regular' => __(
+								'Set the sale price based on the regular price',
+								'codepress-admin-columns'
+						),
+						'schedule'                  => __('Schedule', 'woocommerce'),
+						'schedule_from'             => _x('From', 'schedule', 'codepress-admin-columns'),
+						'schedule_to'               => _x('To', 'schedule', 'codepress-admin-columns'),
+						'scheduled'                 => __('Scheduled', 'codepress-admin-columns'),
+						'stock_status'              => __('Stock status', 'woocommerce'),
+						'stock_qty'                 => __('Stock Qty', 'woocommerce'),
+						'usage_limit_per_coupon'    => __('Usage limit per coupon', 'woocommerce'),
+						'usage_limit_per_user'      => __('Usage limit per user', 'woocommerce'),
+						'usage_limit_products'      => __('Usage limit products', 'woocommerce'),
+						'width'                     => __('Width', 'woocommerce'),
+						'rounding_none'             => __('No Rounding', 'codepress-admin-columns'),
+						'rounding_up'               => __('Round up', 'codepress-admin-columns'),
+						'rounding_down'             => __('Round down', 'codepress-admin-columns'),
+						'rounding_example'          => __('Example:', 'codepress-admin-columns'),
+						'virtual'                   => __('Virtual', 'woocommerce'),
+						'delete_note'               => __('Delete note', 'codepress-admin-columns'),
+						'delete_note_confirm'       => __(
+								'Are you sure you want to delete this note?',
+								'codepress-admin-columns'
+						),
+				],
+		]);
 
-        if ($list_screen instanceof ListScreen\ProductVariation) {
-            wp_localize_script('acp-editing-table', 'woocommerce_admin_meta_boxes', [
-                'calendar_image'         => WC()->plugin_url() . '/assets/images/calendar.png',
-                'currency_format_symbol' => get_woocommerce_currency_symbol(),
-            ]);
-        }
+		$list_key = $table_screen->get_id();
 
-        if ($list_screen instanceof ListScreen\Order || $list_screen instanceof ListScreen\OrderSubscription) {
-            $script_orders = new AC\Asset\Script(
-                'aca-wc-table-orders',
-                $this->location->with_suffix('assets/js/table-orders.js')
-            );
-            $script_orders->enqueue();
-        }
-    }
+		if ($list_key->equals(new TableId('product_variation'))) {
+			wp_localize_script('acp-editing-table', 'woocommerce_admin_meta_boxes', [
+					'calendar_image'         => WC()->plugin_url() . '/assets/images/calendar.png',
+					'currency_format_symbol' => get_woocommerce_currency_symbol(),
+			]);
+		}
 
-    public function table_scripts(AC\ListScreen $list_screen): void
-    {
-        if ( ! $this->is_wc_list_screen($list_screen)) {
-            return;
-        }
+		if ($list_key->equals(new TableId('wc_order')) || $list_key->equals(new TableId('wc_order_subscription'))) {
+			$script_orders = new AC\Asset\Script(
+					'aca-wc-table-orders',
+					$this->location->with_suffix('assets/js/table-orders.js')
+			);
+			$script_orders->enqueue();
+		}
+	}
 
-        $style = new AC\Asset\Style('aca-wc-column', $this->location->with_suffix('assets/css/table.css'));
-        $style->enqueue();
+	public function table_scripts(AC\ListScreen $list_screen): void
+	{
+		if ( ! $this->is_wc_table_screen($list_screen->get_table_screen())) {
+			return;
+		}
 
-        $script = new Table('aca-wc-table', $this->location);
-        $script->enqueue();
-    }
+		$style = new AC\Asset\Style('aca-wc-column', $this->location->with_suffix('assets/css/table.css'));
+		$style->enqueue();
 
-    /**
-     * Single product scripts
-     *
-     * @param string $hook
-     */
-    public function product_scripts($hook): void
-    {
-        global $post;
+		$script = new Table('aca-wc-table', $this->location);
+		$script->enqueue();
+	}
 
-        if (in_array($hook, ['post-new.php', 'post.php']) && $post && 'product' === $post->post_type) {
-            $script = new AC\Asset\Script(
-                'aca-wc-product',
-                $this->location->with_suffix('assets/js/product.js'),
-                ['jquery']
-            );
-            $script->enqueue();
-        }
-    }
+	public function product_scripts($hook): void
+	{
+		global $post;
 
-    public function set_editing_role_group(string $group, string $role): string
-    {
-        if (in_array($role, ['customer', 'shop_manager'])) {
-            $group = __('WooCommerce', 'codepress-admin-columns');
-        }
+		if (in_array($hook, ['post-new.php', 'post.php']) && $post && 'product' === $post->post_type) {
+			$script = new AC\Asset\Script(
+					'aca-wc-product',
+					$this->location->with_suffix('assets/js/product.js'),
+					['jquery']
+			);
+			$script->enqueue();
+		}
+	}
 
-        return $group;
-    }
+	public function set_editing_role_group(string $group, string $role): string
+	{
+		if (in_array($role, ['customer', 'shop_manager'])) {
+			$group = __('WooCommerce', 'codepress-admin-columns');
+		}
 
-    private function get_list_table_link(int $product_id): ?string
-    {
-        $product = wc_get_product($product_id);
+		return $group;
+	}
 
-        if ( ! $product || 'variable' !== $product->get_type()) {
-            return null;
-        }
+	private function get_list_table_link(int $product_id): ?string
+	{
+		$product = wc_get_product($product_id);
 
-        return add_query_arg(['post_type' => 'product_variation', 'post_parent' => $product_id], admin_url('edit.php'));
-    }
+		if ( ! $product || 'variable' !== $product->get_type()) {
+			return null;
+		}
 
-    /**
-     * Add a quick action on the product overview which links to the product variations page.
-     *
-     * @param array   $actions
-     * @param WP_Post $post
-     *
-     * @return array
-     */
-    public function add_quick_action_variation($actions, $post)
-    {
-        if ('product' !== $post->post_type) {
-            return $actions;
-        }
+		return add_query_arg(['post_type' => 'product_variation', 'post_parent' => $product_id], admin_url('edit.php'));
+	}
 
-        $link = $this->get_list_table_link($post->ID);
+	/**
+	 * Add a quick action on the product overview which links to the product variations page.
+	 */
+	public function add_quick_action_variation($actions, $post)
+	{
+		if ('product' !== $post->post_type) {
+			return $actions;
+		}
 
-        if ($link) {
-            $actions['variation'] = ac_helper()->html->link($link, __('View Variations', 'codepress-admin-columns'));
-        }
+		$link = $this->get_list_table_link($post->ID);
 
-        return $actions;
-    }
+		if ($link) {
+			$actions['variation'] = ac_helper()->html->link($link, __('View Variations', 'codepress-admin-columns'));
+		}
 
-    /**
-     * Display an icon on the product name column which links to the product variations page.
-     *
-     * @param string $column
-     * @param int    $post_id
-     *
-     * @see \WP_Posts_List_Table::column_default
-     */
-    public function add_quick_link_variation($column, $post_id)
-    {
-        if ('name' !== $column) {
-            return;
-        }
+		return $actions;
+	}
 
-        $link = $this->get_list_table_link((int)$post_id);
+	/**
+	 * Display an icon on the product name column which links to the product variations page.
+	 */
+	public function add_quick_link_variation($column, $post_id)
+	{
+		if ('name' !== $column) {
+			return;
+		}
 
-        if ( ! $link) {
-            return;
-        }
+		$link = $this->get_list_table_link((int)$post_id);
 
-        $label = ac_helper()->html->tooltip(
-            '<span class="ac-wc-view"></span>',
-            __('View Variations', 'codepress-admin-columns')
-        );
+		if ( ! $link) {
+			return;
+		}
 
-        echo ac_helper()->html->link($link, $label, ['class' => 'view-variations']);
-    }
+		$label = ac_helper()->html->tooltip(
+				'<span class="ac-wc-view"></span>',
+				__('View Variations', 'codepress-admin-columns')
+		);
 
-    /**
-     * Applies the width setting to the table headers
-     */
-    public function display_width_styles(): void
-    {
-        if ( ! $this->current_list_screen instanceof ListScreen\ShopOrder) {
-            return;
-        }
+		echo ac_helper()->html->link($link, $label, ['class' => 'view-variations']);
+	}
 
-        $css_column_width = '';
+	/**
+	 * Applies the width setting to the table headers
+	 */
+	public function display_width_styles(): void
+	{
+		if ( ! $this->list_screen) {
+			return;
+		}
 
-        foreach ($this->current_list_screen->get_columns() as $column) {
-            $setting = $column->get_setting('width');
+		$table_screen = $this->list_screen->get_table_screen();
 
-            if ( ! $setting instanceof AC\Settings\Column\Width) {
-                continue;
-            }
+		if ( ! $table_screen->get_id()->equals(new TableId('shop_order'))) {
+			return;
+		}
 
-            $width = $setting->get_column_width();
+		$css_column_width = '';
 
-            if ($width) {
-                $css_width = $width->get_value() . $width->get_unit();
-            } else {
-                $css_width = 'auto';
-            }
+		foreach ($this->list_screen->get_columns() as $column) {
+			$width_setting = $column->get_setting('width');
+			$width_unit_setting = $column->get_setting('width_unit');
 
-            $css_column_width .= sprintf(
-                '.ac-%s .wrap table th.column-%s { width: %s !important; }',
-                esc_attr($this->current_list_screen->get_key()),
-                esc_attr($column->get_name()),
-                $css_width
-            );
-            $css_column_width .= sprintf(
-                'body.acp-overflow-table.ac-%s .wrap th.column-%s { min-width: %s !important; }',
-                esc_attr($this->current_list_screen->get_key()),
-                esc_attr($column->get_name()),
-                $css_width
-            );
-        }
+			if ( ! $width_setting instanceof AC\Setting\Component) {
+				return;
+			}
 
-        if ( ! $css_column_width) {
-            return;
-        }
+			$width = $width_setting->get_input()->get_value();
 
-        ?>
+			if ($width) {
+				$css_width = $width . $width_unit_setting->get_input()->get_value();
+			} else {
+				$css_width = 'auto';
+			}
+
+			$css_column_width .= sprintf(
+					'.ac-%s .wrap table th.column-%s { width: %s !important; }',
+					esc_attr((string)$this->list_screen->get_table_id()),
+					esc_attr((string)$column->get_id()),
+					$css_width
+			);
+			$css_column_width .= sprintf(
+					'body.acp-overflow-table.ac-%s .wrap th.column-%s { min-width: %s !important; }',
+					esc_attr((string)$this->list_screen->get_table_id()),
+					esc_attr((string)$column->get_id()),
+					$css_width
+			);
+		}
+
+		if ( ! $css_column_width) {
+			return;
+		}
+
+		?>
 		<style>
 			@media screen and (min-width: 783px) {
 			<?= $css_column_width; ?>
 			}
 		</style>
 
-        <?php
-    }
+		<?php
+	}
 
 }

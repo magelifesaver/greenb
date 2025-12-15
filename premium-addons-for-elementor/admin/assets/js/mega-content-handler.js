@@ -1,7 +1,7 @@
 (function ($) {
     'use strict';
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         window.PaMegaContentHandler = {
 
@@ -45,7 +45,7 @@
                         paIframe.attr("src", res.data.url);
                         paIframe.attr("data-premium-temp-id", res.data.id);
 
-                        window.PaMegaContentHandler.saveMegaContentId( res.data.id, widgetId );
+                        window.PaMegaContentHandler.saveMegaContentId(res.data.id, widgetId);
 
                         paIframe.on("load", function () {
                             paIframe.show();
@@ -58,14 +58,14 @@
                 });
             },
 
-            saveMegaContentId: function ( tempID, itemID ) {
+            saveMegaContentId: function (tempID, itemID) {
 
                 $.ajax({
                     type: 'POST',
                     url: paMegaContent.ajaxurl,
                     dataType: 'JSON',
                     data: {
-                        action: 'save_pa_mega_item_content',
+                        action: 'pa_save_mega_item_content',
                         security: paMegaContent.nonce,
                         template_id: tempID,
                         menu_item_id: itemID

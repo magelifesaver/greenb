@@ -7,12 +7,12 @@ use ACP\Export\Service;
 class PostParent implements Service
 {
 
-    public function get_value($id)
+    public function get_value($id): string
     {
         $parent_id = wp_get_post_parent_id($id);
 
         return $parent_id
-            ? strip_tags(get_the_title($parent_id))
+            ? get_the_title($parent_id)
             : '&nbsp;';
     }
 

@@ -63,14 +63,12 @@ class Device extends Condition {
 	 */
 	public function compare_value( $settings, $operator, $value, $compare_val, $tz ) {
 
-		require_once PREMIUM_ADDONS_PATH . 'includes/pa-display-conditions/mobile-detector.php';
-
-		$detect = new \PA_Mobile_Detect();
+		$device_type = Helper_Functions::get_device_type();
 
 		$device = 'desktop';
-		if ( $detect->isTablet() ) {
+		if ( 'tablet' === $device_type ) {
 			$device = 'tablet';
-		} elseif ( $detect->isMobile() ) {
+		} elseif ( 'mobile' === $device_type ) {
 			$device = 'mobile';
 		}
 

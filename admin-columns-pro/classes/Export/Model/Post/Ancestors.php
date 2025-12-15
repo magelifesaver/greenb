@@ -2,23 +2,26 @@
 
 namespace ACP\Export\Model\Post;
 
-use AC\Collection;
-use ACP\Column;
 use ACP\Export\Service;
 
-class Ancestors implements Service {
+class Ancestors implements Service
+{
 
-	private $column;
+    public function get_value($id): string
+    {
+        $post = get_post($id);
 
-	public function __construct( Column\Post\Ancestors $column ) {
-		$this->column = $column;
-	}
+        if ( ! $post) {
+            return '';
+        }
 
-	public function get_value( $id ) {
-		$ancestors = $this->column->get_ancestor_ids( $id );
-		$formatted_values = $this->column->get_formatted_value( new Collection( $ancestors ) );
+        $ancestors = [];
 
-		return strip_tags( $formatted_values->implode( ', ' ) );
-	}
+        foreach ($post->ancestors as $ancestor) {
+            $ancestors[] = ac_helper()->post->get_title($ancestor);
+        }
+
+        return strip_tags(implode(', ', $ancestors));
+    }
 
 }

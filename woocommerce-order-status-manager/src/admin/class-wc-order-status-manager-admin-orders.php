@@ -386,7 +386,7 @@ class WC_Order_Status_Manager_Admin_Orders {
 
 					<?php if ( Framework\SV_WC_Plugin_Compatibility::is_wc_version_gte( '3.3' )  ) : ?>
 						.wc-order-preview .order-status.status-<?php echo esc_html( $status ); ?> {
-							background-color: <?php echo $color; ?>;
+							background-color: <?php echo esc_html( $color ); ?>;
 							color: <?php echo esc_html( wc_order_status_manager()->get_icons_instance()->get_contrast_text_color( $color ) ); ?>;
 						}
 					<?php endif; ?>

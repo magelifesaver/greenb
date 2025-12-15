@@ -223,18 +223,18 @@ class WC_Order_Status_Manager_Admin {
 
 		if ( $is_hpos_orders_screen || 'post-new.php' === $pagenow || 'post.php' === $pagenow || 'edit.php' === $pagenow ) {
 
-			if ( 'wc_order_status' === $typenow || ( isset( $_GET['post'] ) && 'wc_order_status' === get_post_type( $_GET['post'] ) ) ) {
+			if ( 'wc_order_status' === $typenow || ( isset( $_GET['post'] ) && 'wc_order_status' === get_post_type( wc_clean( $_GET['post'] ) ) ) ) {
 				require_once( wc_order_status_manager()->get_plugin_path() . '/src/admin/class-wc-order-status-manager-admin-order-statuses.php' );
 				$this->admin_order_statuses = new WC_Order_Status_Manager_Admin_Order_Statuses();
 			}
 
-			if ( 'wc_order_email' === $typenow || ( isset( $_GET['post'] ) && 'wc_order_email' === get_post_type( $_GET['post'] ) ) ) {
+			if ( 'wc_order_email' === $typenow || ( isset( $_GET['post'] ) && 'wc_order_email' === get_post_type( wc_clean( $_GET['post'] ) ) ) ) {
 				require_once( wc_order_status_manager()->get_plugin_path() . '/src/admin/class-wc-order-status-manager-admin-order-status-emails.php' );
 				$this->admin_order_statuses = new WC_Order_Status_Manager_Admin_Order_Status_Emails();
 			}
 
 			// accounts for HPOS enabled sites
-			if ( $is_hpos_orders_screen || ( 'shop_order' === $typenow || ( isset( $_GET['post'] ) && 'shop_order' === get_post_type( $_GET['post'] ) ) ) ) {
+			if ( $is_hpos_orders_screen || ( 'shop_order' === $typenow || ( isset( $_GET['post'] ) && 'shop_order' === get_post_type( wc_clean( $_GET['post'] ) ) ) ) ) {
 				require_once( wc_order_status_manager()->get_plugin_path() . '/src/admin/class-wc-order-status-manager-admin-orders.php' );
 				$this->admin_orders = new WC_Order_Status_Manager_Admin_Orders();
 			}
@@ -500,7 +500,7 @@ class WC_Order_Status_Manager_Admin {
 		}
 
 		// check the nonce
-		if ( empty( $_POST['wc_order_status_manager_meta_nonce'] ) || ! wp_verify_nonce( $_POST['wc_order_status_manager_meta_nonce'], 'wc_order_status_manager_save_data' ) ) {
+		if ( empty( $_POST['wc_order_status_manager_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['wc_order_status_manager_meta_nonce'] ), 'wc_order_status_manager_save_data' ) ) {
 			return;
 		}
 

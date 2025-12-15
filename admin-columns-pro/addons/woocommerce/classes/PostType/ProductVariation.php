@@ -11,9 +11,6 @@ class ProductVariation implements Registerable
 
     public const POST_TYPE = 'product_variation';
 
-    /**
-     * @var Absolute
-     */
     private $location;
 
     public function __construct(Absolute $location)

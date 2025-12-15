@@ -1,7 +1,7 @@
 <?php
 /**
  * File: wp-content/plugins/aaa-fluentcrm-unique-validation/aaa-fluentcrm-unique-validation.php
- * Plugin Name: AAA FluentCRM - Unique Validation (Live AJAX)
+ * Plugin Name: AAA FluentCRM - Unique Validation (Live AJAX) (XHV98-FLU)
  * Description: Live + step-triggered uniqueness validation for Email, Phone, and Driver’s License in Fluent Forms (multi-step safe) with verbose logging.
  * Version:     1.2.0
  * Author:      Webmaster Workflow

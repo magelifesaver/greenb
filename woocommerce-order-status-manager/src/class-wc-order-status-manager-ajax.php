@@ -71,13 +71,13 @@ class WC_Order_Status_Manager_AJAX {
 			return;
 		}
 
-		$icon_attachment_src = wp_get_attachment_image_src( $_REQUEST['attachment_id'], 'wc_order_status_icon' );
+		$icon_attachment_src = wp_get_attachment_image_src( intval( $_REQUEST['attachment_id'] ), 'wc_order_status_icon' );
 
 		if ( empty( $icon_attachment_src ) ) {
 			return;
 		}
 
-		echo $icon_attachment_src[0];
+		echo $icon_attachment_src[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		exit;
 	}
 
@@ -97,7 +97,7 @@ class WC_Order_Status_Manager_AJAX {
 
 		$statuses = array();
 
-		foreach( $_POST['statuses'] as $index => $status ) {
+		foreach( wc_clean( $_POST['statuses'] ) as $index => $status ) {
 
 			$order_status_post = get_page_by_path( $status, OBJECT, 'wc_order_status' );
 
@@ -148,7 +148,7 @@ class WC_Order_Status_Manager_AJAX {
 			die;
 		}
 
-		if ( $status = wc_order_status_manager()->is_order_status_cpt( $_POST['status'] ) ) {
+		if ( $status = wc_order_status_manager()->is_order_status_cpt( wc_clean( $_POST['status'] ) ) ) {
 
 			if ( $existing_orders = $status->has_orders( array( 'nopaging' => true, 'posts_per_page' => -1 ) ) ) {
 
@@ -192,8 +192,8 @@ class WC_Order_Status_Manager_AJAX {
 
 			// sanity checks
 			if ( ( $_POST['old_status'] !== $_POST['new_status'] )
-			     && ( $old_status = wc_order_status_manager()->is_order_status_cpt( $_POST['old_status'] ) )
-			     && ( $new_status = wc_order_status_manager()->is_order_status_cpt( $_POST['new_status'] ) ) ) {
+			     && ( $old_status = wc_order_status_manager()->is_order_status_cpt( wc_clean( $_POST['old_status'] ) ) )
+			     && ( $new_status = wc_order_status_manager()->is_order_status_cpt( wc_clean( $_POST['new_status'] ) ) ) ) {
 
 				wc_order_status_manager()->get_order_statuses_instance()->handle_order_status_delete( $old_status->get_id(), $new_status->get_slug() );
 
@@ -257,7 +257,7 @@ class WC_Order_Status_Manager_AJAX {
 			die;
 		}
 
-		update_user_meta( get_current_user_id(), WC_Order_Status_Manager::PLUGIN_DEACTIVATION_MODAL_OPTION, $_POST['disabled'] );
+		update_user_meta( get_current_user_id(), WC_Order_Status_Manager::PLUGIN_DEACTIVATION_MODAL_OPTION, wc_clean( $_POST['disabled'] ) );
 
 		wp_send_json_success();
 	}

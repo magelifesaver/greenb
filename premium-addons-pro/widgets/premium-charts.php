@@ -928,12 +928,31 @@ class Premium_Charts extends Widget_Base {
 			)
 		);
 
+        $this->add_control(
+			'suffix',
+			array(
+				'label'       => __( 'Suffix', 'premium-addons-pro' ),
+				'type'        => Controls_Manager::TEXT,
+				'description' => __( 'This text will be added as a suffix to the values', 'premium-addons-pro' ),
+				'label_block' => true,
+				'condition'          => array(
+					'tool_tips' => 'true',
+                    'tool_tips_percent!' => 'true',
+				),
+                'ai' => [
+					'active' => false,
+				],
+                'frontend_available' => true,
+                'label_block' => false,
+			)
+		);
+
 		$this->add_control(
 			'value_on_chart',
 			array(
 				'label'              => __( 'Show Values on Chart', 'premium-addons-pro' ),
 				'type'               => Controls_Manager::SWITCHER,
-				'description'        => __( 'This option works only with Pie and Douhnut Charts', 'premium-addons-pro' ),
+				'description'        => __( 'This option works only with Pie and Doughnut Charts', 'premium-addons-pro' ),
 				'label_on'           => 'Show',
 				'label_off'          => 'Hide',
 				'return_value'       => 'true',
@@ -944,6 +963,8 @@ class Premium_Charts extends Widget_Base {
 				'frontend_available' => true,
 			)
 		);
+
+
 
 		$this->add_control(
 			'duration',

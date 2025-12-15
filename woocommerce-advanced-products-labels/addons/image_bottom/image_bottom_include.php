@@ -45,12 +45,14 @@ jQuery(document).ready(bapl_image_label_bottom_options);
             "label"    => __('Image Parent Selector', 'BeRocket_products_label_domain'),
             "name"     => "img_bottom_parent",
             "value"    => '.product',
+            'tr_class' => 'bapl_imgbtm_selectors'
         );
         $data['Advanced']['img_bottom_find'] = array(
             "type"     => "text",
             "label"    => __('Image Main Selector', 'BeRocket_products_label_domain'),
             "name"     => "img_bottom_find",
             "value"    => 'img',
+            'tr_class' => 'bapl_imgbtm_selectors'
         );
         return $data;
     }

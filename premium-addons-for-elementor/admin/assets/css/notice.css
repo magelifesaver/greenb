@@ -51,6 +51,7 @@
 }
 
 .error.pa-review-notice .pa-cta-btn {
+	vertical-align: middle;
 	background-color: #ff6000;
 	border: none;
 }

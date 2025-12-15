@@ -124,7 +124,7 @@ class WC_Order_Status_Manager_Order_Status_Email extends WC_Email {
 		}
 
 		// When a template is deleted
-		if ( ! empty( $_GET['delete_template'] ) && ( $template = esc_attr( basename( $_GET['delete_template'] ) ) ) && ! empty( $this->$template ) ) {
+		if ( ! empty( $_GET['delete_template'] ) && ( $template = esc_attr( basename( wc_clean( $_GET['delete_template'] ) ) ) ) && ! empty( $this->$template ) ) {
 			add_action( 'woocommerce_delete_email_template', 'reset_templates', 10, 2 );
 		}
 

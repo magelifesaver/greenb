@@ -754,6 +754,8 @@ class Premium_Image_Separator extends Widget_Base {
 			)
 		);
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(

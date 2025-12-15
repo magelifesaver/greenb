@@ -71,6 +71,7 @@ class BeRocket_aapf_custom_slug_include_addon {
     function get_name_by_settings($filter_id) {
         $BeRocket_AAPF_single_filter = BeRocket_AAPF_single_filter::getInstance();
         $filter_settings = $BeRocket_AAPF_single_filter->get_option($filter_id);
+        $filter_settings['filter_id'] = $filter_id;
         $attribute = braapf_get_data_taxonomy_from_post($filter_settings, 'all');
         if( ! empty($attribute) && is_array($attribute) ) {
             if( $attribute['type'] == 'attribute' && strpos($attribute['taxonomy'], 'pa_') === 0 ) {

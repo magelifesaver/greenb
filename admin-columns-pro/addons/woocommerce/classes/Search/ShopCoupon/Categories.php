@@ -4,6 +4,7 @@ namespace ACA\WC\Search\ShopCoupon;
 
 use AC\Helper\Select\Options\Paginated;
 use ACP\Helper\Select\Taxonomy\LabelFormatter\TermName;
+use ACP\Helper\Select\Taxonomy\PaginatedFactory;
 use ACP\Search\Comparison;
 use ACP\Search\Operators;
 use ACP\Search\Value;
@@ -35,7 +36,7 @@ class Categories extends Comparison\Meta
 
     public function get_values(string $search, int $page): Paginated
     {
-        return (new \ACP\Helper\Select\Taxonomy\PaginatedFactory())->create([
+        return (new PaginatedFactory())->create([
             'search'   => $search,
             'page'     => $page,
             'taxonomy' => 'product_cat',

@@ -39,7 +39,7 @@ class WC_Order_Status_Manager extends Framework\SV_WC_Plugin {
 
 
 	/** plugin version number */
-	const VERSION = '1.15.6';
+	const VERSION = '1.15.7';
 
 	/** @var \WC_Order_Status_Manager single instance of this plugin */
 	protected static $instance;
@@ -609,14 +609,14 @@ class WC_Order_Status_Manager extends Framework\SV_WC_Plugin {
 						$orders_url = Framework\SV_WC_Order_Compatibility::get_orders_screen_url();
 
 						/* translators: Placeholders: %1$s - <a> tag, %2$s - </a> tag */
-						echo sprintf( __( '%1$sReassign orders%2$s with a custom status to a WooCommerce core status.', 'woocommerce-order-status-manager' ),'<a href="'. esc_url( $orders_url ) . '">', '</a>' );
+						echo sprintf( esc_html__( '%1$sReassign orders%2$s with a custom status to a WooCommerce core status.', 'woocommerce-order-status-manager' ),'<a href="'. esc_url( $orders_url ) . '">', '</a>' );
 
 						?>
 					</li>
 					<li>
 						<?php
 						/* translators: Placeholders: %1$s - <a> tag, %2$s - </a> tag */
-						echo sprintf( __( '%1$sDelete custom statuses%2$s and select a replacement status for orders.', 'woocommerce-order-status-manager' ), '<a href="/wp-admin/edit.php?post_type=wc_order_status">', '</a>' );
+						echo sprintf( esc_html__( '%1$sDelete custom statuses%2$s and select a replacement status for orders.', 'woocommerce-order-status-manager' ), '<a href="/wp-admin/edit.php?post_type=wc_order_status">', '</a>' );
 						?>
 					</li>
 				</ul>

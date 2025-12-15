@@ -76,7 +76,7 @@ class ProductTaxonomy extends Comparison
     /**
      * Get All orders IDs for a given product ID.
      *
-     * @param integer $product_id
+     * @param int $product_id
      *
      * @return array
      */

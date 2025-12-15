@@ -2,25 +2,42 @@
 
 namespace ACP\Export\Model\Post;
 
-use ACP\Column;
 use ACP\Export\Service;
 
-class LinkCount implements Service {
+class LinkCount implements Service
+{
 
-	private $column;
+    private string $type;
 
-	public function __construct( Column\Post\LinkCount $column ) {
-		$this->column = $column;
-	}
+    private array $internal_domains;
 
-	public function get_value( $id ) {
-		$links = $this->column->get_raw_value( $id );
+    public function __construct(string $type, array $internal_domains)
+    {
+        $this->type = $type;
+        $this->internal_domains = $internal_domains;
+    }
 
-		if ( ! $links ) {
-			return false;
-		}
+    public function get_value($id): string
+    {
+        $content = get_post_field('post_content', $id);
 
-		return sprintf( '%s / %s', count( $links[0] ), count( $links[1] ) );
-	}
+        $links = ac_helper()->html->get_internal_external_links(
+            $content,
+            $this->internal_domains
+        );
+
+        if ( ! $links) {
+            return false;
+        }
+
+        switch ($this->type) {
+            case 'internal':
+                return count($links[0]);
+            case 'external':
+                return count($links[1]);
+            default:
+                return sprintf('%s / %s', count($links[0]), count($links[1]));
+        }
+    }
 
 }

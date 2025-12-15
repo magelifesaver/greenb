@@ -154,10 +154,10 @@ class WC_Order_Status_Manager_Frontend {
 		$description = trim( $status->get_description() );
 
 		if ( ! empty( $description ) ) {
-			echo '<mark class="order-status order-status-' . esc_attr( $status->get_slug() ) . '">' . $name . '</mark>';
+			echo '<mark class="order-status order-status-' . esc_attr( $status->get_slug() ) . '">' . esc_html( $name ) . '</mark>';
 			$this->render_order_status_description_tooltip( $status, 'order-status-' . $status->get_slug() );
 		} else {
-			echo $name;
+			echo esc_html( $name );
 		}
 	}
 

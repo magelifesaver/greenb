@@ -1451,6 +1451,8 @@ class Premium_World_Clock extends Widget_Base {
 
 		}
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 	}
 

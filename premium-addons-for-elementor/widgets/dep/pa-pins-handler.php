@@ -89,11 +89,11 @@ function get_pinterest_data( $id, $settings, $endpoint ) {
 
 	if ( empty( $filter_id ) ) {
 
-		$detect = new \PA_Mobile_Detect();
+		$device_type = Helper_Functions::get_device_type();
 
-		if ( $detect->isTablet() && ! empty( $settings['no_of_posts_tablet'] ) ) {
+		if ( 'tablet' === $device_type && ! empty( $settings['no_of_posts_tablet'] ) ) {
 			$items = array_slice( $items, 0, $settings['no_of_posts_tablet'] );
-		} elseif ( $detect->isMobile() && ! empty( $settings['no_of_posts_mobile'] ) ) {
+		} elseif ( 'mobile' === $device_type && ! empty( $settings['no_of_posts_mobile'] ) ) {
 			$items = array_slice( $items, 0, $settings['no_of_posts_mobile'] );
 		}
 	}
@@ -184,11 +184,11 @@ function get_board_pins( $widget_id, $settings, $board_id ) {
 		set_transient( $transient_name, $response, $expire_time );
 	}
 
-	$detect = new \PA_Mobile_Detect();
+	$device_type = Helper_Functions::get_device_type();
 
-	if ( $detect->isTablet() && ! empty( $settings['pins_per_board_tablet'] ) ) {
+	if ( 'tablet' === $device_type && ! empty( $settings['pins_per_board_tablet'] ) ) {
 		$items = array_slice( $items, 0, $settings['pins_per_board_tablet'] );
-	} elseif ( $detect->isMobile() && ! empty( $settings['pins_per_board_mobile'] ) ) {
+	} elseif ( 'mobile' === $device_type && ! empty( $settings['pins_per_board_mobile'] ) ) {
 		$items = array_slice( $items, 0, $settings['pins_per_board_mobile'] );
 	}
 

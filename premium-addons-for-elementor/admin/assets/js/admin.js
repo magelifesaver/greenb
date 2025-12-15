@@ -27,7 +27,8 @@
 
 		var self = this,
 			$tabs = $(".pa-settings-tab"),
-			$elementsTabs = $(".pa-elements-tab");
+			$elementsTabs = $(".pa-elements-tab"),
+			shouldDisableUnused = false;
 
 		var urlString = window.location.href,
 			url = new URL(urlString);
@@ -45,6 +46,8 @@
 			self.initElementsTabs($elementsTabs);
 
 			self.getUnusedWidget();
+
+			self.handleActionField();
 
 			self.handleElementsActions();
 
@@ -116,6 +119,29 @@
 						self.unusedElements = response.data;
 
 						$(".pa-btn-unused").removeClass("dimmed pa-fade").find("i").remove();
+
+						if (shouldDisableUnused) {
+							$('.pa-btn-unused').trigger('click');
+
+							if (window.opener) {
+
+								// $(".pa-btn-unused").find('span').text('Redirecting to Elementor!');
+
+								swal.fire({
+									title: 'Unused Widgets Disabled!',
+									text: 'Click OK to close this window',
+									type: 'success',
+								}).then(function (result) {
+
+									if (result.value) {
+										window.close();
+									}
+								});
+
+							}
+
+						}
+
 
 					},
 					error: function (err) {
@@ -234,6 +260,9 @@
 						$('#pa-modules .pa-switcher.' + selector).find('input').prop('checked', false);
 					});
 
+					if (!shouldDisableUnused)
+						$(this).addClass('dimmed');
+
 					self.saveElementsSettings('elements', 'default');
 				}
 			);
@@ -322,8 +351,25 @@
 
 			$(".pa-elements-filter input").val(searchInput).trigger("keyup");
 
-
 		}
+
+		self.handleActionField = function () {
+
+			var action = url.searchParams.get("pa-action");
+
+			if (!action)
+				return;
+
+			shouldDisableUnused = true;
+
+			$('body,html').animate({
+				scrollTop: $(".pa-btn-unused").offset().top - 100
+			}, 700);
+
+			$(".pa-btn-unused").toggleClass('dimmed pa-fade').find('span').text('Disabling Unused Widgets');
+
+		};
+
 
 		// Handle Tabs Elements
 		self.initElementsTabs = function ($elem) {
@@ -476,10 +522,10 @@
 
 			if ('elements' === action) {
 				$form = $('form#pa-settings, form#pa-features, form#pa-wz-settings');
-				action = 'pa_elements_settings';
+				action = 'pa_save_elements_settings';
 			} else {
 				$form = $('form#pa-ver-control, form#pa-integrations');
-				action = 'pa_additional_settings';
+				action = 'pa_save_additional_settings';
 			}
 
 			$.ajax(

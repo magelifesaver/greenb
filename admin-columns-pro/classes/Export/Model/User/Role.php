@@ -2,40 +2,66 @@
 
 namespace ACP\Export\Model\User;
 
+use AC;
 use ACP\Export\Service;
-use ACP\RolesFactory;
 
-class Role implements Service {
+class Role implements Service
+{
 
-	private $allow_all_roles;
+    private $allow_non_editable_roles;
 
-	/**
-	 * @var RolesFactory
-	 */
-	private $roles_factory;
+    private $user_roles;
 
-	public function __construct( bool $allow_all_roles ) {
-		$this->allow_all_roles = $allow_all_roles;
-		$this->roles_factory = new RolesFactory();
-	}
+    public function __construct(bool $allow_non_editable_roles)
+    {
+        $this->allow_non_editable_roles = $allow_non_editable_roles;
+    }
 
-	private function is_site_role( $role ) {
-		$roles = $this->roles_factory->create( $this->allow_all_roles );
+    private function get_allowed_roles(): AC\Type\UserRoles
+    {
+        static $editable_roles;
 
-		return in_array( $role, $roles, true );
-	}
+        if (null === $editable_roles) {
+            $editable_roles = (new AC\Helper\UserRoles())->find_all($this->allow_non_editable_roles);
+        }
 
-	public function get_value( $id ) {
-		$user = get_userdata( $id );
+        return $editable_roles;
+    }
 
-		$roles = $user
-			? array_filter( $user->roles, [ $this, 'is_site_role' ] )
-			: [];
+    private function get_allowed_role(string $role): ?AC\Type\UserRole
+    {
+        foreach ($this->get_allowed_roles() as $editable_role) {
+            if ($role === $editable_role->get_name()) {
+                return $editable_role;
+            }
+        }
 
-		return implode(
-			', ',
-			ac_helper()->user->translate_roles( $roles )
-		);
-	}
+        return null;
+    }
+
+    public function get_value($id): string
+    {
+        $user = get_userdata($id);
+
+        if ( ! $user) {
+            return '';
+        }
+
+        $allowed_roles = $this->get_allowed_roles();
+
+        $labels = [];
+
+        foreach ($user->roles as $role_name) {
+            $role_object = $this->get_allowed_role($role_name);
+
+            if ( ! $role_object) {
+                continue;
+            }
+
+            $labels[] = $role_object->get_translate_label();
+        }
+
+        return implode(', ', $labels);
+    }
 
 }

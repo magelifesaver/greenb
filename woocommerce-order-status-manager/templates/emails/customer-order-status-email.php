@@ -17,7 +17,7 @@
  * needs please refer to http://docs.woocommerce.com/document/woocommerce-order-status-manager/ for more information.
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2015-2023, SkyVerge, Inc. (info@skyverge.com)
+ * @copyright   Copyright (c) 2015-2025, SkyVerge, Inc. (info@skyverge.com)
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -45,12 +45,12 @@ defined( 'ABSPATH' ) or exit;
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php if ( $email_body_text ) : ?>
-<div id="body_text"><?php echo $email_body_text; ?></div>
+<div id="body_text"><?php echo $email_body_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 <?php endif; ?>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
-<h2><?php echo esc_html__( 'Order:', 'woocommerce-order-status-manager' ) . ' ' . $order->get_order_number(); ?></h2>
+<h2><?php echo esc_html__( 'Order:', 'woocommerce-order-status-manager' ) . ' ' . esc_html( $order->get_order_number() ); ?></h2>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%;" border="1">
 	<thead>
@@ -69,7 +69,7 @@ defined( 'ABSPATH' ) or exit;
 			'show_sku'            => false,
 		);
 
-		echo wc_get_email_order_items( $order, $email_order_items );
+		echo wc_get_email_order_items( $order, $email_order_items ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		?>
 	</tbody>
@@ -80,8 +80,8 @@ defined( 'ABSPATH' ) or exit;
 				foreach ( $totals as $total ) {
 					$i++; ?>
 					<tr>
-						<th class="td" scope="row" colspan="2" style="text-align: left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
-						<td class="td" style="text-align: left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
+						<th class="td" scope="row" colspan="2" style="text-align: left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo esc_html( $total['label'] ); ?></th>
+						<td class="td" style="text-align: left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					</tr><?php
 				}
 			}
@@ -96,10 +96,10 @@ defined( 'ABSPATH' ) or exit;
 <h2><?php esc_html_e( 'Customer details', 'woocommerce-order-status-manager' ); ?></h2>
 
 <?php if ( $billing_email = $order->get_billing_email() ) : ?>
-	<p><strong><?php esc_html_e( 'Email:', 'woocommerce-order-status-manager' ); ?></strong> <?php echo $billing_email; ?></p>
+	<p><strong><?php esc_html_e( 'Email:', 'woocommerce-order-status-manager' ); ?></strong> <?php echo esc_html( $billing_email ); ?></p>
 <?php endif; ?>
 <?php if ( $billing_phone = $order->get_billing_phone() ) : ?>
-	<p><strong><?php esc_html_e( 'Tel:', 'woocommerce-order-status-manager' ); ?></strong> <?php echo $billing_phone; ?></p>
+	<p><strong><?php esc_html_e( 'Tel:', 'woocommerce-order-status-manager' ); ?></strong> <?php echo esc_html( $billing_phone ); ?></p>
 <?php endif; ?>
 
 <?php wc_get_template( 'emails/email-addresses.php', array( 'order' => $order, 'sent_to_admin' => false ) ); ?>

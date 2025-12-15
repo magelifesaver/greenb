@@ -45,6 +45,7 @@ class WPSunshine_Address_Autocomplete_Premium {
 		include_once WPS_AA_PREMIUM_PATH . '/includes/addons/gravity-forms.php';
 		include_once WPS_AA_PREMIUM_PATH . '/includes/addons/lifterlms.php';
 		include_once WPS_AA_PREMIUM_PATH . '/includes/addons/paidmembershipspro.php';
+		include_once WPS_AA_PREMIUM_PATH . '/includes/addons/edd.php';
 
 		if ( is_admin() ) {
 			include_once WPS_AA_PREMIUM_PATH . '/includes/admin/class-options.php';

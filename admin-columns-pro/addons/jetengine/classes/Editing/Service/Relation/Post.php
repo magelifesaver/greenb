@@ -19,7 +19,7 @@ class Post extends Editing\Service\Relationship
         parent::__construct($storage, $multiple);
     }
 
-    public function get_value($id)
+    public function get_value(int $id): array
     {
         $value = [];
         $post_ids = parent::get_value($id);
@@ -31,7 +31,7 @@ class Post extends Editing\Service\Relationship
         return $value;
     }
 
-    public function get_paginated_options(string $search, int $page, int $id = null): Paginated
+    public function get_paginated_options(string $search, int $page, ?int $id = null): Paginated
     {
         return (new PaginatedFactory())->create([
             'paged'     => $page,

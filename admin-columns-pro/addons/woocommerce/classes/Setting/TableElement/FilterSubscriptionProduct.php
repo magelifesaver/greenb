@@ -1,0 +1,20 @@
+<?php
+
+namespace ACA\WC\Setting\TableElement;
+
+use ACP;
+
+class FilterSubscriptionProduct extends ACP\Settings\ListScreen\TableElement
+{
+
+    public function __construct()
+    {
+        parent::__construct(
+            'hide_filter_subscription_products',
+            __('Product', 'codepress-admin-columns'),
+            'element',
+            ACP\Settings\ListScreen\TableElement\Filters::NAME
+        );
+    }
+
+}

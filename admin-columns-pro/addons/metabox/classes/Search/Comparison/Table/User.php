@@ -12,21 +12,24 @@ class User extends TableStorage implements ACP\Search\Comparison\SearchableValue
 
     use UserValuesTrait;
 
-    /**
-     * @var array
-     */
     protected $query_args;
 
     public function __construct(
-        Operators $operators,
         string $table,
         string $column,
         array $query_args = [],
         string $value_type = Value::INT
     ) {
-        $this->query_args = $query_args;
+        $operators = new Operators([
+            Operators::EQ,
+            Operators::CURRENT_USER,
+            Operators::IS_EMPTY,
+            Operators::NOT_IS_EMPTY,
+        ]);
 
         parent::__construct($operators, $table, $column, $value_type);
+
+        $this->query_args = $query_args;
     }
 
 }

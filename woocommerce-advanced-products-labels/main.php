@@ -324,6 +324,9 @@ class BeRocket_products_label extends BeRocket_Framework {
             function bapl_product_galery_move() {
                 jQuery(".woocommerce-product-gallery .br_alabel:not(.br_alabel_better_compatibility), .woocommerce-product-gallery .berocket_better_labels").each(function(i, o) {
                     jQuery(o).hide().parents(".woocommerce-product-gallery").append(jQuery(o));
+                    setTimeout(function() {
+                        jQuery(document).trigger('bapl_product_galery_appear');
+                    }, 50);
                 });
                 galleryReadyCheck = setInterval(function() {
                     if( jQuery(".woocommerce-product-gallery .woocommerce-product-gallery__trigger").length > 0 ) {

@@ -32,7 +32,9 @@
         } else {
             if( ! usebg ) {
                 $('.br_label_backcolor_use').closest('tr').show();
-                br_each_parent_tr('.br_label_backcolor', ! $('.br_label_backcolor_use').prop('checked'), false);
+                if( typeof(br_each_parent_tr) != 'undefined' ) {
+                    br_each_parent_tr('.br_label_backcolor', ! $('.br_label_backcolor_use').prop('checked'), false);
+                }
             }
             return;
         }

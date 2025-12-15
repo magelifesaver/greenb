@@ -436,20 +436,6 @@ final class Cache extends Base {
 	}
 
 	/**
-	 * Get blog IDs.
-	 *
-	 * @return array List of blog IDs.
-	 */
-	private function get_blog_ids() {
-		$blog_ids = array( 1 );
-		if ( is_multisite() ) {
-			global $wpdb;
-			$blog_ids = array_map( 'absint', $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) );
-		}
-		return $blog_ids;
-	}
-
-	/**
 	 * Get blog path.
 	 *
 	 * @return string Blog path from site address URL, empty otherwise.
@@ -601,7 +587,7 @@ final class Cache extends Base {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 
 		// Verify nonce.
-		if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'swis_cache_clear_nonce' ) ) {
+		if ( empty( $_GET['_wpnonce'] ) || ! \wp_verify_nonce( \sanitize_key( $_GET['_wpnonce'] ), 'swis_cache_clear_nonce' ) ) {
 			return;
 		}
 
@@ -612,18 +598,22 @@ final class Cache extends Base {
 
 		if ( 'swis_cache_clearurl' === $_GET['_action'] ) {
 			// Get clear URL without query string.
-			$clear_url = $this->parse_url( home_url(), PHP_URL_SCHEME ) . '://' . Cache_Engine::$request_headers['Host'] . add_query_arg( '', '' );
+			$clear_url = $this->parse_url( \home_url(), PHP_URL_SCHEME ) . '://' . Cache_Engine::$request_headers['Host'] . \add_query_arg( '', '' );
 			$this->clear_page_cache_by_url( $clear_url );
 		} elseif ( 'swis_cache_clear' === $_GET['_action'] ) {
-			$this->each_site( ( is_multisite() && is_network_admin() ), array( $this, 'clear_site_cache' ) );
+			if ( \is_multisite() && \is_network_admin() ) {
+				$this->clear_complete_cache();
+			} else {
+				$this->clear_site_cache();
+			}
 			$this->clear_server_caches();
 		}
 
-		if ( is_admin() ) {
-			set_transient( $this->get_cache_cleared_transient_name(), 1 );
+		if ( \is_admin() ) {
+			\set_transient( $this->get_cache_cleared_transient_name(), 1 );
 		}
 
-		wp_safe_redirect( remove_query_arg( array( '_cache', '_action', '_wpnonce' ) ) );
+		\wp_safe_redirect( \remove_query_arg( array( '_cache', '_action', '_wpnonce' ) ) );
 		exit;
 	}
 
@@ -708,6 +698,7 @@ final class Cache extends Base {
 	 * @param int|object $product The product ID or a WC_Product instance.
 	 */
 	public function on_woocommerce_stock_update( $product ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		// Get the product ID.
 		if ( is_int( $product ) ) {
 			$product_id = $product;
@@ -724,12 +715,17 @@ final class Cache extends Base {
 	 */
 	public function clear_complete_cache() {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		$network_wide = $this->is_plugin_active_for_network();
 
-		$this->each_site( $network_wide, array( $this, 'clear_site_cache' ) );
+		if ( is_multisite() ) {
+			$remove_dir     = false;
+			$skip_child_dir = false;
+			Disk_Cache::clear_dir( Disk_Cache::$cache_dir, $skip_child_dir, $remove_dir );
+		} else {
+			$this->clear_site_cache();
+		}
 
-		// Delete cache size transient(s).
-		$this->each_site( $network_wide, 'delete_transient', array( $this->get_cache_size_transient_name() ) );
+		\delete_transient( $this->get_cache_size_transient_name() );
+		\do_action( 'swis_complete_cache_cleared' );
 	}
 
 	/**
@@ -745,6 +741,7 @@ final class Cache extends Base {
 	 * @param WP_Post $post The post instance.
 	 */
 	public function clear_associated_cache( $post ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		// Clear post type archives.
 		$this->clear_post_type_archives_cache( $post->post_type );
 
@@ -766,6 +763,7 @@ final class Cache extends Base {
 	 * @param string $post_type The post type to clear.
 	 */
 	public function clear_post_type_archives_cache( $post_type ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$post_type_archives_url = get_post_type_archive_link( $post_type );
 
 		// If an archive page exists for this post type, clear the archive page and its pagination page(s) cache.
@@ -780,6 +778,7 @@ final class Cache extends Base {
 	 * @param int $post_id The post ID number.
 	 */
 	public function clear_taxonomies_archives_cache_by_post_id( $post_id ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$taxonomies = get_taxonomies();
 
 		foreach ( $taxonomies as $taxonomy ) {
@@ -804,6 +803,7 @@ final class Cache extends Base {
 	 * @param int $user_id The user ID of the author.
 	 */
 	public function clear_author_archives_cache_by_user_id( $user_id ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		// Get author archives URL.
 		$author_username     = get_the_author_meta( 'user_login', $user_id );
 		$author_base         = $GLOBALS['wp_rewrite']->author_base;
@@ -819,6 +819,7 @@ final class Cache extends Base {
 	 * @param int $post_id The post ID number.
 	 */
 	public function clear_date_archives_cache_by_post_id( $post_id ) {
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		// Get post dates.
 		$post_date_day   = get_the_date( 'd', $post_id );
 		$post_date_month = get_the_date( 'm', $post_id );
@@ -901,7 +902,7 @@ final class Cache extends Base {
 		}
 
 		// Make sure when we clear a site cache that we've made it the "current" site/blog, so that all subsequent actions are site-specific.
-		if ( is_multisite() ) {
+		if ( is_multisite() && get_current_blog_id() !== $blog_id ) {
 			switch_to_blog( $blog_id );
 		}
 
@@ -915,7 +916,7 @@ final class Cache extends Base {
 
 		if ( empty( $site_urls ) || ! is_iterable( $site_urls ) ) {
 			self::debug_message( 'site_urls is no good after filter' );
-			return $site_objects;
+			return;
 		}
 
 		foreach ( $site_urls as $site_url ) {
@@ -955,6 +956,7 @@ final class Cache extends Base {
 			}
 		}
 
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		// If setting enabled clear complete cache.
 		if ( Cache_Engine::$settings['clear_complete_cache_on_saved_post'] ) {
 			$this->clear_site_cache();
@@ -980,6 +982,7 @@ final class Cache extends Base {
 			}
 		}
 
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		if ( Cache_Engine::$settings['clear_complete_cache_on_saved_comment'] ) {
 			$this->clear_site_cache();
 		} else {

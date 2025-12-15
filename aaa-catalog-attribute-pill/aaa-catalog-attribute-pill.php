@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AAA Catalog Attribute Pill
+ * Plugin Name: AAA Catalog Attribute Pill (XHV98-FRONT)
  * Description: Shows multiple attribute pills under product titles (supports taxonomy + custom attributes + meta for THC). Verbose logging for debugging.
  * Version: 1.1.5
  * Author: Webmaster Workflow

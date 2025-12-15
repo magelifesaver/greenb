@@ -1,7 +1,7 @@
 <?php
 /**
  * File Path: /wp-content/plugins/aaa-age-gate/aaa-age-gate.php
- * Plugin Name: AAA Age Gate
+ * Plugin Name: AAA Age Gate (XHV98)
  * Description: Simple age verification modal for logged-out visitors. Logged-in users bypass automatically.
  * Version: 1.0.0
  * Author: AAA Workflow

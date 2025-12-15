@@ -1,241 +1,237 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ACA\EC\Service;
 
 use AC;
 use AC\Asset\Location;
 use AC\Asset\Style;
 use AC\Registerable;
-use ACA\EC\Column;
-use ACA\EC\ListScreen;
 use ACA\EC\Sorting;
+use ACP\Sorting\ModelFactory;
 use WP_Query;
 
 class TableScreen implements Registerable
 {
 
-    /**
-     * @var array
-     */
-    private $notices;
+	private array $notices;
 
-    /**
-     * @var array
-     */
-    private $filter_vars;
+	private array $filter_vars;
 
-    /**
-     * @var Location\Absolute
-     */
-    private $location;
+	private Location\Absolute $location;
 
-    public function __construct(Location\Absolute $location)
-    {
-        $this->location = $location;
-    }
+	private ModelFactory $model_factory;
 
-    public function register(): void
-    {
-        add_action('ac/table_scripts', [$this, 'table_scripts']);
-        add_action('ac/table/list_screen', [$this, 'add_events_filter_vars']);
-        add_action('ac/table/list_screen', [$this, 'register_event_sorting_fix']);
-        add_action('parse_query', [$this, 'parse_query'], 51);
-    }
+	public function __construct(Location\Absolute $location, ModelFactory $model_factory)
+	{
+		$this->location = $location;
+		$this->model_factory = $model_factory;
+	}
 
-    public function table_scripts(AC\ListScreen $list_screen): void
-    {
-        if ($list_screen->get_group() !== 'events-calendar') {
-            return;
-        }
+	public function register(): void
+	{
+		add_action('ac/table_scripts', [$this, 'table_scripts']);
+		add_action('ac/table/screen', [$this, 'add_events_filter_vars']);
+		add_action('ac/table/list_screen', [$this, 'register_event_sorting_fix']);
+		add_action('parse_query', [$this, 'parse_query'], 51);
+	}
 
-        $script = new Style('aca-ec-table', $this->location->with_suffix('assets/css/table.css'));
-        $script->enqueue();
-    }
+	public function table_scripts(AC\ListScreen $list_screen): void
+	{
+		if ($this->is_events_table($list_screen->get_table_screen())) {
+			return;
+		}
 
-    /**
-     * @param WP_Query $query
-     */
-    public function parse_query(WP_Query $query): void
-    {
-        if ('tribe_events' !== $query->get('post_type')) {
-            return;
-        }
+		$script = new Style('aca-ec-table', $this->location->with_suffix('assets/css/table.css'));
+		$script->enqueue();
+	}
 
-        if ( ! filter_input(INPUT_GET, 'orderby')) {
-            return;
-        }
+	private function is_events_table(AC\TableScreen $table_screen): bool
+	{
+		return $table_screen instanceof AC\PostType &&
+			   in_array(
+					   (string)$table_screen->get_post_type(),
+					   [
+							   'tribe_organizer',
+							   'tribe_events',
+							   'tribe_event_series',
+							   'tribe_venue',
+					   ],
+					   true
+			   );
+	}
 
-        // This prevents the default tribe event query changes
-        $query->tribe_is_event = false;
-    }
+	public function parse_query(WP_Query $query): void
+	{
+		if ('tribe_events' !== $query->get('post_type')) {
+			return;
+		}
 
-    public function add_events_filter_vars($list_screen): void
-    {
-        if ( ! $list_screen instanceof ListScreen\Event) {
-            return;
-        }
+		if ( ! filter_input(INPUT_GET, 'orderby')) {
+			return;
+		}
 
-        $prefix = 'ac_related_filter_';
+		// This prevents the default tribe event query changes
+		$query->tribe_is_event = false;
+	}
 
-        $input = filter_input_array(INPUT_GET, [
-            $prefix . 'value'      => FILTER_SANITIZE_NUMBER_INT,
-            $prefix . 'post_type'  => FILTER_DEFAULT,
-            $prefix . 'date'       => FILTER_DEFAULT,
-            $prefix . 'return_url' => FILTER_DEFAULT,
-        ]);
+	public function add_events_filter_vars(AC\TableScreen $table_screen): void
+	{
+		if ( ! $table_screen->get_id()->equals(new AC\Type\TableId('tribe_events'))) {
+			return;
+		}
 
-        foreach ($input as $k => $v) {
-            unset($input[$k]);
-            $input[str_replace($prefix, '', $k)] = $v;
-        }
+		$prefix = 'ac_related_filter_';
 
-        $input = (object)$input;
+		$input = filter_input_array(INPUT_GET, [
+				$prefix . 'value'      => FILTER_SANITIZE_NUMBER_INT,
+				$prefix . 'post_type'  => FILTER_DEFAULT,
+				$prefix . 'date'       => FILTER_DEFAULT,
+				$prefix . 'return_url' => FILTER_DEFAULT,
+		]);
 
-        switch ($input->post_type ?? '') {
-            case 'tribe_venue':
-                $this->filter_on_venue($input->value);
+		foreach ($input as $k => $v) {
+			unset($input[$k]);
+			$input[str_replace($prefix, '', $k)] = $v;
+		}
 
-                break;
-            case 'tribe_organizer':
-                $this->filter_on_organizer($input->value);
+		$input = (object)$input;
 
-                break;
-            default:
-                return; // invalid post type
-        }
+		switch ($input->post_type ?? '') {
+			case 'tribe_venue':
+				$this->filter_on_venue($input->value);
 
-        $post_type_object = get_post_type_object($input->post_type);
+				break;
+			case 'tribe_organizer':
+				$this->filter_on_organizer($input->value);
 
-        if ( ! $post_type_object) {
-            return;
-        }
+				break;
+			default:
+				return; // invalid post type
+		}
 
-        switch ($input->date) {
-            case 'future':
-                $this->filter_on_future_events();
-                $date = __('upcoming', 'codepress-admin-columns');
+		$post_type_object = get_post_type_object($input->post_type);
 
-                break;
-            case 'past':
-                $this->filter_on_past_events();
-                $date = __('previous', 'codepress-admin-columns');
+		if ( ! $post_type_object) {
+			return;
+		}
 
-                break;
-            default:
-                $date = __('all', 'codepress-admin-columns');
-        }
+		switch ($input->date) {
+			case 'future':
+				$this->filter_on_future_events();
+				$date = __('upcoming', 'codepress-admin-columns');
 
-        // General notice
-        $notice[] = sprintf(
-            __('Filtering on %s: Showing %s events from %s.', 'codepress-admin-columns'),
-            $post_type_object->labels->singular_name,
-            $date,
-            get_the_title($input->value)
-        );
+				break;
+			case 'past':
+				$this->filter_on_past_events();
+				$date = __('previous', 'codepress-admin-columns');
 
-        // Return to related overview link
-        $notice[] = sprintf(
-            '<a href="%s" class="notice__actionlink">%s</a>',
-            esc_url(admin_url('edit.php?' . base64_decode($input->return_url))),
-            sprintf(__('Return to %s', 'codepress-admin-columns'), $post_type_object->labels->name)
-        );
+				break;
+			default:
+				$date = __('all', 'codepress-admin-columns');
+		}
 
-        // Remove filters and stay on this overview link
-        $input_remove = [];
+		// General notice
+		$notice[] = sprintf(
+				__('Filtering on %s: Showing %s events from %s.', 'codepress-admin-columns'),
+				$post_type_object->labels->singular_name,
+				$date,
+				get_the_title($input->value)
+		);
 
-        foreach ($input as $k => $v) {
-            $input_remove[$prefix . $k] = false;
-        }
+		// Return to related overview link
+		$notice[] = sprintf(
+				'<a href="%s" class="notice__actionlink">%s</a>',
+				esc_url(admin_url('edit.php?' . base64_decode($input->return_url))),
+				sprintf(__('Return to %s', 'codepress-admin-columns'), $post_type_object->labels->name)
+		);
 
-        $notice[] = sprintf(
-            '<a href="%s" class="notice-aca-ec-filter__dismiss notice__actionlink">%s</a>',
-            add_query_arg($input_remove),
-            __('Remove this filter', 'codepress-admin-columns')
-        );
+		// Remove filters and stay on this overview link
+		$input_remove = [];
 
-        $this->notices[] = [
-            'type'   => 'success',
-            'notice' => implode(' ', $notice),
-        ];
+		foreach ($input as $k => $v) {
+			$input_remove[$prefix . $k] = false;
+		}
 
-        add_action('admin_notices', [$this, 'display_notices']);
-        add_action('pre_get_posts', [$this, 'events_query_callback']);
-    }
+		$notice[] = sprintf(
+				'<a href="%s" class="notice-aca-ec-filter__dismiss notice__actionlink">%s</a>',
+				add_query_arg($input_remove),
+				__('Remove this filter', 'codepress-admin-columns')
+		);
 
-    /**
-     * @param WP_Query $wp_query
-     */
-    public function events_query_callback(WP_Query $wp_query): void
-    {
-        if ( ! $wp_query->is_main_query()) {
-            return;
-        }
+		$this->notices[] = [
+				'type'   => 'success',
+				'notice' => implode(' ', $notice),
+		];
 
-        $wp_query->query_vars = array_merge($wp_query->query_vars, $this->filter_vars);
-    }
+		add_action('admin_notices', [$this, 'display_notices']);
+		add_action('pre_get_posts', [$this, 'events_query_callback']);
+	}
 
-    public function display_notices(): void
-    {
-        foreach ($this->notices as $notice) : ?>
+	public function events_query_callback(WP_Query $wp_query): void
+	{
+		if ( ! $wp_query->is_main_query()) {
+			return;
+		}
+
+		$wp_query->query_vars = array_merge($wp_query->query_vars, $this->filter_vars);
+	}
+
+	public function display_notices(): void
+	{
+		foreach ($this->notices as $notice) : ?>
 			<div class="notice notice-<?php
-            echo $notice['type']; ?> notice-aca-ec-filter">
+			echo $notice['type']; ?> notice-aca-ec-filter">
 				<div class="info">
 					<p><?php
-                        echo $notice['notice']; ?></p>
+						echo $notice['notice']; ?></p>
 				</div>
 			</div>
-        <?php
-        endforeach;
-    }
+		<?php
+		endforeach;
+	}
 
-    private function filter_on_venue($value): void
-    {
-        $column = new Column\Event\Venue();
+	private function filter_on_venue($value): void
+	{
+		$this->filter_vars['meta_query'][] = [
+				'key'   => '_EventVenueID',
+				'value' => $value,
+		];
+	}
 
-        $this->filter_vars['meta_query'][] = [
-            'key'   => $column->get_meta_key(),
-            'value' => $value,
-        ];
-    }
+	private function filter_on_organizer($value): void
+	{
+		$this->filter_vars['meta_query'][] = [
+				'key'   => '_EventOrganizerID',
+				'value' => $value,
+		];
+	}
 
-    private function filter_on_organizer($value): void
-    {
-        $column = new Column\Event\Organizer();
+	private function filter_on_past_events(): void
+	{
+		$this->filter_vars['meta_query'][] = [
+				'key'     => '_EventEndDate',
+				'value'   => date('Y-m-d H:i'),
+				'compare' => '<',
+		];
+	}
 
-        $this->filter_vars['meta_query'][] = [
-            'key'   => $column->get_meta_key(),
-            'value' => $value,
-        ];
-    }
+	private function filter_on_future_events(): void
+	{
+		$this->filter_vars['meta_query'][] = [
+				'key'     => '_EventStartDate',
+				'value'   => date('Y-m-d H:i'),
+				'compare' => '>',
+		];
+	}
 
-    private function filter_on_past_events(): void
-    {
-        $column = new Column\Event\EndDate();
-
-        $this->filter_vars['meta_query'][] = [
-            'key'     => $column->get_meta_key(),
-            'value'   => date('Y-m-d H:i'),
-            'compare' => '<',
-        ];
-    }
-
-    private function filter_on_future_events(): void
-    {
-        $column = new Column\Event\StartDate();
-
-        $this->filter_vars['meta_query'][] = [
-            'key'     => $column->get_meta_key(),
-            'value'   => date('Y-m-d H:i'),
-            'compare' => '>',
-        ];
-    }
-
-    public function register_event_sorting_fix(AC\ListScreen $list_screen): void
-    {
-        if ($list_screen instanceof ListScreen\Event) {
-            $service = new Sorting\EventSortingFix($list_screen);
-            $service->register();
-        }
-    }
+	public function register_event_sorting_fix(AC\ListScreen $list_screen): void
+	{
+		if ($list_screen->get_table_id()->equals(new AC\Type\TableId('tribe_events'))) {
+			$service = new Sorting\EventSortingFix($list_screen, $this->model_factory);
+			$service->register();
+		}
+	}
 
 }

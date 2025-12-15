@@ -152,6 +152,7 @@ class WPSunshine_Address_Autocomplete {
 						$fields[] = array(
 							'selector' => $field['selector'],
 							'data'     => $field['data'],
+							'delay'    => ( ! empty( $field['delay'] ) ) ? $field['delay'] : '',
 						);
 					}
 				}
@@ -196,6 +197,7 @@ class WPSunshine_Address_Autocomplete {
 					'results_title' => $results_title,
 				);
 				wp_localize_script( 'wps-aa-frontend', 'wps_aa_vars', $args );
+				error_log( print_r( $args, true ) );
 			}
 		}
 

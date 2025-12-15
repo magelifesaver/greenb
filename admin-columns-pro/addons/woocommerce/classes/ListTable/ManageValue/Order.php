@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace ACA\WC\ListTable\ManageValue;
 
-use AC\ColumnRepository;
-use AC\Table\ManageValue;
-use Automattic;
+use AC\CellRenderer;
+use AC\TableScreen\ManageValueService;
 use DomainException;
-use WC_Order;
 
-class Order extends ManageValue
+class Order implements ManageValueService
 {
 
-    private $order_type;
+    private string $order_type;
 
-    public function __construct(string $order_type, ColumnRepository $column_repository)
+    private CellRenderer $renderable;
+
+    public function __construct(string $order_type, CellRenderer $renderable)
     {
-        parent::__construct($column_repository);
-
         $this->order_type = $order_type;
+        $this->renderable = $renderable;
     }
 
     public function register(): void
@@ -33,9 +32,11 @@ class Order extends ManageValue
         add_action($action, [$this, 'render_value'], 100, 2);
     }
 
-    public function render_value($column_name, WC_Order $order): void
+    public function render_value(...$args): void
     {
-        echo $this->render_cell((string)$column_name, $order->get_id());
+        [$column_name, $order] = $args;
+
+        echo $this->renderable->render_cell((string)$column_name, $order->get_id());
     }
 
 }

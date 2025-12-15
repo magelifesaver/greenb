@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: AAA Orders and Products Menu
+Plugin Name: AAA Orders and Products Menu (XHV98-ADMIN)
 Description: Adds top-level Orders and Products menus with status-specific submenus and individual bubble counts. Includes a settings page to add more static menu items.
 Version: 2.4
 Author: webmaster

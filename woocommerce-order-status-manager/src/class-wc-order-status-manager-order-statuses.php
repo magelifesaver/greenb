@@ -557,13 +557,13 @@ class WC_Order_Status_Manager_Order_Statuses {
 
 		// Post slugs must be unique across all posts.
 		$check_sql = "SELECT post_name FROM $wpdb->posts WHERE post_name = %s AND post_type = %s AND ID != %d LIMIT 1";
-		$post_name_check = $wpdb->get_var( $wpdb->prepare( $check_sql, $slug, $post_type, $post_ID ) );
+		$post_name_check = $wpdb->get_var( $wpdb->prepare( $check_sql, $slug, $post_type, $post_ID ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( $post_name_check ) {
 			$suffix = 2;
 			do {
 				$alt_post_name = _truncate_post_slug( $slug, $max_slug_length - ( strlen( $suffix ) + 1 ) ) . "-$suffix";
-				$post_name_check = $wpdb->get_var( $wpdb->prepare( $check_sql, $alt_post_name, $post_type, $post_ID ) );
+				$post_name_check = $wpdb->get_var( $wpdb->prepare( $check_sql, $alt_post_name, $post_type, $post_ID ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 				$suffix++;
 			} while ( $post_name_check );
 			$slug = $alt_post_name;
@@ -641,22 +641,25 @@ class WC_Order_Status_Manager_Order_Statuses {
 
 			$orders_table = $wpdb->prefix . 'wc_orders';
 
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->query( $wpdb->prepare( "
 				UPDATE {$orders_table}
 				SET status = %s
 				WHERE status = %s
 			", $order_status->get_slug( true ), 'wc-' . $this->_previous_order_status_slug ) );
-
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		} else {
 
 			$orders_table = $wpdb->posts;
 
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->query( $wpdb->prepare( "
 				UPDATE {$orders_table}
 				SET post_status = %s
 				WHERE post_type = 'shop_order'
 				AND post_status = %s
 			", $order_status->get_slug( true ), 'wc-' . $this->_previous_order_status_slug ) );
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		}
 
 		// If any other order statuses have specified this status as a 'next status',
@@ -733,6 +736,7 @@ class WC_Order_Status_Manager_Order_Statuses {
 
 		if ( Framework\SV_WC_Plugin_Compatibility::is_hpos_enabled() ) {
 
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$orders_table = $wpdb->prefix . 'wc_orders';
 			$order_rows = $wpdb->get_results( $wpdb->prepare( "
 				SELECT ID
@@ -742,6 +746,7 @@ class WC_Order_Status_Manager_Order_Statuses {
 
 		} else {
 
+			// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$orders_table = $wpdb->posts;
 			$order_rows = $wpdb->get_results( $wpdb->prepare( "
 				SELECT ID
@@ -749,6 +754,7 @@ class WC_Order_Status_Manager_Order_Statuses {
 				WHERE post_type = 'shop_order'
 				  AND post_status = %s
 			", $order_status->get_slug( true ) ), ARRAY_A );
+			// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		}
 
 		$num_updated = 0;

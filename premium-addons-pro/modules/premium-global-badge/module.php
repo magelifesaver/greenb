@@ -210,6 +210,19 @@ class Module extends Module_Base {
 		$element->end_controls_tab();
 
 		$element->end_controls_tabs();
+
+        $element->add_control(
+			'pa_badge_tutorial',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.youtube.com/watch?v=PsYFwEXEXZg/', __( 'Check the video tutorial »', 'premium-addons-for-elementor' ) ),
+				'content_classes' => 'editor-pa-doc',
+				'condition'       => array(
+					'premium_global_badge_switcher' => 'yes',
+				),
+			)
+		);
+
 		$element->end_controls_section();
 	}
 
@@ -724,20 +737,6 @@ class Module extends Module_Base {
 			)
 		);
 
-		$element->add_control(
-			'pa_background_style',
-			array(
-				'label'        => __( 'Clipped Background', 'premium-addons-for-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'description'  => __( 'When enabled, the background will be clipped on the text.', 'premium-addons-for-elementor' ),
-				'prefix_class' => 'pa-bg-clipped-',
-				'condition'    => array(
-					'premium_global_badge_switcher' => 'yes',
-					'pa_badge_type'                 => 'custom',
-				),
-			)
-		);
-
 		$element->add_group_control(
 			PAPRO_Helper::get_bg_control_class()::get_type(),
 			array(
@@ -757,7 +756,7 @@ class Module extends Module_Base {
 					'premium_global_badge_switcher' => 'yes',
 					'pa_badge_type!'                => array( 'bookmark', 'tri', 'flag' ),
 				),
-				'selector'       => '{{WRAPPER}}.pa-bg-clipped-yes.premium-gbadge-custom .premium-global-badge-{{ID}} .premium-badge-text, {{WRAPPER}}:not(.premium-gbadge-custom) .premium-global-badge-{{ID}} .premium-badge-container, {{WRAPPER}}.premium-gbadge-custom:not(.pa-bg-clipped-yes) .premium-global-badge-{{ID}} .premium-badge-container',
+				'selector'       => '{{WRAPPER}}:not(.premium-gbadge-custom) .premium-global-badge-{{ID}} .premium-badge-container, {{WRAPPER}}.premium-gbadge-custom .premium-global-badge-{{ID}} .premium-badge-container',
 			)
 		);
 
@@ -984,6 +983,55 @@ class Module extends Module_Base {
 				),
 				'selectors'          => array(
 					'{{WRAPPER}}.premium-gbadge-bookmark .premium-global-badge-{{ID}}' => 'padding: {{TOP}}{{UNIT}} 0 {{BOTTOM}}{{UNIT}} 0;',
+				),
+			)
+		);
+
+		$element->add_control(
+			'pa_background_style',
+			array(
+				'label'        => __( 'Animated Gradient', 'premium-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'description'  => __( 'Enable this option to apply an animated gradient effect to the text.', 'premium-addons-for-elementor' ),
+				'prefix_class' => 'pa-badge-gradient-',
+				'separator'    => 'before',
+				'condition'    => array(
+					'premium_global_badge_switcher' => 'yes',
+				),
+			)
+		);
+
+		$element->add_control(
+			'pa_gradient_speed',
+			array(
+				'label'     => __( 'Animation Speed (sec)', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 10,
+						'step' => .1,
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}}.pa-badge-gradient-yes .premium-badge-text, {{WRAPPER}}.pa-badge-gradient-yes .premium-badge-icon' => 'animation-duration: {{SIZE}}s ',
+				),
+				'condition' => array(
+					'pa_background_style'           => 'yes',
+					'premium_global_badge_switcher' => 'yes',
+				),
+			)
+		);
+
+		$element->add_group_control(
+			PAPRO_Helper::get_bg_control_class()::get_type(),
+			array(
+				'name'      => 'pa-text_gradient',
+				'types'     => array( 'gradient' ),
+				'selector'  => '{{WRAPPER}}.pa-badge-gradient-yes .premium-badge-text, {{WRAPPER}}.pa-badge-gradient-yes .premium-badge-icon',
+				'condition' => array(
+					'pa_background_style'           => 'yes',
+					'premium_global_badge_switcher' => 'yes',
 				),
 			)
 		);

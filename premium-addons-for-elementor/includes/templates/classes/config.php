@@ -183,8 +183,7 @@ if ( ! class_exists( 'Premium_Templates_Core_Config' ) ) {
 		 */
 		public function get_header_pro_message() {
 
-			return Helper_Functions::check_papro_version() ? __('Activate License', 'premium-addons-for-elementor') : __('Get Pro. SAVE UP TO 35% NOW', 'premium-addons-for-elementor');
-
+			return Helper_Functions::check_papro_version() ? __( 'Activate License', 'premium-addons-for-elementor' ) : __( 'Get Pro. SAVE UP TO $105 NOW', 'premium-addons-for-elementor' );
 		}
 
 		/**

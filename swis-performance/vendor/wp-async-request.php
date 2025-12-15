@@ -99,10 +99,6 @@ abstract class Async_Request {
 	 * @return array
 	 */
 	protected function get_query_args() {
-		if ( property_exists( $this, 'query_args' ) ) {
-			return $this->query_args;
-		}
-
 		return array(
 			'action' => $this->identifier,
 			'nonce'  => wp_create_nonce( $this->identifier ),
@@ -115,10 +111,6 @@ abstract class Async_Request {
 	 * @return string
 	 */
 	protected function get_query_url() {
-		if ( property_exists( $this, 'query_url' ) ) {
-			return $this->query_url;
-		}
-
 		return admin_url( 'admin-ajax.php' );
 	}
 
@@ -128,10 +120,6 @@ abstract class Async_Request {
 	 * @return array
 	 */
 	protected function get_post_args() {
-		if ( property_exists( $this, 'post_args' ) ) {
-			return $this->post_args;
-		}
-
 		return array(
 			'timeout'   => 0.01,
 			'blocking'  => false,

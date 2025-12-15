@@ -196,17 +196,19 @@ final class Slim extends Page_Parser {
 				add_filter( 'swis_elements_link_tag', array( $this, 'find_more_assets' ), 1, 2 );
 				add_filter( $this->prefix . 'filter_page_output', array( $this, 'output_scripts' ), 99 );
 			}
-			if ( ( $this->get_option( 'slim_js_css' ) || $this->get_option( 'optimize_fonts_list' ) ) && ! $this->test_mode_active() ) {
-				add_action( 'template_redirect', array( $this, 'get_content_type' ) );
-				add_action( 'template_redirect', array( $this, 'maybe_remove_emoji' ), 11 );
-				add_filter( 'script_loader_src', array( $this, 'disable_assets' ), 10, 2 );
-				add_filter( 'style_loader_src', array( $this, 'disable_assets' ), 10, 2 );
-				add_filter( 'swis_elements_script_tag', array( $this, 'disable_assets' ), 5, 2 );
-				add_filter( 'swis_elements_link_tag', array( $this, 'disable_assets' ), 5, 2 );
-				add_filter( 'swis_skip_css_defer', array( $this, 'skip_css_defer' ), 10, 3 );
-				add_filter( 'swis_skip_js_defer', array( $this, 'skip_js_defer' ), 10, 3 );
-				add_filter( 'swis_skip_js_delay', array( $this, 'skip_js_delay' ), 10, 3 );
+			if ( $this->get_option( 'slim_js_css' ) || $this->get_option( 'optimize_fonts_list' ) ) {
 				$this->validate_rules();
+				if ( ! $this->test_mode_active() ) {
+					add_action( 'template_redirect', array( $this, 'get_content_type' ) );
+					add_action( 'template_redirect', array( $this, 'maybe_remove_emoji' ), 11 );
+					add_filter( 'script_loader_src', array( $this, 'disable_assets' ), 10, 2 );
+					add_filter( 'style_loader_src', array( $this, 'disable_assets' ), 10, 2 );
+					add_filter( 'swis_elements_script_tag', array( $this, 'disable_assets' ), 5, 2 );
+					add_filter( 'swis_elements_link_tag', array( $this, 'disable_assets' ), 5, 2 );
+					add_filter( 'swis_skip_css_defer', array( $this, 'skip_css_defer' ), 10, 3 );
+					add_filter( 'swis_skip_js_defer', array( $this, 'skip_js_defer' ), 10, 3 );
+					add_filter( 'swis_skip_js_delay', array( $this, 'skip_js_delay' ), 10, 3 );
+				}
 			}
 			if ( ! empty( $_GET['swis_slim_check'] ) && ! is_user_logged_in() ) {  // phpcs:ignore WordPress.Security.NonceVerification
 				$this->output_assets_json = true;
@@ -430,6 +432,18 @@ final class Slim extends Page_Parser {
 			$mode = 'all';
 		}
 		$user_exclusions = $this->get_option( 'slim_js_css' );
+		if ( empty( $user_exclusions ) ) {
+			$user_exclusions = array();
+		}
+		if ( ! is_array( $user_exclusions ) ) {
+			if ( is_string( $user_exclusions ) ) {
+				$this->migrate_user_exclusions();
+			}
+			$user_exclusions = $this->get_option( 'slim_js_css' );
+			if ( ! is_array( $user_exclusions ) ) {
+				$user_exclusions = array();
+			}
+		}
 		switch ( $action ) {
 			case 'create':
 				$raw        = ! empty( $_POST['swis_slim_exclusions'] ) && 'all' !== $mode ? sanitize_text_field( wp_unslash( $_POST['swis_slim_exclusions'] ) ) : false;
@@ -1207,7 +1221,7 @@ final class Slim extends Page_Parser {
 						return $element;
 					}
 					$existing_url_path = $this->parse_url( $asset['url'], PHP_URL_PATH );
-					$this->debug_message( "how about $url_path and $existing_url_path" );
+					// $this->debug_message( "how about $url_path and $existing_url_path" );
 					if ( $url_path === $existing_url_path ) {
 						$this->debug_message( "already have $existing_url_path for $url" );
 						return $element;
@@ -1225,7 +1239,7 @@ final class Slim extends Page_Parser {
 						continue;
 					}
 					$existing_url_path = $this->parse_url( $asset['url'], PHP_URL_PATH );
-					$this->debug_message( "how about $url_path and $existing_url_path" );
+					// $this->debug_message( "how about $url_path and $existing_url_path" );
 					if ( $url_path === $existing_url_path ) {
 						$this->debug_message( "already have $existing_url_path for $url" );
 						return $element;
@@ -1429,9 +1443,13 @@ final class Slim extends Page_Parser {
 						$this->debug_message( "content-include rule triggered for $handle" );
 						return false;
 					}
-					if ( false !== strpos( $include, '*' ) && false === strpos( $include, '#' ) && preg_match( "#$include#", $uri ) ) {
-						$this->debug_message( "pattern-include ($include) rule triggered for $handle" );
-						return false;
+					if ( false !== strpos( $include, '*' ) ) {
+						$pattern = str_replace( '#', '\#', trim( $include, '*' ) );
+						$pattern = str_replace( '(*)', '.*', $pattern );
+						if ( ! empty( $pattern ) && preg_match( "#$pattern#", $uri ) ) {
+							$this->debug_message( "pattern-include ($include as $pattern) rule triggered for $handle" );
+							return false;
+						}
 					} elseif ( $uri === $include ) {
 						$this->debug_message( "page-include ($include) rule triggered for $handle" );
 						return false;
@@ -1445,9 +1463,13 @@ final class Slim extends Page_Parser {
 						$this->debug_message( "content-exclude rule triggered for $handle" );
 						return true;
 					}
-					if ( false !== strpos( $exclude, '*' ) && false === strpos( $exclude, '#' ) && preg_match( "#$exclude#", $uri ) ) {
-						$this->debug_message( "pattern-exclude ($exclude) rule triggered for $handle" );
-						return true;
+					if ( false !== strpos( $exclude, '*' ) ) {
+						$pattern = str_replace( '#', '\#', trim( $exclude, '*' ) );
+						$pattern = str_replace( '(*)', '.*', $pattern );
+						if ( ! empty( $pattern ) && preg_match( "#$pattern#", $uri ) ) {
+							$this->debug_message( "pattern-exclude ($exclude as $pattern) rule triggered for $handle" );
+							return true;
+						}
 					} elseif ( $uri === $exclude ) {
 						$this->debug_message( "page-exclude ($exclude) rule triggered for $handle" );
 						return true;
@@ -1795,10 +1817,10 @@ final class Slim extends Page_Parser {
 		}
 		?>
 				<tr data-slim-handle="<?php echo esc_html( $handle ); ?>">
-					<td class="swis-slim-asset-status">
+					<td class='swis-slim-asset-status'>
 						<?php $this->display_asset_status( $handle, $asset_type ); ?>
 					</td>
-					<td>
+					<td class='swis-slim-asset-details'>
 						<a class='swis-slim-link' href='<?php echo esc_url( $asset['url'] ); ?>' target='_blank'>
 							<?php echo $asset['external'] ? esc_html( $asset['url'] ) : esc_html( $asset['filename'] ); ?>
 						</a>
@@ -1827,7 +1849,7 @@ final class Slim extends Page_Parser {
 					<?php endif; ?>
 						</div>
 					</td>
-					<td>
+					<td class='swis-slim-asset-size'>
 						<?php echo esc_html( $asset['size'] ); ?>
 					</td>
 				</tr>
@@ -1927,10 +1949,13 @@ final class Slim extends Page_Parser {
 				<div class="swis-slim-error-message"></div>
 				<div class="swis-slim-hidden">
 					<div class="swis-slim-raw-rule">
-						<input type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" value="<?php echo esc_attr( $rule['raw'] . ( $effective ? ',' . $this->current_page : '' ) ); ?>" />
+						<input type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-rule-exclusions" value="<?php echo esc_attr( $rule['raw'] . ( $effective ? ',' . $this->current_page : '' ) ); ?>" />
 					</div>
 					<p class="swis-slim-edit-rule-description description">
-						<?php esc_html_e( 'Enter a comma-separated list of pages, URL patterns (use * as wildcard), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+						<span>
+							<?php esc_html_e( 'Comma-separated list of pages, Regex (must use *), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/134-customize-slim-rules' ); ?>
+						</span>
 						<button type="button" class="button-primary swis-slim-rule-save"><?php esc_html_e( 'Save', 'swis-performance' ); ?></button>
 					</p>
 				</div>
@@ -1968,10 +1993,13 @@ final class Slim extends Page_Parser {
 				<div class="swis-slim-error-message"></div>
 				<div class="swis-slim-hidden">
 					<div class="swis-slim-raw-rule">
-						<input type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" value="<?php echo esc_attr( $rule['raw'] . ( $effective ? '' : ',' . $this->current_page ) ); ?>" />
+						<input type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-rule-exclusions" value="<?php echo esc_attr( $rule['raw'] . ( $effective ? '' : ',' . $this->current_page ) ); ?>" />
 					</div>
 					<p class="swis-slim-edit-rule-description description">
-						<?php esc_html_e( 'Enter a comma-separated list of pages, URL patterns (use * as wildcard), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+						<span>
+							<?php esc_html_e( 'Comma-separated list of pages, Regex (must use *), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+							<?php $this->help_link( 'https://docs.ewww.io/article/134-customize-slim-rules' ); ?>
+						</span>
 						<button type="button" class="button-primary swis-slim-rule-save"><?php esc_html_e( 'Save', 'swis-performance' ); ?></button>
 					</p>
 				</div>
@@ -2007,16 +2035,16 @@ final class Slim extends Page_Parser {
 				<div class="swis-slim-row">
 					<div class="swis-slim-reversible">
 						<div class="swis-slim-row">
-							<input type="radio" id="swis_slim_mode_exclude_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="exclude" />
+							<input type="radio" id="swis_slim_mode_exclude_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio swis-slim-mode-exclude" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="exclude" />
 							<strong><label for="swis_slim_mode_exclude_<?php echo esc_attr( $rule_id ); ?>"><?php echo esc_html( $exclude_radio_text ); ?></label></strong>
 						</div>
 						<div class="swis-slim-row">
-							<input type="radio" id="swis_slim_mode_include_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="include" />
+							<input type="radio" id="swis_slim_mode_include_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio swis-slim-mode-include" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="include" />
 							<strong><label for="swis_slim_mode_include_<?php echo esc_attr( $rule_id ); ?>"><?php echo esc_html( $include_radio_text ); ?></label></strong>
 						</div>
 			<?php if ( 'defer' !== $type ) : ?>
 						<div class="swis-slim-row">
-							<input type="radio" id="swis_slim_mode_all_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="all" />
+							<input type="radio" id="swis_slim_mode_all_<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-radio swis-slim-mode-all" name="swis_slim_mode_<?php echo esc_attr( $rule_id ); ?>" value="all" />
 							<strong><label for="swis_slim_mode_all_<?php echo esc_attr( $rule_id ); ?>"><?php echo esc_html( $all_radio_text ); ?></label></strong>
 						</div>
 			<?php endif; ?>
@@ -2028,9 +2056,10 @@ final class Slim extends Page_Parser {
 					</div>
 				</div>
 				<div class="swis-slim-column swis-slim-raw-rule">
-					<input style="display:none;" type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" value="<?php echo esc_attr( $this->current_page ); ?>" />
+					<input style="display:none;" type="text" id="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" name="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>" class="swis-slim-rule-exclusions" value="<?php echo esc_attr( $this->current_page ); ?>" />
 					<label style="display:none;" for="swis-slim-rule-exclusions-<?php echo esc_attr( $rule_id ); ?>">
-						<?php esc_html_e( 'Comma-separated list of pages, URL patterns (use * as wildcard), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+						<?php esc_html_e( 'Comma-separated list of pages, Regex (must use *), or content types in the form T>post or T>page.', 'swis-performance' ); ?>
+						<?php $this->help_link( 'https://docs.ewww.io/article/134-customize-slim-rules' ); ?>
 					</label>
 				</div>
 			</div>

@@ -8,10 +8,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 		var $linkedCarouselWidget = null,
 			mapElement = $scope.find(".premium_maps_map_height"),
+			computedStyle = getComputedStyle($scope[0]),
 			mapSettings = mapElement.data("settings"),
 			mapStyle = mapElement.data("style"),
 			premiumMapMarkers = [],
 			premiumMapPopups = [];
+
+		mapSettings.zoom = parseFloat(computedStyle.getPropertyValue('--pa-map-zoom'));
 
 		var checkGoogleMapsLoaded = setInterval(function () {
 			if (typeof google !== "undefined" &&

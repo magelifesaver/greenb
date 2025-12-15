@@ -327,7 +327,6 @@ class Premium_Videobox extends Widget_Base {
 			array(
 				'label'       => __( 'Title HTML Tag', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'h4',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -335,9 +334,10 @@ class Premium_Videobox extends Widget_Base {
 					'h4'   => 'H4',
 					'h5'   => 'H5',
 					'h6'   => 'H6',
-					'span' => 'Span',
-					'p'    => 'P',
+					'span' => 'span',
+					'p'    => 'p',
 				),
+				'default'     => 'h4',
 				'label_block' => true,
 				'condition'   => array(
 					'youtube_list'                 => 'yes',
@@ -422,7 +422,7 @@ class Premium_Videobox extends Widget_Base {
 				),
 				'prefix_class' => 'premium-videobox-',
 				'default'      => 'layout1',
-				'render_type' => 'template',
+				'render_type'  => 'template',
 				'condition'    => array(
 					'premium_video_box_video_type' => 'youtube',
 					'youtube_list'                 => 'yes',
@@ -1796,6 +1796,8 @@ class Premium_Videobox extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 

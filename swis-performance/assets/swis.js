@@ -139,6 +139,23 @@ jQuery(document).ready(function($) {
 			});
 		}
 	}
+	var swis_transient_status_data = {
+		action: 'swis_transient_status',
+		_wpnonce: swisperformance_vars._wpnonce,
+	};
+	$.post(ajaxurl, swis_transient_status_data, function(response) {
+		try {
+			var swis_response = JSON.parse(response);
+		} catch ( err ) {
+			console.log(err);
+			console.log(response);
+			return false;
+		}
+		if ( swis_response.html ) {
+			$('#swis-transient-status').html(swis_response.html);
+		}
+		return false;
+	});
 	$('#swis-cache-preload-start').on('click', function() {
 		var swis_cache_preload_data = {
 			action: 'swis_cache_preload_init',

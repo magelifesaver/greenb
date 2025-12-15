@@ -265,6 +265,18 @@ class Module extends Module_Base {
 
 		$element->end_controls_tabs();
 
+        $element->add_control(
+			'pa_cursor_tutorial',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( '<a href="%s" target="_blank">%s</a>', 'https://www.youtube.com/watch?v=kd5XMrQeBnI/', __( 'Check the video tutorial »', 'premium-addons-for-elementor' ) ),
+				'content_classes' => 'editor-pa-doc',
+				'condition'       => array(
+					'premium_global_cursor_switcher' => 'yes',
+				),
+			)
+		);
+
 		$element->end_controls_section();
 	}
 

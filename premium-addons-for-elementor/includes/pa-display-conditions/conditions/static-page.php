@@ -34,8 +34,8 @@ class Static_Page extends Condition {
 			'type'        => Controls_Manager::SELECT,
 			'options'     => array(
 				'home' => __( 'Homepage', 'premium-addons-for-elementor' ),
-				'blog'   => __( 'Blog', 'premium-addons-for-elementor' ),
-				'404'    => __( '404 Page', 'premium-addons-for-elementor' ),
+				'blog' => __( 'Blog', 'premium-addons-for-elementor' ),
+				'404'  => __( '404 Page', 'premium-addons-for-elementor' ),
 			),
 			'default'     => 'home',
 			'label_block' => true,

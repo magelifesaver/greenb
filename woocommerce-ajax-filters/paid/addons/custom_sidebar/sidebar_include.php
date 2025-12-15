@@ -416,7 +416,7 @@ class BeRocket_AAPF_custom_sidebar {
                 html += "<span class=\'dashicons dashicons-no\' title=\'No, page do not have any element to open sidebar\'></span>";
             }
             html += "</div>";
-            html += "<div><a class=\'bapf_adminbar_custom_sidebar_open\'href=\'#open_sidebar\'>Open Sidebar</a></div>";
+            html += "<div class=\'bapf_adminbar_status_element\'><a class=\'bapf_adminbar_custom_sidebar_open\'href=\'#open_sidebar\'>Open Sidebar</a></div>";
             jQuery(".bapf_adminbar_custom_sidebar").html(html);
         });
         ';

@@ -224,7 +224,7 @@ class WC_Order_Status_Manager_Admin_Order_Statuses {
 						data-icon-image="<?php echo esc_attr( $icon_attachment_src ? $icon_attachment_src[0] : '' ); ?>"
 					/>
 
-					<a href="#_icon" class="button button-small upload-icon upload-icon-image" data-uploader-button-text="<?php _e( 'Set as status icon', 'woocommerce-order-status-manager' ); ?>"><?php _e( "Select File", 'woocommerce-order-status-manager' ); ?></a>
+					<a href="#_icon" class="button button-small upload-icon upload-icon-image" data-uploader-button-text="<?php esc_html_e( 'Set as status icon', 'woocommerce-order-status-manager' ); ?>"><?php esc_html_e( "Select File", 'woocommerce-order-status-manager' ); ?></a>
 					<a href="#_icon" class="button button-small remove-icon" ><?php esc_html_e( "Remove Icon", 'woocommerce-order-status-manager' ); ?></a>
 					<?php echo wc_help_tip( __( 'Optional status icon. If not supplied, then Name will be displayed to represent the status', 'woocommerce-order-status-manager' ) ); ?>
 				</p>
@@ -422,7 +422,7 @@ class WC_Order_Status_Manager_Admin_Order_Statuses {
 
 		update_post_meta($post_id, '_color', sanitize_hex_color($_POST['_color'] ?? '#000000'));
 
-		if ($nextStatuses = $_POST['_next_statuses'] ?? '') {
+		if ($nextStatuses = $_POST['_next_statuses'] ?? '') { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$nextStatuses = array_map('sanitize_text_field', $nextStatuses);
 		}
 
@@ -527,7 +527,14 @@ class WC_Order_Status_Manager_Admin_Order_Statuses {
 					}
 				}
 
-				printf( '<mark class="%1$s %2$s tips" style="%3$s" data-tip="%4$s">%5$s</mark>', sanitize_title( $status->get_slug() ), ( $icon ? 'has-icon ' . $icon : '' ), $style, esc_attr( $status->get_name() ), esc_html( $status->get_name() ) );
+				printf(
+					'<mark class="%1$s %2$s tips" style="%3$s" data-tip="%4$s">%5$s</mark>',
+					esc_attr( sanitize_title( $status->get_slug() ) ),
+					esc_attr( $icon ? 'has-icon ' . $icon : '' ),
+					esc_attr( $style ),
+					esc_attr( $status->get_name() ),
+					esc_html( $status->get_name() )
+				);
 
 			break;
 
@@ -552,7 +559,7 @@ class WC_Order_Status_Manager_Admin_Order_Statuses {
 				if ( $status->is_core_status() ) : // $status->get_type() could be translated causing a CSS mismatch
 					printf( '<span class="badge core">%s</span>', esc_html( $status->get_type() ) );
 				else :
-					printf( '<span class="badge %1$s">%2$s</span>', sanitize_title( $status->get_type() ), esc_html( $status->get_type() ) );
+					printf( '<span class="badge %1$s">%2$s</span>', esc_attr( sanitize_title( $status->get_type() ) ), esc_html( $status->get_type() ) );
 				endif;
 
 			break;
@@ -581,12 +588,12 @@ class WC_Order_Status_Manager_Admin_Order_Statuses {
 				<p class="singular" style="display: none">
 					<a class="order-status-link"  href=""><?php
 						/* translators: singular order marked with status name - %1$s: orders count (1), %2$s: order status name */
-						printf( __( 'There is currently %1$s order marked as %2$s.', 'woocommerce-order-status-manager' ), '<strong class="order-status-count"></strong>', '<strong class="order-status-name"></strong>' ); ?></a>
+						printf( esc_html__( 'There is currently %1$s order marked as %2$s.', 'woocommerce-order-status-manager' ), '<strong class="order-status-count"></strong>', '<strong class="order-status-name"></strong>' ); ?></a>
 				</p>
 				<p class="plural" style="display: none">
 					<a class="order-status-link" href=""><?php
 						/* translators: multiple orders marked with status name - %1$s orders count (n), %2$s: order status name */
-						printf( __( 'There are currently %1$s orders marked as %2$s.', 'woocommerce-order-status-manager' ), '<strong class="order-status-count"></strong>', '<strong class="order-status-name"></strong>' ); ?></a>
+						printf( esc_html__( 'There are currently %1$s orders marked as %2$s.', 'woocommerce-order-status-manager' ), '<strong class="order-status-count"></strong>', '<strong class="order-status-name"></strong>' ); ?></a>
 				</p>
 
 				<p><?php esc_html_e( 'You can choose to reassign the status of existing orders with another before deleting or have it reassigned automatically.', 'woocommerce-order-status-manager' ) ?></p>

@@ -21,8 +21,8 @@ abstract class Entry extends Comparison
     public function __construct(
         string $meta_key,
         Operators $operators,
-        string $value_type = null,
-        Labels $labels = null
+        ?string $value_type = null,
+        ?Labels $labels = null
     ) {
         parent::__construct($operators, $value_type, $labels);
 
@@ -50,10 +50,7 @@ abstract class Entry extends Comparison
         return $bindings;
     }
 
-    /**
-     * @return Bindings
-     */
-    protected function create_empty_query_bindings()
+    private function create_empty_query_bindings(): Bindings
     {
         $bindings = new Bindings();
         $alias = $bindings->get_entry_meta_table_name_alias();

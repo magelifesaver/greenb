@@ -5854,7 +5854,7 @@ final class Manager {
 		$elem->add_control(
 			'media_whee_start',
 			array(
-				'label'       => __( 'Start', 'premium-addons-pro' ),
+				'label'       => __( 'Start Index', 'premium-addons-pro' ),
 				'type'        => Controls_Manager::NUMBER,
 				'min'         => 0,
 				'description' => __( 'Zero based index of the starting item, or leave empty to start in the middle', 'premium-addons-pro' ),

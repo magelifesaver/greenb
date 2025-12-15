@@ -22,7 +22,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 // PremiumAddons Classes.
 use PremiumAddons\Includes\Helper_Functions;
-use PremiumAddons\Includes\Pa_Nav_Menu_Walker;
+use PremiumAddons\Includes\Helpers\Pa_Nav_Menu_Walker;
 use PremiumAddons\Includes\Controls\Premium_Post_Filter;
 use PremiumAddons\Includes\Controls\Premium_Background;
 
@@ -1528,6 +1528,8 @@ class Premium_Nav_Menu extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 	}
@@ -4793,9 +4795,7 @@ class Premium_Nav_Menu extends Widget_Base {
 
 		if ( 'wordpress_menu' === $menu_type ) {
 
-			$is_valid = $this->is_valid_menu( $menu_id );
-
-			if ( ! $is_valid ) {
+			if ( ! $this->is_valid_menu( $menu_id ) ) {
 				?>
 					<div class="premium-error-notice">
 						<?php echo esc_html( __( 'This is an empty menu. Please make sure your menu has items.', 'premium-addons-for-elementor' ) ); ?>

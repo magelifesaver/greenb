@@ -146,11 +146,14 @@ function wps_aa_init_autocomplete( address_group ) {
 
 			console.log( 'WPSAA Replacements:', replacements );
 
-			// Go through all available fields and apply replacements
-			for ( const key in address_group.fields ) {
+			// Track field processing completion
+			const total_fields = Object.keys( address_group.fields ).length;
+			let processed_fields = 0;
 
-				let selector = address_group.fields[key].selector;
-				let data = address_group.fields[key].data.toString();
+			// Function to process a single field
+			const process_field = ( field_key ) => {
+				let selector = address_group.fields[field_key].selector;
+				let data = address_group.fields[field_key].data.toString();
 				let result = data;
 				let attributes = wps_aa_parse_atts(result);
 
@@ -193,10 +196,27 @@ function wps_aa_init_autocomplete( address_group ) {
 
 				final_data.push( { selector: selector, result: result } );
 
-			}
+				// Increment processed count and check if all fields are done
+				processed_fields++;
+				if ( processed_fields === total_fields ) {
+					const wps_aa_event = new CustomEvent( 'wps_aa', { detail: { data: final_data, init: address_group.init } } );
+					document.dispatchEvent( wps_aa_event );
+				}
+			};
 
-			const wps_aa_event = new CustomEvent( 'wps_aa', { detail: { data: final_data, init: address_group.init } } );
-			document.dispatchEvent( wps_aa_event );
+			// Go through all available fields and apply replacements
+			for ( const key in address_group.fields ) {
+				const field = address_group.fields[key];
+				const delay = field.delay || 0;
+
+				if ( delay > 0 ) {
+					setTimeout( () => {
+						process_field( key );
+					}, delay );
+				} else {
+					process_field( key );
+				}
+			}
 
 		} );
 	});
@@ -424,7 +444,7 @@ function wps_aa_address1_format( country ) {
 		'RU', // Russia (partial)
 		'BE', // Belgium
 		'LU', // Luxembourg
-		'FR', // France (partial)
+		//'FR', // France (partial)
 		'IT', // Italy (partial)
 		'ES', // Spain (partial)
 		'PT', // Portugal

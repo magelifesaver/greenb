@@ -3,7 +3,7 @@ Contributors: nosilver4u
 Donate link: https://ewww.io/donate/
 Tags: compress, convert, webp, resize, lazy load
 Tested up to: 6.9
-Stable tag: 8.3.0
+Stable tag: 8.3.1
 License: GPLv3
 
 Smaller Images, Faster Sites, Happier Visitors. Comprehensive image optimization that doesn't require a degree in rocket science.
@@ -141,6 +141,13 @@ That's not a question, but since I made it up, I'll answer it. See this resource
 
 * Feature requests can be viewed and submitted on our [feedback portal](https://feedback.ewww.io/b/features)
 * If you would like to help translate this plugin in your language, [join the team](https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer/)
+
+= 8.3.1 =
+*Release Date - December 4, 2025*
+
+* changed: prevent use of deprecated seems_utf8() function on WP 6.9+
+* fixed: Lazy Load auto-sizing makes images too small when screen size changes
+* fixed: failure to decode CSS background images contained in encoded quotes (&apos;)
 
 = 8.3.0 =
 *Release Date - November 19, 2025*

@@ -122,7 +122,7 @@ class UpdraftPlusAddOns_Options2 {
 	}
 
 	public function show_admin_warning_notconnected() {
-		$this->show_admin_warning(esc_html(__('You have not yet connected the UpdraftPlus plugin to your UpdraftPlus licence.', 'updraftplus')).' <a href="https://teamupdraft.com/my-account/?utm_source=udp-plugin&utm_medium=referral&utm_campaign=paac&utm_content=connect-to-licence&utm_creative_format=notice">'.esc_html__('Connect to your account.', 'updraftplus').'</a>');
+		$this->show_admin_warning(esc_html(__('You have not yet connected the UpdraftPlus plugin to your UpdraftPlus licence.', 'updraftplus')).' <a href="'.esc_url(network_admin_url($this->options->addons_admin_url())).'">'.esc_html__('Connect to your account.', 'updraftplus').'</a>');
 	}
 
 	public function show_admin_warning_noupdraftplus() {

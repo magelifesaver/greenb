@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 		var swis_slim_rule_id = swis_slim_container.attr('data-slim-rule-id');
 		var error_container = swis_slim_container.find('.swis-slim-error-message');
 		error_container.hide();
-                var swis_slim_handle = swis_slim_container.attr('data-slim-handle');
+		var swis_slim_handle = swis_slim_container.attr('data-slim-handle');
 		var swis_slim_button_text = $(this).text();
 		var swis_slim_button = $(this);
 		swis_slim_button.text(swisperformance_vars.saving_message);
@@ -233,6 +233,14 @@ jQuery(document).ready(function($) {
 	$('#swis-slim-show-all-assets').on('click', function() {
 		$('#swis-slim-assets-pane tr[data-slim-handle]').show();
 	});
+	$('.swis-slim-assets').on('click', '.swis-slim-mode-all', function() {
+		var swis_slim_rule_exclusions = $(this).closest('form.swis-slim-rule').find('.swis-slim-rule-exclusions');
+		swis_slim_rule_exclusions.prop('disabled', true);
+	});
+	$('.swis-slim-assets').on('click', '.swis-slim-mode-exclude,.swis-slim-mode-include', function() {
+		var swis_slim_rule_exclusions = $(this).closest('form.swis-slim-rule').find('.swis-slim-rule-exclusions');
+		swis_slim_rule_exclusions.prop('disabled', false);
+	});
 	$('.swis-slim-assets').on('click', '.swis-slim-rule-customize', function() {
 		var swis_slim_container = $(this).closest('.swis-slim-rule');
 		swis_slim_container.find('input[type=text]').show();
@@ -250,8 +258,8 @@ jQuery(document).ready(function($) {
 		var swis_slim_rule_id = swis_slim_container.attr('data-slim-rule-id');
 		var error_container = swis_slim_container.find('.swis-slim-error-message');
 		error_container.hide();
-                var swis_slim_handle = swis_slim_container.attr('data-slim-handle');
-                var swis_slim_rule_type = swis_slim_container.attr('data-slim-rule-type');
+		var swis_slim_handle = swis_slim_container.attr('data-slim-handle');
+		var swis_slim_rule_type = swis_slim_container.attr('data-slim-rule-type');
 		var swis_slim_button_text = $(this).text();
 		var swis_slim_button = $(this);
 		swis_slim_button.text(swisperformance_vars.saving_message);

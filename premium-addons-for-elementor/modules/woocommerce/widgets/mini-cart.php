@@ -43,28 +43,6 @@ class Mini_Cart extends Widget_Base {
 		return 'premium-mini-cart';
 	}
 
-	private $render_mc_conds = array(
-		'relation' => 'or',
-		'terms'    => array(
-			array(
-				'name'  => 'behaviour',
-				'value' => 'toggle',
-			),
-			array(
-				'terms' => array(
-					array(
-						'name'  => 'behaviour',
-						'value' => 'url',
-					),
-					array(
-						'name'  => 'woo_cta_connect',
-						'value' => 'yes',
-					),
-				),
-			),
-		),
-	);
-
 	/**
 	 * Retrieve Widget Title.
 	 *
@@ -611,8 +589,8 @@ class Mini_Cart extends Widget_Base {
 			array(
 				'label'      => __( 'Count Badge', 'premium-addons-for-elementor' ),
 				'type'       => Controls_Manager::SWITCHER,
-				'label_on'   => esc_html__( 'Show', 'premium-addons-for-elementor' ),
-				'label_off'  => esc_html__( 'Hide', 'premium-addons-for-elementor' ),
+				'label_on'   => __( 'Show', 'premium-addons-for-elementor' ),
+				'label_off'  => __( 'Hide', 'premium-addons-for-elementor' ),
 				'separator'  => 'before',
 				'default'    => 'yes',
 				'conditions' => array(
@@ -806,10 +784,10 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'render_on_cart_checkout',
 			array(
-				'label'     => __( 'Open Mini Cart on Cart/Checkout', 'premium-addons-for-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'render_type'  => 'template',
-				'condition' => array(
+				'label'       => __( 'Open Mini Cart on Cart/Checkout', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'render_type' => 'template',
+				'condition'   => array(
 					'behaviour' => 'toggle',
 				),
 			)
@@ -831,13 +809,26 @@ class Mini_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'woo_cta_connect',
+			'open_on_add_to_cart',
 			array(
-				'label'       => __( 'Connect To Premium Woo CTA', 'premium-addons-for-elementor' ),
+				'label'       => __( 'Open on Cart Update', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => __( 'Use this option to open the cart menu every time a product is added to cart using Premium Woo CTA widget.', 'premium-addons-for-elementor' ),
+				'description' => __( 'Use this option to open the cart menu every time an item is added/removed.', 'premium-addons-for-elementor' ),
 				'condition'   => array(
-					'behaviour' => 'url',
+					'behaviour' => 'toggle',
+				),
+			)
+		);
+
+		$this->add_control(
+			'cart_delay',
+			array(
+				'label'     => __( 'Delay (ms)', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 1000,
+				'condition' => array(
+					'behaviour'           => 'toggle',
+					'open_on_add_to_cart' => 'yes',
 				),
 			)
 		);
@@ -858,6 +849,10 @@ class Mini_Cart extends Widget_Base {
 		$slide_connected_conds = array(
 			'relation' => 'or',
 			'terms'    => array(
+				array(
+					'name'  => 'behaviour',
+					'value' => 'url',
+				),
 				array(
 					'terms' => array(
 						array(
@@ -882,26 +877,16 @@ class Mini_Cart extends Widget_Base {
 						),
 					),
 				),
-				array(
-					'terms' => array(
-						array(
-							'name'  => 'behaviour',
-							'value' => 'url',
-						),
-						array(
-							'name'  => 'woo_cta_connect',
-							'value' => 'yes',
-						),
-					),
-				),
 			),
 		);
 
 		$this->start_controls_section(
 			'mini_cart_sec',
 			array(
-				'label'      => __( 'Mini Cart', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Mini Cart', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -930,11 +915,11 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'cart_dir',
 			array(
-				'label'              => __( 'Direction', 'premium-addons-for-elementor' ),
-				'prefix_class'       => 'pa-slide-dir-',
-				'type'               => Controls_Manager::CHOOSE,
-				'toggle'             => false,
-				'options'            => array(
+				'label'                => __( 'Direction', 'premium-addons-for-elementor' ),
+				'prefix_class'         => 'pa-slide-dir-',
+				'type'                 => Controls_Manager::CHOOSE,
+				'toggle'               => false,
+				'options'              => array(
 					'left'  => array(
 						'title' => __( 'Left', 'premium-addons-for-elementor' ),
 						'icon'  => is_rtl() ? 'eicon-order-end' : 'eicon-order-start',
@@ -944,15 +929,15 @@ class Mini_Cart extends Widget_Base {
 						'icon'  => is_rtl() ? 'eicon-order-start' : 'eicon-order-end',
 					),
 				),
-				'default'            => 'right',
-				'selectors_dictionary'   => array(
+				'default'              => 'right',
+				'selectors_dictionary' => array(
 					'left'  => 'left: 0; transform: translateX(calc(-1 * var(--pa-slide-mc-width))); -webkit-transform: translateX(calc(-1 * var(--pa-slide-mc-width))); -ms-transform: translateX(calc(-1 * var(--pa-slide-mc-width)))',
 					'right' => 'right:0; transform: translateX(var(--pa-slide-mc-width)); -webkit-transform: translateX(var(--pa-slide-mc-width)); -ms-transform: translateX(var(--pa-slide-mc-width))',
 				),
-				'selectors'          => array(
+				'selectors'            => array(
 					'{{WRAPPER}} .pa-woo-mc__content-wrapper' => '{{VALUE}}',
 				),
-				'conditions'         => $slide_connected_conds,
+				'conditions'           => $slide_connected_conds,
 			)
 		);
 
@@ -1011,7 +996,7 @@ class Mini_Cart extends Widget_Base {
 					),
 				),
 				'selectors'  => array(
-					'{{WRAPPER}}' => '--pa-slide-mc-width: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}}' => '--pa-slide-mc-width: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -1072,9 +1057,9 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'transition',
 			array(
-				'label'      => __( 'Transition Duration (Sec)', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'separator'  => 'before',
+				'label'     => __( 'Transition Duration (Sec)', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'separator' => 'before',
 				'range'     => array(
 					'px' => array(
 						'min'  => 0,
@@ -1084,15 +1069,15 @@ class Mini_Cart extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .pa-woo-mc__content-wrapper' => 'transition-duration: {{SIZE}}s',
-				)
+				),
 			)
 		);
 
 		$this->add_control(
 			'close_delay',
 			array(
-				'label'      => __( 'Transition Delay (Sec)', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
+				'label'     => __( 'Transition Delay (Sec)', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array(
 						'min'  => 0,
@@ -1102,14 +1087,14 @@ class Mini_Cart extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .pa-woo-mc__content-wrapper' => 'transition-delay: {{SIZE}}s',
-				)
+				),
 			)
 		);
 
 		$this->add_control(
 			'close_on_outside',
 			array(
-				'label'      => esc_html__( 'Close On Click Outside Content', 'premium-addons-pro' ),
+				'label'      => __( 'Close On Click Outside Content', 'premium-addons-pro' ),
 				'type'       => Controls_Manager::SWITCHER,
 				'default'    => 'yes',
 				'separator'  => 'before',
@@ -1153,8 +1138,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'progressbar_section',
 			array(
-				'label'      => __( 'Free Shipping Progress Bar', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Free Shipping Progress Bar', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -1257,8 +1244,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'cross_sells_section',
 			array(
-				'label'      => __( 'Cross Sells Listing', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Cross Sells Listing', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -1423,15 +1412,17 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'mc_listing_section',
 			array(
-				'label'      => __( 'Product Listing', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Product Listing', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
 		$this->add_control(
 			'thumb_heading',
 			array(
-				'label'     => esc_html__( 'Thumbnail', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Thumbnail', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -1494,7 +1485,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'product_info_heading',
 			array(
-				'label'     => esc_html__( 'Product Info', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Product Info', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -1851,6 +1842,10 @@ class Mini_Cart extends Widget_Base {
 			'relation' => 'or',
 			'terms'    => array(
 				array(
+					'name'  => 'behaviour',
+					'value' => 'url',
+				),
+				array(
 					'terms' => array(
 						array(
 							'name'  => 'behaviour',
@@ -1874,26 +1869,16 @@ class Mini_Cart extends Widget_Base {
 						),
 					),
 				),
-				array(
-					'terms' => array(
-						array(
-							'name'  => 'behaviour',
-							'value' => 'url',
-						),
-						array(
-							'name'  => 'woo_cta_connect',
-							'value' => 'yes',
-						),
-					),
-				),
 			),
 		);
 
 		$this->start_controls_section(
 			'mc_header_section',
 			array(
-				'label'      => __( 'Mini-Cart Header', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Mini-Cart Header', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -2132,8 +2117,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'mc_footer_section',
 			array(
-				'label'      => __( 'Mini-Cart Footer', 'premium-addons-for-elementor' ),
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Mini-Cart Footer', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -2153,7 +2140,7 @@ class Mini_Cart extends Widget_Base {
 				'label'       => __( 'Text', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'render_type' => 'template',
-				'default'     => esc_html__( 'Remove All Items', 'premium-addons-for-elementor' ),
+				'default'     => __( 'Remove All Items', 'premium-addons-for-elementor' ),
 				'label_block' => true,
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -2178,7 +2165,7 @@ class Mini_Cart extends Widget_Base {
 				'label'       => __( 'Text', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'render_type' => 'template',
-				'default'     => esc_html__( 'Subtotal {{count}} items', 'premium-addons-for-elementor' ),
+				'default'     => __( 'Subtotal {{count}} items', 'premium-addons-for-elementor' ),
 				'description' => __( 'Use this option to add a text of your choice, and use the {{count}} placeholder to add your items\' count.', 'premium-addons-for-elementor' ),
 				'label_block' => true,
 				'dynamic'     => array( 'active' => true ),
@@ -2426,6 +2413,8 @@ class Mini_Cart extends Widget_Base {
 			)
 		);
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 	}
 
@@ -2569,7 +2558,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'badge_typo',
-				'label'    => esc_html__( 'Badge Typography', 'premium-addons-for-elementor' ),
+				'label'    => __( 'Badge Typography', 'premium-addons-for-elementor' ),
 				'selector' => '{{WRAPPER}} .pa-woo-mc__badge',
 			)
 		);
@@ -2620,7 +2609,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'       => 'subtotal_typo',
-				'label'      => esc_html__( 'Subtotal Typography', 'premium-addons-for-elementor' ),
+				'label'      => __( 'Subtotal Typography', 'premium-addons-for-elementor' ),
 				'selector'   => '{{WRAPPER}}  .pa-woo-mc__inner-container .pa-woo-mc__subtotal, {{WRAPPER}}.premium-mc-counting-yes  .pa-woo-mc__inner-container .pa-woo-mc__subtotal *',
 				'conditions' => $subtotal_conds,
 			)
@@ -2649,7 +2638,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'triggle_style_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'premium-addons-for-elementor' ),
+				'label' => __( 'Normal', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -2694,7 +2683,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'badge_heading',
 			array(
-				'label'     => esc_html__( 'Count Badge', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Count Badge', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -2745,7 +2734,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'cont_heading',
 			array(
-				'label'     => esc_html__( 'Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -2797,7 +2786,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'triggle_style_hov',
 			array(
-				'label' => esc_html__( 'Hover', 'premium-addons-for-elementor' ),
+				'label' => __( 'Hover', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -2861,7 +2850,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'badge_heading_hov',
 			array(
-				'label'     => esc_html__( 'Count Badge', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Count Badge', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -2914,7 +2903,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'cont_heading_hov',
 			array(
-				'label'     => esc_html__( 'Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -2981,28 +2970,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'cart_conts_style_sec',
 			array(
-				'label'      => __( 'Cart Containers', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'relation' => 'or',
-					'terms'    => array(
-						array(
-							'name'  => 'behaviour',
-							'value' => 'toggle',
-						),
-						array(
-							'terms' => array(
-								array(
-									'name'  => 'behaviour',
-									'value' => 'url',
-								),
-								array(
-									'name'  => 'woo_cta_connect',
-									'value' => 'yes',
-								),
-							),
-						),
-					),
+				'label'     => __( 'Cart Containers', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
 				),
 			)
 		);
@@ -3010,7 +2981,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'items_style_heading',
 			array(
-				'label'     => esc_html__( 'Items', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Items', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3048,7 +3019,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'mc_cont_style_heading',
 			array(
-				'label'     => esc_html__( 'Mini Cart', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Mini Cart', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3101,16 +3072,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'coupon_style_sec',
 			array(
-				'label'      => __( 'Coupon', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'  => 'coupon',
-							'value' => 'yes',
-						),
-						$this->render_mc_conds,
-					),
+				'label'     => __( 'Coupon', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
+					'coupon'    => 'yes',
 				),
 			)
 		);
@@ -3118,7 +3084,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'coupon_txt_heading',
 			array(
-				'label'     => esc_html__( 'Text', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Text', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3146,7 +3112,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'coupon_input_heading',
 			array(
-				'label'     => esc_html__( 'Input Field', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Input Field', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3227,7 +3193,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'coupon_submit_heading',
 			array(
-				'label'     => esc_html__( 'Submit Button', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Submit Button', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3282,7 +3248,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'coupon_cont_heading',
 			array(
-				'label'     => esc_html__( 'Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3338,16 +3304,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'cross_style_sec',
 			array(
-				'label'      => __( 'Cross Sells Listing', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'  => 'cross_sells',
-							'value' => 'yes',
-						),
-						$this->render_mc_conds,
-					),
+				'label'     => __( 'Cross Sells Listing', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour'   => 'toggle',
+					'cross_sells' => 'yes',
 				),
 			)
 		);
@@ -3355,7 +3316,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'crossell_txt_heading',
 			array(
-				'label'     => esc_html__( 'Text', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Text', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3412,7 +3373,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'crossell_nav_heading',
 			array(
-				'label'     => esc_html__( 'Arrows', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Arrows', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3450,7 +3411,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'crossell_product_heading',
 			array(
-				'label'     => esc_html__( 'Product', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Product', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3516,28 +3477,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'items_style_sec',
 			array(
-				'label'      => __( 'Product Listing', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'relation' => 'or',
-					'terms'    => array(
-						array(
-							'name'  => 'behaviour',
-							'value' => 'toggle',
-						),
-						array(
-							'terms' => array(
-								array(
-									'name'  => 'behaviour',
-									'value' => 'url',
-								),
-								array(
-									'name'  => 'woo_cta_connect',
-									'value' => 'yes',
-								),
-							),
-						),
-					),
+				'label'     => __( 'Product Listing', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
 				),
 			)
 		);
@@ -3545,7 +3488,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'thumb_style_heading',
 			array(
-				'label'     => esc_html__( 'Thumbnail', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Thumbnail', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3582,7 +3525,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'title_style_heading',
 			array(
-				'label'     => esc_html__( 'Title', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Title', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3621,7 +3564,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'trash_style_heading',
 			array(
-				'label'     => esc_html__( 'Remove Icon', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Remove Icon', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -3634,7 +3577,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'remove_txt_typo',
-				'label'     => esc_html__( 'Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__remove-item span',
 				'condition' => array(
 					'remove_icon' => 'yes',
@@ -3675,7 +3618,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'price_style_heading',
 			array(
-				'label'     => esc_html__( 'Price', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Price', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -3685,7 +3628,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'price_typo',
-				'label'    => esc_html__( 'Typography', 'premium-addons-for-elementor' ),
+				'label'    => __( 'Typography', 'premium-addons-for-elementor' ),
 				'selector' => '{{WRAPPER}} .pa-woo-mc__item-price',
 			)
 		);
@@ -3704,7 +3647,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'qty_style_heading',
 			array(
-				'label'     => esc_html__( 'Quantity', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Quantity', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -3717,7 +3660,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'qty_typo',
-				'label'     => esc_html__( 'Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__input[type="number"]',
 				'condition' => array(
 					'content_layout' => array( 'layout-1', 'layout-2' ),
@@ -3742,7 +3685,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'qty_cta_style_heading',
 			array(
-				'label'     => esc_html__( '+/- Buttons', 'premium-addons-for-elementor' ),
+				'label'     => __( '+/- Buttons', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -3758,7 +3701,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'qty_cta_normal',
 			array(
-				'label'     => esc_html__( 'Normal', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Normal', 'premium-addons-for-elementor' ),
 				'condition' => array(
 					'content_layout' => array( 'layout-1', 'layout-2' ),
 				),
@@ -3841,7 +3784,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'qta_btn_tab_hov',
 			array(
-				'label'     => esc_html__( 'Hover', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Hover', 'premium-addons-for-elementor' ),
 				'condition' => array(
 					'content_layout' => array( 'layout-1', 'layout-2' ),
 				),
@@ -3943,7 +3886,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'qty_cont_heading',
 			array(
-				'label'     => esc_html__( 'Quantity Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Quantity Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -4042,9 +3985,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'header_style',
 			array(
-				'label'      => __( 'Mini-Cart Header', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Mini-Cart Header', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -4052,7 +3997,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'cart_title_typo',
-				'label'     => esc_html__( 'Title Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Title Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__cart-title',
 				'condition' => array(
 					'cart_title!' => '',
@@ -4089,7 +4034,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'header_count_type',
-				'label'     => esc_html__( 'Count Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Count Typography', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__cart-header .pa-woo-mc__cart-count',
 				'condition' => array(
@@ -4129,7 +4074,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'cicon_heading',
 			array(
-				'label'     => esc_html__( 'Close Icon', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Close Icon', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -4142,7 +4087,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'cicon_tab_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'premium-addons-for-elementor' ),
+				'label' => __( 'Normal', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -4214,7 +4159,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'cicon_tab_hov',
 			array(
-				'label' => esc_html__( 'Hover', 'premium-addons-for-elementor' ),
+				'label' => __( 'Hover', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -4288,7 +4233,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'header_cont_heading',
 			array(
-				'label'     => esc_html__( 'Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -4331,16 +4276,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'remove_all_style',
 			array(
-				'label'      => __( 'Remove All Button', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'  => 'remove_all_btn',
-							'value' => 'yes',
-						),
-						$this->render_mc_conds,
-					),
+				'label'     => __( 'Remove All Button', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour'      => 'toggle',
+					'remove_all_btn' => 'yes',
 				),
 			)
 		);
@@ -4349,7 +4289,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'remove_all_typo',
-				'label'    => esc_html__( 'Typography', 'premium-addons-for-elementor' ),
+				'label'    => __( 'Typography', 'premium-addons-for-elementor' ),
 				'selector' => '{{WRAPPER}} .pa-woo-mc__empty-mc .pa-woo-mc__remove-all-btn,
 				{{WRAPPER}} .pa-woo-mc__empty-mc .pa-woo-mc__confirm-msg',
 			)
@@ -4362,7 +4302,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'remove_btn_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'premium-addons-for-elementor' ),
+				'label' => __( 'Normal', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -4432,7 +4372,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'remove_btn_tab_hov',
 			array(
-				'label' => esc_html__( 'Hover', 'premium-addons-for-elementor' ),
+				'label' => __( 'Hover', 'premium-addons-for-elementor' ),
 			)
 		);
 
@@ -4508,16 +4448,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'progressbar_sec_style',
 			array(
-				'label'      => __( 'Free Shipping Progress Bar', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'  => 'mc_progressbar',
-							'value' => 'yes',
-						),
-						$this->render_mc_conds,
-					),
+				'label'     => __( 'Free Shipping Progress Bar', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour'      => 'toggle',
+					'mc_progressbar' => 'yes',
 				),
 			)
 		);
@@ -4526,7 +4461,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'proress_typo',
-				'label'     => esc_html__( 'Text Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Text Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__progress-heading',
 				'condition' => array(
 					'mc_progressbar' => 'yes',
@@ -4601,9 +4536,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'footer_style',
 			array(
-				'label'      => __( 'Mini-Cart Footer', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Mini-Cart Footer', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -4611,7 +4548,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'footer_sub_text_typo',
-				'label'     => esc_html__( 'Subtotal Text Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Subtotal Text Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__subtotal-heading',
 				'condition' => array(
 					'footer_subtotal' => 'yes',
@@ -4639,7 +4576,7 @@ class Mini_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'footer_amount_typo',
-				'label'     => esc_html__( 'Subtotal Amount Typography', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Subtotal Amount Typography', 'premium-addons-for-elementor' ),
 				'selector'  => '{{WRAPPER}} .pa-woo-mc__cart-footer .pa-woo-mc__subtotal',
 				'condition' => array(
 					'footer_subtotal' => 'yes',
@@ -4689,7 +4626,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'footer_btn_heading',
 			array(
-				'label'     => esc_html__( 'Cart CTA', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Cart CTA', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -4744,7 +4681,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'footer_btn_normal',
 			array(
-				'label'      => esc_html__( 'Normal', 'premium-addons-for-elementor' ),
+				'label'      => __( 'Normal', 'premium-addons-for-elementor' ),
 				'conditions' => array(
 					'relation' => 'or',
 					'terms'    => array(
@@ -4764,7 +4701,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'vcart_heading',
 			array(
-				'label'     => esc_html__( 'View Cart', 'premium-addons-for-elementor' ),
+				'label'     => __( 'View Cart', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -4802,7 +4739,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'checkout_heading',
 			array(
-				'label'     => esc_html__( 'Checkout', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Checkout', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -4871,7 +4808,7 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'footer_btn_tab_hov',
 			array(
-				'label'      => esc_html__( 'Hover', 'premium-addons-for-elementor' ),
+				'label'      => __( 'Hover', 'premium-addons-for-elementor' ),
 				'conditions' => array(
 					'relation' => 'or',
 					'terms'    => array(
@@ -4891,7 +4828,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'vcart_heading_hov',
 			array(
-				'label'     => esc_html__( 'View Cart', 'premium-addons-for-elementor' ),
+				'label'     => __( 'View Cart', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -4929,7 +4866,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'checkout_heading_hov',
 			array(
-				'label'     => esc_html__( 'Checkout', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Checkout', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
@@ -5051,7 +4988,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'footer_cont_heading',
 			array(
-				'label'     => esc_html__( 'Container', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Container', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -5094,9 +5031,11 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'empty_cart_style_sec',
 			array(
-				'label'      => __( 'Empty Cart Message', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => $this->render_mc_conds,
+				'label'     => __( 'Empty Cart Message', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
+				),
 			)
 		);
 
@@ -5115,7 +5054,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'empty_msg_heading',
 			array(
-				'label'     => esc_html__( 'Message', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Message', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -5155,7 +5094,7 @@ class Mini_Cart extends Widget_Base {
 		$this->add_control(
 			'empty_btn_heading',
 			array(
-				'label'     => esc_html__( 'Button', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Button', 'premium-addons-for-elementor' ),
 				'separator' => 'before',
 				'type'      => Controls_Manager::HEADING,
 			)
@@ -5229,28 +5168,10 @@ class Mini_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'loader_style_sec',
 			array(
-				'label'      => __( 'Loader', 'premium-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => array(
-					'relation' => 'or',
-					'terms'    => array(
-						array(
-							'name'  => 'behaviour',
-							'value' => 'toggle',
-						),
-						array(
-							'terms' => array(
-								array(
-									'name'  => 'behaviour',
-									'value' => 'url',
-								),
-								array(
-									'name'  => 'woo_cta_connect',
-									'value' => 'yes',
-								),
-							),
-						),
-					),
+				'label'     => __( 'Loader', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'behaviour' => 'toggle',
 				),
 			)
 		);
@@ -5329,21 +5250,19 @@ class Mini_Cart extends Widget_Base {
 
 		$trigger_pos = $settings['placement'];
 
-		$subtotal    = 'float' === $trigger_pos && 'yes' === $settings['subtotal'];
+		$subtotal     = 'float' === $trigger_pos && 'yes' === $settings['subtotal'];
 		$has_subtotal = 'default' === $trigger_pos && ! in_array( $settings['presets'], array( 'preset-1', 'preset-2' ), true );
 		$has_badge    = 'default' === $trigger_pos && in_array( $settings['presets'], array( 'preset-5', 'preset-7' ), true );
 		$badge        = 'yes' === $settings['badge_switcher'];
 		$behaviour    = $settings['behaviour'];
 
-		$is_connected     = 'url' === $behaviour && 'yes' === $settings['woo_cta_connect'];
-
 		// if yes, we should ignore the is_cart or is_checkout, and always render the mini cart. if not, we follow the previous logic.
-		$render_on_cart_checkout = 'yes' === $settings['render_on_cart_checkout'] ? true : ( ! is_cart() && ! is_checkout());
-		
-		// $render_mini_cart = ( 'toggle' === $behaviour || $is_connected ) && ! is_cart() && ! is_checkout();
-		$render_mini_cart = ( 'toggle' === $behaviour || $is_connected ) && $render_on_cart_checkout;
+		$render_on_cart_checkout = 'yes' === $settings['render_on_cart_checkout'] ? true : ( ! is_cart() && ! is_checkout() );
 
-		$counting_effect  = 'yes' === $settings['odometer_effect'];
+		// $render_mini_cart = ( 'toggle' === $behaviour || $is_connected ) && ! is_cart() && ! is_checkout();
+		$render_mini_cart = 'toggle' === $behaviour && $render_on_cart_checkout;
+
+		$counting_effect = 'yes' === $settings['odometer_effect'];
 
 		$this->add_render_attribute( 'cart_outer_wrapper', 'class', 'pa-woo-mc__outer-container' );
 
@@ -5352,9 +5271,10 @@ class Mini_Cart extends Widget_Base {
 			delete_option( 'pa_mc_layout' );
 			update_option( 'pa_mc_layout', $settings['content_layout'], true );
 
-			$cart_type  = $is_connected || 'float' === $trigger_pos ? 'slide' : $settings['cart_type'];
+			$cart_type  = 'float' === $trigger_pos ? 'slide' : $settings['cart_type'];
 			$cart_count = WC()->cart ? WC()->cart->get_cart_contents_count() : '0';
 			$header_cls = ! empty( $settings['cart_title'] ) ? 'premium-mc-title-yes' : '';
+			$auto_open  = 'yes' === $settings['open_on_add_to_cart'];
 
 			// we should also add the animation.
 			$this->add_render_attribute(
@@ -5375,13 +5295,18 @@ class Mini_Cart extends Widget_Base {
 			}
 
 			$cart_settings = array(
-				'type'         => $cart_type,
-				'behavior'     => $behaviour,
-				'trigger'      => 'slide' === $cart_type ? 'click' : $settings['trigger'],
-				'clickOutside' => 'yes' === $settings['close_on_outside'],
-				'removeTxt'    => 'yes' === $settings['remove_icon'] && 'text' === $settings['remove_type'] ? $settings['remove_txt'] : false,
-				'coupon'       => 'yes' === $settings['coupon']
+				'type'              => $cart_type,
+				'behavior'          => $behaviour,
+				'trigger'           => 'slide' === $cart_type ? 'click' : $settings['trigger'],
+				'clickOutside'      => 'yes' === $settings['close_on_outside'],
+				'removeTxt'         => 'yes' === $settings['remove_icon'] && 'text' === $settings['remove_type'] ? $settings['remove_txt'] : false,
+				'coupon'            => 'yes' === $settings['coupon'],
+				'openAutomatically' => $auto_open,
 			);
+
+			if ( $auto_open ) {
+				$cart_settings['cartDelay'] = $settings['cart_delay'];
+			}
 
 			if ( 'yes' === get_option( 'woocommerce_calc_taxes' ) && in_array( 'yes', array( $settings['show_tax_label'], $settings['show_footer_tax_label'] ), true ) ) {
 				$cart_settings['taxLabel'] = WC()->countries->inc_tax_or_vat();
@@ -5500,7 +5425,9 @@ class Mini_Cart extends Widget_Base {
 						),
 					)
 				);
-				?><div <?php echo wp_kses_post( $this->get_render_attribute_string( 'overlay' ) ); ?>></div><?php
+				?>
+				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'overlay' ) ); ?>></div>
+								<?php
 			}
 		}
 	}
@@ -5872,23 +5799,28 @@ class Mini_Cart extends Widget_Base {
 	 * @return string|false
 	 */
 	private function check_free_shipping_method() {
-
-		// get the first shipping zone as a default.
-		$zones     = \WC_Shipping_Zones::get_zones();
-		$threshold = '';
-
-		$default_zone = is_array( $zones ) && count( $zones ) ? reset( $zones ) : false;
-
-		if ( ! $default_zone ) {
+		if ( ! WC()->cart ) {
 			return false;
 		}
 
-		$shipping_methods = $default_zone['shipping_methods'];
+		$packages = WC()->cart->get_shipping_packages();
 
-		// loop through all the shipping methods in this zone.
+		if ( empty( $packages ) ) {
+			return false;
+		}
+
+		$zone = \WC_Shipping_Zones::get_zone_matching_package( $packages[0] );
+
+		if ( ! $zone ) {
+			return false;
+		}
+
+		$shipping_methods = $zone->get_shipping_methods();
+
+		$threshold = false;
+		// Loop through all the shipping methods in this zone.
 		foreach ( $shipping_methods as $method ) {
-
-			if ( $method->id === 'free_shipping' ) {
+			if ( $method->id === 'free_shipping' && 'yes' === $method->enabled ) { // make sure it's enabled.
 				$min_amount = $method->get_option( 'min_amount' );
 
 				if ( $min_amount ) {

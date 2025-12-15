@@ -11,9 +11,6 @@ use ACP\Search\Value;
 class Choice extends Search\Comparison\Entry implements ACP\Search\Comparison\Values
 {
 
-    /**
-     * @var array
-     */
     private $choices;
 
     public function __construct(string $field, array $choices)

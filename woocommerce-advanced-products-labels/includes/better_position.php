@@ -116,6 +116,7 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
     public static function data_products_label($data) {
         $data['General'][] = array(
             "label"    => __('Start for Better position labels', 'BeRocket_products_label_domain'),
+            'tr_class' => 'bapl_better_position_padding',
             "items" => array(
                 array(
                     "type"     => "number",

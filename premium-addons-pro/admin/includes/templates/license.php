@@ -10,7 +10,7 @@ use PremiumAddonsPro\Admin\Includes\Admin_Helper;
 use PremiumAddons\Includes\Helper_Functions;
 
 $account_link = Helper_Functions::get_campaign_link( 'https://my.leap13.com/', 'license-page', 'wp-dash', 'get-pro' );
-$get_license  = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/', 'license-page', 'wp-dash', 'get-pro' );
+$get_license  = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/#get-pa-pro', 'license-page', 'wp-dash', 'get-pro' );
 $upgrade_link  = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/upgrade-premium-addons-license/', 'license-page', 'wp-dash', 'get-pro' );
 
 
@@ -29,7 +29,7 @@ $info = get_transient( 'pa_license_info' );
 
                         <?php if( isset( $info['id'] ) && '4' !== $info['id'] ) : ?>
 
-                            <b><?php echo __( 'Upgrade to a Lifetime License today and get 10% off—no more renewals! You’ll only pay the difference from your current plan.', 'premium-addons-pro' ); ?></b>
+                            <b><?php echo __( 'Upgrade to a Lifetime License today and <span style="font-weight: 600; color: #FF6000;">Get 35% OFF</span>. No more renewals! You’ll only pay the difference from your current plan.', 'premium-addons-pro' ); ?></b>
 
                             <ol>
                                 <li>
@@ -49,7 +49,7 @@ $info = get_transient( 'pa_license_info' );
                                 </li>
 
                                 <li>
-                                <span><?php echo sprintf( __( 'Enter the code %s at checkout for an extra 10%% off.', 'premium-addons-pro' ), '<strong>LIFETIME10</strong>' ); ?></span>
+                                <span><?php echo sprintf( __( 'Enter the code %s at checkout for an extra 35%% off.', 'premium-addons-pro' ), '<strong>BFUL2025</strong>' ); ?></span>
                                 </li>
                             </ol>
 
@@ -65,7 +65,7 @@ $info = get_transient( 'pa_license_info' );
                                     <span>
                                         <?php echo __( 'If you don\'t have a license key yet, get ', 'premium-addons-pro' ); ?>
                                         <a href="<?php echo esc_url( $get_license ); ?>" target="_blank"><?php echo __( 'Premium Addons Pro', 'premium-addons-pro' ); ?></a>
-                                        <?php echo __( 'now. ', 'premium-addons-pro' ); ?></span><span style="text-decoration: underline; font-weight: 600; color: #FF6000;"><?php echo __( 'SAVE 10%', 'premium-addons-pro' ); ?></span><span><?php echo __( ' on Lifetime license for new purchases and ', 'premium-addons-pro' ); ?><a href="<?php echo esc_url( $upgrade_link ); ?>" target="_blank"><?php echo __( 'upgrades', 'premium-addons-pro' ); ?></a> using the code SUMMER10.</span>
+                                        <?php echo __( 'now. ', 'premium-addons-pro' ); ?></span><span style="text-decoration: underline; font-weight: 600; color: #FF6000;"><?php echo __( 'SAVE UP TO $105', 'premium-addons-pro' ); ?></span><span><?php echo __( ' on new purchases and ', 'premium-addons-pro' ); ?><a href="<?php echo esc_url( $upgrade_link ); ?>" target="_blank"><?php echo __( 'upgrades', 'premium-addons-pro' ); ?></a>.</span>
                                 </li>
 
                                 <li>

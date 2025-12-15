@@ -78,6 +78,7 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
             include "paid/advanced_caching.php";
             include "paid/order-product.php";
             include "paid/divi-module.php";
+            include "paid/checkbox_search.php";
             //COMPATIBILITY
             add_filter('bapf_compatibility_include', array($this, 'compatibility_include'), 10, 1);
             add_filter('brapf_wizard_addons_save', array($this, 'wizard_update_permalinks'), 10, 1);
@@ -1594,7 +1595,7 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
             $option_permalink = array();
         }
         $option_permalink = array_merge($this->default_permalink, $option_permalink);
-        return $option_permalink;
+        return apply_filters('bapf_nice_urls_get_permalinks_options', $option_permalink);
     }
     public function get_nn_permalinks_oprions() {
         $option_permalink = get_option( 'berocket_nn_permalink_option' );
@@ -2070,6 +2071,7 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
         add_action( 'plugins_loaded', array($this, 'plugins_loaded') );
         add_action( 'braapf_register_frontend_assets', array(__CLASS__, 'register_paid_file_script'), 10, 1 );
         add_action( 'braapf_wp_enqueue_script_after', array(__CLASS__, 'include_paid_file_script'), 10, 1 );
+        add_action( 'braapf_wp_enqueue_style_after', array(__CLASS__, 'include_paid_file_style'), 10, 1 );
         add_action( 'bapf_include_all_tempate_styles', array(__CLASS__, 'include_paid_tempate_styles') );
         add_filter( 'brapf_filter_instance', array(__CLASS__, 'datepicker_fix_instance'), 10, 3 );
         add_filter('BeRocket_AAPF_template_full_content', array(__CLASS__, 'value_icon_datepicker'), 600, 4);
@@ -2095,6 +2097,18 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
             wp_register_script( 'berocket_aapf_widget-script_paid',
                 plugins_url( $admin_file, BeRocket_AJAX_filters_file ),
                 array( 'jquery', 'jquery-ui-slider' ) );
+        }
+        $admin_style = 'paid/assets/style.css';
+        if( file_exists(plugin_dir_path(BeRocket_AJAX_filters_file).$admin_style) ) {
+            wp_register_style( 'berocket_aapf_widget-style_paid',
+                plugins_url( $admin_style, BeRocket_AJAX_filters_file )
+            );
+        }
+    }
+    public static function include_paid_file_style($handle) {
+        $admin_file = 'paid/assets/style.css';
+        if( ! BeRocket_AAPF::$concat_enqueue_files && $handle == 'berocket_aapf_widget-style' && file_exists(plugin_dir_path(BeRocket_AJAX_filters_file).$admin_file) ) {
+            BeRocket_AAPF::wp_enqueue_style('berocket_aapf_widget-style_paid');
         }
     }
     public static function include_paid_file_script($handle) {
@@ -2228,17 +2242,22 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
                     var filtertype = jQuery('.braapf_filter_type_data *').serialize();
                     var old_filtertype = $('.braapf_include_exclude_list').data('filtertype');
                     if( filtertype != old_filtertype ) {
-                        var data = 'action=br_include_exclude_list&taxonomy_name='+taxonomy_name+'&'+filtertype;
-                        $.post(ajaxurl, data, function(data) {
-                            $('.braapf_include_exclude_list').data('filtertype', filtertype);
-                            if( data ) {
-                                var replace_str = /%field_name%/g;
-                                data = data.replace(replace_str, braapf_exclude_include_name);
-                                $('.braapf_include_exclude_list').html(data);
-                            } else {
-                                $('.braapf_include_exclude_list').text("");
-                            }
-                        });
+                        var postID = $('#post_ID').val();
+                        var URLdata = 'action=br_include_exclude_list&br_product_filter[filter_id]='+postID+'&taxonomy_name='+taxonomy_name+'&'+filtertype;
+                        var oldURLdata = $('.braapf_include_exclude_list').data('request');
+                        if( oldURLdata != URLdata ) {
+                            $('.braapf_include_exclude_list').data('request', URLdata);
+                            $.post(ajaxurl, URLdata, function(data) {
+                                $('.braapf_include_exclude_list').data('filtertype', filtertype);
+                                if( data ) {
+                                    var replace_str = /%field_name%/g;
+                                    data = data.replace(replace_str, braapf_exclude_include_name);
+                                    $('.braapf_include_exclude_list').html(data);
+                                } else {
+                                    $('.braapf_include_exclude_list').text("");
+                                }
+                            });
+                        }
                     }
                     return true;
                 }

@@ -12,8 +12,6 @@ class Biff8 extends Xls
      * read BIFF8 constant value array from array data
      * returns e.g. ['value' => '{1,2;3,4}', 'size' => 40]
      * section 2.5.8.
-     *
-     * @return array{value: string, size: int}
      */
     protected static function readBIFF8ConstantArray(string $arrayData): array
     {
@@ -49,8 +47,6 @@ class Biff8 extends Xls
      * read BIFF8 constant value which may be 'Empty Value', 'Number', 'String Value', 'Boolean Value', 'Error Value'
      * section 2.5.7
      * returns e.g. ['value' => '5', 'size' => 9].
-     *
-     * @return array{value: bool|float|int|string, size: int}
      */
     private static function readBIFF8Constant(string $valueData): array
     {
@@ -105,8 +101,6 @@ class Biff8 extends Xls
     /**
      * Read BIFF8 cell range address list
      * section 2.5.15.
-     *
-     * @return array{size: int, cellRangeAddresses: mixed[]}
      */
     public static function readBIFF8CellRangeAddressList(string $subData): array
     {

@@ -6,6 +6,7 @@
 namespace PremiumAddons\Admin\Includes;
 
 use PremiumAddons\Includes\Helper_Functions;
+use PremiumAddons\Includes\Assets_Manager;
 use Elementor\Modules\Usage\Module;
 use Elementor\Plugin;
 
@@ -97,20 +98,19 @@ class Admin_Helper {
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 
 		// Register AJAX HOOKS.
-		add_action( 'wp_ajax_pa_save_global_btn', array( $this, 'save_global_btn_value' ) );
-		add_action( 'wp_ajax_pa_elements_settings', array( $this, 'save_settings' ) );
-		add_action( 'wp_ajax_pa_disable_elementor_mc_template', array( $this, 'disable_elementor_mc_template' ) );
-		add_action( 'wp_ajax_pa_additional_settings', array( $this, 'save_additional_settings' ) );
-		add_action( 'wp_ajax_pa_get_unused_widgets', array( $this, 'get_unused_widgets' ) );
-		add_action( 'wp_ajax_get_pa_menu_item_settings', array( $this, 'get_pa_menu_item_settings' ) );
-		add_action( 'wp_ajax_save_pa_menu_item_settings', array( $this, 'save_pa_menu_item_settings' ) );
-		add_action( 'wp_ajax_save_pa_mega_item_content', array( $this, 'save_pa_mega_item_content' ) );
-
-		// Register AJAX Hooks for regenerate assets.
-		add_action( 'wp_ajax_pa_clear_cached_assets', array( $this, 'clear_cached_assets' ) );
+		add_action( 'wp_ajax_pa_save_global_btn', array( $this, 'pa_save_global_btn' ) );
+		add_action( 'wp_ajax_pa_save_elements_settings', array( $this, 'pa_save_elements_settings' ) );
+		add_action( 'wp_ajax_pa_disable_elementor_mc_template', array( $this, 'pa_disable_elementor_mc_template' ) );
+		add_action( 'wp_ajax_pa_save_additional_settings', array( $this, 'pa_save_additional_settings' ) );
+		add_action( 'wp_ajax_pa_get_unused_widgets', array( $this, 'pa_get_unused_widgets' ) );
+		add_action( 'wp_ajax_pa_get_menu_item_settings', array( $this, 'pa_get_menu_item_settings' ) );
+		add_action( 'wp_ajax_pa_save_menu_item_settings', array( $this, 'pa_save_menu_item_settings' ) );
+		add_action( 'wp_ajax_pa_save_mega_item_content', array( $this, 'pa_save_mega_item_content' ) );
+		add_action( 'wp_ajax_pa_check_unused_widgets', array( $this, 'pa_check_unused_widgets' ) );
+		add_action( 'wp_ajax_pa_hide_unused_widgets_dialog', array( $this, 'pa_hide_unused_widgets_dialog' ) );
 
 		// Register Deactivation hooks.
-		register_deactivation_hook( PREMIUM_ADDONS_FILE, array( $this, 'clear_dynamic_assets_data' ) );
+		register_deactivation_hook( PREMIUM_ADDONS_FILE, array( $this, 'clear_dynamic_assets_dir' ) );
 
 		// Register AJAX Hooks for clearing saved site cursor.
 		add_action( 'wp_ajax_pa_clear_site_cursor_settings', array( $this, 'clear_site_cursor_settings' ) );
@@ -142,12 +142,6 @@ class Admin_Helper {
 			}
 		}
 
-		// PA Dynamic Assets.
-		$row_meta = Helper_Functions::is_hide_row_meta();
-
-		if ( ! is_admin() && self::check_dynamic_assets() && ! $row_meta ) {
-			Admin_Bar::get_instance();
-		}
 	}
 
 	/**
@@ -461,7 +455,7 @@ class Admin_Helper {
 	 * @access public
 	 * @since 4.9.4
 	 */
-	public function get_pa_menu_item_settings() {
+	public function pa_get_menu_item_settings() {
 
 		check_ajax_referer( 'pa-menu-nonce', 'security' );
 
@@ -486,7 +480,7 @@ class Admin_Helper {
 	 * @access public
 	 * @since 4.9.4
 	 */
-	public function save_pa_menu_item_settings() {
+	public function pa_save_menu_item_settings() {
 
 		check_ajax_referer( 'pa-menu-nonce', 'security' );
 
@@ -517,7 +511,7 @@ class Admin_Helper {
 	 * @access public
 	 * @since 4.9.4
 	 */
-	public function save_pa_mega_item_content() {
+	public function pa_save_mega_item_content() {
 
 		check_ajax_referer( 'pa-live-editor', 'security' );
 
@@ -565,9 +559,9 @@ class Admin_Helper {
 
 		if ( ! $is_papro_active ) {
 
-			$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/#get-pa-pro', 'plugins-page', 'wp-dash', 'get-pro' );
+			$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/black-friday/#bfdeals', 'plugins-page', 'wp-dash', 'get-pro' );
 
-			$pro_link = sprintf( '<a href="%s" target="_blank" style="color: #FF6000; font-weight: bold;">%s</a>', $link, __( 'Go Pro (35% OFF)', 'premium-addons-for-elementor' ) );
+			$pro_link = sprintf( '<a href="%s" target="_blank" style="color: #FF6000; font-weight: bold;">%s</a>', $link, __( 'Save $105', 'premium-addons-for-elementor' ) );
 			array_push( $new_links, $pro_link );
 		}
 
@@ -730,7 +724,7 @@ class Admin_Helper {
 			);
 		}
 
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+		if ( Helper_Functions::check_elementor_version() ) {
 			call_user_func(
 				'add_submenu_page',
 				self::$page_slug,
@@ -748,8 +742,8 @@ class Admin_Helper {
 			call_user_func(
 				'add_submenu_page',
 				self::$page_slug,
-				'<span style="color: #FF6000;" class="pa_pro_upgrade">Get PRO (35% OFF)</span>',
-				'<span style="color: #FF6000;" class="pa_pro_upgrade">Get PRO (35% OFF)</span>',
+				'<span style="color: #FF6000;" class="pa_pro_upgrade">Get PRO (Up to $105 OFF)</span>',
+				'<span style="color: #FF6000;" class="pa_pro_upgrade">Get PRO (Up to $105 OFF)</span>',
 				'manage_options',
 				'https://premiumaddons.com/pro/#get-pa-pro',
 				''
@@ -886,7 +880,7 @@ class Admin_Helper {
 		if ( ! Helper_Functions::check_papro_version() || ! $license_info ) {
 			return array(
 				'title' => __( 'Get Premium Addons PRO', 'premium-addons-for-elementor' ),
-				'desc'  => __( 'Supercharge your Elementor with PRO Widgets & Addons that you won\'t find anywhere else.', 'premium-addons-for-elementor' ) . '<span class="papro-sale-notice">' . __( 'save up to 35%!', 'premium-addons-for-elementor' ) . '</span>',
+				'desc'  => __( 'Supercharge your Elementor with PRO Widgets & Addons that you won\'t find anywhere else.', 'premium-addons-for-elementor' ) . '<span class="papro-sale-notice">' . __( 'save up to $105!', 'premium-addons-for-elementor' ) . '</span>',
 				'btn'   => __( 'Get Pro', 'premium-addons-for-elementor' ),
 				'cta'   => 'https://premiumaddons.com/get/papro/#get-pa-pro',
 			);
@@ -913,7 +907,7 @@ class Admin_Helper {
 	 * @access public
 	 * @since 3.20.8
 	 */
-	public function save_settings() {
+	public function pa_save_elements_settings() {
 
 		check_ajax_referer( 'pa-settings-tab', 'security' );
 
@@ -929,6 +923,10 @@ class Admin_Helper {
 
 		update_option( 'pa_save_settings', $elements );
 
+		// Clear cache and static property.
+		wp_cache_delete( 'pa_elements', 'premium_addons' );
+		self::$enabled_elements = null;
+
 		// Save the global addons only if it's the second run.
 		$is_second_run = get_option( 'pa_complete_wizard' ) ? false : true;
 		if ( $is_second_run ) {
@@ -937,6 +935,8 @@ class Admin_Helper {
 			update_option( 'pa_complete_wizard', false );
 		}
 
+		// Remove all files in the dynamic assets folder.
+		Assets_Manager::delete_assets_files();
 		wp_send_json_success();
 	}
 
@@ -976,7 +976,7 @@ class Admin_Helper {
 	 * @since 3.20.8
 	 * @access public
 	 */
-	public function save_additional_settings() {
+	public function pa_save_additional_settings() {
 
 		check_ajax_referer( 'pa-settings-tab', 'security' );
 
@@ -1009,7 +1009,7 @@ class Admin_Helper {
 	 * @since 4.0.0
 	 * @access public
 	 */
-	public function save_global_btn_value() {
+	public function pa_save_global_btn() {
 
 		check_ajax_referer( 'pa-settings-tab', 'security' );
 
@@ -1198,24 +1198,34 @@ class Admin_Helper {
 	 */
 	public static function get_enabled_elements() {
 
-		if ( null === self::$enabled_elements ) {
+		$cache_key = 'pa_elements';
+		$cached    = wp_cache_get( $cache_key, 'premium_addons' );
 
-			$defaults = self::get_default_keys();
-
-			$enabled_keys = get_option( 'pa_save_settings', $defaults );
-
-			foreach ( $defaults as $key => $value ) {
-
-				if ( 'pa_mc_temp' !== $key && ! isset( $enabled_keys[ $key ] ) ) {
-					$defaults[ $key ] = 0;
-				} elseif ( 'pa_mc_temp' === $key && isset( $enabled_keys[ $key ] ) && $enabled_keys[ $key ] ) {
-					$defaults[ $key ] = 1;
-				}
-			}
-
-			self::$enabled_elements = $defaults;
-
+		if ( false !== $cached ) {
+			self::$enabled_elements = $cached;
+			return self::$enabled_elements;
 		}
+
+		// Check static property as fallback for multiple calls in same request.
+		if ( null !== self::$enabled_elements ) {
+			return self::$enabled_elements;
+		}
+
+		$defaults = self::get_default_keys();
+
+		$enabled_keys = get_option( 'pa_save_settings', $defaults );
+
+		foreach ( $defaults as $key => $value ) {
+
+			if ( 'pa_mc_temp' !== $key && ! isset( $enabled_keys[ $key ] ) ) {
+				$defaults[ $key ] = 0;
+			} elseif ( 'pa_mc_temp' === $key && isset( $enabled_keys[ $key ] ) && $enabled_keys[ $key ] ) {
+				$defaults[ $key ] = 1;
+			}
+		}
+
+		self::$enabled_elements = $defaults;
+		wp_cache_set( $cache_key, $defaults, 'premium_addons', HOUR_IN_SECONDS );
 
 		return self::$enabled_elements;
 	}
@@ -1397,7 +1407,7 @@ class Admin_Helper {
 	 * @access public
 	 * @since 4.5.8
 	 */
-	public function get_unused_widgets() {
+	public function pa_get_unused_widgets() {
 
 		check_ajax_referer( 'pa-disable-unused', 'security' );
 
@@ -1414,6 +1424,59 @@ class Admin_Helper {
 		wp_send_json_success( $unused_widgets );
 	}
 
+	public function pa_check_unused_widgets() {
+
+		check_ajax_referer( 'pa-disable-unused', 'security' );
+
+		$did_check = get_transient( 'pa_unused_widget_dialog' );
+
+		if( ! $did_check ) {
+
+			// Delay check for 7 days.
+			set_transient( 'pa_unused_widget_dialog', true, DAY_IN_SECONDS * 7 );
+
+			// Get days between now and install time.
+			$install_time = get_option( 'pa_install_time' );
+
+			// If install time is not set, set it now and exit.
+			if( ! $install_time ) {
+				$current_time = gmdate( 'j F, Y', time() );
+				update_option( 'pa_install_time', $current_time );
+				wp_send_json_error( 'Installation time set.' );
+			}
+
+			// Convert to days.
+			$days_diff = ( time() - strtotime( $install_time ) ) / DAY_IN_SECONDS;
+
+			// If 7 days have passed since installation, proceed.
+			if( $days_diff >= 7 ) {
+				wp_send_json_success();
+			} else {
+				wp_send_json_error( 'Not enough days since installation.' );
+			}
+
+		}
+
+		wp_send_json_error( 'Already checked, or canceled' );
+
+	}
+
+	/**
+	 * Hide Unused Widgets Dialog.
+	 *
+	 * @access public
+	 * @since 4.5.8
+	 */
+	public function pa_hide_unused_widgets_dialog() {
+
+		check_ajax_referer( 'pa-disable-unused', 'security' );
+
+		set_transient( 'pa_unused_widget_dialog', true );
+
+		wp_send_json_success( 'Transient updated.' );
+
+	}
+
 	/**
 	 * Disables Elementor Custom Mini Cart Template.
 	 *
@@ -1421,7 +1484,7 @@ class Admin_Helper {
 	 * @since 4.11.6
 	 * @see ElementorPro\Modules\Woocommerce\Module [elementor-pro\modules\woocommerce\module.php].
 	 */
-	public function disable_elementor_mc_template() {
+	public function pa_disable_elementor_mc_template() {
 
 		check_ajax_referer( 'pa-settings-tab', 'security' );
 
@@ -1430,65 +1493,14 @@ class Admin_Helper {
 		wp_send_json_success( 'Elementor Mini Cart Template Disabled.' );
 	}
 
-	/**
-	 * Clear Cached Assets.
-	 *
-	 * Deletes assets options from DB And
-	 * deletes assets files from uploads/premium-addons-for-elementor via AJAX
-	 * diretory.
-	 *
-	 * @access public
-	 * @since 4.9.3
-	 */
-	public function clear_cached_assets() {
 
-		check_ajax_referer( 'pa-generate-nonce', 'security' );
-
-		$post_id = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
-
-		$this->clear_dynamic_assets_data( $post_id );
-
-		wp_send_json_success( 'Cached Assets Cleared' );
-	}
-
-	/**
-	 * Clear Dynamic Assets Data.
-	 *
-	 * Deletes assets options from DB And
-	 * deletes assets files from uploads/premium-addons-for-elementor
-	 * diretory.
-	 *
-	 * @access public
-	 * @since 4.10.51
-	 *
-	 * @param string $id post ID.
-	 */
-	public function clear_dynamic_assets_data( $id = '' ) {
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'You are not allowed to do this action', 'premium-addons-for-elementor' ) );
-		}
-
-		if ( empty( $id ) ) {
-			$this->delete_assets_options();
-		}
-
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			Plugin::$instance->files_manager->clear_cache();
-		}
-
-		// Purge All LS Cache
-		do_action( 'litespeed_purge_all', 'Premium Addons for Elementor' );
-
-		$this->delete_assets_files( $id );
-	}
 
 	/**
 	 * Clear Cached Assets.
 	 *
 	 * Deletes assets options from DB And
 	 * deletes assets files from uploads/premium-addons-for-elementor
-	 * diretory.
+	 * directory.
 	 *
 	 * @access public
 	 * @since 4.9.3
@@ -1506,61 +1518,7 @@ class Admin_Helper {
 		wp_send_json_success( 'Site Cursor Settings Cleared' );
 	}
 
-	/**
-	 * Delete Assets Options.
-	 *
-	 * @access public
-	 * @since 4.9.3
-	 */
-	public function delete_assets_options() {
 
-		global $wpdb;
-
-		$query = $wpdb->prepare(
-			"DELETE FROM $wpdb->options
-			 WHERE (option_name LIKE %s OR option_name LIKE %s)
-			 AND autoload = %s",
-			'%pa_elements_%',
-			'%pa_edit_%',
-			'no'
-		);
-
-		$wpdb->query( $query ); // phpcs:ignore
-	}
-
-	/**
-	 * Delete Assets Files.
-	 *
-	 * @access public
-	 * @since 4.6.1
-	 *
-	 * @param string $id post id.
-	 */
-	public function delete_assets_files( $id ) {
-
-		$path = PREMIUM_ASSETS_PATH;
-
-		if ( ! is_dir( $path ) || ! file_exists( $path ) ) {
-			return;
-		}
-
-		if ( empty( $id ) ) {
-			foreach ( scandir( $path ) as $file ) {
-				if ( '.' === $file || '..' === $file ) {
-					continue;
-				}
-
-				wp_delete_file( Helper_Functions::get_safe_path( $path . DIRECTORY_SEPARATOR . $file ) );
-			}
-		} else {
-
-			$id = Helper_Functions::generate_unique_id( 'pa_assets_' . $id );
-
-			foreach ( glob( PREMIUM_ASSETS_PATH . '/*' . $id . '*' ) as $file ) {
-				wp_delete_file( Helper_Functions::get_safe_path( $file ) );
-			}
-		}
-	}
 
 	/**
 	 * Get PA widget names.
@@ -1709,7 +1667,7 @@ class Admin_Helper {
 			$response = wp_remote_get(
 				$request,
 				array(
-					'timeout'   => 15,
+					'timeout'   => 5,
 					'sslverify' => true,
 				)
 			);
@@ -1727,6 +1685,32 @@ class Admin_Helper {
 		}
 
 		return $posts;
+	}
+
+	/**
+	 * Clear Dynamic Assets Directory
+	 *
+	 * Deletes all files in the dynamic assets directory
+	 *
+	 * @since 4.9.3
+	 * @access public
+	 */
+	public function clear_dynamic_assets_dir() {
+
+		$path = PREMIUM_ASSETS_PATH;
+
+		if ( ! is_dir( $path ) || ! file_exists( $path ) ) {
+			return;
+		}
+
+		foreach ( scandir( $path ) as $file ) {
+			if ( '.' === $file || '..' === $file ) {
+				continue;
+			}
+
+			unlink( Helper_Functions::get_safe_path( $path . DIRECTORY_SEPARATOR . $file ) );
+		}
+
 	}
 
 	/**

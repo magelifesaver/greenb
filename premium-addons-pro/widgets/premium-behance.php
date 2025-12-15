@@ -2017,18 +2017,19 @@ class Premium_Behance extends Widget_Base {
 			</div>
 
 			<?php
-			return; }
+			return;
+		}
 
-		add_filter(
-			'pa_behance_feed',
-			function ( $feed_arr ) {
+		// add_filter(
+		// 	'pa_behance_feed',
+		// 	function ( $feed_arr ) {
 
-				$id              = $this->get_id();
-				$feed_arr[ $id ] = $this->get_behance_feed();
+		// 		$id              = $this->get_id();
+		// 		$feed_arr[ $id ] = $this->get_behance_feed();
 
-				return $feed_arr;
-			}
-		);
+		// 		return $feed_arr;
+		// 	}
+		// );
 
 		$load_more = 'yes' === $settings['load'] ? '' : 'button-none';
 
@@ -2053,6 +2054,7 @@ class Premium_Behance extends Widget_Base {
 			'cover_size'     => $settings['cover_size'],
 			'id'             => $widget_id,
 			'number'         => $photos_num,
+            'feedObject'     => $this->get_behance_feed()
 		);
 
 		$this->add_render_attribute(
@@ -2103,7 +2105,7 @@ class Premium_Behance extends Widget_Base {
 
 		if ( false === $response ) {
 
-			$api_url = sprintf( 'https://api.behance.net/v2/users/%s/projects?client_id=XQhsS66hLTKjUoj8Gky7FOFJxNMh23uu&per_page=%s&page=1', $username, $photos_num );
+			$api_url = sprintf( 'https://api.behance.net/v2/users/%s/projects?client_id=%s&per_page=%s&page=1', $username, PREMIUM_BEHANCE_API_KEY, $photos_num );
 
 			$response = wp_remote_get(
 				$api_url,

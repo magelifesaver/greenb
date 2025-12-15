@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: A Offline Gateways (Blocks Compatible)(live)
+ * Plugin Name: A Offline Gateways (Blocks Compatible)(live)(XHV98-WF)
  * Description: Offline gateways (Zelle, Venmo, ApplePay, Credit Card, CashApp, COD) with Checkout Blocks + tipping.
  * Version: 1.4.2
  * Author: Webmaster Delivery

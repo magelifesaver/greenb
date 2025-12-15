@@ -33,8 +33,6 @@ class MemoryDrawing extends BaseDrawing
 
     /**
      * Rendering function.
-     *
-     * @var callable-string
      */
     private string $renderingFunction;
 
@@ -64,10 +62,7 @@ class MemoryDrawing extends BaseDrawing
 
     public function __destruct()
     {
-        if ($this->imageResource) {
-            @imagedestroy($this->imageResource);
-            $this->imageResource = null;
-        }
+        $this->imageResource = null;
         $this->worksheet = null;
     }
 
@@ -163,7 +158,6 @@ class MemoryDrawing extends BaseDrawing
         return $drawing;
     }
 
-    /** @return callable-string */
     private static function identifyRenderingFunction(string $mimeType): string
     {
         return match ($mimeType) {
@@ -264,8 +258,6 @@ class MemoryDrawing extends BaseDrawing
 
     /**
      * Get rendering function.
-     *
-     * @return callable-string
      */
     public function getRenderingFunction(): string
     {
@@ -275,7 +267,7 @@ class MemoryDrawing extends BaseDrawing
     /**
      * Set rendering function.
      *
-     * @param callable-string $value see self::RENDERING_*
+     * @param string $value see self::RENDERING_*
      *
      * @return $this
      */

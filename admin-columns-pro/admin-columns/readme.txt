@@ -1,12 +1,11 @@
 === Admin Columns ===
-Contributors: codepress, tschutter, davidmosterd, dungengronovius, engelen
-Tags: admin, column, columns, table, tables
-Requires at least: 4.7.3
-Tested up to: 6.8.2
+Contributors: codepress, tschutter, davidmosterd, engelen, dungengronovius
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
+Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
+Requires at least: 4.7.1
+Tested up to: 6.3.1
 Requires PHP: 7.2
-Stable tag: 4.7.18
-License: GPLv2
-License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Stable tag: 4.7
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -210,6 +209,13 @@ You can find a list of the available actions and filters (and examples on how to
 
 == Changelog ==
 
+= 7.0.0 =
+
+* [Important] Version numbering jumped ahead to 7.0 to align with the Pro version.
+* [Breaking] Custom columns created for versions below 7.0 are no longer compatible and must be rewritten. (See upgrade path.)
+* [Breaking] Many hooks have been renamed or modified to fit the new architecture and to prevent fatal errors.
+* [Improved] Completely new design and interface for the settings pages.
+
 = 4.7.18 =
 Release Date: September 22nd, 2025
 
@@ -260,7 +266,6 @@ Release Date: January 7th, 2025
 Release Date: November 5th, 2024
 
 * [Improved] Better edit term link with taxonomy as parameter
-
 
 = 4.7.8 =
 Release Date: October 1st, 2024
@@ -313,7 +318,6 @@ Release Date: December 6th, 2023
 = 4.6.9 =
 Release Date: October 2nd, 2023
 
-* [Fixed] Render values for Taxonomies fixed
 * [Fixed] URLs for Terms in Taxonomy columns were incorrect
 
 = 4.6.8 =

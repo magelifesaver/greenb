@@ -12,7 +12,7 @@ final class AbstractDecoderFactory
     /**
      * @var DecoderFactory[]
      */
-    private $decoder_factories = [];
+    private array $decoder_factories = [];
 
     public function __construct(array $decoder_factories)
     {
@@ -24,7 +24,8 @@ final class AbstractDecoderFactory
         $this->decoder_factories[] = $decoder_factory;
     }
 
-    public function can_create( array $encoded_data ) : bool {
+    public function can_create(array $encoded_data): bool
+    {
         foreach ($this->decoder_factories as $decoder_factory) {
             $decoder = $decoder_factory->create($encoded_data);
 

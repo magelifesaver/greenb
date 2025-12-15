@@ -15,7 +15,7 @@ class OrderField extends ACP\Search\Comparison
 
     private $field;
 
-    public function __construct(string $field, Operators $operators, string $value_type = null, Labels $labels = null)
+    public function __construct(string $field, Operators $operators, ?string $value_type = null, ?Labels $labels = null)
     {
         parent::__construct($operators, $value_type, $labels);
 

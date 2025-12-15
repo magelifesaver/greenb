@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {
+            "AAA\\DailyReporting\\": "includes/"
+        }
+    },
+    "require": {
+        "phpoffice/phpspreadsheet": "^3.9",
+        "dompdf/dompdf": "^3.1"
+    }
+}

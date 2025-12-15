@@ -35,6 +35,22 @@ class Base {
 	protected $content_dir = WP_CONTENT_DIR . '/swis/';
 
 	/**
+	 * The directory in which to store cache files.
+	 *
+	 * @access protected
+	 * @var string $cache_dir
+	 */
+	protected $cache_dir = '';
+
+	/**
+	 * The URL to the directory where cache files are stored.
+	 *
+	 * @access protected
+	 * @var string $cache_dir_url
+	 */
+	protected $cache_dir_url = '';
+
+	/**
 	 * The debug buffer for the plugin.
 	 *
 	 * @access public
@@ -107,6 +123,13 @@ class Base {
 	protected $prefix = 'swis_';
 
 	/**
+	 * List of blog IDs in multisite network.
+	 *
+	 * @var array
+	 */
+	protected $blog_ids = array();
+
+	/**
 	 * Is media offload to S3 (or similar)?
 	 *
 	 * @access public
@@ -129,6 +152,14 @@ class Base {
 	 * @var bool $s3_object_version
 	 */
 	public $s3_object_version = false;
+
+	/**
+	 * A list of user-defined page/URL exclusions, populated by validate_user_exclusions().
+	 *
+	 * @access protected
+	 * @var array $user_page_exclusions
+	 */
+	protected $user_page_exclusions = array();
 
 	/**
 	 * Set class properties for children.
@@ -171,7 +202,6 @@ class Base {
 		if ( ! is_dir( $this->content_dir ) && \is_writable( WP_CONTENT_DIR ) ) {
 			\wp_mkdir_p( $this->content_dir );
 		}
-		$debug_enabled = $this->get_option( $this->prefix . 'debug' );
 		if (
 			! empty( self::$debug ) &&
 			empty( self::$temp_debug ) &&
@@ -348,6 +378,37 @@ class Base {
 	}
 
 	/**
+	 * Sanitize a list of URLs in a textarea option.
+	 *
+	 * @param string $input A list of URLs from a textarea.
+	 * @return array The sanitized list of URLs.
+	 */
+	public function sanitize_textarea_urls( $input ) {
+		$this->debug_message( '<b>' . __FUNCTION__ . '()</b>' );
+		if ( empty( $input ) ) {
+			return '';
+		}
+		$path_array = array();
+		if ( is_array( $input ) ) {
+			$paths = $input;
+		} elseif ( is_string( $input ) ) {
+			$paths = explode( "\n", $input );
+		}
+		if ( $this->is_iterable( $paths ) ) {
+			$i = 0;
+			foreach ( $paths as $path ) {
+				++$i;
+				$this->debug_message( "validating textarea exclusion: $path" );
+				$path = trim( sanitize_url( $path ), " \t\n\r\0\x0B" );
+				if ( ! empty( $path ) ) {
+					$path_array[] = $path;
+				}
+			}
+		}
+		return $path_array;
+	}
+
+	/**
 	 * Retrieve option: use override/constant setting if defined, otherwise use 'blog' setting or $default.
 	 *
 	 * Overrides are only available for integer and boolean options.
@@ -453,7 +514,7 @@ class Base {
 		if ( function_exists( '\ewww_image_optimizer_easy_active' ) && \ewww_image_optimizer_easy_active() ) {
 			return true;
 		}
-		if ( \get_option( 'easyio_exactdn' ) ) {
+		if ( defined( 'EASYIO_VERSION' ) && \get_option( 'easyio_exactdn' ) ) {
 			return true;
 		}
 		return false;
@@ -533,6 +594,9 @@ class Base {
 			$this->get_option( 'test_mode' ) &&
 			( ! is_user_logged_in() || ! current_user_can( apply_filters( 'swis_performance_admin_permissions', 'manage_options' ) ) )
 		) {
+			if ( ! empty( $_GET['swis_test_mode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+				return false;
+			}
 			return true;
 		}
 		return false;
@@ -642,6 +706,76 @@ class Base {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Exclude pages from being processed for things like page builders.
+	 *
+	 * @since 2.4.0
+	 *
+	 * @param boolean $skip Whether the page should be skipped. Default false.
+	 * @param string  $uri The URI of the page (no domain or scheme included).
+	 * @return boolean True to skip the page, unchanged otherwise.
+	 */
+	public function skip_page( $skip = false, $uri = '' ) {
+		if ( $this->is_iterable( $this->user_page_exclusions ) ) {
+			foreach ( $this->user_page_exclusions as $page_exclusion ) {
+				if ( '/' === $page_exclusion && '/' === $uri ) {
+					return true;
+				} elseif ( '/' === $page_exclusion ) {
+					continue;
+				}
+				if ( false !== \strpos( $uri, $page_exclusion ) ) {
+					return true;
+				}
+			}
+		}
+		if ( false !== \strpos( $uri, 'bricks=run' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, '?brizy-edit' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, '?brizy_media' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, '&builder=true' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'cornerstone=' ) || false !== \strpos( $uri, 'cornerstone-endpoint' ) || false !== \strpos( $uri, 'cornerstone/edit/' ) ) {
+			return true;
+		}
+		if ( \did_action( 'cs_element_rendering' ) || \did_action( 'cornerstone_before_boot_app' ) || \apply_filters( 'cs_is_preview_render', false ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'ct_builder=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'ct_render_shortcode=' ) || false !== strpos( $uri, 'action=oxy_render' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'elementor-preview=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'et_fb=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'fb-edit=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, '?fl_builder' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'is-editor-iframe=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'tatsu=' ) ) {
+			return true;
+		}
+		if ( false !== \strpos( $uri, 'tve=true' ) ) {
+			return true;
+		}
+		return $skip;
 	}
 
 	/**
@@ -769,6 +903,23 @@ class Base {
 	}
 
 	/**
+	 * Get blog IDs.
+	 *
+	 * @return array List of blog IDs.
+	 */
+	protected function get_blog_ids() {
+		if ( is_array( $this->blog_ids ) && count( $this->blog_ids ) > 0 ) {
+			return $this->blog_ids;
+		}
+		$this->blog_ids = array( 1 );
+		if ( is_multisite() ) {
+			global $wpdb;
+			$this->blog_ids = array_map( 'absint', $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) );
+		}
+		return $this->blog_ids;
+	}
+
+	/**
 	 * Clear the contents of a given directory.
 	 *
 	 * @param string $dir The directory path.
@@ -796,6 +947,9 @@ class Base {
 			$this->debug_message( 'not writable' );
 			return;
 		}
+		if ( ! \str_contains( $dir, $this->cache_dir ) ) {
+			$this->debug_message( "refusing to clear non-cache dir: $dir" );
+		}
 
 		$dir_objects = $this->get_dir_objects( $dir );
 
@@ -806,7 +960,7 @@ class Base {
 			if ( is_dir( $dir_object ) ) {
 				$this->clear_dir( $dir_object );
 			} elseif ( $this->is_file( $dir_object ) && is_writable( $dir_object ) ) {
-				unlink( $dir_object );
+				@unlink( $dir_object );
 			}
 		}
 
@@ -814,9 +968,9 @@ class Base {
 		clearstatcache();
 		$dir_objects = $this->get_dir_objects( $dir );
 
-		// If the directory is empty now. No need to do error suppression here.
-		if ( empty( $dir_objects ) ) {
-			rmdir( $dir );
+		// If the directory is empty now, and is not the root cache directory.
+		if ( empty( $dir_objects ) && $dir !== $this->cache_dir ) {
+			@rmdir( $dir );
 		}
 		clearstatcache();
 	}
@@ -887,7 +1041,7 @@ class Base {
 	 */
 	public function get_local_path( $url ) {
 		// Need to strip query strings.
-		$url_parts = explode( '?', $url );
+		$url_parts = \explode( '?', $url );
 		if ( ! is_array( $url_parts ) || empty( $url_parts[0] ) ) {
 			return false;
 		}
@@ -895,10 +1049,12 @@ class Base {
 		$file = $this->url_to_path_exists( $url );
 		if ( ! $file ) {
 			$local_domain = $this->parse_url( $this->content_url, PHP_URL_HOST );
-			if ( false === strpos( $url, $local_domain ) ) {
-				$remote_domain      = $this->parse_url( $url, PHP_URL_HOST );
-				$possible_local_url = str_replace( $remote_domain, $local_domain, $url );
-				$file               = $this->url_to_path_exists( $possible_local_url );
+			if ( ! \str_contains( $url, $local_domain ) ) {
+				$remote_domain = $this->parse_url( $url, PHP_URL_HOST );
+				if ( $remote_domain ) {
+					$possible_local_url = \str_replace( $remote_domain, $local_domain, $url );
+					$file               = $this->url_to_path_exists( $possible_local_url );
+				}
 			}
 		}
 		return $file;
@@ -910,30 +1066,51 @@ class Base {
 	 * @param string $file The absolute path to the original file.
 	 * @param string $mod_time The modification time of the file.
 	 * @param string $default_extension The file extension to use if one does not exist in $file.
+	 * @param string $suffix The suffix to add before the extension, defaults to 'min'.
 	 * @return string The location to store the minified file in the cache.
 	 */
-	public function get_cache_path( $file, $mod_time, $default_extension = 'css' ) {
-		if ( 0 === strpos( $file, WP_CONTENT_DIR ) ) {
-			$path_to_keep = str_replace( WP_CONTENT_DIR, '', $file );
-		} elseif ( 0 === strpos( $file, ABSPATH ) ) {
-			$path_to_keep = str_replace( ABSPATH, '', $file );
+	public function get_cache_path( $file, $mod_time, $default_extension = 'css', $suffix = 'min' ) {
+		if ( \str_contains( $file, $this->cache_dir ) ) {
+			// If the suffix is the default, bail to prevent double-minifying.
+			if ( \preg_match( "/\d{10,15}\.$suffix\./", $file ) ) {
+				return false;
+			}
+			$path_to_keep = \str_replace( $this->cache_dir, '', $file );
+		} elseif ( 0 === \strpos( $file, WP_CONTENT_DIR ) ) {
+			$path_to_keep = \str_replace( WP_CONTENT_DIR, '', $file );
+		} elseif ( 0 === \strpos( $file, ABSPATH ) ) {
+			$path_to_keep = \str_replace( ABSPATH, '', $file );
 		} else {
 			return false;
 		}
-		$extension = pathinfo( $file, PATHINFO_EXTENSION );
+
+		// Used to bust external caches/CDNs when asset cache is cleared.
+		$cache_iterator = (int) $this->get_option( 'asset_cache_iterator' );
+		$mod_time      .= $cache_iterator;
+
+		$extension = \pathinfo( $file, PATHINFO_EXTENSION );
 		if ( $extension && $mod_time ) {
-			$path_to_keep = preg_replace( "/\.$extension/", "-$mod_time.min.$extension", $path_to_keep );
+			if ( \preg_match( '/\d{10,15}\.min\./', $file ) ) {
+				$path_to_keep = \preg_replace( "/\.$extension$/", ".$suffix.$extension", $path_to_keep );
+			} else {
+				$path_to_keep = \preg_replace( "/\.$extension$/", "-$mod_time.$suffix.$extension", $path_to_keep );
+			}
 		} elseif ( $mod_time ) {
-			$path_to_keep = $path_to_keep . "-$mod_time.min." . $default_extension;
+			if ( \preg_match( '/\d{10,15}\.min\./', $file ) ) {
+				$path_to_keep = $path_to_keep . ".$suffix.$default_extension";
+			} else {
+				$path_to_keep = $path_to_keep . "-$mod_time.$suffix.$default_extension";
+			}
 		}
-		$cache_file = $this->cache_dir . ltrim( $path_to_keep, '/\\' );
-		$cache_dir  = dirname( $cache_file );
-		if ( ! is_dir( $cache_dir ) ) {
-			if ( ! wp_mkdir_p( $cache_dir ) ) {
+
+		$cache_file = $this->cache_dir . \ltrim( $path_to_keep, '/\\' );
+		$cache_dir  = \dirname( $cache_file );
+		if ( ! \is_dir( $cache_dir ) ) {
+			if ( ! \wp_mkdir_p( $cache_dir ) ) {
 				return false;
 			}
 		}
-		if ( ! is_writable( $cache_dir ) ) {
+		if ( ! \is_writable( $cache_dir ) ) {
 			return false;
 		}
 		return $cache_file;
@@ -946,23 +1123,45 @@ class Base {
 	 * @param string $mod_time The modification time of the file.
 	 * @param string $query_string The query string from the original URL. If none, defaults to null.
 	 * @param string $default_extension The file extension to use if one does not exist in $file.
+	 * @param string $suffix The suffix to add before the extension, defaults to 'min'.
 	 * @return string The URL of the minified file in the cache.
 	 */
-	public function get_cache_url( $file, $mod_time, $query_string = null, $default_extension = 'css' ) {
-		if ( 0 === strpos( $file, WP_CONTENT_DIR ) ) {
+	public function get_cache_url( $file, $mod_time, $query_string = null, $default_extension = 'css', $suffix = 'min' ) {
+		if ( \str_contains( $file, $this->cache_dir ) ) {
+			// If the suffix is the default, bail to prevent double-minifying.
+			if ( \preg_match( "/\d{10,15}\.$suffix\./", $file ) ) {
+				return false;
+			}
+			$path_to_keep = str_replace( $this->cache_dir, '', $file );
+		} elseif ( 0 === strpos( $file, WP_CONTENT_DIR ) ) {
 			$path_to_keep = str_replace( WP_CONTENT_DIR, '', $file );
 		} elseif ( 0 === strpos( $file, ABSPATH ) ) {
 			$path_to_keep = str_replace( ABSPATH, '', $file );
 		} else {
 			return false;
 		}
+
+		// Used to bust external caches/CDNs when asset cache is cleared.
+		$cache_iterator = (int) $this->get_option( 'asset_cache_iterator' );
+		$mod_time      .= $cache_iterator;
+
 		$extension = pathinfo( $file, PATHINFO_EXTENSION );
 		if ( $extension && $mod_time ) {
-			$path_to_keep = preg_replace( "/\.$extension/", "-$mod_time.min.$extension", $path_to_keep );
+			if ( \preg_match( '/\d{10,15}\.min\./', $file ) ) {
+				$path_to_keep = preg_replace( "/\.$extension$/", ".$suffix.$extension", $path_to_keep );
+			} else {
+				$path_to_keep = preg_replace( "/\.$extension$/", "-$mod_time.$suffix.$extension", $path_to_keep );
+			}
 		} elseif ( $mod_time ) {
-			$path_to_keep = $path_to_keep . "-$mod_time.min." . $default_extension;
+			if ( \preg_match( '/\d{10,15}\.min\./', $file ) ) {
+				$path_to_keep = $path_to_keep . ".$suffix.$default_extension";
+			} else {
+				$path_to_keep = $path_to_keep . "-$mod_time.$suffix.$default_extension";
+			}
 		}
+
 		$cache_url = $this->cache_dir_url . ltrim( $path_to_keep, '/\\' ) . ( $query_string ? "?$query_string" : '' );
+
 		return $cache_url;
 	}
 
@@ -1067,12 +1266,14 @@ class Base {
 	 */
 	public function url_to_path_exists( $url, $extension = '' ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
-		if ( 0 === strpos( $url, WP_CONTENT_URL ) ) {
-			$path = str_replace( WP_CONTENT_URL, WP_CONTENT_DIR, $url );
-		} elseif ( 0 === strpos( $url, $this->relative_home_url ) ) {
-			$path = str_replace( $this->relative_home_url, ABSPATH, $url );
-		} elseif ( 0 === strpos( $url, $this->home_url ) ) {
-			$path = str_replace( $this->home_url, ABSPATH, $url );
+		if ( 0 === \strpos( $url, WP_CONTENT_URL ) ) {
+			$path = \str_replace( WP_CONTENT_URL, WP_CONTENT_DIR, $url );
+		} elseif ( 0 === \strpos( $url, $this->relative_home_url ) ) {
+			$path = \str_replace( $this->relative_home_url, ABSPATH, $url );
+		} elseif ( 0 === \strpos( $url, $this->home_url ) ) {
+			$path = \str_replace( $this->home_url, ABSPATH, $url );
+		} elseif ( \str_starts_with( $url, '/' ) && ! \str_starts_with( $url, '//' ) ) {
+			$path = ABSPATH . ltrim( $url, '/' );
 		} else {
 			$this->debug_message( 'not a valid local asset' );
 			return false;
@@ -1094,15 +1295,18 @@ class Base {
 	 * @return mixed Result of parse_url.
 	 */
 	public function parse_url( $url, $component = -1 ) {
-		if ( 0 === strpos( $url, '//' ) ) {
-			$url = ( is_ssl() ? 'https:' : 'http:' ) . $url;
+		if ( empty( $url ) ) {
+			return false;
 		}
-		if ( false === strpos( $url, 'http' ) && '/' !== substr( $url, 0, 1 ) ) {
-			$url = ( is_ssl() ? 'https://' : 'http://' ) . $url;
+		if ( \str_starts_with( $url, '//' ) ) {
+			$url = ( \is_ssl() ? 'https:' : 'http:' ) . $url;
+		}
+		if ( ! \str_starts_with( $url, 'http' ) && ! \str_starts_with( $url, '/' ) && ! \str_starts_with( $url, '.' ) ) {
+			$url = ( \is_ssl() ? 'https://' : 'http://' ) . $url;
 		}
 		// Because encoded ampersands in the filename break things.
-		$url = str_replace( '&#038;', '&', $url );
-		return parse_url( $url, $component );
+		$url = \html_entity_decode( $url );
+		return \parse_url( $url, $component );
 	}
 
 	/**

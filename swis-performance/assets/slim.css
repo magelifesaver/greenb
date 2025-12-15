@@ -434,8 +434,14 @@ table.swis-slim-assets {
 	margin: 0;
 	overflow: visible;
 }
-.swis-slim-asset-status {
+table.swis-slim-assets th {
+	background-color: #f6f7f7;
+}
+table.swis-slim-assets th.swis-slim-asset-status, table.swis-slim-assets td.swis-slim-asset-status {
 	width: 85px;
+}
+table.swis-slim-assets th.swis-slim-asset-details, table.swis-slim-assets td.swis-slim-asset-details {
+	width: initial;
 }
 .swis-slim-asset-size {
 	width: 100px;

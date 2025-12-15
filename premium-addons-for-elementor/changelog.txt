@@ -1,5 +1,66 @@
 == Changelog ==
 
+= 4.11.51 - 27/11/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Tweak: Added file size limits for TikTok videos download to improve security.
+
+= 4.11.50 - 25/11/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Fixed: Woo Mini Cart widget blocks widgets click on editor page.
+
+= 4.11.49 - 23/11/2025 =
+
+- Tweak: Core improved for better performance and loading speed.
+- Tweak: Added Open Mini Cart on Check option in Woo Mini Cart widget.
+
+= 4.11.48 - 20/11/2025 =
+
+- Tweak: Added Spacing option for slides in Carousel widget.
+- Fixed: Speed option not working for Half Circle layout in Progress Bar widget.
+
+= 4.11.47 - 18/11/2025 =
+
+- Tweak: Added Spacing option for rating stars in Testimonials widget.
+- Fixed: Liquid Glass conflicts with Dynamic Links widget.
+- Fixed: PHP warning in Google Maps widget when marker image alt text is not set.
+- Fixed: Quick View string is not translated in Woo Products Listing widget.
+
+= 4.11.46 - 03/11/2025 =
+
+- Tweak: Added CSS Selector in Woo Mini Cart to open mini cart using any element on the page.
+- Tweak: Added Transition Duration/Delay controls in Woo Mini Cart widget.
+- Fixed: Product not added to cart when stock number is not specified in Woo Mini Cart widget.
+- Fixed: PHP warning when Title is disabled in Pricing Table widget.
+- Fixed: Console error when Animated Shape Divider addon is enabled on editor.
+- Fixed: Gap issue around Image Button widget.
+
+= 4.11.45 - 28/10/2025 =
+
+- New: Added Discount Reveal Effect for price in Pricing Table widget.
+- New: Added Allow Backorders option in Woo Mini Cart widget.
+- Tweak: Improved Tags Cloud and Countdown widgets for better performance.
+- Tweak: Improved Templates Live Editor to be able to edit any select template.
+- Fixed: Product image is not showing in correct height in Woo Products Listing widget Quick View popup.
+- Fixed: Layout #2 issue in Get Videos from Channel/Playlist option in Video Box widget.
+
+= 4.11.44 - 20/10/2025 =
+
+- Tweak: Added Close Delay option in Woo Mini Cart widget.
+- Tweak: Improved styling for Demo/Templates buttons on the editor for better UI.
+
+= 4.11.43 - 16/10/2025 =
+
+- Tweak: Added transition for hover background in Image Button widget.
+- Tweak: Added background image option for digits in Countdown widget.
+- Tweak: Added Icon Background control for icons in Bullet List widget.
+
+= 4.11.42 - 13/10/2025 =
+
+- Fixed: Security issue in TikTok Feed widget handler.
+- Fixed: Page Publish button not detecting Premium Templates insert.
+
 = 4.11.41 - 05/10/2025 =
 
 - New: Added Order controls in Pricing Table to allow content reordering.

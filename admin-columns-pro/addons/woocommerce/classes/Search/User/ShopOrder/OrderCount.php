@@ -15,7 +15,7 @@ class OrderCount extends Comparison
      */
     protected $status;
 
-    public function __construct(array $status = [])
+    public function __construct(array $stati = [])
     {
         $operators = new Operators([
             Operators::EQ,
@@ -25,7 +25,7 @@ class OrderCount extends Comparison
             Operators::BETWEEN,
         ]);
 
-        $this->status = $status;
+        $this->status = $stati;
 
         parent::__construct($operators, Value::INT);
     }

@@ -154,6 +154,24 @@ class Premium_Banner extends Widget_Base {
 	 */
 	protected function register_controls() {  // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 
+		$this->register_image_controls();
+
+		$this->register_content_controls();
+
+		$this->register_button_controls();
+
+		$this->register_display_options_controls();
+
+		$this->register_responsive_controls();
+
+		$this->register_docs_controls();
+
+		$this->register_style_controls();
+
+	}
+
+	private function register_image_controls() {
+
 		$this->start_controls_section(
 			'premium_banner_global_settings',
 			array(
@@ -168,13 +186,11 @@ class Premium_Banner extends Widget_Base {
 			'premium_banner_image',
 			array(
 				'label'         => __( 'Upload Image', 'premium-addons-for-elementor' ),
-				'description'   => __( 'Select an image for the Banner', 'premium-addons-for-elementor' ),
 				'type'          => Controls_Manager::MEDIA,
 				'dynamic'       => array( 'active' => true ),
 				'default'       => array(
 					'url' => Utils::get_placeholder_image_src(),
 				),
-				'show_external' => true,
 			)
 		);
 
@@ -188,10 +204,52 @@ class Premium_Banner extends Widget_Base {
 		);
 
 		$this->add_control(
+			'premium_banner_image_animation',
+			array(
+				'label'   => __( 'Banner Effect', 'premium-addons-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'animation1',
+				'options' => array(
+					'animation1'  => __( 'Effect 1', 'premium-addons-for-elementor' ),
+					'animation5'  => __( 'Effect 2', 'premium-addons-for-elementor' ),
+					'animation13' => __( 'Effect 3', 'premium-addons-for-elementor' ),
+					'animation2'  => __( 'Effect 4', 'premium-addons-for-elementor' ),
+					'animation4'  => __( 'Effect 5', 'premium-addons-for-elementor' ),
+					'animation6'  => __( 'Effect 6', 'premium-addons-for-elementor' ),
+					'animation7'  => __( 'Effect 7', 'premium-addons-for-elementor' ),
+					'animation8'  => __( 'Effect 8', 'premium-addons-for-elementor' ),
+					'animation9'  => __( 'Effect 9', 'premium-addons-for-elementor' ),
+					'animation10' => __( 'Effect 10', 'premium-addons-for-elementor' ),
+					'animation11' => __( 'Effect 11', 'premium-addons-for-elementor' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'premium_banner_hover_effect',
+			array(
+				'label'   => __( 'Image Hover Effect', 'premium-addons-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => array(
+					'none'      => __( 'None', 'premium-addons-for-elementor' ),
+					'zoomin'    => __( 'Zoom In', 'premium-addons-for-elementor' ),
+					'zoomout'   => __( 'Zoom Out', 'premium-addons-for-elementor' ),
+					'scale'     => __( 'Scale', 'premium-addons-for-elementor' ),
+					'grayscale' => __( 'Grayscale', 'premium-addons-for-elementor' ),
+					'blur'      => __( 'Blur', 'premium-addons-for-elementor' ),
+					'bright'    => __( 'Bright', 'premium-addons-for-elementor' ),
+					'sepia'     => __( 'Sepia', 'premium-addons-for-elementor' ),
+				),
+				'default' => 'none',
+			)
+		);
+
+		$this->add_control(
 			'premium_banner_link_url_switch',
 			array(
 				'label' => __( 'Link', 'premium-addons-for-elementor' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'separator' => 'before',
 			)
 		);
 
@@ -209,7 +267,7 @@ class Premium_Banner extends Widget_Base {
 		$this->add_control(
 			'premium_banner_image_custom_link',
 			array(
-				'label'         => __( 'Set custom Link', 'premium-addons-for-elementor' ),
+				'label'         => __( 'Link URL', 'premium-addons-for-elementor' ),
 				'type'          => Controls_Manager::URL,
 				'dynamic'       => array( 'active' => true ),
 				'condition'     => array(
@@ -235,107 +293,14 @@ class Premium_Banner extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'premium_banner_image_animation',
-			array(
-				'label'   => __( 'Effect', 'premium-addons-for-elementor' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'animation1',
-				'options' => array(
-					'animation1'  => __( 'Effect 1', 'premium-addons-for-elementor' ),
-					'animation5'  => __( 'Effect 2', 'premium-addons-for-elementor' ),
-					'animation13' => __( 'Effect 3', 'premium-addons-for-elementor' ),
-					'animation2'  => __( 'Effect 4', 'premium-addons-for-elementor' ),
-					'animation4'  => __( 'Effect 5', 'premium-addons-for-elementor' ),
-					'animation6'  => __( 'Effect 6', 'premium-addons-for-elementor' ),
-					'animation7'  => __( 'Effect 7', 'premium-addons-for-elementor' ),
-					'animation8'  => __( 'Effect 8', 'premium-addons-for-elementor' ),
-					'animation9'  => __( 'Effect 9', 'premium-addons-for-elementor' ),
-					'animation10' => __( 'Effect 10', 'premium-addons-for-elementor' ),
-					'animation11' => __( 'Effect 11', 'premium-addons-for-elementor' ),
-				),
-			)
-		);
-
-		$this->add_control(
-			'premium_banner_active',
-			array(
-				'label' => __( 'Always Hovered', 'premium-addons-for-elementor' ),
-				'type'  => Controls_Manager::SWITCHER,
-			)
-		);
-
-		$this->add_control(
-			'premium_banner_hover_effect',
-			array(
-				'label'   => __( 'Hover Effect', 'premium-addons-for-elementor' ),
-				'type'    => Controls_Manager::SELECT,
-				'options' => array(
-					'none'      => __( 'None', 'premium-addons-for-elementor' ),
-					'zoomin'    => __( 'Zoom In', 'premium-addons-for-elementor' ),
-					'zoomout'   => __( 'Zoom Out', 'premium-addons-for-elementor' ),
-					'scale'     => __( 'Scale', 'premium-addons-for-elementor' ),
-					'grayscale' => __( 'Grayscale', 'premium-addons-for-elementor' ),
-					'blur'      => __( 'Blur', 'premium-addons-for-elementor' ),
-					'bright'    => __( 'Bright', 'premium-addons-for-elementor' ),
-					'sepia'     => __( 'Sepia', 'premium-addons-for-elementor' ),
-				),
-				'default' => 'none',
-			)
-		);
-
-		$this->add_responsive_control(
-			'premium_banner_custom_height',
-			array(
-				'label'      => __( 'Minimum Height', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em', 'vh', 'custom' ),
-				'range'      => array(
-					'px' => array(
-						'min' => 1,
-						'max' => 600,
-					),
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .premium-banner-ib img' => 'height: {{SIZE}}{{UNIT}};',
-				),
-			)
-		);
-
-		$this->add_control(
-			'image_fit',
-			array(
-				'label'     => __( 'Image Fit', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => array(
-					'cover'   => __( 'Cover', 'premium-addons-for-elementor' ),
-					'fill'    => __( 'Fill', 'premium-addons-for-elementor' ),
-					'contain' => __( 'Contain', 'premium-addons-for-elementor' ),
-				),
-				'default'   => 'fill',
-				'selectors' => array(
-					'{{WRAPPER}} .premium-banner-ib img' => 'object-fit: {{VALUE}}',
-				),
-				'condition' => array(
-					'premium_banner_custom_height[size]!' => '',
-				),
-			)
-		);
-
-		$this->add_control(
-			'mouse_tilt',
-			array(
-				'label'        => __( 'Mouse Tilt', 'premium-addons-for-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'prefix_class' => 'premium-banner-tilt-',
-				'render_type'  => 'template',
-			)
-		);
-
 		$this->end_controls_section();
 
+	}
+
+	private function register_content_controls() {
+
 		$this->start_controls_section(
-			'premium_banner_image_section',
+			'content_section',
 			array(
 				'label' => __( 'Content', 'premium-addons-for-elementor' ),
 			)
@@ -356,10 +321,9 @@ class Premium_Banner extends Widget_Base {
 		$this->add_control(
 			'premium_banner_title_tag',
 			array(
-				'label'       => __( 'HTML Tag', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'h3',
-				'options'     => array(
+				'label'   => __( 'Title HTML Tag', 'premium-addons-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
 					'h3'   => 'H3',
@@ -370,15 +334,7 @@ class Premium_Banner extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
-				'label_block' => true,
-			)
-		);
-
-		$this->add_control(
-			'premium_banner_description_hint',
-			array(
-				'label' => __( 'Description', 'premium-addons-for-elementor' ),
-				'type'  => Controls_Manager::HEADING,
+				'default' => 'h3',
 			)
 		);
 
@@ -393,34 +349,11 @@ class Premium_Banner extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'premium_banner_title_text_align',
-			array(
-				'label'     => __( 'Alignment', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'options'   => array(
-					'left'   => array(
-						'title' => __( 'Left', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-left',
-					),
-					'center' => array(
-						'title' => __( 'Center', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-center',
-					),
-					'right'  => array(
-						'title' => __( 'Right', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-right',
-					),
-				),
-				'default'   => 'left',
-				'toggle'    => false,
-				'selectors' => array(
-					'{{WRAPPER}} .premium-banner-ib-title, {{WRAPPER}} .premium-banner-ib-content, {{WRAPPER}} .premium-banner-read-more'   => 'text-align: {{VALUE}} ;',
-				),
-			)
-		);
-
 		$this->end_controls_section();
+
+	}
+
+	private function register_button_controls() {
 
 		$this->start_controls_section(
 			'button_section',
@@ -507,6 +440,106 @@ class Premium_Banner extends Widget_Base {
 
 		$this->end_controls_section();
 
+	}
+
+	private function register_display_options_controls() {
+
+		$this->start_controls_section(
+			'display_options_section',
+			array(
+				'label' => __( 'Display Options', 'premium-addons-for-elementor' ),
+			)
+		);
+
+		$this->add_control(
+			'premium_banner_active',
+			array(
+				'label' => __( 'Always Hovered', 'premium-addons-for-elementor' ),
+				'type'  => Controls_Manager::SWITCHER,
+			)
+		);
+
+		$this->add_control(
+			'premium_banner_title_text_align',
+			array(
+				'label'     => __( 'Content Alignment', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'left'   => array(
+						'title' => __( 'Left', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'right'  => array(
+						'title' => __( 'Right', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'default'   => 'left',
+				'toggle'    => false,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-banner-ib-title, {{WRAPPER}} .premium-banner-ib-content, {{WRAPPER}} .premium-banner-read-more'   => 'text-align: {{VALUE}} ;',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'premium_banner_custom_height',
+			array(
+				'label'      => __( 'Minimum Height', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'vh', 'custom' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 1,
+						'max' => 600,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-banner-ib img' => 'height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'image_fit',
+			array(
+				'label'     => __( 'Image Fit', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => array(
+					'cover'   => __( 'Cover', 'premium-addons-for-elementor' ),
+					'fill'    => __( 'Fill', 'premium-addons-for-elementor' ),
+					'contain' => __( 'Contain', 'premium-addons-for-elementor' ),
+				),
+				'default'   => 'fill',
+				'selectors' => array(
+					'{{WRAPPER}} .premium-banner-ib img' => 'object-fit: {{VALUE}}',
+				),
+				'condition' => array(
+					'premium_banner_custom_height[size]!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'mouse_tilt',
+			array(
+				'label'        => __( 'Mouse Tilt', 'premium-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'prefix_class' => 'premium-banner-tilt-',
+				'render_type'  => 'template',
+			)
+		);
+
+		$this->end_controls_section();
+
+	}
+
+	private function register_responsive_controls() {
+
 		$this->start_controls_section(
 			'premium_banner_responsive_section',
 			array(
@@ -526,6 +559,10 @@ class Premium_Banner extends Widget_Base {
 
 		$this->end_controls_section();
 
+	}
+
+	private function register_docs_controls() {
+
 		$this->start_controls_section(
 			'section_pa_docs',
 			array(
@@ -544,26 +581,22 @@ class Premium_Banner extends Widget_Base {
 			)
 		);
 
+		Helper_Functions::register_element_feedback_controls( $this );
+
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'banner' );
+
+
+	}
+
+	private function register_style_controls() {
 
 		$this->start_controls_section(
 			'premium_banner_opacity_style',
 			array(
 				'label' => __( 'General', 'premium-addons-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-
-		$this->add_control(
-			'premium_banner_image_bg_color',
-			array(
-				'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .premium-banner-ib' => 'background: {{VALUE}};',
-				),
 			)
 		);
 
@@ -584,6 +617,17 @@ class Premium_Banner extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .premium-banner-ib img' => 'opacity: {{SIZE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'premium_banner_image_bg_color',
+			array(
+				'label'     => __( 'Overlay Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-banner-ib' => 'background: {{VALUE}};',
 				),
 			)
 		);
@@ -1313,24 +1357,25 @@ class Premium_Banner extends Widget_Base {
 			)
 		);
 
-		$title_tag  = $settings['premium_banner_title_tag'];
-		$title      = $settings['premium_banner_title'];
-		$full_title = '<' . Helper_Functions::validate_html_tag( $title_tag ) . ' ' . $this->get_render_attribute_string( 'premium_banner_title' ) . '>' . $title . '</' . Helper_Functions::validate_html_tag( $title_tag ) . '>';
 
-		$link = 'yes' === $settings['premium_banner_image_link_switcher'] ? $settings['premium_banner_image_custom_link'] : get_permalink( $settings['premium_banner_image_existing_page_link'] );
+		if( 'yes' === $settings['premium_banner_link_url_switch'] ) {
 
-		if ( 'yes' === $settings['premium_banner_image_link_switcher'] ) {
-			$this->add_link_attributes( 'link', $link );
-		} else {
-			$this->add_render_attribute( 'link', 'href', $link );
+			if ( 'yes' === $settings['premium_banner_image_link_switcher'] ) {
+				$this->add_link_attributes( 'link', $settings['premium_banner_image_custom_link'] );
+			} else {
+				$this->add_render_attribute( 'link', 'href', get_permalink( $settings['premium_banner_image_existing_page_link'] ) );
+			}
+
+			$this->add_render_attribute( 'link', 'class', 'premium-banner-ib-link' );
 		}
 
-		$this->add_render_attribute( 'link', 'class', 'premium-banner-ib-link' );
-
 		$animation_class = 'premium-banner-' . $settings['premium_banner_image_animation'];
-		$hover_class     = ' ' . $settings['premium_banner_hover_effect'];
+		$img_hover     = ' ' . $settings['premium_banner_hover_effect'];
 		$active          = 'yes' === $settings['premium_banner_active'] ? ' active' : '';
-		$full_class      = $animation_class . $hover_class . $active;
+		$effect_type_class = ' premium-banner__effect-type' . ( in_array( $settings['premium_banner_image_animation'], array('animation2', 'animation5', 'animation6'), true ) ? '1' : '2' );
+		$full_class      = $animation_class . $img_hover . $active . $effect_type_class;
+
+
 
 		if ( 'yes' === $settings['premium_banner_link_switcher'] ) {
 
@@ -1400,32 +1445,39 @@ class Premium_Banner extends Widget_Base {
 				<?php if ( 'animation7' === $settings['premium_banner_image_animation'] ) : ?>
 					<div class="premium-banner-desc-centered">
 				<?php endif; ?>
-					<?php
-					echo wp_kses_post( $full_title );
-					if ( ! empty( $settings['premium_banner_description'] ) ) :
-						?>
-						<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'premium_banner_description' ) ); ?>>
-							<?php echo $this->parse_text_editor( $settings['premium_banner_description'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</div>
-					<?php endif; ?>
-					<?php if ( 'yes' === $settings['premium_banner_link_switcher'] && ! empty( $settings['premium_banner_more_text'] ) ) : ?>
-						<div class="premium-banner-read-more">
-							<a <?php echo wp_kses_post( $this->get_render_attribute_string( 'button' ) ); ?>>
-								<div class="premium-button-text-icon-wrapper">
-									<span><?php echo esc_html( $settings['premium_banner_more_text'] ); ?></span>
-								</div>
 
-								<?php if ( 'style6' === $settings['premium_button_hover_effect'] && 'yes' === $settings['mouse_detect'] ) : ?>
-									<span class="premium-button-style6-bg"></span>
-								<?php endif; ?>
+				<?php if ( ! empty( $settings['premium_banner_title'] ) ) : ?>
+					<<?php echo wp_kses_post( Helper_Functions::validate_html_tag( $settings['premium_banner_title_tag'] ) . ' ' . $this->get_render_attribute_string( 'premium_banner_title' ) ); ?>>
+						<?php echo wp_kses_post( $settings['premium_banner_title'] ); ?>
+					</<?php echo wp_kses_post( Helper_Functions::validate_html_tag( $settings['premium_banner_title_tag'] ) ); ?>>
+				<?php endif; ?>
 
-								<?php if ( 'style8' === $settings['premium_button_hover_effect'] ) : ?>
-									<?php echo Helper_Functions::get_btn_svgs( $settings['underline_style'] ); ?>
-								<?php endif; ?>
+				<?php if ( ! empty( $settings['premium_banner_description'] ) ) :
+					?>
+					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'premium_banner_description' ) ); ?>>
+						<?php echo $this->parse_text_editor( $settings['premium_banner_description'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</div>
+				<?php endif; ?>
 
-							</a>
-						</div>
-					<?php endif; ?>
+				<?php if ( 'yes' === $settings['premium_banner_link_switcher'] && ! empty( $settings['premium_banner_more_text'] ) ) : ?>
+					<div class="premium-banner-read-more">
+						<a <?php echo wp_kses_post( $this->get_render_attribute_string( 'button' ) ); ?>>
+							<div class="premium-button-text-icon-wrapper">
+								<span><?php echo esc_html( $settings['premium_banner_more_text'] ); ?></span>
+							</div>
+
+							<?php if ( 'style6' === $settings['premium_button_hover_effect'] && 'yes' === $settings['mouse_detect'] ) : ?>
+								<span class="premium-button-style6-bg"></span>
+							<?php endif; ?>
+
+							<?php if ( 'style8' === $settings['premium_button_hover_effect'] ) : ?>
+								<?php echo Helper_Functions::get_btn_svgs( $settings['underline_style'] ); ?>
+							<?php endif; ?>
+
+						</a>
+					</div>
+				<?php endif; ?>
+
 				<?php if ( 'animation7' === $settings['premium_banner_image_animation'] ) : ?>
 				</div>
 				<?php endif; ?>
@@ -1459,6 +1511,7 @@ class Premium_Banner extends Widget_Base {
 				'premium-banner-min-height',
 				'premium-banner-' + settings.premium_banner_image_animation,
 				settings.premium_banner_hover_effect,
+				'premium-banner__effect-type' + ( [ 'animation2', 'animation5', 'animation6' ].includes( settings.premium_banner_image_animation ) ? '1' : '2' ),
 				active
 			] );
 

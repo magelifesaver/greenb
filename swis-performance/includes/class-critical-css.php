@@ -70,51 +70,51 @@ final class Critical_CSS extends Page_Parser {
 
 		// Suppress all the stylesheets via query param.
 		if ( ! empty( $_GET['swis_test_ccss'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			add_filter( 'swis_elements_link_tag', array( $this, 'disable_all_css' ) );
+			\add_filter( 'swis_elements_link_tag', array( $this, 'disable_all_css' ) );
 		}
 		// Hide the admin bar when using either of the Critical CSS query params.
 		if ( ! empty( $_GET['swis_ccss'] ) || ! empty( $_GET['swis_test_ccss'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			add_filter( 'show_admin_bar', '__return_false' );
+			\add_filter( 'show_admin_bar', '__return_false' );
 		}
 
 		// Actions to save/edit critical CSS files.
-		add_action( 'wp_ajax_swis_save_ccss', array( $this, 'save_ccss_ajax' ) );
+		\add_action( 'wp_ajax_swis_save_ccss', array( $this, 'save_ccss_ajax' ) );
 
 		// Everything below here is for generating critical CSS via API.
 		if ( ! $this->get_option( 'critical_css_key' ) && ! \get_option( 'swis_license' ) ) {
 			return;
 		}
-		if ( ! is_dir( $this->cache_dir ) ) {
-			if ( ! wp_mkdir_p( $this->cache_dir ) ) {
-				add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
+		if ( ! \is_dir( $this->cache_dir ) ) {
+			if ( ! \wp_mkdir_p( $this->cache_dir ) ) {
+				\add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
 				return;
 			}
 		}
-		if ( ! is_writable( $this->cache_dir ) ) {
-			add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
+		if ( ! \is_writable( $this->cache_dir ) ) {
+			\add_action( 'admin_notices', array( $this, 'requirements_failed' ) );
 			return;
 		}
 		if ( $this->background_mode_enabled() ) {
 			// Add handler to manually start the (async) preloader.
-			add_action( 'admin_action_swis_generate_css_manual', array( $this, 'manual_generate_css_action' ) );
-			add_action( 'admin_action_swis_generate_css_resume_manual', array( $this, 'manual_generate_css_resume_action' ) );
+			\add_action( 'admin_action_swis_generate_css_manual', array( $this, 'manual_generate_css_action' ) );
+			\add_action( 'admin_action_swis_generate_css_resume_manual', array( $this, 'manual_generate_css_resume_action' ) );
 			// If a page is updated/published, (maybe) clear and regen the CSS.
-			add_action( 'save_post', array( $this, 'on_save_post' ) );
+			\add_action( 'save_post', array( $this, 'on_save_post' ) );
 		}
-		add_action( 'switch_theme', array( $this, 'switch_theme' ) );
-		add_action( 'admin_notices', array( $this, 'display_theme_regen_notice' ) );
-		add_action( 'wp_ajax_swis_dismiss_theme_regen_notice', array( $this, 'dismiss_theme_regen_notice' ) );
+		\add_action( 'switch_theme', array( $this, 'switch_theme' ) );
+		\add_action( 'admin_notices', array( $this, 'display_theme_regen_notice' ) );
+		\add_action( 'wp_ajax_swis_dismiss_theme_regen_notice', array( $this, 'dismiss_theme_regen_notice' ) );
 
 		// TODO: not used, because we have a global JS/CSS purge which can be used from front-end also.
-		add_action( 'admin_action_swis_purge_critical_css', array( $this, 'manual_purge_css_action' ) );
+		\add_action( 'admin_action_swis_purge_critical_css', array( $this, 'manual_purge_css_action' ) );
 
 		// Adds the ignoreStyleElements argument to the POST fields sent to the API.
-		add_filter( 'swis_generate_css_post_fields', array( $this, 'ignore_style_elements' ) );
+		\add_filter( 'swis_generate_css_post_fields', array( $this, 'ignore_style_elements' ) );
 
 		// Actions to process CSS generation via AJAX.
-		add_action( 'wp_ajax_swis_generate_css_init', array( $this, 'start_generate_css_ajax' ) );
-		add_action( 'wp_ajax_swis_url_generate_css', array( $this, 'url_generate_css_ajax' ) );
-		add_action( 'wp_ajax_swis_url_generate_page_css', array( $this, 'url_generate_page_css_ajax' ) );
+		\add_action( 'wp_ajax_swis_generate_css_init', array( $this, 'start_generate_css_ajax' ) );
+		\add_action( 'wp_ajax_swis_url_generate_css', array( $this, 'url_generate_css_ajax' ) );
+		\add_action( 'wp_ajax_swis_url_generate_page_css', array( $this, 'url_generate_page_css_ajax' ) );
 	}
 
 	/**
@@ -663,6 +663,8 @@ final class Critical_CSS extends Page_Parser {
 		if ( ! empty( $_GET['swis_stop_generate_css'] ) ) {
 			$this->stop_generate_css();
 		} else {
+			\delete_transient( 'swis_generate_css_invalid' );
+			\delete_transient( 'swis_generate_css_paused' );
 			$this->start_generate_css();
 		}
 		$base_url = \admin_url( 'options-general.php?page=swis-performance-options' );
@@ -679,6 +681,8 @@ final class Critical_CSS extends Page_Parser {
 			\wp_die( \esc_html__( 'Access denied', 'swis-performance' ) );
 		}
 		session_write_close();
+		\delete_transient( 'swis_generate_css_invalid' );
+		\delete_transient( 'swis_generate_css_paused' );
 		swis()->critical_css_background->dispatch();
 		$base_url = \admin_url( 'options-general.php?page=swis-performance-options' );
 		\wp_safe_redirect( $base_url );
@@ -744,6 +748,14 @@ final class Critical_CSS extends Page_Parser {
 	 */
 	public function on_save_post( $post_id ) {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
+		if ( ! $this->get_option( 'critical_css_auto_refresh' ) ) {
+			return;
+		}
+		$home_url = get_home_url();
+		if ( ! $this->is_cached( $home_url ) ) {
+			$this->debug_message( "no CCSS for $home_url, suppressed auto-refresh" );
+			return;
+		}
 		$post_status = \get_post_status( $post_id );
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
@@ -765,10 +777,12 @@ final class Critical_CSS extends Page_Parser {
 				),
 			);
 			if ( $url && $this->is_cached( $url ) ) {
+				$this->debug_message( "purging CCSS cache for $url of type $type and queueing regen" );
 				$this->purge_cache_by_url( $url );
 				swis()->critical_css_background->push_to_queue( $page );
 				swis()->critical_css_background->dispatch();
 			} elseif ( 'page' === $type ) {
+				$this->debug_message( "queueing regen for page: $url" );
 				swis()->critical_css_background->push_to_queue( $page );
 				swis()->critical_css_background->dispatch();
 			}
@@ -1120,6 +1134,7 @@ final class Critical_CSS extends Page_Parser {
 		if ( empty( $url ) ) {
 			return;
 		}
+		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$cache_dir = $this->get_cache_file_dir( $url );
 		if ( $cache_dir ) {
 			$cache_file = $cache_dir . '/critical.css';
@@ -1567,7 +1582,7 @@ final class Critical_CSS extends Page_Parser {
 			} elseif ( 401 === (int) $status ) {
 				$this->debug_message( 'critical css API key is invalid or expired' );
 				++$invalid_key;
-				set_transient( 'swis_generate_css_invalid', $invalid_key, 7 * DAY_IN_SECONDS );
+				set_transient( 'swis_generate_css_invalid', $invalid_key, DAY_IN_SECONDS );
 				set_transient( 'swis_generate_css_paused', 1, DAY_IN_SECONDS );
 				$page['params']['status'] = 'invalid_key';
 				$page['params']['error']  = __( 'Critical CSS API key is invalid, please make sure it is entered correctly and that you have an active subscription.', 'swis-performance' );
@@ -1665,7 +1680,8 @@ final class Critical_CSS extends Page_Parser {
 			} elseif ( 401 === (int) $status ) {
 				$this->debug_message( 'critical css API key is invalid or expired' );
 				++$invalid_key;
-				set_transient( 'swis_generate_css_invalid', $invalid_key, 7 * DAY_IN_SECONDS );
+				set_transient( 'swis_generate_css_invalid', $invalid_key, DAY_IN_SECONDS );
+				set_transient( 'swis_generate_css_paused', 1, DAY_IN_SECONDS );
 				$page['params']['status'] = 'invalid_key';
 				$page['params']['error']  = __( 'Critical CSS API key is invalid, please make sure it is entered correctly and that you have an active subscription.', 'swis-performance' );
 			} elseif ( 400 === (int) $status ) {
@@ -1726,7 +1742,7 @@ final class Critical_CSS extends Page_Parser {
 		$api_url = 'https://api.exactlywww.com/criticalcss/generate/';
 
 		// Use the swis_disable query param to get a clean page load.
-		$url = add_query_arg( 'swis_ccss', '1', $url );
+		$url = \add_query_arg( 'swis_ccss', '1', $url );
 
 		$key = $this->get_option( 'critical_css_key' );
 		if ( empty( $key ) ) {
@@ -1734,14 +1750,15 @@ final class Critical_CSS extends Page_Parser {
 		}
 		$args = array(
 			'timeout'   => 20,
-			'sslverify' => apply_filters( 'https_local_ssl_verify', false, $api_url ),
+			'sslverify' => \apply_filters( 'https_local_ssl_verify', false, $api_url ),
 			'headers'   => array(
 				'Authorization' => "JWT $key",
 				'Content-type'  => 'application/json',
 				'User-Agent'    => 'SWIS Performance ' . SWIS_PLUGIN_VERSION,
+				'Site-URL'      => \home_url(),
 			),
-			'body'      => wp_json_encode(
-				apply_filters(
+			'body'      => \wp_json_encode(
+				\apply_filters(
 					'swis_generate_css_post_fields',
 					array(
 						'url' => $url,
@@ -1751,7 +1768,7 @@ final class Critical_CSS extends Page_Parser {
 		);
 
 		// Request a CCSS generation from the Critical CSS API.
-		return wp_remote_post( $api_url, $args );
+		return \wp_remote_post( $api_url, $args );
 	}
 
 	/**
@@ -1774,6 +1791,7 @@ final class Critical_CSS extends Page_Parser {
 				'Authorization' => "JWT $key",
 				'Content-type'  => 'application/json',
 				'User-Agent'    => 'SWIS Performance ' . SWIS_PLUGIN_VERSION,
+				'Site-URL'      => \home_url(),
 			),
 		);
 
@@ -1908,6 +1926,7 @@ final class Critical_CSS extends Page_Parser {
 			if ( 'is_404' !== $page['params']['type'] ) {
 				$this->delete_ccss_record( $page['page_url'] );
 			}
+			$this->update_ccss_record( $page, $valid );
 			return;
 		}
 		if (
@@ -1918,12 +1937,15 @@ final class Critical_CSS extends Page_Parser {
 				'is_login' === $page['params']['type']
 			)
 		) {
+			$this->update_ccss_record( $page, $valid );
 			return;
 		}
 
 		// For pages only, insert/update records in the db.
 		if ( $valid ) {
 			$this->update_ccss_record( $page, $valid );
+		} else {
+			$this->debug_message( "not updating record for {$page['page_url']}, result was $result" );
 		}
 
 		$cache_file_dir = $this->get_cache_file_dir( $page['page_url'] );

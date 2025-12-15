@@ -16,7 +16,7 @@ class Ratings implements QueryBindings
      */
     private $sort_type;
 
-    public function __construct(string $sort_type = null)
+    public function __construct(?string $sort_type = null)
     {
         if (null === $sort_type) {
             $sort_type = 'COUNT';

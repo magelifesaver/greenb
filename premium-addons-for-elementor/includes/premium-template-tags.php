@@ -8,7 +8,7 @@ namespace PremiumAddons\Includes;
 // Elementor Classes.
 use Elementor\Plugin;
 use Elementor\Group_Control_Image_Size;
-use PremiumAddons\Includes\ACF_Helper;
+use PremiumAddons\Includes\Helpers\ACF_Helper;
 use PremiumAddonsPro\Includes\Smart_Post_Listing_Helper as Posts_Helper;
 use ElementorPro\Plugin as PluginPro;
 use ElementorPro\Modules\LoopBuilder\Files\Css\Loop_Dynamic_CSS;
@@ -74,7 +74,7 @@ class Premium_Template_Tags {
 	public $_render_attributes; // phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore
 
 	/**
-	 * Class contructor
+	 * Class constructor
 	 */
 	public function __construct() {
 
@@ -285,10 +285,9 @@ class Premium_Template_Tags {
 		if ( ! empty( $list ) && ! is_wp_error( $list ) ) {
 
 			foreach ( $list as $post ) {
-				$key =  in_array( 'elementor_library', $post_type, true ) ? $post->post_title : $post->ID;
+				$key             = in_array( 'elementor_library', $post_type, true ) ? $post->post_title : $post->ID;
 				$options[ $key ] = $post->post_title;
 			}
-
 		}
 
 		wp_send_json_success( wp_json_encode( $options ) );
@@ -1478,30 +1477,29 @@ class Premium_Template_Tags {
 	 */
 	public function handle_search_source( $search, $wp_query ) {
 
-		if( 'both' === self::$settings['search_in'] ) {
+		if ( 'both' === self::$settings['search_in'] ) {
 			return $search;
 		}
 
 		global $wpdb;
 
-		if (empty($search)) {
+		if ( empty( $search ) ) {
 			return $search; // No search term, do nothing.
 		}
 
 		// Get the search term.
-		$q = $wp_query->query_vars;
+		$q           = $wp_query->query_vars;
 		$search_term = $q['s'];
 
 		// Escape the term safely.
-		$like = '%' . $wpdb->esc_like($search_term) . '%';
+		$like = '%' . $wpdb->esc_like( $search_term ) . '%';
 
 		$search_source = 'title' === self::$settings['search_in'] ? 'post_title' : 'post_content';
 
 		// Only search in post_title.
-		$search = $wpdb->prepare(" AND ({$wpdb->posts}.$search_source LIKE %s) ", $like);
+		$search = $wpdb->prepare( " AND ({$wpdb->posts}.$search_source LIKE %s) ", $like );
 
 		return $search;
-
 	}
 
 	/**
@@ -1644,7 +1642,7 @@ class Premium_Template_Tags {
 
 		$this->add_render_attribute( 'post_inner' . $post_id, 'class', 'premium-search__post-inner' );
 
-		if( 'none' !== $settings['post_lq_effect'] ) {
+		if ( 'none' !== $settings['post_lq_effect'] ) {
 			$this->add_render_attribute( 'post_inner' . $post_id, 'class', 'premium-con-lq__' . $settings['post_lq_effect'] );
 		}
 
@@ -2539,5 +2537,4 @@ class Premium_Template_Tags {
 
 		<?php
 	}
-
 }

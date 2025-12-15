@@ -467,7 +467,7 @@ class BeRocket_products_label_paid extends BeRocket_plugin_variations {
                     $product_regular = $product->get_regular_price('view');
                     $product_sale = wc_get_price_to_display( $product, array( 'price' => $product_sale ) );
                     $product_regular = wc_get_price_to_display( $product, array( 'price' => $product_regular ) );
-                    if( ! empty($product_sale) && $product_sale != $product_regular ) {
+                    if( ! empty($product_sale) && ! empty($product_regular) && $product_sale != $product_regular ) {
                         $replacement['sale_p'] = $product_sale / $product_regular;
                         $replacement['sale_val'] = $product_regular - $product_sale;
                         $replacement['sale_end'] = get_post_meta( $product_id, '_sale_price_dates_to', true );
@@ -479,7 +479,7 @@ class BeRocket_products_label_paid extends BeRocket_plugin_variations {
                             $child_regular = $child->get_regular_price('view');
                             $child_sale = wc_get_price_to_display( $child, array( 'price' => $child_sale ) );
                             $child_regular = wc_get_price_to_display( $child, array( 'price' => $child_regular ) );
-                            if( ! empty($child_sale) && $child_sale != $child_regular ) {
+                            if( ! empty($child_sale) && ! empty($child_regular) && $child_sale != $child_regular ) {
                                 $price_ratio2 = $child_sale / $child_regular;
                                 $price_val2 = $child_regular - $child_sale;
                                 if( $replacement['sale_p'] === '' || $price_ratio2 < $replacement['sale_p'] ) {

@@ -173,10 +173,20 @@ final class Prefetch extends Base {
 				$domains[] = $domain;
 			}
 		}
+		if ( \str_contains( $content, 'data-aidaform-app' ) ) {
+			$links = array();
+			preg_match_all( '#\sdata-url\s*=\s*["\']https?:\/\/([^\/?\'"]{4,256})[/?\'"]#is', $content, $links );
+			if ( $this->is_iterable( $links[1] ) ) {
+				foreach ( $links[1] as $domain ) {
+					$domains[] = $domain;
+				}
+			}
+		}
 		return $domains;
 	}
+
 	/**
-	 * Parse page content looking for jQuery script tag to rewrite.
+	 * Add prefetch/preconnect directives to the page HTML.
 	 *
 	 * @param string $content The HTML content to parse.
 	 * @return string The filtered HTML content.

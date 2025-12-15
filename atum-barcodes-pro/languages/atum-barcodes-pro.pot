@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ATUM Barcodes PRO\n"
-"POT-Creation-Date: 2025-08-28 11:15+0200\n"
+"POT-Creation-Date: 2025-11-25 08:35+0100\n"
 "PO-Revision-Date: 2023-04-20 13:49+0200\n"
 "Last-Translator: BE REBEL <https://berebel.studio>\n"
 "Language-Team: BE REBEL <https://berebel.studio>\n"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Barcode"
 msgstr ""
 
-#: classes/Entities/Orders.php:427 classes/Entities/Orders.php:434
+#: classes/Entities/Orders.php:430 classes/Entities/Orders.php:437
 #: classes/Entities/Products.php:140 classes/Entities/Products.php:147
 #: classes/Entities/Suppliers.php:66 classes/Entities/Suppliers.php:73
 #: classes/Entities/Taxonomies.php:67 classes/Entities/Taxonomies.php:74
@@ -118,11 +118,11 @@ msgstr ""
 #: classes/Inc/Hooks.php:208 classes/Inc/Hooks.php:215
 #: classes/Inc/Metaboxes.php:249 classes/Inc/Metaboxes.php:256
 #: classes/Inc/Settings.php:254 classes/Inc/Settings.php:261
-#: classes/Integrations/MultiInventory.php:397
-#: classes/Integrations/MultiInventory.php:404
+#: classes/Integrations/MultiInventory.php:399
+#: classes/Integrations/MultiInventory.php:406
 #: classes/Integrations/PickPack.php:341 classes/Integrations/PickPack.php:348
-#: classes/Integrations/PurchaseOrders.php:253
-#: classes/Integrations/PurchaseOrders.php:260
+#: classes/Integrations/PurchaseOrders.php:330
+#: classes/Integrations/PurchaseOrders.php:337
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -475,40 +475,44 @@ msgstr ""
 msgid "Error generating the barcode. Please check if it was entered correctly"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:84
+#: classes/Integrations/PurchaseOrders.php:90
 msgid "Edit PO barcode"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:87
+#: classes/Integrations/PurchaseOrders.php:93
 msgid "Edit PO Barcode"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:118
+#: classes/Integrations/PurchaseOrders.php:124
 msgid "None"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:119
+#: classes/Integrations/PurchaseOrders.php:125
 msgid "Set"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:120
+#: classes/Integrations/PurchaseOrders.php:126
 msgid "Unexpected error. The Barcode could not be saved."
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:137
+#: classes/Integrations/PurchaseOrders.php:143
 msgid "Missing data"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:143
+#: classes/Integrations/PurchaseOrders.php:149
 msgid "The PO does not exist"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:151
+#: classes/Integrations/PurchaseOrders.php:157
 msgid "The barcode is already in use by another PO"
 msgstr ""
 
-#: classes/Integrations/PurchaseOrders.php:168
+#: classes/Integrations/PurchaseOrders.php:174
 msgid "Barcode saved successfully"
+msgstr ""
+
+#: classes/Integrations/PurchaseOrders.php:261
+msgid "Barcode Tracking"
 msgstr ""
 
 #: views/meta-boxes/barcode-input.php:15

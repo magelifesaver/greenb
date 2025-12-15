@@ -260,13 +260,13 @@ abstract class Skin_Style {
 
 			} else {
 
-				global $wp_query;
+				$current_query_args = $GLOBALS['wp_query']->query_vars;
 
-				$main_query = clone $wp_query;
+				$current_query_args['posts_per_page'] = $settings['products_numbers'];
 
-				self::$query = $main_query;
+				self::$query_args = $current_query_args;
 
-				self::$query_args = $main_query->query_vars;
+				self::$query = new \WP_Query( self::$query_args );
 
 			}
 		} elseif ( 'related' === $settings['query_type'] ) {

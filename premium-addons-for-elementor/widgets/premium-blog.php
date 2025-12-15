@@ -798,7 +798,6 @@ class Premium_Blog extends Widget_Base {
 				'label'       => __( 'Title HTML Tag', 'premium-addons-for-elementor' ),
 				'description' => __( 'Select a heading tag for the post title.', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SELECT,
-				'default'     => 'h2',
 				'options'     => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
@@ -810,6 +809,7 @@ class Premium_Blog extends Widget_Base {
 					'span' => 'span',
 					'p'    => 'p',
 				),
+				'default'     => 'h2',
 				'label_block' => true,
 			)
 		);
@@ -1559,6 +1559,8 @@ class Premium_Blog extends Widget_Base {
 			++$doc_index;
 
 		}
+
+		Helper_Functions::register_element_feedback_controls( $this );
 
 		$this->end_controls_section();
 
