@@ -33,12 +33,75 @@ define( 'AAA_OC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AAA_OC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /* -------------------------------------------------------------
- * Helpers
+ * Helpers (Logging + Retention)
  * ------------------------------------------------------------- */
+
+/**
+ * Writes to a per-day log file to prevent unbounded growth.
+ * Default retention is controlled by option: aaa_oc_log_retention_days (default 14).
+ *
+ * Files are written to:
+ * /wp-content/plugins/aaa-order-workflow/logs/aaa_oc-YYYY-MM-DD.log
+ */
 function aaa_oc_log( $message ) {
-	$file = AAA_OC_PLUGIN_DIR . 'aaa_oc.log';
-	$time = date( 'Y-m-d H:i:s' );
-	@file_put_contents( $file, "[$time] $message" . PHP_EOL, FILE_APPEND );
+	$timestamp = current_time( 'timestamp' ); // WP timezone.
+	$date      = date( 'Y-m-d', $timestamp );
+	$time      = date( 'Y-m-d H:i:s', $timestamp );
+
+	$logs_dir = trailingslashit( AAA_OC_PLUGIN_DIR ) . 'logs/';
+	if ( ! is_dir( $logs_dir ) ) {
+		@mkdir( $logs_dir, 0755, true );
+	}
+
+	// Fallback: if logs dir can't be created/written, write in plugin root (existing behavior).
+	$target_dir = ( is_dir( $logs_dir ) && is_writable( $logs_dir ) ) ? $logs_dir : trailingslashit( AAA_OC_PLUGIN_DIR );
+
+	$file = $target_dir . 'aaa_oc-' . $date . '.log';
+	$line = '[' . $time . '] ' . (string) $message . PHP_EOL;
+
+	@file_put_contents( $file, $line, FILE_APPEND | LOCK_EX );
+}
+
+/**
+ * Deletes daily log files older than N days (default 14).
+ * Hooked to aaa_oc_scheduled_cleanup (already scheduled daily on activation).
+ */
+add_action( 'aaa_oc_scheduled_cleanup', 'aaa_oc_cleanup_logs' );
+function aaa_oc_cleanup_logs() {
+	$retention_days = (int) get_option( 'aaa_oc_log_retention_days', 14 );
+	if ( $retention_days < 1 ) {
+		$retention_days = 1;
+	}
+
+	$logs_dir = trailingslashit( AAA_OC_PLUGIN_DIR ) . 'logs/';
+	if ( ! is_dir( $logs_dir ) ) {
+		return;
+	}
+
+	$cutoff_ts = current_time( 'timestamp' ) - ( $retention_days * DAY_IN_SECONDS );
+	$files     = glob( $logs_dir . 'aaa_oc-*.log' );
+
+	if ( empty( $files ) || ! is_array( $files ) ) {
+		return;
+	}
+
+	foreach ( $files as $path ) {
+		$base = basename( $path );
+
+		// Expect: aaa_oc-YYYY-MM-DD.log
+		if ( ! preg_match( '/^aaa_oc-(\d{4}-\d{2}-\d{2})\.log$/', $base, $m ) ) {
+			continue;
+		}
+
+		$file_ts = strtotime( $m[1] . ' 00:00:00' );
+		if ( ! $file_ts ) {
+			continue;
+		}
+
+		if ( $file_ts < $cutoff_ts ) {
+			@unlink( $path );
+		}
+	}
 }
 
 /* -------------------------------------------------------------
@@ -252,6 +315,11 @@ function aaa_oc_activate() {
 	if ( class_exists( 'AAA_OC_Payment_Setup' ) )        { AAA_OC_Payment_Setup::install(); }
 	if ( class_exists( 'AAA_OC_Table_Installer' ) )      { AAA_OC_Table_Installer::create_index_table(); }
 	if ( class_exists( 'AAA_OC_Fulfillment_Analytics' ) ){ AAA_OC_Fulfillment_Analytics::create_table(); }
+
+	// Default log retention (days) if not set.
+	if ( get_option( 'aaa_oc_log_retention_days', null ) === null ) {
+		add_option( 'aaa_oc_log_retention_days', 14, '', false );
+	}
 
 	if ( ! wp_next_scheduled( 'aaa_oc_scheduled_cleanup' ) ) {
 		wp_schedule_event( time(), 'daily', 'aaa_oc_scheduled_cleanup' );
