@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Vector Sync
  * Description: Synchronize WordPress content with external vector databases.  This plugin allows administrators to connect their site to either a Pinecone index or an OpenAI vector store and schedule synchronisation of posts, products or orders into a selected vector space.
- * Version: 1.3.0
+ * Version: 2.0.0
  * Author: AI Assistant
  * License: GPL2
  *
@@ -19,8 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants.
-define( 'VECTOR_SYNC_VERSION', '1.3.0' );
+define( 'VECTOR_SYNC_VERSION', '2.0.0' );
 define( 'VECTOR_SYNC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+// Provide the full plugin file path for activation hooks.  This constant
+// is referenced by the jobs scheduler when registering hooks.
+define( 'VECTOR_SYNC_PLUGIN_FILE', __FILE__ );
 
 // Require core classes.  Keeping includes at top-level makes the architecture
 // predictable and avoids conditional loading.  Each class file is kept under
@@ -30,6 +33,17 @@ require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-api-client.php
 require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-data-manager.php';
 require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-admin-page.php';
 require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-db.php';
+require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-jobs-db.php';
+require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-jobs-post-type.php';
+require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-jobs-meta-box.php';
+require_once VECTOR_SYNC_PLUGIN_DIR . 'includes/class-vector-sync-jobs-scheduler.php';
+
+// Register activation and deactivation hooks for the jobs scheduler.  These
+// hooks are defined here at file load so they execute when the plugin is
+// activated or deactivated.  Initialising the scheduler on the `init` hook
+// does not suffice because activation hooks fire before `init` is invoked.
+register_activation_hook( __FILE__, array( 'Vector_Sync_Jobs_Scheduler', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Vector_Sync_Jobs_Scheduler', 'deactivate' ) );
 
 // When settings are updated, reschedule cron jobs based on user preferences.
 // We no longer rely on the default WordPress option for saving plugin settings.  Instead, the
@@ -61,6 +75,9 @@ function vector_sync_activate() {
     // migrating the settings structure without collisions.
     Vector_Sync_DB::create_table();
     Vector_Sync_Scheduler::activate();
+    // Create jobs table and schedule existing jobs.
+    Vector_Sync_Jobs_DB::create_table();
+    Vector_Sync_Jobs_Scheduler::activate();
 }
 register_activation_hook( __FILE__, 'vector_sync_activate' );
 
@@ -71,6 +88,7 @@ register_activation_hook( __FILE__, 'vector_sync_activate' );
  */
 function vector_sync_deactivate() {
     Vector_Sync_Scheduler::deactivate();
+    Vector_Sync_Jobs_Scheduler::deactivate();
 }
 register_deactivation_hook( __FILE__, 'vector_sync_deactivate' );
 
@@ -93,3 +111,16 @@ function vector_sync_pre_option_filter( $value, $option, $default ) {
     return $value;
 }
 add_filter( 'pre_option_vector_sync_settings', 'vector_sync_pre_option_filter', 10, 3 );
+
+/**
+ * Initialise custom post type, meta boxes and scheduler for vector sync jobs.
+ * Hooked on init after the main settings page has been registered.  This
+ * separate init function keeps job-related functionality isolated from
+ * the core plugin initialisation.
+ */
+function vector_sync_jobs_init() {
+    Vector_Sync_Jobs_Post_Type::init();
+    Vector_Sync_Jobs_Meta_Box::init();
+    Vector_Sync_Jobs_Scheduler::init();
+}
+add_action( 'init', 'vector_sync_jobs_init' );

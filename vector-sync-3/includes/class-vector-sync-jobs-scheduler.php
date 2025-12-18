@@ -13,11 +13,12 @@ class Vector_Sync_Jobs_Scheduler {
      * on activation.  Also unschedule on deactivation.
      */
     public static function init() {
+        // Register the cron actions for job execution.  Activation/deactivation
+        // hooks are registered in vector-sync.php to ensure they run during
+        // plugin activation.
         add_action( 'vector_sync_initial_job', array( __CLASS__, 'run_job' ) );
         add_action( 'vector_sync_recurring_job', array( __CLASS__, 'run_job' ) );
-        register_activation_hook( VECTOR_SYNC_PLUGIN_FILE, array( __CLASS__, 'activate' ) );
-        register_deactivation_hook( VECTOR_SYNC_PLUGIN_FILE, array( __CLASS__, 'deactivate' ) );
-        // When a job is deleted, remove its schedule.
+        // When a job is deleted, remove its schedule and settings.
         add_action( 'before_delete_post', array( __CLASS__, 'on_delete_post' ) );
     }
 

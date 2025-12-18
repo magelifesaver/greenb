@@ -40,7 +40,9 @@ class Vector_Sync_Jobs_Post_Type {
             'labels'             => $labels,
             'public'             => false,
             'show_ui'            => true,
-            'show_in_menu'       => true,
+            // Hide the post type from the default admin menu.  Jobs are
+            // accessed via the Vector Sync top‑level menu instead.
+            'show_in_menu'       => false,
             'show_in_nav_menus'  => false,
             'show_in_admin_bar'  => false,
             'supports'           => array( 'title' ),

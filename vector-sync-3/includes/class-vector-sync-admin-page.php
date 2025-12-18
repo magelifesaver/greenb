@@ -27,13 +27,61 @@ class Vector_Sync_Admin_Page {
      * capability to access this page.
      */
     public function add_menu() {
-        add_options_page(
+        // Register a top‑level menu item for Vector Sync.  This menu
+        // contains submenus for the settings page and the jobs list.  The
+        // top‑level page itself renders the settings page.  Users need the
+        // manage_options capability to access these pages.
+        add_menu_page(
             __( 'Vector Sync', 'vector-sync' ),
             __( 'Vector Sync', 'vector-sync' ),
             'manage_options',
             'vector-sync',
-            array( $this, 'render_page' )
+            array( $this, 'render_settings_page' ),
+            'dashicons-schedule',
+            56
         );
+        // Settings submenu.  We reuse the same slug as the top‑level
+        // page so clicking on "Vector Sync" will direct to the settings.
+        add_submenu_page(
+            'vector-sync',
+            __( 'Settings', 'vector-sync' ),
+            __( 'Settings', 'vector-sync' ),
+            'manage_options',
+            'vector-sync',
+            array( $this, 'render_settings_page' )
+        );
+        // Jobs submenu.  This page redirects to the custom post type list for
+        // vector sync jobs.  We use a separate slug to avoid conflicts.
+        add_submenu_page(
+            'vector-sync',
+            __( 'Jobs', 'vector-sync' ),
+            __( 'Jobs', 'vector-sync' ),
+            'manage_options',
+            'vector-sync-jobs',
+            array( $this, 'render_jobs_page' )
+        );
+    }
+
+    /**
+     * Render the settings page.  This is the callback for the top‑level
+     * menu and the Settings submenu.  It simply proxies to render_page().
+     */
+    public function render_settings_page() {
+        $this->render_page();
+    }
+
+    /**
+     * Render the jobs page.  We redirect to the list table view of our
+     * custom post type.  Using a separate method allows us to hook
+     * redirection logic into the submenu callback.
+     */
+    public function render_jobs_page() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+        // Redirect to the edit screen for the vector_sync_job post type.
+        wp_safe_redirect( admin_url( 'edit.php?post_type=vector_sync_job' ) );
+        exit;
     }
 
     /**
@@ -181,21 +229,14 @@ class Vector_Sync_Admin_Page {
         if ( ! current_user_can( 'manage_options' ) ) {
             return;
         }
-        // Define tabs for API credentials and per‑service vector space
-        // configuration.  Each service gets its own tab so the user can
-        // configure Pinecone and OpenAI independently.  Translatable labels
-        // provide clarity in the UI.
-        $tabs = array(
-            'api'      => __( 'API', 'vector-sync' ),
-            'pinecone' => __( 'Pinecone Vector Spaces', 'vector-sync' ),
-            'openai'   => __( 'OpenAI Vector Spaces', 'vector-sync' ),
-        );
-        $current_tab = isset( $_GET['tab'] ) && isset( $tabs[ $_GET['tab'] ] ) ? $_GET['tab'] : 'api';
+        // Render only the API tab since vector spaces are configured per job.
+        $tabs = array( 'api' => __( 'API', 'vector-sync' ) );
+        $current_tab = 'api';
         echo '<div class="wrap">';
         echo '<h1>' . esc_html__( 'Vector Sync Settings', 'vector-sync' ) . '</h1>';
         echo '<h2 class="nav-tab-wrapper">';
         foreach ( $tabs as $tab => $name ) {
-            $class = $tab === $current_tab ? 'nav-tab nav-tab-active' : 'nav-tab';
+            $class = 'nav-tab nav-tab-active';
             $url   = add_query_arg( array( 'page' => 'vector-sync', 'tab' => $tab ), admin_url( 'options-general.php' ) );
             echo '<a class="' . esc_attr( $class ) . '" href="' . esc_url( $url ) . '">' . esc_html( $name ) . '</a>';
         }
@@ -203,13 +244,7 @@ class Vector_Sync_Admin_Page {
         echo '<form method="post" action="options.php">';
         settings_fields( 'vector_sync_settings_group' );
         $settings = Vector_Sync_DB::get_settings();
-        if ( 'api' === $current_tab ) {
-            $this->render_api_tab( $settings );
-        } elseif ( 'pinecone' === $current_tab ) {
-            $this->render_service_tab( 'pinecone', $settings );
-        } else {
-            $this->render_service_tab( 'openai', $settings );
-        }
+        $this->render_api_tab( $settings );
         submit_button();
         echo '</form>';
         echo '</div>';
