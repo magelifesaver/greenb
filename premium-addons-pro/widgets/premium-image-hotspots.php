@@ -179,7 +179,27 @@ class Premium_Image_Hotspots extends Widget_Base {
 	}
 
 	protected function is_dynamic_content(): bool {
-		return false;
+
+		$is_edit = Plugin::instance()->editor->is_edit_mode();
+
+		if( $is_edit ) {
+			return false;
+		}
+
+		$items     = $this->get_settings( 'premium_image_hotspots_icons' );
+        $is_dynamic_content = false;
+
+		if ( ! empty( $items ) ) {
+			foreach ( $items as $item ) {
+				if( 'elementor_templates' === $item['premium_image_hotspots_content'] ) {
+					$is_dynamic_content = true;
+					break;
+				}
+			}
+		}
+
+		return $is_dynamic_content;
+
 	}
 
 	/**

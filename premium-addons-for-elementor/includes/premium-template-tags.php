@@ -6,13 +6,15 @@
 namespace PremiumAddons\Includes;
 
 // Elementor Classes.
+use PremiumAddons\Includes\Helpers\ACF_Helper;
+use PremiumAddons\Includes\Helpers\Query_Helper;
+
+use PremiumAddonsPro\Includes\Smart_Post_Listing_Helper as Smart_List_Helper;
+
 use Elementor\Plugin;
 use Elementor\Group_Control_Image_Size;
-use PremiumAddons\Includes\Helpers\ACF_Helper;
-use PremiumAddonsPro\Includes\Smart_Post_Listing_Helper as Posts_Helper;
 use ElementorPro\Plugin as PluginPro;
 use ElementorPro\Modules\LoopBuilder\Files\Css\Loop_Dynamic_CSS;
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -80,14 +82,6 @@ class Premium_Template_Tags {
 
 		add_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
 		add_filter( 'found_posts', array( $this, 'fix_found_posts_query' ), 1, 2 );
-
-		add_action( 'wp_ajax_pa_get_posts', array( $this, 'get_posts_query' ) );
-		add_action( 'wp_ajax_nopriv_pa_get_posts', array( $this, 'get_posts_query' ) );
-
-		add_action( 'wp_ajax_premium_update_filter', array( $this, 'get_posts_list' ) );
-		add_action( 'wp_ajax_premium_update_tax', array( $this, 'get_related_tax' ) );
-
-		add_action( 'wp_ajax_pa_acf_options', array( $this, 'get_acf_options' ) );
 
 		add_action( 'wp_ajax_premium_get_search_results', array( $this, 'get_search_results' ) );
 		add_action( 'wp_ajax_nopriv_premium_get_search_results', array( $this, 'get_search_results' ) );
@@ -197,22 +191,7 @@ class Premium_Template_Tags {
 	 */
 	public static function get_authors() {
 
-		$users = get_users(
-			array(
-				'role__in' => array( 'administrator', 'editor', 'author', 'contributor' ),
-				'fields'   => array( 'ID', 'display_name' ), // Only fetch the necessary fields
-			)
-		);
-
-		$options = array();
-
-		foreach ( $users as $user ) {
-			if ( 'wp_update_service' === $user->display_name ) {
-				continue;
-			}
-
-			$options[ $user->ID ] = $user->display_name;
-		}
+		$options = Query_Helper::get_authors();
 
 		return $options;
 	}
@@ -229,100 +208,9 @@ class Premium_Template_Tags {
 	 */
 	public static function get_posts_types() {
 
-		$post_types = get_post_types(
-			array(
-				'public' => true,
-			),
-			'objects'
-		);
-
-		$options = array();
-
-		foreach ( $post_types as $post_type ) {
-
-			if ( 'attachment' === $post_type->name ) {
-				continue;
-			}
-
-			$options[ $post_type->name ] = $post_type->label;
-		}
+		$options = Query_Helper::get_posts_types();
 
 		return $options;
-	}
-
-
-	/**
-	 * Get posts list
-	 *
-	 * Get posts list array
-	 *
-	 * @since 4.2.8
-	 * @access public
-	 */
-	public static function get_posts_list() {
-
-		check_ajax_referer( 'pa-blog-widget-nonce', 'nonce' );
-
-		$post_type = isset( $_POST['post_type'] ) ? wp_unslash( $_POST['post_type'] ) : '';
-
-		$post_type = array_map( 'sanitize_text_field', $post_type );
-
-		if ( empty( $post_type ) ) {
-			wp_send_json_error( __( 'Empty Post Type.', 'premium-addons-for-elementor' ) );
-		}
-
-		$list = get_posts(
-			array(
-				'post_type'              => $post_type,
-				'posts_per_page'         => -1,
-				'update_post_term_cache' => false,
-				'update_post_meta_cache' => false,
-			)
-		);
-
-		$options = array();
-
-		if ( ! empty( $list ) && ! is_wp_error( $list ) ) {
-
-			foreach ( $list as $post ) {
-				$key             = in_array( 'elementor_library', $post_type, true ) ? $post->post_title : $post->ID;
-				$options[ $key ] = $post->post_title;
-			}
-		}
-
-		wp_send_json_success( wp_json_encode( $options ) );
-	}
-
-	/**
-	 * Get related taxonomy list
-	 *
-	 * Get related taxonomy list array
-	 *
-	 * @since 4.3.1
-	 * @access public
-	 */
-	public static function get_related_tax() {
-
-		check_ajax_referer( 'pa-blog-widget-nonce', 'nonce' );
-
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
-
-		if ( empty( $post_type ) ) {
-			wp_send_json_error( __( 'Empty Post Type.', 'premium-addons-for-elementor' ) );
-		}
-
-		$taxonomy = self::get_taxnomies( $post_type );
-
-		$related_tax = array();
-
-		if ( ! empty( $taxonomy ) ) {
-
-			foreach ( $taxonomy as $index => $tax ) {
-				$related_tax[ $index ] = $tax->label;
-			}
-		}
-
-		wp_send_json_success( wp_json_encode( $related_tax ) );
 	}
 
 
@@ -337,22 +225,7 @@ class Premium_Template_Tags {
 	 */
 	public static function get_default_posts_list( $post_type ) {
 
-		global $wpdb;
-
-		$list = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT ID, post_title FROM $wpdb->posts WHERE post_type = %s AND post_status = 'publish'",
-				$post_type
-			)
-		); // phpcs:ignore
-
-		$options = array();
-
-		if ( ! empty( $list ) ) {
-			foreach ( $list as $post ) {
-				$options[ $post->ID ] = $post->post_title;
-			}
-		}
+		$options = Query_Helper::get_default_posts_list( $post_type );
 
 		return $options;
 	}
@@ -370,239 +243,9 @@ class Premium_Template_Tags {
 	 */
 	public static function get_taxnomies( $type ) {
 
-		$taxonomies = get_object_taxonomies( $type, 'objects' );
+		$option = Query_Helper::get_taxnomies( $type );
 
-		$data = array();
-
-		foreach ( $taxonomies as $tax_slug => $tax ) {
-
-			if ( ! $tax->public || ! $tax->show_ui ) {
-				continue;
-			}
-
-			$data[ $tax_slug ] = (object) array(
-				'label' => $tax->label,
-			);
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Get query args
-	 *
-	 * Get query arguments array
-	 *
-	 * @since 3.20.3
-	 * @access public
-	 *
-	 * @return array query args
-	 */
-	public static function get_query_args( $target_post_type = '' ) {
-
-		$settings = self::$settings;
-
-		$paged     = self::get_paged();
-		$tax_count = 0;
-
-		$post_type = $settings['post_type_filter'];
-		$post_id   = get_the_ID();
-
-		if ( 'main' === $post_type ) {
-
-			global $wp_query;
-
-			$main_query = clone $wp_query;
-
-			return $main_query->query_vars;
-
-		}
-
-		$post_args = array(
-			'post_type'        => ! empty( $target_post_type ) ? $target_post_type : $post_type,
-			'posts_per_page'   => empty( $settings['premium_blog_number_of_posts'] ) ? 9999 : $settings['premium_blog_number_of_posts'],
-			'paged'            => $paged,
-			'post_status'      => 'publish',
-			'suppress_filters' => false,
-		);
-
-		// If select field control option is enabled in AJAX search, then return because we don't want any other post args.
-		if ( ! empty( $target_post_type ) ) {
-			return $post_args;
-		}
-
-		if ( 'related' === $post_type ) {
-			$current_post_type      = get_post_type( $post_id );
-			$post_args['post_type'] = $current_post_type;
-		}
-
-		$post_args['orderby'] = $settings['premium_blog_order_by'];
-		$post_args['order']   = $settings['premium_blog_order'];
-
-		if ( 'meta_value' === $settings['premium_blog_order_by'] ) {
-			$post_args['meta_key'] = $settings['premium_blog_meta_key'];
-		}
-
-		if ( isset( $settings['posts_from'] ) ) {
-
-			if ( '' !== $settings['posts_from'] ) {
-				$last_time = strtotime( '-1 ' . $settings['posts_from'] );
-
-				$start_date = gmdate( 'Y-m-d', $last_time );
-				$end_date   = gmdate( 'Y-m-d' );
-
-				$post_args['date_query'] = array(
-					array(
-						'after'     => $start_date,
-						'before'    => $end_date,
-						'inclusive' => true,
-					),
-				);
-
-			}
-		}
-
-		$excluded_posts = array();
-
-		if ( ! empty( $settings['premium_blog_posts_exclude'] ) && 'post' === $post_type ) {
-
-			if ( 'post__in' === $settings['posts_filter_rule'] ) {
-				$post_args['post__in'] = $settings['premium_blog_posts_exclude'];
-			} else {
-				$excluded_posts = $settings['premium_blog_posts_exclude'];
-			}
-		} elseif ( 'related' === $post_type ) {
-
-			if ( 'product' === $current_post_type ) {
-
-				$post_cats = self::get_product_cats_ids( $post_id );
-
-				$post_args['tax_query'][] = array(
-					'taxonomy' => 'product_cat',
-					'field'    => 'term_id',
-					'terms'    => $post_cats,
-					'operator' => 'IN',
-				);
-
-			} else {
-				$post_cats = wp_get_post_categories( $post_id );
-
-				if ( ! empty( $post_cats ) ) {
-					$post_args['category__in'] = $post_cats;
-				}
-			}
-		} elseif ( ! empty( $settings['custom_posts_filter'] ) && ! in_array( $post_type, array( 'post', 'related' ), true ) ) {
-
-			$keys = array_keys( self::get_default_posts_list( $post_type ) );
-
-			if ( empty( array_diff( ( $settings['custom_posts_filter'] ), $keys ) ) ) {
-
-				if ( 'post__in' === $settings['posts_filter_rule'] ) {
-					$post_args['post__in'] = $settings['custom_posts_filter'];
-				} else {
-					$excluded_posts = $settings['custom_posts_filter'];
-				}
-			}
-		}
-
-		if ( ! empty( $settings['premium_blog_users'] ) ) {
-
-			$post_args[ $settings['author_filter_rule'] ] = $settings['premium_blog_users'];
-		}
-
-		if ( 'related' !== $post_type ) {
-			// Get all the taxanomies associated with the post type.
-			$taxonomy = self::get_taxnomies( $post_type );
-
-			if ( ! empty( $taxonomy ) && ! is_wp_error( $taxonomy ) ) {
-
-				// Get all taxonomy values under the taxonomy.
-
-				$tax_count = 0;
-				foreach ( $taxonomy as $index => $tax ) {
-
-					if ( ! empty( $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ] ) ) {
-
-						$operator = $settings[ $index . '_' . $post_type . '_filter_rule' ];
-
-						$post_args['tax_query'][] = array(
-							'taxonomy' => $index,
-							'field'    => 'slug',
-							'terms'    => $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ],
-							'operator' => $operator,
-						);
-						++$tax_count;
-					}
-				}
-			}
-		}
-
-		// needs to be checked.
-		if ( '' !== $settings['active_cat'] && '*' !== $settings['active_cat'] && 'related' !== $post_type ) {
-
-			$filter_type = $settings['filter_tabs_type'];
-
-			if ( 'tag' === $settings['filter_tabs_type'] ) {
-				$filter_type = 'post_tag';
-			}
-
-			$post_args['tax_query'][] = array(
-				'taxonomy' => $filter_type,
-				'field'    => 'slug',
-				'terms'    => $settings['active_cat'],
-				'operator' => 'IN',
-			);
-
-		}
-
-		if ( isset( $settings['premium_blog_offset'] ) && 0 < $settings['premium_blog_offset'] ) {
-
-			/**
-			 * Offset break the pagination. Using WordPress's work around
-			 *
-			 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
-			 */
-			$post_args['offset_to_fix'] = $settings['premium_blog_offset'];
-
-		}
-
-		if ( isset( $settings['ignore_sticky_posts'] ) ) {
-			if ( 'yes' === $settings['ignore_sticky_posts'] ) {
-				$excluded_posts = array_merge( $excluded_posts, get_option( 'sticky_posts' ) );
-			} else {
-				$post_args['ignore_sticky_posts'] = true;
-			}
-		}
-
-		if ( ( isset( $settings['query_exclude_current'] ) && 'yes' === $settings['query_exclude_current'] ) || 'related' === $post_type ) {
-			array_push( $excluded_posts, $post_id );
-		}
-
-		$post_args['post__not_in'] = $excluded_posts;
-
-		return $post_args;
-	}
-
-	/**
-	 * Retrieves the product's categories IDs.
-	 *
-	 * @access public
-	 * @since 2.8.20
-	 *
-	 * @param int $prod_id  product id.
-	 *
-	 * @return array
-	 */
-	public static function get_product_cats_ids( $prod_id ) {
-
-		$prod_cats = get_the_terms( $prod_id, 'product_cat' );
-		$cats_ids  = array();
-
-		foreach ( $prod_cats as $index => $cat ) {
-			array_push( $cats_ids, $cat->term_id );
-		}
-
-		return $cats_ids;
+		return $option;
 	}
 
 	/**
@@ -615,7 +258,7 @@ class Premium_Template_Tags {
 	 */
 	public function get_query_posts() {
 
-		$post_args = $this->get_query_args();
+		$post_args = Query_Helper::get_query_args( self::$settings );
 
 		$defaults = array(
 			'author'           => '',
@@ -634,49 +277,6 @@ class Premium_Template_Tags {
 		$this->set_pagination_limit( $total_pages );
 
 		return $query;
-	}
-
-
-	/**
-	 * Get paged
-	 *
-	 * Returns the paged number for the query.
-	 *
-	 * @since 3.20.0
-	 * @return int
-	 */
-	public static function get_paged() {
-
-		global $wp_the_query, $paged;
-
-		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : false;
-
-		if ( $nonce && wp_verify_nonce( $nonce, 'pa-blog-widget-nonce' ) ) {
-			if ( isset( $_POST['page_number'] ) && '' !== $_POST['page_number'] ) {
-				return sanitize_text_field( wp_unslash( $_POST['page_number'] ) );
-			}
-		}
-
-		// Check the 'paged' query var.
-		$paged_qv = $wp_the_query->get( 'paged' );
-
-		if ( is_numeric( $paged_qv ) ) {
-			return $paged_qv;
-		}
-
-		// Check the 'page' query var.
-		$page_qv = $wp_the_query->get( 'page' );
-
-		if ( is_numeric( $page_qv ) ) {
-			return $page_qv;
-		}
-
-		// Check the $paged global?
-		if ( is_numeric( $paged ) ) {
-			return $paged;
-		}
-
-		return 0;
 	}
 
 	/**
@@ -1255,7 +855,7 @@ class Premium_Template_Tags {
 			$pages = min( $settings['max_pages'], $pages );
 		}
 
-		$paged = $this->get_paged();
+		$paged = Query_Helper::get_paged();
 
 		$current_page = $paged;
 
@@ -1373,36 +973,6 @@ class Premium_Template_Tags {
 		}
 
 		wp_send_json_success( $data );
-	}
-
-	/**
-	 * Get Acf Options.
-	 *
-	 * Get options using AJAX.
-	 *
-	 * @since 4.4.8
-	 * @access public
-	 */
-	public function get_acf_options() {
-
-		check_ajax_referer( 'pa-blog-widget-nonce', 'nonce' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( 'Insufficient user permission' );
-		}
-
-		$query_options = isset( $_POST['query_options'] ) ? array_map( 'strip_tags', $_POST['query_options'] ) : ''; // phpcs:ignore
-
-		$query = new \WP_Query(
-			array(
-				'post_type'      => 'acf-field',
-				'posts_per_page' => -1,
-			)
-		);
-
-		$results = ACF_Helper::format_acf_query_result( $query->posts, $query_options );
-
-		wp_send_json_success( wp_json_encode( $results ) );
 	}
 
 	/**
@@ -1580,7 +1150,7 @@ class Premium_Template_Tags {
 
 		$settings = self::$settings;
 
-		$post_args = $this->get_query_args( $post_type );
+		$post_args = Query_Helper::get_query_args( $settings, $post_type );
 
 		$search_args = array(
 			's' => $query,
@@ -1722,159 +1292,6 @@ class Premium_Template_Tags {
 
 		<?php
 	}
-
-
-	/**
-	 * Get Current Product Swap Image.
-	 *
-	 * @since 3.4.0
-	 * @access public
-	 *
-	 * @param string $size image size.
-	 */
-	public static function get_current_product_swap_image( $size ) {
-
-		global $product;
-
-		$attachment_ids = $product->get_gallery_image_ids();
-
-		if ( $attachment_ids ) {
-
-			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
-
-			echo wp_kses_post( apply_filters( 'pa_woo_product_swap_image', wp_get_attachment_image( reset( $attachment_ids ), $image_size, false, array( 'class' => 'premium-woo-product__on_hover' ) ) ) );
-		}
-	}
-
-	/**
-	 * Get Current Product Images
-	 *
-	 * Gets current product images
-	 *
-	 * @since 3.4.0
-	 * @access public
-	 *
-	 * @param string $size image size.
-	 */
-	public static function get_current_product_gallery_images( $size ) {
-
-		global $product;
-
-		$attachment_ids = $product->get_gallery_image_ids();
-
-		if ( $attachment_ids ) {
-
-			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
-
-			foreach ( $attachment_ids as $index => $id ) {
-				if ( $index > 2 ) {
-					break;
-				}
-
-				echo wp_kses_post( apply_filters( 'pa_woo_product_gallery_image', wp_get_attachment_image( $id, $image_size, false, array( 'class' => 'premium-woo-product__gallery_image' ) ) ) );
-			}
-		}
-	}
-
-	/**
-	 * Get Current Product Images
-	 *
-	 * Gets current product images
-	 *
-	 * @since 3.4.0
-	 * @access public
-	 *
-	 * @param string $size image size.
-	 */
-	public static function get_current_product_linked_images( $size ) {
-
-		global $product;
-
-		$attachment_ids = $product->get_gallery_image_ids();
-
-		if ( $attachment_ids ) {
-
-			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
-
-			foreach ( $attachment_ids as $index => $id ) {
-				if ( $index > 2 ) {
-					break;
-				}
-
-				woocommerce_template_loop_product_link_open();
-
-				echo wp_kses_post( apply_filters( 'pa_woo_product_gallery_image', wp_get_attachment_image( $id, $image_size, false, array( 'class' => 'premium-woo-product__gallery_image' ) ) ) );
-
-				woocommerce_template_loop_product_link_close(); // closes product anchor tag.
-
-			}
-		}
-	}
-
-
-	/**
-	 * Get Current Product Category
-	 *
-	 * @since 3.4.0
-	 * @access public
-	 */
-	public static function get_current_product_category() {
-		if ( apply_filters( 'pa_woo_product_parent_category', true ) ) :
-			?>
-			<span class="premium-woo-product-category">
-				<?php
-					global $product;
-					$product_categories = function_exists( 'wc_get_product_category_list' ) ? wc_get_product_category_list( get_the_ID(), '&', '', '' ) : $product->get_categories( '&', '', '' );
-
-					$product_categories = wp_strip_all_tags( $product_categories );
-
-				if ( $product_categories ) {
-					list( $parent_cat ) = explode( '&', $product_categories );
-
-					echo esc_html( $parent_cat );
-				}
-				?>
-			</span>
-			<?php
-		endif;
-	}
-
-	/**
-	 * Get Product Short Description
-	 *
-	 * @since 3.4.0
-	 * @access public
-	 *
-	 * @param integer $length excerpt length.
-	 */
-	public static function get_product_excerpt( $length ) {
-
-		if ( has_excerpt() ) {
-
-			$excerpt = trim( get_the_excerpt() );
-
-			if ( ! empty( $length ) ) {
-
-				$words = explode( ' ', $excerpt, $length + 1 );
-
-				if ( count( $words ) > $length ) {
-
-					array_pop( $words );
-
-					array_push( $words, '…' );
-
-				}
-
-				$excerpt = implode( ' ', $words );
-
-			}
-
-			echo '<div class="premium-woo-product-desc">';
-				echo wp_kses_post( $excerpt );
-			echo '</div>';
-		}
-	}
-
 
 	/**
 	 * Get Widget Setting data.
@@ -2432,7 +1849,7 @@ class Premium_Template_Tags {
 				<div class="premium-smart-listing__post-thumbnail-wrapper">
 					<?php
 					if ( 'yes' === $settings['pa_featured_categories_meta'] ) {
-						Posts_Helper::get_post_categories( $settings, $post_id );
+						Smart_List_Helper::get_post_categories( $settings, $post_id );
 					}
 					?>
 					<div class="premium-smart-listing__thumbnail-container" style="<?php echo isset( $thumbnail_src[0] ) ? 'background-image: url(' . esc_url( $thumbnail_src[0] ) . ');' : ''; ?>">
@@ -2444,7 +1861,7 @@ class Premium_Template_Tags {
 				</div>
 				<div class="premium-smart-listing__post-content-wrapper">
 					<div class="premium-smart-listing__post-title-wrapper"> <?php $this->render_post_title( $target, $key, 'premium-smart-listing__post-title' ); ?> </div>
-					<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Posts_Helper::render_smart_post_meta( 'featured', $settings, $post_id ); ?> </div>
+					<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Smart_List_Helper::render_smart_post_meta( 'featured', $settings, $post_id ); ?> </div>
 					<?php $this->get_post_content( $content_options ); ?>
 				</div>
 			</<?php echo wp_kses_post( $post_tag ); ?>>
@@ -2526,11 +1943,11 @@ class Premium_Template_Tags {
 					<div class="premium-smart-listing__post-content-wrapper">
 						<?php
 						if ( 'yes' === $settings['categories_meta'] ) {
-							Posts_Helper::get_post_categories( $settings, $post_id );
+							Smart_List_Helper::get_post_categories( $settings, $post_id );
 						}
 						?>
 						<div class="premium-smart-listing__post-title-wrapper"> <?php $this->render_post_title( $target, $key, 'premium-smart-listing__post-title' ); ?>  </div>
-						<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Posts_Helper::render_smart_post_meta( 'post', $settings, $post_id ); ?> </div>
+						<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Smart_List_Helper::render_smart_post_meta( 'post', $settings, $post_id ); ?> </div>
 						<?php $this->get_post_content( $content_options ); ?>
 					</div>
 			</<?php echo wp_kses_post( $post_tag ); ?>>

@@ -196,6 +196,7 @@ class AIPKit_Core_Ajax_Handler extends BaseDashboardAjaxHandler
         // Get provider config
         $provider_config = \WPAICG\AIPKit_Providers::get_provider_data($provider);
         if (empty($provider_config['api_key'])) {
+            /* translators: %s: Provider name. */
              $this->send_wp_error(new WP_Error('missing_api_key_delete_vector', sprintf(__('API key for %s is missing.', 'gpt3-ai-content-generator'), $provider)));
              return;
         }
@@ -267,6 +268,7 @@ class AIPKit_Core_Ajax_Handler extends BaseDashboardAjaxHandler
         // Step 1: Delete the existing vector and log entry
         $provider_config = AIPKit_Providers::get_provider_data($provider);
         if (empty($provider_config['api_key'])) {
+            /* translators: %s: Provider name. */
              $this->send_wp_error(new WP_Error('missing_api_key_reindex', sprintf(__('API key for %s is missing.', 'gpt3-ai-content-generator'), $provider)));
              return;
         }

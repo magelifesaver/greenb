@@ -5,7 +5,7 @@
  * @package PA
  */
 
-use PremiumAddons\Includes\Premium_Template_Tags;
+use PremiumAddons\Modules\Woocommerce\Module as Woocommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // If this file is called directly, abort.
@@ -67,7 +67,7 @@ $image_size      = $settings['featured_image_size'];
 			echo '<img src="' . esc_url( $product_thumb ) . '" alt="' . esc_attr( $alt ) . '">';
 
 			if ( 'swap' === $settings['hover_style'] ) {
-				Premium_Template_Tags::get_current_product_swap_image( $image_size );
+				Woocommerce::get_current_product_swap_image( $image_size );
 			}
 		}
 
@@ -124,7 +124,7 @@ $image_size      = $settings['featured_image_size'];
 					case 'desc':
 						$length = $segment['excerpt_length'];
 						do_action( 'pa_woo_product_before_desc', $product_id, $settings );
-						Premium_Template_Tags::get_product_excerpt( $length );
+						Woocommerce::get_product_excerpt( $length );
 						do_action( 'pa_woo_product_after_desc', $product_id, $settings );
 						break;
 
@@ -141,7 +141,7 @@ $image_size      = $settings['featured_image_size'];
 						break;
 					case 'category':
 						do_action( 'pa_woo_product_before_cat', $product_id, $settings );
-						Premium_Template_Tags::get_current_product_category();
+						Woocommerce::get_current_product_category();
 						do_action( 'pa_woo_product_after_cat', $product_id, $settings );
 						break;
 

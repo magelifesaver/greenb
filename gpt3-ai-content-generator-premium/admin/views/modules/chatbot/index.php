@@ -138,6 +138,14 @@ $starters_addon_active = aipkit_dashboard::is_addon_active('conversation_starter
 $is_realtime_voice_active = (aipkit_dashboard::is_pro_plan() && aipkit_dashboard::is_addon_active('realtime_voice'));
 
 ?>
+<?php
+// Check if Chatolia notice should be displayed
+$chatolia_notice_dismissed = get_option('aipkit_chatolia_notice_dismissed', '0') === '1';
+if (!$chatolia_notice_dismissed) {
+    include __DIR__ . '/partials/chatolia-notice.php';
+}
+?>
+
 <div class="aipkit_container aipkit_chatbot_module_container">
     <?php include __DIR__ . '/partials/chatbot-main-selector.php'; ?>
 

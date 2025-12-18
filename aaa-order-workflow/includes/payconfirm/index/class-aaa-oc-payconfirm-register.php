@@ -17,7 +17,7 @@ class AAA_OC_PayConfirm_Register {
 		if ( post_type_exists('payment-confirmation') ) { return; }
 		register_post_type('payment-confirmation', [
 			'labels'      => ['name'=>'Payment Confirmations','singular_name'=>'Payment Confirmation'],
-			'public'      => false,
+			'public'      => true,
 			'show_ui'     => true,
 			'show_in_menu'=> true,
 			'supports'    => ['title','editor','custom-fields','author'],

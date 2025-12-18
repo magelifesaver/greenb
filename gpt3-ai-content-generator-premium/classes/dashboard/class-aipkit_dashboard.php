@@ -67,7 +67,7 @@ if (!class_exists('\\WPAICG\\aipkit_dashboard')) {
 
         public static function is_pro_plan()
         {
-            if (function_exists('wpaicg_gacg_fs') && wpaicg_gacg_fs()->is_plan('pro', true)) { // Check for 'pro' plan or higher
+            if (function_exists('wpaicg_gacg_fs') && wpaicg_gacg_fs()->is_plan('pro', true)) {
                 return true;
             }
             return false;

@@ -175,7 +175,27 @@ class Premium_Image_Accordion extends Widget_Base {
 	}
 
 	protected function is_dynamic_content(): bool {
-		return false;
+
+		$is_edit = Plugin::instance()->editor->is_edit_mode();
+
+		if( $is_edit ) {
+			return false;
+		}
+
+		$items     = $this->get_settings( 'image_content' );
+        $is_dynamic_content = false;
+
+		if ( ! empty( $items ) ) {
+			foreach ( $items as $item ) {
+				if( 'template' === $item['content_type'] ) {
+					$is_dynamic_content = true;
+					break;
+				}
+			}
+		}
+
+		return $is_dynamic_content;
+
 	}
 
 	/**

@@ -144,6 +144,156 @@ class Module extends Module_Base {
 	}
 
 	/**
+	 * Get Current Product Swap Image.
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @param string $size image size.
+	 */
+	public static function get_current_product_swap_image( $size ) {
+
+		global $product;
+
+		$attachment_ids = $product->get_gallery_image_ids();
+
+		if ( $attachment_ids ) {
+
+			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
+
+			echo wp_kses_post( apply_filters( 'pa_woo_product_swap_image', wp_get_attachment_image( reset( $attachment_ids ), $image_size, false, array( 'class' => 'premium-woo-product__on_hover' ) ) ) );
+		}
+	}
+
+	/**
+	 * Get Current Product Images
+	 *
+	 * Gets current product images
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @param string $size image size.
+	 */
+	public static function get_current_product_linked_images( $size ) {
+
+		global $product;
+
+		$attachment_ids = $product->get_gallery_image_ids();
+
+		if ( $attachment_ids ) {
+
+			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
+
+			foreach ( $attachment_ids as $index => $id ) {
+				if ( $index > 2 ) {
+					break;
+				}
+
+				woocommerce_template_loop_product_link_open();
+
+				echo wp_kses_post( apply_filters( 'pa_woo_product_gallery_image', wp_get_attachment_image( $id, $image_size, false, array( 'class' => 'premium-woo-product__gallery_image' ) ) ) );
+
+				woocommerce_template_loop_product_link_close(); // closes product anchor tag.
+
+			}
+		}
+	}
+
+	/**
+	 * Get Product Short Description
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @param integer $length excerpt length.
+	 */
+	public static function get_product_excerpt( $length ) {
+
+		if ( has_excerpt() ) {
+
+			$excerpt = trim( get_the_excerpt() );
+
+			if ( ! empty( $length ) ) {
+
+				$words = explode( ' ', $excerpt, $length + 1 );
+
+				if ( count( $words ) > $length ) {
+
+					array_pop( $words );
+
+					array_push( $words, '…' );
+
+				}
+
+				$excerpt = implode( ' ', $words );
+
+			}
+
+			echo '<div class="premium-woo-product-desc">';
+				echo wp_kses_post( $excerpt );
+			echo '</div>';
+		}
+	}
+
+	/**
+	 * Get Current Product Category
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 */
+	public static function get_current_product_category() {
+		if ( apply_filters( 'pa_woo_product_parent_category', true ) ) :
+			?>
+			<span class="premium-woo-product-category">
+				<?php
+					global $product;
+					$product_categories = function_exists( 'wc_get_product_category_list' ) ? wc_get_product_category_list( get_the_ID(), '&', '', '' ) : $product->get_categories( '&', '', '' );
+
+					$product_categories = wp_strip_all_tags( $product_categories );
+
+				if ( $product_categories ) {
+					list( $parent_cat ) = explode( '&', $product_categories );
+
+					echo esc_html( $parent_cat );
+				}
+				?>
+			</span>
+			<?php
+		endif;
+	}
+
+	/**
+	 * Get Current Product Images
+	 *
+	 * Gets current product images
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @param string $size image size.
+	 */
+	public static function get_current_product_gallery_images( $size ) {
+
+		global $product;
+
+		$attachment_ids = $product->get_gallery_image_ids();
+
+		if ( $attachment_ids ) {
+
+			$image_size = apply_filters( 'single_product_archive_thumbnail_size', $size );
+
+			foreach ( $attachment_ids as $index => $id ) {
+				if ( $index > 2 ) {
+					break;
+				}
+
+				echo wp_kses_post( apply_filters( 'pa_woo_product_gallery_image', wp_get_attachment_image( $id, $image_size, false, array( 'class' => 'premium-woo-product__gallery_image' ) ) ) );
+			}
+		}
+	}
+
+	/**
 	 * Instance
 	 *
 	 * @return object self::$instance

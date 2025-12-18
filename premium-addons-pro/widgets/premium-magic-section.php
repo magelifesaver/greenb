@@ -198,7 +198,22 @@ class Premium_Magic_Section extends Widget_Base {
 	 * @return bool
 	 */
 	protected function is_dynamic_content(): bool {
-		return false;
+
+		$is_edit = Plugin::instance()->editor->is_edit_mode();
+
+		if( $is_edit ) {
+			return false;
+		}
+
+		$content_type     = $this->get_settings('premium_magic_section_content_type');
+        $is_dynamic_content = false;
+
+		if( 'template' === $content_type ) {
+			$is_dynamic_content = true;
+		}
+
+		return $is_dynamic_content;
+
 	}
 
 	/**

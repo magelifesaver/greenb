@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/productsearch/index/class-aaa-oc-productsearch-table-indexer.php
  * Purpose: Seed/refresh ProductSearch index; update single rows on stock flip / save / term-change.
- * Version: 1.2.0
+ * Version: 1.3.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -171,6 +171,27 @@ class AAA_OC_ProductSearch_Table_Indexer {
 
 		$in_stock = $p->is_in_stock() ? 1 : 0;
 
+		// Display/aux fields.
+		$sku = $p->get_sku();
+
+		$price_regular = $p->get_regular_price();
+		$price_sale    = $p->get_sale_price();
+		$price_active  = $p->get_price();
+
+		if ( function_exists( 'wc_format_decimal' ) ) {
+			$price_regular = ( '' !== $price_regular ) ? wc_format_decimal( $price_regular, 6 ) : null;
+			$price_sale    = ( '' !== $price_sale ) ? wc_format_decimal( $price_sale, 6 ) : null;
+			$price_active  = ( '' !== $price_active ) ? wc_format_decimal( $price_active, 6 ) : null;
+		}
+
+		$product_slug = method_exists( $p, 'get_slug' ) ? $p->get_slug() : '';
+		$image_id     = $p->get_image_id();
+		$image_url    = $image_id ? wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' ) : '';
+
+		if ( ! $image_url && function_exists( 'wc_placeholder_img_src' ) ) {
+			$image_url = wc_placeholder_img_src();
+		}
+
 		$row = array(
 			'product_id'    => $product_id,
 			'in_stock'      => $in_stock,
@@ -181,20 +202,32 @@ class AAA_OC_ProductSearch_Table_Indexer {
 			'brand_name'    => $brand_term ? $brand_term->name : null,
 			'cat_term_ids'  => json_encode( $cat_ids ),
 			'cat_slugs'     => implode( ' ', $cat_slugs ),
+			'sku'           => $sku ?: null,
+			'price_regular' => $price_regular,
+			'price_sale'    => $price_sale,
+			'price_active'  => $price_active,
+			'product_slug'  => $product_slug ?: null,
+			'image_url'     => $image_url ?: null,
 			'updated_at'    => current_time( 'mysql' ),
 		);
 
 		$formats = array(
-			'%d',
-			'%d',
-			'%s',
-			'%s',
-			'%d',
-			'%s',
-			'%s',
-			'%s',
-			'%s',
-			'%s',
+			'%d', // product_id
+			'%d', // in_stock
+			'%s', // title
+			'%s', // title_norm
+			'%d', // brand_term_id
+			'%s', // brand_slug
+			'%s', // brand_name
+			'%s', // cat_term_ids
+			'%s', // cat_slugs
+			'%s', // sku
+			'%f', // price_regular
+			'%f', // price_sale
+			'%f', // price_active
+			'%s', // product_slug
+			'%s', // image_url
+			'%s', // updated_at
 		);
 
 		$wpdb->replace( self::table(), $row, $formats );

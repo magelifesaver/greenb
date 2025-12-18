@@ -102,6 +102,7 @@ class Premium_Tabs extends Widget_Base {
 	 */
 	public function get_style_depends() {
 		return array(
+			'font-awesome-5-all',
 			'pa-glass',
 			'pa-slick',
 			'premium-addons',
@@ -192,7 +193,27 @@ class Premium_Tabs extends Widget_Base {
 	}
 
 	protected function is_dynamic_content(): bool {
-		return false;
+
+		$is_edit = Plugin::instance()->editor->is_edit_mode();
+
+		if( $is_edit ) {
+			return false;
+		}
+
+		$items     = $this->get_settings( 'premium_tabs_repeater' );
+        $is_dynamic_content = false;
+
+		if ( ! empty( $items ) ) {
+			foreach ( $items as $item ) {
+				if( 'elementor_templates' === $item['premium_tabs_content'] ) {
+					$is_dynamic_content = true;
+					break;
+				}
+			}
+		}
+
+		return $is_dynamic_content;
+
 	}
 
 	/**
@@ -1489,9 +1510,9 @@ class Premium_Tabs extends Widget_Base {
 
                     '{{WRAPPER}}.premium-tabs__background-yes .premium-tabs-nav-list::before' => 'background-color: {{VALUE}};',
 
-					'{{WRAPPER}} ul.premium-tabs-horizontal .premium-tab-arrow'     => 'border-top-color: {{VALUE}}',
+					'{{WRAPPER}} ul.premium-tabs-horizontal .premium-tab-arrow, {{WRAPPER}} ul.premium-accordion-tabs .premium-tab-arrow'     => 'border-top-color: {{VALUE}}',
 
-					'{{WRAPPER}} ul.premium-tabs-vertical .premium-tab-arrow'     => 'border-' . $dir . '-color: {{VALUE}}',
+					'{{WRAPPER}} ul.premium-tabs-vertical:not(.premium-accordion-tabs) .premium-tab-arrow'     => 'border-' . $dir . '-color: {{VALUE}}',
 				),
 				'render_type'        => 'template',
 				'frontend_available' => true,

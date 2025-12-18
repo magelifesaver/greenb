@@ -1,8 +1,9 @@
 <?php
 /**
- * File: /wp-content/plugins/aaa-order-workflow/includes/productsearch/helpers/class-aaa-oc-productsearch-helpers.php
- * Purpose: Helpers for tokenization, synonyms expansion, index SQL search, and archive redirects.
- * Version: 1.2.0
+ * File: /plugins/aaa-order-workflow/includes/productsearch/helpers/class-aaa-oc-productsearch-helpers.php
+ * Purpose: Helpers for tokenization, synonyms expansion (brand/category/global),
+ *          index SQL search, and smart archive redirects.
+ * Version: 1.3.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,50 +37,11 @@ class AAA_OC_ProductSearch_Helpers {
 	}
 
 	/**
-	 * Legacy: single-word → category archive redirect (brands are skipped).
-	 * Now mostly unused by search hooks, kept for back-compat.
-	 */
-	public static function maybe_redirect_to_term_archive( string $q ) {
-		$tokens = array_values(
-			array_filter(
-				preg_split( '/\s+/', strtolower( $q ) )
-			)
-		);
-		if ( count( $tokens ) !== 1 ) {
-			return;
-		}
-
-		$tok = $tokens[0];
-
-		// If this is a brand, DO NOT redirect. Let the index + synonyms handle it.
-		$brand = get_term_by( 'slug', sanitize_title( $tok ), 'berocket_brand' );
-		if ( ! $brand ) {
-			$brand = get_term_by( 'name', $tok, 'berocket_brand' );
-		}
-		if ( $brand && ! is_wp_error( $brand ) ) {
-			self::log( "maybe_redirect_to_term_archive: '{$q}' is brand; skipping redirect." );
-			return;
-		}
-
-		// Categories can still redirect here if someone else calls this.
-		$term = get_term_by( 'slug', sanitize_title( $tok ), 'product_cat' );
-		if ( ! $term ) {
-			$term = get_term_by( 'name', $tok, 'product_cat' );
-		}
-
-		if ( $term && ! is_wp_error( $term ) ) {
-			$link = get_term_link( $term );
-			if ( ! is_wp_error( $link ) ) {
-				self::log( "Redirecting '{$q}' to category archive {$link}" );
-				wp_safe_redirect( $link, 302 );
-				exit;
-			}
-		}
-	}
-
-	/**
-	 * New: redirect ONLY if all results share the same brand (for brand query)
-	 * or all share the same category (for category query).
+	 * Smart redirect rule:
+	 * - Run AFTER we know the product IDs for a query.
+	 * - Redirect ONLY if:
+	 *   * Query is a clean brand name AND all results share that brand
+	 *   * OR query is a clean category name AND all results share that category
 	 */
 	public static function maybe_redirect_by_results( string $q, array $product_ids ) {
 		if ( empty( $product_ids ) ) {
@@ -89,6 +51,9 @@ class AAA_OC_ProductSearch_Helpers {
 		global $wpdb;
 
 		$q_trim       = trim( (string) $q );
+		if ( '' === $q_trim ) {
+			return;
+		}
 		$normalized_q = strtolower( remove_accents( $q_trim ) );
 		$scope        = '';
 		$term         = null;
@@ -132,21 +97,23 @@ class AAA_OC_ProductSearch_Helpers {
 				return;
 			}
 
-			$distinct = array();
+			$distinct_ids = array();
 			foreach ( $brand_rows as $bid ) {
-				$distinct[ (int) $bid ] = true;
+				$distinct_ids[ (int) $bid ] = true;
 			}
-
-			$distinct_ids   = array_keys( $distinct );
-			$non_null_brands = array_filter(
+			$distinct_ids     = array_keys( $distinct_ids );
+			$non_null_brands  = array_filter(
 				$distinct_ids,
 				static function ( $id ) {
 					return (int) $id > 0;
 				}
 			);
 
-			// All rows share the same non-null brand and it matches the brand term in the query.
-			if ( count( $non_null_brands ) === 1 && (int) $non_null_brands[0] === (int) $term->term_id && count( $distinct_ids ) === 1 ) {
+			if (
+				count( $non_null_brands ) === 1 &&
+				(int) $non_null_brands[0] === (int) $term->term_id &&
+				count( $distinct_ids ) === 1
+			) {
 				$link = get_term_link( $term );
 				if ( ! is_wp_error( $link ) ) {
 					self::log( "Redirecting '{$q_trim}' to brand archive {$link}" );
@@ -209,7 +176,8 @@ class AAA_OC_ProductSearch_Helpers {
 	}
 
 	/**
-	 * Expand tokens using synonyms (global + brand/category-bound, with bidi logic).
+	 * Expand tokens using synonyms (brand/category/global, with bidi logic).
+	 *
 	 * Returns:
 	 *  - tokens: the ORIGINAL user tokens (for AND semantics)
 	 *  - map: token => [ variants to search for in index ]
@@ -268,15 +236,19 @@ class AAA_OC_ProductSearch_Helpers {
 			$map[ $t ] = array( $t );
 		}
 
-		// 1) Synonym → canonical expansion (user typed the synonym itself).
-		$rows = array();
-		if ( ! empty( $tokens ) ) {
-			$placeholders = implode( ',', array_fill( 0, count( $tokens ), '%s' ) );
-			$sql          = "SELECT scope, term_id, synonym, bidi FROM {$syn_table} WHERE active=1 AND synonym IN ($placeholders)";
-			$rows         = $wpdb->get_results( $wpdb->prepare( $sql, $tokens ), ARRAY_A );
+		/**
+		 * 1) BRAND / CATEGORY: synonym → canonical expansion
+		 *    (user typed the synonym itself, scope = 'brand' or 'category').
+		 */
+		$rows_bc = array();
+		$placeholders = implode( ',', array_fill( 0, count( $tokens ), '%s' ) );
+		if ( $placeholders ) {
+			$sql_bc = "SELECT scope, term_id, synonym, bidi FROM {$syn_table}
+				WHERE active=1 AND scope IN ('brand','category') AND synonym IN ($placeholders)";
+			$rows_bc = $wpdb->get_results( $wpdb->prepare( $sql_bc, $tokens ), ARRAY_A );
 		}
 
-		foreach ( $rows as $r ) {
+		foreach ( $rows_bc as $r ) {
 			$synonym = strtolower( remove_accents( $r['synonym'] ) );
 			if ( ! isset( $map[ $synonym ] ) ) {
 				// synonym is not one of the user tokens; skip.
@@ -301,7 +273,9 @@ class AAA_OC_ProductSearch_Helpers {
 			}
 		}
 
-		// 2) Canonical brand/category name → synonyms when bidi=1 and query is exactly that term.
+		/**
+		 * 2) BRAND / CATEGORY: canonical name → synonyms when bidi=1 and query is exactly that term.
+		 */
 		if ( $term && $scope ) {
 			$syn_rows = $wpdb->get_results(
 				$wpdb->prepare(
@@ -322,13 +296,81 @@ class AAA_OC_ProductSearch_Helpers {
 			$map[ $token_key ] = array_values( array_unique( $map[ $token_key ] ) );
 		}
 
+		/**
+		 * 3) GLOBAL groups (scope = 'global'):
+		 *    - Defined as Search word + synonyms in the UI, stored as rows sharing term_id.
+		 *    - When bidi=1, each token in the group expands to ALL tokens in that group.
+		 *    - When bidi=0, group is ignored by expansion (safe, non-surprising default).
+		 */
+		$rows_global = array();
+		if ( $placeholders ) {
+			$sql_g = "SELECT term_id, synonym, bidi FROM {$syn_table}
+				WHERE active=1 AND scope='global' AND synonym IN ($placeholders)";
+			$rows_global = $wpdb->get_results( $wpdb->prepare( $sql_g, $tokens ), ARRAY_A );
+		}
+
+		if ( ! empty( $rows_global ) ) {
+			$group_ids = array();
+			foreach ( $rows_global as $rg ) {
+				$group_ids[ (int) $rg['term_id'] ] = true;
+			}
+			$group_ids = array_keys( $group_ids );
+
+			if ( ! empty( $group_ids ) ) {
+				$in_groups      = implode( ',', array_fill( 0, count( $group_ids ), '%d' ) );
+				$sql_all_groups = "SELECT term_id, synonym, bidi FROM {$syn_table}
+					WHERE active=1 AND scope='global' AND term_id IN ($in_groups)";
+				$all_g          = $wpdb->get_results( $wpdb->prepare( $sql_all_groups, $group_ids ), ARRAY_A );
+
+				$groups = array();
+				foreach ( $all_g as $row ) {
+					$gid = (int) $row['term_id'];
+					if ( ! isset( $groups[ $gid ] ) ) {
+						$groups[ $gid ] = array(
+							'tokens' => array(),
+							'bidi'   => 0,
+						);
+					}
+					$tok = strtolower( remove_accents( $row['synonym'] ) );
+					$groups[ $gid ]['tokens'][] = $tok;
+					if ( (int) $row['bidi'] === 1 ) {
+						$groups[ $gid ]['bidi'] = 1;
+					}
+				}
+
+				// Apply groups: only when bidi=1.
+				foreach ( $groups as $g ) {
+					if ( empty( $g['tokens'] ) || 1 !== (int) $g['bidi'] ) {
+						continue;
+					}
+					$group_tokens = array_values( array_unique( $g['tokens'] ) );
+					foreach ( $tokens as $t ) {
+						if ( in_array( $t, $group_tokens, true ) ) {
+							$map[ $t ] = array_values(
+								array_unique(
+									array_merge(
+										$map[ $t ] ?? array( $t ),
+										$group_tokens
+									)
+								)
+							);
+						}
+					}
+				}
+			}
+		}
+
 		return array(
 			'tokens' => $tokens,
 			'map'    => $map,
 		);
 	}
 
-	/** Search the index table only; return array of product IDs (respect Woo "hide oos"). */
+	/**
+	 * Search the index table only; return array of product IDs (respect Woo "hide oos").
+	 * - Within a single token: OR across fields (title, brand, cat_slugs).
+	 * - Across different tokens: AND between tokens.
+	 */
 	public static function search_index( string $q ) : array {
 		global $wpdb;
 

@@ -26,11 +26,11 @@ function build_task_config_enhancement_logic(array $post_data): array|WP_Error
     $task_config['post_authors'] = isset($post_data['post_authors']) && is_array($post_data['post_authors']) ? array_map('absint', $post_data['post_authors']) : [];
     $task_config['post_statuses'] = isset($post_data['post_statuses']) && is_array($post_data['post_statuses']) ? array_map('sanitize_key', $post_data['post_statuses']) : ['publish'];
 
-    // Fields to enhance
-    $task_config['update_title'] = isset($post_data['update_title']) ? '1' : '0';
-    $task_config['update_excerpt'] = isset($post_data['update_excerpt']) ? '1' : '0';
-    $task_config['update_meta'] = isset($post_data['update_meta']) ? '1' : '0';
-    $task_config['update_content'] = isset($post_data['update_content']) ? '1' : '0';
+    // Fields to enhance (respect explicit '1'/'0' values from frontend)
+    $task_config['update_title'] = (isset($post_data['update_title']) && $post_data['update_title'] === '1') ? '1' : '0';
+    $task_config['update_excerpt'] = (isset($post_data['update_excerpt']) && $post_data['update_excerpt'] === '1') ? '1' : '0';
+    $task_config['update_meta'] = (isset($post_data['update_meta']) && $post_data['update_meta'] === '1') ? '1' : '0';
+    $task_config['update_content'] = (isset($post_data['update_content']) && $post_data['update_content'] === '1') ? '1' : '0';
 
     // Prompts
     $task_config['title_prompt'] = isset($post_data['title_prompt']) ? sanitize_textarea_field(wp_unslash($post_data['title_prompt'])) : '';
@@ -52,8 +52,8 @@ function build_task_config_enhancement_logic(array $post_data): array|WP_Error
     // Task Frequency
     $task_config['task_frequency'] = isset($post_data['task_frequency']) ? sanitize_key($post_data['task_frequency']) : 'daily';
 
-    // One-time run flag
-    $task_config['enhance_existing_now_flag'] = isset($post_data['enhance_existing_now_flag']) ? '1' : '0';
+    // One-time run flag (explicit value)
+    $task_config['enhance_existing_now_flag'] = (isset($post_data['enhance_existing_now_flag']) && $post_data['enhance_existing_now_flag'] === '1') ? '1' : '0';
 
     // --- START: NEW Vector Store Settings ---
     $task_config['enable_vector_store'] = isset($post_data['enable_vector_store']) && $post_data['enable_vector_store'] === '1' ? '1' : '0';

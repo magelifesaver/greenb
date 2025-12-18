@@ -3,7 +3,7 @@
  * Plugin Name: Meta Box AIO
  * Plugin URI:  https://metabox.io/pricing/
  * Description: All Meta Box extensions in one package.
- * Version:     3.3.4
+ * Version:     3.3.5
  * Author:      MetaBox.io
  * Author URI:  https://metabox.io
  * License:     GPL2+

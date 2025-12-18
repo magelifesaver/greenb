@@ -121,6 +121,10 @@ class Ajax_Hooks_Registrar
             if (method_exists($settings_ajax_handler, 'ajax_dismiss_migration_notice')) {
                 add_action('wp_ajax_aipkit_dismiss_migration_notice', [$settings_ajax_handler, 'ajax_dismiss_migration_notice']);
             }
+            // --- ADDED: Register the Chatolia notice dismiss action ---
+            if (method_exists($settings_ajax_handler, 'ajax_dismiss_chatolia_notice')) {
+                add_action('wp_ajax_aipkit_dismiss_chatolia_notice', [$settings_ajax_handler, 'ajax_dismiss_chatolia_notice']);
+            }
             // --- END ADDED ---
         }
 

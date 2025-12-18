@@ -2,9 +2,9 @@
 Contributors: senols
 Tags: ai, chatbot, openai, gemini, chatgpt
 Requires at least: 5.0.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 2.3.43
+Stable tag: 2.3.46
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,21 @@ Yes. AIP supports GPT-5, GPT-4o, GPT-4 Turbo, Google Gemini 1.5, Imagen 4.0, and
 ---
 
 == Changelog ==
+
+= 2.3.46 =
+
+- **Improved**: WordPress 6.9 Compatibility.
+
+= 2.3.45 =
+
+- **Fixed**: Chatbot input bar overlaying typed text on mobile and some desktop themes (e.g., OceanWP). The action bar now stacks below the textarea to avoid z-index/position conflicts.
+- **Fixed**: AI Forms checkbox control no longer forces the first checkbox to stay selected.
+
+= 2.3.44 =
+
+- **Fixed**: Automated Tasks → Enhance Existing Content — "Fields to Update" incorrectly checked "Title" when editing a task even if it was not selected during save. Checkbox states now persist correctly.
+- **Fixed**: Chatbot settings — "Reasoning" parameter was not persisting and always reverted to "low" (default) after save.
+- **Improved**: SDK updated.
 
 = 2.3.43 =
 

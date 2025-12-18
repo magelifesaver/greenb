@@ -2,9 +2,9 @@
 Contributors: leap13
 Tags: elementor, elements, addons, elementor addon, elementor widget, elementor extensions, page builder, builder, visual editor, wordpress page builder
 Requires at least: 4.5
-Tested Up To: 6.8.3
+Tested Up To: 6.9
 Requires PHP: 7.0
-Stable tag: 2.9.49
+Stable tag: 2.9.54
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -80,6 +80,31 @@ Yes, it will work with any WordPress theme as long as you are using Elementor as
 Premium Addons for Elementor is light weight and we also gave you the control to enable only the elements you actually use on your website for faster performance.
 
 == Changelog ==
+
+= 2.9.54 =
+
+- Tweak: Improved compatibility between Dynamic Assets and Elementor Elements Cache.
+- Fixed: Arrow position when Accordion option is enabled in Tabs widget.
+
+= 2.9.53 =
+
+- Tweak: Facebook and Behance Feed widgets improved.
+- Tweak: Core improved for better performance and loading speed.
+
+= 2.9.52 =
+
+- Tweak: Added Suffix option in Charts widget to add text after value on hover.
+- Tweak: Core improved for better performance and loading speed.
+
+= 2.9.51 =
+
+- Tweak: API endpoint usage improved in Behance Feed widget.
+- Fixed: Horizontal Scroll issues after scene ends.
+
+= 2.9.50 =
+
+- New: Added Animated Gradient option to the badge text in Badge Global addon.
+- Tweak: Improved Font Size and Color effects in Magic Scroll addon.
 
 = 2.9.49 =
 

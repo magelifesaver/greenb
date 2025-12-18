@@ -11,7 +11,7 @@
  * @wordpress-plugin
  * Plugin Name: AIP: Complete AI Toolkit for WordPress (formerly AI Power) Pro
  * Description:       AI, Chatbot, ChatGPT, Content Writer, Auto Content Writer, Product Writer, Image Generator, AutoGPT, ChatPDF, AI Training, Embeddings and more.
- * Version:           2.3.43
+ * Version:           2.3.46
  * Update URI: https://api.freemius.com
  * Author:            Senol Sahin
  * Author URI:        https://aipower.org
@@ -24,7 +24,7 @@
 if ( !defined( 'WPINC' ) ) {
     die;
 }
-define( 'WPAICG_VERSION', '2.3.43' );
+define( 'WPAICG_VERSION', '2.3.46' );
 define( 'WPAICG_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPAICG_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPAICG_LIB_DIR', WPAICG_PLUGIN_DIR . 'lib/' );

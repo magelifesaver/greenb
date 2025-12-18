@@ -9,8 +9,6 @@ namespace PremiumAddons\Includes\Controls;
 
 use Elementor\Control_Select;
 
-use PremiumAddons\Includes\Premium_Template_Tags as Blog_Helper;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }

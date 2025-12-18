@@ -90,7 +90,23 @@ class Premium_Content_Toggle extends Widget_Base {
 	}
 
 	protected function is_dynamic_content(): bool {
-		return false;
+
+		$is_edit = Plugin::instance()->editor->is_edit_mode();
+
+		if( $is_edit ) {
+			return false;
+		}
+
+		$first_content_type     = $this->get_settings('premium_content_toggle_first_content_tools');
+        $second_content_type    = $this->get_settings('premium_content_toggle_second_content_tools');
+        $is_dynamic_content = false;
+
+		if( 'elementor_templates' === $first_content_type || 'elementor_templates' === $second_content_type ) {
+			$is_dynamic_content = true;
+		}
+
+		return $is_dynamic_content;
+
 	}
 
 	/**

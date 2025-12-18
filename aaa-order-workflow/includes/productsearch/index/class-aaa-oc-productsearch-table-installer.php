@@ -3,10 +3,12 @@
  * File: /wp-content/plugins/aaa-order-workflow/includes/productsearch/index/class-aaa-oc-productsearch-table-installer.php
  * Purpose: Create/upgrade tables for the ProductSearch module (searchable index + synonyms).
  * Style:   dbDelta-safe; InnoDB; WFCP-driven debug; one-per-request guard.
- * Version: 1.2.0
+ * Version: 1.3.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class AAA_OC_ProductSearch_Table_Installer {
 
@@ -19,7 +21,7 @@ class AAA_OC_ProductSearch_Table_Installer {
 
 	/** WFCP-driven debug (modules scope → key: productsearch_debug) */
 	private static function debug_on() : bool {
-		if ( function_exists('aaa_oc_get_option') ) {
+		if ( function_exists( 'aaa_oc_get_option' ) ) {
 			return (bool) aaa_oc_get_option( 'productsearch_debug', 'modules', 0 );
 		}
 		return false;
@@ -30,7 +32,9 @@ class AAA_OC_ProductSearch_Table_Installer {
 	 * Mirrors the style used by other installers.
 	 */
 	public static function install() : void {
-		if ( self::$did ) return;
+		if ( self::$did ) {
+			return;
+		}
 		self::$did = true;
 
 		global $wpdb;
@@ -41,7 +45,7 @@ class AAA_OC_ProductSearch_Table_Installer {
 		$index_table = $wpdb->prefix . self::T_INDEX;
 		$syn_table   = $wpdb->prefix . self::T_SYNONYMS;
 
-		// Searchable Product Index
+		// Searchable Product Index – now display-ready (pricing, image, slug).
 		$sql1 = "CREATE TABLE {$index_table} (
 			product_id     BIGINT UNSIGNED NOT NULL,
 			in_stock       TINYINT(1) NOT NULL DEFAULT 0,
@@ -52,6 +56,12 @@ class AAA_OC_ProductSearch_Table_Installer {
 			brand_name     VARCHAR(200) NULL,
 			cat_term_ids   TEXT NULL,
 			cat_slugs      TEXT NULL,
+			sku            VARCHAR(100) NULL,
+			price_regular  DECIMAL(18,6) NULL,
+			price_sale     DECIMAL(18,6) NULL,
+			price_active   DECIMAL(18,6) NULL,
+			product_slug   VARCHAR(200) NULL,
+			image_url      VARCHAR(255) NULL,
 			updated_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			PRIMARY KEY (product_id),
 			KEY idx_in_stock (in_stock),
@@ -78,7 +88,11 @@ class AAA_OC_ProductSearch_Table_Installer {
 
 		if ( self::debug_on() ) {
 			$msg = "[ProductSearch][Installer] ensured: {$index_table}, {$syn_table}";
-			if ( function_exists('aaa_oc_log') ) { aaa_oc_log($msg); } else { error_log($msg); }
+			if ( function_exists( 'aaa_oc_log' ) ) {
+				aaa_oc_log( $msg );
+			} else {
+				error_log( $msg );
+			}
 		}
 	}
 

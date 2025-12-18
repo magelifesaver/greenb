@@ -5,7 +5,7 @@
  * @package PA
  */
 
-use PremiumAddons\Includes\Premium_Template_Tags;
+use PremiumAddons\Modules\Woocommerce\Module as Woocommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // If this file is called directly, abort.
@@ -68,11 +68,11 @@ $out_of_stock    = 'outofstock' === get_post_meta( $product_id, '_stock_status',
 			echo '<img src="' . esc_url( $product_thumb ) . '" alt="' . esc_attr( $alt ) . '">';
 
 			if ( 'swap' === $settings['hover_style'] ) {
-				Premium_Template_Tags::get_current_product_swap_image( $image_size );
+				Woocommerce::get_current_product_swap_image( $image_size );
 			}
 
 				woocommerce_template_loop_product_link_close();
-				Premium_Template_Tags::get_current_product_linked_images( $image_size );
+				Woocommerce::get_current_product_linked_images( $image_size );
 
 			echo '</div></div>';
 			if ( 'yes' === $quick_view ) {
@@ -96,7 +96,7 @@ $out_of_stock    = 'outofstock' === get_post_meta( $product_id, '_stock_status',
 
 		if ( 'yes' === $this->get_option_value( 'product_category' ) ) {
 			do_action( 'pa_woo_product_before_cat', $product_id, $settings );
-			Premium_Template_Tags::get_current_product_category();
+			Woocommerce::get_current_product_category();
 			do_action( 'pa_woo_product_after_cat', $product_id, $settings );
 		}
 
@@ -110,7 +110,7 @@ $out_of_stock    = 'outofstock' === get_post_meta( $product_id, '_stock_status',
 
 		if ( 'yes' === $this->get_option_value( 'product_image' ) ) {
 			echo '<div class="premium-woo-product-gallery-images">';
-				Premium_Template_Tags::get_current_product_gallery_images( $image_size );
+				Woocommerce::get_current_product_gallery_images( $image_size );
 			echo '</div>';
 		}
 

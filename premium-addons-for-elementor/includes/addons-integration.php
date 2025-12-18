@@ -6,14 +6,8 @@
 namespace PremiumAddons\Includes;
 
 use PremiumAddons\Admin\Includes\Admin_Helper;
-use PremiumAddons\Modules\Premium_Equal_Height\Module as Equal_Height;
-use PremiumAddons\Modules\PA_Display_Conditions\Module as Display_Conditions;
-use PremiumAddons\Modules\PremiumSectionFloatingEffects\Module as Floating_Effects;
+use PremiumAddons\Includes\Helpers\AJAX_Helper;
 use PremiumAddons\Modules\Woocommerce\Module as Woocommerce;
-use PremiumAddons\Modules\PremiumGlobalTooltips\Module as GlobalTooltips;
-use PremiumAddons\Modules\PremiumShapeDivider\Module as Shape_Divider;
-use PremiumAddons\Modules\PremiumWrapperLink\Module as Wrapper_Link;
-use PremiumAddons\Modules\PremiumGlassmorphism\Module as Glassmorphism;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -23,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Addons_Integration.
  */
 class Addons_Integration {
+
+	use AJAX_Helper;
 
 	/**
 	 * Class instance
@@ -63,14 +59,14 @@ class Addons_Integration {
 			return;
 		}
 
-		Premium_Template_Tags::getInstance();
-
 		if ( null === self::$modules ) {
 			self::$modules = Admin_Helper::get_enabled_elements();
 			self::$integrations = Admin_Helper::get_integrations_settings();
 		}
 
 		$this->register_hooks();
+
+		$this->register_ajax_hooks();
 
 		$this->load_extensions();
 
@@ -80,8 +76,6 @@ class Addons_Integration {
 		// Handle everything related to widgets assets.
 		Assets_Manager::get_instance( self::$modules, self::$integrations );
 
-		// Handle everything related to feedback.
-		Helpers\Element_Feedback::get_instance();
 	}
 
 	/**
@@ -96,19 +90,9 @@ class Addons_Integration {
 		add_action( 'elementor/preview/enqueue_styles', array( $this, 'enqueue_preview_styles' ) );
 		add_action( 'elementor/editor/before_enqueue_styles', array( $this, 'enqueue_editor_styles' ) );
 
-
 		// Load Editor JS Files.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'before_enqueue_scripts' ) );
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'after_enqueue_scripts' ) );
-
-		// AJAX Handlers.
-		add_action( 'wp_ajax_get_elementor_template_content', array( $this, 'get_template_content' ) );
-		add_action( 'wp_ajax_nopriv_get_elementor_template_content', array( $this, 'get_template_content' ) );
-
-		// Social Feed AJAX Handlers.
-		add_action( 'wp_ajax_get_pinterest_token', array( $this, 'get_pinterest_token' ) );
-		add_action( 'wp_ajax_get_pinterest_boards', array( $this, 'get_pinterest_boards' ) );
-		add_action( 'wp_ajax_get_tiktok_token', array( $this, 'get_tiktok_token' ) );
 
 		// Register Controls and Widgets Area.
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_widgets_category' ), 9 );
@@ -142,7 +126,6 @@ class Addons_Integration {
 				'ajaxurl'      => esc_url( admin_url( 'admin-ajax.php' ) ),
 				'nonce'        => wp_create_nonce( 'pa-blog-widget-nonce' ),
 				'upgrade_link' => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/pro/', '', 'wp-editor', 'get-pro' ),
-				// 'unused_nonce' => wp_create_nonce( 'pa-disable-unused' ),
 			)
 		);
 
@@ -403,161 +386,6 @@ class Addons_Integration {
 	}
 
 	/**
-	 * Get Pinterest account token for Pinterest Feed widget
-	 *
-	 * @since 4.10.2
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function get_pinterest_token() {
-
-		check_ajax_referer( 'pa-editor', 'security' );
-
-		$api_url = 'https://appfb.premiumaddons.com/wp-json/fbapp/v2/pinterest';
-
-		$response = wp_remote_get(
-			$api_url,
-			array(
-				'timeout'   => 15,
-				'sslverify' => true,
-			)
-		);
-
-		$body = wp_remote_retrieve_body( $response );
-		$body = json_decode( $body, true );
-
-		wp_send_json_success( $body );
-	}
-
-	/**
-	 * Get Pinterest account token for Pinterest Feed widget
-	 *
-	 * @since 4.10.2
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function get_pinterest_boards() {
-
-		check_ajax_referer( 'pa-blog-widget-nonce', 'nonce' );
-
-		if ( ! isset( $_GET['token'] ) ) {
-			wp_send_json_error();
-		}
-
-		$token = sanitize_text_field( wp_unslash( $_GET['token'] ) );
-
-		$transient_name = 'pa_pinterest_boards_' . substr( $token, 0, 15 );
-
-		$body = get_transient( $transient_name );
-
-		if ( false === $body ) {
-
-			$api_url = 'https://api.pinterest.com/v5/boards?page_size=60';
-
-			$response = wp_remote_get(
-				$api_url,
-				array(
-					'headers' => array(
-						'Authorization' => 'Bearer ' . $token,
-					),
-				)
-			);
-
-			$body = wp_remote_retrieve_body( $response );
-			$body = json_decode( $body, true );
-
-			set_transient( $transient_name, $body, 30 * MINUTE_IN_SECONDS );
-
-		}
-
-		$boards = array();
-
-		foreach ( $body['items'] as $index => $board ) {
-			$boards[ $board['id'] ] = $board['name'];
-		}
-
-		wp_send_json_success( wp_json_encode( $boards ) );
-	}
-
-	/**
-	 * Get Pinterest account token for Pinterest Feed widget
-	 *
-	 * @since 4.10.2
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function get_tiktok_token() {
-
-		check_ajax_referer( 'pa-editor', 'security' );
-
-		$api_url = 'https://appfb.premiumaddons.com/wp-json/fbapp/v2/tiktok';
-
-		$response = wp_remote_get(
-			$api_url,
-			array(
-				'timeout'   => 15,
-				'sslverify' => false,
-			)
-		);
-
-		$body = wp_remote_retrieve_body( $response );
-		$body = json_decode( $body, true );
-
-		wp_send_json_success( $body );
-	}
-
-	/**
-	 * Get Template Content
-	 *
-	 * Get Elementor template HTML content.
-	 *
-	 * @since 3.2.6
-	 * @access public
-	 */
-	public function get_template_content() {
-
-		$template = isset( $_GET['templateID'] ) ? sanitize_text_field( wp_unslash( $_GET['templateID'] ) ) : '';
-		$is_ID    = isset( $_GET['is_id'] ) ? filter_var( $_GET['is_id'], FILTER_VALIDATE_BOOLEAN ) : false;
-
-		if ( empty( $template ) ) {
-			wp_send_json_error( 'Empty Template ID' );
-		}
-
-		// Get the post object to check status and author
-		$post = get_post( $template );
-
-		if ( ! $post ) {
-			wp_send_json_error( 'Invalid Template ID' );
-		}
-
-		// Check if post is published or user has permission to view
-		if ( 'publish' !== $post->post_status ) {
-			$current_user_id = get_current_user_id();
-			$is_author = ( $current_user_id === (int) $post->post_author );
-			$is_admin = current_user_can( 'manage_options' );
-
-			if ( ! $is_admin && ! $is_author ) {
-				wp_send_json_error( 'Permission denied' );
-			}
-		}
-
-		$template_content = Helper_Functions::render_elementor_template( $template, $is_ID );
-
-		if ( empty( $template_content ) || ! isset( $template_content ) ) {
-			wp_send_json_error( 'Empty Content' );
-		}
-
-		$data = array(
-			'template_content' => $template_content,
-		);
-
-		wp_send_json_success( $data );
-	}
-
-	/**
 	 * Registers Premium Addons Custom Controls.
 	 *
 	 * @since 4.2.5
@@ -592,7 +420,7 @@ class Addons_Integration {
 			$control_manager->controls_manager->register( new $premium_tax_filter() );
 		}
 
-		if ( self::$modules['pa-display-conditions'] ) {
+		if ( self::$modules['pa-display-conditions'] && class_exists( 'ACF' ) ) {
 
 			require_once PREMIUM_ADDONS_PATH . 'includes/controls/premium-acf-selector.php';
 			$premium_acf_selector = __NAMESPACE__ . '\Controls\Premium_Acf_Selector';
@@ -624,22 +452,21 @@ class Addons_Integration {
 		Extras\Live_Editor::get_instance();
 
 		if ( self::$modules['premium-equal-height'] ) {
-			Equal_Height::get_instance();
+			\PremiumAddons\Addons\Equal_Height::get_instance();
 		}
 
 		if ( self::$modules['premium-glassmorphism'] ) {
-			Glassmorphism::get_instance();
+			\PremiumAddons\Addons\Liquid_Glass::get_instance();
 		}
 
 		if ( self::$modules['pa-display-conditions'] ) {
 			require_once PREMIUM_ADDONS_PATH . 'widgets/dep/urlopen.php';
-			$has_acf = class_exists( 'ACF' );
-			$has_woo = class_exists( 'woocommerce' );
-			Display_Conditions::get_instance( $has_acf, $has_woo );
+			require_once PREMIUM_ADDONS_PATH . 'includes/pa-display-conditions/pa-controls-handler.php';
+			\PremiumAddons\Addons\Display_Conditions::get_instance();
 		}
 
 		if ( self::$modules['premium-floating-effects'] ) {
-			Floating_Effects::get_instance();
+			\PremiumAddons\Addons\Floating_Effects::get_instance();
 		}
 
 		if ( class_exists( 'woocommerce' ) && ( self::$modules['woo-products'] || self::$modules['woo-categories'] || self::$modules['mini-cart'] || self::$modules['woo-cta'] ) ) {
@@ -647,15 +474,15 @@ class Addons_Integration {
 		}
 
 		if ( self::$modules['premium-global-tooltips'] ) {
-			GlobalTooltips::get_instance();
+			\PremiumAddons\Addons\Tooltips::get_instance();
 		}
 
 		if ( self::$modules['premium-shape-divider'] ) {
-			Shape_Divider::get_instance();
+			\PremiumAddons\Addons\Shape_Divider::get_instance();
 		}
 
 		if ( self::$modules['premium-wrapper-link'] ) {
-			Wrapper_Link::get_instance();
+			\PremiumAddons\Addons\Wrapper_Link::get_instance();
 		}
 
 		if ( self::$modules['premium-cross-domain'] ) {

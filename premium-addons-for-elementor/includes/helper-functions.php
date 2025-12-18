@@ -1390,7 +1390,7 @@ class Helper_Functions {
 
 		if ( null === self::$shapes ) {
 
-			self::$shapes = require PREMIUM_ADDONS_PATH . 'modules/premium-shape-divider/shapes.php';
+			self::$shapes = require PREMIUM_ADDONS_PATH . 'addons/shapes.php';
 
 		}
 

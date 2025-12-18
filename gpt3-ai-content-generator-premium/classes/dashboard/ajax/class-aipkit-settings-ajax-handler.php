@@ -475,4 +475,19 @@ class SettingsAjaxHandler extends BaseDashboardAjaxHandler
         update_option('aipkit_migration_notice_dismissed', '1', 'no');
         wp_send_json_success(['message' => 'Migration notice dismissed.']);
     }
+
+    /**
+     * AJAX: Handles dismissing the Chatolia notice permanently.
+     * @since 2.1
+     */
+    public function ajax_dismiss_chatolia_notice()
+    {
+        $permission_check = $this->check_module_access_permissions('settings');
+        if (is_wp_error($permission_check)) {
+            $this->send_wp_error($permission_check);
+            return;
+        }
+        update_option('aipkit_chatolia_notice_dismissed', '1', 'no');
+        wp_send_json_success(['message' => 'Chatolia notice dismissed.']);
+    }
 }
