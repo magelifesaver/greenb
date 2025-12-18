@@ -1,0 +1,5 @@
+/* File: /wp-content/plugins/aaa-admin-controler-v2/assets/css/admin.css */
+.aaa-ac-toolbar{ display:flex; gap:8px; align-items:center; margin:8px 0; }
+.aaa-ac-online{ color:#007017; font-weight:600; }
+.aaa-ac-offline{ color:#b30000; font-weight:600; }
+.aaa-ac-code{ font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; padding: 2px 4px; background:#f6f8fa; border-radius:4px; }
