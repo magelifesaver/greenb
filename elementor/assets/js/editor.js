@@ -41518,7 +41518,10 @@ module.exports = {
     return this.getAtomicElementTypes().includes(elType);
   },
   getWidgetCache: function getWidgetCache(model) {
-    var elementType = 'widget' === model.get('elType') ? model.get('widgetType') : model.get('elType');
+    var isModel = model && 'function' === typeof model.get;
+    var elType = isModel ? model.get('elType') : model === null || model === void 0 ? void 0 : model.elType;
+    var widgetType = isModel ? model.get('widgetType') : model === null || model === void 0 ? void 0 : model.widgetType;
+    var elementType = 'widget' === elType ? widgetType : elType;
     return elementor.widgetsCache[elementType];
   },
   isAtomicWidget: function isAtomicWidget(model) {

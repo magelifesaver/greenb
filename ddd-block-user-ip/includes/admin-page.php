@@ -46,8 +46,9 @@ function ddd_buip_render_settings_page() {
         wp_safe_redirect( remove_query_arg( array( 'ddd_buip_action', 'ip', '_wpnonce' ) ) );
         exit;
     }
-    // Fetch up to 50 most recent log entries for display.
-    $recent_logs = $wpdb->get_results( "SELECT ip, country, hits, last_seen, score FROM $table ORDER BY last_seen DESC LIMIT 50" );
+    // Process bulk actions if any were submitted.
+    ddd_buip_process_bulk_action();
+    // Collect option values for the form and table rendering.
     $ips      = get_option( 'ddd_buip_ips', '' );
     $safe_ips = get_option( 'ddd_buip_safe_ips', '' );
     $country  = strtoupper( get_option( 'ddd_buip_allowed_country', 'US' ) );
@@ -79,70 +80,7 @@ function ddd_buip_render_settings_page() {
         </form>
         <p><em><?php printf( esc_html__( 'Log table: %s', 'ddd-block-user-ip' ), '<code>' . esc_html( $table ) . '</code>' ); ?></em></p>
         <h2><?php esc_html_e( 'Recent IP Activity', 'ddd-block-user-ip' ); ?></h2>
-        <table class="widefat striped">
-            <thead>
-                <tr>
-                    <th><?php esc_html_e( 'IP Address', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Country', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Hits', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Last Seen', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Score', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Status', 'ddd-block-user-ip' ); ?></th>
-                    <th><?php esc_html_e( 'Actions', 'ddd-block-user-ip' ); ?></th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php if ( ! empty( $recent_logs ) ) : ?>
-                <?php foreach ( $recent_logs as $log ) : ?>
-                    <?php
-                    $ip      = $log->ip;
-                    $is_block = ddd_buip_is_in_manual_block_list( $ip );
-                    $is_safe  = ddd_buip_is_in_safe_list( $ip );
-                    $row_country = $log->country ? strtoupper( $log->country ) : '';
-                    $would_country_block = ( $auto && $row_country && $row_country !== $country && ! $is_safe );
-                    $status = __( 'Normal', 'ddd-block-user-ip' );
-                    if ( $is_safe ) {
-                        $status = __( 'Safe', 'ddd-block-user-ip' );
-                    } elseif ( $is_block ) {
-                        $status = __( 'Blocked (Manual)', 'ddd-block-user-ip' );
-                    } elseif ( $would_country_block ) {
-                        $status = __( 'Blocked (Country)', 'ddd-block-user-ip' );
-                    }
-                    $base_url  = admin_url( 'tools.php?page=ddd-block-user-ip' );
-                    $block_url = wp_nonce_url(
-                        add_query_arg( array( 'ddd_buip_action' => $is_block ? 'unblock' : 'block', 'ip' => rawurlencode( $ip ) ), $base_url ),
-                        'ddd_buip_manage_ip_' . $ip
-                    );
-                    $safe_url  = wp_nonce_url(
-                        add_query_arg( array( 'ddd_buip_action' => $is_safe ? 'unsafelist' : 'safe', 'ip' => rawurlencode( $ip ) ), $base_url ),
-                        'ddd_buip_manage_ip_' . $ip
-                    );
-                    ?>
-                    <tr>
-                        <td><?php echo esc_html( $ip ); ?></td>
-                        <td><?php echo esc_html( $log->country ? $log->country : '-' ); ?></td>
-                        <td><?php echo esc_html( $log->hits ); ?></td>
-                        <td><?php echo esc_html( $log->last_seen ); ?></td>
-                        <td><?php echo esc_html( $log->score ); ?></td>
-                        <td><?php echo esc_html( $status ); ?></td>
-                        <td>
-                            <a href="<?php echo esc_url( $block_url ); ?>">
-                                <?php echo esc_html( $is_block ? __( 'Unblock', 'ddd-block-user-ip' ) : __( 'Block', 'ddd-block-user-ip' ) ); ?>
-                            </a>
-                            |
-                            <a href="<?php echo esc_url( $safe_url ); ?>">
-                                <?php echo esc_html( $is_safe ? __( 'Remove safe', 'ddd-block-user-ip' ) : __( 'Safelist', 'ddd-block-user-ip' ) ); ?>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <tr>
-                    <td colspan="7"><?php esc_html_e( 'No log entries yet.', 'ddd-block-user-ip' ); ?></td>
-                </tr>
-            <?php endif; ?>
-            </tbody>
-        </table>
+        <?php ddd_buip_render_ip_table( $country, $auto ); ?>
     </div>
     <?php
 }

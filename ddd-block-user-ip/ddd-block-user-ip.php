@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DDD Block User IP (XHV98-DEV)
  * Description: Block specified IP addresses and optionally auto‑block non‑local countries, with basic IP hit logging and safelist support.
- * Version:     1.5.0
+ * Version:     1.6.0
  * Author:      My Frrenn
  *
  * This is the bootstrap file for the DDD Block User IP plugin. It defines core constants,
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin version for cache busting and migrations.
 if ( ! defined( 'DDD_BUIP_VERSION' ) ) {
-    define( 'DDD_BUIP_VERSION', '1.5.0' );
+define( 'DDD_BUIP_VERSION', '1.6.0' );
 }
 
 // Directory constants.
@@ -40,6 +40,7 @@ require_once DDD_BUIP_DIR . 'includes/log.php';
 require_once DDD_BUIP_DIR . 'includes/admin-menu.php';
 require_once DDD_BUIP_DIR . 'includes/admin-page.php';
 require_once DDD_BUIP_DIR . 'includes/blocker.php';
+require_once DDD_BUIP_DIR . 'includes/ip-table.php';
 
 // Register the activation hook. The hook must be registered in the main plugin
 // file to ensure it runs when the plugin is activated. It calls the
