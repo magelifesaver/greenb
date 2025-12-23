@@ -1,10 +1,10 @@
 /*
  * Styles for the Dev Debug Manager admin page.
+ * File Path: plugins/ddd-dev-debug-manager/assets/css/debug-manager.css
  * Provides a monospaced log area with scrollbars and basic spacing for the action
  * buttons.  Keep this file minimal to avoid unnecessary bloat.
  */
 
-/* Main debug content area */
 #ddd-debug-content {
     background-color: #fafafa;
     border: 1px solid #ddd;
@@ -16,7 +16,6 @@
     word-wrap: break-word;
 }
 
-/* Container for action buttons */
 .ddd-debug-actions {
     margin-bottom: 1em;
 }

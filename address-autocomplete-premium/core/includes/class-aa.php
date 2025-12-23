@@ -190,14 +190,13 @@ class WPSunshine_Address_Autocomplete {
 					)
 				);
 
-				wp_enqueue_script( 'wps-aa-frontend', WPS_AA_URL . 'assets/js/frontend.js', array( 'jquery', 'wps-aa-google-maps' ), ( WPS_AA_PREMIUM_VERSION ) ? WPS_AA_PREMIUM_VERSION : WPS_AA_VERSION, true );
+				wp_enqueue_script( 'wps-aa-frontend', WPS_AA_URL . 'assets/js/frontend.js', array( 'jquery', 'wps-aa-google-maps' ), ( defined( 'WPS_AA_PREMIUM_VERSION' ) ) ? WPS_AA_PREMIUM_VERSION : WPS_AA_VERSION, true );
 				$results_title = get_option( 'wps_aa_results_title' );
 				$args          = array(
 					'instances'     => $instances_data,
 					'results_title' => $results_title,
 				);
 				wp_localize_script( 'wps-aa-frontend', 'wps_aa_vars', $args );
-				error_log( print_r( $args, true ) );
 			}
 		}
 

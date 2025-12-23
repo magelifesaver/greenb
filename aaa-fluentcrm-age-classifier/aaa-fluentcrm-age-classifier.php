@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAA FluentCRM Age Classifier (XHV98-FLU)
  * Description: Computes age & bracket from FluentCRM date_of_birth, writes to FluentCRM custom fields, and manages MEDICAL/RECREATIONAL + bracket + DOB Missing tags. Daily cron + “Run Now”.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Workflow
  *
  * File Path: wp-content/plugins/aaa-fluentcrm-age-classifier/aaa-fluentcrm-age-classifier.php
@@ -11,7 +11,9 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /** Debug toggle */
-define( 'AAA_FCRM_AGE_DEBUG', true );
+if ( ! defined( 'AAA_FCRM_AGE_DEBUG' ) ) {
+    define( 'AAA_FCRM_AGE_DEBUG', true );
+}
 
 /** Options / hooks */
 define( 'AAA_FCRM_AGE_OPT',  'aaa_fcrm_age_settings' );
@@ -36,6 +38,7 @@ function aaa_fcrm_age_defaults() {
         'strict_detach' => 1
     );
 }
+
 function aaa_fcrm_age_get_settings() {
     $saved = get_option( AAA_FCRM_AGE_OPT, array() );
     return wp_parse_args( is_array( $saved ) ? $saved : array(), aaa_fcrm_age_defaults() );
@@ -49,10 +52,11 @@ register_activation_hook( __FILE__, function () {
     // schedule daily near midnight local (better for rollovers)
     if ( ! wp_next_scheduled( AAA_FCRM_AGE_CRON ) ) {
         $tz = wp_timezone();
-        $first = (new DateTimeImmutable('tomorrow 00:07:00', $tz))->getTimestamp();
+        $first = ( new DateTimeImmutable( 'tomorrow 00:07:00', $tz ) )->getTimestamp();
         wp_schedule_event( $first, 'daily', AAA_FCRM_AGE_CRON );
     }
 });
+
 register_deactivation_hook( __FILE__, function () {
     if ( $ts = wp_next_scheduled( AAA_FCRM_AGE_CRON ) ) {
         wp_unschedule_event( $ts, AAA_FCRM_AGE_CRON );
@@ -88,16 +92,16 @@ function aaa_fcrm_age_settings_page() {
         $cfg['dob_missing_tag']  = sanitize_title( $in['dob_missing_tag']  ?? $cfg['dob_missing_tag'] );
 
         // keep user-entered hyphen; don't over-sanitize here
-	$prefix = isset($in['bracket_tag_slug_prefix'])
-	    ? sanitize_text_field($in['bracket_tag_slug_prefix'])
-	    : $cfg['bracket_tag_slug_prefix'];
+        $prefix = isset( $in['bracket_tag_slug_prefix'] )
+            ? sanitize_text_field( $in['bracket_tag_slug_prefix'] )
+            : $cfg['bracket_tag_slug_prefix'];
 
-	$prefix = trim($prefix);
-	// ensure a single trailing hyphen so slugs look like "age-21-30"
-	if ($prefix !== '' && substr($prefix, -1) !== '-') {
-	    $prefix .= '-';
-	}
-	$cfg['bracket_tag_slug_prefix'] = $prefix;
+        $prefix = trim( $prefix );
+        // ensure a single trailing hyphen so slugs look like "age-21-30"
+        if ( $prefix !== '' && substr( $prefix, -1 ) !== '-' ) {
+            $prefix .= '-';
+        }
+        $cfg['bracket_tag_slug_prefix'] = $prefix;
 
         $cfg['bracket_tag_title_prefix'] = sanitize_text_field( $in['bracket_tag_title_prefix'] ?? $cfg['bracket_tag_title_prefix'] );
 
@@ -158,7 +162,7 @@ function aaa_fcrm_age_settings_page() {
                 <tr>
                     <th scope="row">Strict Detach</th>
                     <td>
-                        <label><input type="checkbox" name="strict_detach" value="1" <?php checked( 1, (int)$cfg['strict_detach'] ); ?>> Remove competing tags each run (recommended)</label>
+                        <label><input type="checkbox" name="strict_detach" value="1" <?php checked( 1, (int) $cfg['strict_detach'] ); ?>> Remove competing tags each run (recommended)</label>
                     </td>
                 </tr>
             </table>
@@ -179,40 +183,40 @@ add_action( AAA_FCRM_AGE_CRON, 'aaa_fcrm_age_run' );
 
 function aaa_fcrm_age_run() {
     if ( ! function_exists( 'FluentCrmApi' ) ) {
-        if ( AAA_FCRM_AGE_DEBUG ) error_log('[AAA-FCRM-AGE] FluentCRM not active; aborting');
+        if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] FluentCRM not active; aborting' );
         return;
     }
 
-// Prevent overlaps
-if ( get_transient( 'aaa_fcrm_age_running' ) ) {
-    if ( AAA_FCRM_AGE_DEBUG ) error_log('[AAA-FCRM-AGE] Skip: previous run in progress');
-    return;
-}
-set_transient( 'aaa_fcrm_age_running', 1, 5 * MINUTE_IN_SECONDS );
-
-// safety net: always clear the lock even on fatal errors
-register_shutdown_function( function () {
-    delete_transient( 'aaa_fcrm_age_running' );
-} );
-
-$cfg = aaa_fcrm_age_get_settings();
-$brackets = aaa_fcrm_age_parse_brackets( $cfg['brackets'] );
-
-// Ensure fields/tags exist (self-healing, merge-only)
-aaa_fcrm_age_ensure_custom_fields( $brackets );
-aaa_fcrm_age_ensure_tags( $brackets, $cfg );
-
-// Build tag map (slug -> id)
-$slug_to_id = array();
-try {
-    $tagApi = FluentCrmApi('tags');
-    $rows   = $tagApi->getInstance()->get(['id','slug']);
-    foreach ( $rows as $row ) {
-        $slug_to_id[ is_array($row) ? $row['slug'] : $row->slug ] = (int)( is_array($row) ? $row['id'] : $row->id );
+    // Prevent overlaps
+    if ( get_transient( 'aaa_fcrm_age_running' ) ) {
+        if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] Skip: previous run in progress' );
+        return;
     }
-} catch ( \Throwable $e ) {
-    if ( AAA_FCRM_AGE_DEBUG ) error_log('[AAA-FCRM-AGE] Tag map load failed: '.$e->getMessage());
-}
+    set_transient( 'aaa_fcrm_age_running', 1, 5 * MINUTE_IN_SECONDS );
+
+    // safety net: always clear the lock even on fatal errors
+    register_shutdown_function( function () {
+        delete_transient( 'aaa_fcrm_age_running' );
+    } );
+
+    $cfg      = aaa_fcrm_age_get_settings();
+    $brackets = aaa_fcrm_age_parse_brackets( $cfg['brackets'] );
+
+    // Ensure fields/tags exist (self-healing, merge-only)
+    aaa_fcrm_age_ensure_custom_fields( $brackets );
+    aaa_fcrm_age_ensure_tags( $brackets, $cfg );
+
+    // Build tag map (slug -> id)
+    $slug_to_id = array();
+    try {
+        $tagApi = FluentCrmApi( 'tags' );
+        $rows   = $tagApi->getInstance()->get( array( 'id', 'slug' ) );
+        foreach ( $rows as $row ) {
+            $slug_to_id[ is_array( $row ) ? $row['slug'] : $row->slug ] = (int) ( is_array( $row ) ? $row['id'] : $row->id );
+        }
+    } catch ( \Throwable $e ) {
+        if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] Tag map load failed: ' . $e->getMessage() );
+    }
 
     $added = $removed = $processed = 0;
 
@@ -222,9 +226,11 @@ try {
     $recreational = sanitize_title( $cfg['recreational_tag'] );
     $dob_missing  = sanitize_title( $cfg['dob_missing_tag'] );
 
-    $all_bracket_slugs = array_map( function( $b ) use ( $cfg ) {
+    $all_bracket_slugs = array_map( function ( $b ) use ( $cfg ) {
         return sanitize_title( $cfg['bracket_tag_slug_prefix'] . $b['label'] );
     }, $brackets );
+
+    $contactApi = FluentCrmApi( 'contacts' );
 
     global $wpdb;
     $table = $wpdb->prefix . 'fc_subscribers';
@@ -240,10 +246,10 @@ try {
 
         foreach ( $rows as $r ) {
             $processed++;
-            $last = (int)$r['id'];
+            $last = (int) $r['id'];
 
-            $email = trim( (string)$r['email'] );
-            $dob   = trim( (string)$r['date_of_birth'] );
+            $email = trim( (string) $r['email'] );
+            $dob   = trim( (string) $r['date_of_birth'] );
 
             // compute age (whole years) or null
             $age = null;
@@ -254,8 +260,8 @@ try {
                 } catch ( \Throwable $e ) { $age = null; }
             }
 
-            $attach_slugs = array();
-            $detach_slugs = array();
+            $attach_slugs  = array();
+            $detach_slugs  = array();
             $custom_values = array();
 
             if ( null === $age ) {
@@ -268,7 +274,8 @@ try {
                 $custom_values['age_bracket'] = '';
             } else {
                 // Determine bracket (min inclusive, max exclusive; null max open-ended)
-                $chosen_slug = ''; $chosen_label = '';
+                $chosen_slug  = '';
+                $chosen_label = '';
                 foreach ( $brackets as $b ) {
                     if ( is_null( $b['max'] ) ) {
                         if ( $age >= $b['min'] ) { $chosen_slug = sanitize_title( $cfg['bracket_tag_slug_prefix'] . $b['label'] ); $chosen_label = $b['label']; break; }
@@ -297,47 +304,45 @@ try {
                 if ( ! empty( $cfg['strict_detach'] ) ) $detach_slugs[] = $dob_missing;
 
                 // Custom fields
-                $custom_values['age_years']   = (string)$age;
+                $custom_values['age_years']   = (string) $age;
                 $custom_values['age_bracket'] = $chosen_label;
             }
 
             // normalize
-            $attach_slugs = array_values(array_unique(array_diff($attach_slugs, $detach_slugs)));
-            $detach_slugs = array_values(array_unique($detach_slugs));
+            $attach_slugs = array_values( array_unique( array_diff( $attach_slugs, $detach_slugs ) ) );
+            $detach_slugs = array_values( array_unique( $detach_slugs ) );
 
             // Map to tag IDs
             $add_ids = array();
-            foreach ($attach_slugs as $s) { 
-	    if (isset($slug_to_id[$s])) $add_ids[] = $slug_to_id[$s]; }
+            foreach ( $attach_slugs as $s ) { if ( isset( $slug_to_id[ $s ] ) ) $add_ids[] = $slug_to_id[ $s ]; }
             $rem_ids = array();
-            foreach ($detach_slugs as $s) { if (isset($slug_to_id[$s])) $rem_ids[] = $slug_to_id[$s]; }
+            foreach ( $detach_slugs as $s ) { if ( isset( $slug_to_id[ $s ] ) ) $rem_ids[] = $slug_to_id[ $s ]; }
 
             try {
-                $contactApi = FluentCrmApi('contacts');
-                $subscriber = $contactApi->getContact((int)$r['id']);
-                if (!$subscriber) continue;
+                $subscriber = $contactApi->getContact( (int) $r['id'] );
+                if ( ! $subscriber ) continue;
 
                 // SAFE MERGE: never wipe other custom_values keys
-                if ($email) {
+                if ( $email ) {
                     $existing = $subscriber->custom_values;
-                    if (!is_array($existing)) {
-                        $existing = json_decode((string)$existing, true);
-                        if (!is_array($existing)) $existing = array();
+                    if ( ! is_array( $existing ) ) {
+                        $existing = json_decode( (string) $existing, true );
+                        if ( ! is_array( $existing ) ) $existing = array();
                     }
-                    foreach ($custom_values as $k => $v) {
-                        $existing[$k] = $v;
+                    foreach ( $custom_values as $k => $v ) {
+                        $existing[ $k ] = $v;
                     }
-                    $contactApi->createOrUpdate(array(
+                    $contactApi->createOrUpdate( array(
                         'email'         => $email,
                         'custom_values' => $existing
-                    ));
+                    ) );
                 }
 
-                if ($add_ids) { $subscriber->attachTags($add_ids); $added += count($add_ids); }
-                if ($rem_ids) { $subscriber->detachTags($rem_ids); $removed += count($rem_ids); }
+                if ( $add_ids ) { $subscriber->attachTags( $add_ids ); $added += count( $add_ids ); }
+                if ( $rem_ids ) { $subscriber->detachTags( $rem_ids ); $removed += count( $rem_ids ); }
 
-            } catch (\Throwable $e) {
-                if (AAA_FCRM_AGE_DEBUG) error_log('[AAA-FCRM-AGE] #'.$r['id'].' error: '.$e->getMessage());
+            } catch ( \Throwable $e ) {
+                if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] #' . $r['id'] . ' error: ' . $e->getMessage() );
             }
         }
 
@@ -354,7 +359,7 @@ try {
         'time'      => time()
     ), 3600 );
 
-    if ( AAA_FCRM_AGE_DEBUG ) error_log('[AAA-FCRM-AGE] Done; processed='.$processed.' add='.$added.' rem='.$removed);
+    if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] Done; processed=' . $processed . ' add=' . $added . ' rem=' . $removed );
 }
 
 /** Friendly “last run” notice */
@@ -364,60 +369,69 @@ add_action( 'admin_notices', function () {
     if ( ! $s ) return;
     delete_transient( 'aaa_fcrm_age_last_run' );
     echo '<div class="notice notice-success"><p><strong>Age Classifier:</strong> processed '
-        .intval($s['processed']).' contacts; tags +'.intval($s['tag_adds']).' / -'.intval($s['tag_rems']).'.</p></div>';
-});
+        . intval( $s['processed'] ) . ' contacts; tags +' . intval( $s['tag_adds'] ) . ' / -' . intval( $s['tag_rems'] ) . '.</p></div>';
+} );
 
 /** Ensure custom fields exist (self-healing, flat options, select-one) */
 function aaa_fcrm_age_ensure_custom_fields( $brackets ) {
     // --- HARDENED: merge-only, never remove other fields; also take a backup snapshot ---
-    // Your site uses this key; keep it here so we never call saveGlobalFields.
     $opt_key = 'contact_custom_fields';
 
-    $fields = get_option($opt_key);
-    if (!is_array($fields)) $fields = [];
+    $fields = get_option( $opt_key );
+    if ( ! is_array( $fields ) ) $fields = array();
 
     // One-shot backup (keeps last snapshot) so you can roll back the registry if needed
     $bak_key = 'aaa_fcrm_age_backup_' . $opt_key;
-    if (!get_option($bak_key)) {
-        add_option($bak_key, $fields, '', false); // no autoload
+    if ( ! get_option( $bak_key ) ) {
+        add_option( $bak_key, $fields, '', false ); // no autoload
     }
 
     // Index by slug
-    $by = [];
-    foreach ($fields as $f) {
-        if (!empty($f['slug'])) $by[$f['slug']] = $f;
+    $by = array();
+    foreach ( $fields as $f ) {
+        if ( ! empty( $f['slug'] ) ) $by[ $f['slug'] ] = $f;
     }
 
     // Flat bracket options like ["18-21","21-30", ...]
-    $flat = [];
-    foreach ($brackets as $b) $flat[] = $b['label'];
+    $flat = array();
+    foreach ( $brackets as $b ) $flat[] = $b['label'];
 
     // Age (years) – merge/ensure only
-    $by['age_years'] = isset($by['age_years']) ? array_merge($by['age_years'], [
+    $by['age_years'] = isset( $by['age_years'] ) ? array_merge( $by['age_years'], array(
         'slug'  => 'age_years',
         'label' => 'Age (years)',
         'type'  => 'number'
-    ]) : [
+    ) ) : array(
         'slug'  => 'age_years',
         'label' => 'Age (years)',
         'type'  => 'number'
-    ];
+    );
 
-    // Age Bracket – force select-one + flat options; flatten if someone saved [{id,title}]
-	$age['type'] = (isset($age['type']) && in_array($age['type'], array('select','select-one'), true))
-	    ? $age['type']
-	    : 'select-one';
+    // Age Bracket – ensure exists; force select-one + flat options; flatten if someone saved [{id,title}]
+    $age = isset( $by['age_bracket'] ) && is_array( $by['age_bracket'] ) ? $by['age_bracket'] : array(
+        'slug'  => 'age_bracket',
+        'label' => 'Age Bracket'
+    );
+    $age['slug']  = 'age_bracket';
+    $age['label'] = isset( $age['label'] ) ? (string) $age['label'] : 'Age Bracket';
 
-    if (!empty($age['options']) && is_array($age['options']) && $age['options'] && is_array(reset($age['options']))) {
-        $tmp=[]; foreach ($age['options'] as $o) { $tmp[] = is_array($o) ? ($o['title'] ?? ($o['id'] ?? '')) : (string)$o; }
-        $age['options'] = array_values(array_filter($tmp));
+    $age['type'] = ( isset( $age['type'] ) && in_array( $age['type'], array( 'select', 'select-one' ), true ) )
+        ? $age['type']
+        : 'select-one';
+
+    if ( ! empty( $age['options'] ) && is_array( $age['options'] ) && $age['options'] && is_array( reset( $age['options'] ) ) ) {
+        $tmp = array();
+        foreach ( $age['options'] as $o ) {
+            $tmp[] = is_array( $o ) ? ( $o['title'] ?? ( $o['id'] ?? '' ) ) : (string) $o;
+        }
+        $age['options'] = array_values( array_filter( $tmp ) );
     }
-    if (empty($age['options'])) $age['options'] = $flat;
+    if ( empty( $age['options'] ) ) $age['options'] = $flat;
 
     $by['age_bracket'] = $age;
 
     // Write back: MERGE ONLY (we never drop unknown slugs)
-    update_option($opt_key, array_values($by), false);
+    update_option( $opt_key, array_values( $by ), false );
 }
 
 /** Ensure tags exist (MEDICAL, RECREATIONAL, DOB Missing, and bracket tags) */
@@ -437,16 +451,16 @@ function aaa_fcrm_age_ensure_tags( $brackets, $cfg ) {
     }
 
     try {
-        $tagApi = FluentCrmApi('tags');
+        $tagApi = FluentCrmApi( 'tags' );
         $tagApi->importBulk( $toCreate ); // idempotent
     } catch ( \Throwable $e ) {
-        if ( AAA_FCRM_AGE_DEBUG ) error_log('[AAA-FCRM-AGE] ensure tags: '.$e->getMessage());
+        if ( AAA_FCRM_AGE_DEBUG ) error_log( '[AAA-FCRM-AGE] ensure tags: ' . $e->getMessage() );
     }
 }
 
 /** Parse bracket CSV → [ ['min'=>int, 'max'=>int|null, 'label'=>string], ... ] */
 function aaa_fcrm_age_parse_brackets( $csv ) {
-    $csv = (string)$csv;
+    $csv = (string) $csv;
     $pieces = array_filter( array_map( 'trim', explode( ',', $csv ) ) );
     $out = array();
 
@@ -456,13 +470,13 @@ function aaa_fcrm_age_parse_brackets( $csv ) {
             $out[] = array( 'min' => $min, 'max' => null, 'label' => $min . '+' );
         } else {
             if ( ! preg_match( '/^\s*(\d+)\s*-\s*(\d+)\s*$/', $p, $m ) ) continue;
-            $min = (int)$m[1]; $max = (int)$m[2];
+            $min = (int) $m[1]; $max = (int) $m[2];
             if ( $max <= $min ) continue;
             $out[] = array( 'min' => $min, 'max' => $max, 'label' => $min . '-' . $max );
         }
     }
 
-    usort( $out, function( $a, $b ) { return $a['min'] <=> $b['min']; } );
+    usort( $out, function ( $a, $b ) { return $a['min'] <=> $b['min']; } );
     return $out;
 }
 
@@ -470,6 +484,15 @@ function aaa_fcrm_age_parse_brackets( $csv ) {
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
     WP_CLI::add_command( 'fcrm age classify', function () {
         aaa_fcrm_age_run();
-        WP_CLI::success('Age classification run complete.');
+        WP_CLI::success( 'Age classification run complete.' );
     } );
 }
+
+/* -------------------------------------------------------------------------
+   SETTINGS LINK IN PLUGIN LISTING
+---------------------------------------------------------------------------*/
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $links ) {
+    $settings_url = admin_url( 'admin.php?page=aaa-fluentcrm-age-classifier' );
+    $links[]      = '<a href="' . esc_url( $settings_url ) . '">' . __( 'Settings', 'aaa-fluentcrm-age-classifier' ) . '</a>';
+    return $links;
+} );
