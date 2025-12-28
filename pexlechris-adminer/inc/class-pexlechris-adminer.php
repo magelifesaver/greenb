@@ -309,7 +309,7 @@ class Pexlechris_Adminer extends Adminer\Adminer
             #dbs{
                 display: none;
             }
-            .footer > div > fieldset:nth-child(2) > legend{
+            .footer > div > fieldset:last-of-type:nth-child(2):not(.jsonly) > legend{
                 color: transparent;
                 width: 90px;
                 height: 17px;
@@ -327,6 +327,10 @@ class Pexlechris_Adminer extends Adminer\Adminer
                 content: "Selected ";
                 position: absolute;
                 left: -66px;
+            }
+            .footer input[name="copy"]{
+                z-index: 2;
+                position: relative;
             }
             .footer > div > fieldset:nth-child(2) > div > select[name="target"],
             .footer > div > fieldset:nth-child(2) > div > input[name="move"]{

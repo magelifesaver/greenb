@@ -151,10 +151,10 @@ class AAA_OC_AttrVis_Fixer {
      *               - next_paged: next page index.
      *               - checked: number of products processed.
      */
-    public static function get_visibility_report( $batch = 50, $paged = 1, $category = 0 ) {
-        $batch = max( 1, (int) $batch );
-        $paged = max( 1, (int) $paged );
-        $args  = array(
+    public static function get_visibility_report( $batch = 50, $paged = 1, $category = 0, $stock_status = '', $attr_names = array() ) {
+        $batch  = max( 1, (int) $batch );
+        $paged  = max( 1, (int) $paged );
+        $args   = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
             'posts_per_page' => $batch,
@@ -170,14 +170,26 @@ class AAA_OC_AttrVis_Fixer {
                 ),
             );
         }
+        // Filter by stock status if provided.
+        $stock_status = trim( (string) $stock_status );
+        $allowed_statuses = array( 'instock', 'outofstock', 'onbackorder' );
+        if ( $stock_status && in_array( $stock_status, $allowed_statuses, true ) ) {
+            $args['meta_query'] = array(
+                array(
+                    'key'     => '_stock_status',
+                    'value'   => $stock_status,
+                    'compare' => '=',
+                ),
+            );
+        }
         $q = new WP_Query( $args );
         $items   = array();
         $checked = 0;
         foreach ( (array) $q->posts as $product_id ) {
             $checked++;
-            $title  = get_the_title( $product_id );
-            $meta   = get_post_meta( $product_id, '_product_attributes', true );
-            $attrs  = array();
+            $title = get_the_title( $product_id );
+            $meta  = get_post_meta( $product_id, '_product_attributes', true );
+            $attrs = array();
             if ( is_array( $meta ) ) {
                 foreach ( $meta as $key => $attr ) {
                     if ( ! is_array( $attr ) ) {
@@ -185,15 +197,23 @@ class AAA_OC_AttrVis_Fixer {
                     }
                     $is_taxonomy = isset( $attr['is_taxonomy'] ) ? (int) $attr['is_taxonomy'] : 0;
                     if ( ! $is_taxonomy ) {
-                        continue; // ignore custom attributes.
+                        continue;
                     }
-                    $taxonomy  = isset( $attr['name'] ) ? $attr['name'] : $key;
+                    $taxonomy_slug = isset( $attr['name'] ) ? $attr['name'] : $key;
+                    // If attribute filtering requested, only include specified names.
+                    if ( ! empty( $attr_names ) && ! in_array( $taxonomy_slug, $attr_names, true ) ) {
+                        continue;
+                    }
                     $is_visible = isset( $attr['is_visible'] ) ? (int) $attr['is_visible'] : 0;
                     $attrs[] = array(
-                        'name'    => $taxonomy,
+                        'name'    => $taxonomy_slug,
                         'visible' => $is_visible,
                     );
                 }
+            }
+            // If filtering by attributes and none matched, skip this product entirely.
+            if ( ! empty( $attr_names ) && empty( $attrs ) ) {
+                continue;
             }
             $items[] = array(
                 'product_id'    => $product_id,
@@ -203,10 +223,10 @@ class AAA_OC_AttrVis_Fixer {
         }
         wp_reset_postdata();
         return array(
-            'items'     => $items,
-            'has_more'  => ( $checked === $batch ),
+            'items'      => $items,
+            'has_more'   => ( $checked === $batch ),
             'next_paged' => $paged + 1,
-            'checked'   => $checked,
+            'checked'    => $checked,
         );
     }
 }

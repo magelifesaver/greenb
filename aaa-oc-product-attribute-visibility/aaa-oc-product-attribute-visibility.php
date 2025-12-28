@@ -15,7 +15,7 @@
  * Plugin Name: AAA OC Product Attribute Visibility
  * Description: Fixes taxonomy‑based WooCommerce attribute visibility in _product_attributes. Provides a report and bulk actions via UI, plus background cron processing for large sets.
  * Author: Lokey Delivery
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

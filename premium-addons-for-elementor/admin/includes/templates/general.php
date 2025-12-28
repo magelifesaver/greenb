@@ -98,7 +98,7 @@ $pa_news = self::get_pa_news();
 						<p><?php echo esc_html( __( 'It’s highly recommended to check our documentation and FAQs before using this plugin. ', 'premium-addons-for-elementor' ) ); ?></p>
 						<ul class="pa-support-list">
 							<li><a href="<?php echo esc_url( $docs_url ); ?>" target="_blank"><?php esc_html_e( '> Documentation.', 'premium-addons-for-elementor' ); ?></a></li>
-							<li><a href="https://my.leap13.com/contact-support" target="_blank"><?php esc_html_e( '> Support Tickets.', 'premium-addons-for-elementor' ); ?></a></li>
+							<li><a href="https://wordpress.org/support/plugin/premium-addons-for-elementor/" target="_blank"><?php esc_html_e( '> Support Tickets.', 'premium-addons-for-elementor' ); ?></a></li>
 							<li><a href="https://my.leap13.com/forums/forum/premium-addons-for-elementor-plugin-community-support/" target="_blank"><?php esc_html_e( '> Community Forums.', 'premium-addons-for-elementor' ); ?></a></li>
 						</ul>
 					</div>

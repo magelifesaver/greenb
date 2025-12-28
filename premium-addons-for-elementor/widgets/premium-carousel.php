@@ -222,38 +222,14 @@ class Premium_Carousel extends Widget_Base {
 		);
 
 		$this->add_control(
-			'full_width_img',
+			'gallery_equal_height',
 			array(
-				'label'       => __( 'Full Width', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'default'     => 'yes',
-				'description' => __( 'Make images take full width of the slide', 'premium-addons-for-elementor' ),
-				'selectors'   => array(
-					'{{WRAPPER}} .premium-carousel-template img' => 'width: 100%',
-				),
-				'condition'   => array(
-					'source' => 'gallery',
-				),
-			)
-		);
-
-		$this->add_control(
-			'img_fit',
-			array(
-				'label'     => __( 'Image Fit', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '',
-				'options'   => array(
-					''        => __( 'Default', 'premium-addons-for-elementor' ),
-					'fill'    => __( 'Fill', 'premium-addons-for-elementor' ),
-					'cover'   => __( 'Cover', 'premium-addons-for-elementor' ),
-					'contain' => __( 'Contain', 'premium-addons-for-elementor' ),
-				),
-				'selectors' => array(
-					'{{WRAPPER}} .premium-carousel-template img' => 'object-fit: {{VALUE}};',
-				),
+				'label' => __( 'Equal Height', 'premium-addons-for-elementor' ),
+				'type'  => Controls_Manager::SWITCHER,
+				'prefix_class' => 'premium-carousel__eq-height-',
 				'condition' => array(
 					'source' => 'gallery',
+					'premium_carousel_slider_type' => 'horizontal',
 				),
 			)
 		);
@@ -331,6 +307,42 @@ class Premium_Carousel extends Widget_Base {
 				'prevent_empty' => false,
 				'condition'     => array(
 					'source' => 'template',
+				),
+			)
+		);
+
+		$links_repeater = new REPEATER();
+
+		$links_repeater->add_control(
+			'carousel_img_link',
+			array(
+				'label'         => __( 'Link URL', 'premium-addons-for-elementor' ),
+				'type'          => Controls_Manager::URL,
+				'dynamic'       => array( 'active' => true ),
+			)
+		);
+
+		$this->add_control(
+			'links_repeater',
+			array(
+				'label'         => __( 'Links', 'premium-addons-for-elementor' ),
+				'type'          => Controls_Manager::REPEATER,
+				'fields'        => $links_repeater->get_controls(),
+				'prevent_empty' => false,
+				'condition'     => array(
+					'source' => 'gallery',
+				),
+			)
+		);
+
+		$this->add_control(
+			'gallery_links_notice',
+			array(
+				'raw'             => __( 'Links will be added in the same order as your selected gallery images.', 'premium-addons-for-elementor' ),
+				'type'            => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => array(
+					'source' => 'gallery',
 				),
 			)
 		);
@@ -795,6 +807,9 @@ class Premium_Carousel extends Widget_Base {
 				'label'       => __( 'Extra Class', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'description' => __( 'Add extra class name that will be applied to the carousel, and you can use this class for your customizations.', 'premium-addons-for-elementor' ),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -962,6 +977,43 @@ class Premium_Carousel extends Widget_Base {
 			array(
 				'label'     => __( 'Image', 'premium-addons-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'source' => 'gallery',
+				),
+			)
+		);
+
+		$this->add_control(
+			'full_width_img',
+			array(
+				'label'       => __( 'Full Width', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'default'     => 'yes',
+				'description' => __( 'Make images take full width of the slide', 'premium-addons-for-elementor' ),
+				'selectors'   => array(
+					'{{WRAPPER}} .premium-carousel-template img' => 'width: 100%',
+				),
+				'condition'   => array(
+					'source' => 'gallery',
+				),
+			)
+		);
+
+		$this->add_control(
+			'img_fit',
+			array(
+				'label'     => __( 'Image Fit', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					''        => __( 'Default', 'premium-addons-for-elementor' ),
+					'fill'    => __( 'Fill', 'premium-addons-for-elementor' ),
+					'cover'   => __( 'Cover', 'premium-addons-for-elementor' ),
+					'contain' => __( 'Contain', 'premium-addons-for-elementor' ),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .premium-carousel-template img' => 'object-fit: {{VALUE}};',
+				),
 				'condition' => array(
 					'source' => 'gallery',
 				),
@@ -1726,6 +1778,8 @@ class Premium_Carousel extends Widget_Base {
 			// Gallery is returned as array of IDs when we're using an ACF Gallery Field.
 			$templates = ! empty( $settings['gallery'] ) ? $settings['gallery'] : array();
 
+			$links = ! empty( $settings['links_repeater'] ) ? $settings['links_repeater'] : array();
+
 			$content_type = 'gallery';
 
 		} else {
@@ -2049,8 +2103,15 @@ class Premium_Carousel extends Widget_Base {
 							if ( 'gallery' === $source ) {
 								$image_url = Group_Control_Image_Size::get_attachment_image_src( $template_title['id'], 'thumbnail', $settings );
 								?>
+
+								<?php if( ! empty( $links[ $index ]['carousel_img_link']['url'] ) ) : ?>
+									<a href="<?php echo esc_url( $links[ $index ]['carousel_img_link']['url'] ); ?>" <?php echo ! empty( $links[ $index ]['carousel_img_link']['is_external'] ) ? 'target="_blank"' : ''; ?> <?php echo ! empty( $links[ $index ]['carousel_img_link']['nofollow'] ) ? 'rel="nofollow"' : ''; ?>>
+								<?php endif; ?>
 									<img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( Control_Media::get_image_alt( $template_title ) ); ?>">
-														<?php
+								<?php if( ! empty( $links[ $index ]['carousel_img_link']['url'] ) ) : ?>
+									</a>
+								<?php endif; ?>
+								<?php
 							} else {
 								echo Helper_Functions::render_elementor_template( $template_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}

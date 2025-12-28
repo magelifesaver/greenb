@@ -1,183 +1,189 @@
 (function ($) {
 
-    var PremiumPostTickerHandler = function ($scope, $) {
+	var PremiumPostTickerHandler = function ($scope, $) {
 
-        var timer = null,
-            $postsWrapper = $scope.find('.premium-post-ticker__posts-wrapper'),
-            settings = $scope.find('.premium-post-ticker__outer-wrapper').data('ticker-settings');
+		var timer = null,
+			$postsWrapper = $scope.find('.premium-post-ticker__posts-wrapper'),
+			settings = $scope.find('.premium-post-ticker__outer-wrapper').data('ticker-settings'),
+			isAlreadyLoaded = $scope.data("is-loaded");
 
-        if (!settings)
-            return;
+		if (isAlreadyLoaded)
+			return;
 
-        if ('' !== settings.animation && 'layout-4' !== settings.layout) {
-            $postsWrapper.on("init", function (event) {
-                resetAnimations("init");
-            });
-        }
+		$scope.attr("data-is-loaded", true);
 
-        if (settings.typing) {
-            $postsWrapper.on('init', function (event, slick) {
-                var $currentTyping = $postsWrapper.find('[data-slick-index="' + slick.currentSlide + '"] .premium-post-ticker__post-title a');
+		if (!settings)
+			return;
 
-                typeTitle($currentTyping);
-            });
+		if ('' !== settings.animation && 'layout-4' !== settings.layout) {
+			$postsWrapper.on("init", function (event) {
+				resetAnimations("init");
+			});
+		}
 
-            $postsWrapper.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+		if (settings.typing) {
+			$postsWrapper.on('init', function (event, slick) {
+				var $currentTyping = $postsWrapper.find('[data-slick-index="' + slick.currentSlide + '"] .premium-post-ticker__post-title a');
 
-                var $typedItem = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title'),
-                    $currentTyping = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title a'),
-                    $nextTyping = $postsWrapper.find('[data-slick-index="' + nextSlide + '"] .premium-post-ticker__post-title a'),
-                    speed = slick.options.speed,
-                    typingDelay = Math.floor(speed / 3);
+				typeTitle($currentTyping);
+			});
 
-                clearInterval(timer);
-                $typedItem.removeClass('premium-text-typing');
-                $currentTyping.text('');
+			$postsWrapper.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
 
-                // Clear text before typing
-                $nextTyping.text('');
+				var $typedItem = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title'),
+					$currentTyping = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title a'),
+					$nextTyping = $postsWrapper.find('[data-slick-index="' + nextSlide + '"] .premium-post-ticker__post-title a'),
+					speed = slick.options.speed,
+					typingDelay = Math.floor(speed / 3);
 
-                setTimeout(function () {
-                    typeTitle($nextTyping);
-                }, typingDelay);
-            });
-        }
+				clearInterval(timer);
+				$typedItem.removeClass('premium-text-typing');
+				$currentTyping.text('');
 
-        if ($postsWrapper.find('.premium-post-ticker__post-wrapper').length <= 6) {
+				// Clear text before typing
+				$nextTyping.text('');
 
-            $postsWrapper.find('.premium-post-ticker__post-wrapper').map(function (index, post) {
-                $postsWrapper.append($(post).clone());
-            })
+				setTimeout(function () {
+					typeTitle($nextTyping);
+				}, typingDelay);
+			});
+		}
 
-        }
+		if ($postsWrapper.find('.premium-post-ticker__post-wrapper').length <= 6) {
 
-        $postsWrapper.slick(getSlickSettings());
+			$postsWrapper.find('.premium-post-ticker__post-wrapper').map(function (index, post) {
+				$postsWrapper.append($(post).clone());
+			})
 
-        if ('' !== settings.animation && 'layout-4' !== settings.layout) {
+		}
 
-            $postsWrapper.on("beforeChange", function () {
-                resetAnimations();
-            });
+		$postsWrapper.slick(getSlickSettings());
 
-            $postsWrapper.on("afterChange", function () {
-                triggerAnimation();
-            });
-        }
+		if ('' !== settings.animation && 'layout-4' !== settings.layout) {
 
-        if (settings.arrows) {
+			$postsWrapper.on("beforeChange", function () {
+				resetAnimations();
+			});
 
-            $scope.find('.premium-post-ticker__arrows a').on('click.paTickerNav', function () {
+			$postsWrapper.on("afterChange", function () {
+				triggerAnimation();
+			});
+		}
 
-                if ($(this).hasClass('prev-arrow')) {
+		if (settings.arrows) {
 
-                    $postsWrapper.slick('slickPrev');
+			$scope.find('.premium-post-ticker__arrows a').on('click.paTickerNav', function () {
 
-                } else if ($(this).hasClass('next-arrow')) {
+				if ($(this).hasClass('prev-arrow')) {
 
-                    $postsWrapper.slick('slickNext');
+					$postsWrapper.slick('slickPrev');
 
-                }
-            });
-        }
+				} else if ($(this).hasClass('next-arrow')) {
 
-        $scope.find('.premium-post-ticker__outer-wrapper').removeClass('premium-post-ticker__hidden');
+					$postsWrapper.slick('slickNext');
 
-        function getSlickSettings() {
+				}
+			});
+		}
 
-            $postsWrapper.off('mouseenter.paTickerPause');
+		$scope.find('.premium-post-ticker__outer-wrapper').removeClass('premium-post-ticker__hidden');
 
-            var closestTab = $scope.closest('.premium-tabs-content-section'),
-                autoPlay = settings.autoPlay;
+		function getSlickSettings() {
 
-            //If there is a parent tab and it's not active, then autoplay should not be true.
-            if (closestTab.length > 0) {
-                if (!closestTab.hasClass('content-current'))
-                    autoPlay = false;
-            }
+			$postsWrapper.off('mouseenter.paTickerPause');
 
-            var slickSetting = {
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                autoplay: autoPlay,
-                rows: 0,
-                speed: settings.speed,
-                fade: settings.fade,
-                draggable: true,
-                pauseOnHover: settings.pauseOnHover,
-                vertical: settings.vertical,
-                rtl: settings.shouldBeRtl
-            };
+			var closestTab = $scope.closest('.premium-tabs-content-section'),
+				autoPlay = settings.autoPlay;
 
-            if (settings.autoPlay) {
-                slickSetting.autoplaySpeed = settings.autoplaySpeed;
-            }
+			//If there is a parent tab and it's not active, then autoplay should not be true.
+			if (closestTab.length > 0) {
+				if (!closestTab.hasClass('content-current'))
+					autoPlay = false;
+			}
 
-            if (settings.infinite) {
-                slickSetting.autoplaySpeed = 0;
-                slickSetting.cssEase = 'linear';
+			var slickSetting = {
+				infinite: true,
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+				autoplay: autoPlay,
+				rows: 0,
+				speed: settings.speed,
+				fade: settings.fade,
+				draggable: true,
+				pauseOnHover: settings.pauseOnHover,
+				vertical: settings.vertical,
+				rtl: settings.shouldBeRtl
+			};
 
-                slickSetting.useCSS = false;
+			if (settings.autoPlay) {
+				slickSetting.autoplaySpeed = settings.autoplaySpeed;
+			}
 
-                if ('layout-4' !== settings.layout && !settings.vertical) {
-                    slickSetting.variableWidth = true; // this only is required if the slider is horizontal
-                }
-            }
+			if (settings.infinite) {
+				slickSetting.autoplaySpeed = 0;
+				slickSetting.cssEase = 'linear';
 
-            if ('layout-4' === settings.layout) {
-                slickSetting.vertical = true;
-                slickSetting.slidesToShow = settings.slidesToShow || 1;
-            }
+				slickSetting.useCSS = false;
 
-            return slickSetting;
-        }
+				if ('layout-4' !== settings.layout && !settings.vertical) {
+					slickSetting.variableWidth = true; // this only is required if the slider is horizontal
+				}
+			}
 
-        function resetAnimations() {
+			if ('layout-4' === settings.layout) {
+				slickSetting.vertical = true;
+				slickSetting.slidesToShow = settings.slidesToShow || 1;
+			}
 
-            var $slides = $postsWrapper.find(".slick-slide").not(".slick-current");
+			return slickSetting;
+		}
 
-            $slides.each(function (index, elem) {
-                $(elem).removeClass("animated " + settings.animation).addClass("elementor-invisible");
-            });
-        };
+		function resetAnimations() {
 
-        function triggerAnimation() {
+			var $slides = $postsWrapper.find(".slick-slide").not(".slick-current");
 
-            $postsWrapper.find(".slick-active.elementor-invisible").each(function (index, elem) {
+			$slides.each(function (index, elem) {
+				$(elem).removeClass("animated " + settings.animation).addClass("elementor-invisible");
+			});
+		};
 
-                $(elem).removeClass("elementor-invisible").addClass(settings.animation + ' animated');
+		function triggerAnimation() {
 
-            });
-        }
+			$postsWrapper.find(".slick-active.elementor-invisible").each(function (index, elem) {
 
-        function typeTitle($tickerItem) {
+				$(elem).removeClass("elementor-invisible").addClass(settings.animation + ' animated');
 
-            if (!$tickerItem.length) {
-                return;
-            }
+			});
+		}
 
-            var typingCounter = 0,
-                $typedItem = $tickerItem.closest('.premium-post-ticker__post-title'),
-                typingText = $tickerItem.data('typing'),
-                typingTextLength = typingText.length;
+		function typeTitle($tickerItem) {
 
-            $typedItem.addClass('premium-text-typing');
-            $tickerItem.text(typingText.substr(0, typingCounter++));
+			if (!$tickerItem.length) {
+				return;
+			}
 
-            timer = setInterval(function () {
-                if (typingCounter <= typingTextLength) {
-                    $tickerItem.text(typingText.substr(0, typingCounter++));
-                } else {
-                    clearInterval(timer);
-                    $typedItem.removeClass('premium-text-typing'); // have the '_' after.
-                }
-            }, 40);
-        }
-    };
+			var typingCounter = 0,
+				$typedItem = $tickerItem.closest('.premium-post-ticker__post-title'),
+				typingText = $tickerItem.data('typing'),
+				typingTextLength = typingText.length;
 
-    $(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/premium-post-ticker.default', PremiumPostTickerHandler);
-    });
+			$typedItem.addClass('premium-text-typing');
+			$tickerItem.text(typingText.substr(0, typingCounter++));
+
+			timer = setInterval(function () {
+				if (typingCounter <= typingTextLength) {
+					$tickerItem.text(typingText.substr(0, typingCounter++));
+				} else {
+					clearInterval(timer);
+					$typedItem.removeClass('premium-text-typing'); // have the '_' after.
+				}
+			}, 40);
+		}
+	};
+
+	$(window).on('elementor/frontend/init', function () {
+		elementorFrontend.hooks.addAction('frontend/element_ready/premium-post-ticker.default', PremiumPostTickerHandler);
+	});
 
 })(jQuery);

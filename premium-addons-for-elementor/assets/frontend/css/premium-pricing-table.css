@@ -21,9 +21,6 @@
 .premium-pricing-icon-container .premium-pricing-icon {
   display: inline-block;
 }
-.premium-pricing-icon-container .premium-pricing-image {
-  overflow: hidden;
-}
 .premium-pricing-icon-container .premium-pricing-image img {
   width: 25px;
   height: 25px;

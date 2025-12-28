@@ -697,7 +697,7 @@ class Admin_Notices {
 
 			<div class="pa-dashboard-widget-block">
 				<div class="pa-footer-bar">
-					<a href="https://my.leap13.com/contact-support" target="_blank" style="color: #27ae60">
+					<a href="https://wordpress.org/support/plugin/premium-addons-for-elementor/" target="_blank" style="color: #27ae60">
 						Need Help?
 						<span aria-hidden="true" class="dashicons dashicons-external"></span>
 					</a>

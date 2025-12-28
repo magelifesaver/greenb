@@ -338,6 +338,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'condition'   => array(
 					'icon_type' => 'animation',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -349,6 +352,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'description' => 'You can use these sites to create SVGs: <a href="https://danmarshall.github.io/google-font-to-svg-path/" target="_blank">Google Fonts</a> and <a href="https://boxy-svg.com/" target="_blank">Boxy SVG</a>',
 				'condition'   => array(
 					'icon_type' => 'svg',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -628,6 +634,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => array( 'active' => true ),
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -681,6 +690,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'default'     => '$',
 				'separator'   => 'before',
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -692,6 +704,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'default'     => '25',
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -703,6 +718,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'default'     => '/',
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -715,6 +733,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'default'     => 'm',
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -756,6 +777,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'default'     => __( 'Feature Title', 'premium-addons-for-elementor' ),
 				'dynamic'     => array( 'active' => true ),
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -799,6 +823,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'condition'   => array(
 					'icon_type' => 'svg',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 
 			)
 		);
@@ -813,6 +840,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'label_block' => true,
 				'condition'   => array(
 					'icon_type' => 'animation',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -1025,6 +1055,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'default'   => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 				'condition' => array(
 					'premium_pricing_table_item_tooltip' => 'yes',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -1280,6 +1313,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => array( 'active' => true ),
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -1399,6 +1435,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => array( 'active' => true ),
 				'label_block' => true,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -1846,7 +1885,7 @@ class Premium_Pricing_Table extends Widget_Base {
 					'default' => Global_Colors::COLOR_PRIMARY,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .premium-pricing-icon-container i, {{WRAPPER}} .premium-pricing-icon-container > svg, {{WRAPPER}} .premium-pricing-icon, {{WRAPPER}} .premium-pricing-image' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .premium-pricing-icon-wrapper' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -1862,7 +1901,7 @@ class Premium_Pricing_Table extends Widget_Base {
 					'unit' => 'px',
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-pricing-icon-container i, {{WRAPPER}} .premium-pricing-icon-container > svg, {{WRAPPER}} .premium-pricing-icon, {{WRAPPER}} .premium-pricing-image' => 'padding: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .premium-pricing-icon-wrapper' => 'padding: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -1871,7 +1910,7 @@ class Premium_Pricing_Table extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'premium_pricing_icon_inner_border',
-				'selector' => '{{WRAPPER}} .premium-pricing-icon-container i, {{WRAPPER}} .premium-pricing-icon-container > svg, {{WRAPPER}} .premium-pricing-icon, {{WRAPPER}} .premium-pricing-image',
+				'selector' => '{{WRAPPER}} .premium-pricing-icon-wrapper',
 			)
 		);
 
@@ -1886,7 +1925,7 @@ class Premium_Pricing_Table extends Widget_Base {
 					'unit' => 'px',
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-pricing-icon-container i, {{WRAPPER}} .premium-pricing-icon-container > svg, {{WRAPPER}} .premium-pricing-icon, {{WRAPPER}} .premium-pricing-image' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .premium-pricing-icon-wrapper' => 'border-radius: {{SIZE}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -3287,6 +3326,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'condition' => array(
 					'table_adv_radius' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -3392,6 +3434,9 @@ class Premium_Pricing_Table extends Widget_Base {
 				'condition' => array(
 					'table_hover_adv_radius' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -3465,11 +3510,8 @@ class Premium_Pricing_Table extends Widget_Base {
 			$title_tag = Helper_Functions::validate_html_tag( $settings['premium_pricing_table_title_size'] );
 		}
 
-		$link_type = $settings['premium_pricing_table_button_url_type'];
-
 		if ( 'yes' === $settings['premium_pricing_table_badge_switcher'] ) {
 			$badge_position = 'premium-badge-' . $settings['premium_pricing_table_badge_position'];
-
 			$badge_style = 'premium-badge-' . $settings['ribbon_type'];
 
 			$this->add_inline_editing_attributes( 'premium_pricing_table_badge_text' );
@@ -3478,6 +3520,8 @@ class Premium_Pricing_Table extends Widget_Base {
 			// $badge_position = '';
 			// }
 		}
+
+		$link_type = $settings['premium_pricing_table_button_url_type'];
 
 		if ( 'link' === $link_type ) {
 			$link_url = get_permalink( $settings['premium_pricing_table_button_link_existing_content'] );
@@ -3514,23 +3558,6 @@ class Premium_Pricing_Table extends Widget_Base {
 
 				$this->add_render_attribute( 'icon', 'class', 'premium-drawable-icon' );
 
-				// if ( 'icon' === $icon_type ) {
-				// if ( ! empty( $settings['premium_pricing_table_icon_selection'] ) ) {
-				// $this->add_render_attribute(
-				// 'icon',
-				// array(
-				// 'class'       => $settings['premium_pricing_table_icon_selection'],
-				// 'aria-hidden' => 'true',
-				// )
-				// );
-
-				// }
-
-				// $migrated = isset( $settings['__fa4_migrated']['premium_pricing_table_icon_selection_updated'] );
-				// $is_new   = empty( $settings['premium_pricing_table_icon_selection'] ) && Icons_Manager::is_migration_allowed();
-
-				// }
-
 				if ( 'yes' === $settings['draw_svg'] ) {
 
 					$this->add_render_attribute(
@@ -3541,12 +3568,6 @@ class Premium_Pricing_Table extends Widget_Base {
 							'premium-drawer-hover',
 						)
 					);
-
-					// if ( 'icon' === $icon_type ) {
-
-					// $this->add_render_attribute( 'icon', 'class', $settings['premium_pricing_table_icon_selection_updated']['value'] );
-
-					// }
 
 					$this->add_render_attribute(
 						'icon',
@@ -3566,6 +3587,7 @@ class Premium_Pricing_Table extends Widget_Base {
 				} else {
 					$this->add_render_attribute( 'icon', 'class', 'premium-svg-nodraw' );
 				}
+
 			} elseif ( 'animation' === $icon_type ) {
 				$this->add_render_attribute(
 					'pricing_lottie',
@@ -3624,36 +3646,38 @@ class Premium_Pricing_Table extends Widget_Base {
 		if ( 'yes' === $settings['premium_pricing_table_icon_switcher'] ) :
 			?>
 			<div class="premium-pricing-icon-container">
-				<?php if ( 'icon' === $icon_type ) : ?>
-					<?php
-					if ( 'yes' !== $settings['draw_svg'] ) :
-						Icons_Manager::render_icon(
-							$settings['premium_pricing_table_icon_selection_updated'],
-							array(
-								'class'       => array( 'premium-svg-nodraw', 'premium-drawable-icon' ),
-								'aria-hidden' => 'true',
-							)
-						);
-				else :
-					echo Helper_Functions::get_svg_by_icon(
-						$settings['premium_pricing_table_icon_selection_updated'],
-						$this->get_render_attribute_string( 'icon' )
-					);
+				<div class="premium-pricing-icon-wrapper">
+					<?php if ( 'icon' === $icon_type ) : ?>
+						<?php
+						if ( 'yes' !== $settings['draw_svg'] ) :
+							Icons_Manager::render_icon(
+								$settings['premium_pricing_table_icon_selection_updated'],
+								array(
+									'class'       => array( 'premium-svg-nodraw', 'premium-drawable-icon' ),
+									'aria-hidden' => 'true',
+								)
+							);
+						else :
+							echo Helper_Functions::get_svg_by_icon(
+								$settings['premium_pricing_table_icon_selection_updated'],
+								$this->get_render_attribute_string( 'icon' )
+							);
 
-				endif;
-				?>
+						endif;
+					?>
 
-				<?php elseif ( 'svg' === $icon_type ) : ?>
-					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'icon' ) ); ?>>
-						<?php $this->print_unescaped_setting( 'custom_svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</div>
-				<?php elseif ( 'animation' === $icon_type ) : ?>
-					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'pricing_lottie' ) ); ?>></div>
-				<?php else : ?>
-					<div class='premium-pricing-image'>
-						<img <?php echo wp_kses_post( $this->get_render_attribute_string( 'pricing_img' ) ); ?> />
-					</div>
-				<?php endif; ?>
+					<?php elseif ( 'svg' === $icon_type ) : ?>
+						<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'icon' ) ); ?>>
+							<?php $this->print_unescaped_setting( 'custom_svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</div>
+					<?php elseif ( 'animation' === $icon_type ) : ?>
+						<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'pricing_lottie' ) ); ?>></div>
+					<?php else : ?>
+						<div class='premium-pricing-image'>
+							<img <?php echo wp_kses_post( $this->get_render_attribute_string( 'pricing_img' ) ); ?> />
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
 			<?php
 		endif;

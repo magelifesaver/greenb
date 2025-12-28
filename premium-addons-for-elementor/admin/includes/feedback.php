@@ -62,9 +62,9 @@ class Feedback {
 		if ( ! $anonymous ) {
 			$wordpress['deactivated_plugin']['uninstall_details'] .= ( empty( $wordpress['deactivated_plugin']['uninstall_details'] ) ? '' : PHP_EOL . PHP_EOL ) . 'Domain: ' . self::get_site_domain();
 
-			// $wordpress['used_widgets'] = array(
-			// 'widgets'      => Admin_Helper::get_used_widgets()
-			// );
+			$wordpress['used_widgets'] = array(
+				'widgets' => self::get_usage_count(),
+			);
 		}
 
 		$body = array(
@@ -326,6 +326,109 @@ class Feedback {
 		}
 
 		return $return;
+	}
+
+	public static function get_usage_count() {
+
+		$usage_count = array();
+
+		// First, try to get data from Elementor options.
+		$all_usage = get_option( 'elementor_controls_usage', array() );
+
+		if ( ! empty( $all_usage ) && is_array( $all_usage ) ) {
+			$usage_count = self::get_elements_from_controls_usage( $all_usage );
+		}
+
+		return $usage_count;
+	}
+
+	/**
+	 * Extract Elements Usage From Usage
+	 *
+	 * @since 4.10.61
+	 *
+	 * @param array $all_elements All usage data.
+	 */
+	private static function get_elements_from_controls_usage( $all_elements ) {
+
+		$used_elements = array();
+
+		foreach ( $all_elements as $doc_type => $elements ) {
+
+			if ( ! is_array( $elements ) ) {
+				continue;
+			}
+
+			// Iterate through element types within each document type
+			foreach ( $elements as $element_type => $element_data ) {
+				if ( ! is_array( $element_data ) || ! isset( $element_data['count'] ) ) {
+					continue;
+				}
+
+				$element_name = $element_type;
+				$count        = (int) $element_data['count'];
+
+				// Only count our elements.
+				if ( strpos( $element_name, 'premium-' ) === 0 ) {
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+							? $used_elements[ $element_name ] + $count
+							: $count;
+				}
+
+				// Check for extension usage in controls data
+				if ( isset( $element_data['controls'] ) && is_array( $element_data['controls'] ) ) {
+					self::get_addons_from_controls_usage( $element_data['controls'], $used_elements );
+				}
+			}
+		}
+
+		return $used_elements;
+	}
+
+	/**
+	 * Extract Addons Usage From Controls Usage
+	 *
+	 * @since 4.10.61
+	 *
+	 * @param array $controls       Controls usage data.
+	 * @param array $used_elements  Reference to used elements array.
+	 */
+	private static function get_addons_from_controls_usage( $controls, &$used_elements ) {
+
+		$map = array(
+			'pa_display_conditions_switcher' => 'display-conditions',
+			'premium_eq_height_switcher'     => 'equal-height',
+			'premium_fe_switcher'            => 'floating-effects',
+			'premium_glass_switcher'         => 'glass-effect',
+			'premium_global_divider_sw'      => 'shape-divider',
+			'premium_tooltip_switcher'       => 'tooltips',
+			'premium_wrapper_link_switcher'  => 'wrapper-link',
+			'premium_global_badge_switcher'  => 'badge',
+			'premium_global_cursor_switcher' => 'custom-cursor',
+			'premium_mscroll_switcher'       => 'mscroll',
+			'premium_blob_switcher'          => 'blob',
+			'premium_gradient_switcher'      => 'animated-gradient',
+			'premium_kenburns_switcher'      => 'kenburns',
+			'premium_lottie_switcher'        => 'lottie',
+			'premium_parallax_switcher'      => 'parallax',
+			'premium_particles_switcher'     => 'particles',
+		);
+
+		array_walk_recursive(
+			$controls,
+			function ( $value, $key ) use ( &$used_elements, $map ) {
+
+				if ( ! isset( $map[ $key ] ) ) {
+					return;
+				}
+
+				$element_name = $map[ $key ];
+
+				$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+					? $used_elements[ $element_name ] + $value
+					: $value;
+			}
+		);
 	}
 
 	private static function get_site_domain() {

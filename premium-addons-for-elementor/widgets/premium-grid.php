@@ -319,6 +319,9 @@ class Premium_Grid extends Widget_Base {
 				'condition' => array(
 					'premium_gallery_load_more' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -489,6 +492,9 @@ class Premium_Grid extends Widget_Base {
 					),
 					$condition
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -500,6 +506,9 @@ class Premium_Grid extends Widget_Base {
 				'label'   => __( 'Category', 'premium-addons-for-elementor' ),
 				'type'    => Controls_Manager::TEXT,
 				'dynamic' => array( 'active' => true ),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -608,6 +617,9 @@ class Premium_Grid extends Widget_Base {
 				'description' => __( 'This is used to link categories from different pages. For example: premiumaddons.com/elementor-grid-widget?cat=2', 'premium-addons-for-elementor' ),
 				'label_block' => true,
 				'condition'   => $condition,
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -722,6 +734,9 @@ class Premium_Grid extends Widget_Base {
 					'premium_gallery_video'       => 'true',
 					'premium_gallery_video_type!' => 'hosted',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -757,6 +772,9 @@ class Premium_Grid extends Widget_Base {
 				'condition'   => array(
 					'premium_gallery_video'      => 'true',
 					'premium_gallery_video_type' => 'hosted',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -841,6 +859,9 @@ class Premium_Grid extends Widget_Base {
 				'condition'   => array(
 					'premmium_gallery_img_info!' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -854,6 +875,9 @@ class Premium_Grid extends Widget_Base {
 				'condition'   => array(
 					'premmium_gallery_img_info!' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -864,6 +888,9 @@ class Premium_Grid extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'description' => __( 'To assign for multiple categories, separate by a comma \',\'', 'premium-addons-for-elementor' ),
 				'dynamic'     => array( 'active' => true ),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -1028,6 +1055,15 @@ class Premium_Grid extends Widget_Base {
 				'default'     => 'default',
 				'separator'   => 'before',
 				'label_block' => true,
+			)
+		);
+
+		$this->add_control(
+			'style_notice',
+			array(
+				'raw'             => __( 'You need to make sure that the grid items have title/description to see the skins.', 'premium-addons-for-elementor' ),
+				'type'            => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 			)
 		);
 
@@ -1353,77 +1389,6 @@ class Premium_Grid extends Widget_Base {
 		$this->end_controls_section();
 
 		Helper_Functions::register_papro_promotion_controls( $this, 'grid' );
-
-		$this->start_controls_section(
-			'premium_gallery_general_style',
-			array(
-				'label' => __( 'General', 'premium-addons-for-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-
-		$this->add_group_control(
-			Premium_Background::get_type(),
-			array(
-				'name'     => 'premium_gallery_general_background',
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .premium-img-gallery',
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			array(
-				'name'     => 'premium_gallery_general_border',
-				'selector' => '{{WRAPPER}} .premium-img-gallery',
-			)
-		);
-
-		$this->add_control(
-			'premium_gallery_general_border_radius',
-			array(
-				'label'      => __( 'Border Radius', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', '%', 'em' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .premium-img-gallery' => 'border-radius: {{SIZE}}{{UNIT}};',
-				),
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			array(
-				'name'     => 'premium_gallery_general_box_shadow',
-				'selector' => '{{WRAPPER}} .premium-img-gallery',
-			)
-		);
-
-		$this->add_responsive_control(
-			'premium_gallery_general_margin',
-			array(
-				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .premium-img-gallery' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'premium_gallery_general_padding',
-			array(
-				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .premium-img-gallery' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
-				),
-			)
-		);
-
-		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'premium_gallery_img_style_section',
@@ -1927,7 +1892,7 @@ class Premium_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'premium_gallery_filter_style',
 			array(
-				'label'     => __( 'Filter', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Filter Tabs', 'premium-addons-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'premium_gallery_filter' => 'yes',
@@ -2049,6 +2014,9 @@ class Premium_Grid extends Widget_Base {
 				'condition' => array(
 					'filter_adv_radius' => 'yes',
 				),
+				'ai'          => array(
+					'active' => false,
+				),
 			)
 		);
 
@@ -2126,6 +2094,9 @@ class Premium_Grid extends Widget_Base {
 				),
 				'condition' => array(
 					'filter_hover_adv_radius' => 'yes',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -2207,6 +2178,9 @@ class Premium_Grid extends Widget_Base {
 				),
 				'condition' => array(
 					'filter_active_adv_radius' => 'yes',
+				),
+				'ai'          => array(
+					'active' => false,
 				),
 			)
 		);
@@ -2518,6 +2492,77 @@ class Premium_Grid extends Widget_Base {
 				'selectors' => array(
 					'#elementor-lightbox-slideshow-{{ID}} .dialog-lightbox-close-button:hover, #elementor-lightbox-{{ID}} .dialog-lightbox-close-button:hover' => 'color: {{VALUE}};',
 					'#elementor-lightbox-slideshow-{{ID}} svg:hover, #elementor-lightbox-{{ID}} svg:hover' => 'fill: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'premium_gallery_general_style',
+			array(
+				'label' => __( 'Grid Container', 'premium-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_group_control(
+			Premium_Background::get_type(),
+			array(
+				'name'     => 'premium_gallery_general_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .premium-img-gallery',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'premium_gallery_general_border',
+				'selector' => '{{WRAPPER}} .premium-img-gallery',
+			)
+		);
+
+		$this->add_control(
+			'premium_gallery_general_border_radius',
+			array(
+				'label'      => __( 'Border Radius', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-img-gallery' => 'border-radius: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'premium_gallery_general_box_shadow',
+				'selector' => '{{WRAPPER}} .premium-img-gallery',
+			)
+		);
+
+		$this->add_responsive_control(
+			'premium_gallery_general_margin',
+			array(
+				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-img-gallery' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'premium_gallery_general_padding',
+			array(
+				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-img-gallery' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
 			)
 		);

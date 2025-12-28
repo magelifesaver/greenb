@@ -83,8 +83,6 @@ class Premium_Template_Tags {
 		add_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
 		add_filter( 'found_posts', array( $this, 'fix_found_posts_query' ), 1, 2 );
 
-		add_action( 'wp_ajax_premium_get_search_results', array( $this, 'get_search_results' ) );
-		add_action( 'wp_ajax_nopriv_premium_get_search_results', array( $this, 'get_search_results' ) );
 	}
 
 	/**

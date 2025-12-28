@@ -223,6 +223,18 @@
   transition: width 0s ease-in-out !important;
 }
 
+.pa-carousel-gallery.premium-carousel__eq-height-yes .slick-track {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.pa-carousel-gallery.premium-carousel__eq-height-yes .slick-slide {
+  height: inherit !important;
+}
+.pa-carousel-gallery.premium-carousel__eq-height-yes img {
+  height: 100%;
+}
+
 .pa-carousel-gallery .premium-carousel-template.slick-slide {
   text-align: center;
 }

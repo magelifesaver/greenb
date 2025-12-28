@@ -18,6 +18,10 @@
 			<?php esc_html_e( 'widget to be enabled. Enable it from ', 'premium-addons-for-elementor' ); ?>
 			<a class='elementor-library-enable-element' href="{{ url }}" target='_blank'>here</a><?php esc_html_e( ', refresh this page and try to insert the template again.', 'premium-addons-for-elementor' ); ?>
 			<# } #>
+			<# if( 'Contact Form 7' === name ) { #>
+				<?php esc_html_e( ' Also, make sure to install Contact Form 7 plugin from ', 'premium-addons-for-elementor' ); ?>
+				<a class='elementor-library-enable-element' href="https://wordpress.org/plugins/contact-form-7/" target='_blank'>here</a>
+			<# } #>
 		</span>
 	</div>
 </div>

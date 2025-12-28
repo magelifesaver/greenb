@@ -118,6 +118,10 @@
 					 */
 					if ('right_side_template' === tempSelectorId || 'premium_content_toggle_second_content_templates' === tempSelectorId) {
 						widgetId += '2';
+					} else if ('pa_finner_temp_live' === tempSelectorId) {
+						widgetId += '3';
+					} else if ('pa_sinner_temp_live' === tempSelectorId) {
+						widgetId += '4';
 					}
 
 					var options = {
@@ -288,8 +292,15 @@
 			/**
 			 * Default: live_temp_content.
 			 * In widgets where there are two live templates in the same widget (not in a repeater) or in the same repeater item, we use a different control name for the second template.
+			 * In Content Toggle widget, there are 4 templates, the 2 inner templates have different control names for their live template controls.
 			 */
 			var liveTempId = ['premium_content_toggle_second_content_templates', 'fixed_template', 'right_side_template'].includes(tempSelectorId) ? 'live_temp_content_extra' : 'live_temp_content';
+
+			if ('pa_finner_temp_live' === tempSelectorId) {
+				liveTempId = 'pa_finner_live_temp_content';
+			} else if ('pa_sinner_temp_live' === tempSelectorId) {
+				liveTempId = 'pa_sinner_live_temp_content';
+			}
 
 			var loadTemplate = $('body').attr('data-pa-liveeditor-load'),
 				settingsToChange = {};

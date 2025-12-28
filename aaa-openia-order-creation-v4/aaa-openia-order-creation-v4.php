@@ -110,9 +110,9 @@ function aaa_v4_enqueue_assets($hook) {
         'orders',
         'products',
         'relookup',
-	'address-loader',
-	'stock-checks',
-	'validation'
+        'address-loader',
+        'stock-checks',
+        'validation'
     ];
 
     foreach ($scripts as $handle) {
@@ -124,10 +124,13 @@ function aaa_v4_enqueue_assets($hook) {
             true
         );
 
+        // IMPORTANT:
+        // Do NOT overwrite WordPress admin's global "ajaxurl" (string).
+        // Dropzone gets its own object instead.
         if ($handle === 'dropzone') {
-            wp_localize_script("aaa-v4-dropzone-js", 'ajaxurl', [
-                'url' => admin_url('admin-ajax.php'),
-                'user_id' => get_current_user_id(), // use fallback
+            wp_localize_script("aaa-v4-dropzone-js", 'AAA_V4_DROPZONE', [
+                'url'     => admin_url('admin-ajax.php'),
+                'user_id' => get_current_user_id(),
             ]);
         }
     }

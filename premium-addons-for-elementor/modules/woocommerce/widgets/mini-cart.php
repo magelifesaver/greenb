@@ -987,7 +987,8 @@ class Mini_Cart extends Widget_Base {
 			array(
 				'label'      => __( 'Width', 'premium-addons-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'vw', '%', 'custom' ),
+				'size_units' => array( 'px', 'vw', 'custom' ),
+				'description'  => __( 'Please note that setting the width using the "%" unit will cause unexpected behavior.', 'premium-addons-for-elementor' ),
 				'range'      => array(
 					'px' => array(
 						'min'  => 0,

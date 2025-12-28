@@ -549,24 +549,35 @@ class Admin_Helper {
 	 */
 	public function insert_action_links( $links ) {
 
+		// Check if Premium Addons PRO version is active.
 		$is_papro_active = Helper_Functions::check_papro_version();
 
+		// Create the Settings link that points to the plugin's settings page.
 		$settings_link = sprintf( '<a href="%1$s">%2$s</a>', admin_url( 'admin.php?page=' . self::$page_slug . '#tab=elements' ), __( 'Settings', 'premium-addons-for-elementor' ) );
 
+		// Create the Rollback link with nonce for security (currently not used in the final array).
 		$rollback_link = sprintf( '<a href="%1$s">%2$s%3$s</a>', wp_nonce_url( admin_url( 'admin-post.php?action=premium_addons_rollback' ), 'premium_addons_rollback' ), __( 'Rollback to v', 'premium-addons-for-elementor' ), PREMIUM_ADDONS_STABLE_VERSION );
 
+		// Initialize the new links array with the Settings link.
 		$new_links = array( $settings_link );
 
+		// If PRO version is not active, add a promotional link to upgrade.
 		if ( ! $is_papro_active ) {
 
+			// Get the campaign link for the Black Friday deal.
 			$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/black-friday/#bfdeals', 'plugins-page', 'wp-dash', 'get-pro' );
 
+			// Create a styled promotional link encouraging users to save money by upgrading.
 			$pro_link = sprintf( '<a href="%s" target="_blank" style="color: #FF6000; font-weight: bold;">%s</a>', $link, __( 'Save $105', 'premium-addons-for-elementor' ) );
+
+			// Add the promotional link to the array.
 			array_push( $new_links, $pro_link );
 		}
 
+		// Merge the original links with our new custom links.
 		$new_links = array_merge( $links, $new_links );
 
+		// Return the modified links array to display on the plugins page.
 		return $new_links;
 	}
 
@@ -587,23 +598,32 @@ class Admin_Helper {
 	 */
 	public function plugin_row_meta( $meta, $file ) {
 
+		// Check if row meta should be hidden based on white label settings.
 		if ( Helper_Functions::is_hide_row_meta() ) {
 			return $meta;
 		}
 
+		// Only add custom meta links for Premium Addons plugin.
 		if ( PREMIUM_ADDONS_BASENAME === $file ) {
 
+			// Generate the support link with campaign tracking parameters.
 			$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/support', 'plugins-page', 'wp-dash', 'get-support' );
 
+			// Create an array of additional meta links to display.
 			$row_meta = array(
+				// Add "Docs & FAQs" link pointing to support documentation.
 				'docs'   => '<a href="' . esc_attr( $link ) . '" aria-label="' . esc_attr( __( 'View Premium Addons for Elementor Documentation', 'premium-addons-for-elementor' ) ) . '" target="_blank">' . __( 'Docs & FAQs', 'premium-addons-for-elementor' ) . '</a>',
+				// Add "Video Tutorials" link pointing to YouTube channel.
 				'videos' => '<a href="https://www.youtube.com/leap13" aria-label="' . esc_attr( __( 'View Premium Addons Video Tutorials', 'premium-addons-for-elementor' ) ) . '" target="_blank">' . __( 'Video Tutorials', 'premium-addons-for-elementor' ) . '</a>',
+				// Add "Rate the plugin" link pointing to WordPress.org reviews page.
 				'rate'   => '<a href="https://wordpress.org/support/plugin/premium-addons-for-elementor/reviews/#new-post" aria-label="' . esc_attr( __( 'Rate plugin', 'premium-addons-for-elementor' ) ) . '" target="_blank">' . __( 'Rate the plugin ★★★★★', 'premium-addons-for-elementor' ) . '</a>',
 			);
 
+			// Merge the custom links with existing meta links.
 			$meta = array_merge( $meta, $row_meta );
 		}
 
+		// Return the modified meta array.
 		return $meta;
 	}
 
@@ -1428,12 +1448,11 @@ class Admin_Helper {
 
 		check_ajax_referer( 'pa-disable-unused', 'security' );
 
-		$did_check = get_transient( 'pa_unused_widget_dialog' );
+		$did_check = get_option( 'pa_unused_widget_dialog' );
 
 		if( ! $did_check ) {
 
-			// Delay check for 7 days.
-			set_transient( 'pa_unused_widget_dialog', true, DAY_IN_SECONDS * 7 );
+			update_option( 'pa_unused_widget_dialog', true );
 
 			// Get days between now and install time.
 			$install_time = get_option( 'pa_install_time' );
@@ -1471,9 +1490,9 @@ class Admin_Helper {
 
 		check_ajax_referer( 'pa-disable-unused', 'security' );
 
-		set_transient( 'pa_unused_widget_dialog', true );
+		update_option( 'pa_unused_widget_dialog', true );
 
-		wp_send_json_success( 'Transient updated.' );
+		wp_send_json_success( 'Option updated.' );
 
 	}
 

@@ -2999,7 +2999,15 @@
 					if (lastPathIndex == 0)
 						lastPathIndex = 1;
 
-					var fillSpeed = settings.svg_fill_speed ? settings.svg_fill_speed.size : 1;
+					var fillSpeed = parseFloat(
+						settings &&
+						settings.svg_fill_speed &&
+						settings.svg_fill_speed.size
+					);
+
+					if (!fillSpeed || isNaN(fillSpeed)) {
+						fillSpeed = 1;
+					}
 
 					timeLine.to($paths, fillSpeed, {
 						fill: settings.svg_color,

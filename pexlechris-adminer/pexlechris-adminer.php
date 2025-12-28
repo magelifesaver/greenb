@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Database Manager - WP Adminer
  * Description: Manage the database from your WordPress Dashboard using Adminer.
- * Version: 4.3.0
- * Stable tag: 4.3.0
+ * Version: 4.3.2
+ * Stable tag: 4.3.2
  * Adminer version: 5.4.1
  * Author: Pexle Chris
  * Author URI: https://www.pexlechris.dev

@@ -5,17 +5,19 @@ Donate Link: https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_c
 Requires at least: 5.0
 Tested Up To: 6.9
 Requires PHP: 7.4
-Stable Tag: 4.11.58
+Stable Tag: 4.11.61
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
-90+ Elementor widgets and 580+ templates. It includes elements like Nav Mega Menu, Carousel, Blog, WooCommerce widgets, Display Conditions.
+Elementor Carousel, Mega Menu, Posts List/Slider, Media Gallery, WooCommerce Widgets, Display Conditions, Premade Templates & more.
 
 == Description ==
 
-Supercharge your [Elementor Page Builder](https://wordpress.org/plugins/elementor/) with 90+ highly customizable addons and widgets, 550+ pre-made templates that will give you the ability to build sophisticated websites in less time with no coding required. Both Elementor and Premium Addons plugins take your WordPress website to the next level.
+**Premium Addons for Elementor** supercharges your [Elementor Page Builder](https://wordpress.org/plugins/elementor/) with 90+ Elementor widgets, 550+ pre-made Elementor templates that will give you the ability to build sophisticated websites in less time with no coding required. Both Elementor and Premium Addons plugins take your WordPress website to the next level.
 
-[**Check The Widgets & Addons Demo Pages**](https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=demos)
+It has Elementor elements like **Carousel, Blog Posts List/Slider, Mega Menu Builder, Testimonials, WooCommerce, Search Form, Posts/News Ticker, etc.**
+
+[**Check Elementor Widgets & Addons Demo Pages**](https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=demos)
 
 ### Useful Links
 [Support](https://my.leap13.com/contact-support/) | [Docs](https://premiumaddons.com/docs/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=docs) | [Video Tutorials](https://www.youtube.com/channel/UCXcJ9BeO2sKKHor7Q9VglTQ) | [Facebook Group](https://facebook.com/groups/premiumAddons) | [Upgrade to Pro](https://premiumaddons.com/pro/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme&utm_content=upgrade-pro)
@@ -254,6 +256,24 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 14. Premium Progress Bar Widget
 
 == Changelog ==
+
+= 4.11.61 - 23/12/2025 =
+
+- Fixed: AJAX Search widget not working.
+
+= 4.11.60 - 22/12/2025 =
+
+- New: Added Links to add links to Gallery images in Carousel widget.
+- New: Added Equal Height option for Gallery images in Carousel widget.
+- Tweak: Compatibility between Media Grid widget and lazyload images plugins.
+- Fixed: Lightbox loading icon is not centered.
+
+= 4.11.59 - 21/12/2025 =
+
+- New: Added Focused Word option in Title widget.
+- New: Added 6 hover effects in Title widget.
+- Tweak: Controls organized in Title widget for better UX.
+- Fixed: Console error in SVG Draw widget.
 
 = 4.11.58 - 17/12/2025 =
 

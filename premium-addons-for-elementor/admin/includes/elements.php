@@ -258,7 +258,7 @@ $elements = array(
 			array(
 				'key'   => 'premium-grid',
 				'name'  => 'premium-img-gallery',
-				'title' => __( 'Media Grid', 'premium-addons-for-elementor' ),
+				'title' => __( 'Media Grid/Gallery', 'premium-addons-for-elementor' ),
 				'demo'  => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/elementor-grid-widget/', 'grid', 'wp-dash', 'dashboard' ),
 				'doc'   => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs-category/using-widgets/grid/', 'grid', 'wp-dash', 'dashboard' ),
 			),
@@ -825,7 +825,7 @@ $elements = array(
 			array(
 				'key'   => 'premium-grid',
 				'name'  => 'premium-img-gallery',
-				'title' => __( 'Media Grid', 'premium-addons-for-elementor' ),
+				'title' => __( 'Media Grid/Gallery', 'premium-addons-for-elementor' ),
 				'demo'  => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/elementor-grid-widget/', 'grid', 'wp-dash', 'dashboard' ),
 				'doc'   => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/grid-widget-tutorial/', 'grid', 'wp-dash', 'dashboard' ),
 			),

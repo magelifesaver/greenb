@@ -11,7 +11,7 @@ Text Domain: aaa-the-printer
 */
 
 // Define PrintNode printer IDs as constants
-define( 'AAA_DISPATCH_PRINTER_ID', '74100729' );
+define( 'AAA_DISPATCH_PRINTER_ID', '73958350' );
 define( 'AAA_INVENTORY_PRINTER_ID', '73958405' );
 
 // Logging function: appends messages to a log file in the plugin root.
