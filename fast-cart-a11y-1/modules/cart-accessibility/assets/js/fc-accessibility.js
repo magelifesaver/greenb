@@ -1,36 +1,33 @@
-// Accessibility helpers for Fast Cart. See accompanying PHP for details.
+// Accessibility enhancements for the WPXtension Fast Cart (fc-container).
+// Makes the rest of the page inert when the cart is open, traps focus
+// inside the cart and restores focus on close. Designed to stay
+// under 150 lines by compressing logic into concise functions.
+
 (function(){
     'use strict';
-    const sel = '.fc-container';
+    const selector = '.fc-container';
     let prev = null;
-    const getC = () => document.querySelector(sel);
-    const getPage = () => Array.from(document.body.children).filter(el => !el.classList.contains('fc-container'));
+    const getC = () => document.querySelector(selector);
+    const others = () => Array.from(document.body.children).filter(el => !el.classList.contains('fc-container'));
     const disable = () => {
         const c = getC();
         if (!c) return;
-        getPage().forEach(el => {
-            el.setAttribute('inert', '');
-            el.setAttribute('aria-hidden', 'true');
-        });
+        others().forEach(el => { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); });
         c.removeAttribute('inert');
         c.setAttribute('aria-hidden', 'false');
     };
     const enable = () => {
         const c = getC();
         if (!c) return;
-        getPage().forEach(el => {
-            el.removeAttribute('inert');
-            el.removeAttribute('aria-hidden');
-        });
+        others().forEach(el => { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); });
         c.setAttribute('inert', '');
         c.setAttribute('aria-hidden', 'true');
     };
-    const trap = c => {
-        const sel = 'a[href],area[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),button:not([disabled]),[tabindex]:not([tabindex="-1"])';
-        const nodes = c.querySelectorAll(sel);
+    const trap = (c) => {
+        const nodes = c.querySelectorAll('a[href],area[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),button:not([disabled]),[tabindex]:not([tabindex="-1"])');
         if (!nodes.length) return;
         const first = nodes[0], last = nodes[nodes.length - 1];
-        c.addEventListener('keydown', e => {
+        c.addEventListener('keydown', (e) => {
             if (e.key !== 'Tab') return;
             if (e.shiftKey) {
                 if (document.activeElement === first) {
@@ -61,19 +58,19 @@
         }
         prev = null;
     };
-    const watch = () => {
+    const setup = () => {
         const c = getC();
         if (!c) return;
         if (c.classList.contains('loaded')) open(); else enable();
-        const observer = new MutationObserver(ms => {
-            ms.forEach(m => {
+        const obs = new MutationObserver((ms) => {
+            ms.forEach((m) => {
                 if (m.type === 'attributes' && m.attributeName === 'class') {
-                    if (c.classList.contains('loaded')) open(); else close();
+                    c.classList.contains('loaded') ? open() : close();
                 }
             });
         });
-        observer.observe(c, {attributes: true, attributeFilter: ['class']});
-        document.addEventListener('keydown', e => {
+        obs.observe(c, { attributes: true, attributeFilter: ['class'] });
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const ci = getC();
                 if (ci && ci.classList.contains('loaded')) {
@@ -86,5 +83,5 @@
             }
         });
     };
-    document.addEventListener('DOMContentLoaded', watch);
+    document.addEventListener('DOMContentLoaded', setup);
 })();

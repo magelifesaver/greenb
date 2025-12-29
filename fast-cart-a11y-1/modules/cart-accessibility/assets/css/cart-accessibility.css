@@ -8,8 +8,16 @@
 
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
+    /* WPXtension Fast Cart: remove transition/animation on the container and content */
     .fc-container,
     .fc-container .fc-content {
+        transition-duration: 0s !important;
+        animation-duration: 0s !important;
+    }
+
+    /* Barn2 Fast Cart: remove transition/animation on the overlay and cart */
+    .wc-fast-cart__page-overlay,
+    #wc-fast-cart {
         transition-duration: 0s !important;
         animation-duration: 0s !important;
     }

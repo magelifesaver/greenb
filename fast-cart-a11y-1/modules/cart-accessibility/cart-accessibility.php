@@ -38,17 +38,32 @@ class FCA11Y_Cart_Accessibility {
      * Fast Cart is inactive.
      */
     public static function enqueue_assets() {
-        // Ensure Fast Cart is available before enqueuing assets.
-        if ( ! class_exists( 'Fast_Cart' ) ) {
+        // Ensure Fast Cart (either WPXtension or Barn2) is available before enqueuing assets.
+        // WPXtension plugin registers a global Fast_Cart class, whereas Barn2's plugin
+        // uses a namespaced class. Only enqueue our accessibility assets when at least
+        // one of these classes exists.
+        if ( ! class_exists( 'Fast_Cart' ) && ! class_exists( '\\Barn2\\Plugin\\WC_Fast_Cart\\Plugin' ) ) {
             return;
         }
 
         $plugin_url = plugin_dir_url( FCA11Y_PLUGIN_FILE );
 
-        // Enqueue JavaScript.
-        $script_handle = 'fca11y-cart-accessibility';
-        $script_path   = $plugin_url . 'modules/cart-accessibility/assets/js/cart-accessibility.js';
-        wp_enqueue_script( $script_handle, $script_path, [], '1.0.0', true );
+
+        /*
+         * Enqueue JavaScript. We include two separate scripts: one for
+         * the WPXtension implementation (fc-accessibility.js) and one for
+         * Barn2's implementation (wfc-accessibility.js). Each script
+         * contains logic specific to its respective plugin and exits
+         * early if the required DOM elements are missing.
+         */
+        $scripts = [
+            'fca11y-fc-accessibility'  => 'modules/cart-accessibility/assets/js/fc-accessibility.js',
+            'fca11y-wfc-accessibility' => 'modules/cart-accessibility/assets/js/wfc-accessibility.js',
+        ];
+        foreach ( $scripts as $handle => $relative_path ) {
+            $path = $plugin_url . $relative_path;
+            wp_enqueue_script( $handle, $path, [], '1.0.0', true );
+        }
 
         // Enqueue CSS.
         $style_handle = 'fca11y-cart-accessibility';

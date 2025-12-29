@@ -224,6 +224,7 @@ export function KitSettingsCustomizationDialog( {
 										checked={ settings.customCode }
 										disabled={ ( isImport && ! data?.uploadedData?.manifest?.[ 'custom-code' ] ) || ! isHighTier() }
 										tooltip={ ! isHighTier() }
+										notExported={ isImport && ! data?.uploadedData?.manifest?.[ 'custom-code' ] }
 									/>
 								</Stack>
 							</SettingSection>
