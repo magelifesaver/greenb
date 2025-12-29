@@ -3,7 +3,7 @@
  * File: /wp-content/plugins/aaa-admin-controler-v2/aaa-admin-controler-v2.php
  * Plugin Name: AAA Admin Controller v2
  * Description: Network‑only tool to view/limit staff sessions, schedule forced ends, and verify identity via admin popup. Includes reports.
- * Version: 2.4.1
+ * Version: 2.5.2
  * Author: Workflow
  * Network: true
  * Text Domain: aaa-ac
@@ -20,7 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * version. See other files for UI and AJAX changes.
  */
 
-define( 'AAA_AC_VER', '2.4.1' );
+// Bump the plugin version to reflect the extended sessions functionality.
+define( 'AAA_AC_VER', '2.5.0' );
 define( 'AAA_AC_TEXTDOMAIN', 'aaa-ac' );
 define( 'AAA_AC_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AAA_AC_URL',  plugin_dir_url( __FILE__ ) );
@@ -73,6 +74,13 @@ add_action('plugins_loaded', ['AC_Cron','init']);
 /** Logger (session lifecycle) */
 require_once AAA_AC_PATH . 'index/class-ac-logger.php';
 add_action('plugins_loaded', ['AC_Logger','init']);
+
+/** Extended Sessions (bulk end + extra columns) */
+// Load our extended sessions handler which introduces bulk actions and extra
+// columns (last activity, customer, cart) for the sessions tab. This class
+// registers its own AJAX endpoints via AC_Sessions_Extended::init().
+require_once AAA_AC_PATH . 'ajax/class-ac-sessions-extended.php';
+add_action('plugins_loaded', ['AC_Sessions_Extended','init']);
 
 // require_once AAA_AC_PATH . 'timeclock/aaa-ac-timeclock-admin.php';
 // add_action('plugins_loaded', ['AAA_AC_Timeclock_Admin','init']);
@@ -149,10 +157,11 @@ add_action('admin_enqueue_scripts', function($hook){
         if ( ! is_network_admin() ) return;
         if ( isset($_GET['page']) && $_GET['page'] === 'aaa-ac-online' ) {
                 wp_enqueue_style( 'aaa-ac-admin', AAA_AC_URL . 'assets/css/admin.css', array(), AAA_AC_VER );
-                wp_enqueue_script( 'aaa-ac-admin-v2',  AAA_AC_URL . 'assets/js/admin-v2.js',  array(), AAA_AC_VER, true );
+                // Use the extended admin script which includes bulk selection and extra columns.
+                wp_enqueue_script( 'aaa-ac-admin-extended',  AAA_AC_URL . 'assets/js/admin-extended.js',  array(), AAA_AC_VER, true );
                 wp_enqueue_script( 'aaa-ac-reports',   AAA_AC_URL . 'assets/js/reports.js',   array(), AAA_AC_VER, true );
                 wp_localize_script(
-                        'aaa-ac-admin-v2',
+                        'aaa-ac-admin-extended',
                         'AAA_AC',
                         array(
                                 'ajax'        => admin_url('admin-ajax.php'),

@@ -28,22 +28,22 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @param string $scope Optional. Context category (eg: 'ajax', 'rest', 'openai').
  */
 if ( ! function_exists( 'aaa_wf_ai_debug' ) ) {
-	function aaa_wf_ai_debug( $message, $file = '', $scope = 'general' ) {
+        function aaa_wf_ai_debug( $message, $file = '', $scope = 'general' ) {
 
-		// Only log if debugging is enabled
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+                // Only log if debugging is enabled
+                if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
 
-		$time   = gmdate( 'Y-m-d H:i:s' );
-		$prefix = "[AAA Workflow AI][$scope][$time]";
-		$tag    = $file ? " [{$file}]" : '';
+                $time   = gmdate( 'Y-m-d H:i:s' );
+                $prefix = "[AAA Workflow AI][$scope][$time]";
+                $tag    = $file ? " [{$file}]" : '';
 
-		// Normalize message
-		if ( is_array( $message ) || is_object( $message ) ) {
-			$message = print_r( $message, true );
-		}
+                // Normalize message
+                if ( is_array( $message ) || is_object( $message ) ) {
+                        $message = print_r( $message, true );
+                }
 
-		error_log( "{$prefix}{$tag} {$message}" );
-	}
+                error_log( "{$prefix}{$tag} {$message}" );
+        }
 }
 
 /**
@@ -57,29 +57,29 @@ if ( ! function_exists( 'aaa_wf_ai_debug' ) ) {
  * @param string $scope Optional subsystem scope.
  */
 if ( ! function_exists( 'aaa_wf_ai_debug_dump' ) ) {
-	function aaa_wf_ai_debug_dump( $data, $label = 'Dump', $scope = 'general' ) {
+        function aaa_wf_ai_debug_dump( $data, $label = 'Dump', $scope = 'general' ) {
 
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+                if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
 
-		$time = gmdate( 'Y-m-d H:i:s' );
-		$prefix = "[AAA Workflow AI][$scope][$time]";
+                $time = gmdate( 'Y-m-d H:i:s' );
+                $prefix = "[AAA Workflow AI][$scope][$time]";
 
-		// Handle complex data types
-		if ( is_wp_error( $data ) ) {
-			$payload = [
-				'error_code' => $data->get_error_code(),
-				'error_message' => $data->get_error_message(),
-				'error_data' => $data->get_error_data(),
-			];
-		} elseif ( is_array( $data ) || is_object( $data ) ) {
-			$payload = json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
-		} else {
-			$payload = (string) $data;
-		}
+                // Handle complex data types
+                if ( is_wp_error( $data ) ) {
+                        $payload = [
+                                'error_code' => $data->get_error_code(),
+                                'error_message' => $data->get_error_message(),
+                                'error_data' => $data->get_error_data(),
+                        ];
+                } elseif ( is_array( $data ) || is_object( $data ) ) {
+                        $payload = json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+                } else {
+                        $payload = (string) $data;
+                }
 
-		$log_entry = "{$prefix} [{$label}] → {$payload}";
-		error_log( $log_entry );
-	}
+                $log_entry = "{$prefix} [{$label}] → {$payload}";
+                error_log( $log_entry );
+        }
 }
 
 /**
@@ -93,29 +93,29 @@ if ( ! function_exists( 'aaa_wf_ai_debug_dump' ) ) {
  * @param string $scope Optional category (ajax, rest, etc.)
  */
 if ( ! function_exists( 'aaa_wf_ai_debug_error' ) ) {
-	function aaa_wf_ai_debug_error( $error, $context = 'Error', $scope = 'error' ) {
+        function aaa_wf_ai_debug_error( $error, $context = 'Error', $scope = 'error' ) {
 
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+                if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
 
-		if ( is_wp_error( $error ) ) {
-			$entry = sprintf(
-				"%s [%s] Code: %s | Message: %s",
-				"[AAA Workflow AI][$scope][" . gmdate('Y-m-d H:i:s') . "]",
-				$context,
-				$error->get_error_code(),
-				$error->get_error_message()
-			);
-		} else {
-			$entry = sprintf(
-				"%s [%s] %s",
-				"[AAA Workflow AI][$scope][" . gmdate('Y-m-d H:i:s') . "]",
-				$context,
-				$error
-			);
-		}
+                if ( is_wp_error( $error ) ) {
+                        $entry = sprintf(
+                                "%s [%s] Code: %s | Message: %s",
+                                "[AAA Workflow AI][$scope][" . gmdate('Y-m-d H:i:s') . "]",
+                                $context,
+                                $error->get_error_code(),
+                                $error->get_error_message()
+                        );
+                } else {
+                        $entry = sprintf(
+                                "%s [%s] %s",
+                                "[AAA Workflow AI][$scope][" . gmdate('Y-m-d H:i:s') . "]",
+                                $context,
+                                $error
+                        );
+                }
 
-		error_log( $entry );
-	}
+                error_log( $entry );
+        }
 }
 
 /**
