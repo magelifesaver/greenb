@@ -1,0 +1,16 @@
+/*
+ * Fast Cart accessibility styles.
+ *
+ * These rules reduce motion for users who prefer less animation. They
+ * specifically target the Fast Cart container and content classes to
+ * override any transition durations defined by the original plugin.
+ */
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .fc-container,
+    .fc-container .fc-content {
+        transition-duration: 0s !important;
+        animation-duration: 0s !important;
+    }
+}
