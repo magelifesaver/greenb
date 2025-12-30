@@ -118,7 +118,7 @@
 				font_size:parseInt(new_elm.css('font-size')),
 				font_family:new_elm.attr('data-wb_stn_font'),
 				theme:new_elm.attr('data-wb_stn_theme'),
-        global_note: 1,  // or 0 depending on your UI control
+        global_note: confirm('Make this note global?') ? 1 : 0,
 			};
 			this.fireAjax(data,new_elm);
 		},
