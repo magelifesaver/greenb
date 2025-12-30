@@ -66,7 +66,8 @@ class AAA_OC_AIP_Indexer_Debug {
         // Build the same query arguments used by the main plugin for orders.
         $args = [
             'post_type'   => 'shop_order',
-            'post_status' => [ 'wc-pending', 'wc-on-hold', 'wc-processing', 'wc-failed' ],
+            // Include completed orders as well; this list should match the bridge.
+            'post_status' => [ 'wc-pending', 'wc-on-hold', 'wc-processing', 'wc-failed', 'wc-completed' ],
             'date_query'  => [ [ 'after' => gmdate( 'Y-m-d', strtotime( '-90 days' ) ), 'inclusive' => true ] ],
             'fields'      => 'ids',
         ];
