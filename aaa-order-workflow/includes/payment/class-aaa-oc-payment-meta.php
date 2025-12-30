@@ -10,6 +10,8 @@
  * - Post meta queries to work reliably (`meta_query`, etc.)
  *
  * Note: These registrations do not save data. They just declare type, visibility, and structure.
+ *
+ * Version: 1.0.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,37 +19,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class AAA_OC_Payment_Meta {
-
     /**
-     * Hook into WordPress init.
-     * This ensures meta fields are registered before ACP or other systems load.
+     * Hook into WordPress init so meta fields are registered early.
      */
     public static function init() {
         add_action( 'init', [ __CLASS__, 'register_payment_meta' ] );
     }
 
     /**
-     * Register all payment-related meta keys for WooCommerce orders.
+     * Register all payment‑related meta keys for WooCommerce orders.
+     *
+     * Numeric fields are registered as type 'number' and single,
+     * with REST visibility. The payment status includes a sanitize
+     * callback to restrict allowed values.
      */
     public static function register_payment_meta() {
-
-        /**
-         * Payment Status (special: includes sanitize callback to enforce allowed values).
-         * This is the main payment status tracked: unpaid, partial, or paid.
-         */
+        // Payment status: enforce allowed values via sanitize callback.
         register_post_meta( 'shop_order', 'aaa_oc_payment_status', [
             'type'              => 'string',
             'single'            => true,
             'show_in_rest'      => true,
-            'sanitize_callback' => function( $value ) {
+            'sanitize_callback' => function ( $value ) {
                 return in_array( $value, [ 'unpaid', 'partial', 'paid' ], true ) ? $value : 'unpaid';
             },
         ] );
 
-        /**
-         * Numeric fields that store payment amounts.
-         * These are declared with type 'number' and made REST-visible for ACP support.
-         */
+        // Numeric amount fields stored on the order record.
         $amount_fields = [
             'aaa_oc_cash_amount',
             'aaa_oc_zelle_amount',
@@ -62,33 +59,43 @@ class AAA_OC_Payment_Meta {
             'epayment_tip',
             'total_order_tip',
         ];
-
         foreach ( $amount_fields as $key ) {
             register_post_meta( 'shop_order', $key, [
                 'type'          => 'number',
                 'single'        => true,
                 'show_in_rest'  => true,
-                'auth_callback' => '__return_true', // always allow reads
+                'auth_callback' => '__return_true',
             ] );
         }
 
-        /**
-         * Admin-facing internal notes (optional field, used in logs and saved by admin).
-         */
+        // Admin notes stored in the index and mirrored to the order.
         register_post_meta( 'shop_order', 'payment_admin_notes', [
             'type'          => 'string',
             'single'        => true,
             'show_in_rest'  => true,
             'auth_callback' => '__return_true',
-        ]);
+        ] );
+
+        // Consolidated payment detail string (human-readable breakdown with tip info).
+        register_post_meta( 'shop_order', 'epayment_detail', [
+            'type'          => 'string',
+            'single'        => true,
+            'show_in_rest'  => true,
+            'auth_callback' => '__return_true',
+        ] );
     }
 
     /**
-     * Optional utility to update status only if it changed.
-     * Helps prevent unnecessary writes or version bumps.
+     * Optional helper to update the payment status meta only when it changes.
+     * Helps prevent redundant writes and unnecessary version bumps.
+     *
+     * @param int    $order_id  The WooCommerce order ID.
+     * @param string $new_status New status (unpaid, partial, or paid).
      */
     public static function maybe_update_payment_status_meta( $order_id, $new_status ) {
-        if ( ! $order_id || ! $new_status ) return;
+        if ( ! $order_id || ! $new_status ) {
+            return;
+        }
         $current = get_post_meta( $order_id, 'aaa_oc_payment_status', true );
         if ( $new_status !== $current ) {
             update_post_meta( $order_id, 'aaa_oc_payment_status', $new_status );

@@ -1,0 +1,15 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+#editor-note-view h3.hndle {
+	background: #ff0000!important;
+	color: #fff!important;
+}
+#admin_add_note {
+	height: 150px;
+}
+
+.notes-settings-label{
+	width:300px;
+	display: block;
+	font-weight: bold;
+	margin-top:10px;
+}

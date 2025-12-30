@@ -1,0 +1,30 @@
+- Give user option on page/post list of displaying checkbox, notes or nothing. Code below for checkbox
+- Add editor notes to somewhere else because it's getting buried.
+- Fix screenshot 1. Not displaying on repository page
+
+
+
+ // Add a new column to the posts and pages list
+    function add_custom_column($columns)
+    {
+        $columns['admin_note'] = 'Admin Note';
+        return $columns;
+    }
+
+    add_filter('manage_posts_columns', 'add_custom_column');
+    add_filter('manage_pages_columns', 'add_custom_column');
+
+// Display the checkbox in the new column
+    function custom_column_content($column_name, $post_id)
+    {
+        if ('admin_note' === $column_name) {
+            $admin_note = get_post_meta($post_id, 'gb_admin_note', true);
+            // Check if there is an entry for gb_admin_note
+            $checked = !empty($admin_note) ? 'checked' : '';
+            // Display the checkbox
+            echo '<input type="checkbox" ' . $checked . ' disabled>';
+        }
+    }
+
+    add_action('manage_posts_custom_column', 'custom_column_content', 10, 2);
+    add_action('manage_pages_custom_column', 'custom_column_content', 10, 2);
