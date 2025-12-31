@@ -1,9 +1,17 @@
 <?php
 /**
- * Filepath: sfwf/index/class-wf-sfwf-forecast-runner.php
+ * Version: 1.3.0 (2025-12-31)
+ * Enhanced to populate the AI summary meta field (aip_forecast_summary) and
+ * updated comments.  Works with forecast grid version 1.3.0.
+ *
+ * Filepath: index/class-wf-sfwf-forecast-runner.php
  * ---------------------------------------------------------------------------
  * Main forecast runner that coordinates all forecast modules.
- * This replaces the previous monolithic update_product_forecast().
+ *
+ * This version extends the original by adding support for a consolidated
+ * `aip_forecast_summary` meta field.  After computing all forecast metrics,
+ * the runner assembles a summary of key metrics (stock quantity, sales
+ * status, stock status and flags) and stores it as a JSON‑encoded string.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -120,13 +128,13 @@ class WF_SFWF_Forecast_Runner {
         $stock = WF_SFWF_Forecast_Stock::calculate( $product );
 
         // Step 4: Projection Dates
-	$sales_day_clean = floatval( preg_replace('/[^0-9\.]/', '', $sales['forecast_sales_day']) );
-	$projections = WF_SFWF_Forecast_Projections::calculate( $product, $sales_day_clean );
+        $sales_day_clean = floatval( preg_replace('/[^0-9\.]/', '', $sales['forecast_sales_day']) );
+        $projections = WF_SFWF_Forecast_Projections::calculate( $product, $sales_day_clean );
 
         // Step 5: Sales Status
         $status = WF_SFWF_Forecast_Status::evaluate( $product, [
             'stock'              => $stock['forecast_stock_qty'],
-            'total_units_sold'   => $sales['forecast_total_units_sold'],
+            'total_units_sold'   => $sales['forecast_total_units_sold'] ?? 0,
             'sales_day'          => $sales['forecast_sales_day'],
             'first_sold'         => $first_sold,
             'last_sold'          => $last_sold,
@@ -147,6 +155,27 @@ class WF_SFWF_Forecast_Runner {
             $status,
             $flags
         );
+
+        /*
+         * Compose a summary of forecast information for AI/ML use.  The summary
+         * consolidates a handful of key metrics into a single JSON object.  It
+         * includes stock quantity, the WooCommerce stock status (instock or
+         * outofstock), the forecast sales status (active/not_moving tiers), and
+         * the state of manual flags.  Storing this as a single meta value
+         * simplifies querying and vector indexing.
+         */
+        $summary_data = [
+            'stock_qty'    => $stock['forecast_stock_qty'],
+            'stock_status' => $product->get_stock_status(),
+            'sales_status' => $status['forecast_sales_status'] ?? 'active',
+            'flags'        => [
+                'do_not_reorder'   => $flags['forecast_do_not_reorder'] ?? 'no',
+                'must_stock'       => $flags['forecast_is_must_stock'] ?? 'no',
+                'force_reorder'    => $flags['forecast_force_reorder'] ?? 'no',
+                'flag_for_review'  => $flags['forecast_flag_for_review'] ?? 'no',
+            ],
+        ];
+        $fields['aip_forecast_summary'] = wp_json_encode( $summary_data );
 
         WF_SFWF_Forecast_Meta_Updater::write( $product_id, $fields );
     }

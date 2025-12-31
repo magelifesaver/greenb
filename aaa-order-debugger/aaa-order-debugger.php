@@ -2,34 +2,24 @@
 /**
  * Plugin Name: AAA Order Debugger
  * Description: Debug tool to view order JSON and selected workflow tables (order index, payment index, fulfillment logs, options).
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Workflow
  * File Path: /wp-content/plugins/aaa-order-debugger/aaa-order-debugger.php
  */
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-
-// Define a version constant for easier cache busting if needed.
-if ( ! defined( 'AAA_ORDER_DEBUGGER_VERSION' ) ) {
-    define( 'AAA_ORDER_DEBUGGER_VERSION', '1.1.2' );
-}
+// Exit if accessed directly and define a version constant.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'AAA_ORDER_DEBUGGER_VERSION' ) ) { define( 'AAA_ORDER_DEBUGGER_VERSION', '1.1.3' ); }
 
 class AAA_Order_Debugger {
 
-    /**
-     * Initialise hooks.
-     */
+    /** Initialise hooks. */
     public static function init() : void {
         add_action( 'admin_menu', [ __CLASS__, 'menu' ] );
         add_action( 'admin_post_aaa_order_debugger', [ __CLASS__, 'handle' ] );
     }
 
-    /**
-     * Add the submenu under WooCommerce.
-     */
+    /** Add submenu under WooCommerce. */
     public static function menu() : void {
         add_submenu_page(
             'woocommerce',
@@ -41,9 +31,7 @@ class AAA_Order_Debugger {
         );
     }
 
-    /**
-     * Render the settings page.
-     */
+    /** Render the settings page. */
     public static function page() : void {
         echo '<div class="wrap">';
         echo '<h1>' . esc_html__( 'Order Debugger', 'aaa-order-debugger' ) . '</h1>';
@@ -57,16 +45,14 @@ class AAA_Order_Debugger {
         echo '</div>';
     }
 
-    /**
-     * Handle the form submission.
-     */
+    /** Handle the form submission. */
     public static function handle() : void {
         check_admin_referer( 'aaa_order_debugger' );
         global $wpdb;
 
         $order_id = isset( $_POST['order_id'] ) ? absint( $_POST['order_id'] ) : 0;
-        echo '<div class="wrap">';
-        echo '<h1>' . esc_html__( 'Debugger Results', 'aaa-order-debugger' ) . '</h1>';
+        // Begin wrapper and heading.
+        echo '<div class="wrap"><h1>' . esc_html__( 'Debugger Results', 'aaa-order-debugger' ) . '</h1>';
 
         if ( ! $order_id ) {
             echo '<p>' . esc_html__( 'No order ID provided.', 'aaa-order-debugger' ) . '</p>';
@@ -82,8 +68,8 @@ class AAA_Order_Debugger {
         }
 
         echo '<h2>' . esc_html__( 'Order #', 'aaa-order-debugger' ) . esc_html( $order_id ) . '</h2>';
-
-        // Wrap all output in a container for copying.
+        // Top copy button
+        echo '<p><button type="button" class="button aaa-debug-copy-btn" onclick="aaaCopyDebugger(this)">' . esc_html__( 'Copy All', 'aaa-order-debugger' ) . '</button></p>';
         echo '<div id="aaa-debug-container" style="white-space:pre-wrap;font-family:monospace;font-size:13px;">';
 
         // 1. Full REST JSON of the order.
@@ -112,57 +98,37 @@ class AAA_Order_Debugger {
         echo '=== FULFILLMENT LOGS ===\n';
         echo esc_html( print_r( $fulfillment_logs, true ) ) . "\n\n";
 
-        // 5. Options table dump (mask sensitive values).
+        // 5. Options table dump (mask secrets and exclude daily_count/api_key rows).
         $options = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}aaa_oc_options", ARRAY_A );
-        // Mask sensitive keys.
-        foreach ( $options as &$opt ) {
-            if ( isset( $opt['option_key'] ) ) {
-                // Mask the OpenAI key and any other secrets.
-                if ( in_array( $opt['option_key'], [ 'aaa_wf_ai_openai_key' ], true ) ) {
-                    $opt['option_value'] = '[MASKED]';
-                }
+        $filtered = [];
+        foreach ( $options as $opt ) {
+            $key = isset( $opt['option_key'] ) ? $opt['option_key'] : '';
+            // Skip daily_order_count* and any key containing api_key
+            if ( $key !== '' && ( stripos( $key, 'daily_order_count' ) === 0 || stripos( $key, 'api_key' ) !== false ) ) {
+                continue;
             }
+            if ( $key === 'aaa_wf_ai_openai_key' ) {
+                $opt['option_value'] = '[MASKED]';
+            }
+            $filtered[] = $opt;
         }
         echo '=== ' . esc_html( $wpdb->prefix . 'aaa_oc_options' ) . ' ===\n';
-        echo esc_html( print_r( $options, true ) ) . "\n\n";
+        echo esc_html( print_r( $filtered, true ) ) . "\n\n";
 
         echo '</div>'; // End of debug container.
 
         // Copy button without alert; toggle text while copying.
         echo '<p><button type="button" class="button aaa-debug-copy-btn" onclick="aaaCopyDebugger(this)">' . esc_html__( 'Copy All', 'aaa-order-debugger' ) . '</button></p>';
 
-        // Inline script for copy functionality.
-        echo '<script>
-        function aaaCopyDebugger(btn){
-            var container = document.getElementById("aaa-debug-container");
-            if (!container) return;
-            var text = container.innerText || container.textContent || "";
-            var button = btn || document.querySelector(".aaa-debug-copy-btn");
-            var original = button ? button.textContent : "";
-            if (button) {
-                button.disabled = true;
-                button.textContent = "Copying...";
-            }
-            navigator.clipboard.writeText(text).finally(function(){
-                if (button) {
-                    button.disabled = false;
-                    button.textContent = original || "Copy All";
-                }
-            });
-        }
-        </script>';
+        // Inline script for copy functionality (condensed).
+        echo '<script>function aaaCopyDebugger(btn){var c=document.getElementById("aaa-debug-container");if(!c)return;var t=c.innerText||c.textContent||"",b=btn||document.querySelector(".aaa-debug-copy-btn"),o=b?b.textContent:"";if(b){b.disabled=true;b.textContent="Copying..."}navigator.clipboard.writeText(t).finally(function(){if(b){b.disabled=false;b.textContent=o||"Copy All";}});}</script>';
 
         echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=aaa-order-debugger' ) ) . '" class="button">&larr; ' . esc_html__( 'Back', 'aaa-order-debugger' ) . '</a></p>';
         echo '</div>';
         exit;
     }
 
-    /**
-     * Fetch the internal WC REST order JSON.
-     *
-     * @param int $order_id The order ID.
-     * @return string JSON representation.
-     */
+    /** Fetch the internal WC REST order JSON. @param int $order_id Order ID. @return string */
     private static function get_order_rest_json( int $order_id ) : string {
         // Ensure WC REST controller exists.
         if ( ! class_exists( 'WC_REST_Orders_V3_Controller' ) && ! class_exists( 'WC_REST_Orders_V2_Controller' ) ) {

@@ -1,9 +1,18 @@
 <?php
+// Version: 1.3.0 (2025-12-31)
+// Added AI Summary column and group (aip_forecast_summary) and included more
+// descriptive comments.  This version aligns with changes in the forecast
+// runner and dashboard to support AI workflows.
 /**
- * Filepath: sfwf/helpers/forecast-column-definitions.php
+ * Filepath: helpers/forecast-column-definitions.php
  * ---------------------------------------------------------------------------
  * Central list of all forecast product meta fields used in grids/reports.
  * Defines visibility, sorting, filtering, formatting, and labels.
+ *
+ * This version includes a new summary column (`aip_forecast_summary`) that
+ * encapsulates key forecast information into a single JSON string.  It is
+ * grouped under "AIP Summary" so that users can toggle the column on/off
+ * easily and quickly identify AI‑relevant data.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +30,6 @@ class SFWF_Column_Definitions {
                 'type'       => 'number',
                 'sortable'   => true,
                 'filterable' => false,
-                // Columns are grouped to allow UI toggling in the forecast grid. See views/forecast-dashboard.php
                 'group'      => 'Inventory',
             ],
             'forecast_total_units_sold' => [
@@ -233,6 +241,17 @@ class SFWF_Column_Definitions {
                 'sortable'   => true,
                 'filterable' => false,
                 'group'      => 'Lifecycle',
+            ],
+
+            // 🧠 AI Forecast Summary
+            'aip_forecast_summary' => [
+                'label'      => 'AI Summary',
+                'type'       => 'text',
+                'sortable'   => false,
+                'filterable' => false,
+                // Use a short, underscored group key so that sanitize_html_class
+                // produces a consistent slug (aip_forecast_summary).
+                'group'      => 'aip_forecast_summary',
             ],
         ];
     }
