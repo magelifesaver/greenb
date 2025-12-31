@@ -92,9 +92,11 @@ class Wb_Sticky_Notes {
 	public function __construct() {
 		if ( defined( 'WB_STICKY_NOTES_VERSION' ) ) {
 			$this->version = WB_STICKY_NOTES_VERSION;
-		} else {
-			$this->version = '1.2.4';
-		}
+        } else {
+            // Fallback version when the constant is not defined. Update to
+            // reflect the current plugin version.
+            $this->version = '1.2.7';
+        }
 		$this->plugin_name =WB_STICKY_PLUGIN_NAME;
 
 

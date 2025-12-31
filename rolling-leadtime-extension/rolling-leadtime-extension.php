@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Rolling Lead‑Time Extension
  * Description: Adds rolling lead‑time logic to Time Picker for WooCommerce. Computes the earliest allowable delivery/pickup slot based on preparation time, dispatch buffer and travel time and adjusts the existing time picker accordingly. Also displays an estimated arrival window on product pages.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: AI Assistant
  * License: GPL2
  * Text Domain: rlt

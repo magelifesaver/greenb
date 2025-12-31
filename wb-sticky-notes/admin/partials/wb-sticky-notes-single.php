@@ -49,19 +49,53 @@ if(isset($theme_data) && is_array($theme_data))
 	$content=isset($theme_data['content']) ? $theme_data['content'] : '';
 	$data_id=(isset($theme_data['id_wb_stn_notes']) ? $theme_data['id_wb_stn_notes'] : $data_id);
 }
+// Determine global status and note ownership for permission checks.
+$current_user_id = get_current_user_id();
+$is_global_note  = 0;
+$note_owner_id   = 0;
+if ( isset( $theme_data ) && is_array( $theme_data ) ) {
+    $is_global_note = isset( $theme_data['is_global'] ) ? absint( $theme_data['is_global'] ) : 0;
+    $note_owner_id  = isset( $theme_data['id_user'] ) ? absint( $theme_data['id_user'] ) : 0;
+}
 ?>
 <div class="wb_stn_note <?php echo esc_attr($theme);?> <?php echo esc_attr($font_family);?>" style="<?php echo esc_attr($font_size.$width.$height.$postop.$posleft.$z_index.$state);?>" data-wb_stn_left="<?php echo esc_attr($left_vl);?>" data-wb_stn_top="<?php echo esc_attr($top_vl);?>" data-wb_stn_width="<?php echo esc_attr($width_vl);?>" data-wb_stn_height="<?php echo esc_attr($height_vl);?>" data-wb_stn_theme="<?php echo esc_attr($theme);?>" data-wb_stn_font="<?php echo esc_attr($font_family);?>" data-wb_stn_zindex="<?php echo esc_attr($zindex_vl);?>" data-wb_stn_id="<?php echo esc_attr($data_id);?>">
-	<div class="wb_stn_note_hd">
-		<div class="wb_stn_menu_btn wb_stn_note_options_menu">
-			<span class="dashicons dashicons-menu"></span>
-		</div>
-		<div class="wb_stn_menu_right">
-			<div class="wb_stn_menu_btn wb_stn_note_remove">
-				<span class="dashicons dashicons-no-alt"></span>
-			</div>
-		</div>
-		<?php echo $note_dropdown_menu_html;?>
-	</div>	
+    <div class="wb_stn_note_hd">
+        <div class="wb_stn_menu_btn wb_stn_note_options_menu">
+            <span class="dashicons dashicons-menu"></span>
+        </div>
+        <?php
+        // Show a small indicator when a note is global. Uses Dashicons to
+        // provide a visual cue that the note is shared with all users.
+        if ( isset( $theme_data ) && is_array( $theme_data ) ) {
+            $global = isset( $theme_data['is_global'] ) ? absint( $theme_data['is_global'] ) : 0;
+            if ( 1 === $global ) {
+                ?>
+                <div class="wb_stn_menu_btn wb_stn_global_indicator" title="<?php esc_attr_e( 'Global note', 'wb-sticky-notes' ); ?>">
+                    <span class="dashicons dashicons-admin-site"></span>
+                </div>
+                <!-- Refresh icon for global notes. Clicking triggers an AJAX reload of notes without refreshing the whole page. -->
+                <div class="wb_stn_menu_btn wb_stn_global_refresh" title="<?php esc_attr_e( 'Refresh notes', 'wb-sticky-notes' ); ?>">
+                    <span class="dashicons dashicons-update"></span>
+                </div>
+                <?php
+            }
+        }
+        ?>
+        <div class="wb_stn_menu_right">
+            <?php
+            // Show the delete button only if this note is not global or the
+            // current user is the owner of the note. Global notes should only
+            // be deletable by their creator to prevent other users from
+            // removing shared content.
+            if ( $is_global_note !== 1 || $current_user_id === $note_owner_id ) :
+            ?>
+            <div class="wb_stn_menu_btn wb_stn_note_remove">
+                <span class="dashicons dashicons-no-alt"></span>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php echo $note_dropdown_menu_html;?>
+    </div>
 	<div class="wb_stn_note_body">
 		<div class="wb_stn_note_body_inner" contenteditable="true">
 			<?php 

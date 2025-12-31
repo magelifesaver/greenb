@@ -25,9 +25,9 @@ if ( ! defined( 'WPINC' ) ) {
 		require_once plugin_dir_path( __FILE__ ).'settings.php';
 	}
 	?>
-	<div style="float:left; margin-top:25px; width:100%;">
+	<div style="float:left; margin-top:25px; width:100%;display:none;">
 		<div style="float:left; font-weight:bold; font-size:18px; width:100%;"><?php _e('Our free plugins', 'wb-sticky-notes'); ?></div>
-			<div style="float:left; width:99%; margin-left:1%; margin-top:15px; border:solid 1px #ccc; background:#fff; padding:15px; box-sizing:border-box;">
+			<div style="display:none;float:left; width:99%; margin-left:1%; margin-top:15px; border:solid 1px #ccc; background:#fff; padding:15px; box-sizing:border-box;">
 				<div style="float:left; margin-bottom:0px; width:100%;">
 					<div style="float:left; font-weight:bold; font-size:18px; width:100%;">
 						<a href="https://webbuilder143.com/woocommerce-custom-product-tabs/" target="_blank" style="text-decoration:none;"><?php _e('Custom Product Tabs For WooCommerce', 'wb-sticky-notes'); ?></a>
@@ -84,7 +84,7 @@ if ( ! defined( 'WPINC' ) ) {
 			</div>
 	</div>
 
-	<div style="background-color: #6d4cb7; color: white; padding: 20px; text-align: center; border-radius: 8px; font-family: Arial, sans-serif; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:50px; clear:both; float:left; width:100%; box-sizing:border-box;">
+	<div style="display:none;background-color: #6d4cb7; color: white; padding: 20px; text-align: center; border-radius: 8px; font-family: Arial, sans-serif; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:50px; clear:both; float:left; width:100%; box-sizing:border-box;">
 		<h2 style="font-size: 24px; margin: 0; font-weight: bold; color: white;">Support Our Plugin</h2>
 
 		<p style="font-size: 16px; margin-top: 20px;">

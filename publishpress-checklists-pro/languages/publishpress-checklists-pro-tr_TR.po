@@ -1,0 +1,916 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/publishpress-"
+"checklists-pro\n"
+"POT-Creation-Date: 2025-12-16T15:42:05+00:00\n"
+"PO-Revision-Date: 2025-12-17 08:44+0000\n"
+"Last-Translator: Adesina Adedeji <deji@publishpress.com>\n"
+"Language-Team: Turkish <https://weblate.publishpress.com/projects/"
+"publishpress-checklists-pro/publishpress-checklists-pro/tr/>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;getText;displayText;getTextN;getTextAndEscHtml\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: lib\n"
+
+#. Plugin Name of the plugin
+#. Plugin Name of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress Checklists Pro"
+msgstr "PublishPress Kontrol Listeleri Pro"
+
+#. Plugin URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#. Description of the plugin
+#: publishpress-checklists-pro.php
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"PublishPress Kontrol Listeleri ile içerikleriniz için yayınlama "
+"gereksinimlerini seçebilirsiniz."
+
+#. Author of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Author URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#: src/duplicate-checklist/duplicate-checklist.php:61
+msgid "Duplicate Requirement"
+msgstr "Yinelenen Gereksinim"
+
+#: src/duplicate-checklist/duplicate-checklist.php:85
+msgid "Delete"
+msgstr "Sil"
+
+#: src/duplicate-checklist/duplicate-checklist.php:90
+msgid "Delete this duplicate"
+msgstr "Bu tekrarı sil"
+
+#: src/duplicate-checklist/duplicate-checklist.php:108
+#: src/duplicate-checklist/duplicate-checklist.php:115
+msgid "Duplicate"
+msgstr "Tekrar"
+
+#: src/duplicate-checklist/duplicate-checklist.php:110
+msgid "Please enable the task before using this Duplicate feature."
+msgstr "Bu Kopyala özelliğini kullanmadan önce görevi etkinleştiriniz."
+
+#: src/duplicate-checklist/duplicate-checklist.php:119
+msgid "Duplicate this task"
+msgstr "Bu görevi yinelen"
+
+#: src/duplicate-checklist/duplicate-checklist.php:223
+msgid "Are you sure you want to duplicate this task?"
+msgstr "Bu görevi çoğaltmak istediğinizden emin misiniz?"
+
+#: src/duplicate-checklist/duplicate-checklist.php:224
+msgid "Duplicating..."
+msgstr "Yineleniyor..."
+
+#: src/duplicate-checklist/duplicate-checklist.php:225
+msgid "Task duplicated successfully!"
+msgstr "Görev başarıyla kopyalandı!"
+
+#: src/duplicate-checklist/duplicate-checklist.php:226
+msgid "Error duplicating Task."
+msgstr "Görevi yinelerken hata."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:71
+msgid "Duplicate Checklist Tools"
+msgstr "Yinelenen Kontrol Listesi Araçları"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:74
+msgid "Current Duplicate Requirements"
+msgstr "Mevcut Tekrar Eden Gereksinimler"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:77
+#, php-format
+msgid "Found %d duplicate requirements:"
+msgstr "%d yinelenen gereksinim bulundu:"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:93
+msgid ""
+"Are you sure you want to clean up this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"Bu kopyayı temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:94
+msgid "Clean Up"
+msgstr "Temizle"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:103
+msgid "No duplicate requirements found. Your system is clean!"
+msgstr "Kopya gereksinim bulunamadı. Sisteminiz temiz!"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:109
+msgid "Manual Cleanup"
+msgstr "Manuel Temizlik"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:110
+msgid ""
+"If you know the exact name of a stuck duplicate requirement, you can force "
+"clean it up here."
+msgstr ""
+"Eğer sıkışmış bir kopya gereksinimin tam adını biliyorsanız, buradan "
+"temizlenmesini zorlayabilirsiniz."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:115
+msgid "e.g., title_count_duplicate_2"
+msgstr "örneğin, başlık_sayısı_yinelenen_2"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:117
+msgid ""
+"Are you sure you want to force cleanup this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"Bu kopyayı zorla temizlemek istediğinizden emin misiniz? Bu işlem geri "
+"alınamaz."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:118
+msgid "Force Cleanup"
+msgstr "Temizlemeyi Zorla"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:125
+msgid "Orphaned PHP Class Mappings"
+msgstr "Yetim PHP Sınıf Eşleştirmeleri"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:126
+msgid ""
+"Class mappings link duplicate requirement names to their PHP class names. "
+"The system uses these mappings to determine which PHP class to instantiate "
+"for each duplicate requirement."
+msgstr ""
+"Sınıf eşlemeleri, tekrar eden gereksinim adlarını PHP sınıf adlarına bağlar. "
+"Sistem, her bir tekrar eden gereksinim için hangi PHP sınıfının "
+"örnekleneceğini belirlemek için bu eşlemeleri kullanır."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:127
+#, php-format
+msgid ""
+"Found %d class mappings. Clean up any orphaned mappings (mappings without "
+"corresponding duplicate requirements) to keep your database clean."
+msgstr ""
+"%d sınıf eşlemeleri bulundu. Veritabanınızı temiz tutmak için yetim "
+"eşlemeleri (karşılık gelen yinelenen gereksinimleri olmayan eşlemeleri) "
+"temizleyin."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:133
+msgid "Clean Up Orphaned Mappings"
+msgstr "Yetim Eşlemeleri Temizle"
+
+#: src/modules/accessibility/accessibility.php:81
+#: src/modules/accessibility/accessibility.php:180
+msgid "Accessibility"
+msgstr "Erişilebilirlik"
+
+#: src/modules/accessibility/accessibility.php:85
+#: src/modules/accessibility/accessibility.php:89
+msgid "Define tasks that verify accessibility"
+msgstr "Erişilebilirliği doğrulayan görevleri tanımla"
+
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:47
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:48
+msgid "H1, H2, H3 etc tags are used in logical order"
+msgstr "H1, H2, H3 vb. etiketler mantıksal sırayla kullanılıyor"
+
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:47
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:48
+msgid "Only one H1 tag in content"
+msgstr "İçerikte yalnızca bir H1 etiketi"
+
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:47
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:48
+msgid "Tables have a header row"
+msgstr "Tabloların bir başlık satırı vardır"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:109
+msgid "Advanced Custom Fields Support"
+msgstr "Gelişmiş Özel Alanlar Desteği"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:113
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:117
+msgid "Define tasks that must be complete before a product is published"
+msgstr "Bir ürün yayınlanmadan önce tamamlanması gereken görevleri tanımlayın"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:188
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:330
+msgid "ACF"
+msgstr "ACF"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:47
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:48
+#, php-format
+msgid "Number of characters in %s field"
+msgstr "%s alanındaki karakter sayısı"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:49
+#, php-format
+msgid "Minimum of %%s character in %s field"
+msgstr "%s alanında en az %%s karakter"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:50
+#, php-format
+msgid "Minimum of %%s characters in %s field"
+msgstr "%s alanında en az %%s karakter"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:51
+#, php-format
+msgid "Maximum of %%s character in %s field"
+msgstr "%s alanında maksimum %%s karakter"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:52
+#, php-format
+msgid "Maximum of %%s characters in %s field"
+msgstr "%s alanında maksimum %%s karakter"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:53
+#, php-format
+msgid "%%s character in %s field"
+msgstr "%s alanında %%s karakteri"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:54
+#, php-format
+msgid "%%s characters in %s field"
+msgstr "%s alanında %%s karakter"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:55
+#, php-format
+msgid "Between %%s and %%s characters in %s field"
+msgstr "%s alanında %%s ile %%s karakter arasında"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:318
+msgid "Got value from ACF Configuration."
+msgstr "ACF Yapılandırmasından değer alındı."
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:102
+#: src/modules/all-in-one-seo/all-in-one-seo.php:254
+msgid "All in One SEO"
+msgstr "Hepsi Bir Arada SEO"
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:106
+#: src/modules/all-in-one-seo/all-in-one-seo.php:110
+msgid "Define tasks that verify All in One SEO items"
+msgstr "Tüm Hepsi Bir Arada SEO öğelerini doğrulayan görevleri tanımla"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:51
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:52
+msgid "All in One SEO Headline Score"
+msgstr "Hepsi Bir Arada SEO Başlık Skoru"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:53
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:54
+#, php-format
+msgid "Minimum All in One SEO Headline Score: %d"
+msgstr "Minimum Hepsi Bir Arada SEO Başlık Puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:55
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:56
+#, php-format
+msgid "Maximum All in One SEO Headline Score: %d"
+msgstr "Maximum Hepsi Bir Arada SEO Başlık Puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:57
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:58
+#, php-format
+msgid "Exact All in One SEO Headline Score: %d"
+msgstr "Tam All in One SEO Başlık Puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:59
+#, php-format
+msgid "All in One SEO Headline Score between %d and %d"
+msgstr "Hepsi Bir Arada SEO Başlık Skoru %d ile %d arasında"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:50
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:51
+msgid "All in One SEO Score"
+msgstr "Hepsi Bir Arada SEO Skoru"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:52
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:53
+#, php-format
+msgid "Minimum All in One SEO score: %d"
+msgstr "Minimum Hepsi Bir Arada SEO puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:54
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:55
+#, php-format
+msgid "Maximum All in One SEO score: %d"
+msgstr "Maximum Hepsi Bir Arada SEO puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:56
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:57
+#, php-format
+msgid "Exact All in One SEO score: %d"
+msgstr "Tam All in One SEO puanı: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:58
+#, php-format
+msgid "All in One SEO Score between %d and %d"
+msgstr "Hepsi Bir Arada SEO Skoru %d ile %d arasında"
+
+#: src/modules/approved-by-user/approved-by-user.php:78
+msgid "Approved by User"
+msgstr "Kullanıcı tarafından onaylandı"
+
+#: src/modules/approved-by-user/approved-by-user.php:82
+#: src/modules/approved-by-user/approved-by-user.php:86
+msgid "Define tasks that require approval by specific users"
+msgstr "Belirli kullanıcılar tarafından onay gerektiren görevleri tanımla"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:51
+#, php-format
+msgid "Approved by %s"
+msgstr "%s tarafından onaylandı"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:52
+msgid "Approved by specific user"
+msgstr "belirli bir kullanıcı tarafından onaylandı"
+
+#: src/modules/audio-count/audio-count.php:78
+msgid "Audio Count"
+msgstr "Ses Sayısı"
+
+#: src/modules/audio-count/audio-count.php:82
+#: src/modules/audio-count/audio-count.php:86
+msgid "Define tasks that verify total audio in content"
+msgstr "İçerikteki toplam sesi doğrulayan görevleri tanımla"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:47
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:48
+msgid "Number of audio items in content"
+msgstr "İçerikteki ses öğelerinin sayısı"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:49
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:50
+#, php-format
+msgid "Minimum of %d audio items in content"
+msgstr "İçerikte en az %d ses öğesi"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:51
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:52
+#, php-format
+msgid "Maximum of %d audio items in content"
+msgstr "İçerikte en fazla %d ses öğesi"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:53
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:54
+#, php-format
+msgid "%d audio items in content"
+msgstr "%d ses öğesi içerikte"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:55
+#, php-format
+msgid "Between %d and %d audio items in content"
+msgstr "İçerikte %d ile %d arasında ses öğesi"
+
+#: src/modules/featured-image-size/featured-image-size.php:79
+msgid "Featured Image Size Support"
+msgstr "Desteklenen Öne Çıkan Görsel Boyutu"
+
+#: src/modules/featured-image-size/featured-image-size.php:83
+#: src/modules/featured-image-size/featured-image-size.php:87
+msgid "Define tasks that verify the featured image size"
+msgstr "Öne çıkan görsel boyutunu doğrulayan görevleri belirtin"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:51
+msgid "Featured image height"
+msgstr "Öne çıkan görsel yüksekliği"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:56
+#, php-format
+msgid "Minimum %spx for the featured image height"
+msgstr "Öne çıkan görsel yüksekliği için minimum %spx olmalı"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:64
+#, php-format
+msgid "Maximum %spx for the featured image height"
+msgstr "Öne çıkan görsel yüksekliği için maksimum %spx olmalı"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:69
+#, php-format
+msgid "Featured image height of %spx"
+msgstr "%spx yüksekliğinde öne çıkan görseli"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:70
+#, php-format
+msgid "Featured image height between %spx and %spx"
+msgstr "Öne çıkan görsel yüksekliği %spx ve %spx arasında olmalı"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:51
+msgid "Featured image width"
+msgstr "Öne çıkan görsel genişliği"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:56
+#, php-format
+msgid "Minimum %spx for the featured image width"
+msgstr "Öne çıkan görsel genişliği için minimum %spx olmalı"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:64
+#, php-format
+msgid "Maximum %spx for the featured image width"
+msgstr "Öne çıkan görsel genişliği için maksimum %spx olmalı"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:69
+#, php-format
+msgid "Featured image width of %spx"
+msgstr "%spx genişlikli öne çıkan görsel"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:70
+#, php-format
+msgid "Featured image width between %spx and %spx"
+msgstr "Öne çıkan görsel genişliği %spx ile %spx arasında olmalı"
+
+#: src/modules/image-count/image-count.php:78
+msgid "Image Count"
+msgstr "Görüntü Sayısı"
+
+#: src/modules/image-count/image-count.php:82
+#: src/modules/image-count/image-count.php:86
+msgid "Define tasks that verify total images in content"
+msgstr "İçerikteki toplam görüntüleri doğrulayan görevleri tanımlayın"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:47
+#: src/modules/image-count/lib/Requirement/ImageCount.php:48
+msgid "Number of images in content"
+msgstr "İçerikteki görsel sayısı"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:49
+#, php-format
+msgid "Minimum of %d image in content"
+msgstr "İçerikte en az %d resim var"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:50
+#, php-format
+msgid "Minimum of %d images in content"
+msgstr "İçerikte en az %d resim var"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:51
+#, php-format
+msgid "Maximum of %d image in content"
+msgstr "İçerikte maksimum %d resim"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:52
+#, php-format
+msgid "Maximum of %d images in content"
+msgstr "İçerikte maksimum %d resim var"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:53
+#, php-format
+msgid "%d image in content"
+msgstr "İçerikte %d resim var"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:54
+#, php-format
+msgid "%d images in content"
+msgstr "İçerikte %d resim var"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:55
+#, php-format
+msgid "Between %d and %d images in content"
+msgstr "İçerikte %d ile %d arasında resim var"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:46
+#, php-format
+msgid "Avoid using %s tags in content"
+msgstr "%s etiketlerini içerikte kullanmaktan kaçının"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:47
+msgid "Avoid heading tags in content"
+msgstr "İçerikte başlık etiketlerinden kaçının"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:48
+msgid "Content should not contain any of the selected heading tags."
+msgstr "İçerikte seçilen başlık etiketlerinden hiçbiri bulunmamalıdır."
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:59
+msgid "H1"
+msgstr "H1"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:60
+msgid "H2"
+msgstr "H2"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:61
+msgid "H3"
+msgstr "H3"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:62
+msgid "H4"
+msgstr "H4"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:63
+msgid "H5"
+msgstr "H5"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:64
+msgid "H6"
+msgstr "H6"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:78
+msgid "No Heading Tags in Content"
+msgstr "İçerikte Başlık Etiketi Yok"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:82
+#: src/modules/no-heading-tags/no-heading-tags.php:86
+msgid "Define tasks that verify no prohibited heading tags are in content"
+msgstr ""
+"İçerikte yasaklı başlık etiketlerinin olmadığını doğrulayan görevleri tanımla"
+
+#: src/modules/prosettings/prosettings.php:120
+msgid "Pro Settings"
+msgstr "Profesyonel Ayarlar"
+
+#: src/modules/prosettings/prosettings.php:213
+msgid "License key:"
+msgstr "Lisans anahtarı:"
+
+#: src/modules/prosettings/prosettings.php:220
+msgid "Show Checklists column in post lists:"
+msgstr "Gönderi listelerinde Kontrol Listeleri sütununu göster:"
+
+#: src/modules/prosettings/prosettings.php:227
+msgid "Enable Status Filter:"
+msgstr "Durum Filtrelemesini Etkinleştir:"
+
+#: src/modules/prosettings/prosettings.php:235
+msgid "Enable Duplicate Checklists"
+msgstr "Yinelenen Kontrol Listelerini Etkinleştir"
+
+#: src/modules/prosettings/prosettings.php:243
+msgid "Debug Duplicate Feature:"
+msgstr "Tekrarı Hata Ayıkla Özelliği:"
+
+#: src/modules/prosettings/prosettings.php:296
+msgid ""
+"This allows tasks to be disabled for specific statuses such as \"Draft\" or "
+"\"Published\"."
+msgstr ""
+"Bu, görevlerin \"Taslak\" veya \"Yayınlandı\" gibi belirli durumlar için "
+"devre dışı bırakılmasına olanak tanır."
+
+#: src/modules/prosettings/prosettings.php:311
+msgid "This allows users to duplicate existing checklist task."
+msgstr ""
+"Bu, kullanıcıların mevcut kontrol listesi görevini kopyalamalarına olanak "
+"tanır."
+
+#: src/modules/prosettings/prosettings.php:327
+msgid "Enable debugging tools for duplicate functionality."
+msgstr "Yinelenen işlevsellik için hata ayıklama araçlarını etkinleştir."
+
+#: src/modules/prosettings/prosettings.php:347
+msgid ""
+"Add a Checklists column to the Posts screen showing how many requirements "
+"are complete."
+msgstr ""
+"Görevlerin tamamlanma sayısını gösteren bir Kontrol Listeleri sütunu "
+"Gönderiler ekranına ekleyin."
+
+#: src/modules/prosettings/prosettings.php:364
+msgid "Checklists"
+msgstr "Kontrol Listeleri"
+
+#: src/modules/prosettings/prosettings.php:421
+msgid "No checklists"
+msgstr "Liste yok"
+
+#: src/modules/prosettings/prosettings.php:494
+msgid "Debug Duplicate"
+msgstr "Tekrarı Hata Ayıkla"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:61
+#, fuzzy, php-format
+#| msgid "Publish time should be in the future"
+msgid "Publish time should be at %s"
+msgstr "Yayın zamanı gelecekte olmalıdır"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:62
+msgid "(not set)"
+msgstr ""
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:64
+#, fuzzy
+#| msgid "Publish time should be in the future"
+msgid "Publish time should be at a specific time"
+msgstr "Yayın zamanı gelecekte olmalıdır"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:47
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:48
+msgid "Publish time should be in the future"
+msgstr "Yayın zamanı gelecekte olmalıdır"
+
+#: src/modules/publish-time/publish-time.php:80
+#: src/modules/publish-time/publish-time.php:190
+msgid "Publish Date / Time"
+msgstr "Yayın Tarihi / Saati"
+
+#: src/modules/publish-time/publish-time.php:84
+#: src/modules/publish-time/publish-time.php:88
+msgid "Combine exact and future publish time checks"
+msgstr "Kesin ve gelecekteki yayın zamanı kontrollerini birleştir"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:48
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:49
+msgid "Rank Math SEO Score"
+msgstr "Rank Math SEO Puanı"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:50
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:51
+#, php-format
+msgid "Minimum Rank Math SEO score: %d"
+msgstr "Minimum Rank Math SEO puanı: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:52
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:53
+#, php-format
+msgid "Maximum Rank Math SEO score: %d"
+msgstr "Maximum Rank Math SEO puanı: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:54
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:55
+#, php-format
+msgid "Exact Rank Math SEO score: %d"
+msgstr "Tam Rank Math SEO puanı: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:56
+#, php-format
+msgid "Rank Math SEO scores between %d and %d"
+msgstr "Rank Math SEO puanları %d ile %d arasında"
+
+#: src/modules/rank-math/rank-math.php:103
+#: src/modules/rank-math/rank-math.php:247
+msgid "Rank Math SEO"
+msgstr "Rank Math SEO"
+
+#: src/modules/rank-math/rank-math.php:107
+#: src/modules/rank-math/rank-math.php:111
+msgid "Define tasks that verify Rank Math SEO items"
+msgstr "Rank Math SEO öğelerini doğrulayan görevleri tanımla"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:47
+#: src/modules/video-count/lib/Requirement/VideoCount.php:48
+msgid "Number of video items in content"
+msgstr "İçerikteki video öğelerinin sayısı"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:49
+#: src/modules/video-count/lib/Requirement/VideoCount.php:50
+#, php-format
+msgid "Minimum of %d video items in content"
+msgstr "İçerikte en az %d video öğesi"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:51
+#: src/modules/video-count/lib/Requirement/VideoCount.php:52
+#, php-format
+msgid "Maximum of %d video items in content"
+msgstr "İçerikte en fazla %d video öğesi"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:53
+#: src/modules/video-count/lib/Requirement/VideoCount.php:54
+#, php-format
+msgid "%d video items in content"
+msgstr "%d video öğesi içerikte"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:55
+#, php-format
+msgid "Between %d and %d video items in content"
+msgstr "İçerikte %d ile %d video öğesi arasında"
+
+#: src/modules/video-count/video-count.php:78
+msgid "Video Count"
+msgstr "Video Sayısı"
+
+#: src/modules/video-count/video-count.php:82
+#: src/modules/video-count/video-count.php:86
+msgid "Define tasks that verify total video in content"
+msgstr "İçerikteki toplam videoyu doğrulayan görevleri tanımla"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:65
+msgid "Check the \"Allow backorders?\" box"
+msgstr "“Ön Sipariş (ısmarlama) satışa izin ver” kutusunu işaretleyin"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:66
+msgid "Allow backorders"
+msgstr "Ön Sipariş (ısmarlama) satışa izin ver"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:67
+msgid "Allow backorders, but notify"
+msgstr "Ön Sipariş (ısmarlama) satışa izin ver, ancak bilgilendir"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:68
+msgid "Do not allow backorders"
+msgstr "Ön sipariş (ısmarlama) satışa izin vermeyin"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:169
+msgid "Do not allow"
+msgstr "İzin verme"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:176
+msgid "Allow"
+msgstr "İzin ver"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:183
+msgid "Allow, but notify customer"
+msgstr "İzin ver, ancak müşteriye bildirin"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:65
+msgid "Select some products for \"Cross-sells\""
+msgstr "\"Çapraz satış\" için bazı ürünler seçin"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:69
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:84
+#, php-format
+msgid "Min %s Max %s"
+msgstr "Minimum %s Maksimum %s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:70
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:74
+#, php-format
+msgid "Minimum of %s products for \"Cross-sells\""
+msgstr "\"Çapraz satışlar\" için en az %s ürün gerekli"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:78
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:82
+#, php-format
+msgid "Maximum of %s products for \"Cross-sells\""
+msgstr "\"Çapraz satışlar\" için en fazla %s ürün olmalı"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:86
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:87
+#, php-format
+msgid "%s products for \"Cross-sells\""
+msgstr "\"Çapraz Satışlar\" için %s ürünler"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:88
+#, php-format
+msgid "%s to %s products for \"Cross-sells\""
+msgstr "\"Çapraz satışlar\" için %s ila %s arası ürünler"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:72
+msgid "Discount for the \"Sale price\""
+msgstr "“ İndirimli fiyatı” için iskonto"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:73
+#, php-format
+msgid "Min %s%% Max %s%%"
+msgstr "Minimum %s%% Maksimum %s%%"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:74
+#: src/modules/woocommerce/lib/Requirement/Discount.php:75
+#, php-format
+msgid "Min %s%% discount for the \"Sale price\""
+msgstr "“İndirimli fiyatı\" için iskonto minimum %s%% olmalı"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:76
+#: src/modules/woocommerce/lib/Requirement/Discount.php:77
+#, php-format
+msgid "Max %s%% discount for the \"Sale price\""
+msgstr "“İndirimli Satış fiyatı\" için iskonto maksimum %s%%"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:78
+#: src/modules/woocommerce/lib/Requirement/Discount.php:79
+#, php-format
+msgid "%s%% discount for the \"Sale price\""
+msgstr "“İndirimli fiyatı” için %s%% iskonto"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:80
+#, php-format
+msgid "%s%% to %s%% discount for the \"Sale price\""
+msgstr "“İndirimli fiyatı” için %s%% ila %s%% iskonto"
+
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:43
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:44
+msgid "Check the \"Downloadable\" box"
+msgstr "\"İndirilebilir\" kutusunu işaretleyin"
+
+#: src/modules/woocommerce/lib/Requirement/Image.php:43
+#: src/modules/woocommerce/lib/Requirement/Image.php:44
+msgid "Product image"
+msgstr "Ürün Resmi"
+
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:43
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:44
+msgid "Check the \"Manage stock?\" box"
+msgstr "\"Stokları yönetilsin mi?” kutusunu işaretleyin"
+
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:42
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:43
+msgid "Enter a \"Regular price\""
+msgstr "Bir \"Normal fiyat\" girin"
+
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:44
+msgid "Enter a \"Sale price\""
+msgstr "Bir “İndirimli Satış Fiyatı\" girin"
+
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:44
+msgid "Schedule the \"Sale price\""
+msgstr "“İndirimli Satış fiyatını\" planlayın"
+
+#: src/modules/woocommerce/lib/Requirement/Sku.php:43
+#: src/modules/woocommerce/lib/Requirement/Sku.php:44
+msgid "Enter a \"SKU\""
+msgstr "Bir “Stok Kodu” girin"
+
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:43
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:44
+msgid "Check the \"Sold individually\" box"
+msgstr "\"Tek tek satılır\" kutusunu işaretleyin"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:80
+msgid "Select some products for \"Upsells\""
+msgstr "“Üst Satış” için bazı ürünler seçin"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:85
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:89
+#, php-format
+msgid "Minimum of %s products for \"Upsells\""
+msgstr "\"Üst Satışlar\" için en az %s ürün gerekli"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:93
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:97
+#, php-format
+msgid "Maximum of %s products for \"Upsells\""
+msgstr "\"Üst Satışlar\" için en fazla %s ürün olmalı"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:101
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:102
+#, php-format
+msgid "%s products for \"Upsells\""
+msgstr "“Üst Satış” için %s ürünler"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:103
+#, php-format
+msgid "%s to %s products for \"Upsells\""
+msgstr "“Üst Satışlar” için %s ila %s arası ürünler"
+
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:42
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:43
+msgid "Check the \"Virtual\" box"
+msgstr "“Online” kutusunu işaretleyin"
+
+#: src/modules/woocommerce/woocommerce.php:113
+msgid "WooCommerce Support"
+msgstr "WooCommerce Desteği"
+
+#: src/modules/woocommerce/woocommerce.php:117
+#: src/modules/woocommerce/woocommerce.php:121
+msgid ""
+"Define tasks that must be complete before a WooCommerce product is published"
+msgstr ""
+"Bir WooCommerce ürünü yayınlanmadan önce tamamlanması gereken görevleri "
+"belirt"
+
+#: src/modules/woocommerce/woocommerce.php:287
+msgid "WooCommerce"
+msgstr "WooTicaret"
+
+#: src/PluginServiceProvider.php:61
+msgid "Checklists Pro"
+msgstr "Kontrol Listeleri Pro"
+
+#: src/status-filter/StatusFilter.php:70
+msgid "Exclude Statuses"
+msgstr "Durumları Hariç Tut"
+
+#: src/status-filter/StatusFilter.php:91
+msgid "Select statuses to exclude"
+msgstr "Hariç tutmak için durumları seçin"
+
+#~ msgid " is filled"
+#~ msgstr " doldurulmuştur"
+
+#~ msgid "Show Checklists column in post lists."
+#~ msgstr "Gönderi listelerinde Kontrol Listeleri sütununu göster."

@@ -1,0 +1,156 @@
+/*
+ * Styling for the AAA Account Portal. Uses CSS custom properties so colours
+ * can be modified via plugin settings. Buttons and tabs reflect the
+ * Lokey Delivery palette (green, gold and black) by default.
+ */
+
+:root {
+  --aaa-acp-primary: #006400;
+  --aaa-acp-accent: #fed700;
+  --aaa-acp-text: #000000;
+  /* Optional override variables. These are defined dynamically via plugin settings and may be absent. */
+  --aaa-acp-bg: initial;
+  --aaa-acp-label: initial;
+  --aaa-acp-link: initial;
+  --aaa-acp-button-bg: initial;
+  --aaa-acp-button-text: initial;
+  --aaa-acp-button-hover-bg: initial;
+  --aaa-acp-button-hover-text: initial;
+}
+
+.aaa-acp {
+  max-width: 420px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.aaa-acp-tabs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.aaa-acp-tab {
+  flex: 1;
+  padding: 8px 10px;
+  background: var(--aaa-acp-primary);
+  color: #ffffff;
+  border: 1px solid var(--aaa-acp-primary);
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.aaa-acp-tab.is-active {
+  background: var(--aaa-acp-accent);
+  color: var(--aaa-acp-text);
+  border-color: var(--aaa-acp-accent);
+}
+
+.aaa-acp-form {
+  /* Use optional border colour when provided; otherwise no border by default */
+  border: none;
+  padding: 15px;
+  border-radius: 0 4px 4px 4px;
+  /* Customisable form background, falls back to white */
+  background: var(--aaa-acp-bg, #ffffff) !important;
+}
+
+.aaa-acp-form label {
+  display: block;
+  margin-top: 8px;
+  font-weight: 600;
+  /* Customisable label colour; fallback to inherit (theme text colour) */
+  color: var(--aaa-acp-label, inherit) !important;
+}
+
+.aaa-acp-form input[type="text"],
+.aaa-acp-form input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--aaa-acp-primary);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.aaa-acp-submit {
+  /* Use customisable button background and text colours, with fallbacks to accent/text */
+  background: var(--aaa-acp-button-bg, var(--aaa-acp-accent)) !important;
+  color: var(--aaa-acp-button-text, var(--aaa-acp-text)) !important;
+  border: none;
+  padding: 10px 12px;
+  margin-top: 12px;
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.aaa-acp-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Button hover state uses optional overrides; fallback to normal button colours */
+.aaa-acp-submit:hover:not(:disabled) {
+  background: var(--aaa-acp-button-hover-bg, var(--aaa-acp-button-bg, var(--aaa-acp-accent))) !important;
+  color: var(--aaa-acp-button-hover-text, var(--aaa-acp-button-text, var(--aaa-acp-text))) !important;
+}
+
+.aaa-acp-remember {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  /* Custom link colour also applies to remember text */
+  color: var(--aaa-acp-link, var(--aaa-acp-primary)) !important;
+}
+
+.aaa-acp-msg {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid var(--aaa-acp-accent);
+  background: #fffbe6;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.aaa-acp-msg.is-error {
+  border-color: #c00;
+  background: #ffe6e6;
+}
+
+.aaa-acp-register {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Registration link uses the accent colour so it stands out on green backgrounds. */
+.aaa-acp-register a {
+  color: var(--aaa-acp-link, var(--aaa-acp-accent)) !important;
+  text-decoration: underline;
+}
+
+.aaa-acp-back {
+  display: block;
+  margin-top: 10px;
+  color: var(--aaa-acp-link, var(--aaa-acp-primary)) !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Link for toggling to the lost password form */
+.aaa-acp-forgot {
+  display: block;
+  margin-top: 8px;
+  color: var(--aaa-acp-link, var(--aaa-acp-primary)) !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}

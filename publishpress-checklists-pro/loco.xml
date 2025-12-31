@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle>
+
+  <!-- Pro version domain -->
+  <domain name="publishpress-checklists-pro">
+    <project>
+      <source>
+        <directory>src</directory>
+        <directory>.</directory>
+      </source>
+      <target>
+        <directory>languages</directory>
+      </target>
+      <template>
+        <file>languages/publishpress-checklists-pro.pot</file>
+      </template>
+    </project>
+  </domain>
+
+  <!-- Free version domain -->
+  <domain name="publishpress-checklists">
+    <project name="PublishPress Checklists" slug="publishpress-checklists">
+      <source>
+        <directory>lib/vendor/publishpress/publishpress-checklists</directory> 
+      </source>
+      <target>
+        <directory>lib/vendor/publishpress/publishpress-checklists/languages</directory>
+      </target>
+      <template>
+        <file>lib/vendor/publishpress/publishpress-checklists/languages/publishpress-checklists.pot</file>
+      </template>
+    </project>
+  </domain>
+
+</bundle>

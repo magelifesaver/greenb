@@ -1,0 +1,925 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/publishpress-"
+"checklists-pro\n"
+"POT-Creation-Date: 2025-12-16T15:42:05+00:00\n"
+"PO-Revision-Date: 2025-12-17 08:44+0000\n"
+"Last-Translator: Adesina Adedeji <deji@publishpress.com>\n"
+"Language-Team: Italian <https://weblate.publishpress.com/projects/"
+"publishpress-checklists-pro/publishpress-checklists-pro/it/>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;getText;displayText;getTextN;getTextAndEscHtml\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: lib\n"
+
+#. Plugin Name of the plugin
+#. Plugin Name of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress Checklists Pro"
+msgstr "PublishPress Checklists Pro"
+
+#. Plugin URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#. Description of the plugin
+#: publishpress-checklists-pro.php
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"Con le checklist di PublishPress puoi scegliere i requisiti di pubblicazione "
+"per i tuoi contenuti."
+
+#. Author of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Author URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#: src/duplicate-checklist/duplicate-checklist.php:61
+msgid "Duplicate Requirement"
+msgstr "Requisito Duplicato"
+
+#: src/duplicate-checklist/duplicate-checklist.php:85
+msgid "Delete"
+msgstr "Elimina"
+
+#: src/duplicate-checklist/duplicate-checklist.php:90
+msgid "Delete this duplicate"
+msgstr "Elimina questo duplicato"
+
+#: src/duplicate-checklist/duplicate-checklist.php:108
+#: src/duplicate-checklist/duplicate-checklist.php:115
+msgid "Duplicate"
+msgstr "Duplicato"
+
+#: src/duplicate-checklist/duplicate-checklist.php:110
+msgid "Please enable the task before using this Duplicate feature."
+msgstr ""
+"Si prega di abilitare il compito prima di utilizzare questa funzione di "
+"duplicazione."
+
+#: src/duplicate-checklist/duplicate-checklist.php:119
+msgid "Duplicate this task"
+msgstr "Duplica questo compito"
+
+#: src/duplicate-checklist/duplicate-checklist.php:223
+msgid "Are you sure you want to duplicate this task?"
+msgstr "Sei sicuro di voler duplicare questo compito?"
+
+#: src/duplicate-checklist/duplicate-checklist.php:224
+msgid "Duplicating..."
+msgstr "Duplicazione..."
+
+#: src/duplicate-checklist/duplicate-checklist.php:225
+msgid "Task duplicated successfully!"
+msgstr "Compito duplicato con successo!"
+
+#: src/duplicate-checklist/duplicate-checklist.php:226
+msgid "Error duplicating Task."
+msgstr "Errore nella duplicazione del Compito."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:71
+msgid "Duplicate Checklist Tools"
+msgstr "Strumenti di Checklist Duplicati"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:74
+msgid "Current Duplicate Requirements"
+msgstr "Requisiti duplicati correnti"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:77
+#, php-format
+msgid "Found %d duplicate requirements:"
+msgstr "Trovati %d requisiti duplicati:"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:93
+msgid ""
+"Are you sure you want to clean up this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"Sei sicuro di voler eliminare questo duplicato? Questa azione non può essere "
+"annullata."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:94
+msgid "Clean Up"
+msgstr "Pulire"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:103
+msgid "No duplicate requirements found. Your system is clean!"
+msgstr "Nessun requisito duplicato trovato. Il tuo sistema è pulito!"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:109
+msgid "Manual Cleanup"
+msgstr "Pulizia Manuale"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:110
+msgid ""
+"If you know the exact name of a stuck duplicate requirement, you can force "
+"clean it up here."
+msgstr ""
+"Se conosci il nome esatto di un requisito duplicato bloccato, puoi forzare "
+"la pulizia qui."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:115
+msgid "e.g., title_count_duplicate_2"
+msgstr "e.g., titolo_count_duplicate_2"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:117
+msgid ""
+"Are you sure you want to force cleanup this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"Sei sicuro di voler forzare la pulizia di questo duplicato? Questa azione "
+"non può essere annullata."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:118
+msgid "Force Cleanup"
+msgstr "Forza Pulizia"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:125
+msgid "Orphaned PHP Class Mappings"
+msgstr "Mappature di classi PHP orfane"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:126
+msgid ""
+"Class mappings link duplicate requirement names to their PHP class names. "
+"The system uses these mappings to determine which PHP class to instantiate "
+"for each duplicate requirement."
+msgstr ""
+"I collegamenti di mappatura delle classi associano i nomi dei requisiti "
+"duplicati ai loro nomi di classe PHP. Il sistema utilizza queste mappature "
+"per determinare quale classe PHP istanziare per ogni requisito duplicato."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:127
+#, php-format
+msgid ""
+"Found %d class mappings. Clean up any orphaned mappings (mappings without "
+"corresponding duplicate requirements) to keep your database clean."
+msgstr ""
+"Trovati %d mappature di classe. Pulisci eventuali mappature orfane "
+"(mappature senza requisiti duplicati corrispondenti) per mantenere il tuo "
+"database pulito."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:133
+msgid "Clean Up Orphaned Mappings"
+msgstr "Pulire le mappature orfane"
+
+#: src/modules/accessibility/accessibility.php:81
+#: src/modules/accessibility/accessibility.php:180
+msgid "Accessibility"
+msgstr "Accessibilità"
+
+#: src/modules/accessibility/accessibility.php:85
+#: src/modules/accessibility/accessibility.php:89
+msgid "Define tasks that verify accessibility"
+msgstr "Definisci compiti che verificano l'accessibilità"
+
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:47
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:48
+msgid "H1, H2, H3 etc tags are used in logical order"
+msgstr "I tag H1, H2, H3 ecc. sono utilizzati in ordine logico"
+
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:47
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:48
+msgid "Only one H1 tag in content"
+msgstr "Solo un tag H1 nel contenuto"
+
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:47
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:48
+msgid "Tables have a header row"
+msgstr "Le tabelle hanno una riga di intestazione"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:109
+msgid "Advanced Custom Fields Support"
+msgstr "Supporto avanzato per campi personalizzati"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:113
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:117
+msgid "Define tasks that must be complete before a product is published"
+msgstr ""
+"Definire le attività che devono essere completate prima che un prodotto "
+"venga pubblicato"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:188
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:330
+msgid "ACF"
+msgstr "ACF"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:47
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:48
+#, php-format
+msgid "Number of characters in %s field"
+msgstr "Numero di caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:49
+#, php-format
+msgid "Minimum of %%s character in %s field"
+msgstr "Minimo di %%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:50
+#, php-format
+msgid "Minimum of %%s characters in %s field"
+msgstr "Minimo di %%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:51
+#, php-format
+msgid "Maximum of %%s character in %s field"
+msgstr "Massimo di %%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:52
+#, php-format
+msgid "Maximum of %%s characters in %s field"
+msgstr "Massimo di %%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:53
+#, php-format
+msgid "%%s character in %s field"
+msgstr "Carattere %%s nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:54
+#, php-format
+msgid "%%s characters in %s field"
+msgstr "%%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:55
+#, php-format
+msgid "Between %%s and %%s characters in %s field"
+msgstr "Tra %%s e %%s caratteri nel campo %s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:318
+msgid "Got value from ACF Configuration."
+msgstr "Ho ottenuto valore dalla configurazione ACF."
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:102
+#: src/modules/all-in-one-seo/all-in-one-seo.php:254
+msgid "All in One SEO"
+msgstr "Tutto in Uno SEO"
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:106
+#: src/modules/all-in-one-seo/all-in-one-seo.php:110
+msgid "Define tasks that verify All in One SEO items"
+msgstr "Definisci compiti che verificano gli elementi SEO All in One"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:51
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:52
+msgid "All in One SEO Headline Score"
+msgstr "Punteggio Titolo Tutto in Uno SEO"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:53
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:54
+#, php-format
+msgid "Minimum All in One SEO Headline Score: %d"
+msgstr "Punteggio Minimo All in One SEO per il Titolo: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:55
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:56
+#, php-format
+msgid "Maximum All in One SEO Headline Score: %d"
+msgstr "Punteggio Massimo All in One SEO per il Titolo: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:57
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:58
+#, php-format
+msgid "Exact All in One SEO Headline Score: %d"
+msgstr "Punteggio Esatto All in One SEO Headline: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:59
+#, php-format
+msgid "All in One SEO Headline Score between %d and %d"
+msgstr "Punteggio Titolo Tutto in Uno SEO tra %d e %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:50
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:51
+msgid "All in One SEO Score"
+msgstr "Punteggio Tutto in Uno SEO"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:52
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:53
+#, php-format
+msgid "Minimum All in One SEO score: %d"
+msgstr "Punteggio Minimo All in One SEO: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:54
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:55
+#, php-format
+msgid "Maximum All in One SEO score: %d"
+msgstr "Punteggio Massimo All in One SEO: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:56
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:57
+#, php-format
+msgid "Exact All in One SEO score: %d"
+msgstr "Punteggio Esatto All in One SEO: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:58
+#, php-format
+msgid "All in One SEO Score between %d and %d"
+msgstr "Punteggio Tutto in Uno SEO tra %d e %d"
+
+#: src/modules/approved-by-user/approved-by-user.php:78
+msgid "Approved by User"
+msgstr "Approvato da Utente"
+
+#: src/modules/approved-by-user/approved-by-user.php:82
+#: src/modules/approved-by-user/approved-by-user.php:86
+msgid "Define tasks that require approval by specific users"
+msgstr ""
+"Definisci compiti che richiedono approvazione da parte di utenti specifici"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:51
+#, php-format
+msgid "Approved by %s"
+msgstr "Approvato da %s"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:52
+msgid "Approved by specific user"
+msgstr "Approvato da utente specifico"
+
+#: src/modules/audio-count/audio-count.php:78
+msgid "Audio Count"
+msgstr "Conteggio Audio"
+
+#: src/modules/audio-count/audio-count.php:82
+#: src/modules/audio-count/audio-count.php:86
+msgid "Define tasks that verify total audio in content"
+msgstr "Definisci compiti che verificano il totale audio nel contenuto"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:47
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:48
+msgid "Number of audio items in content"
+msgstr "Numero di elementi audio nel contenuto"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:49
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:50
+#, php-format
+msgid "Minimum of %d audio items in content"
+msgstr "Minimo di %d elementi audio nel contenuto"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:51
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:52
+#, php-format
+msgid "Maximum of %d audio items in content"
+msgstr "Massimo di %d elementi audio nel contenuto"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:53
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:54
+#, php-format
+msgid "%d audio items in content"
+msgstr "%d elementi audio nel contenuto"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:55
+#, php-format
+msgid "Between %d and %d audio items in content"
+msgstr "Tra %d e %d elementi audio nel contenuto"
+
+#: src/modules/featured-image-size/featured-image-size.php:79
+msgid "Featured Image Size Support"
+msgstr "Compatibilità con la dimensione dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/featured-image-size.php:83
+#: src/modules/featured-image-size/featured-image-size.php:87
+msgid "Define tasks that verify the featured image size"
+msgstr ""
+"Definire le operazioni che verificano le dimensioni dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:51
+msgid "Featured image height"
+msgstr "Altezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:56
+#, php-format
+msgid "Minimum %spx for the featured image height"
+msgstr "Minima %spx per l'altezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:64
+#, php-format
+msgid "Maximum %spx for the featured image height"
+msgstr "Massima %spx per l'altezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:69
+#, php-format
+msgid "Featured image height of %spx"
+msgstr "Altezza dell'immagine in evidenza di %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:70
+#, php-format
+msgid "Featured image height between %spx and %spx"
+msgstr "Altezza dell'immagine in evidenza tra %spx e %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:51
+msgid "Featured image width"
+msgstr "Larghezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:56
+#, php-format
+msgid "Minimum %spx for the featured image width"
+msgstr "Minima %spx per la larghezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:64
+#, php-format
+msgid "Maximum %spx for the featured image width"
+msgstr "Massima %spx per la larghezza dell'immagine in evidenza"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:69
+#, php-format
+msgid "Featured image width of %spx"
+msgstr "Larghezza dell'immagine in evidenza di %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:70
+#, php-format
+msgid "Featured image width between %spx and %spx"
+msgstr "Larghezza dell'immagine in evidenza tra %spx e %spx"
+
+#: src/modules/image-count/image-count.php:78
+msgid "Image Count"
+msgstr "Conteggio delle immagini"
+
+#: src/modules/image-count/image-count.php:82
+#: src/modules/image-count/image-count.php:86
+msgid "Define tasks that verify total images in content"
+msgstr "Definire le attività che verificano le immagini totali nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:47
+#: src/modules/image-count/lib/Requirement/ImageCount.php:48
+msgid "Number of images in content"
+msgstr "Numero di immagini nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:49
+#, php-format
+msgid "Minimum of %d image in content"
+msgstr "Minimo di %d immagine nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:50
+#, php-format
+msgid "Minimum of %d images in content"
+msgstr "Minimo di %d immagini nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:51
+#, php-format
+msgid "Maximum of %d image in content"
+msgstr "Massimo di %d immagine nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:52
+#, php-format
+msgid "Maximum of %d images in content"
+msgstr "Massimo di %d immagini nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:53
+#, php-format
+msgid "%d image in content"
+msgstr "%d immagine nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:54
+#, php-format
+msgid "%d images in content"
+msgstr "%d immagini nel contenuto"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:55
+#, php-format
+msgid "Between %d and %d images in content"
+msgstr "Tra %d e %d immagini nel contenuto"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:46
+#, php-format
+msgid "Avoid using %s tags in content"
+msgstr "Evita di utilizzare i tag %s nel contenuto"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:47
+msgid "Avoid heading tags in content"
+msgstr "Evita i tag di intestazione nel contenuto"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:48
+msgid "Content should not contain any of the selected heading tags."
+msgstr ""
+"Il contenuto non deve contenere nessuno dei tag di intestazione selezionati."
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:59
+msgid "H1"
+msgstr "H1"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:60
+msgid "H2"
+msgstr "H2"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:61
+msgid "H3"
+msgstr "H3"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:62
+msgid "H4"
+msgstr "H4"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:63
+msgid "H5"
+msgstr "H5"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:64
+msgid "H6"
+msgstr "H6"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:78
+msgid "No Heading Tags in Content"
+msgstr "Nessun Tag di Intestazione nel Contenuto"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:82
+#: src/modules/no-heading-tags/no-heading-tags.php:86
+msgid "Define tasks that verify no prohibited heading tags are in content"
+msgstr ""
+"Definisci compiti che verificano che non ci siano tag di intestazione "
+"vietati nel contenuto"
+
+#: src/modules/prosettings/prosettings.php:120
+msgid "Pro Settings"
+msgstr "Impostazioni Pro"
+
+#: src/modules/prosettings/prosettings.php:213
+msgid "License key:"
+msgstr "Chiave di licenza:"
+
+#: src/modules/prosettings/prosettings.php:220
+msgid "Show Checklists column in post lists:"
+msgstr "Mostra la colonna delle Checklist nelle liste dei post:"
+
+#: src/modules/prosettings/prosettings.php:227
+msgid "Enable Status Filter:"
+msgstr "Abilita Filtro Stato:"
+
+#: src/modules/prosettings/prosettings.php:235
+msgid "Enable Duplicate Checklists"
+msgstr "Abilita Checklist Duplicati"
+
+#: src/modules/prosettings/prosettings.php:243
+msgid "Debug Duplicate Feature:"
+msgstr "Debug della funzionalità duplicata:"
+
+#: src/modules/prosettings/prosettings.php:296
+msgid ""
+"This allows tasks to be disabled for specific statuses such as \"Draft\" or "
+"\"Published\"."
+msgstr ""
+"Questo consente di disabilitare i compiti per stati specifici come \"Bozza\" "
+"o \"Pubblicato\"."
+
+#: src/modules/prosettings/prosettings.php:311
+msgid "This allows users to duplicate existing checklist task."
+msgstr ""
+"Questo consente agli utenti di duplicare un compito di checklist esistente."
+
+#: src/modules/prosettings/prosettings.php:327
+msgid "Enable debugging tools for duplicate functionality."
+msgstr "Abilita gli strumenti di debug per la funzionalità di duplicazione."
+
+#: src/modules/prosettings/prosettings.php:347
+msgid ""
+"Add a Checklists column to the Posts screen showing how many requirements "
+"are complete."
+msgstr ""
+"Aggiungi una colonna Checklist alla schermata Post che mostra quanti "
+"requisiti sono completi."
+
+#: src/modules/prosettings/prosettings.php:364
+msgid "Checklists"
+msgstr "Liste di controllo"
+
+#: src/modules/prosettings/prosettings.php:421
+msgid "No checklists"
+msgstr "Nessuna checklist"
+
+#: src/modules/prosettings/prosettings.php:494
+msgid "Debug Duplicate"
+msgstr "Debug Duplicato"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:61
+#, fuzzy, php-format
+#| msgid "Publish time should be in the future"
+msgid "Publish time should be at %s"
+msgstr "L'ora di pubblicazione deve essere nel futuro"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:62
+msgid "(not set)"
+msgstr ""
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:64
+#, fuzzy
+#| msgid "Publish time should be in the future"
+msgid "Publish time should be at a specific time"
+msgstr "L'ora di pubblicazione deve essere nel futuro"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:47
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:48
+msgid "Publish time should be in the future"
+msgstr "L'ora di pubblicazione deve essere nel futuro"
+
+#: src/modules/publish-time/publish-time.php:80
+#: src/modules/publish-time/publish-time.php:190
+msgid "Publish Date / Time"
+msgstr "Data / Ora di pubblicazione"
+
+#: src/modules/publish-time/publish-time.php:84
+#: src/modules/publish-time/publish-time.php:88
+msgid "Combine exact and future publish time checks"
+msgstr "Combinare controlli di tempo di pubblicazione esatti e futuri"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:48
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:49
+msgid "Rank Math SEO Score"
+msgstr "Punteggio SEO di Rank Math"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:50
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:51
+#, php-format
+msgid "Minimum Rank Math SEO score: %d"
+msgstr "Punteggio Minimo Rank Math SEO: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:52
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:53
+#, php-format
+msgid "Maximum Rank Math SEO score: %d"
+msgstr "Punteggio Massimo Rank Math SEO: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:54
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:55
+#, php-format
+msgid "Exact Rank Math SEO score: %d"
+msgstr "Punteggio Esatto Rank Math SEO: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:56
+#, php-format
+msgid "Rank Math SEO scores between %d and %d"
+msgstr "I punteggi SEO di Rank Math variano tra %d e %d"
+
+#: src/modules/rank-math/rank-math.php:103
+#: src/modules/rank-math/rank-math.php:247
+msgid "Rank Math SEO"
+msgstr "Rank Math SEO"
+
+#: src/modules/rank-math/rank-math.php:107
+#: src/modules/rank-math/rank-math.php:111
+msgid "Define tasks that verify Rank Math SEO items"
+msgstr "Definisci compiti che verificano gli elementi SEO di Rank Math"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:47
+#: src/modules/video-count/lib/Requirement/VideoCount.php:48
+msgid "Number of video items in content"
+msgstr "Numero di elementi video nel contenuto"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:49
+#: src/modules/video-count/lib/Requirement/VideoCount.php:50
+#, php-format
+msgid "Minimum of %d video items in content"
+msgstr "Minimo di %d elementi video nel contenuto"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:51
+#: src/modules/video-count/lib/Requirement/VideoCount.php:52
+#, php-format
+msgid "Maximum of %d video items in content"
+msgstr "Massimo di %d elementi video nel contenuto"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:53
+#: src/modules/video-count/lib/Requirement/VideoCount.php:54
+#, php-format
+msgid "%d video items in content"
+msgstr "%d elementi video nel contenuto"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:55
+#, php-format
+msgid "Between %d and %d video items in content"
+msgstr "Tra %d e %d elementi video nel contenuto"
+
+#: src/modules/video-count/video-count.php:78
+msgid "Video Count"
+msgstr "Conteggio video"
+
+#: src/modules/video-count/video-count.php:82
+#: src/modules/video-count/video-count.php:86
+msgid "Define tasks that verify total video in content"
+msgstr "Definisci compiti che verificano il totale video nel contenuto"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:65
+msgid "Check the \"Allow backorders?\" box"
+msgstr ""
+"Seleziona la casella \"Permetti ordini per prodotti in riordinazione?\""
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:66
+msgid "Allow backorders"
+msgstr "Permetti ordini per prodotti in riordinazione"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:67
+msgid "Allow backorders, but notify"
+msgstr "Permetti ordini per prodotti in riordinazione, ma avvisa"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:68
+msgid "Do not allow backorders"
+msgstr "Non permettere ordini per prodotti in riordinazione"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:169
+msgid "Do not allow"
+msgstr "Non permettere"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:176
+msgid "Allow"
+msgstr "Pemetti"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:183
+msgid "Allow, but notify customer"
+msgstr "Permetti, ma avvisa l'utente"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:65
+msgid "Select some products for \"Cross-sells\""
+msgstr "Seleziona alcuni prodotti per \"Cross-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:69
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:84
+#, php-format
+msgid "Min %s Max %s"
+msgstr "Min %s Max %s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:70
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:74
+#, php-format
+msgid "Minimum of %s products for \"Cross-sells\""
+msgstr "Minimo di %s prodotti per \"Cross-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:78
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:82
+#, php-format
+msgid "Maximum of %s products for \"Cross-sells\""
+msgstr "Massimo di %s prodotti per \"Cross-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:86
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:87
+#, php-format
+msgid "%s products for \"Cross-sells\""
+msgstr "%s prodotti per \"Cross-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:88
+#, php-format
+msgid "%s to %s products for \"Cross-sells\""
+msgstr "%s a %s prodotti per \"Cross-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:72
+msgid "Discount for the \"Sale price\""
+msgstr "Sconto per il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:73
+#, php-format
+msgid "Min %s%% Max %s%%"
+msgstr "Min %s%% Max %s%%"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:74
+#: src/modules/woocommerce/lib/Requirement/Discount.php:75
+#, php-format
+msgid "Min %s%% discount for the \"Sale price\""
+msgstr "Min %s%% sconto per il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:76
+#: src/modules/woocommerce/lib/Requirement/Discount.php:77
+#, php-format
+msgid "Max %s%% discount for the \"Sale price\""
+msgstr "Max %s%% sconto per il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:78
+#: src/modules/woocommerce/lib/Requirement/Discount.php:79
+#, php-format
+msgid "%s%% discount for the \"Sale price\""
+msgstr "%s%% sconto per il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:80
+#, php-format
+msgid "%s%% to %s%% discount for the \"Sale price\""
+msgstr "%s%% a %s%% sconto per il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:43
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:44
+msgid "Check the \"Downloadable\" box"
+msgstr "Seleziona la casella \"Scaricabile\""
+
+#: src/modules/woocommerce/lib/Requirement/Image.php:43
+#: src/modules/woocommerce/lib/Requirement/Image.php:44
+msgid "Product image"
+msgstr "Immagine del prodotto"
+
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:43
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:44
+msgid "Check the \"Manage stock?\" box"
+msgstr "Seleziona la casella \"Gestire il magazzino?\""
+
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:42
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:43
+msgid "Enter a \"Regular price\""
+msgstr "Immetti un \"Prezzo di listino\""
+
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:44
+msgid "Enter a \"Sale price\""
+msgstr "Immetti un \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:44
+msgid "Schedule the \"Sale price\""
+msgstr "Programma il \"Prezzo in offerta\""
+
+#: src/modules/woocommerce/lib/Requirement/Sku.php:43
+#: src/modules/woocommerce/lib/Requirement/Sku.php:44
+msgid "Enter a \"SKU\""
+msgstr "Immetti un \"COD\""
+
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:43
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:44
+msgid "Check the \"Sold individually\" box"
+msgstr "Seleziona la casella \"Venduto singolarmente\""
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:80
+msgid "Select some products for \"Upsells\""
+msgstr "Seleziona alcuni prodotti per \"Up-sells\""
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:85
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:89
+#, php-format
+msgid "Minimum of %s products for \"Upsells\""
+msgstr "Minimo di %s prodotti per \"Upsells\""
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:93
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:97
+#, php-format
+msgid "Maximum of %s products for \"Upsells\""
+msgstr "Massimo di %s prodotti per \"Upsells\""
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:101
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:102
+#, php-format
+msgid "%s products for \"Upsells\""
+msgstr "%s prodotti per \"Upsells\""
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:103
+#, php-format
+msgid "%s to %s products for \"Upsells\""
+msgstr "%s a %s prodotti per \"Upsells\""
+
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:42
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:43
+msgid "Check the \"Virtual\" box"
+msgstr "Seleziona la casella \"Virtuale\""
+
+#: src/modules/woocommerce/woocommerce.php:113
+msgid "WooCommerce Support"
+msgstr "Compatibilità con WooCommerce"
+
+#: src/modules/woocommerce/woocommerce.php:117
+#: src/modules/woocommerce/woocommerce.php:121
+msgid ""
+"Define tasks that must be complete before a WooCommerce product is published"
+msgstr ""
+"Definisci le azioni che devono essere completate prima che un prodotto "
+"WooCommerce venga pubblicato"
+
+#: src/modules/woocommerce/woocommerce.php:287
+msgid "WooCommerce"
+msgstr "Commercio elettronico"
+
+#: src/PluginServiceProvider.php:61
+msgid "Checklists Pro"
+msgstr "Checklists Pro"
+
+#: src/status-filter/StatusFilter.php:70
+msgid "Exclude Statuses"
+msgstr "Escludi Stati"
+
+#: src/status-filter/StatusFilter.php:91
+msgid "Select statuses to exclude"
+msgstr "Seleziona gli stati da escludere"
+
+#~ msgid " is filled"
+#~ msgstr " è compilato"
+
+#~ msgid "Show Checklists column in post lists."
+#~ msgstr "Mostra la colonna delle Checklist nelle liste dei post."

@@ -1,0 +1,102 @@
+#publishpress_checklists_settings_options_license_key {
+    width: 300px;
+}
+
+.ppch_license_key_status {
+    margin-left: 0;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    padding: 4px;
+}
+
+.ppch_license_key_status.valid {
+    color: #8181da;
+}
+
+.ppch_license_key_status.invalid {
+    color: #f54d4d;
+}
+
+.ppch_license_key_status_label {
+    color: black;
+    font-weight: normal;
+}
+
+.ppch_settings_field_description {
+    margin-bottom: 10px !important;
+    color: gray;
+}
+
+/* Tools */
+.ppch-tools-container {
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+.ppch-tools-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.ppch-tools-section p {
+    margin-bottom: 10px !important;
+}
+
+.ppch-tools-section h3 {
+    margin-top: 0;
+    color: #23282d;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.ppch-test-result {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.ppch-test-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.ppch-test-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.ppch-duplicates-list {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.ppch-duplicate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.ppch-duplicate-item:last-child {
+    border-bottom: none;
+}
+
+.ppch-cleanup-form {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.ppch-cleanup-form input[type="text"] {
+    width: 250px;
+}

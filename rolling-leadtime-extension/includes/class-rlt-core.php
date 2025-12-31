@@ -466,6 +466,49 @@ class RLT_Core {
         if (!is_product()) {
             return;
         }
+        // Determine if the customer is logged in and has a shipping address.
+        $logged_in   = is_user_logged_in();
+        $ship_addr   = $this->get_shipping_address_string();
+
+        // Guest estimate options.
+        $guest_min = isset($options['guest_min_eta']) ? absint($options['guest_min_eta']) : 60;
+        $guest_max = isset($options['guest_max_eta']) ? absint($options['guest_max_eta']) : 90;
+
+        // Scenario: non‑logged‑in users. Show generic window and login prompt.
+        if (!$logged_in) {
+            $login_url = wp_login_url(get_permalink());
+            echo '<p class="rlt-eta notice notice-info" style="margin-top:10px;">' .
+                sprintf(
+                    /* translators: 1: minimum minutes 2: maximum minutes 3: login URL */
+                    esc_html__('Order now for delivery within about %1$d–%2$d minutes. <a href="%3$s">Log in</a> for a more accurate estimate.', 'rlt'),
+                    $guest_min,
+                    $guest_max,
+                    esc_url($login_url)
+                ) .
+                '</p>';
+            return;
+        }
+
+        // Scenario: logged in but no shipping address.
+        if ($logged_in && empty($ship_addr)) {
+            // Build link to the edit shipping address endpoint. Attempt to redirect back to this product page after saving.
+            $myaccount   = wc_get_page_permalink('myaccount');
+            $edit_addr   = wc_get_endpoint_url('edit-address', 'shipping', $myaccount);
+            // Add redirect_to param so WooCommerce returns to current product after address update.
+            $edit_addr   = add_query_arg('redirect_to', rawurlencode(get_permalink()), $edit_addr);
+            echo '<p class="rlt-eta notice notice-info" style="margin-top:10px;">' .
+                sprintf(
+                    /* translators: 1: minimum minutes 2: maximum minutes 3: edit address URL */
+                    esc_html__('Order now for delivery within about %1$d–%2$d minutes. Please <a href="%3$s">add your delivery address</a> to get an accurate estimate.', 'rlt'),
+                    $guest_min,
+                    $guest_max,
+                    esc_url($edit_addr)
+                ) .
+                '</p>';
+            return;
+        }
+
+        // Scenario: logged in and shipping address present – compute dynamic ETA.
         $prep     = isset($options['prep_time']) ? absint($options['prep_time']) : 0;
         $dispatch = isset($options['dispatch_buffer']) ? absint($options['dispatch_buffer']) : 0;
         $travel   = isset($options['default_travel_time']) ? absint($options['default_travel_time']) : 0;
@@ -482,10 +525,19 @@ class RLT_Core {
         $format   = get_option('time_format');
         $start    = wp_date($format, $start_ts);
         $end      = wp_date($format, $end_ts);
+        // Build an address suffix. If a shipping address is available for the current customer, include it; otherwise use a generic placeholder.
+        $address = $ship_addr;
+        if ($address) {
+            /* translators: %s: formatted address */
+            $addr_text = sprintf(esc_html__('to %s', 'rlt'), esc_html($address));
+        } else {
+            $addr_text = esc_html__('to your address', 'rlt');
+        }
         echo '<p class="rlt-eta notice notice-info" style="margin-top:10px;">' .
             sprintf(
-                /* translators: 1: start time 2: end time */
-                esc_html__('Order now for estimated delivery between %1$s – %2$s.', 'rlt'),
+                /* translators: 1: address 2: start time 3: end time */
+                esc_html__('Order now for estimated delivery %1$s between %2$s – %3$s.', 'rlt'),
+                $addr_text,
                 esc_html($start),
                 esc_html($end)
             ) .

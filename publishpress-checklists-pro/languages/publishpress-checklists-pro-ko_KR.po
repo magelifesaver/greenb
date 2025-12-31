@@ -1,0 +1,904 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/publishpress-"
+"checklists-pro\n"
+"POT-Creation-Date: 2025-12-16T15:42:05+00:00\n"
+"PO-Revision-Date: 2025-12-17 11:39+0000\n"
+"Last-Translator: Adesina Adedeji <deji@publishpress.com>\n"
+"Language-Team: Korean <https://weblate.publishpress.com/projects/"
+"publishpress-checklists-pro/publishpress-checklists-pro/ko/>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.14.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;getText;displayText;getTextN;"
+"getTextAndEscHtml\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: lib\n"
+
+#. Plugin Name of the plugin
+#. Plugin Name of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress Checklists Pro"
+msgstr "PublishPress Checklists Pro"
+
+#. Plugin URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#. Description of the plugin
+#: publishpress-checklists-pro.php
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"PublishPress 체크리스트를 사용하면 콘텐츠의 게시 요구 사항을 선택할 수 있습니"
+"다."
+
+#. Author of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Author URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#: src/duplicate-checklist/duplicate-checklist.php:61
+msgid "Duplicate Requirement"
+msgstr "요구 사항 중복"
+
+#: src/duplicate-checklist/duplicate-checklist.php:85
+msgid "Delete"
+msgstr "삭제"
+
+#: src/duplicate-checklist/duplicate-checklist.php:90
+msgid "Delete this duplicate"
+msgstr "이 중복 항목 삭제"
+
+#: src/duplicate-checklist/duplicate-checklist.php:108
+#: src/duplicate-checklist/duplicate-checklist.php:115
+msgid "Duplicate"
+msgstr "중복"
+
+#: src/duplicate-checklist/duplicate-checklist.php:110
+msgid "Please enable the task before using this Duplicate feature."
+msgstr "이 중복 기능을 사용하기 전에 작업을 활성화해 주세요."
+
+#: src/duplicate-checklist/duplicate-checklist.php:119
+msgid "Duplicate this task"
+msgstr "이 작업 중복"
+
+#: src/duplicate-checklist/duplicate-checklist.php:223
+msgid "Are you sure you want to duplicate this task?"
+msgstr "이 작업을 복제하시겠습니까?"
+
+#: src/duplicate-checklist/duplicate-checklist.php:224
+msgid "Duplicating..."
+msgstr "중복 중..."
+
+#: src/duplicate-checklist/duplicate-checklist.php:225
+msgid "Task duplicated successfully!"
+msgstr "작업이 성공적으로 복제되었습니다!"
+
+#: src/duplicate-checklist/duplicate-checklist.php:226
+msgid "Error duplicating Task."
+msgstr "작업 복제 중 오류가 발생했습니다."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:71
+msgid "Duplicate Checklist Tools"
+msgstr "체크리스트 도구 중복"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:74
+msgid "Current Duplicate Requirements"
+msgstr "현재 중복 요구 사항"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:77
+#, php-format
+msgid "Found %d duplicate requirements:"
+msgstr "%d개의 중복 요구 사항을 찾았습니다:"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:93
+msgid ""
+"Are you sure you want to clean up this duplicate? This action cannot be "
+"undone."
+msgstr "이 중복 항목을 정리하시겠습니까? 이 작업은 취소할 수 없습니다."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:94
+msgid "Clean Up"
+msgstr "정리"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:103
+msgid "No duplicate requirements found. Your system is clean!"
+msgstr "중복 요구 사항이 발견되지 않았습니다. 시스템이 깨끗합니다!"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:109
+msgid "Manual Cleanup"
+msgstr "수동 정리"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:110
+msgid ""
+"If you know the exact name of a stuck duplicate requirement, you can force "
+"clean it up here."
+msgstr ""
+"중복된 요구 사항의 정확한 이름을 알고 있다면, 여기에서 강제로 정리할 수 있습"
+"니다."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:115
+msgid "e.g., title_count_duplicate_2"
+msgstr "예: title_count_duplicate_2"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:117
+msgid ""
+"Are you sure you want to force cleanup this duplicate? This action cannot be "
+"undone."
+msgstr "이 중복 항목을 강제로 정리하시겠습니까? 이 작업은 취소할 수 없습니다."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:118
+msgid "Force Cleanup"
+msgstr "강제 정리"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:125
+msgid "Orphaned PHP Class Mappings"
+msgstr "고아 PHP 클래스 매핑"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:126
+msgid ""
+"Class mappings link duplicate requirement names to their PHP class names. "
+"The system uses these mappings to determine which PHP class to instantiate "
+"for each duplicate requirement."
+msgstr ""
+"클래스 매핑은 중복 요구 이름을 해당 PHP 클래스 이름에 연결합니다. 시스템은 이"
+"러한 매핑을 사용하여 각 중복 요구에 대해 어떤 PHP 클래스를 인스턴스화할지 결"
+"정합니다."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:127
+#, php-format
+msgid ""
+"Found %d class mappings. Clean up any orphaned mappings (mappings without "
+"corresponding duplicate requirements) to keep your database clean."
+msgstr ""
+"%d개의 클래스 매핑을 찾았습니다. 데이터베이스를 깨끗하게 유지하기 위해 고아 "
+"매핑(상응하는 중복 요구 사항이 없는 매핑)을 정리하세요."
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:133
+msgid "Clean Up Orphaned Mappings"
+msgstr "고아 매핑 정리"
+
+#: src/modules/accessibility/accessibility.php:81
+#: src/modules/accessibility/accessibility.php:180
+msgid "Accessibility"
+msgstr "접근성"
+
+#: src/modules/accessibility/accessibility.php:85
+#: src/modules/accessibility/accessibility.php:89
+msgid "Define tasks that verify accessibility"
+msgstr "접근성을 검증하는 작업 정의"
+
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:47
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:48
+msgid "H1, H2, H3 etc tags are used in logical order"
+msgstr "H1, H2, H3 등 태그는 논리적 순서로 사용됩니다"
+
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:47
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:48
+msgid "Only one H1 tag in content"
+msgstr "콘텐츠에 H1 태그는 하나만 있어야 합니다"
+
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:47
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:48
+msgid "Tables have a header row"
+msgstr "테이블에는 헤더 행이 있습니다"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:109
+msgid "Advanced Custom Fields Support"
+msgstr "고급 사용자 정의 필드 지원"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:113
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:117
+msgid "Define tasks that must be complete before a product is published"
+msgstr "제품이 게시되기 전에 완료해야 하는 작업 정의"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:188
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:330
+msgid "ACF"
+msgstr "ACF"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:47
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:48
+#, php-format
+msgid "Number of characters in %s field"
+msgstr "%s 필드의 문자 수"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:49
+#, php-format
+msgid "Minimum of %%s character in %s field"
+msgstr "%s 필드에서 %%s자 최소"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:50
+#, php-format
+msgid "Minimum of %%s characters in %s field"
+msgstr "%s 필드에서 %%s자 최소"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:51
+#, php-format
+msgid "Maximum of %%s character in %s field"
+msgstr "%s 필드에서 최대 %%s 문자"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:52
+#, php-format
+msgid "Maximum of %%s characters in %s field"
+msgstr "%s 필드에서 최대 %%s 글자"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:53
+#, php-format
+msgid "%%s character in %s field"
+msgstr "%%s 문자 %s 필드에"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:54
+#, php-format
+msgid "%%s characters in %s field"
+msgstr "%%s 문자 %s 필드에"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:55
+#, php-format
+msgid "Between %%s and %%s characters in %s field"
+msgstr "%s 필드에서 %%s와 %%s 사이의 문자"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:318
+msgid "Got value from ACF Configuration."
+msgstr "ACF 구성에서 값을 가져왔습니다."
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:102
+#: src/modules/all-in-one-seo/all-in-one-seo.php:254
+msgid "All in One SEO"
+msgstr "올인원 SEO"
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:106
+#: src/modules/all-in-one-seo/all-in-one-seo.php:110
+msgid "Define tasks that verify All in One SEO items"
+msgstr "All in One SEO 항목을 검증하는 작업 정의"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:51
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:52
+msgid "All in One SEO Headline Score"
+msgstr "올인원 SEO 헤드라인 점수"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:53
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:54
+#, php-format
+msgid "Minimum All in One SEO Headline Score: %d"
+msgstr "최소 All in One SEO 제목 점수: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:55
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:56
+#, php-format
+msgid "Maximum All in One SEO Headline Score: %d"
+msgstr "모든 SEO 헤드라인 점수 최대: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:57
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:58
+#, php-format
+msgid "Exact All in One SEO Headline Score: %d"
+msgstr "정확한 올인원 SEO 헤드라인 점수: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:59
+#, php-format
+msgid "All in One SEO Headline Score between %d and %d"
+msgstr "%d와 %d 사이의 올인원 SEO 헤드라인 점수"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:50
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:51
+msgid "All in One SEO Score"
+msgstr "올인원 SEO 점수"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:52
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:53
+#, php-format
+msgid "Minimum All in One SEO score: %d"
+msgstr "최소 All in One SEO 점수: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:54
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:55
+#, php-format
+msgid "Maximum All in One SEO score: %d"
+msgstr "모든 SEO 점수 최대: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:56
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:57
+#, php-format
+msgid "Exact All in One SEO score: %d"
+msgstr "정확한 올인원 SEO 점수: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:58
+#, php-format
+msgid "All in One SEO Score between %d and %d"
+msgstr "%d와 %d 사이의 올인원 SEO 점수"
+
+#: src/modules/approved-by-user/approved-by-user.php:78
+msgid "Approved by User"
+msgstr "사용자에 의해 승인됨"
+
+#: src/modules/approved-by-user/approved-by-user.php:82
+#: src/modules/approved-by-user/approved-by-user.php:86
+msgid "Define tasks that require approval by specific users"
+msgstr "특정 사용자에 의해 승인받아야 하는 작업 정의"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:51
+#, php-format
+msgid "Approved by %s"
+msgstr "%s에 의해 승인됨"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:52
+msgid "Approved by specific user"
+msgstr "특정 사용자에 의해 승인됨"
+
+#: src/modules/audio-count/audio-count.php:78
+msgid "Audio Count"
+msgstr "오디오 수"
+
+#: src/modules/audio-count/audio-count.php:82
+#: src/modules/audio-count/audio-count.php:86
+msgid "Define tasks that verify total audio in content"
+msgstr "콘텐츠의 총 오디오를 확인하는 작업 정의"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:47
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:48
+msgid "Number of audio items in content"
+msgstr "콘텐츠에 오디오 항목 수"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:49
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:50
+#, php-format
+msgid "Minimum of %d audio items in content"
+msgstr "내용에 %d개의 오디오 항목 최소"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:51
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:52
+#, php-format
+msgid "Maximum of %d audio items in content"
+msgstr "내용에서 최대 %d 오디오 항목"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:53
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:54
+#, php-format
+msgid "%d audio items in content"
+msgstr "%d 오디오 항목이 콘텐츠에 있습니다"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:55
+#, php-format
+msgid "Between %d and %d audio items in content"
+msgstr "콘텐츠에서 %d와 %d 사이의 오디오 항목"
+
+#: src/modules/featured-image-size/featured-image-size.php:79
+msgid "Featured Image Size Support"
+msgstr "대표 이미지 크기 지원"
+
+#: src/modules/featured-image-size/featured-image-size.php:83
+#: src/modules/featured-image-size/featured-image-size.php:87
+msgid "Define tasks that verify the featured image size"
+msgstr "대표 이미지 크기를 확인하는 작업 정의"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:51
+msgid "Featured image height"
+msgstr "대표 이미지 높이"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:56
+#, php-format
+msgid "Minimum %spx for the featured image height"
+msgstr "특집 이미지 높이에 대한 최소 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:64
+#, php-format
+msgid "Maximum %spx for the featured image height"
+msgstr "대표 이미지 높이의 최대 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:69
+#, php-format
+msgid "Featured image height of %spx"
+msgstr "%spx의 대표 이미지 높이"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:70
+#, php-format
+msgid "Featured image height between %spx and %spx"
+msgstr "%spx 및 %spx 사이의 대표 이미지 높이"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:51
+msgid "Featured image width"
+msgstr "대표 이미지 너비"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:56
+#, php-format
+msgid "Minimum %spx for the featured image width"
+msgstr "특집 이미지 너비에 대한 최소 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:64
+#, php-format
+msgid "Maximum %spx for the featured image width"
+msgstr "대표 이미지 너비의 최대 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:69
+#, php-format
+msgid "Featured image width of %spx"
+msgstr "%spx의 대표 이미지 너비"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:70
+#, php-format
+msgid "Featured image width between %spx and %spx"
+msgstr "%spx 및 %spx 사이의 대표 이미지 너비"
+
+#: src/modules/image-count/image-count.php:78
+msgid "Image Count"
+msgstr "이미지 수"
+
+#: src/modules/image-count/image-count.php:82
+#: src/modules/image-count/image-count.php:86
+msgid "Define tasks that verify total images in content"
+msgstr "콘텐츠의 총 이미지를 확인하는 작업 정의"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:47
+#: src/modules/image-count/lib/Requirement/ImageCount.php:48
+msgid "Number of images in content"
+msgstr "콘텐츠에 이미지 수"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:49
+#, php-format
+msgid "Minimum of %d image in content"
+msgstr "내용에 %d개의 이미지 최소"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:50
+#, php-format
+msgid "Minimum of %d images in content"
+msgstr "내용에 %d개의 이미지 최소"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:51
+#, php-format
+msgid "Maximum of %d image in content"
+msgstr "내용에 %d개의 이미지 최대"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:52
+#, php-format
+msgid "Maximum of %d images in content"
+msgstr "내용에 %d개의 이미지 최대"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:53
+#, php-format
+msgid "%d image in content"
+msgstr "%d 이미지가 콘텐츠에 있습니다"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:54
+#, php-format
+msgid "%d images in content"
+msgstr "%d 이미지가 콘텐츠에 있습니다"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:55
+#, php-format
+msgid "Between %d and %d images in content"
+msgstr "콘텐츠에서 %d와 %d 사이의 이미지"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:46
+#, php-format
+msgid "Avoid using %s tags in content"
+msgstr "콘텐츠에서 %s 태그 사용을 피하십시오"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:47
+msgid "Avoid heading tags in content"
+msgstr "콘텐츠에서 헤딩 태그를 피하십시오"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:48
+msgid "Content should not contain any of the selected heading tags."
+msgstr "내용에는 선택한 제목 태그가 포함되어서는 안 됩니다."
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:59
+msgid "H1"
+msgstr "H1"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:60
+msgid "H2"
+msgstr "H2"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:61
+msgid "H3"
+msgstr "H3"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:62
+msgid "H4"
+msgstr "H4"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:63
+msgid "H5"
+msgstr "H5"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:64
+msgid "H6"
+msgstr "H6"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:78
+msgid "No Heading Tags in Content"
+msgstr "콘텐츠에 제목 태그가 없습니다"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:82
+#: src/modules/no-heading-tags/no-heading-tags.php:86
+msgid "Define tasks that verify no prohibited heading tags are in content"
+msgstr "콘텐츠에 금지된 헤딩 태그가 없는지 확인하는 작업 정의"
+
+#: src/modules/prosettings/prosettings.php:120
+msgid "Pro Settings"
+msgstr "전문 설정"
+
+#: src/modules/prosettings/prosettings.php:213
+msgid "License key:"
+msgstr "라이센스 키:"
+
+#: src/modules/prosettings/prosettings.php:220
+msgid "Show Checklists column in post lists:"
+msgstr "게시물 목록에 체크리스트 열 표시하기:"
+
+#: src/modules/prosettings/prosettings.php:227
+msgid "Enable Status Filter:"
+msgstr "상태 필터 활성화:"
+
+#: src/modules/prosettings/prosettings.php:235
+msgid "Enable Duplicate Checklists"
+msgstr "중복 체크리스트 활성화"
+
+#: src/modules/prosettings/prosettings.php:243
+msgid "Debug Duplicate Feature:"
+msgstr "중복 기능 디버그:"
+
+#: src/modules/prosettings/prosettings.php:296
+msgid ""
+"This allows tasks to be disabled for specific statuses such as \"Draft\" or "
+"\"Published\"."
+msgstr ""
+"이는 \"초안\" 또는 \"게시됨\"과 같은 특정 상태에 대해 작업을 비활성화할 수 있"
+"게 합니다."
+
+#: src/modules/prosettings/prosettings.php:311
+msgid "This allows users to duplicate existing checklist task."
+msgstr "이는 사용자가 기존 체크리스트 작업을 복제할 수 있게 합니다."
+
+#: src/modules/prosettings/prosettings.php:327
+msgid "Enable debugging tools for duplicate functionality."
+msgstr "중복 기능을 위한 디버깅 도구 활성화."
+
+#: src/modules/prosettings/prosettings.php:347
+msgid ""
+"Add a Checklists column to the Posts screen showing how many requirements "
+"are complete."
+msgstr ""
+"게시물 화면에 체크리스트 열을 추가하여 완료된 요구 사항의 수를 보여줍니다."
+
+#: src/modules/prosettings/prosettings.php:364
+msgid "Checklists"
+msgstr "체크리스트"
+
+#: src/modules/prosettings/prosettings.php:421
+msgid "No checklists"
+msgstr "체크리스트 없음"
+
+#: src/modules/prosettings/prosettings.php:494
+msgid "Debug Duplicate"
+msgstr "중복 디버그"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:61
+#, php-format
+msgid "Publish time should be at %s"
+msgstr "게시 시간은 %s 이어야 합니다"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:62
+msgid "(not set)"
+msgstr "(설정되지 않음)"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:64
+msgid "Publish time should be at a specific time"
+msgstr "게시 시간은 특정 시간이어야 합니다"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:47
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:48
+msgid "Publish time should be in the future"
+msgstr "게시 시간은 미래여야 합니다"
+
+#: src/modules/publish-time/publish-time.php:80
+#: src/modules/publish-time/publish-time.php:190
+msgid "Publish Date / Time"
+msgstr "게시 날짜 / 시간"
+
+#: src/modules/publish-time/publish-time.php:84
+#: src/modules/publish-time/publish-time.php:88
+msgid "Combine exact and future publish time checks"
+msgstr "정확한 및 미래 게시 시간 체크 결합"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:48
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:49
+msgid "Rank Math SEO Score"
+msgstr "Rank Math SEO 점수"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:50
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:51
+#, php-format
+msgid "Minimum Rank Math SEO score: %d"
+msgstr "최소 Rank Math SEO 점수: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:52
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:53
+#, php-format
+msgid "Maximum Rank Math SEO score: %d"
+msgstr "최대 Rank Math SEO 점수: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:54
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:55
+#, php-format
+msgid "Exact Rank Math SEO score: %d"
+msgstr "정확한 랭크 매스 SEO 점수: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:56
+#, php-format
+msgid "Rank Math SEO scores between %d and %d"
+msgstr "순위 수학 SEO 점수는 %d와 %d 사이입니다"
+
+#: src/modules/rank-math/rank-math.php:103
+#: src/modules/rank-math/rank-math.php:247
+msgid "Rank Math SEO"
+msgstr "Rank Math SEO"
+
+#: src/modules/rank-math/rank-math.php:107
+#: src/modules/rank-math/rank-math.php:111
+msgid "Define tasks that verify Rank Math SEO items"
+msgstr "Rank Math SEO 항목을 확인하는 작업 정의"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:47
+#: src/modules/video-count/lib/Requirement/VideoCount.php:48
+msgid "Number of video items in content"
+msgstr "콘텐츠에 비디오 항목 수"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:49
+#: src/modules/video-count/lib/Requirement/VideoCount.php:50
+#, php-format
+msgid "Minimum of %d video items in content"
+msgstr "내용에 %d개의 비디오 항목 최소"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:51
+#: src/modules/video-count/lib/Requirement/VideoCount.php:52
+#, php-format
+msgid "Maximum of %d video items in content"
+msgstr "내용에 %d개의 비디오 항목 최대"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:53
+#: src/modules/video-count/lib/Requirement/VideoCount.php:54
+#, php-format
+msgid "%d video items in content"
+msgstr "%d 비디오 항목이 콘텐츠에 있습니다"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:55
+#, php-format
+msgid "Between %d and %d video items in content"
+msgstr "콘텐츠에서 %d와 %d 사이의 비디오 항목"
+
+#: src/modules/video-count/video-count.php:78
+msgid "Video Count"
+msgstr "비디오 수"
+
+#: src/modules/video-count/video-count.php:82
+#: src/modules/video-count/video-count.php:86
+msgid "Define tasks that verify total video in content"
+msgstr "콘텐츠의 총 비디오를 확인하는 작업 정의"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:65
+msgid "Check the \"Allow backorders?\" box"
+msgstr "\"재고 부족 허용?\" 체크박스를 선택하세요"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:66
+msgid "Allow backorders"
+msgstr "백오더 허용"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:67
+msgid "Allow backorders, but notify"
+msgstr "백오더 허용, 하지만 알림"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:68
+msgid "Do not allow backorders"
+msgstr "백오더를 허용하지 않음"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:169
+msgid "Do not allow"
+msgstr "허용하지 않음"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:176
+msgid "Allow"
+msgstr "허용"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:183
+msgid "Allow, but notify customer"
+msgstr "허용, 하지만 고객에게 알림"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:65
+msgid "Select some products for \"Cross-sells\""
+msgstr "“교차 판매”를 위한 제품 선택하기"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:69
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:84
+#, php-format
+msgid "Min %s Max %s"
+msgstr "최소 %s 최대 %s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:70
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:74
+#, php-format
+msgid "Minimum of %s products for \"Cross-sells\""
+msgstr "\"교차 판매\"를 위한 최소 %s 제품"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:78
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:82
+#, php-format
+msgid "Maximum of %s products for \"Cross-sells\""
+msgstr "\"교차 판매\"를 위한 최대 %s 제품"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:86
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:87
+#, php-format
+msgid "%s products for \"Cross-sells\""
+msgstr "%s 제품이 \"교차 판매\"에 있습니다"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:88
+#, php-format
+msgid "%s to %s products for \"Cross-sells\""
+msgstr "%s에서 %s 제품이 \"교차 판매\"에 있습니다"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:72
+msgid "Discount for the \"Sale price\""
+msgstr "\"판매가\"에 대한 할인"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:73
+#, php-format
+msgid "Min %s%% Max %s%%"
+msgstr "최소 %s%% 최대 %s%%"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:74
+#: src/modules/woocommerce/lib/Requirement/Discount.php:75
+#, php-format
+msgid "Min %s%% discount for the \"Sale price\""
+msgstr "\"판매 가격\"에 대한 최소 %s%% 할인"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:76
+#: src/modules/woocommerce/lib/Requirement/Discount.php:77
+#, php-format
+msgid "Max %s%% discount for the \"Sale price\""
+msgstr "세일 가격의 최대 %s%% 할인"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:78
+#: src/modules/woocommerce/lib/Requirement/Discount.php:79
+#, php-format
+msgid "%s%% discount for the \"Sale price\""
+msgstr "%s%% 할인 \"판매 가격\"에"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:80
+#, php-format
+msgid "%s%% to %s%% discount for the \"Sale price\""
+msgstr "%s%%에서 %s%% 할인 \"판매 가격\"에"
+
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:43
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:44
+msgid "Check the \"Downloadable\" box"
+msgstr "\"다운로드 가능\" 체크박스를 선택하세요"
+
+#: src/modules/woocommerce/lib/Requirement/Image.php:43
+#: src/modules/woocommerce/lib/Requirement/Image.php:44
+msgid "Product image"
+msgstr "제품 이미지"
+
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:43
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:44
+msgid "Check the \"Manage stock?\" box"
+msgstr "\"재고 관리?\" 체크박스를 선택하세요"
+
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:42
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:43
+msgid "Enter a \"Regular price\""
+msgstr "\"정가\"를 입력하세요"
+
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:44
+msgid "Enter a \"Sale price\""
+msgstr "\"할인 가격\"을 입력하세요"
+
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:44
+msgid "Schedule the \"Sale price\""
+msgstr "“판매 가격” 예약하기"
+
+#: src/modules/woocommerce/lib/Requirement/Sku.php:43
+#: src/modules/woocommerce/lib/Requirement/Sku.php:44
+msgid "Enter a \"SKU\""
+msgstr "\"SKU\"를 입력하세요"
+
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:43
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:44
+msgid "Check the \"Sold individually\" box"
+msgstr "\"개별 판매\" 체크박스를 선택하세요"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:80
+msgid "Select some products for \"Upsells\""
+msgstr "“상향 판매”를 위한 제품 선택하기"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:85
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:89
+#, php-format
+msgid "Minimum of %s products for \"Upsells\""
+msgstr "최소 %s개의 제품이 필요합니다 \"업셀\"을 위해"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:93
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:97
+#, php-format
+msgid "Maximum of %s products for \"Upsells\""
+msgstr "\"상향 판매\"를 위한 최대 %s 제품"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:101
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:102
+#, php-format
+msgid "%s products for \"Upsells\""
+msgstr "%s 제품이 \"상향 판매\"에 있습니다"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:103
+#, php-format
+msgid "%s to %s products for \"Upsells\""
+msgstr "%s에서 %s 제품이 \"상향 판매\"에 있습니다"
+
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:42
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:43
+msgid "Check the \"Virtual\" box"
+msgstr "\"가상\" 체크박스를 선택하세요"
+
+#: src/modules/woocommerce/woocommerce.php:113
+msgid "WooCommerce Support"
+msgstr "우커머스 지원"
+
+#: src/modules/woocommerce/woocommerce.php:117
+#: src/modules/woocommerce/woocommerce.php:121
+msgid ""
+"Define tasks that must be complete before a WooCommerce product is published"
+msgstr "WooCommerce 제품이 게시되기 전에 완료해야 하는 작업 정의"
+
+#: src/modules/woocommerce/woocommerce.php:287
+msgid "WooCommerce"
+msgstr "우커머스"
+
+#: src/PluginServiceProvider.php:61
+msgid "Checklists Pro"
+msgstr "체크리스트 프로"
+
+#: src/status-filter/StatusFilter.php:70
+msgid "Exclude Statuses"
+msgstr "상태 제외"
+
+#: src/status-filter/StatusFilter.php:91
+msgid "Select statuses to exclude"
+msgstr "제외할 상태 선택하기"
+
+#~ msgid " is filled"
+#~ msgstr " 가 채워졌습니다"
+
+#~ msgid "Show Checklists column in post lists."
+#~ msgstr "게시물 목록에 체크리스트 열 표시하기."

@@ -128,6 +128,18 @@
 .wb_stn_note .wb_stn_note_hd{ float:left; width:100%; height:30px; cursor:move;}
 .wb_stn_note .wb_stn_note_hd .wb_stn_menu_btn{ float:left; height:30px; width:25px; text-align:center; cursor:pointer; }
 .wb_stn_note .wb_stn_note_hd .wb_stn_menu_btn .dashicons{ margin-top:5px; }
+/* Styles for the global note indicator. It visually matches other menu
+   buttons but is non-interactive. */
+.wb_stn_note .wb_stn_note_hd .wb_stn_global_indicator{
+    float:left;
+    height:30px;
+    width:25px;
+    text-align:center;
+    cursor:default;
+}
+.wb_stn_note .wb_stn_note_hd .wb_stn_global_indicator .dashicons{
+    margin-top:5px;
+}
 .wb_stn_menu_right{ float:right;}
 .wb_stn_note_menu_dropdown{ position:absolute; display:none; background:#fff; margin-top:30px; font-family:sans-serif; font-size:12px; box-shadow:1px 2px 2px 0px #a4a1a1; cursor:default;}
 .wb_stn_note_menu_dropdown ul{ margin:0px; padding:0px; float:left; }

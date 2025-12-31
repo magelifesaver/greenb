@@ -196,9 +196,9 @@ class Wb_Sticky_Notes_Admin {
 
 		$wp_admin_bar->add_menu(array(
 			'parent' => $menu_id, 
-			'title' => __('Rate us', 'wb-sticky-notes').' ⭐️⭐️⭐️⭐️⭐️', 
+			'title' => __('', 'wb-sticky-notes').' ', 
 			'id' =>$menu_id.'_rate_us', 
-			'href' => 'https://wordpress.org/support/plugin/wb-sticky-notes/reviews/?rate=5#new-post',
+			'href' => '#',
 			)
 		);
 	}

@@ -100,6 +100,15 @@ class RLT_Settings {
         add_settings_field('rlt_api_key', __('Google API key', 'rlt'), array($this, 'render_field_api_key'), 'rlt-settings', 'rlt_main');
         // Slot length for product ETA.
         add_settings_field('rlt_slot_length', __('ETA window length (minutes)', 'rlt'), array($this, 'render_field_slot_length'), 'rlt-settings', 'rlt_main');
+        // Guest estimate min and max minutes.
+        add_settings_field('rlt_guest_min_eta', __('Guest minimum ETA (minutes)', 'rlt'), array($this, 'render_field_guest_min_eta'), 'rlt-settings', 'rlt_main');
+        add_settings_field('rlt_guest_max_eta', __('Guest maximum ETA (minutes)', 'rlt'), array($this, 'render_field_guest_max_eta'), 'rlt-settings', 'rlt_main');
+        // Coverage area qualifier type.
+        add_settings_field('rlt_coverage_type', __('Coverage qualifier', 'rlt'), array($this, 'render_field_coverage_type'), 'rlt-settings', 'rlt_main');
+        // Coverage radius (if radius type chosen).
+        add_settings_field('rlt_coverage_radius', __('Coverage radius (miles)', 'rlt'), array($this, 'render_field_coverage_radius'), 'rlt-settings', 'rlt_main');
+        // Coverage cities list (comma‑separated).
+        add_settings_field('rlt_coverage_cities', __('Coverage cities', 'rlt'), array($this, 'render_field_coverage_cities'), 'rlt-settings', 'rlt_main');
     }
 
     /**
@@ -116,6 +125,12 @@ class RLT_Settings {
         $output['default_travel_time'] = isset($input['default_travel_time']) ? absint($input['default_travel_time']) : 0;
         $output['api_key'] = isset($input['api_key']) ? sanitize_text_field($input['api_key']) : '';
         $output['slot_length'] = isset($input['slot_length']) ? absint($input['slot_length']) : 60;
+        $output['guest_min_eta'] = isset($input['guest_min_eta']) ? absint($input['guest_min_eta']) : 60;
+        $output['guest_max_eta'] = isset($input['guest_max_eta']) ? absint($input['guest_max_eta']) : 90;
+        $valid_types = array('none', 'radius', 'shipping_zone', 'city_list');
+        $output['coverage_type'] = isset($input['coverage_type']) && in_array($input['coverage_type'], $valid_types, true) ? $input['coverage_type'] : 'none';
+        $output['coverage_radius'] = isset($input['coverage_radius']) ? absint($input['coverage_radius']) : 0;
+        $output['coverage_cities'] = isset($input['coverage_cities']) ? sanitize_text_field($input['coverage_cities']) : '';
         return $output;
     }
 
@@ -181,6 +196,62 @@ class RLT_Settings {
         $options = get_option('rlt_settings', array());
         $value = isset($options['slot_length']) ? intval($options['slot_length']) : 60;
         printf('<input type="number" min="15" name="rlt_settings[slot_length]" value="%d" class="small-text" />', $value);
+    }
+
+    /**
+     * Renders the guest minimum ETA field.
+     */
+    public function render_field_guest_min_eta() {
+        $options = get_option('rlt_settings', array());
+        $value   = isset($options['guest_min_eta']) ? intval($options['guest_min_eta']) : 60;
+        printf('<input type="number" min="0" name="rlt_settings[guest_min_eta]" value="%d" class="small-text" />', $value);
+    }
+
+    /**
+     * Renders the guest maximum ETA field.
+     */
+    public function render_field_guest_max_eta() {
+        $options = get_option('rlt_settings', array());
+        $value   = isset($options['guest_max_eta']) ? intval($options['guest_max_eta']) : 90;
+        printf('<input type="number" min="0" name="rlt_settings[guest_max_eta]" value="%d" class="small-text" />', $value);
+    }
+
+    /**
+     * Renders the coverage qualifier type field.
+     */
+    public function render_field_coverage_type() {
+        $options = get_option('rlt_settings', array());
+        $value   = isset($options['coverage_type']) ? $options['coverage_type'] : 'none';
+        $choices = array(
+            'none'         => __('None (no coverage check)', 'rlt'),
+            'radius'       => __('Radius from store', 'rlt'),
+            'shipping_zone' => __('Shipping zone by drawing', 'rlt'),
+            'city_list'    => __('List of cities', 'rlt'),
+        );
+        echo '<select name="rlt_settings[coverage_type]">';
+        foreach ($choices as $key => $label) {
+            printf('<option value="%s" %s>%s</option>', esc_attr($key), selected($value, $key, false), esc_html($label));
+        }
+        echo '</select>';
+    }
+
+    /**
+     * Renders the coverage radius field.
+     */
+    public function render_field_coverage_radius() {
+        $options = get_option('rlt_settings', array());
+        $value   = isset($options['coverage_radius']) ? intval($options['coverage_radius']) : 0;
+        printf('<input type="number" min="0" name="rlt_settings[coverage_radius]" value="%d" class="small-text" />', $value);
+    }
+
+    /**
+     * Renders the coverage cities field.
+     */
+    public function render_field_coverage_cities() {
+        $options = get_option('rlt_settings', array());
+        $value   = isset($options['coverage_cities']) ? esc_attr($options['coverage_cities']) : '';
+        echo '<textarea name="rlt_settings[coverage_cities]" rows="3" cols="50" class="large-text">' . $value . '</textarea>';
+        echo '<p class="description">' . esc_html__('Comma‑separated list of cities that qualify for delivery. Used only when the coverage type is set to “List of cities”.', 'rlt') . '</p>';
     }
 
     /**

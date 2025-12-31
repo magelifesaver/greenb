@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Sticky Notes for WP Dashboard
  * Description:       Easily add, manage, and organize sticky notes directly on your WordPress dashboard. Perfect for reminders, to-dos, and team collaboration.
- * Version:           1.2.4
+ * Version:           1.2.7
  * Author:            Web Builder 143
  * Author URI:        https://profiles.wordpress.org/webbuilder143/
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define('WB_STICKY_NOTES_VERSION','1.2.4');
+define('WB_STICKY_NOTES_VERSION','1.2.7');
 
 define('WB_STN_SETTINGS','WB_STN_SETTINGS');
 

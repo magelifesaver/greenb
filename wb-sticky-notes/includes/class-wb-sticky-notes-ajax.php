@@ -93,14 +93,24 @@ class Wb_Sticky_Notes_Ajax {
 		$table_name=$wpdb->prefix.$this->notes_tb;
 		$post_data=$this->preparePostData($settings);
 		
-		// Check if a "global_note" flag was sent. If so, store 0 as the owner.
-		$is_global = (isset($_POST['global_note']) && absint($_POST['global_note']) === 1);
-		$post_data['post_data']['id_user'] = $is_global ? 0 : get_current_user_id();
-		$post_data['post_data_format'][] = '%d';
-		$post_data['post_data']['state']=1;
-		$post_data['post_data_format'][]='%d';
-		$post_data['post_data']['status']=Wb_Sticky_Notes::$status['active'];
-		$post_data['post_data_format'][]='%d';
+        // Always save the creator's user ID so ownership is retained. Notes
+        // created as global will still store the creator here and use the
+        // separate `is_global` flag for visibility.
+        $post_data['post_data']['id_user'] = get_current_user_id();
+        $post_data['post_data_format'][]   = '%d';
+
+        // Determine whether this note should be visible to all users. The
+        // front‑end should send a `global_note` flag (1 or 0). If absent or
+        // falsy it defaults to a private note. Global notes are marked by
+        // setting the `is_global` column to 1.
+        $is_global = ( isset( $_POST['global_note'] ) && absint( $_POST['global_note'] ) === 1 ) ? 1 : 0;
+        $post_data['post_data']['is_global'] = $is_global;
+        $post_data['post_data_format'][]     = '%d';
+
+        $post_data['post_data']['state'] = 1;
+        $post_data['post_data_format'][] = '%d';
+        $post_data['post_data']['status'] = Wb_Sticky_Notes::$status['active'];
+        $post_data['post_data_format'][] = '%d';
 
 		$result=$wpdb->insert($table_name,$post_data['post_data'],$post_data['post_data_format']);
 		if($result!==false){
@@ -169,24 +179,22 @@ class Wb_Sticky_Notes_Ajax {
 		{
 			$table_name=$wpdb->prefix.$this->notes_tb;
 			$id_user=get_current_user_id();			
-			foreach($note_data as $id=>$value) 
-			{
-				//only accept integer value
-				//$id=(int) $id; 
-				//$value=(int) $value;
-				if($id>0)
-				{
-					$result=$wpdb->update(
-						$table_name,
-						array('z_index'=>$value),
-						array('id_user'=>$id_user,'id_wb_stn_notes'=>$id),
-						array('%d'),
-						array('%d','%d')
-					);
-				}
-			}
-			$out['response']=true;
-			$out['er']=__('Success', 'wb-sticky-notes');
+            foreach ( $note_data as $id => $value ) {
+                if ( $id > 0 ) {
+                    // Determine whether the note is global. For global notes we
+                    // don't filter by user when updating the z-index.
+                    $note_row = $wpdb->get_row( $wpdb->prepare( "SELECT is_global FROM $table_name WHERE id_wb_stn_notes = %d", $id ), ARRAY_A );
+                    $where    = array( 'id_wb_stn_notes' => $id );
+                    $where_f  = array( '%d' );
+                    if ( empty( $note_row['is_global'] ) ) {
+                        $where['id_user'] = $id_user;
+                        $where_f[]        = '%d';
+                    }
+                    $wpdb->update( $table_name, array( 'z_index' => $value ), $where, array( '%d' ), $where_f );
+                }
+            }
+            $out['response'] = true;
+            $out['er']       = __( 'Success', 'wb-sticky-notes' );
 		}
 		return $out;
 	}
@@ -220,26 +228,32 @@ class Wb_Sticky_Notes_Ajax {
 			'er'=>__('Error', 'wb-sticky-notes'),
 			'data'=>'',
 		);
-		$id=$this->get_noteid_input();
-		if($id>0)
-		{
-			$settings=Wb_Sticky_Notes::get_settings();
-			$table_name=$wpdb->prefix.$this->notes_tb;
-			$id_user=get_current_user_id();
-			$post_data=$this->preparePostData($settings);
-			$result=$wpdb->update(
-				$table_name,
-				$post_data['post_data'],
-				array('id_user'=>$id_user,'id_wb_stn_notes'=>$id),
-				$post_data['post_data_format'],
-				array('%d','%d')
-			);
-			if($result!==false){
-				$out['response']=true;
-				$out['er']=__('Success', 'wb-sticky-notes');
-			}
-		}
-		return $out;
+        $id = $this->get_noteid_input();
+        if ( $id > 0 ) {
+            $settings    = Wb_Sticky_Notes::get_settings();
+            $table_name = $wpdb->prefix . $this->notes_tb;
+            $id_user    = get_current_user_id();
+            $post_data  = $this->preparePostData( $settings );
+
+            // Determine if the note is global. Global notes can be edited by any
+            // authorised user, so we do not filter by id_user in that case.
+            $note_row = $wpdb->get_row( $wpdb->prepare( "SELECT is_global, id_user FROM $table_name WHERE id_wb_stn_notes = %d", $id ), ARRAY_A );
+            if ( ! empty( $note_row ) ) {
+                $where        = array( 'id_wb_stn_notes' => $id );
+                $where_format = array( '%d' );
+                if ( empty( $note_row['is_global'] ) ) {
+                    // Private notes remain editable only by their owner.
+                    $where['id_user']    = $id_user;
+                    $where_format[]      = '%d';
+                }
+                $result = $wpdb->update( $table_name, $post_data['post_data'], $where, $post_data['post_data_format'], $where_format );
+                if ( false !== $result ) {
+                    $out['response'] = true;
+                    $out['er']       = __( 'Success', 'wb-sticky-notes' );
+                }
+            }
+        }
+        return $out;
 	}
 
 	/**
@@ -386,66 +400,63 @@ class Wb_Sticky_Notes_Ajax {
 		return $html;
 	}
 
-    /**
-     * Get notes to display in the dashboard.
-     *
-     * By default the original plugin only loaded notes belonging to the
-     * current user (filtered by the `id_user` field). This method has
-     * been updated to return all active notes regardless of owner so
-     * they appear as a shared notice for every authorised user. When a
-     * specific note ID is passed it still limits the query to that
-     * individual note. The create/edit/delete actions continue to use
-     * the current user’s ID for ownership and permission checks.
-     *
-     * @since    1.0.0
-     * @since    1.1.1 Single note HTML returning option added. Using in toggle archive functionality.
-     * @modified 1.2.5  Global visibility – fetch all notes instead of filtering by user.
-     */
-    private function get_notes()
-    {
-        global $wpdb;
-        $out = array(
-            'response' => true,
-            'er'       => '',
-            'data'     => '',
-        );
+	/**
+	 * Get all notes of the current user
+	 *
+	 * @since    1.0.0
+	 * @since    1.1.1 Single note HTML returning option added. Using in toggle archive functionality.
+	 */
+	private function get_notes()
+	{
+		global $wpdb;
+		$out=array(
+			'response'=>true,
+			'er'=>'',
+			'data'=>'',
+		);
+		$settings=Wb_Sticky_Notes::get_settings();
+		if($settings['enable']!=1) /* not enabled */
+		{
+			return $out;
+		}
 
-        $settings = Wb_Sticky_Notes::get_settings();
-        // Bail early if the module is disabled.
-        if ( $settings['enable'] != 1 ) {
-            return $out;
+        $table_name    = $wpdb->prefix . $this->notes_tb;
+        $id_user       = get_current_user_id();
+        $status_active = Wb_Sticky_Notes::$status['active'];
+        // Always require a logged‑in user to load notes. If no user is
+        // authenticated the notes cannot be fetched and an error is
+        // returned.
+        if ( $id_user > 0 ) {
+            $id = $this->get_noteid_input();
+
+            // Build a query that returns notes that are either owned by the
+            // current user or marked global (`is_global` = 1). This ensures
+            // private notes remain visible only to their owner while global
+            // notes are shown to everyone. Only notes with status = active
+            // are retrieved.
+            $sql        = "SELECT * FROM $table_name WHERE status=%d AND (id_user=%d OR is_global=1)";
+            $sql_data   = array( $status_active, $id_user );
+
+            // If a specific note ID is requested, add that filter.
+            if ( $id > 0 ) {
+                $sql        .= " AND id_wb_stn_notes=%d";
+                $sql_data[] = $id;
+            }
+
+            $sql      .= " ORDER BY z_index,id_wb_stn_notes";
+            $qry       = $wpdb->prepare( $sql, $sql_data );
+            $results   = $wpdb->get_results( $qry, ARRAY_A );
+            $out['data'] = $this->prepareNoteHTML( $results );
+        } else {
+            $out = array(
+                'response' => false,
+                'er'       => __( 'Error', 'wb-sticky-notes' ),
+                'data'     => '',
+            );
         }
 
-$table_name    = $wpdb->prefix . $this->notes_tb;
-$status_active = Wb_Sticky_Notes::$status['active'];
-
-$current_user = get_current_user_id();
-$id = $this->get_noteid_input();
-
-// Build a query that fetches notes where:
-// - status = active
-// - AND (id_user = current user OR id_user = 0)
-$sql        = "SELECT * FROM $table_name WHERE status=%d AND (id_user=%d OR id_user=0)";
-$sql_params = array($status_active, $current_user);
-
-// If a specific note ID is requested, add that filter too.
-if ($id > 0) {
-    $sql        .= " AND id_wb_stn_notes=%d";
-    $sql_params[] = $id;
-}
-
-$sql .= " ORDER BY z_index,id_wb_stn_notes";
-
-// Execute the SQL query with the parameters
-$qry     = $wpdb->prepare($sql, $sql_params);
-$results = $wpdb->get_results($qry, ARRAY_A);
-
-// Return the HTML rendering of all notes (private + global)
-$out['data'] = $this->prepareNoteHTML($results);
-return $out;
-    }
-		
-		
+        return $out;
+	}
 
 	/**
 	 * Get archives of the current user (Ajax callback)

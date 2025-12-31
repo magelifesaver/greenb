@@ -1,0 +1,909 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/publishpress-"
+"checklists-pro\n"
+"POT-Creation-Date: 2025-12-16T15:42:05+00:00\n"
+"PO-Revision-Date: 2025-12-17 11:39+0000\n"
+"Last-Translator: Adesina Adedeji <deji@publishpress.com>\n"
+"Language-Team: Japanese <https://weblate.publishpress.com/projects/"
+"publishpress-checklists-pro/publishpress-checklists-pro/ja/>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.14.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists-pro.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2;getText;displayText;getTextN;"
+"getTextAndEscHtml\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: lib\n"
+
+#. Plugin Name of the plugin
+#. Plugin Name of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress Checklists Pro"
+msgstr "PublishPress Checklists Pro"
+
+#. Plugin URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#. Description of the plugin
+#: publishpress-checklists-pro.php
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"PublishPress Checklistsを使用すると、コンテンツの出版要件を選択できます。"
+
+#. Author of the plugin
+#: publishpress-checklists-pro.php
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Author URI of the plugin
+#: publishpress-checklists-pro.php
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#: src/duplicate-checklist/duplicate-checklist.php:61
+msgid "Duplicate Requirement"
+msgstr "重複要件"
+
+#: src/duplicate-checklist/duplicate-checklist.php:85
+msgid "Delete"
+msgstr "削除"
+
+#: src/duplicate-checklist/duplicate-checklist.php:90
+msgid "Delete this duplicate"
+msgstr "この重複を削除"
+
+#: src/duplicate-checklist/duplicate-checklist.php:108
+#: src/duplicate-checklist/duplicate-checklist.php:115
+msgid "Duplicate"
+msgstr "重複"
+
+#: src/duplicate-checklist/duplicate-checklist.php:110
+msgid "Please enable the task before using this Duplicate feature."
+msgstr "この重複機能を使用する前にタスクを有効にしてください。"
+
+#: src/duplicate-checklist/duplicate-checklist.php:119
+msgid "Duplicate this task"
+msgstr "このタスクを重複させる"
+
+#: src/duplicate-checklist/duplicate-checklist.php:223
+msgid "Are you sure you want to duplicate this task?"
+msgstr "このタスクを重複させてもよろしいですか？"
+
+#: src/duplicate-checklist/duplicate-checklist.php:224
+msgid "Duplicating..."
+msgstr "重複中..."
+
+#: src/duplicate-checklist/duplicate-checklist.php:225
+msgid "Task duplicated successfully!"
+msgstr "タスクが正常に複製されました！"
+
+#: src/duplicate-checklist/duplicate-checklist.php:226
+msgid "Error duplicating Task."
+msgstr "タスクの複製中にエラーが発生しました。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:71
+msgid "Duplicate Checklist Tools"
+msgstr "重複チェックリストツール"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:74
+msgid "Current Duplicate Requirements"
+msgstr "現在の重複要件"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:77
+#, php-format
+msgid "Found %d duplicate requirements:"
+msgstr "%d の重複要件が見つかりました:"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:93
+msgid ""
+"Are you sure you want to clean up this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"この重複をクリーンアップしてもよろしいですか？このアクションは元に戻せませ"
+"ん。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:94
+msgid "Clean Up"
+msgstr "クリーンアップ"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:103
+msgid "No duplicate requirements found. Your system is clean!"
+msgstr "重複する要件は見つかりませんでした。システムはクリーンです！"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:109
+msgid "Manual Cleanup"
+msgstr "手動クリーンアップ"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:110
+msgid ""
+"If you know the exact name of a stuck duplicate requirement, you can force "
+"clean it up here."
+msgstr ""
+"スタックされた重複要件の正確な名前がわかっている場合は、ここで強制的にクリー"
+"ンアップできます。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:115
+msgid "e.g., title_count_duplicate_2"
+msgstr "例: title_count_duplicate_2"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:117
+msgid ""
+"Are you sure you want to force cleanup this duplicate? This action cannot be "
+"undone."
+msgstr ""
+"この重複を強制的にクリーンアップしてもよろしいですか？このアクションは元に戻"
+"せません。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:118
+msgid "Force Cleanup"
+msgstr "強制クリーンアップ"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:125
+msgid "Orphaned PHP Class Mappings"
+msgstr "孤立したPHPクラスマッピング"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:126
+msgid ""
+"Class mappings link duplicate requirement names to their PHP class names. "
+"The system uses these mappings to determine which PHP class to instantiate "
+"for each duplicate requirement."
+msgstr ""
+"クラスマッピングは、重複要件名をそのPHPクラス名にリンクします。システムはこれ"
+"らのマッピングを使用して、各重複要件のためにインスタンス化するPHPクラスを決定"
+"します。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:127
+#, php-format
+msgid ""
+"Found %d class mappings. Clean up any orphaned mappings (mappings without "
+"corresponding duplicate requirements) to keep your database clean."
+msgstr ""
+"%d のクラスマッピングが見つかりました。孤立したマッピング（対応する重複要件の"
+"ないマッピング）をクリーンアップして、データベースをクリーンに保ってくださ"
+"い。"
+
+#: src/duplicate-checklist/lib/DebugDuplicateAdmin.php:133
+msgid "Clean Up Orphaned Mappings"
+msgstr "孤立したマッピングをクリーンアップ"
+
+#: src/modules/accessibility/accessibility.php:81
+#: src/modules/accessibility/accessibility.php:180
+msgid "Accessibility"
+msgstr "アクセシビリティ"
+
+#: src/modules/accessibility/accessibility.php:85
+#: src/modules/accessibility/accessibility.php:89
+msgid "Define tasks that verify accessibility"
+msgstr "アクセシビリティを確認するタスクを定義します"
+
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:47
+#: src/modules/accessibility/lib/Requirement/HeadingInHierarchy.php:48
+msgid "H1, H2, H3 etc tags are used in logical order"
+msgstr "H1、H2、H3などのタグは論理的な順序で使用されます"
+
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:47
+#: src/modules/accessibility/lib/Requirement/SingleH1PerPage.php:48
+msgid "Only one H1 tag in content"
+msgstr "コンテンツ内にH1タグは1つだけ"
+
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:47
+#: src/modules/accessibility/lib/Requirement/TableHeader.php:48
+msgid "Tables have a header row"
+msgstr "テーブルにはヘッダー行があります"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:109
+msgid "Advanced Custom Fields Support"
+msgstr "高度なカスタムフィールドサポート"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:113
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:117
+msgid "Define tasks that must be complete before a product is published"
+msgstr "製品が公開される前に完了する必要があるタスクを定義します"
+
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:188
+#: src/modules/advanced-custom-fields/advanced-custom-fields.php:330
+msgid "ACF"
+msgstr "ACF"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:47
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:48
+#, php-format
+msgid "Number of characters in %s field"
+msgstr "%sフィールド内の文字数"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:49
+#, php-format
+msgid "Minimum of %%s character in %s field"
+msgstr "%sフィールドに%%s文字以上必要です"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:50
+#, php-format
+msgid "Minimum of %%s characters in %s field"
+msgstr "%sフィールドに%%s文字以上必要です"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:51
+#, php-format
+msgid "Maximum of %%s character in %s field"
+msgstr "%sフィールドの最大%%s文字"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:52
+#, php-format
+msgid "Maximum of %%s characters in %s field"
+msgstr "%sフィールドの最大%%s文字"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:53
+#, php-format
+msgid "%%s character in %s field"
+msgstr "%%s 文字が %s フィールドにあります"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:54
+#, php-format
+msgid "%%s characters in %s field"
+msgstr "%%s 文字が %s フィールドにあります"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:55
+#, php-format
+msgid "Between %%s and %%s characters in %s field"
+msgstr "%s フィールドの間で %%s と %%s の文字数"
+
+#: src/modules/advanced-custom-fields/lib/Requirement/Base_counter.php:318
+msgid "Got value from ACF Configuration."
+msgstr "ACF設定から値を取得しました。"
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:102
+#: src/modules/all-in-one-seo/all-in-one-seo.php:254
+msgid "All in One SEO"
+msgstr "オールインワンSEO"
+
+#: src/modules/all-in-one-seo/all-in-one-seo.php:106
+#: src/modules/all-in-one-seo/all-in-one-seo.php:110
+msgid "Define tasks that verify All in One SEO items"
+msgstr "All in One SEO項目を確認するタスクを定義します"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:51
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:52
+msgid "All in One SEO Headline Score"
+msgstr "オールインワンSEO見出しスコア"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:53
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:54
+#, php-format
+msgid "Minimum All in One SEO Headline Score: %d"
+msgstr "All in One SEOヘッドラインスコアの最小値：%d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:55
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:56
+#, php-format
+msgid "Maximum All in One SEO Headline Score: %d"
+msgstr "最大オールインワンSEOヘッドラインスコア: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:57
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:58
+#, php-format
+msgid "Exact All in One SEO Headline Score: %d"
+msgstr "正確なオールインワンSEOヘッドラインスコア: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOHeadlineScore.php:59
+#, php-format
+msgid "All in One SEO Headline Score between %d and %d"
+msgstr "%d と %d の間のオールインワンSEOヘッドラインスコア"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:50
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:51
+msgid "All in One SEO Score"
+msgstr "オールインワンSEOスコア"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:52
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:53
+#, php-format
+msgid "Minimum All in One SEO score: %d"
+msgstr "All in One SEOスコアの最小値：%d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:54
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:55
+#, php-format
+msgid "Maximum All in One SEO score: %d"
+msgstr "最大オールインワンSEOスコア: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:56
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:57
+#, php-format
+msgid "Exact All in One SEO score: %d"
+msgstr "正確なオールインワンSEOスコア: %d"
+
+#: src/modules/all-in-one-seo/lib/Requirement/AIOSeoScore.php:58
+#, php-format
+msgid "All in One SEO Score between %d and %d"
+msgstr "%d と %d の間のオールインワンSEOスコア"
+
+#: src/modules/approved-by-user/approved-by-user.php:78
+msgid "Approved by User"
+msgstr "ユーザーによって承認されました"
+
+#: src/modules/approved-by-user/approved-by-user.php:82
+#: src/modules/approved-by-user/approved-by-user.php:86
+msgid "Define tasks that require approval by specific users"
+msgstr "特定のユーザーによる承認が必要なタスクを定義します"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:51
+#, php-format
+msgid "Approved by %s"
+msgstr "%s によって承認されました"
+
+#: src/modules/approved-by-user/lib/Requirement/ApprovedByUser.php:52
+msgid "Approved by specific user"
+msgstr "特定のユーザーによって承認されました"
+
+#: src/modules/audio-count/audio-count.php:78
+msgid "Audio Count"
+msgstr "オーディオ数"
+
+#: src/modules/audio-count/audio-count.php:82
+#: src/modules/audio-count/audio-count.php:86
+msgid "Define tasks that verify total audio in content"
+msgstr "コンテンツ内の合計音声を確認するタスクを定義する"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:47
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:48
+msgid "Number of audio items in content"
+msgstr "コンテンツ内の音声アイテムの数"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:49
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:50
+#, php-format
+msgid "Minimum of %d audio items in content"
+msgstr "コンテンツ内のオーディオアイテムの最小数は%dです"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:51
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:52
+#, php-format
+msgid "Maximum of %d audio items in content"
+msgstr "コンテンツ内の最大 %d オーディオアイテム"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:53
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:54
+#, php-format
+msgid "%d audio items in content"
+msgstr "コンテンツ内の %d 音声アイテム"
+
+#: src/modules/audio-count/lib/Requirement/AudioCount.php:55
+#, php-format
+msgid "Between %d and %d audio items in content"
+msgstr "コンテンツ内で %d と %d の間のオーディオアイテム"
+
+#: src/modules/featured-image-size/featured-image-size.php:79
+msgid "Featured Image Size Support"
+msgstr "フィーチャー画像サイズのサポート"
+
+#: src/modules/featured-image-size/featured-image-size.php:83
+#: src/modules/featured-image-size/featured-image-size.php:87
+msgid "Define tasks that verify the featured image size"
+msgstr "特徴画像のサイズを確認するタスクを定義する"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:51
+msgid "Featured image height"
+msgstr "フィーチャー画像の高さ"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:56
+#, php-format
+msgid "Minimum %spx for the featured image height"
+msgstr "フィーチャー画像の高さは最小 %spx です"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:64
+#, php-format
+msgid "Maximum %spx for the featured image height"
+msgstr "フィーチャー画像の高さの最大 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:69
+#, php-format
+msgid "Featured image height of %spx"
+msgstr "%spx のフィーチャー画像の高さ"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageHeight.php:70
+#, php-format
+msgid "Featured image height between %spx and %spx"
+msgstr "%spx と %spx の間のフィーチャー画像の高さ"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:51
+msgid "Featured image width"
+msgstr "フィーチャー画像の幅"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:52
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:56
+#, php-format
+msgid "Minimum %spx for the featured image width"
+msgstr "フィーチャー画像の幅は最小 %spx です"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:60
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:64
+#, php-format
+msgid "Maximum %spx for the featured image width"
+msgstr "フィーチャー画像の幅の最大 %spx"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:68
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:69
+#, php-format
+msgid "Featured image width of %spx"
+msgstr "%spx のフィーチャー画像の幅"
+
+#: src/modules/featured-image-size/lib/Requirement/FeaturedImageWidth.php:70
+#, php-format
+msgid "Featured image width between %spx and %spx"
+msgstr "%spx と %spx の間のフィーチャー画像の幅"
+
+#: src/modules/image-count/image-count.php:78
+msgid "Image Count"
+msgstr "画像数"
+
+#: src/modules/image-count/image-count.php:82
+#: src/modules/image-count/image-count.php:86
+msgid "Define tasks that verify total images in content"
+msgstr "コンテンツ内の合計画像を確認するタスクを定義する"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:47
+#: src/modules/image-count/lib/Requirement/ImageCount.php:48
+msgid "Number of images in content"
+msgstr "コンテンツ内の画像の数"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:49
+#, php-format
+msgid "Minimum of %d image in content"
+msgstr "コンテンツ内の画像の最小数は%dです"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:50
+#, php-format
+msgid "Minimum of %d images in content"
+msgstr "コンテンツ内の画像の最小数は%dです"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:51
+#, php-format
+msgid "Maximum of %d image in content"
+msgstr "コンテンツ内の画像の最大数は%dです"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:52
+#, php-format
+msgid "Maximum of %d images in content"
+msgstr "コンテンツ内の画像の最大数は%dです"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:53
+#, php-format
+msgid "%d image in content"
+msgstr "コンテンツ内の %d 画像"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:54
+#, php-format
+msgid "%d images in content"
+msgstr "コンテンツ内の %d 画像"
+
+#: src/modules/image-count/lib/Requirement/ImageCount.php:55
+#, php-format
+msgid "Between %d and %d images in content"
+msgstr "コンテンツ内で %d と %d の間の画像"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:46
+#, php-format
+msgid "Avoid using %s tags in content"
+msgstr "コンテンツ内で %s タグの使用を避ける"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:47
+msgid "Avoid heading tags in content"
+msgstr "コンテンツ内で見出しタグを避ける"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:48
+msgid "Content should not contain any of the selected heading tags."
+msgstr "コンテンツには、選択した見出しタグのいずれかを含めてはいけません。"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:59
+msgid "H1"
+msgstr "H1"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:60
+msgid "H2"
+msgstr "H2"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:61
+msgid "H3"
+msgstr "H3"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:62
+msgid "H4"
+msgstr "H4"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:63
+msgid "H5"
+msgstr "H5"
+
+#: src/modules/no-heading-tags/lib/Requirement/NoHeadingTags.php:64
+msgid "H6"
+msgstr "H6"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:78
+msgid "No Heading Tags in Content"
+msgstr "コンテンツに見出しタグがありません"
+
+#: src/modules/no-heading-tags/no-heading-tags.php:82
+#: src/modules/no-heading-tags/no-heading-tags.php:86
+msgid "Define tasks that verify no prohibited heading tags are in content"
+msgstr ""
+"禁止されている見出しタグがコンテンツに含まれていないことを確認するタスクを定"
+"義する"
+
+#: src/modules/prosettings/prosettings.php:120
+msgid "Pro Settings"
+msgstr "プロ設定"
+
+#: src/modules/prosettings/prosettings.php:213
+msgid "License key:"
+msgstr "ライセンスキー："
+
+#: src/modules/prosettings/prosettings.php:220
+msgid "Show Checklists column in post lists:"
+msgstr "投稿リストにチェックリストの列を表示："
+
+#: src/modules/prosettings/prosettings.php:227
+msgid "Enable Status Filter:"
+msgstr "ステータスフィルターを有効にする:"
+
+#: src/modules/prosettings/prosettings.php:235
+msgid "Enable Duplicate Checklists"
+msgstr "重複チェックリストを有効にする"
+
+#: src/modules/prosettings/prosettings.php:243
+msgid "Debug Duplicate Feature:"
+msgstr "重複機能をデバッグ:"
+
+#: src/modules/prosettings/prosettings.php:296
+msgid ""
+"This allows tasks to be disabled for specific statuses such as \"Draft\" or "
+"\"Published\"."
+msgstr ""
+"これにより、「下書き」や「公開」などの特定のステータスに対してタスクを無効に"
+"することができます。"
+
+#: src/modules/prosettings/prosettings.php:311
+msgid "This allows users to duplicate existing checklist task."
+msgstr "これにより、ユーザーは既存のチェックリストタスクを複製できます。"
+
+#: src/modules/prosettings/prosettings.php:327
+msgid "Enable debugging tools for duplicate functionality."
+msgstr "重複機能のデバッグツールを有効にする。"
+
+#: src/modules/prosettings/prosettings.php:347
+msgid ""
+"Add a Checklists column to the Posts screen showing how many requirements "
+"are complete."
+msgstr "投稿画面にチェックリストの列を追加し、完了した要件の数を表示します。"
+
+#: src/modules/prosettings/prosettings.php:364
+msgid "Checklists"
+msgstr "チェックリスト"
+
+#: src/modules/prosettings/prosettings.php:421
+msgid "No checklists"
+msgstr "チェックリストはありません"
+
+#: src/modules/prosettings/prosettings.php:494
+msgid "Debug Duplicate"
+msgstr "重複をデバッグ"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:61
+#, php-format
+msgid "Publish time should be at %s"
+msgstr "公開時間は%sの必要があります"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:62
+msgid "(not set)"
+msgstr "(設定されていません)"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeExact.php:64
+msgid "Publish time should be at a specific time"
+msgstr "公開時間は特定の時間に設定する必要があります"
+
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:47
+#: src/modules/publish-time/lib/Requirement/PublishTimeFuture.php:48
+msgid "Publish time should be in the future"
+msgstr "公開時間は未来である必要があります"
+
+#: src/modules/publish-time/publish-time.php:80
+#: src/modules/publish-time/publish-time.php:190
+msgid "Publish Date / Time"
+msgstr "公開日/時間"
+
+#: src/modules/publish-time/publish-time.php:84
+#: src/modules/publish-time/publish-time.php:88
+msgid "Combine exact and future publish time checks"
+msgstr "正確な公開時間と将来の公開時間チェックを組み合わせる"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:48
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:49
+msgid "Rank Math SEO Score"
+msgstr "ランクマスSEOスコア"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:50
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:51
+#, php-format
+msgid "Minimum Rank Math SEO score: %d"
+msgstr "最小ランクマスSEOスコア: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:52
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:53
+#, php-format
+msgid "Maximum Rank Math SEO score: %d"
+msgstr "最大ランクマスSEOスコア：%d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:54
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:55
+#, php-format
+msgid "Exact Rank Math SEO score: %d"
+msgstr "正確なランクマスSEOスコア: %d"
+
+#: src/modules/rank-math/lib/Requirement/RankMathScore.php:56
+#, php-format
+msgid "Rank Math SEO scores between %d and %d"
+msgstr "Rank Math SEOのスコアは%dから%dの間です"
+
+#: src/modules/rank-math/rank-math.php:103
+#: src/modules/rank-math/rank-math.php:247
+msgid "Rank Math SEO"
+msgstr "ランクマスSEO"
+
+#: src/modules/rank-math/rank-math.php:107
+#: src/modules/rank-math/rank-math.php:111
+msgid "Define tasks that verify Rank Math SEO items"
+msgstr "Rank Math SEOアイテムを確認するタスクを定義する"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:47
+#: src/modules/video-count/lib/Requirement/VideoCount.php:48
+msgid "Number of video items in content"
+msgstr "コンテンツ内のビデオアイテムの数"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:49
+#: src/modules/video-count/lib/Requirement/VideoCount.php:50
+#, php-format
+msgid "Minimum of %d video items in content"
+msgstr "コンテンツ内のビデオアイテムの最小数は%dです"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:51
+#: src/modules/video-count/lib/Requirement/VideoCount.php:52
+#, php-format
+msgid "Maximum of %d video items in content"
+msgstr "コンテンツ内のビデオアイテムの最大数は%dです"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:53
+#: src/modules/video-count/lib/Requirement/VideoCount.php:54
+#, php-format
+msgid "%d video items in content"
+msgstr "コンテンツ内の %d 動画アイテム"
+
+#: src/modules/video-count/lib/Requirement/VideoCount.php:55
+#, php-format
+msgid "Between %d and %d video items in content"
+msgstr "コンテンツ内で %d と %d の間のビデオアイテム"
+
+#: src/modules/video-count/video-count.php:78
+msgid "Video Count"
+msgstr "動画数"
+
+#: src/modules/video-count/video-count.php:82
+#: src/modules/video-count/video-count.php:86
+msgid "Define tasks that verify total video in content"
+msgstr "コンテンツ内の合計動画を確認するタスクを定義する"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:65
+msgid "Check the \"Allow backorders?\" box"
+msgstr "「バックオーダーを許可しますか？」ボックスをチェックしてください"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:66
+msgid "Allow backorders"
+msgstr "バックオーダーを許可する"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:67
+msgid "Allow backorders, but notify"
+msgstr "バックオーダーを許可するが、通知する"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:68
+msgid "Do not allow backorders"
+msgstr "バックオーダーを許可しない"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:169
+msgid "Do not allow"
+msgstr "許可しない"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:176
+msgid "Allow"
+msgstr "許可する"
+
+#: src/modules/woocommerce/lib/Requirement/Backorder.php:183
+msgid "Allow, but notify customer"
+msgstr "許可するが、顧客に通知する"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:65
+msgid "Select some products for \"Cross-sells\""
+msgstr "「クロスセル」のためにいくつかの製品を選択する"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:69
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:84
+#, php-format
+msgid "Min %s Max %s"
+msgstr "最小 %s 最大 %s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:70
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:74
+#, php-format
+msgid "Minimum of %s products for \"Cross-sells\""
+msgstr "「クロスセル」の最小製品数：%s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:78
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:82
+#, php-format
+msgid "Maximum of %s products for \"Cross-sells\""
+msgstr "「クロスセル」の最大製品数：%s"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:86
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:87
+#, php-format
+msgid "%s products for \"Cross-sells\""
+msgstr "\"クロスセル\" のための %s 商品"
+
+#: src/modules/woocommerce/lib/Requirement/Crosssell.php:88
+#, php-format
+msgid "%s to %s products for \"Cross-sells\""
+msgstr "\"クロスセル\" のための %s から %s 商品"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:72
+msgid "Discount for the \"Sale price\""
+msgstr "「セール価格」の割引"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:73
+#, php-format
+msgid "Min %s%% Max %s%%"
+msgstr "最小 %s%% 最大 %s%%"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:74
+#: src/modules/woocommerce/lib/Requirement/Discount.php:75
+#, php-format
+msgid "Min %s%% discount for the \"Sale price\""
+msgstr "「セール価格」の最小%s%%割引"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:76
+#: src/modules/woocommerce/lib/Requirement/Discount.php:77
+#, php-format
+msgid "Max %s%% discount for the \"Sale price\""
+msgstr "「セール価格」の最大 %s%% 割引"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:78
+#: src/modules/woocommerce/lib/Requirement/Discount.php:79
+#, php-format
+msgid "%s%% discount for the \"Sale price\""
+msgstr "\"セール価格\" のための %s%% 割引"
+
+#: src/modules/woocommerce/lib/Requirement/Discount.php:80
+#, php-format
+msgid "%s%% to %s%% discount for the \"Sale price\""
+msgstr "\"セール価格\" のための %s%% から %s%% 割引"
+
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:43
+#: src/modules/woocommerce/lib/Requirement/Downloadable.php:44
+msgid "Check the \"Downloadable\" box"
+msgstr "「ダウンロード可能」ボックスをチェックしてください"
+
+#: src/modules/woocommerce/lib/Requirement/Image.php:43
+#: src/modules/woocommerce/lib/Requirement/Image.php:44
+msgid "Product image"
+msgstr "製品画像"
+
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:43
+#: src/modules/woocommerce/lib/Requirement/ManageStock.php:44
+msgid "Check the \"Manage stock?\" box"
+msgstr "「在庫管理しますか？」ボックスをチェックしてください"
+
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:42
+#: src/modules/woocommerce/lib/Requirement/RegularPrice.php:43
+msgid "Enter a \"Regular price\""
+msgstr "「通常価格」を入力してください"
+
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePrice.php:44
+msgid "Enter a \"Sale price\""
+msgstr "「セール価格」を入力してください"
+
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:43
+#: src/modules/woocommerce/lib/Requirement/SalePriceScheduled.php:44
+msgid "Schedule the \"Sale price\""
+msgstr "「販売価格」をスケジュールする"
+
+#: src/modules/woocommerce/lib/Requirement/Sku.php:43
+#: src/modules/woocommerce/lib/Requirement/Sku.php:44
+msgid "Enter a \"SKU\""
+msgstr "「SKU」を入力してください"
+
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:43
+#: src/modules/woocommerce/lib/Requirement/SoldIndividually.php:44
+msgid "Check the \"Sold individually\" box"
+msgstr "「個別に販売」ボックスをチェックしてください"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:80
+msgid "Select some products for \"Upsells\""
+msgstr "「アップセル」のためにいくつかの製品を選択する"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:85
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:89
+#, php-format
+msgid "Minimum of %s products for \"Upsells\""
+msgstr "「アップセル」のための最小限の%s製品"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:93
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:97
+#, php-format
+msgid "Maximum of %s products for \"Upsells\""
+msgstr "「アップセル」の最大製品数：%s"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:101
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:102
+#, php-format
+msgid "%s products for \"Upsells\""
+msgstr "\"アップセル\" のための %s 商品"
+
+#: src/modules/woocommerce/lib/Requirement/Upsell.php:103
+#, php-format
+msgid "%s to %s products for \"Upsells\""
+msgstr "\"アップセル\" のための %s から %s 商品"
+
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:42
+#: src/modules/woocommerce/lib/Requirement/VirtualCheckbox.php:43
+msgid "Check the \"Virtual\" box"
+msgstr "「バーチャル」ボックスをチェックしてください"
+
+#: src/modules/woocommerce/woocommerce.php:113
+msgid "WooCommerce Support"
+msgstr "WooCommerceサポート"
+
+#: src/modules/woocommerce/woocommerce.php:117
+#: src/modules/woocommerce/woocommerce.php:121
+msgid ""
+"Define tasks that must be complete before a WooCommerce product is published"
+msgstr "WooCommerce製品が公開される前に完了する必要があるタスクを定義します"
+
+#: src/modules/woocommerce/woocommerce.php:287
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: src/PluginServiceProvider.php:61
+msgid "Checklists Pro"
+msgstr "チェックリスト プロ"
+
+#: src/status-filter/StatusFilter.php:70
+msgid "Exclude Statuses"
+msgstr "ステータスを除外"
+
+#: src/status-filter/StatusFilter.php:91
+msgid "Select statuses to exclude"
+msgstr "除外するステータスを選択する"
+
+#~ msgid " is filled"
+#~ msgstr " が入力されました"
+
+#~ msgid "Show Checklists column in post lists."
+#~ msgstr "投稿リストにチェックリストの列を表示します。"

@@ -24,12 +24,18 @@
 				{
 					if(data.response===true)
 					{
-						if(post_data.wb_stn_action=='get_notes')
-						{ 
-							$('body').append(data.data);
-							$('.wb_stn_note[data-wb_stn_id="0"]').hide().addClass('wb_stn_dummy_html');
-							wb_stn.setInnerHeight();
-						}
+                        if(post_data.wb_stn_action=='get_notes')
+                        {
+                            $('body').append(data.data);
+                            $('.wb_stn_note[data-wb_stn_id="0"]').hide().addClass('wb_stn_dummy_html');
+                            wb_stn.setInnerHeight();
+                            // After notes are loaded, respect the persisted visibility state (if any). If
+                            // the user previously hid notes, keep them hidden across page refreshes.
+                            var notesState = localStorage.getItem('wb_stn_show_notes');
+                            if(notesState === '0') {
+                                $('.wb_stn_note').not('.wb_stn_dummy_html').hide();
+                            }
+                        }
 						else if(post_data.wb_stn_action=='create_note')
 						{
 							if(elm!==null)
@@ -106,20 +112,24 @@
 			wb_stn.hideDropDownMenu(new_elm);
 
 			var pos=new_elm.position();
-			var data={
-				wb_stn_action:'create_note',
-				id_wb_stn_notes:0,
-				content:new_elm.find('.wb_stn_note_body_inner').html(),
-				width:parseInt(new_elm.width()),
-				height:parseInt(new_elm.height()),
-				postop:parseInt(pos.top),
-				posleft:parseInt(pos.left),
-				z_index:parseInt(new_elm.css('z-index')),
-				font_size:parseInt(new_elm.css('font-size')),
-				font_family:new_elm.attr('data-wb_stn_font'),
-				theme:new_elm.attr('data-wb_stn_theme'),
-        global_note: confirm('Make this note global?') ? 1 : 0,
-			};
+            var data = {
+                wb_stn_action : 'create_note',
+                id_wb_stn_notes : 0,
+                content : new_elm.find('.wb_stn_note_body_inner').html(),
+                width : parseInt( new_elm.width() ),
+                height : parseInt( new_elm.height() ),
+                postop : parseInt( pos.top ),
+                posleft : parseInt( pos.left ),
+                z_index : parseInt( new_elm.css( 'z-index' ) ),
+                font_size : parseInt( new_elm.css( 'font-size' ) ),
+                font_family : new_elm.attr( 'data-wb_stn_font' ),
+                theme : new_elm.attr( 'data-wb_stn_theme' ),
+                // Prompt the user for global vs. private visibility. If the user
+                // clicks OK the note will be visible to all users; otherwise
+                // the note is private. The value (1 or 0) is sent to the
+                // server and used to set the `is_global` flag.
+                global_note : window.confirm( wb_stn_data.labels && wb_stn_data.labels.make_global ? wb_stn_data.labels.make_global : 'Make this note global?\nOK = Yes, Cancel = No' ) ? 1 : 0,
+            };
 			this.fireAjax(data,new_elm);
 		},
 		setZindex:function()
@@ -316,10 +326,16 @@
 				wb_stn.toggleArchive(elm, 2);
 		    });
 
-		    $(document).on('click','.wb_stn_pagination_btn', function(){
-		    	var offset = $(this).attr('data-offset');
-				wb_stn.loadArchives(offset);
-		    });
+            $(document).on('click','.wb_stn_pagination_btn', function(){
+                var offset = $(this).attr('data-offset');
+                wb_stn.loadArchives(offset);
+            });
+
+            // Refresh button on global notes. When clicked remove all existing
+            // notes and reload via AJAX.
+            $(document).on('click','.wb_stn_note .wb_stn_global_refresh', function(){
+                wb_stn.refreshNotes();
+            });
 		},
 		hideDropDownMenu:function(elm)
 		{
@@ -376,12 +392,18 @@
 				state=1;
 				$('.wb_stn_note').not('.wb_stn_dummy_html').show();
 			}
-			var data={
-				wb_stn_action:'toggle_notes',
-				id_wb_stn_notes:0,
-				state:state,
-			};
-			this.fireAjax(data,null);
+            // Persist the user's preference in localStorage. When state=0
+            // notes are hidden; when 1 they are shown. This persists across
+            // page reloads and browser sessions.
+            try {
+                localStorage.setItem('wb_stn_show_notes', state.toString());
+            } catch (e) {}
+            var data={
+                wb_stn_action:'toggle_notes',
+                id_wb_stn_notes:0,
+                state:state,
+            };
+            this.fireAjax(data,null);
 		},
 		setTheme:function(elm,vl)
 		{
@@ -457,7 +479,17 @@
 			{
 				elm.find('.wb_stn_loader').remove();
 			}
-		}
+        },
+        /**
+         * Refresh all notes without reloading the page. Removes existing
+         * note elements from the DOM then fetches fresh notes via AJAX.
+         */
+        refreshNotes:function()
+        {
+            // remove all existing notes before loading new ones
+            $('.wb_stn_note').remove();
+            this.loadNotes();
+        }
 	};
 	
 	$(function() {
