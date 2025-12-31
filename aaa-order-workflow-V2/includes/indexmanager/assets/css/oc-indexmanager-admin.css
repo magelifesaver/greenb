@@ -1,0 +1,4 @@
+.im-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.im-row input[type=text]{width:180px}
+.im-handle{cursor:move}
+.im-table-group,.im-key-group{display:flex;gap:4px}

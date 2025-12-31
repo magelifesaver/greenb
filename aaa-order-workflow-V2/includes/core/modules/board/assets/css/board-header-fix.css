@@ -1,0 +1,105 @@
+/***********************************************************
+ * AAA Order Workflow — Board Core Columns (titles + counts)
+ * Path: includes/core/modules/board/assets/css/board-core.css
+ * Scope: ONLY the column strip + column wrappers (no card restyle)
+ ***********************************************************/
+/* ===== INNER WRAP FROM FEED ===== */
+.aaa-oc-columns-wrap{
+  display:inline-flex;
+  gap:1rem;
+  width:max-content;           /* grow to fit columns */
+}
+
+#aaa-oc-board-columns {
+  display: inline-flex;
+  gap: 0.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* HIDE SCROLLBAR (modern approach) */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+#aaa-oc-board-columns::-webkit-scrollbar {
+ 
+}
+/*
+   EACH COLUMN
+   - Fixed width so columns stack horizontally
+   - Scroll vertically within each column (hidden scrollbar)
+*/
+.aaa-oc-column {
+  border: 1px solid #ccc;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  background: #dbdbdb;
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  /* Default to 300px wide (col-count-1) */
+  flex: 0 0 300px;
+  max-width: 300px;
+  
+  overflow-y: auto;
+
+  /* Example fixed max-height: adjust as you like */
+  max-height: calc(100vh - 150px);
+
+  /* HIDE VERTICAL SCROLLBAR */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;     /* Firefox */
+}
+.aaa-oc-column::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* 
+   OPTIONAL: If you have a "two-column" style 
+   (wider column) 
+*/
+.aaa-oc-column.col-count-1 {
+  flex: 1 1 auto;
+  min-width: 300px;    /* fallback if screen is small */
+  max-width: 600px;    /* so it can expand up to 600px if there's space */
+}
+
+/* 2-column style (10–29 orders) */
+.aaa-oc-column.col-count-2 {
+  flex: 1 1 auto;
+  min-width: 600px;
+  max-width: 1000px; 
+}
+
+/* 3-column style (30+ orders) */
+.aaa-oc-column.col-count-3 {
+  flex: 1 1 auto;
+  min-width: 900px;
+  max-width: 1400px;
+}
+
+/***********************************************************
+ * COLUMN TITLE
+ ***********************************************************/
+.aaa-oc-column-title {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #dbdbdb; /* or white, etc. */
+}
+.aaa-oc-column-title .aaa-oc-order-count {
+  font-size: 0.9em;
+  color: #777;
+}
+
+
+/* ===== Collapsed/Expanded visibility helpers (kept minimal) ===== */
+.aaa-oc-order-card.collapsed .collapsed-only{ display:block; }
+.aaa-oc-order-card.collapsed .expanded-only{ display:none; }
+.aaa-oc-order-card.expanded .collapsed-only{ display:none !important; }
+.aaa-oc-order-card.expanded .expanded-only{ display:block !important; }

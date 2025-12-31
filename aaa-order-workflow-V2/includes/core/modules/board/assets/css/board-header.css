@@ -1,0 +1,31 @@
+/**
+ * File: /wp-content/plugins/aaa-order-workflow/includes/core/modules/board/assets/css/board-header.css
+ * Purpose: Workflow Board column header styling (titles + counts) with real markup only.
+ * Notes:
+ *  - Titles come from server-rendered markup: .aaa-oc-column-title + .aaa-oc-order-count
+ *  - No ::before/::after content strings here (or anywhere else).
+ */
+
+/* Column container header bar (uses real markup) */
+.aaa-oc-column-title{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  min-height:38px;
+  padding:.5rem .5rem;
+  margin:-8px -8px 8px -8px; /* sit on the column edges defined by the column box */
+  background:#dbdbdb;
+  border-bottom:1px solid #cfcfcf;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+/* Count bubble beside header text */
+.aaa-oc-order-count{
+  font-weight:400;
+  color:#777;
+}

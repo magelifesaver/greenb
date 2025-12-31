@@ -1,0 +1,388 @@
+/***********************************************************
+ * AAA Order Workflow - Board CSS
+ * Path: /plugins/aaa-order-workflow/assets/css/board.css
+ ***********************************************************/
+
+/* 
+   MAIN BOARD WRAPPER
+   - Displays columns inline
+   - Allows horizontal scrolling (hidden scrollbar)
+*/
+
+/***********************************************************
+ * Individual Order Cards
+ ***********************************************************/
+.aaa-oc-order-card {
+  display: inline-block;
+  width: 280px;
+  margin: 0 0 1rem 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Large order number in the card */
+.aaa-oc-order-number-large {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+/* "NEW" badge */
+.aaa-oc-new-badge {
+  background: #f33;
+  color: #fff;
+  padding: 3px 6px;
+  font-weight: 700;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Daily order number styling */
+.aaa-oc-daily-order {
+  background: green;
+  color: #fff;
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-left: 6px;
+  font-size: 0.9em;
+}
+
+/* Customer name */
+.aaa-oc-customer-name {
+  font-size: 1.1em;
+  margin-top: 0.5rem;
+}
+
+/* Price + items row */
+.aaa-oc-order-totals {
+}
+.aaa-oc-total-price {
+  font-weight: 600;
+}
+
+
+
+/***********************************************************
+ * BUTTONS & PAGINATION
+ ***********************************************************/
+.aaa-oc-actions {
+  margin-top: 0.5rem;
+}
+
+
+#aaa-oc-modal-content .aaa-oc-order-card {
+  width: 100%;
+}
+.aaa-oc-order-card.expanded {
+  z-index: 9999;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+
+  /* NEW SCROLL BEHAVIOR */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.aaa-oc-order-card.expanded .aaa-customer-notes {
+  display: block !important;
+}
+.aaa-oc-order-card.expanded .aaa-nav2-buttons {
+display: flex !important;
+}
+.aaa-oc-order-card.expanded .aaa-nav-buttons {
+  display: flex !important;
+}
+.aaa-oc-order-card.expanded .aaa-delivery-info {
+  display: none !important;
+}
+
+/* Default: if .collapsed is on the card container, show collapsed-only, hide expanded-only */
+.aaa-oc-order-card.collapsed .collapsed-only {
+  display: block; 
+}
+.aaa-oc-order-card.collapsed .expanded-only {
+  display: none; 
+}
+
+/* When .expanded is on the card container, do the opposite */
+.aaa-oc-order-card.expanded .collapsed-only {
+  display: none !important;
+}
+.aaa-oc-order-card.expanded .expanded-only {
+  display: block !important;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* disable page-level scrolling */
+}
+/* Hide all admin notices in the WordPress dashboard */
+.notice,
+.update-nag,
+.updated,
+.error,
+.notice-success,
+.notice-error,
+.notice-warning,
+.notice-info {
+    display: none !important;
+}
+
+/***********************************************************
+ * EXPANDED
+ ***********************************************************/
+ 
+ .aaa-special-box {
+    background: blue;
+    padding: 10px 10px;
+    color: white;
+    border-radius: 10px;
+}
+.aaa-warning-box {
+    background: red;
+    padding: 10px 10px;
+    color: white;
+    border-radius: 10px;
+}
+
+.hidden-button { display: none !important; }
+
+
+/* Modern “flat” button style */
+.button-modern, button.button-modern, .aaa-wf-header-buttons, .aaa-wf-exit-dashboard, .aaa-oc-today-orders, .aaa-oc-feed-open, .button-link {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+  text-decoration: none;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+/* Hover / focus state */
+.button-modern:hover,
+.button-modern:focus {
+  background: linear-gradient(135deg, #48c, #5a9);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Active / pressed state */
+.button-modern:active {
+  background: linear-gradient(135deg, #3a8, #397);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateY(0);
+}
+
+/* Disabled state */
+.button-modern[disabled] {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+.aaa-oc-prev-status-icon.button-modern, .aaa-oc-next-status-icon.button-modern {
+    line-height: .5 !important;
+    padding: 3px 11px;
+}
+.aaa-order-card .open-order.button-modern {
+  /* only these get the modern look */
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #5a9, #48c) !important;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.aaa-order-card .open-order.button-modern:hover {
+  background: linear-gradient(135deg, #48c, #5a9);
+  transform: translateY(-2px);
+}
+
+
+.pill-tip-et {
+    background: #cfc;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+.pill-tip-wt {
+    background: #ffdd57;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.aaa-oc-order-card.expanded::-webkit-scrollbar {
+  width: 8px;
+}
+.aaa-oc-order-card.expanded::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+.aaa-announcement p {
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
+}
+.future-delivery {
+    background: #3498db;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+}
+.aaa-oc-header-extras .button-modern {
+  padding: 4px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* add once in the injected CSS block */
+.aaa-oc-delivery-pill.pill-red { background:#d64040; } /* ASAP red */
+/* Delivery labels */
+.aaa-delivery-date.today-delivery {
+    background: #28a745; /* green */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.aaa-delivery-date.tomorrow-delivery {
+    background: #007bff; /* blue */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.aaa-delivery-date.future-delivery {
+    background: #6c757d; /* gray */
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+div#aaa-oc-countdown-bar {
+    display: none;
+}
+.aaa-oc-header-extras select,
+.aaa-oc-header-extras input[type="search"],
+.aaa-oc-header-extras a.button-modern,
+.aaa-oc-header-extras button {
+    height:32px;
+    line-height:30px;
+    padding:0 10px;
+    border:1px solid #ccd0d4;
+    border-radius:4px;
+}
+.aaa-oc-header-extras select {
+    min-width:140px;
+    background:#fff;
+}
+.aaa-oc-header-extras .button-modern {
+    background:#2271b1;
+    color:#fff;
+    text-decoration:none;
+}
+.aaa-oc-header-extras .button-modern:hover {
+    background:#135e96;
+}
+
+.aaa-oc-pill-envelope {
+    background: #fff; /* yellow */
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 4px;
+    font-size: 24px;
+}
+/* =========================
+   OWB — Top row containment
+   (works with your current layout)
+   ========================= */
+
+/* Make header cells clip long content instead of expanding the card */
+.aaa-oc-shell-cell { min-width: 0; overflow: hidden; }
+
+/* Keep top-right controls aligned to the edge and contained */
+[data-area="top_right"] .aaa-oc-top-right {
+  justify-content: flex-end;
+  max-width: 100%;
+}
+
+/* Tidy the jump select so it doesn't jitter layout */
+.aaa-oc-status-jump-label { margin-left: 8px; }
+.aaa-oc-status-jump { min-width: 140px; }
+
+/* Ensure top row wrappers lay out nicely (matches your style) */
+.aaa-oc-pillbar,
+.aaa-oc-top-right,
+.aaa-oc-user-pills,
+.aaa-oc-status-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Pill chip look (consistent with your theme) */
+.aaa-oc-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid #ccd6e0;
+  background: #eef3fa;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+/* Board header compact layout */
+.aaa-board-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:6px 10px;
+  margin:0 0 6px 0;
+  background:#f7f7f7;
+  border:1px solid #e5e5ea;
+  border-radius:6px;
+}
+.aaa-board-head .aaa-title {
+  font-size:18px;
+  font-weight:600;
+  margin:0;
+  line-height:1.2;
+}
+.aaa-board-head .aaa-actions {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+}
+.aaa-board-head .aaa-actions .button { margin:0; }
+.aaa-board-shell { margin-top:6px; }

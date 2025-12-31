@@ -1,0 +1,110 @@
+<?php
+/**
+ * Plugin Name: AAA Order Workflow 2
+ * Description: Workflow Board + modular system. Core loader owns Board + modules; Core Assets loader enqueues shared/legacy JS.
+ * Version:     2.0.0
+ * Author:      Webmaster Delivery
+ * Text Domain: aaa-oc
+ *
+ * File: /wp-content/plugins/aaa-order-workflow/aaa-order-workflow.php
+ */
+
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+/* --------------------------------------------------------------------
+ * Core plugin constants (define ONCE)
+ * ------------------------------------------------------------------ */
+if ( ! defined( 'AAA_OC_VERSION' ) )      define( 'AAA_OC_VERSION', '2.0.0' );
+if ( ! defined( 'AAA_OC_PLUGIN_FILE' ) )  define( 'AAA_OC_PLUGIN_FILE', __FILE__ );
+if ( ! defined( 'AAA_OC_PLUGIN_DIR' ) )   define( 'AAA_OC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'AAA_OC_PLUGIN_URL' ) )   define( 'AAA_OC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'AAA_OC_REQUIRED_CAP' ) ) define( 'AAA_OC_REQUIRED_CAP', 'manage_woocommerce' );
+/* --------------------------------------------------------------------
+ * WooCommerce dependency check (admin-only)
+ * ------------------------------------------------------------------ */
+add_action( 'admin_init', function () {
+	if ( is_admin() && current_user_can( 'activate_plugins' ) && ! class_exists( 'WooCommerce' ) ) {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+		add_action( 'admin_notices', function () {
+			echo '<div class="error"><p>' . esc_html__( 'AAA Order Workflow requires WooCommerce to be installed and active.', 'aaa-oc' ) . '</p></div>';
+		} );
+	}
+} );
+
+/* --------------------------------------------------------------------
+ * Shared logger — single file (aaa_oc.log) in plugin root
+ * ------------------------------------------------------------------ */
+if ( ! function_exists( 'aaa_oc_log' ) ) {
+	function aaa_oc_log( $message ) {
+		$file = AAA_OC_PLUGIN_DIR . 'aaa_oc.log';
+		$time = date( 'Y-m-d H:i:s' );
+		@file_put_contents( $file, "[$time] " . ( is_string( $message ) ? $message : wp_json_encode( $message ) ) . PHP_EOL, FILE_APPEND );
+	}
+}
+
+/* --------------------------------------------------------------------
+ * Load Core (owns: options, version helper, registry, modules, Board, etc.)
+ * Load Core Assets (owns: shared/legacy admin JS enqueues)
+ * ------------------------------------------------------------------ */
+require_once AAA_OC_PLUGIN_DIR . 'includes/core/aaa-oc-core-loader.php';
+//require_once AAA_OC_PLUGIN_DIR . 'includes/core/aaa-oc-core-assets-loader.php';
+
+/* --------------------------------------------------------------------
+ * Activation / Deactivation safety nets
+ *  - Core Loader should register its own installers; this is a fallback.
+ * ------------------------------------------------------------------ */
+register_activation_hook( __FILE__, function () {
+	// Fallback: ensure Board table installer is available and run it idempotently
+	$installer = AAA_OC_PLUGIN_DIR . 'includes/core/modules/board/index/class-aaa-oc-table-installer.php';
+	if ( file_exists( $installer ) ) require_once $installer;
+
+	if ( class_exists( 'AAA_OC_Table_Installer' ) ) {
+		if ( method_exists( 'AAA_OC_Table_Installer', 'create_index_table' ) ) {
+			AAA_OC_Table_Installer::create_index_table();
+		} elseif ( method_exists( 'AAA_OC_Table_Installer', 'ensure_installed' ) ) {
+			AAA_OC_Table_Installer::ensure_installed();
+		}
+	}
+
+	if ( ! wp_next_scheduled( 'aaa_oc_scheduled_cleanup' ) ) {
+		wp_schedule_event( time() + DAY_IN_SECONDS, 'daily', 'aaa_oc_scheduled_cleanup' );
+	}
+} );
+
+register_deactivation_hook( __FILE__, function () {
+	wp_clear_scheduled_hook( 'aaa_oc_scheduled_cleanup' );
+} );
+
+/* Safety net: re-run installer on boot if schema version mismatches (Core Loader may already handle this) */
+add_action( 'plugins_loaded', function () {
+	$installer = AAA_OC_PLUGIN_DIR . 'includes/core/modules/board/index/class-aaa-oc-table-installer.php';
+	if ( file_exists( $installer ) ) require_once $installer;
+
+	if ( class_exists( 'AAA_OC_Table_Installer' ) && defined( 'AAA_OC_Table_Installer::SCHEMA_VERSION' ) ) {
+		if ( method_exists( 'AAA_OC_Table_Installer', 'ensure_installed' ) ) {
+			AAA_OC_Table_Installer::ensure_installed();
+		}
+	}
+}, 9 );
+
+/* --------------------------------------------------------------------
+ * Admin Bar shortcut → Workflow Board (V1)
+ * ------------------------------------------------------------------ */
+add_action( 'admin_bar_menu', function( $wp_admin_bar ) {
+	if ( ! current_user_can( 'manage_woocommerce' ) ) return;
+	$wp_admin_bar->add_node( [
+		'id'    => 'aaa-workflow-board-v1',
+		'title' => 'Workflow Board',
+		'href'  => admin_url( 'admin.php?page=aaa-oc-workflow-board' ),
+		'meta'  => [ 'class' => 'aaa-workflow-board-v1-link', 'title' => 'Go to Workflow Board', 'target' => '_blank' ],
+	] );
+}, 100 );
+
+/* --------------------------------------------------------------------
+ * Plugins list: “Settings” link → Workflow Settings (tabs)
+ * ------------------------------------------------------------------ */
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function( $links ) {
+	$settings_url = admin_url( 'admin.php?page=aaa-oc-core-settings' );
+	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-oc' ) . '</a>' );
+	return $links;
+} );
