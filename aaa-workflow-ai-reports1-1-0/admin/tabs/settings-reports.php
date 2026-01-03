@@ -6,7 +6,7 @@
  *              This version displays both the AI summary and the raw REST
  *              data returned from LokeyReports (including top products).
  * Dependencies: admin.js, lokey-client.php, openai-client.php
- * File Version: 1.4.0
+ * File Version: 1.3.0
  * Updated: 2025-12-28
  * Author: AAA Workflow DevOps
  * ============================================================================
@@ -26,31 +26,19 @@ if ( isset( $_GET['ai_updated'] ) ) {
         <input type="date" id="aaa-wf-ai-from" value="<?php echo esc_attr( date('Y-m-d', strtotime('-7 days')) ); ?>">
         <label for="aaa-wf-ai-to">To:</label>
         <input type="date" id="aaa-wf-ai-to" value="<?php echo esc_attr( date('Y-m-d') ); ?>">
-        <label for="aaa-wf-ai-report-type">Report Type:</label>
-        <select id="aaa-wf-ai-report-type">
-            <option value="summary" selected>Summary</option>
-            <option value="products">Top Products</option>
-            <option value="categories">Category Breakdown</option>
-            <option value="inventory">Inventory Summary</option>
-        </select>
         <button id="aaa-wf-ai-fetch" class="button button-primary">Generate Report</button>
     </p>
     <!-- AI Summary Output -->
-    <h3 style="display:flex;align-items:center;">AI Summary
-        <button id="aaa-wf-ai-copy-summary" class="button button-secondary" style="margin-left:auto;">Copy Report</button>
-    </h3>
+    <h3>AI Summary</h3>
     <pre id="aaa-wf-ai-summary-output" style="background:#fff; padding:10px; min-height:100px; overflow:auto; border:1px solid #ccd0d4;"></pre>
     <!-- Raw Data Output -->
     <h3>Raw Data</h3>
     <pre id="aaa-wf-ai-raw-output" style="background:#fff; padding:10px; min-height:100px; overflow:auto; border:1px solid #ccd0d4;"></pre>
     <!-- 🔍 Advanced Debug Panel -->
     <div id="aaa-wf-ai-debug-panel" style="margin-top:25px; background:#f9f9f9; border:1px solid #ccd0d4; border-radius:6px; padding:10px;">
-        <h3 style="margin-top:0; display:flex;align-items:center;">
+        <h3 style="margin-top:0;">
             Debug Console
-            <span style="margin-left:auto;">
-                <button id="aaa-wf-ai-copy-debug" class="button button-secondary">Copy Debug</button>
-                <button id="aaa-wf-ai-clear-debug" class="button button-secondary">Clear Log</button>
-            </span>
+            <button id="aaa-wf-ai-clear-debug" class="button button-secondary" style="float:right;">Clear Log</button>
         </h3>
         <div id="aaa-wf-ai-debug-entries" style="max-height:300px; overflow-y:auto; font-family:monospace; font-size:13px; line-height:1.4;"></div>
     </div>

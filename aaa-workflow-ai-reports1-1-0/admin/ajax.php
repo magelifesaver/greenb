@@ -26,8 +26,6 @@ add_action( 'admin_post_aaa_wf_ai_save_openai', function() {
     // Retrieve values from POST
     $key   = sanitize_text_field( $_POST['aaa_wf_ai_openai_key'] ?? '' );
     $debug = ! empty( $_POST['aaa_wf_ai_debug_enabled'] ) ? 1 : 0;
-    // Development mode saves full session logs to /wp-content/aaa-logs/
-    $dev_mode = ! empty( $_POST['aaa_wf_ai_dev_mode'] ) ? 1 : 0;
     $model = sanitize_text_field( $_POST['aaa_wf_ai_default_model'] ?? '' );
     $prompt_template = isset( $_POST['aaa_wf_ai_prompt_template'] ) ? wp_unslash( $_POST['aaa_wf_ai_prompt_template'] ) : '';
     $temperature     = isset( $_POST['aaa_wf_ai_temperature'] ) ? floatval( $_POST['aaa_wf_ai_temperature'] ) : 0.3;
@@ -36,7 +34,6 @@ add_action( 'admin_post_aaa_wf_ai_save_openai', function() {
     // Persist options via custom helper
     aaa_wf_ai_save_option( 'aaa_wf_ai_openai_key', $key );
     aaa_wf_ai_save_option( 'aaa_wf_ai_debug_enabled', $debug );
-    aaa_wf_ai_save_option( 'aaa_wf_ai_dev_mode', $dev_mode );
     if ( $model ) {
         aaa_wf_ai_save_option( 'aaa_wf_ai_default_model', $model );
     }
@@ -131,83 +128,34 @@ add_action( 'wp_ajax_aaa_wf_ai_verify_openai_key', function() {
  */
 add_action( 'wp_ajax_aaa_wf_ai_run_report', function() {
     check_ajax_referer( 'aaa_wf_ai_nonce', 'nonce' );
-
-    // Identify the report type (summary, products, categories, inventory, etc.)
-    $type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'summary';
-
-    // Decode pre-fetched REST data if provided
     $data_json = stripslashes( $_POST['data'] ?? '' );
     $data      = json_decode( $data_json, true );
-
-    // Retrieve from/to dates from POST for logging and top-product fetching
-    $from_param = sanitize_text_field( $_POST['from'] ?? date( 'Y-m-d' ) );
-    $to_param   = sanitize_text_field( $_POST['to']   ?? date( 'Y-m-d' ) );
-
-    // If no data is supplied and the type is summary, attempt to fetch summary directly.
-    if ( empty( $data ) && $type === 'summary' ) {
-        aaa_wf_ai_debug( "⚠️ No REST data received — fetching manually for {$from_param} → {$to_param}", basename( __FILE__ ), 'ajax' );
-        $data = aaa_wf_ai_get_sales_summary( $from_param, $to_param );
+    // If no pre-fetched data is supplied or totals are missing, fetch summary
+    if ( empty( $data ) || empty( $data['totals'] ) ) {
+        $from = sanitize_text_field( $_POST['from'] ?? date( 'Y-m-d' ) );
+        $to   = sanitize_text_field( $_POST['to'] ?? date( 'Y-m-d' ) );
+        aaa_wf_ai_debug( "⚠️ No REST data received — fetching manually for {$from} → {$to}", basename( __FILE__ ), 'ajax' );
+        $data = aaa_wf_ai_get_sales_summary( $from, $to );
     }
-
-    // Validate that we have some data to work with.  For summary reports we
-    // expect a 'totals' array; for other types we accept any non-empty array.
-    $is_valid = is_array( $data ) && ! empty( $data );
-    if ( $type === 'summary' ) {
-        $is_valid = $is_valid && ! empty( $data['totals'] );
-    }
-
-    if ( ! $is_valid ) {
-        aaa_wf_ai_debug( '❌ Invalid or empty report data — skipping AI analysis.', basename( __FILE__ ), 'ajax' );
+    if ( empty( $data ) || ! is_array( $data ) || empty( $data['totals'] ) ) {
+        aaa_wf_ai_debug( '❌ Invalid or empty sales data — skipping AI analysis.', basename( __FILE__ ), 'ajax' );
         wp_send_json_success( [
             'summary' => '⚠️ No valid data found for analysis. Ensure the endpoint returns valid results.',
             'raw'     => $data,
         ] );
         exit;
     }
-
-    // Determine the date range for top-product fetching and logging.  Use data
-    // values if available; otherwise default to incoming parameters.  Some
-    // endpoints (e.g. inventory summary) may not have date fields.
-    $from_date = isset( $data['from'] ) ? $data['from'] : $from_param;
-    $to_date   = isset( $data['to'] )   ? $data['to']   : $to_param;
-
-    // For summary reports, augment data with a list of top products.  Other
-    // report types (products, categories, inventory) include their own rows.
-    if ( $type === 'summary' ) {
-        $top_products = aaa_wf_ai_get_top_products( $from_date, $to_date, 5 );
-        if ( ! empty( $top_products ) ) {
-            $data['top_products'] = $top_products;
-        }
+    // Determine date range from incoming data or fallbacks for top products
+    $from_date = $data['from'] ?? sanitize_text_field( $_POST['from'] ?? date( 'Y-m-d' ) );
+    $to_date   = $data['to']   ?? sanitize_text_field( $_POST['to']   ?? date( 'Y-m-d' ) );
+    // Fetch top products and attach to data structure
+    $top_products = aaa_wf_ai_get_top_products( $from_date, $to_date, 5 );
+    if ( ! empty( $top_products ) ) {
+        $data['top_products'] = $top_products;
     }
-
-    // Analyze via OpenAI.  The same function handles generic report data.
+    // Analyze via OpenAI
     $result = aaa_wf_ai_analyze_sales( $data );
     aaa_wf_ai_debug( '✅ AI report analysis complete.', basename( __FILE__ ), 'ajax' );
-
-    // Persist a session log if development mode is enabled.  Each run is
-    // recorded as a JSON file to aid debugging and auditing.
-    $dev_mode = (bool) aaa_wf_ai_get_option( 'aaa_wf_ai_dev_mode', false );
-    if ( $dev_mode ) {
-        $log_dir = WP_CONTENT_DIR . '/aaa-logs';
-        if ( ! is_dir( $log_dir ) ) {
-            wp_mkdir_p( $log_dir );
-        }
-        $timestamp = date( 'Y-m-d_His' );
-        // Build a filename containing type and date range for clarity
-        $fname = sprintf( 'ai-report-%s_%s_%s-to-%s.json', $timestamp, sanitize_title( $type ), $from_date ?: 'na', $to_date ?: 'na' );
-        $log_path = trailingslashit( $log_dir ) . $fname;
-        $log_payload = [
-            'timestamp'  => current_time( 'mysql' ),
-            'type'       => $type,
-            'from'       => $from_date,
-            'to'         => $to_date,
-            'rest_data'  => $data,
-            'ai_summary' => $result,
-        ];
-        file_put_contents( $log_path, json_encode( $log_payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
-        aaa_wf_ai_debug( "🧾 Session log written: {$log_path}", basename( __FILE__ ), 'ajax' );
-    }
-
     wp_send_json_success( [
         'summary' => $result,
         'raw'     => $data,

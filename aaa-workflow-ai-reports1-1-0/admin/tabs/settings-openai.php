@@ -24,8 +24,6 @@ $verified_at     = aaa_wf_ai_get_option( 'aaa_wf_ai_verified_at', '' );
 $prompt_template = aaa_wf_ai_get_option( 'aaa_wf_ai_prompt_template', '' );
 $temperature     = (float) aaa_wf_ai_get_option( 'aaa_wf_ai_temperature', 0.3 );
 $max_tokens      = (int) aaa_wf_ai_get_option( 'aaa_wf_ai_max_tokens', 800 );
-// Development mode toggle (enables additional log files)
-$dev_mode       = (bool) aaa_wf_ai_get_option( 'aaa_wf_ai_dev_mode', false );
 
 // -----------------------------------------------------------------------------
 // Show success message
@@ -109,16 +107,6 @@ if ( isset( $_GET['updated'] ) ) {
                     </label>
                 </td>
             </tr>
-		<tr>
-			<th scope="row">Enable Development Mode</th>
-			<td>
-				<label>
-					<input type="checkbox" name="aaa_wf_ai_dev_mode" value="1" <?php checked( $dev_mode, true ); ?>>
-					Generate session log files in <code>/wp-content/aaa-logs/</code>
-				</label>
-				<p class="description">When enabled, each AI report run is saved to a JSON file for audit and debugging. Recommended for staging/testing environments.</p>
-			</td>
-		</tr>
             <?php if ( $verified_at ) : ?>
             <tr>
                 <th scope="row">Last Verified</th>

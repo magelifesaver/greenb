@@ -59,9 +59,6 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
         'pluginVer' => AAA_WF_AI_VERSION,
         'restPrefix' => 'lokeyreports/v1',
         'siteUrl'    => home_url(),
-
-        // 🔗 Inventory REST endpoint prefix
-        'invRestUrl' => esc_url( rest_url( 'lokey-inventory/v1/' ) ),
     ] );
 
     aaa_wf_ai_debug( 'Admin assets enqueued successfully.', basename( __FILE__ ), 'assets' );

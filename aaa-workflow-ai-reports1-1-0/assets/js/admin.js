@@ -6,7 +6,7 @@
  *              version no longer overwrites the raw data with the summary; it
  *              displays both side by side for greater transparency.
  * Dependencies: jQuery, AAA_WFAI global
- * File Version: 1.4.0
+ * File Version: 1.3.0
  * Updated: 2025-12-28
  * Author: AAA Workflow DevOps
  * ============================================================================
@@ -29,49 +29,18 @@ jQuery(document).ready(function($) {
     $('#aaa-wf-ai-clear-debug').on('click', function() {
         $('#aaa-wf-ai-debug-entries').empty();
     });
-    // --- Copy Debug Console ---
-    $('#aaa-wf-ai-copy-debug').on('click', function() {
-        const text = $('#aaa-wf-ai-debug-entries').text();
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = $(this);
-            const orig = btn.text();
-            btn.text('Copied!');
-            setTimeout(() => btn.text(orig), 2000);
-        });
-    });
-    // --- Copy Summary ---
-    $('#aaa-wf-ai-copy-summary').on('click', function() {
-        const text = $('#aaa-wf-ai-summary-output').text();
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = $(this);
-            const orig = btn.text();
-            btn.text('Copied!');
-            setTimeout(() => btn.text(orig), 2000);
-        });
-    });
     // --- Fetch & Analyze Report ---
-    $('#aaa-wf-ai-fetch').on('click', function(e) {
+    $('#aaa-wf-ai-fetch').on('click', function(e){
         e.preventDefault();
-        const from  = $('#aaa-wf-ai-from').val();
-        const to    = $('#aaa-wf-ai-to').val();
-        const type  = $('#aaa-wf-ai-report-type').val() || 'summary';
-        // Indicate loading
+        const from = $('#aaa-wf-ai-from').val();
+        const to   = $('#aaa-wf-ai-to').val();
+        // Indicate loading in both panels
         $('#aaa-wf-ai-summary-output').text('Fetching and analyzing report...');
         $('#aaa-wf-ai-raw-output').text('');
-        addDebugEntry('Report Triggered', { from, to, type }, 'trigger');
-        // Build REST URL depending on report type
-        let restUrl = '';
-        if (type === 'summary') {
-            restUrl = `${AAA_WFAI.restUrl}sales/summary?from=${from}&to=${to}`;
-        } else if (type === 'products') {
-            restUrl = `${AAA_WFAI.restUrl}sales/products?from=${from}&to=${to}&limit=10&order_by=net_sales&order=desc`;
-        } else if (type === 'categories') {
-            restUrl = `${AAA_WFAI.restUrl}sales/categories?from=${from}&to=${to}&limit=10&order_by=net_sales&order=desc`;
-        } else if (type === 'inventory') {
-            restUrl = `${AAA_WFAI.invRestUrl}inventory/summary`;
-        }
-        // Log REST request
-        addDebugEntry('REST Request → LokeyReports', { url: restUrl, method: 'GET', type }, 'request');
+        addDebugEntry('Report Triggered', { from, to }, 'trigger');
+        // REST call to LokeyReports Summary
+        const restUrl = `${AAA_WFAI.restUrl}sales/summary?from=${from}&to=${to}`;
+        addDebugEntry('REST Request → LokeyReports', { url: restUrl, method: 'GET' }, 'request');
         $.ajax({
             url: restUrl,
             method: 'GET',
@@ -80,18 +49,15 @@ jQuery(document).ready(function($) {
             },
             success: function(resp) {
                 addDebugEntry('REST Response ← LokeyReports', resp, 'response');
-                // Show raw output early
+                // Immediately populate raw output with the summary JSON (may be overwritten later)
                 $('#aaa-wf-ai-raw-output').text(JSON.stringify(resp, null, 2));
-                // Post to server for AI analysis
+                // AI analysis via AJAX
                 $.post(AAA_WFAI.ajaxUrl, {
                     action: 'aaa_wf_ai_run_report',
                     nonce: AAA_WFAI.nonce,
-                    type: type,
-                    from: from,
-                    to: to,
                     data: JSON.stringify(resp)
                 }, function(aiResp) {
-                    addDebugEntry('AI Analysis Request', { from, to, type }, 'ai-request');
+                    addDebugEntry('AI Analysis Request', { from, to }, 'ai-request');
                     addDebugEntry('AI Analysis Response', aiResp, 'ai-response');
                     if (aiResp.success) {
                         $('#aaa-wf-ai-summary-output').text(aiResp.data.summary);
@@ -102,7 +68,10 @@ jQuery(document).ready(function($) {
                 });
             },
             error: function(xhr) {
-                addDebugEntry('REST Error', { status: xhr.status, response: xhr.responseJSON || xhr.responseText }, 'error');
+                addDebugEntry('REST Error', {
+                    status: xhr.status,
+                    response: xhr.responseJSON || xhr.responseText
+                }, 'error');
                 $('#aaa-wf-ai-summary-output').text('❌ Error fetching report.');
             }
         });

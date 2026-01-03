@@ -56,54 +56,20 @@ function aaa_wf_ai_analyze_sales( $data ) {
     // Prepare input data
     $input_json = json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 
-    // Build extra context for various types of data.  If top_products are
-    // present, we summarise those.  Otherwise, if a `rows` array exists
-    // (e.g. category sales), we summarise the items by net sales.  If a
-    // `totals` array exists without an `orders` key (e.g. inventory
-    // summary), we summarise the totals by supplier.
+    // Build extra context for top products if provided
     $extra_context = '';
-    // Top products
     if ( isset( $data['top_products'] ) && is_array( $data['top_products'] ) && isset( $data['top_products']['rows'] ) ) {
         $rows = $data['top_products']['rows'];
         if ( ! empty( $rows ) ) {
             $bullet_list = [];
             foreach ( $rows as $row ) {
+                // Determine the product name field (some endpoints use product_name, others name)
                 $name = $row['product_name'] ?? $row['name'] ?? ( $row['product_id'] ?? 'Product' );
                 $net  = isset( $row['net_sales'] ) ? number_format( (float) $row['net_sales'], 2 ) : '0.00';
                 $bullet_list[] = sprintf( '%s ($%s)', $name, $net );
             }
-            if ( $bullet_list ) {
-                $extra_context .= 'Top products by net sales: ' . implode( ', ', $bullet_list ) . ".\n\n";
-            }
-        }
-    }
-    // Generic rows (categories or products)
-    elseif ( isset( $data['rows'] ) && is_array( $data['rows'] ) ) {
-        $rows = $data['rows'];
-        if ( ! empty( $rows ) ) {
-            $bullet_list = [];
-            foreach ( $rows as $row ) {
-                // for categories or products, look for name/category fields and net sales
-                $name = $row['category_name'] ?? $row['name'] ?? ( $row['category_id'] ?? 'Item' );
-                $net  = isset( $row['net_sales'] ) ? number_format( (float) $row['net_sales'], 2 ) : '0.00';
-                $bullet_list[] = sprintf( '%s ($%s)', $name, $net );
-            }
-            if ( $bullet_list ) {
-                $extra_context .= 'Top items by net sales: ' . implode( ', ', $bullet_list ) . ".\n\n";
-            }
-        }
-    }
-    // Inventory summary totals (supplier → value)
-    if ( empty( $extra_context ) && isset( $data['totals'] ) && is_array( $data['totals'] ) && ! isset( $data['totals']['orders'] ) ) {
-        $totals = $data['totals'];
-        if ( ! empty( $totals ) ) {
-            $bullet_list = [];
-            foreach ( $totals as $supplier => $value ) {
-                $val = number_format( (float) $value, 2 );
-                $bullet_list[] = sprintf( '%s ($%s)', $supplier, $val );
-            }
-            if ( $bullet_list ) {
-                $extra_context .= 'Inventory value by supplier: ' . implode( ', ', $bullet_list ) . ".\n\n";
+            if ( ! empty( $bullet_list ) ) {
+                $extra_context = "Top products by net sales: " . implode( ', ', $bullet_list ) . ".\n\n";
             }
         }
     }

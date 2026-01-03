@@ -50,32 +50,3 @@ add_action( 'admin_menu', function() {
         55
     );
 });
-
-/**
- * -----------------------------------------------------------------------------
- * Safe option fallback
- *
- * In certain cases (e.g. before activation on a fresh site) the custom
- * options table created by this plugin may not yet exist.  To avoid fatal
- * errors when retrieving options through aaa_wf_ai_get_option(), we provide
- * a wrapper that checks for the table and falls back to the core options API.
- *
- * @param string $key     Option key to fetch.
- * @param mixed  $default Default value if nothing is found.
- * @param string $scope   Optional scope for custom options (unused when
- *                        falling back to core).
- * @return mixed          Stored value or the default.
- */
-if ( ! function_exists( 'aaa_wf_ai_safe_option_fallback' ) ) {
-    function aaa_wf_ai_safe_option_fallback( $key, $default = null, $scope = 'global' ) {
-        global $wpdb;
-        // Determine the name of the custom options table (matches helper)
-        $table = $wpdb->prefix . 'aaa_oc_options';
-        // If the table doesn't exist yet, defer to WordPress core
-        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) !== $table ) {
-            return get_option( $key, $default );
-        }
-        // Otherwise, use the custom helper to fetch from our scoped table
-        return aaa_wf_ai_get_option( $key, $default, $scope );
-    }
-}
