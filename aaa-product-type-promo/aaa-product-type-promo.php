@@ -39,7 +39,7 @@ add_filter( 'woocommerce_product_class', function ( $classname, $product_type ) 
 // partially updated or files are missing.
 $modules = [
     'includes/class-wc-product-promo.php',      // Defines the product class.
-    'includes/admin/meta-box.php',             // Registers the banner meta box.
+    'includes/admin/banner-field.php',         // Registers the banner image meta box without dependencies.
     'includes/admin/admin-ui.php',             // Cleans up the product edit screen.
     'includes/frontend/display-banner.php',    // Renders the banner in loops.
     'includes/filter/attribute-count.php',     // Excludes promos from attribute counts.
