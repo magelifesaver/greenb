@@ -1,1 +1,1 @@
-<?php $sess_vars = ["time"=>1767182318, "name"=>"wp_pma_n0JGSDWaOQhCvu",  "value"=>"wp_pma_WtLEPfSpUNcBzJwqG9KRdjX",  "require_ip"=>true, "ip"=>"67.150.137.213", "strip_slashes"=>true];
+<?php $sess_vars = ["time"=>1767477023, "name"=>"wp_pma_c6NUzrYMRp8SEZ",  "value"=>"wp_pma_qB0jDk1J7TmbwN2C3rP5t46",  "require_ip"=>true, "ip"=>"174.218.82.159", "strip_slashes"=>true];
