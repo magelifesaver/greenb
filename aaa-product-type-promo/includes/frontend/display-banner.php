@@ -24,7 +24,15 @@ add_action( 'init', function () {
         if ( ! $image_url ) {
             return;
         }
-        echo '<div class="aaa-promo-banner"><img src="' . esc_url( $image_url ) . '" alt="' . esc_attr__( 'Promo Banner', 'aaa' ) . '" /></div>';
+        // Retrieve optional link URL.
+        $link_url = get_post_meta( $product->get_id(), '_promo_banner_link', true );
+        // Build the image HTML.
+        $img_html = '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr__( 'Promo Banner', 'aaa' ) . '" />';
+        // If a link is set, wrap the image in an anchor.
+        if ( $link_url ) {
+            $img_html = '<a href="' . esc_url( $link_url ) . '" class="aaa-promo-link">' . $img_html . '</a>';
+        }
+        echo '<div class="aaa-promo-banner">' . $img_html . '</div>';
     }, 5 );
 } );
 

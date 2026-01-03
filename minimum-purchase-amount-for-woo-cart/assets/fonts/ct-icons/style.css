@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'ct-icons';
+  src:
+    url('fonts/ct-icons.ttf?2f83bq') format('truetype'),
+    url('fonts/ct-icons.woff?2f83bq') format('woff'),
+    url('fonts/ct-icons.svg?2f83bq#ct-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ct-icon-"], [class*=" ct-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ct-icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ct-icon-woocommerce-cart-settings:before {
+  content: "\e900";
+}

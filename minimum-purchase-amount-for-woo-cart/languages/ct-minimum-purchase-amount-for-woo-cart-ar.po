@@ -1,0 +1,259 @@
+# Copyright (C) 2021 CT Talks
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Minimum Purchase Amount For Woo Cart 2.2.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/minimum-purchase-"
+"amount-for-woo-cart\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-12-19T14:32:17+00:00\n"
+"PO-Revision-Date: 2023-09-16 03:25+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: ct-minimum-purchase-amount-for-woo-cart\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
+"X-Loco-Version: 2.6.6; wp-6.3.1"
+
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid " & the current cart total is"
+msgstr " وإجمالي سلة التسوق الحالية هو"
+
+#: includes/admin/ct-class-settings-page.php:157
+msgid " or more to successfully make a purchase"
+msgstr " أو أكثر لإجراء عملية شراء بنجاح"
+
+#: includes/admin/ct-class-settings-page.php:157
+msgid "& the current cart total is"
+msgstr "وإجمالي سلة التسوق الحالية هو"
+
+#: includes/public/ct-class-min-cart-amount-application.php:97
+msgid "[amount-remaining]"
+msgstr "[المبلغ المتبقي]"
+
+#: includes/public/ct-class-min-cart-amount-application.php:99
+msgid "[current-total]"
+msgstr "[المجموع الحالي]"
+
+#: includes/public/ct-class-min-cart-amount-application.php:95
+msgid "[minimum-amount]"
+msgstr "[الحد الأدنى للمبلغ]"
+
+#: includes/admin/ct-class-settings-page.php:24
+#: includes/admin/ct-class-settings-page.php:25
+msgid "Cart Settings"
+msgstr "إعدادات عربة التسوق"
+
+#: includes/admin/ct-class-settings-page.php:138
+msgid "Clear"
+msgstr "واضح"
+
+#. Author of the plugin
+msgid "CT Talks"
+msgstr "محادثات CT"
+
+#: includes/admin/ct-class-settings-page.php:155
+msgid "Current cart total."
+msgstr "إجمالي العربة الحالية."
+
+#: includes/admin/ct-class-settings-page.php:127
+#: includes/admin/ct-class-settings-page.php:140
+msgid "Currently Saved Value : "
+msgstr "القيمة المحفوظة حاليا:"
+
+#: includes/admin/ct-class-settings-page.php:95
+msgid "Disable Checkout Link"
+msgstr "تعطيل رابط الخروج"
+
+#: includes/admin/ct-class-settings-page.php:279
+msgid "Enable/Disable"
+msgstr "مفعل وغير مفعل"
+
+#: includes/admin/ct-class-settings-page.php:202
+msgid ""
+"Enabling this setting will exclude the shipping amount if from the cart "
+"total while matching with the minimum order amount."
+msgstr ""
+"سيؤدي تمكين هذا الإعداد إلى استبعاد مبلغ الشحن إذا كان من إجمالي سلة التسوق "
+"أثناء المطابقة مع الحد الأدنى لمبلغ الطلب."
+
+#: includes/admin/ct-class-settings-page.php:97
+msgid "Exclude shipping charges from the cart total"
+msgstr "استبعاد رسوم الشحن من إجمالي سلة التسوق"
+
+#: includes/admin/ct-class-settings-page.php:74
+msgid "Extras"
+msgstr "إضافات"
+
+#. translators:  %s amount specified as minimum amount to allow free shipping
+#: includes/public/ct-class-min-cart-amount-application.php:214
+msgid "Free shipping on orders above %s"
+msgstr "شحن مجاني للطلبات التي تزيد عن %s"
+
+#: includes/admin/ct-class-settings-page.php:88
+msgid "Free Shipping Settings"
+msgstr "إعدادات الشحن المجاني"
+
+#: includes/admin/ct-class-settings-page.php:68
+msgid "General"
+msgstr "عام"
+
+#. Author URI of the plugin
+msgid "https://cttalks.com/"
+msgstr "https://cttalks.com/"
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/minimum-purchase-amount-for-woo-cart/"
+msgstr "https://wordpress.org/plugins/minimum-purchase-amount-for-woo-cart/"
+
+#: includes/admin/ct-class-settings-page.php:189
+msgid ""
+"If the discount coupon is applied to the cart the cart total will also "
+"include discount value while checking if it matches the minimum cart total "
+"rules."
+msgstr ""
+"إذا تم تطبيق قسيمة الخصم على سلة التسوق ، فسيتضمن إجمالي سلة التسوق أيضًا "
+"قيمة الخصم أثناء التحقق مما إذا كانت تتطابق مع الحد الأدنى لقواعد إجمالي سلة "
+"التسوق."
+
+#: includes/admin/ct-class-settings-page.php:123
+msgid ""
+"If the total value of the clients cart is lesser that the value specified "
+"the checkout will be restricted for the user"
+msgstr ""
+"إذا كانت القيمة الإجمالية لسلة العملاء أقل من القيمة المحددة ، فسيتم تقييد "
+"السداد للمستخدم"
+
+#: includes/admin/ct-class-settings-page.php:135
+msgid ""
+"If the total value of the clients cart is more than the value specified, The "
+"option for free shipping will be enabled."
+msgstr ""
+"إذا كانت القيمة الإجمالية لعربة العملاء أكبر من القيمة المحددة، فسيتم تفعيل "
+"خيار الشحن المجاني."
+
+#: includes/admin/ct-class-settings-page.php:96
+msgid "Include discounts in the cart total"
+msgstr "تضمين الخصومات في إجمالي سلة التسوق"
+
+#: includes/admin/ct-class-settings-page.php:94
+msgid "Message to be displayed on the cart page"
+msgstr "سيتم عرض الرسالة على صفحة عربة التسوق"
+
+#: includes/admin/ct-class-settings-page.php:99
+msgid "Minimum Cart Amount For Free Shipping"
+msgstr "الحد الأدنى لمبلغ عربة التسوق للشحن المجاني"
+
+#: includes/admin/ct-class-settings-page.php:93
+msgid "Minimum Cart Amount To Make a Purchase"
+msgstr "الحد الأدنى لمبلغ سلة التسوق لإجراء عملية شراء"
+
+#: includes/admin/ct-class-settings-page.php:278
+msgid "Minimum Order Amount"
+msgstr "الحد الأدنى للطلب"
+
+#: includes/admin/ct-class-settings-page.php:83
+msgid "Minimum Order Amount Settings"
+msgstr "إعدادات الحد الأدنى لكمية الطلب"
+
+#. Plugin Name of the plugin
+#| msgid "Minimum Purchase Amount For Woo Cart"
+msgid "Minimum Purchase Amount For WooCommerce"
+msgstr "الحد الأدنى لمبلغ الشراء لـ Woo Cart"
+
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "or more to successfully make a purchase"
+msgstr "أو أكثر لإجراء عملية شراء بنجاح"
+
+#: includes/admin/ct-class-settings-page.php:157
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "please add the products worth"
+msgstr "الرجاء إضافة المنتجات قيمتها"
+
+#: includes/public/ct-class-min-cart-amount-application.php:23
+msgid "Proceed to checkout"
+msgstr "الشروع في الخروج"
+
+#: includes/admin/ct-class-settings-page.php:217
+msgid "Reach Out For Support, Customizations/Feedback"
+msgstr "تواصل معنا للحصول على الدعم والتخصيصات/التعليقات"
+
+#: includes/admin/ct-class-settings-page.php:270
+msgid "Role Based Minimum Order Amount Settings"
+msgstr "الحد الأدنى من إعدادات مبلغ الطلب على أساس الدور"
+
+#: includes/admin/ct-class-settings-page.php:71
+msgid "Role Based Minimum Orders"
+msgstr "الحد الأدنى من الأوامر القائمة على الدور"
+
+#: includes/admin/ct-class-settings-page.php:277
+msgid "Role Slug"
+msgstr "دور سبيكة"
+
+#: includes/admin/ct-class-settings-page.php:309
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#: includes/admin/ct-class-settings-page.php:26
+msgid "Settings"
+msgstr "إعدادات"
+
+#: includes/admin/ct-class-settings-page.php:325
+msgid "Some error occured, please try again"
+msgstr "حدث خطأ ما ، يرجى المحاولة مرة أخرى"
+
+#: includes/admin/ct-class-settings-page.php:324
+msgid "Successfully saved the rules"
+msgstr "تم حفظ القواعد بنجاح"
+
+#: includes/admin/ct-class-settings-page.php:153
+msgid "The minimum amount required to make a purchase, "
+msgstr "الحد الأدنى للمبلغ المطلوب لإجراء عملية شراء،"
+
+#: includes/admin/ct-class-settings-page.php:157
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "The minimum amount to make a purchase is"
+msgstr "الحد الأدنى للمبلغ لإجراء عملية شراء هو"
+
+#: includes/admin/ct-class-settings-page.php:154
+msgid "The required amount to match the purchase amount."
+msgstr "المبلغ المطلوب ليتناسب مع مبلغ الشراء."
+
+#: includes/admin/ct-class-settings-page.php:152
+msgid ""
+"This message will be displayed on the cart when the products of a value "
+"lesser than the specified minimum amount are present in the cart."
+msgstr ""
+"سيتم عرض هذه الرسالة في عربة التسوق عندما تكون المنتجات ذات القيمة الأقل من "
+"الحد الأدنى للمبلغ المحدد موجودة في سلة التسوق."
+
+#. Description of the plugin
+msgid ""
+"This woocommecre extension will allow you to specify the minimum purchase "
+"value for WooCommerce."
+msgstr ""
+"سيسمح لك ملحق woocommecre هذا بتحديد الحد الأدنى لقيمة الشراء لـ WooCommerce."
+
+#: includes/admin/ct-class-settings-page.php:276
+msgid "User Role"
+msgstr "دور المستخدم"
+
+#: includes/admin/ct-class-settings-page.php:173
+msgid ""
+"When enabled the checkout link on the cart page will be disabled when cart "
+"value is lesser than the minimum value defined"
+msgstr ""
+"عند التمكين ، سيتم تعطيل رابط الخروج في صفحة عربة التسوق عندما تكون قيمة سلة "
+"التسوق أقل من الحد الأدنى للقيمة المحددة"
+
+#: includes/admin/ct-class-settings-page.php:226
+msgid ""
+"You can offer your customers free shipping when the cart total matches the "
+"entered value. This will help you build better upsell strategies."
+msgstr ""
+"يمكنك أن تقدم لعملائك شحنًا مجانيًا عندما يتطابق إجمالي سلة التسوق مع القيمة "
+"المدخلة. سيساعدك هذا على بناء استراتيجيات أفضل للارتقاء بالمبيعات."

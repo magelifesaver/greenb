@@ -2,7 +2,7 @@
 /**
  * Plugin Name: A Product Type Promo Banner (Standalone)(workflow)(live)
  * Description: Registers a custom WooCommerce product type "promo" with a banner image field and frontend banner display.  Cleans up the admin UI so the promo type only exposes relevant fields (categories, brands, etc.) and prevents promo products from polluting attribute filter counts.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Workflow Delivery
  *
  * This is the main loader file for the Promo Banner product type.  It includes

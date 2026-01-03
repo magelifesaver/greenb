@@ -1,0 +1,260 @@
+# Copyright (C) 2021 CT Talks
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Minimum Purchase Amount For Woo Cart 2.2.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/minimum-purchase-"
+"amount-for-woo-cart\n"
+"Last-Translator: \n"
+"Language-Team: Hindi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-12-19T14:32:17+00:00\n"
+"PO-Revision-Date: 2023-09-16 03:23+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: ct-minimum-purchase-amount-for-woo-cart\n"
+"Language: hi_IN\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.5.5; wp-5.8.2"
+
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid " & the current cart total is"
+msgstr " और वर्तमान कार्ट कुल है"
+
+#: includes/admin/ct-class-settings-page.php:157
+msgid " or more to successfully make a purchase"
+msgstr " या अधिक सफलतापूर्वक खरीदारी करने के लिए"
+
+#: includes/admin/ct-class-settings-page.php:157
+msgid "& the current cart total is"
+msgstr "और वर्तमान कार्ट कुल है"
+
+#: includes/public/ct-class-min-cart-amount-application.php:97
+msgid "[amount-remaining]"
+msgstr "[शेष राशि]"
+
+#: includes/public/ct-class-min-cart-amount-application.php:99
+msgid "[current-total]"
+msgstr "[वर्तमान-कुल]"
+
+#: includes/public/ct-class-min-cart-amount-application.php:95
+msgid "[minimum-amount]"
+msgstr "[न्यूनतम राशि]"
+
+#: includes/admin/ct-class-settings-page.php:24
+#: includes/admin/ct-class-settings-page.php:25
+msgid "Cart Settings"
+msgstr "कार्ट सेटिंग्स"
+
+#: includes/admin/ct-class-settings-page.php:138
+msgid "Clear"
+msgstr "स्पष्ट"
+
+#. Author of the plugin
+msgid "CT Talks"
+msgstr "सीटी वार्ता"
+
+#: includes/admin/ct-class-settings-page.php:155
+msgid "Current cart total."
+msgstr "वर्तमान कार्ट कुल."
+
+#: includes/admin/ct-class-settings-page.php:127
+#: includes/admin/ct-class-settings-page.php:140
+msgid "Currently Saved Value : "
+msgstr "वर्तमान में सहेजा गया मूल्य:"
+
+#: includes/admin/ct-class-settings-page.php:95
+msgid "Disable Checkout Link"
+msgstr "चेकआउट लिंक अक्षम करें"
+
+#: includes/admin/ct-class-settings-page.php:279
+msgid "Enable/Disable"
+msgstr "अक्षम सक्षम"
+
+#: includes/admin/ct-class-settings-page.php:202
+msgid ""
+"Enabling this setting will exclude the shipping amount if from the cart "
+"total while matching with the minimum order amount."
+msgstr ""
+"इस सेटिंग को सक्षम करने से न्यूनतम ऑर्डर राशि के साथ मेल खाते समय शिपिंग "
+"राशि को कार्ट की कुल राशि से बाहर कर दिया जाएगा।"
+
+#: includes/admin/ct-class-settings-page.php:97
+msgid "Exclude shipping charges from the cart total"
+msgstr "कुल कार्ट से शिपिंग शुल्क हटा दें"
+
+#: includes/admin/ct-class-settings-page.php:74
+msgid "Extras"
+msgstr "अतिरिक्त"
+
+#. translators:  %s amount specified as minimum amount to allow free shipping
+#: includes/public/ct-class-min-cart-amount-application.php:214
+msgid "Free shipping on orders above %s"
+msgstr "%s से ऊपर के ऑर्डर पर मुफ़्त शिपिंग"
+
+#: includes/admin/ct-class-settings-page.php:88
+msgid "Free Shipping Settings"
+msgstr "मुफ़्त शिपिंग सेटिंग्स"
+
+#: includes/admin/ct-class-settings-page.php:68
+msgid "General"
+msgstr "आम"
+
+#. Author URI of the plugin
+msgid "https://cttalks.com/"
+msgstr "https://cttalks.com/"
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/minimum-purchase-amount-for-woo-cart/"
+msgstr "https://wordpress.org/plugins/minimum-purchase-amount-for-woo-cart/"
+
+#: includes/admin/ct-class-settings-page.php:189
+msgid ""
+"If the discount coupon is applied to the cart the cart total will also "
+"include discount value while checking if it matches the minimum cart total "
+"rules."
+msgstr ""
+"यदि डिस्काउंट कूपन कार्ट पर लागू किया जाता है तो कार्ट टोटल में डिस्काउंट "
+"वैल्यू भी शामिल होगी, जबकि यह जांचता है कि यह न्यूनतम कार्ट टोटल नियमों से "
+"मेल खाता है या नहीं।"
+
+#: includes/admin/ct-class-settings-page.php:123
+msgid ""
+"If the total value of the clients cart is lesser that the value specified "
+"the checkout will be restricted for the user"
+msgstr ""
+"यदि क्लाइंट कार्ट का कुल मूल्य निर्दिष्ट मूल्य से कम है तो चेकआउट उपयोगकर्ता "
+"के लिए प्रतिबंधित हो जाएगा"
+
+#: includes/admin/ct-class-settings-page.php:135
+msgid ""
+"If the total value of the clients cart is more than the value specified, The "
+"option for free shipping will be enabled."
+msgstr ""
+"यदि क्लाइंट कार्ट का कुल मूल्य निर्दिष्ट मूल्य से अधिक है, तो मुफ़्त शिपिंग "
+"का विकल्प सक्षम किया जाएगा।"
+
+#: includes/admin/ct-class-settings-page.php:96
+msgid "Include discounts in the cart total"
+msgstr "कुल कार्ट में छूट शामिल करें"
+
+#: includes/admin/ct-class-settings-page.php:94
+msgid "Message to be displayed on the cart page"
+msgstr "कार्ट पेज पर प्रदर्शित होने वाला संदेश"
+
+#: includes/admin/ct-class-settings-page.php:99
+msgid "Minimum Cart Amount For Free Shipping"
+msgstr "मुफ़्त शिपिंग के लिए न्यूनतम कार्ट राशि"
+
+#: includes/admin/ct-class-settings-page.php:93
+msgid "Minimum Cart Amount To Make a Purchase"
+msgstr "खरीदारी करने के लिए न्यूनतम कार्ट राशि"
+
+#: includes/admin/ct-class-settings-page.php:278
+msgid "Minimum Order Amount"
+msgstr "न्यूनतम आदेश राशि"
+
+#: includes/admin/ct-class-settings-page.php:83
+msgid "Minimum Order Amount Settings"
+msgstr "न्यूनतम ऑर्डर राशि सेटिंग्स"
+
+#. Plugin Name of the plugin
+#| msgid "Minimum Purchase Amount For Woo Cart"
+msgid "Minimum Purchase Amount For WooCommerce"
+msgstr "WooCommerce Cart के लिए न्यूनतम खरीद राशि"
+
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "or more to successfully make a purchase"
+msgstr "या अधिक सफलतापूर्वक खरीदारी करने के लिए"
+
+#: includes/admin/ct-class-settings-page.php:157
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "please add the products worth"
+msgstr "कृपया मूल्य वाले उत्पाद जोड़ें"
+
+#: includes/public/ct-class-min-cart-amount-application.php:23
+msgid "Proceed to checkout"
+msgstr "चेक आउट करने के लिए आगे बढ़ें"
+
+#: includes/admin/ct-class-settings-page.php:217
+msgid "Reach Out For Support, Customizations/Feedback"
+msgstr "समर्थन, अनुकूलन/प्रतिक्रिया के लिए संपर्क करें"
+
+#: includes/admin/ct-class-settings-page.php:270
+msgid "Role Based Minimum Order Amount Settings"
+msgstr "भूमिका आधारित न्यूनतम आदेश राशि सेटिंग"
+
+#: includes/admin/ct-class-settings-page.php:71
+msgid "Role Based Minimum Orders"
+msgstr "भूमिका आधारित न्यूनतम आदेश"
+
+#: includes/admin/ct-class-settings-page.php:277
+msgid "Role Slug"
+msgstr "रोल स्लग"
+
+#: includes/admin/ct-class-settings-page.php:309
+msgid "Save Changes"
+msgstr "परिवर्तनों को सुरक्षित करें"
+
+#: includes/admin/ct-class-settings-page.php:26
+msgid "Settings"
+msgstr "समायोजन"
+
+#: includes/admin/ct-class-settings-page.php:325
+msgid "Some error occured, please try again"
+msgstr "कुछ त्रुटि हुई, कृपया पुन: प्रयास करें"
+
+#: includes/admin/ct-class-settings-page.php:324
+msgid "Successfully saved the rules"
+msgstr "नियमों को सफलतापूर्वक सहेजा गया"
+
+#: includes/admin/ct-class-settings-page.php:153
+msgid "The minimum amount required to make a purchase, "
+msgstr "खरीदारी करने के लिए आवश्यक न्यूनतम राशि,"
+
+#: includes/admin/ct-class-settings-page.php:157
+#: includes/public/ct-class-min-cart-amount-application.php:92
+msgid "The minimum amount to make a purchase is"
+msgstr "खरीदारी करने के लिए न्यूनतम राशि है"
+
+#: includes/admin/ct-class-settings-page.php:154
+msgid "The required amount to match the purchase amount."
+msgstr "खरीद राशि से मेल खाने के लिए आवश्यक राशि."
+
+#: includes/admin/ct-class-settings-page.php:152
+msgid ""
+"This message will be displayed on the cart when the products of a value "
+"lesser than the specified minimum amount are present in the cart."
+msgstr ""
+"यह संदेश कार्ट पर तब प्रदर्शित होगा जब निर्दिष्ट न्यूनतम राशि से कम मूल्य के "
+"उत्पाद कार्ट में मौजूद हों।"
+
+#. Description of the plugin
+msgid ""
+"This woocommecre extension will allow you to specify the minimum purchase "
+"value for WooCommerce."
+msgstr ""
+"यह WooCommecre एक्सटेंशन आपको WooCommerce के लिए न्यूनतम खरीद मूल्य "
+"निर्दिष्ट करने की अनुमति देगा।"
+
+#: includes/admin/ct-class-settings-page.php:276
+msgid "User Role"
+msgstr "उपयोगकर्ता भूमिका"
+
+#: includes/admin/ct-class-settings-page.php:173
+msgid ""
+"When enabled the checkout link on the cart page will be disabled when cart "
+"value is lesser than the minimum value defined"
+msgstr ""
+"सक्षम होने पर कार्ट पृष्ठ पर चेकआउट लिंक अक्षम हो जाएगा जब कार्ट मान "
+"निर्धारित न्यूनतम मान से कम हो"
+
+#: includes/admin/ct-class-settings-page.php:226
+msgid ""
+"You can offer your customers free shipping when the cart total matches the "
+"entered value. This will help you build better upsell strategies."
+msgstr ""
+"जब कार्ट का कुल योग दर्ज मूल्य से मेल खाता है तो आप अपने ग्राहकों को मुफ़्त "
+"शिपिंग की पेशकश कर सकते हैं। इससे आपको बेहतर अपसेल रणनीति बनाने में मदद "
+"मिलेगी।"

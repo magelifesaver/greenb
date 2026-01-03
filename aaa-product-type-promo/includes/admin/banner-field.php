@@ -38,6 +38,11 @@ add_action( 'add_meta_boxes', function () {
                     <?php esc_html_e( 'Remove', 'aaa' ); ?>
                 </button>
             </div>
+            <p style="margin-top:10px;">
+                <label for="promo-banner-link"><strong><?php esc_html_e( 'Banner Link URL', 'aaa' ); ?></strong></label>
+                <input type="url" id="promo-banner-link" name="promo_banner_link" value="<?php echo esc_attr( get_post_meta( $post->ID, '_promo_banner_link', true ) ); ?>" class="widefat" placeholder="https://example.com" />
+                <small><?php esc_html_e( 'Optional: Enter a URL to link the banner to.', 'aaa' ); ?></small>
+            </p>
             <?php
         },
         'product',
@@ -89,8 +94,16 @@ add_action( 'save_post_product', function ( $post_id ) {
     }
     // Only store the value for promo products.
     $product_type = get_post_meta( $post_id, '_product_type', true );
-    if ( 'promo' === $product_type && isset( $_POST['promo_banner_image'] ) ) {
-        $new_id = absint( $_POST['promo_banner_image'] );
-        update_post_meta( $post_id, '_promo_banner_image', $new_id );
+    if ( 'promo' === $product_type ) {
+        // Save banner image.
+        if ( isset( $_POST['promo_banner_image'] ) ) {
+            $new_id = absint( $_POST['promo_banner_image'] );
+            update_post_meta( $post_id, '_promo_banner_image', $new_id );
+        }
+        // Save banner link URL (sanitized URL or empty string).
+        if ( isset( $_POST['promo_banner_link'] ) ) {
+            $url = esc_url_raw( $_POST['promo_banner_link'] );
+            update_post_meta( $post_id, '_promo_banner_link', $url );
+        }
     }
 } );
