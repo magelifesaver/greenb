@@ -21,6 +21,9 @@ register_activation_hook( __FILE__, function() {
     add_option( 'aaa_wf_ai_prompt_template', "You are an AI data analyst. Given this WooCommerce sales summary JSON, produce a concise, clear narrative report including total orders, revenue, average order value, any trends and best‑selling products. If totals exist, describe them. If not, state that there were no sales. Respond in professional human‑readable format.\n\nJSON:\n\n" );
     add_option( 'aaa_wf_ai_temperature', 0.3 );
     add_option( 'aaa_wf_ai_max_tokens', 800 );
+
+    // Ensure a default WP option for debug flag exists. 0 = disabled by default.
+    add_option( 'aaa_wf_ai_debug_enabled', 0 );
 } );
 
 // -----------------------------------------------------------------------------

@@ -37,7 +37,14 @@ add_action( 'init', function () {
 add_action( 'wp_head', function () {
     ?>
     <style>
-        /* Hide WooCommerce product details for promo products */
+        /* Hide most product details for promo products so only the banner shows. */
+        /* Older versions of this plugin relied on the theme adding a .product-details wrapper.  */
+        /* To maintain backwards compatibility, hide that container if present. */
+        .product-type-promo .product-details,
+        .product-type-promo .my-custom-image-container {
+            display: none !important;
+        }
+        /* Hide common WooCommerce loop elements for promo products (title, price, rating, buttons, short description). */
         .woocommerce ul.products li.product.product-type-promo .woocommerce-loop-product__title,
         .woocommerce ul.products li.product.product-type-promo .price,
         .woocommerce ul.products li.product.product-type-promo .star-rating,
@@ -45,7 +52,11 @@ add_action( 'wp_head', function () {
         .woocommerce ul.products li.product.product-type-promo .woocommerce-product-details__short-description {
             display: none !important;
         }
-        /* Make sure the banner spans the full product tile */
+        /* Ensure promo products render as a block item in list/grid views. */
+        .woocommerce ul.products.products-list-view li.product.virtual.product-type-promo {
+            display: block !important;
+        }
+        /* Make sure the banner spans the full product tile. */
         .aaa-promo-banner img {
             width: 100%;
             height: auto;

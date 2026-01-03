@@ -1,9 +1,10 @@
 <?php
-// Version: 1.3.0 (2025-12-31)
-// Added AI Summary column and group (aip_forecast_summary) and included more
-// descriptive comments.  This version aligns with changes in the forecast
-// runner and dashboard to support AI workflows.
 /**
+ * Version: 1.3.0 (2025-12-31)
+ * Added AI Summary column and group (aip_forecast_summary) and included more
+ * descriptive comments.  This version aligns with changes in the forecast
+ * runner and dashboard to support AI workflows.
+ *
  * Filepath: helpers/forecast-column-definitions.php
  * ---------------------------------------------------------------------------
  * Central list of all forecast product meta fields used in grids/reports.

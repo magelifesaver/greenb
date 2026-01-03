@@ -35,7 +35,10 @@ add_action( 'admin_post_aaa_wf_ai_save_openai', function() {
 
     // Persist options via custom helper
     aaa_wf_ai_save_option( 'aaa_wf_ai_openai_key', $key );
+    // Persist debug flag both to the custom options table and the WP options
+    // table.  The debug helper reads from the WP option to avoid recursion.
     aaa_wf_ai_save_option( 'aaa_wf_ai_debug_enabled', $debug );
+    update_option( 'aaa_wf_ai_debug_enabled', (int) $debug );
     aaa_wf_ai_save_option( 'aaa_wf_ai_dev_mode', $dev_mode );
     if ( $model ) {
         aaa_wf_ai_save_option( 'aaa_wf_ai_default_model', $model );

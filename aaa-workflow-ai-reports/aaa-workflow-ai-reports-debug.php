@@ -42,10 +42,12 @@ if ( ! function_exists( 'aaa_wf_ai_debug' ) ) {
                  * disable logging from the plugin UI while keeping WP_DEBUG
                  * enabled for other plugins.
                  */
-                $plugin_debug_enabled = true;
-                if ( function_exists( 'aaa_wf_ai_safe_option_fallback' ) ) {
-                        $plugin_debug_enabled = (bool) aaa_wf_ai_safe_option_fallback( 'aaa_wf_ai_debug_enabled', false );
-                }
+                // Check the plugin-level debug flag stored in the WordPress options table.
+                // We avoid using the custom options helper here to prevent recursion
+                // when debug() is called from within aaa_wf_ai_get_option().  If the
+                // option does not exist, default to true (logging on) so that
+                // administrators can still see critical errors until they save settings.
+                $plugin_debug_enabled = get_option( 'aaa_wf_ai_debug_enabled', true );
                 if ( ! $plugin_debug_enabled ) {
                         return;
                 }
@@ -77,11 +79,8 @@ if ( ! function_exists( 'aaa_wf_ai_debug_dump' ) ) {
         function aaa_wf_ai_debug_dump( $data, $label = 'Dump', $scope = 'general' ) {
 
                 if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
-                // Respect plugin-level debug option (see aaa_wf_ai_debug for details)
-                $plugin_debug_enabled = true;
-                if ( function_exists( 'aaa_wf_ai_safe_option_fallback' ) ) {
-                        $plugin_debug_enabled = (bool) aaa_wf_ai_safe_option_fallback( 'aaa_wf_ai_debug_enabled', false );
-                }
+                // Respect plugin-level debug option stored in WP options
+                $plugin_debug_enabled = get_option( 'aaa_wf_ai_debug_enabled', true );
                 if ( ! $plugin_debug_enabled ) {
                         return;
                 }
@@ -121,11 +120,8 @@ if ( ! function_exists( 'aaa_wf_ai_debug_error' ) ) {
         function aaa_wf_ai_debug_error( $error, $context = 'Error', $scope = 'error' ) {
 
                 if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
-                // Respect plugin-level debug option
-                $plugin_debug_enabled = true;
-                if ( function_exists( 'aaa_wf_ai_safe_option_fallback' ) ) {
-                        $plugin_debug_enabled = (bool) aaa_wf_ai_safe_option_fallback( 'aaa_wf_ai_debug_enabled', false );
-                }
+                // Respect plugin-level debug option stored in WP options
+                $plugin_debug_enabled = get_option( 'aaa_wf_ai_debug_enabled', true );
                 if ( ! $plugin_debug_enabled ) {
                         return;
                 }

@@ -11,6 +11,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// Bail if the base product class doesn't exist.  This file is loaded on the
+// `woocommerce_loaded` hook but this extra check provides safety if the hook
+// order changes.
+if ( ! class_exists( 'WC_Product' ) ) {
+    return;
+}
+
 if ( ! class_exists( 'WC_Product_Promo' ) ) {
     class WC_Product_Promo extends WC_Product {
         /**

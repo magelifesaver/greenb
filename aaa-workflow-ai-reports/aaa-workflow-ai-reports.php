@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAA Workflow AI Reports
  * Description: Admin plugin integrating Lokey Delivery reporting endpoints with OpenAI for smart WooCommerce insights.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: AAA Workflow DevOps
  *
  * This enhanced version expands the reporting capabilities by pulling in
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 // Define constants early so sub‑files can reference them.
 define( 'AAA_WF_AI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AAA_WF_AI_URL', plugin_dir_url( __FILE__ ) );
-define( 'AAA_WF_AI_VERSION', '1.3.1' );
+define( 'AAA_WF_AI_VERSION', '1.3.2' );
 
 // Load the main loader and the assets loader.
 require_once AAA_WF_AI_DIR . 'aaa-workflow-ai-reports-loader.php';

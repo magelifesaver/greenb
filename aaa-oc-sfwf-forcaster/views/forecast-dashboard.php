@@ -1,15 +1,17 @@
 <?php
-// Version: 1.3.0 (2025-12-31)
-//
-// This release improves horizontal scrolling and header rendering.  Column
-// headers no longer wrap or break words thanks to `white‑space: nowrap` on
-// header and data cells.  The table now sets its width via an inline
-// attribute (`style="width:100%"`) so DataTables can properly calculate
-// widths when `scrollX` is enabled.  See README for full changelog.
-// Modified view file for the forecast grid. This version enhances the original
-// by adding a consolidated summary meta key, proper sorting via data-order
-// attributes, coloured statuses, group-specific column classes and backgrounds,
-// and a header offset for the WordPress admin bar. See README for details.
+/**
+ * Version: 1.3.0 (2025-12-31)
+ *
+ * This release improves horizontal scrolling and header rendering.  Column
+ * headers no longer wrap or break words thanks to `white‑space: nowrap` on
+ * header and data cells.  The table now sets its width via an inline
+ * attribute (`style="width:100%"`) so DataTables can properly calculate
+ * widths when `scrollX` is enabled.  See README for full changelog.
+ * Modified view file for the forecast grid. This version enhances the original
+ * by adding a consolidated summary meta key, proper sorting via data-order
+ * attributes, coloured statuses, group-specific column classes and backgrounds,
+ * and a header offset for the WordPress admin bar. See README for details.
+ */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once SFWF_ROOT . 'helpers/forecast-column-definitions.php';
