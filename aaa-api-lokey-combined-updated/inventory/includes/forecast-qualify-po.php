@@ -7,14 +7,11 @@
  * Purpose:
  *   Evaluates forecast-enabled products to determine whether they qualify for
  *   a purchase order based on stock level, forecast metrics, and interval logic.
- *
- * Depends on:
- *   - /lokey-inventory/v1/forecast/products
- *   - WooCommerce product meta fields populated by forecasting logic.
+ *   Supports "sales_status=all" to include all forecast-enabled products.
  *
  * Author: Lokey Delivery DevOps
- * Version: 1.0.0
- * Created: 2025-12-30
+ * Version: 1.1.0
+ * Updated: 2025-12-31
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -39,7 +36,7 @@ add_action( 'rest_api_init', function () {
                 'default'     => 5,
             ],
             'sales_status' => [
-                'description' => 'Filter forecast sales status (default active).',
+                'description' => 'Filter forecast sales status (default active, use all to include every status).',
                 'type'        => 'string',
                 'default'     => 'active',
             ],
@@ -64,83 +61,114 @@ function lokey_inv_forecast_qualify_po( WP_REST_Request $req ) {
     $sales_status  = sanitize_text_field( $req->get_param( 'sales_status' ) ?: 'active' );
     $limit         = absint( $req->get_param( 'limit' ) ?: 100 );
 
-    // --- Phase 1: Fetch filtered products using existing endpoint
-    $internal_req = new WP_REST_Request( 'GET', '/lokey-inventory/v1/forecast/products' );
-    $internal_req->set_param( 'stock_below', $stock_below );
-    $internal_req->set_param( 'sales_status', $sales_status );
-    $internal_req->set_param( 'limit', $limit );
-    $internal_req->set_param( 'order_by', 'forecast_reorder_date' );
-    $internal_req->set_param( 'order', 'asc' );
+    /*
+     * -------------------------------------------------------------------------
+     * Phase 1: Fetch filtered products using a dual-stock logic.
+     * This matches the Forecaster dashboard by checking BOTH:
+     *   - WooCommerce _stock
+     *   - forecast_stock_qty
+     * -------------------------------------------------------------------------
+     */
+    $args = [
+        'status'     => 'publish',
+        'limit'      => $limit,
+        'return'     => 'ids',
+        'meta_query' => [
+            'relation' => 'AND',
+            [
+                'key'   => 'forecast_enable_reorder',
+                'value' => 'yes',
+            ],
+            [
+                'relation' => 'OR',
+                [
+                    'key'     => '_stock',
+                    'value'   => $stock_below,
+                    'compare' => '<=',
+                    'type'    => 'NUMERIC',
+                ],
+                [
+                    'key'     => 'forecast_stock_qty',
+                    'value'   => $stock_below,
+                    'compare' => '<=',
+                    'type'    => 'NUMERIC',
+                ],
+            ],
+        ],
+    ];
 
-    $response = rest_do_request( $internal_req );
-    if ( $response->is_error() ) {
-        return $response;
+    // Handle sales_status filter (support "all" keyword)
+    if ( ! empty( $sales_status ) && strtolower( $sales_status ) !== 'all' ) {
+        $args['meta_query'][] = [
+            'key'   => 'forecast_sales_status',
+            'value' => $sales_status,
+        ];
     }
 
-    $data = $response->get_data();
-    $products = $data['data'] ?? [];
+    // Retrieve products directly with WooCommerce.
+    $product_ids = function_exists( 'wc_get_products' ) ? wc_get_products( $args ) : [];
 
     $qualified = [];
 
-    // --- Phase 2: Apply qualification logic
-    foreach ( $products as $p ) {
-        $id     = (int) $p['id'];
-        $name   = $p['name'] ?? '';
-        $sku    = $p['sku'] ?? '';
-        $stock  = (float) ( $p['forecast_stock_qty'] ?? 0 );
-        $status = $p['forecast_sales_status'] ?? '';
-        $enabled = $p['forecast_enable_reorder'] ?? '';
+    /*
+     * -------------------------------------------------------------------------
+     * Phase 2: Evaluate qualification criteria.
+     * -------------------------------------------------------------------------
+     */
+    foreach ( $product_ids as $pid ) {
+        $product = wc_get_product( $pid );
+        if ( ! $product ) continue;
 
-        $lead_days = (int) ( $p['forecast_lead_time_days'] ?? 0 );
-        $sales_window = (int) ( $p['forecast_sales_window_days'] ?? 30 );
-        $min_order = (int) ( $p['forecast_minimum_order_qty'] ?? 1 );
-        $monthly_sales = (float) ( $p['forecast_sales_month'] ?? 0 );
-        $daily_sales = (float) ( $p['forecast_sales_day'] ?? 0 );
+        $stock           = (float) get_post_meta( $pid, '_stock', true );
+        $forecast_stock  = (float) get_post_meta( $pid, 'forecast_stock_qty', true );
+        $status          = get_post_meta( $pid, 'forecast_sales_status', true );
+        $enabled         = get_post_meta( $pid, 'forecast_enable_reorder', true );
+        $lead_days       = (int) get_post_meta( $pid, 'forecast_lead_time_days', true );
+        $sales_window    = (int) get_post_meta( $pid, 'forecast_sales_window_days', true );
+        $min_order       = (int) get_post_meta( $pid, 'forecast_minimum_order_qty', true );
+        $daily_sales     = (float) get_post_meta( $pid, 'forecast_sales_day', true );
+        $monthly_sales   = (float) get_post_meta( $pid, 'forecast_sales_month', true );
 
-        if ( $status !== 'active' || $enabled !== 'yes' ) {
-            continue;
-        }
+        // Skip disabled forecast products.
+        if ( $enabled !== 'yes' ) continue;
+        // Skip inactive products unless "all" was requested.
+        if ( strtolower( $sales_status ) !== 'all' && $status !== 'active' ) continue;
 
-        // Normalize daily sales rate if only monthly available
         if ( $interval === 'daily' && $daily_sales <= 0 && $monthly_sales > 0 ) {
             $daily_sales = $monthly_sales / 30;
         }
-        if ( $interval === 'monthly' && $monthly_sales <= 0 && $daily_sales > 0 ) {
-            $monthly_sales = $daily_sales * 30;
-        }
 
-        // Calculate reorder threshold window
-        $window_days = max( 1, $lead_days + $sales_window );
+        $window_days   = max( 1, $lead_days + $sales_window );
         $threshold_qty = $daily_sales * $window_days;
 
-        // Determine qualification
-        $qualifies = false;
-        $reason = '';
+        $current_qty   = min( $stock, $forecast_stock );
+        $qualifies     = false;
+        $reason        = '';
         $suggested_qty = 0;
 
-        if ( $stock <= $stock_below ) {
+        if ( $current_qty <= $stock_below ) {
             $reason .= 'Stock below threshold. ';
         }
-        if ( $stock <= $threshold_qty ) {
+        if ( $current_qty <= $threshold_qty ) {
             $reason .= 'Stock within reorder window. ';
         }
 
-        if ( $stock <= $threshold_qty && $status === 'active' && $enabled === 'yes' ) {
+        if ( $current_qty <= $threshold_qty && $enabled === 'yes' ) {
             $qualifies = true;
-            $suggested_qty = max( $min_order, ceil( $threshold_qty - $stock ) );
+            $suggested_qty = max( $min_order, ceil( $threshold_qty - $current_qty ) );
         }
 
         if ( $qualifies ) {
             $qualified[] = [
-                'id'                   => $id,
-                'name'                 => $name,
-                'sku'                  => $sku,
-                'forecast_stock_qty'   => $stock,
+                'id'                   => $pid,
+                'name'                 => $product->get_name(),
+                'sku'                  => $product->get_sku(),
+                'forecast_stock_qty'   => $forecast_stock,
                 'forecast_sales_day'   => $daily_sales,
                 'forecast_lead_time_days' => $lead_days,
                 'forecast_minimum_order_qty' => $min_order,
-                'forecast_reorder_date'=> $p['forecast_reorder_date'] ?? '',
-                'forecast_oos_date'    => $p['forecast_oos_date'] ?? '',
+                'forecast_reorder_date'=> get_post_meta( $pid, 'forecast_reorder_date', true ),
+                'forecast_oos_date'    => get_post_meta( $pid, 'forecast_oos_date', true ),
                 'qualifies'            => true,
                 'reason'               => trim( $reason ),
                 'suggested_order_qty'  => $suggested_qty,
@@ -148,7 +176,11 @@ function lokey_inv_forecast_qualify_po( WP_REST_Request $req ) {
         }
     }
 
-    // --- Return structured response
+    /*
+     * -------------------------------------------------------------------------
+     * Return structured response
+     * -------------------------------------------------------------------------
+     */
     return new WP_REST_Response( [
         'version'   => LOKEY_INV_API_VERSION,
         'status'    => 'success',

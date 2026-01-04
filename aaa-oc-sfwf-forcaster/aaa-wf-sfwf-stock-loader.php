@@ -49,7 +49,12 @@ require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-index.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-scheduler.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-flag-handler.php';
 
-
+// === Custom: Load additional classes for bulk actions and selected forecasts ===
+// These files register themselves via hooks and do not modify existing
+// functionality. They provide the ability to run the forecast on selected
+// products from both the products list and the forecast grid.
+require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-bulk-actions.php';
+require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-selected-handler.php';
 
 // === Admin Menu: Settings Page ===
 add_action( 'admin_menu', 'sfwf_register_settings_page' );

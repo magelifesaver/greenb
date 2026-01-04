@@ -3,7 +3,7 @@
  * Version: 1.3.0 (2025-12-31)
  *
  * This release improves horizontal scrolling and header rendering.  Column
- * headers no longer wrap or break words thanks to `white‑space: nowrap` on
+ * headers no longer wrap or break words thanks to `white-space: nowrap` on
  * header and data cells.  The table now sets its width via an inline
  * attribute (`style="width:100%"`) so DataTables can properly calculate
  * widths when `scrollX` is enabled.  See README for full changelog.
@@ -11,6 +11,17 @@
  * by adding a consolidated summary meta key, proper sorting via data-order
  * attributes, coloured statuses, group-specific column classes and backgrounds,
  * and a header offset for the WordPress admin bar. See README for details.
+ *
+ * Additional modifications in this build:
+ * - Added a checkbox column to allow selecting individual rows in the grid.
+ *   A "Select All" checkbox in the header toggles all row checkboxes.
+ * - Added an "Update Selected" button alongside existing actions.  When
+ *   clicked, it gathers the selected product IDs and posts them to a new
+ *   admin‑post handler (`sfwf_run_selected`), which runs the forecast on
+ *   those products.  Success is indicated via a query parameter and a
+ *   corresponding message shown at the top of the page.
+ * - Adjusted group column indexing and DataTables configuration to account
+ *   for the new checkbox column.
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -113,20 +124,32 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
     $total_products = count( $product_ids );
     ?>
     <p><strong><?php _e( 'Total Products:', 'aaa-wf-sfwf' ); ?> <span id="sfwf-total-count"><?php echo intval( $total_products ); ?></span></strong></p>
+    <?php
+    // Display a notice when selected products have been updated via the "Update Selected" button.
+    if ( isset( $_GET['sfwf_run_selected_done'] ) ) {
+        $count = intval( $_GET['sfwf_run_selected_done'] );
+        if ( $count > 0 ) {
+            $msg = sprintf( _n( '%d product forecast updated.', '%d products forecast updated.', $count, 'aaa-wf-sfwf' ), $count );
+            echo '<div class="notice notice-success is-dismissible" style="margin-top:10px;"><p>' . esc_html( $msg ) . '</p></div>';
+        }
+    }
+    ?>
 
     <?php
     // Build a map of group names to column indexes. Columns #0–6 (ID etc.) are
     // fixed, so group columns start at index 7. We use this map when toggling
     // column visibility via the checkboxes in the UI.
     $groups = [];
-    $i      = 7;
+    // Start indexing groups at 8 because we've added an extra checkbox column before
+    // the row number column.
+    $i      = 8;
     foreach ( $columns as $def ) {
         $g = isset( $def['group'] ) ? $def['group'] : 'Other';
         $groups[ $g ][] = $i++;
     }
     ?>
 
-    <!-- Forecast action controls: rebuild all or just flagged products -->
+    <!-- Forecast action controls: rebuild all, update flagged or selected products -->
     <div style="margin-bottom: 1em;">
         <form method="POST" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="display:inline-block; margin-right: 10px;">
             <?php wp_nonce_field( 'sfwf_run_forecast', 'sfwf_run_forecast_nonce' ); ?>
@@ -139,6 +162,13 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
             <input type="hidden" name="action" value="sfwf_run_forecast" />
             <input type="hidden" name="mode" value="rebuild_flagged" />
             <?php submit_button( __( 'Update Flagged', 'aaa-wf-sfwf' ), 'secondary', 'submit', false ); ?>
+        </form>
+        <!-- Form for updating selected rows -->
+        <form method="POST" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" id="sfwf-run-selected-form" style="display:inline-block; margin-left:10px;">
+            <?php wp_nonce_field( 'sfwf_run_selected', 'sfwf_run_selected_nonce' ); ?>
+            <input type="hidden" name="action" value="sfwf_run_selected" />
+            <input type="hidden" name="product_ids" id="sfwf-selected-ids" value="" />
+            <?php submit_button( __( 'Update Selected', 'aaa-wf-sfwf' ), 'secondary', 'submit', false ); ?>
         </form>
         <?php if ( isset( $_GET['forecast_scheduled'] ) && $_GET['forecast_scheduled'] === '1' ) : ?>
             <span class="sfwf-scheduled-notice" style="margin-left:10px; color:#007cba;"><?php esc_html_e( 'Forecast scheduled! It will run in the background shortly.', 'aaa-wf-sfwf' ); ?></span>
@@ -202,6 +232,8 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
     <table id="sfwf-forecast-table" class="wp-list-table widefat fixed striped" style="width:100%">
         <thead>
             <tr>
+                <!-- Checkbox column for selecting rows -->
+                <th style="width:20px;"><input type="checkbox" id="sfwf-select-all" /></th>
                 <th style="width:40px;">#</th>
                 <th><?php esc_html_e( 'ID', 'aaa-wf-sfwf' ); ?></th>
                 <th><?php esc_html_e( 'Product', 'aaa-wf-sfwf' ); ?></th>
@@ -291,6 +323,8 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
                 $row_class .= ' sfwf-sales-' . sanitize_html_class( $sales_status );
                 ?>
                 <tr data-last-sold-days="<?php echo esc_attr( $days_since_last_sold ); ?>" class="<?php echo esc_attr( trim( $row_class ) ); ?>">
+                    <!-- Checkbox cell -->
+                    <td><input type="checkbox" class="sfwf-select-row" value="<?php echo esc_attr( $product_id ); ?>" /></td>
                     <td><?php echo intval( $row_num++ ); ?></td>
                     <td><?php echo esc_html( $product_id ); ?></td>
                     <td>
@@ -522,7 +556,9 @@ jQuery(document).ready(function($) {
         scrollX: true,
         scrollCollapse: false,
         columnDefs: [
-            { targets: [4, 5, 6], visible: false, searchable: true }
+            // Hide the hidden filter columns (Stock, Category, Brand).  The
+            // column indices have shifted by one due to the new checkbox column.
+            { targets: [5, 6, 7], visible: false, searchable: true }
         ],
         fixedHeader: {
             header: true,
@@ -584,15 +620,15 @@ jQuery(document).ready(function($) {
     // Filtering by stock, category, brand using hidden columns
     $('#sfwf-filter-stock').on('change', function() {
         var val = $(this).val();
-        table.column(4).search(val).draw();
+        table.column(5).search(val).draw();
     });
     $('#sfwf-filter-category').on('change', function() {
         var val = $(this).val();
-        table.column(5).search(val).draw();
+        table.column(6).search(val).draw();
     });
     $('#sfwf-filter-brand').on('change', function() {
         var val = $(this).val();
-        table.column(6).search(val).draw();
+        table.column(7).search(val).draw();
     });
 
     // Custom filter for days since last sold
@@ -617,6 +653,28 @@ jQuery(document).ready(function($) {
             sfwfLastSoldThreshold = isNaN(num) ? null : num;
         }
         table.draw();
+    });
+
+    // Handle Select All checkbox: toggle all row checkboxes
+    $('#sfwf-select-all').on('change', function() {
+        var checked = $(this).is(':checked');
+        $('.sfwf-select-row').prop('checked', checked);
+    });
+
+    // Before submitting the "Update Selected" form, populate the hidden field with selected IDs.
+    $('#sfwf-run-selected-form').on('submit', function() {
+        var ids = [];
+        // Use jQuery to iterate over all checkboxes in the table (including those not visible due to pagination or filtering)
+        $('#sfwf-forecast-table').find('.sfwf-select-row:checked').each(function() {
+            ids.push($(this).val());
+        });
+        // Assign the IDs to the hidden input
+        $('#sfwf-selected-ids').val(ids.join(','));
+        if ( ids.length === 0 ) {
+            alert('<?php echo esc_js( __( 'Please select at least one product.', 'aaa-wf-sfwf' ) ); ?>');
+            return false;
+        }
+        return true;
     });
 });
 </script>
