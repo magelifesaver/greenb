@@ -133,6 +133,14 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
             echo '<div class="notice notice-success is-dismissible" style="margin-top:10px;"><p>' . esc_html( $msg ) . '</p></div>';
         }
     }
+    // Display a notice when products have been added to a purchase order via the "Add to PO" button.
+    if ( isset( $_GET['sfwf_po_added'] ) ) {
+        $count = intval( $_GET['sfwf_po_added'] );
+        if ( $count > 0 ) {
+            $msg = sprintf( _n( '%d product added to a purchase order.', '%d products added to a purchase order.', $count, 'aaa-wf-sfwf' ), $count );
+            echo '<div class="notice notice-success is-dismissible" style="margin-top:10px;"><p>' . esc_html( $msg ) . '</p></div>';
+        }
+    }
     ?>
 
     <?php
@@ -169,6 +177,14 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
             <input type="hidden" name="action" value="sfwf_run_selected" />
             <input type="hidden" name="product_ids" id="sfwf-selected-ids" value="" />
             <?php submit_button( __( 'Update Selected', 'aaa-wf-sfwf' ), 'secondary', 'submit', false ); ?>
+        </form>
+
+        <!-- Form for adding selected rows to a purchase order -->
+        <form method="POST" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" id="sfwf-add-to-po-form" style="display:inline-block; margin-left:10px;">
+            <?php wp_nonce_field( 'sfwf_add_to_po', 'sfwf_add_to_po_nonce' ); ?>
+            <input type="hidden" name="action" value="sfwf_add_to_po" />
+            <input type="hidden" name="product_ids" id="sfwf-po-ids" value="" />
+            <?php submit_button( __( 'Add to PO', 'aaa-wf-sfwf' ), 'secondary', 'submit', false ); ?>
         </form>
         <?php if ( isset( $_GET['forecast_scheduled'] ) && $_GET['forecast_scheduled'] === '1' ) : ?>
             <span class="sfwf-scheduled-notice" style="margin-left:10px; color:#007cba;"><?php esc_html_e( 'Forecast scheduled! It will run in the background shortly.', 'aaa-wf-sfwf' ); ?></span>
@@ -664,12 +680,24 @@ jQuery(document).ready(function($) {
     // Before submitting the "Update Selected" form, populate the hidden field with selected IDs.
     $('#sfwf-run-selected-form').on('submit', function() {
         var ids = [];
-        // Use jQuery to iterate over all checkboxes in the table (including those not visible due to pagination or filtering)
         $('#sfwf-forecast-table').find('.sfwf-select-row:checked').each(function() {
             ids.push($(this).val());
         });
-        // Assign the IDs to the hidden input
         $('#sfwf-selected-ids').val(ids.join(','));
+        if ( ids.length === 0 ) {
+            alert('<?php echo esc_js( __( 'Please select at least one product.', 'aaa-wf-sfwf' ) ); ?>');
+            return false;
+        }
+        return true;
+    });
+
+    // Before submitting the "Add to PO" form, populate its hidden field with selected IDs.
+    $('#sfwf-add-to-po-form').on('submit', function() {
+        var ids = [];
+        $('#sfwf-forecast-table').find('.sfwf-select-row:checked').each(function() {
+            ids.push($(this).val());
+        });
+        $('#sfwf-po-ids').val(ids.join(','));
         if ( ids.length === 0 ) {
             alert('<?php echo esc_js( __( 'Please select at least one product.', 'aaa-wf-sfwf' ) ); ?>');
             return false;

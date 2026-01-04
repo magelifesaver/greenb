@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       AAA Stock Forecast Workflow V1
  * Description:       Predicts out-of-stock risks and prepares purchase orders based on sales velocity, stock, and lead time.
- * Version:           1.0.0
+ * Version:           1.2.0
  * Author:            Webmaster Workflow
  * Text Domain:       aaa-wf-sfwf
  * Domain Path:       /languages
@@ -55,6 +55,10 @@ require_once SFWF_ROOT . 'index/class-wf-sfwf-flag-handler.php';
 // products from both the products list and the forecast grid.
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-bulk-actions.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-selected-handler.php';
+// Load the purchase order handler.  This adds the ability to add selected
+// products to a purchase order from the forecast grid.  The handler itself
+// provides a stub implementation that simply flags products as added to a PO.
+require_once SFWF_ROOT . 'index/class-wf-sfwf-purchase-order-handler.php';
 
 // === Admin Menu: Settings Page ===
 add_action( 'admin_menu', 'sfwf_register_settings_page' );

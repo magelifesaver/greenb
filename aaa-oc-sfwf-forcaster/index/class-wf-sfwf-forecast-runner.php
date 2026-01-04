@@ -12,6 +12,14 @@
  * `aip_forecast_summary` meta field.  After computing all forecast metrics,
  * the runner assembles a summary of key metrics (stock quantity, sales
  * status, stock status and flags) and stores it as a JSON‑encoded string.
+ *
+ * The original file lives in the parent plugin; this copy has been
+ * modified to include additional data points in the summary.  Specifically
+ * it now includes daily and total sales metrics, projected dates, and
+ * extended flags.  These extra fields make the summary more useful for AI
+ * applications that need a fuller picture of a product’s sales and stock
+ * performance.  The added fields are backwards‑compatible: if a field is
+ * unavailable it will be omitted from the summary.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -158,24 +166,64 @@ class WF_SFWF_Forecast_Runner {
 
         /*
          * Compose a summary of forecast information for AI/ML use.  The summary
-         * consolidates a handful of key metrics into a single JSON object.  It
-         * includes stock quantity, the WooCommerce stock status (instock or
-         * outofstock), the forecast sales status (active/not_moving tiers), and
-         * the state of manual flags.  Storing this as a single meta value
-         * simplifies querying and vector indexing.
+         * consolidates key metrics into a single JSON object.  In this version
+         * we extend the original summary to include additional sales and
+         * projection data as well as extra flags.  The goal is to provide
+         * downstream agents with a richer snapshot of the product state while
+         * still keeping the payload concise.  Where data is unavailable, the
+         * field is omitted rather than set to an empty string.
          */
+        // Build a richer AI summary for the product.  The intent is to capture a
+        // broad snapshot of sales velocity, inventory, lifecycle, and manual
+        // overrides in a single object.  Downstream AI agents can use this data
+        // to answer common questions such as “when will this product be out of
+        // stock?”, “how fast is it selling?”, or “is it flagged for clearance?”.
+        //
+        // We intentionally map the projection keys to simplified names (e.g.
+        // `oos_date`) to keep the JSON concise.  Numeric values that are empty
+        // are represented as null so that json_encode omits them when filtered.
         $summary_data = [
-            'stock_qty'    => $stock['forecast_stock_qty'],
-            'stock_status' => $product->get_stock_status(),
-            'sales_status' => $status['forecast_sales_status'] ?? 'active',
-            'flags'        => [
-                'do_not_reorder'   => $flags['forecast_do_not_reorder'] ?? 'no',
-                'must_stock'       => $flags['forecast_is_must_stock'] ?? 'no',
-                'force_reorder'    => $flags['forecast_force_reorder'] ?? 'no',
-                'flag_for_review'  => $flags['forecast_flag_for_review'] ?? 'no',
+            'stock_qty'        => $stock['forecast_stock_qty'],
+            'stock_status'     => $product->get_stock_status(),
+            'sales_status'     => $status['forecast_sales_status'] ?? 'active',
+            // Sales velocity
+            'total_units_sold' => $sales['forecast_total_units_sold'] ?? null,
+            'sales_per_day'    => $sales['forecast_sales_day'] ?? null,
+            'sales_per_month'  => $sales['forecast_sales_month'] ?? null,
+            // Projection dates
+            'oos_date'         => $projections['forecast_oos_date'] ?? null,
+            'reorder_date'     => $projections['forecast_reorder_date'] ?? null,
+            // Lifecycle
+            'last_sold_date'   => $last_sold ?? null,
+            'last_purchased'   => $last_po ?? null,
+            // Manual flags (include clearance and removal)
+            'flags'            => [
+                'do_not_reorder'     => $flags['forecast_do_not_reorder'] ?? 'no',
+                'must_stock'         => $flags['forecast_is_must_stock'] ?? 'no',
+                'force_reorder'      => $flags['forecast_force_reorder'] ?? 'no',
+                'flag_for_review'    => $flags['forecast_flag_for_review'] ?? 'no',
+                'mark_for_clearance' => $flags['forecast_mark_for_clearance'] ?? 'no',
+                'mark_for_removal'   => $flags['forecast_mark_for_removal'] ?? 'no',
             ],
+            // Additional metadata
+            'lead_time_days'    => $fields['forecast_lead_time_days'] ?? null,
+            'min_order_qty'     => $fields['forecast_minimum_order_qty'] ?? null,
+            'sales_window_days' => $fields['forecast_sales_window_days'] ?? null,
+            'minimum_stock'     => $fields['forecast_minimum_stock'] ?? null,
         ];
-        $fields['aip_forecast_summary'] = wp_json_encode( $summary_data );
+        // Include reorder note if present
+        if ( ! empty( $flags['forecast_reorder_note'] ) ) {
+            $summary_data['reorder_note'] = $flags['forecast_reorder_note'];
+        }
+        // Filter out any null or empty values to keep the JSON lean
+        $filtered_summary = array_filter( $summary_data, function( $value ) {
+            // Preserve numeric zero and the flags array
+            if ( is_array( $value ) ) {
+                return ! empty( $value );
+            }
+            return $value !== null && $value !== '';
+        } );
+        $fields['aip_forecast_summary'] = wp_json_encode( $filtered_summary );
 
         WF_SFWF_Forecast_Meta_Updater::write( $product_id, $fields );
     }

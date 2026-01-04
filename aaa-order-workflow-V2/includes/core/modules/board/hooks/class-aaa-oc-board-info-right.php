@@ -34,10 +34,21 @@ if ( ! class_exists( 'AAA_OC_Board_Info_Right' ) ) {
                 return;
             }
 
-            // Shipping method title
+            // Shipping method title.  Prefer a human‑friendly label; if the
+            // shipping total is zero treat this as “Free shipping”.  The order
+            // index stores shipping_total as a float and shipping_method as
+            // the method title (e.g. Flat rate, Local pickup).  When the
+            // shipping_total is zero or missing we display “Free shipping”.
             $shipping = '';
+            $method_name   = '';
             if ( ! empty( $oi->shipping_method ) ) {
-                $shipping = trim( (string) $oi->shipping_method );
+                $method_name = trim( (string) $oi->shipping_method );
+            }
+            $shipping_cost = isset( $oi->shipping_total ) ? (float) $oi->shipping_total : 0.0;
+            if ( $shipping_cost <= 0 && $method_name !== '' ) {
+                $shipping = __( 'Free shipping', 'aaa-order-workflow' );
+            } elseif ( $method_name !== '' ) {
+                $shipping = $method_name;
             }
 
             // Driver name and delivery date/time are intentionally not loaded
