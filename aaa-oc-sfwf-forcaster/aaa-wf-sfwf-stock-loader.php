@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       AAA Stock Forecast Workflow V1
  * Description:       Predicts out-of-stock risks and prepares purchase orders based on sales velocity, stock, and lead time.
- * Version:           1.2.0
+ * Version:           1.3.0
  * Author:            Webmaster Workflow
  * Text Domain:       aaa-wf-sfwf
  * Domain Path:       /languages
@@ -103,3 +103,42 @@ add_filter( 'admin_footer_text', function( $footer ) {
 	}
 	return $footer;
 });
+
+/**
+ * Prevent third‑party update check scripts from loading on the forecast pages.
+ *
+ * The Admin Columns Pro plugin and some other extensions enqueue scripts that
+ * perform remote update checks via AJAX. On some hosting configurations these
+ * scripts attempt to call a different domain and cause CORS errors that can
+ * break other JavaScript on the page (including DataTables sorting). To
+ * safeguard the forecast UI, we dequeue and deregister those scripts when
+ * rendering our plugin pages. See the support threads for update‑plugins‑check.js
+ * errors for more details.
+ *
+ * @param string $hook_suffix The current admin page hook.
+ */
+add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
+        // Identify our plugin pages where the forecast UI is rendered. When
+        // visiting these pages, disable the problematic scripts to avoid JS
+        // errors that interfere with DataTable sorting and filtering.
+        $pages_to_clean = [
+                'woocommerce_page_sfwf-forecast-grid',
+                'woocommerce_page_sfwf-settings',
+        ];
+        if ( in_array( $hook_suffix, $pages_to_clean, true ) ) {
+                // Deregister the Admin Columns Pro plugin update check script if present.
+                // Both handles are checked because the exact handle name can vary
+                // between versions (acp-plugins-update-check or update-plugins-check).
+                foreach ( [ 'acp-plugins-update-check', 'update-plugins-check' ] as $handle ) {
+                        if ( wp_script_is( $handle, 'enqueued' ) || wp_script_is( $handle, 'registered' ) ) {
+                                wp_dequeue_script( $handle );
+                                wp_deregister_script( $handle );
+                        }
+                }
+                // Deregister the WooCommerce Global Cart (woogc) trigger if present.
+                if ( wp_script_is( 'woogc', 'enqueued' ) || wp_script_is( 'woogc', 'registered' ) ) {
+                        wp_dequeue_script( 'woogc' );
+                        wp_deregister_script( 'woogc' );
+                }
+        }
+}, 100 );
