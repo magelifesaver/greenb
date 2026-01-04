@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.5
 Tested Up To: 6.9
 Requires PHP: 7.0
-Stable tag: 2.9.54
+Stable tag: 2.9.55
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -80,6 +80,12 @@ Yes, it will work with any WordPress theme as long as you are using Elementor as
 Premium Addons for Elementor is light weight and we also gave you the control to enable only the elements you actually use on your website for faster performance.
 
 == Changelog ==
+
+= 2.9.55 =
+
+- New: Animated Gradient and Ken Burns addons are now applicable on widgets.
+- Tweak: Opacity Scroll effect in Horizontal Scroll widget improved.
+- Fixed: Blob not removed after disabling Animated Blob addon switcher.
 
 = 2.9.54 =
 

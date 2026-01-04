@@ -813,7 +813,7 @@ class Mini_Cart extends Widget_Base {
 			array(
 				'label'       => __( 'Open on Cart Update', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => __( 'Use this option to open the cart menu every time an item is added/removed.', 'premium-addons-for-elementor' ),
+				'description' => __( 'Use this option to open the cart menu every time an item is added to the cart.', 'premium-addons-for-elementor' ),
 				'condition'   => array(
 					'behaviour' => 'toggle',
 				),
@@ -985,18 +985,18 @@ class Mini_Cart extends Widget_Base {
 		$this->add_responsive_control(
 			'menu_width',
 			array(
-				'label'      => __( 'Width', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'vw', 'custom' ),
-				'description'  => __( 'Please note that setting the width using the "%" unit will cause unexpected behavior.', 'premium-addons-for-elementor' ),
-				'range'      => array(
+				'label'       => __( 'Width', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => array( 'px', 'vw', 'custom' ),
+				'description' => __( 'Please note that setting the width using the "%" unit will cause unexpected behavior.', 'premium-addons-for-elementor' ),
+				'range'       => array(
 					'px' => array(
 						'min'  => 0,
 						'max'  => 1000,
 						'step' => 1,
 					),
 				),
-				'selectors'  => array(
+				'selectors'   => array(
 					'{{WRAPPER}}' => '--pa-slide-mc-width: {{SIZE}}{{UNIT}};',
 				),
 			)

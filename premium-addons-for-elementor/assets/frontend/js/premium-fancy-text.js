@@ -6,13 +6,7 @@
 			settings = $elem.data("settings"),
 			loadingSpeed = settings.delay || 2500,
 			$animatedText = $elem.find('.premium-atext__text'),
-			startEffectOn = $elem.data('start-effect'),
-			isAlreadyLoaded = $scope.data("is-loaded");
-
-		if (isAlreadyLoaded)
-			return;
-
-		$scope.attr("data-is-loaded", true);
+			startEffectOn = $elem.data('start-effect');
 
 		function escapeHtml(unsafe) {
 			return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(
@@ -283,6 +277,11 @@
 	};
 
 	$(window).on('elementor/frontend/init', function () {
+
+		if ('undefined' !== typeof paElementsHandler && paElementsHandler.isElementAlreadyExists('paFancyText')) {
+			return false;
+		}
+
 		elementorFrontend.hooks.addAction('frontend/element_ready/premium-addon-fancy-text.default', PremiumFancyTextHandler);
 	});
 })(jQuery);

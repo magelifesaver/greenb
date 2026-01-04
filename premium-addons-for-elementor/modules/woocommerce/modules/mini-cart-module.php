@@ -88,6 +88,8 @@ class Mini_Cart_Module extends Module_Base {
 		if ( $mc_custom_temp_enabled ) {
 			add_filter( 'woocommerce_add_to_cart_fragments', array( $this, 'pa_add_mini_cart_fragments' ) );
 		}
+
+		add_action( 'woocommerce_add_to_cart', array( $this, 'pa_set_product_added_to_cart_flag' ) );
 	}
 
 	/**
@@ -262,5 +264,17 @@ class Mini_Cart_Module extends Module_Base {
 		} else {
 			wp_send_json_error( 'Coupon not found or already removed.', 404 );
 		}
+	}
+
+	/**
+	 * Set product added to cart flag.
+	 * Used to determine whether to open the mini cart automatically on page load.
+	 *
+	 * @see premium-mini-cart.js
+	 * @see assets-manager.php [$product_added_to_cart] to pass the transient value to JS.
+	 */
+	public function pa_set_product_added_to_cart_flag() {
+		// Set a transient that will be available on the next page load.
+		set_transient( 'pa_product_added_to_cart', true, 60 );
 	}
 }

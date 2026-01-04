@@ -1002,13 +1002,7 @@
 				settings = $elem.data("settings"),
 				loadingSpeed = settings.delay || 2500,
 				$animatedText = $elem.find('.premium-atext__text'),
-				startEffectOn = $elem.data('start-effect'),
-				isAlreadyLoaded = $scope.data("is-loaded");
-
-			if (isAlreadyLoaded)
-				return;
-
-			$scope.attr("data-is-loaded", true);
+				startEffectOn = $elem.data('start-effect');
 
 			function escapeHtml(unsafe) {
 				return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(

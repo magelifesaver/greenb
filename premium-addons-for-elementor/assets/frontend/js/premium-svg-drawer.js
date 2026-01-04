@@ -2,7 +2,11 @@
 
 	$(window).on('elementor/frontend/init', function () {
 
-		var PremiumSVGDrawerHandler = elementorModules.frontend.handlers.Base.extend({
+		if ('undefined' !== typeof paElementsHandler && paElementsHandler.isElementAlreadyExists('paSVGDraw')) {
+			return false;
+		}
+
+		var PremiumSVGDrawHandler = elementorModules.frontend.handlers.Base.extend({
 
 			bindEvents: function () {
 
@@ -138,7 +142,7 @@
 
 		});
 
-		elementorFrontend.elementsHandler.attachHandler('premium-svg-drawer', PremiumSVGDrawerHandler);
+		elementorFrontend.elementsHandler.attachHandler('premium-svg-drawer', PremiumSVGDrawHandler);
 
 	});
 })(jQuery);

@@ -57,7 +57,7 @@ if ( ! class_exists( 'PA_Core' ) ) {
 
 			Addons_Integration::get_instance();
 
-			include_once PREMIUM_ADDONS_PATH . 'includes/cm-pointer.php';
+			include_once PREMIUM_ADDONS_PATH . 'includes/promotion-pointer.php';
 		}
 
 		/**

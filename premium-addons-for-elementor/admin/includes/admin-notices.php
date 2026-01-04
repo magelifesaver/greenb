@@ -528,7 +528,7 @@ class Admin_Notices {
 	 */
 	public function get_pa_stories() {
 
-		$stories = get_transient( 'pa_stories_bf' );
+		$stories = get_transient( 'pa_stories_' . PREMIUM_ADDONS_VERSION );
 
 		if ( ! $stories ) {
 
@@ -543,14 +543,14 @@ class Admin_Notices {
 			);
 
 			if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				set_transient( 'pa_stories_bf', true, WEEK_IN_SECONDS );
+				set_transient( 'pa_stories_' . PREMIUM_ADDONS_VERSION, true, WEEK_IN_SECONDS );
 				return false;
 			}
 
 			$body    = wp_remote_retrieve_body( $response );
 			$stories = json_decode( $body, true );
 
-			set_transient( 'pa_stories_bf', $stories, WEEK_IN_SECONDS );
+			set_transient( 'pa_stories_' . PREMIUM_ADDONS_VERSION, $stories, WEEK_IN_SECONDS );
 
 		}
 
@@ -596,8 +596,8 @@ class Admin_Notices {
 
 				$highlight = true;
 				array_unshift( $stories['posts'], array(
-					'title' => 'Switch to Premium Addons Pro Lifetime, Pay the Difference & Save 35% Today!',
-					'link'  => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/upgrade-premium-addons-license/', 'wp-dash', 'bf25-dash-widget', 'cm25' ),
+					'title' => 'Switch to Premium Addons Pro Lifetime, Pay the Difference & Save 30% Today!',
+					'link'  => Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/upgrade-premium-addons-license/', 'wp-dash', 'xmas25-dash-widget', 'xmas25' ),
 				) );
 
 			}
@@ -671,7 +671,7 @@ class Admin_Notices {
 							<div class="pa-story-img-container">
 								<img src="<?php echo esc_url( $banner['image'] ); ?>" alt="<?php echo esc_attr( $banner['description'] ); ?>">
 							</div>
-							<a href="<?php echo esc_url( Helper_Functions::get_campaign_link( $banner['link'], 'wp-dash', 'dash-widget', 'cm25' ) ); ?>" target="_blank" title="<?php echo esc_attr( $banner['description'] ); ?>"></a>
+							<a href="<?php echo esc_url( Helper_Functions::get_campaign_link( $banner['link'], 'wp-dash', 'dash-widget', 'xmas25' ) ); ?>" target="_blank" title="<?php echo esc_attr( $banner['description'] ); ?>"></a>
 						</div>
 
 					<?php endif; ?>

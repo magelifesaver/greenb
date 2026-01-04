@@ -118,6 +118,7 @@ class Module extends Module_Base {
 				'label'        => __( 'Enable Blob Generator', 'premium-addons-pro' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'premium-blob-',
+				'render_type'  => 'template',
 			)
 		);
 
@@ -137,16 +138,16 @@ class Module extends Module_Base {
 
 		$repeater = new Repeater();
 
-		$repeater->add_control(
-			'hide_layer',
-			array(
-				'label'     => __( 'Hide This Blob', 'premium-addons-pro' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'selectors' => array(
-					'{{WRAPPER}} {{CURRENT_ITEM}}' => 'display: none',
-				),
-			)
-		);
+		// $repeater->add_control(
+		// 	'hide_layer',
+		// 	array(
+		// 		'label'     => __( 'Hide This Blob', 'premium-addons-pro' ),
+		// 		'type'      => Controls_Manager::SWITCHER,
+		// 		'selectors' => array(
+		// 			'{{WRAPPER}} {{CURRENT_ITEM}}' => 'display: none',
+		// 		),
+		// 	)
+		// );
 
 		$repeater->add_control(
 			'premium_blob_type',

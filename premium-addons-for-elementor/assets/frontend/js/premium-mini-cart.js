@@ -34,15 +34,28 @@
 			}, 0);
 		}
 
+		/**
+		 * Open the cart automatically on page load if it's caused by a product being added to the cart only.
+		 */
+		if (openAutomatically && PAWooMCartSettings.productAddedToCart) {
+			setTimeout(function () {
+				if (!$scope.find('.pa-woo-mc__content-wrapper-' + id).hasClass('pa-woo-mc__open')) {
+					toggleMiniCart();
+				}
+			}, cartDelay || 0);
+		}
+
 		if (openAutomatically) {
 			if (!cartDebounce) {
-				elementorFrontend.elements.$body.on('wc_fragments_refreshed removed_from_cart added_to_cart', function (event, data) {
-					if (!$scope.find('.pa-woo-mc__content-wrapper-' + id).hasClass('pa-woo-mc__open')) {
-						setTimeout(function () {
+				elementorFrontend.elements.$body.on('added_to_cart', function (event, data) {
+					setTimeout(function () {
+						var $contentWrapper = $scope.find('.pa-woo-mc__content-wrapper-' + id);
+
+						if (!$contentWrapper.hasClass('pa-woo-mc__open')) {
 							toggleMiniCart(event, data);
-							cartDebounce = true;
-						}, cartDelay);
-					}
+						}
+						cartDebounce = true;
+					}, cartDelay || 0);
 				});
 			}
 		}
@@ -495,6 +508,7 @@
 				$scope.find('.pa-woo-mc__content-wrapper-' + id).removeClass('pa-woo-mc__open');
 			});
 
+			// coupon toggler.
 			if (settings.coupon) {
 
 				$scope.find('.pa-woo-mc__coupon-toggler').click(function () {

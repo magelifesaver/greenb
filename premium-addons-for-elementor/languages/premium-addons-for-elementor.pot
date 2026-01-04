@@ -2,10 +2,10 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Premium Addons for Elementor 4.11.61\n"
+"Project-Id-Version: Premium Addons for Elementor 4.11.62\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/premium-addons-for-elementor\n"
-"POT-Creation-Date: 2025-12-23 12:53:40+00:00\n"
+"POT-Creation-Date: 2025-12-29 14:12:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "This option is available in Premium Addons Pro. "
 msgstr ""
 
-#: addons/display-conditions.php:222 addons/floating-effects.php:146
+#: addons/display-conditions.php:222 addons/floating-effects.php:167
 #: addons/shape-divider.php:268 addons/shape-divider.php:637
 #: addons/tooltips.php:354 modules/woocommerce/widgets/woo-products.php:244
 #: widgets/premium-contactform.php:242 widgets/premium-countdown.php:449
@@ -339,8 +339,8 @@ msgstr ""
 msgid "Trigger on"
 msgstr ""
 
-#: addons/equal-height.php:176 widgets/premium-fancytext.php:374
-#: widgets/premium-media-wheel.php:1229
+#: addons/equal-height.php:176 addons/floating-effects.php:129
+#: widgets/premium-fancytext.php:374 widgets/premium-media-wheel.php:1229
 msgid "Page Load"
 msgstr ""
 
@@ -362,37 +362,108 @@ msgstr ""
 msgid "Video tutorial »"
 msgstr ""
 
-#: addons/floating-effects.php:92 admin/includes/templates/addons.php:164
+#: addons/floating-effects.php:93 admin/includes/templates/addons.php:164
 msgid "Floating Effects"
 msgstr ""
 
-#: addons/floating-effects.php:100
+#: addons/floating-effects.php:101
 msgid "Enable Floating Effects"
 msgstr ""
 
-#: addons/floating-effects.php:113
+#: addons/floating-effects.php:114
 msgid "How to use Premium Floating Effects for Elementor »"
 msgstr ""
 
-#: addons/floating-effects.php:124
+#: addons/floating-effects.php:125
+msgid "Play On"
+msgstr ""
+
+#: addons/floating-effects.php:130 addons/tooltips.php:759
+#: modules/woocommerce/skins/skin-1.php:469
+#: modules/woocommerce/skins/skin-1.php:701
+#: modules/woocommerce/skins/skin-10.php:391
+#: modules/woocommerce/skins/skin-10.php:614
+#: modules/woocommerce/skins/skin-11.php:382
+#: modules/woocommerce/skins/skin-11.php:529
+#: modules/woocommerce/skins/skin-11.php:767
+#: modules/woocommerce/skins/skin-2.php:418
+#: modules/woocommerce/skins/skin-2.php:630
+#: modules/woocommerce/skins/skin-3.php:456
+#: modules/woocommerce/skins/skin-3.php:671
+#: modules/woocommerce/skins/skin-4.php:440
+#: modules/woocommerce/skins/skin-4.php:664
+#: modules/woocommerce/skins/skin-5.php:423
+#: modules/woocommerce/skins/skin-5.php:630
+#: modules/woocommerce/skins/skin-6.php:464
+#: modules/woocommerce/skins/skin-6.php:671
+#: modules/woocommerce/skins/skin-7.php:492
+#: modules/woocommerce/skins/skin-7.php:697
+#: modules/woocommerce/skins/skin-8.php:449
+#: modules/woocommerce/skins/skin-8.php:657
+#: modules/woocommerce/skins/skin-9.php:400
+#: modules/woocommerce/skins/skin-9.php:620
+#: modules/woocommerce/skins/skin-base.php:908
+#: modules/woocommerce/widgets/mini-cart.php:2790
+#: modules/woocommerce/widgets/mini-cart.php:3788
+#: modules/woocommerce/widgets/mini-cart.php:4163
+#: modules/woocommerce/widgets/mini-cart.php:4376
+#: modules/woocommerce/widgets/mini-cart.php:4812
+#: modules/woocommerce/widgets/woo-categories.php:615
+#: modules/woocommerce/widgets/woo-cta.php:1144
+#: modules/woocommerce/widgets/woo-cta.php:1426
+#: modules/woocommerce/widgets/woo-cta.php:1661
+#: modules/woocommerce/widgets/woo-cta.php:1803
+#: modules/woocommerce/widgets/woo-products.php:1444
+#: modules/woocommerce/widgets/woo-products.php:1717
+#: modules/woocommerce/widgets/woo-products.php:1911
+#: widgets/premium-banner.php:1081 widgets/premium-blog.php:2445
+#: widgets/premium-blog.php:2770 widgets/premium-button.php:1397
+#: widgets/premium-carousel.php:1373 widgets/premium-contactform.php:1594
+#: widgets/premium-grid.php:1800 widgets/premium-grid.php:2028
+#: widgets/premium-grid.php:2360 widgets/premium-icon-list.php:1020
+#: widgets/premium-image-button.php:1336 widgets/premium-image-scroll.php:507
+#: widgets/premium-image-scroll.php:675 widgets/premium-image-scroll.php:812
+#: widgets/premium-lottie.php:248 widgets/premium-lottie.php:614
+#: widgets/premium-media-wheel.php:2077 widgets/premium-media-wheel.php:2354
+#: widgets/premium-modalbox.php:1542 widgets/premium-modalbox.php:1889
+#: widgets/premium-modalbox.php:2062 widgets/premium-nav-menu.php:1239
+#: widgets/premium-nav-menu.php:1720 widgets/premium-nav-menu.php:2227
+#: widgets/premium-nav-menu.php:2354 widgets/premium-nav-menu.php:2430
+#: widgets/premium-nav-menu.php:3632 widgets/premium-nav-menu.php:4297
+#: widgets/premium-notifications.php:2161
+#: widgets/premium-notifications.php:2442
+#: widgets/premium-notifications.php:3410
+#: widgets/premium-pinterest-feed.php:1399
+#: widgets/premium-pinterest-feed.php:1626
+#: widgets/premium-pinterest-feed.php:2336 widgets/premium-post-ticker.php:2919
+#: widgets/premium-pricing-table.php:3020
+#: widgets/premium-pricing-table.php:3380 widgets/premium-search-form.php:1935
+#: widgets/premium-search-form.php:2378 widgets/premium-search-form.php:2794
+#: widgets/premium-tcloud.php:734 widgets/premium-tiktok-feed.php:2257
+#: widgets/premium-tiktok-feed.php:2481 widgets/premium-weather.php:3034
+#: widgets/premium-weather.php:3262
+msgid "Hover"
+msgstr ""
+
+#: addons/floating-effects.php:142
 msgid "Custom CSS Selector"
 msgstr ""
 
-#: addons/floating-effects.php:126
+#: addons/floating-effects.php:144
 msgid ""
 "Set this option if you want to apply floating effects on specfic selector "
 "inside your widget. For example, .premium-dual-header-container"
 msgstr ""
 
-#: addons/floating-effects.php:146
-msgid "The options in Style and Filters tabs are available in Premium Addons Pro."
+#: addons/floating-effects.php:167
+msgid "The options in Filters tab are available in Premium Addons Pro."
 msgstr ""
 
-#: addons/floating-effects.php:157
+#: addons/floating-effects.php:181
 msgid "Motion"
 msgstr ""
 
-#: addons/floating-effects.php:168
+#: addons/floating-effects.php:192
 #: modules/woocommerce/widgets/woo-categories.php:545
 #: modules/woocommerce/widgets/woo-products.php:1518
 #: widgets/premium-blog.php:683 widgets/premium-grid.php:1119
@@ -401,62 +472,66 @@ msgstr ""
 msgid "Translate"
 msgstr ""
 
-#: addons/floating-effects.php:180
+#: addons/floating-effects.php:204
 msgid "Translate X"
 msgstr ""
 
-#: addons/floating-effects.php:197 addons/floating-effects.php:230
-#: addons/floating-effects.php:319 addons/floating-effects.php:351
-#: addons/floating-effects.php:383 addons/floating-effects.php:473
-#: addons/floating-effects.php:506 addons/floating-effects.php:595
-#: addons/floating-effects.php:627
+#: addons/floating-effects.php:221 addons/floating-effects.php:254
+#: addons/floating-effects.php:343 addons/floating-effects.php:375
+#: addons/floating-effects.php:407 addons/floating-effects.php:497
+#: addons/floating-effects.php:530 addons/floating-effects.php:619
+#: addons/floating-effects.php:651 addons/floating-effects.php:753
+#: addons/floating-effects.php:827
 #: includes/pa-display-conditions/conditions/time-range.php:59
 msgid "From"
 msgstr ""
 
-#: addons/floating-effects.php:198 addons/floating-effects.php:231
-#: addons/floating-effects.php:320 addons/floating-effects.php:352
-#: addons/floating-effects.php:384 addons/floating-effects.php:474
-#: addons/floating-effects.php:507 addons/floating-effects.php:596
-#: addons/floating-effects.php:628
+#: addons/floating-effects.php:222 addons/floating-effects.php:255
+#: addons/floating-effects.php:344 addons/floating-effects.php:376
+#: addons/floating-effects.php:408 addons/floating-effects.php:498
+#: addons/floating-effects.php:531 addons/floating-effects.php:620
+#: addons/floating-effects.php:652 addons/floating-effects.php:754
+#: addons/floating-effects.php:843
 #: includes/pa-display-conditions/conditions/time-range.php:34
 msgid "To"
 msgstr ""
 
-#: addons/floating-effects.php:213
+#: addons/floating-effects.php:237
 msgid "Translate Y"
-msgstr ""
-
-#: addons/floating-effects.php:246 addons/floating-effects.php:399
-#: addons/floating-effects.php:522 addons/floating-effects.php:643
-#: widgets/premium-pricing-table.php:731 widgets/premium-pricing-table.php:2391
-msgid "Duration"
 msgstr ""
 
 #: addons/floating-effects.php:270 addons/floating-effects.php:423
 #: addons/floating-effects.php:546 addons/floating-effects.php:667
+#: addons/floating-effects.php:768 addons/floating-effects.php:859
+#: widgets/premium-pricing-table.php:731 widgets/premium-pricing-table.php:2391
+msgid "Duration"
+msgstr ""
+
+#: addons/floating-effects.php:294 addons/floating-effects.php:447
+#: addons/floating-effects.php:570 addons/floating-effects.php:691
+#: addons/floating-effects.php:792 addons/floating-effects.php:883
 #: addons/tooltips.php:903
 msgid "Delay"
 msgstr ""
 
-#: addons/floating-effects.php:291 widgets/premium-fancytext.php:391
+#: addons/floating-effects.php:315 widgets/premium-fancytext.php:391
 #: widgets/premium-textual-showcase.php:1644
 msgid "Rotate"
 msgstr ""
 
-#: addons/floating-effects.php:303
+#: addons/floating-effects.php:327
 msgid "Rotate X"
 msgstr ""
 
-#: addons/floating-effects.php:335
+#: addons/floating-effects.php:359
 msgid "Rotate Y"
 msgstr ""
 
-#: addons/floating-effects.php:367
+#: addons/floating-effects.php:391
 msgid "Rotate Z"
 msgstr ""
 
-#: addons/floating-effects.php:444
+#: addons/floating-effects.php:468
 #: modules/woocommerce/widgets/woo-categories.php:541
 #: modules/woocommerce/widgets/woo-products.php:1514
 #: widgets/premium-banner.php:237 widgets/premium-blog.php:678
@@ -466,27 +541,27 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
-#: addons/floating-effects.php:456
+#: addons/floating-effects.php:480
 msgid "Scale X"
 msgstr ""
 
-#: addons/floating-effects.php:489
+#: addons/floating-effects.php:513
 msgid "Scale Y"
 msgstr ""
 
-#: addons/floating-effects.php:567
+#: addons/floating-effects.php:591
 msgid "Skew"
 msgstr ""
 
-#: addons/floating-effects.php:579
+#: addons/floating-effects.php:603
 msgid "Skew X"
 msgstr ""
 
-#: addons/floating-effects.php:611
+#: addons/floating-effects.php:635
 msgid "Skew Y"
 msgstr ""
 
-#: addons/floating-effects.php:689 addons/shape-divider.php:587
+#: addons/floating-effects.php:713 addons/shape-divider.php:587
 #: addons/tooltips.php:413 modules/woocommerce/widgets/mini-cart.php:1751
 #: widgets/premium-button.php:437 widgets/premium-countdown.php:358
 #: widgets/premium-counter.php:974 widgets/premium-icon-list.php:2501
@@ -496,7 +571,7 @@ msgstr ""
 msgid "Style"
 msgstr ""
 
-#: addons/floating-effects.php:702 addons/shape-divider.php:689
+#: addons/floating-effects.php:726 addons/shape-divider.php:689
 #: widgets/premium-image-scroll.php:647 widgets/premium-image-scroll.php:682
 #: widgets/premium-lottie.php:586 widgets/premium-lottie.php:632
 #: widgets/premium-media-wheel.php:1890 widgets/premium-media-wheel.php:2022
@@ -506,7 +581,40 @@ msgstr ""
 msgid "Opacity"
 msgstr ""
 
-#: addons/floating-effects.php:717 modules/woocommerce/skins/skin-7.php:267
+#: addons/floating-effects.php:742
+#: includes/pa-display-conditions/conditions/acf-boolean.php:50
+#: includes/pa-display-conditions/conditions/acf-choice.php:50
+#: includes/pa-display-conditions/conditions/acf-text.php:50
+#: includes/pa-display-conditions/conditions/browser.php:34
+#: includes/pa-display-conditions/conditions/date-range.php:34
+#: includes/pa-display-conditions/conditions/date.php:34
+#: includes/pa-display-conditions/conditions/day.php:34
+#: includes/pa-display-conditions/conditions/device.php:34
+#: includes/pa-display-conditions/conditions/ip-location.php:45
+#: includes/pa-display-conditions/conditions/lang.php:34
+#: includes/pa-display-conditions/conditions/login-status.php:34
+#: includes/pa-display-conditions/conditions/operating-system.php:34
+#: includes/pa-display-conditions/conditions/page.php:35
+#: includes/pa-display-conditions/conditions/post-category.php:42
+#: includes/pa-display-conditions/conditions/post-format.php:34
+#: includes/pa-display-conditions/conditions/post-format.php:35
+#: includes/pa-display-conditions/conditions/post-type.php:36
+#: includes/pa-display-conditions/conditions/post.php:35
+#: includes/pa-display-conditions/conditions/return-visitor.php:34
+#: includes/pa-display-conditions/conditions/shortcode.php:34
+#: includes/pa-display-conditions/conditions/url-referer.php:34
+#: includes/pa-display-conditions/conditions/url-string.php:34
+#: includes/pa-display-conditions/conditions/user-role.php:35
+#: includes/pa-display-conditions/conditions/woo-cart-products.php:35
+#: includes/pa-display-conditions/conditions/woo-cat-page.php:34
+#: includes/pa-display-conditions/conditions/woo-category.php:34
+#: includes/pa-display-conditions/conditions/woo-product-cat.php:34
+#: includes/pa-display-conditions/conditions/woo-purchase-products.php:35
+#: widgets/premium-counter.php:1253 widgets/premium-progressbar.php:878
+msgid "Value"
+msgstr ""
+
+#: addons/floating-effects.php:814 modules/woocommerce/skins/skin-7.php:267
 #: modules/woocommerce/skins/skin-base.php:356
 #: modules/woocommerce/skins/skin-base.php:449
 #: modules/woocommerce/skins/skin-base.php:1253
@@ -594,11 +702,11 @@ msgstr ""
 msgid "Background Color"
 msgstr ""
 
-#: addons/floating-effects.php:734
+#: addons/floating-effects.php:906
 msgid "Filters"
 msgstr ""
 
-#: addons/floating-effects.php:745 widgets/premium-banner.php:239
+#: addons/floating-effects.php:917 widgets/premium-banner.php:239
 #: widgets/premium-blog.php:680 widgets/premium-grid.php:1116
 #: widgets/premium-icon-list.php:1546 widgets/premium-image-scroll.php:430
 #: widgets/premium-notifications.php:1872 widgets/premium-person.php:298
@@ -607,11 +715,11 @@ msgstr ""
 msgid "Blur"
 msgstr ""
 
-#: addons/floating-effects.php:761
+#: addons/floating-effects.php:933
 msgid "Contrast"
 msgstr ""
 
-#: addons/floating-effects.php:777
+#: addons/floating-effects.php:949
 #: modules/woocommerce/widgets/woo-categories.php:542
 #: modules/woocommerce/widgets/woo-products.php:1515
 #: widgets/premium-banner.php:238 widgets/premium-blog.php:679
@@ -621,25 +729,25 @@ msgstr ""
 msgid "Grayscale"
 msgstr ""
 
-#: addons/floating-effects.php:793
+#: addons/floating-effects.php:965
 msgid "Hue"
 msgstr ""
 
-#: addons/floating-effects.php:809
+#: addons/floating-effects.php:981
 msgid "Brightness"
 msgstr ""
 
-#: addons/floating-effects.php:825
+#: addons/floating-effects.php:997
 msgid "Saturation "
 msgstr ""
 
-#: addons/floating-effects.php:845 widgets/premium-lottie.php:151
+#: addons/floating-effects.php:1017 widgets/premium-lottie.php:151
 #: widgets/premium-person.php:175 widgets/premium-tiktok-feed.php:890
 #: widgets/premium-weather.php:305
 msgid "General Settings"
 msgstr ""
 
-#: addons/floating-effects.php:857
+#: addons/floating-effects.php:1029
 #: modules/woocommerce/widgets/mini-cart.php:918
 #: widgets/premium-carousel.php:353 widgets/premium-dual-header.php:590
 #: widgets/premium-image-scroll.php:460 widgets/premium-tcloud.php:346
@@ -647,7 +755,7 @@ msgstr ""
 msgid "Direction"
 msgstr ""
 
-#: addons/floating-effects.php:861 addons/shape-divider.php:510
+#: addons/floating-effects.php:1033 addons/shape-divider.php:510
 #: modules/woocommerce/skins/skin-1.php:412
 #: modules/woocommerce/skins/skin-1.php:644
 #: modules/woocommerce/skins/skin-10.php:331
@@ -721,7 +829,7 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: addons/floating-effects.php:862 addons/shape-divider.php:511
+#: addons/floating-effects.php:1034 addons/shape-divider.php:511
 #: addons/tooltips.php:336 modules/woocommerce/widgets/mini-cart.php:487
 #: modules/woocommerce/widgets/mini-cart.php:2238
 #: modules/woocommerce/widgets/mini-cart.php:2319
@@ -741,11 +849,11 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: addons/floating-effects.php:863 addons/shape-divider.php:512
+#: addons/floating-effects.php:1035 addons/shape-divider.php:512
 msgid "Alternate"
 msgstr ""
 
-#: addons/floating-effects.php:875 addons/tooltips.php:321
+#: addons/floating-effects.php:1047 addons/tooltips.php:321
 #: modules/woocommerce/widgets/mini-cart.php:474
 #: modules/woocommerce/widgets/woo-cta.php:526
 #: modules/woocommerce/widgets/woo-cta.php:723 widgets/premium-button.php:735
@@ -767,11 +875,11 @@ msgstr ""
 msgid "Loop"
 msgstr ""
 
-#: addons/floating-effects.php:879 widgets/premium-media-wheel.php:1058
+#: addons/floating-effects.php:1051 widgets/premium-media-wheel.php:1058
 msgid "Infinite"
 msgstr ""
 
-#: addons/floating-effects.php:880
+#: addons/floating-effects.php:1052
 #: modules/woocommerce/widgets/mini-cart.php:237
 #: modules/woocommerce/widgets/mini-cart.php:283
 #: modules/woocommerce/widgets/mini-cart.php:362
@@ -785,55 +893,55 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: addons/floating-effects.php:892 widgets/premium-notifications.php:626
+#: addons/floating-effects.php:1064 widgets/premium-notifications.php:626
 msgid "Number"
 msgstr ""
 
-#: addons/floating-effects.php:906 widgets/premium-icon-list.php:1576
+#: addons/floating-effects.php:1078 widgets/premium-icon-list.php:1576
 msgid "Easing"
 msgstr ""
 
-#: addons/floating-effects.php:910 widgets/premium-icon-list.php:1581
+#: addons/floating-effects.php:1082 widgets/premium-icon-list.php:1581
 msgid "Linear"
 msgstr ""
 
-#: addons/floating-effects.php:911
+#: addons/floating-effects.php:1083
 msgid "easeInOutSine"
 msgstr ""
 
-#: addons/floating-effects.php:912
+#: addons/floating-effects.php:1084
 msgid "easeInOutExpo"
 msgstr ""
 
-#: addons/floating-effects.php:913
+#: addons/floating-effects.php:1085
 msgid "easeInOutQuart"
 msgstr ""
 
-#: addons/floating-effects.php:914
+#: addons/floating-effects.php:1086
 msgid "easeInOutCirc"
 msgstr ""
 
-#: addons/floating-effects.php:915
+#: addons/floating-effects.php:1087
 msgid "easeInOutBack"
 msgstr ""
 
-#: addons/floating-effects.php:916 addons/floating-effects.php:932
+#: addons/floating-effects.php:1088 addons/floating-effects.php:1104
 msgid "Steps"
 msgstr ""
 
-#: addons/floating-effects.php:917
+#: addons/floating-effects.php:1089
 msgid "Elastic In"
 msgstr ""
 
-#: addons/floating-effects.php:918
+#: addons/floating-effects.php:1090
 msgid "Elastic Out"
 msgstr ""
 
-#: addons/floating-effects.php:919
+#: addons/floating-effects.php:1091
 msgid "Elastic In Out"
 msgstr ""
 
-#: addons/floating-effects.php:946
+#: addons/floating-effects.php:1118
 msgid "Disable Floating Effects On Safari"
 msgstr ""
 
@@ -2501,72 +2609,6 @@ msgstr ""
 msgid "Click"
 msgstr ""
 
-#: addons/tooltips.php:759 modules/woocommerce/skins/skin-1.php:469
-#: modules/woocommerce/skins/skin-1.php:701
-#: modules/woocommerce/skins/skin-10.php:391
-#: modules/woocommerce/skins/skin-10.php:614
-#: modules/woocommerce/skins/skin-11.php:382
-#: modules/woocommerce/skins/skin-11.php:529
-#: modules/woocommerce/skins/skin-11.php:767
-#: modules/woocommerce/skins/skin-2.php:418
-#: modules/woocommerce/skins/skin-2.php:630
-#: modules/woocommerce/skins/skin-3.php:456
-#: modules/woocommerce/skins/skin-3.php:671
-#: modules/woocommerce/skins/skin-4.php:440
-#: modules/woocommerce/skins/skin-4.php:664
-#: modules/woocommerce/skins/skin-5.php:423
-#: modules/woocommerce/skins/skin-5.php:630
-#: modules/woocommerce/skins/skin-6.php:464
-#: modules/woocommerce/skins/skin-6.php:671
-#: modules/woocommerce/skins/skin-7.php:492
-#: modules/woocommerce/skins/skin-7.php:697
-#: modules/woocommerce/skins/skin-8.php:449
-#: modules/woocommerce/skins/skin-8.php:657
-#: modules/woocommerce/skins/skin-9.php:400
-#: modules/woocommerce/skins/skin-9.php:620
-#: modules/woocommerce/skins/skin-base.php:908
-#: modules/woocommerce/widgets/mini-cart.php:2790
-#: modules/woocommerce/widgets/mini-cart.php:3788
-#: modules/woocommerce/widgets/mini-cart.php:4163
-#: modules/woocommerce/widgets/mini-cart.php:4376
-#: modules/woocommerce/widgets/mini-cart.php:4812
-#: modules/woocommerce/widgets/woo-categories.php:615
-#: modules/woocommerce/widgets/woo-cta.php:1144
-#: modules/woocommerce/widgets/woo-cta.php:1426
-#: modules/woocommerce/widgets/woo-cta.php:1661
-#: modules/woocommerce/widgets/woo-cta.php:1803
-#: modules/woocommerce/widgets/woo-products.php:1444
-#: modules/woocommerce/widgets/woo-products.php:1717
-#: modules/woocommerce/widgets/woo-products.php:1911
-#: widgets/premium-banner.php:1081 widgets/premium-blog.php:2445
-#: widgets/premium-blog.php:2770 widgets/premium-button.php:1397
-#: widgets/premium-carousel.php:1373 widgets/premium-contactform.php:1594
-#: widgets/premium-grid.php:1800 widgets/premium-grid.php:2028
-#: widgets/premium-grid.php:2360 widgets/premium-icon-list.php:1020
-#: widgets/premium-image-button.php:1336 widgets/premium-image-scroll.php:507
-#: widgets/premium-image-scroll.php:675 widgets/premium-image-scroll.php:812
-#: widgets/premium-lottie.php:248 widgets/premium-lottie.php:614
-#: widgets/premium-media-wheel.php:2077 widgets/premium-media-wheel.php:2354
-#: widgets/premium-modalbox.php:1542 widgets/premium-modalbox.php:1889
-#: widgets/premium-modalbox.php:2062 widgets/premium-nav-menu.php:1239
-#: widgets/premium-nav-menu.php:1720 widgets/premium-nav-menu.php:2227
-#: widgets/premium-nav-menu.php:2354 widgets/premium-nav-menu.php:2430
-#: widgets/premium-nav-menu.php:3632 widgets/premium-nav-menu.php:4297
-#: widgets/premium-notifications.php:2161
-#: widgets/premium-notifications.php:2442
-#: widgets/premium-notifications.php:3410
-#: widgets/premium-pinterest-feed.php:1399
-#: widgets/premium-pinterest-feed.php:1626
-#: widgets/premium-pinterest-feed.php:2336 widgets/premium-post-ticker.php:2919
-#: widgets/premium-pricing-table.php:3020
-#: widgets/premium-pricing-table.php:3380 widgets/premium-search-form.php:1935
-#: widgets/premium-search-form.php:2378 widgets/premium-search-form.php:2794
-#: widgets/premium-tcloud.php:734 widgets/premium-tiktok-feed.php:2257
-#: widgets/premium-tiktok-feed.php:2481 widgets/premium-weather.php:3034
-#: widgets/premium-weather.php:3262
-msgid "Hover"
-msgstr ""
-
 #: addons/tooltips.php:760
 msgid "On Viewport"
 msgstr ""
@@ -2830,7 +2872,7 @@ msgid "Rollback to v"
 msgstr ""
 
 #: admin/includes/admin-helper.php:571
-msgid "Save $105"
+msgid "Save 30%"
 msgstr ""
 
 #: admin/includes/admin-helper.php:615
@@ -2905,7 +2947,7 @@ msgid "Run Setup Wizard"
 msgstr ""
 
 #: admin/includes/admin-helper.php:902
-msgid "Get Premium Addons PRO"
+msgid "XMAS SALE 2025"
 msgstr ""
 
 #: admin/includes/admin-helper.php:903
@@ -2915,7 +2957,7 @@ msgid ""
 msgstr ""
 
 #: admin/includes/admin-helper.php:903
-msgid "save up to $105!"
+msgid "save up to 30%!"
 msgstr ""
 
 #: admin/includes/admin-helper.php:904
@@ -2929,7 +2971,7 @@ msgstr ""
 #: admin/includes/admin-helper.php:914
 msgid ""
 "Pay only the difference and enjoy an <span class=\"papro-sale-notice\"> "
-"EXTRA 35% OFF</span> when you upgrade your Premium Addons Pro license to "
+"EXTRA 30% OFF</span> when you upgrade your Premium Addons Pro license to "
 "Lifetime — no renewals, no hassle, just lifetime access forever."
 msgstr ""
 
@@ -2938,7 +2980,7 @@ msgstr ""
 msgid "Upgrade Now"
 msgstr ""
 
-#: admin/includes/admin-helper.php:1532 includes/assets-manager.php:712
+#: admin/includes/admin-helper.php:1532 includes/assets-manager.php:709
 msgid "You are not allowed to do this action"
 msgstr ""
 
@@ -3727,7 +3769,7 @@ msgid "STARTING FROM"
 msgstr ""
 
 #: admin/includes/setup-wizard/content-views/upgrade.php:109
-msgid "( UP TO $105 OFF! )"
+msgid "( UP TO 30% OFF! )"
 msgstr ""
 
 #: admin/includes/setup-wizard/content-views/upgrade.php:111
@@ -4224,7 +4266,7 @@ msgid "now. "
 msgstr ""
 
 #: admin/includes/templates/license.php:32
-msgid "SAVE UP TO $105"
+msgid "SAVE UP TO 30%"
 msgstr ""
 
 #: admin/includes/templates/license.php:37
@@ -4455,7 +4497,7 @@ msgid "upgrade now"
 msgstr ""
 
 #: admin/includes/templates/pro-popup.php:37
-msgid "Go PRO (SAVE $105)"
+msgid "Go PRO (SAVE 30%)"
 msgstr ""
 
 #: admin/includes/templates/version-control.php:32
@@ -4615,35 +4657,35 @@ msgid ""
 "able to reset White Labeling tab options."
 msgstr ""
 
-#: includes/assets-manager.php:1436 includes/assets-manager.php:1448
-#: includes/assets-manager.php:1464
+#: includes/assets-manager.php:1444 includes/assets-manager.php:1465
+#: includes/assets-manager.php:1482
 #: modules/woocommerce/widgets/mini-cart.php:5779
 msgid "View cart"
 msgstr ""
 
-#: includes/assets-manager.php:1451
+#: includes/assets-manager.php:1468
 msgid "*The current stock is only "
 msgstr ""
 
-#: includes/assets-manager.php:1490 widgets/premium-notifications.php:1451
+#: includes/assets-manager.php:1508 widgets/premium-notifications.php:1451
 #: widgets/premium-pinterest-feed.php:271 widgets/premium-tiktok-feed.php:260
 #: widgets/premium-videobox.php:288
 msgid "Year"
 msgstr ""
 
-#: includes/assets-manager.php:1491 widgets/premium-notifications.php:1450
+#: includes/assets-manager.php:1509 widgets/premium-notifications.php:1450
 #: widgets/premium-pinterest-feed.php:270 widgets/premium-tiktok-feed.php:259
 #: widgets/premium-videobox.php:287
 msgid "Month"
 msgstr ""
 
-#: includes/assets-manager.php:1492 widgets/premium-notifications.php:1449
+#: includes/assets-manager.php:1510 widgets/premium-notifications.php:1449
 #: widgets/premium-pinterest-feed.php:269 widgets/premium-tiktok-feed.php:258
 #: widgets/premium-videobox.php:286
 msgid "Week"
 msgstr ""
 
-#: includes/assets-manager.php:1493
+#: includes/assets-manager.php:1511
 #: includes/pa-display-conditions/pa-controls-handler.php:94
 #: widgets/premium-notifications.php:1448
 #: widgets/premium-pinterest-feed.php:268 widgets/premium-tiktok-feed.php:257
@@ -4651,40 +4693,40 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: includes/assets-manager.php:1494 widgets/premium-pinterest-feed.php:267
+#: includes/assets-manager.php:1512 widgets/premium-pinterest-feed.php:267
 #: widgets/premium-videobox.php:284 widgets/premium-weather.php:472
 msgid "Hour"
 msgstr ""
 
-#: includes/assets-manager.php:1495
+#: includes/assets-manager.php:1513
 msgid "Minute"
 msgstr ""
 
-#: includes/assets-manager.php:1496
+#: includes/assets-manager.php:1514
 msgid "Second"
 msgstr ""
 
-#: includes/assets-manager.php:1499 widgets/premium-countdown.php:330
+#: includes/assets-manager.php:1517 widgets/premium-countdown.php:330
 #: widgets/premium-countdown.php:407
 msgid "Years"
 msgstr ""
 
-#: includes/assets-manager.php:1500 widgets/premium-countdown.php:331
+#: includes/assets-manager.php:1518 widgets/premium-countdown.php:331
 #: widgets/premium-countdown.php:408
 msgid "Months"
 msgstr ""
 
-#: includes/assets-manager.php:1501
+#: includes/assets-manager.php:1519
 msgid "Weeks"
 msgstr ""
 
-#: includes/assets-manager.php:1502 widgets/premium-countdown.php:221
+#: includes/assets-manager.php:1520 widgets/premium-countdown.php:221
 #: widgets/premium-countdown.php:332 widgets/premium-countdown.php:409
 #: widgets/premium-countdown.php:743 widgets/premium-world-clock.php:2683
 msgid "Days"
 msgstr ""
 
-#: includes/assets-manager.php:1503 widgets/premium-countdown.php:236
+#: includes/assets-manager.php:1521 widgets/premium-countdown.php:236
 #: widgets/premium-countdown.php:279 widgets/premium-countdown.php:333
 #: widgets/premium-countdown.php:410 widgets/premium-countdown.php:755
 #: widgets/premium-weather.php:2442 widgets/premium-weather.php:3461
@@ -4692,14 +4734,14 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
-#: includes/assets-manager.php:1504 widgets/premium-countdown.php:252
+#: includes/assets-manager.php:1522 widgets/premium-countdown.php:252
 #: widgets/premium-countdown.php:295 widgets/premium-countdown.php:334
 #: widgets/premium-countdown.php:411 widgets/premium-countdown.php:767
 #: widgets/premium-world-clock.php:2176
 msgid "Minutes"
 msgstr ""
 
-#: includes/assets-manager.php:1505 widgets/premium-countdown.php:335
+#: includes/assets-manager.php:1523 widgets/premium-countdown.php:335
 #: widgets/premium-countdown.php:412 widgets/premium-world-clock.php:2312
 msgid "Seconds"
 msgstr ""
@@ -5221,7 +5263,7 @@ msgid "Check Demo"
 msgstr ""
 
 #: includes/helpers/papro-promotion.php:169
-msgid "Get PRO ($105 OFF)"
+msgid "Get PRO (30% OFF)"
 msgstr ""
 
 #: includes/helpers/papro-promotion.php:192
@@ -5232,38 +5274,6 @@ msgstr ""
 msgid ""
 "Apply outstanding scroll animations to any column/widget with just few "
 "clicks and control every single detail in the animation scene."
-msgstr ""
-
-#: includes/pa-display-conditions/conditions/acf-boolean.php:50
-#: includes/pa-display-conditions/conditions/acf-choice.php:50
-#: includes/pa-display-conditions/conditions/acf-text.php:50
-#: includes/pa-display-conditions/conditions/browser.php:34
-#: includes/pa-display-conditions/conditions/date-range.php:34
-#: includes/pa-display-conditions/conditions/date.php:34
-#: includes/pa-display-conditions/conditions/day.php:34
-#: includes/pa-display-conditions/conditions/device.php:34
-#: includes/pa-display-conditions/conditions/ip-location.php:45
-#: includes/pa-display-conditions/conditions/lang.php:34
-#: includes/pa-display-conditions/conditions/login-status.php:34
-#: includes/pa-display-conditions/conditions/operating-system.php:34
-#: includes/pa-display-conditions/conditions/page.php:35
-#: includes/pa-display-conditions/conditions/post-category.php:42
-#: includes/pa-display-conditions/conditions/post-format.php:34
-#: includes/pa-display-conditions/conditions/post-format.php:35
-#: includes/pa-display-conditions/conditions/post-type.php:36
-#: includes/pa-display-conditions/conditions/post.php:35
-#: includes/pa-display-conditions/conditions/return-visitor.php:34
-#: includes/pa-display-conditions/conditions/shortcode.php:34
-#: includes/pa-display-conditions/conditions/url-referer.php:34
-#: includes/pa-display-conditions/conditions/url-string.php:34
-#: includes/pa-display-conditions/conditions/user-role.php:35
-#: includes/pa-display-conditions/conditions/woo-cart-products.php:35
-#: includes/pa-display-conditions/conditions/woo-cat-page.php:34
-#: includes/pa-display-conditions/conditions/woo-category.php:34
-#: includes/pa-display-conditions/conditions/woo-product-cat.php:34
-#: includes/pa-display-conditions/conditions/woo-purchase-products.php:35
-#: widgets/premium-counter.php:1253 widgets/premium-progressbar.php:878
-msgid "Value"
 msgstr ""
 
 #: includes/pa-display-conditions/conditions/acf-boolean.php:54
@@ -5678,7 +5688,7 @@ msgid "Activate License"
 msgstr ""
 
 #: includes/templates/classes/config.php:186
-msgid "Get Pro. SAVE UP TO $105 NOW"
+msgid "Get Pro. SAVE UP TO 30% NOW"
 msgstr ""
 
 #: includes/templates/classes/manager.php:183 widgets/premium-blog.php:1190
@@ -7035,7 +7045,9 @@ msgid "Open on Cart Update"
 msgstr ""
 
 #: modules/woocommerce/widgets/mini-cart.php:816
-msgid "Use this option to open the cart menu every time an item is added/removed."
+msgid ""
+"Use this option to open the cart menu every time an item is added to the "
+"cart."
 msgstr ""
 
 #: modules/woocommerce/widgets/mini-cart.php:826

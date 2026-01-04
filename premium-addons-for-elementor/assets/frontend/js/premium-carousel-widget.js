@@ -322,6 +322,11 @@
 	};
 
 	$(window).on('elementor/frontend/init', function () {
+
+		if ('undefined' !== typeof paElementsHandler && paElementsHandler.isElementAlreadyExists('paCarousel')) {
+			return false;
+		}
+
 		elementorFrontend.hooks.addAction('frontend/element_ready/premium-carousel-widget.default', PremiumCarouselHandler);
 	});
 })(jQuery);

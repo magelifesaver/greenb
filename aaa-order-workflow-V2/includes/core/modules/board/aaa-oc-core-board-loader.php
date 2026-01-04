@@ -11,6 +11,7 @@
  * Version: 1.3.4
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
@@ -74,6 +75,7 @@ if ( ! class_exists( 'AAA_OC_Loader_Util' ) && file_exists( $util ) ) {
  * are relative to the module base directory established above.
  */
 if ( class_exists( 'AAA_OC_Loader_Util' ) ) {
+    // Settings, preferences and hook maps
     AAA_OC_Loader_Util::require_or_log( $base . '/ajax/class-aaa-oc-board-prefs.php',            false, 'board' );
     AAA_OC_Loader_Util::require_or_log( $base . '/board-hooks-map.php',                          false, 'board' );
 
@@ -120,6 +122,13 @@ if ( class_exists( 'AAA_OC_Loader_Util' ) ) {
     AAA_OC_Loader_Util::require_or_log( $base . '/hooks/class-aaa-oc-board-collapsed-summary-right.php', false, 'board' );
     AAA_OC_Loader_Util::require_or_log( $base . '/hooks/class-aaa-oc-board-info-right.php',            false, 'board' );
 
+    // Additional core hook owners: account info panel, collapsed controls icons
+    // and custom CSS. These extend the default board output without
+    // interfering with optional modules.
+    AAA_OC_Loader_Util::require_or_log( $base . '/hooks/class-aaa-oc-board-account-info.php',            false, 'board' );
+    AAA_OC_Loader_Util::require_or_log( $base . '/hooks/class-aaa-oc-board-collapsed-controls-right-icons.php', false, 'board' );
+    AAA_OC_Loader_Util::require_or_log( $base . '/hooks/class-aaa-oc-board-custom-css.php',                 false, 'board' );
+
     // After attempting to load all files, emit a final log entry summarising
     // whether our AJAX handler class exists.  This uses aaa_oc_log() if
     // available; otherwise it fails silently.  The class_exists() check
@@ -138,7 +147,7 @@ if ( class_exists( 'AAA_OC_Loader_Util' ) ) {
      * dependencies. This branch mirrors the list above but without logging
      * granularity.
      */
-    foreach ([
+        foreach ([
             '/ajax/class-aaa-oc-board-prefs.php',
             '/board-hooks-map.php',
             '/inc/class-aaa-oc-board.php',
@@ -167,6 +176,9 @@ if ( class_exists( 'AAA_OC_Loader_Util' ) ) {
             '/hooks/aaa-oc-board-card-borders.php',
             '/hooks/class-aaa-oc-board-collapsed-summary-right.php',
             '/hooks/class-aaa-oc-board-info-right.php',
+            '/hooks/class-aaa-oc-board-account-info.php',
+            '/hooks/class-aaa-oc-board-collapsed-controls-right-icons.php',
+            '/hooks/class-aaa-oc-board-custom-css.php',
         ] as $rel ) {
         $f = $base . $rel;
         if ( file_exists( $f ) ) {

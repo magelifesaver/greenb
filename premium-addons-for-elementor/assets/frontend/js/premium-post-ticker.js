@@ -4,13 +4,7 @@
 
 		var timer = null,
 			$postsWrapper = $scope.find('.premium-post-ticker__posts-wrapper'),
-			settings = $scope.find('.premium-post-ticker__outer-wrapper').data('ticker-settings'),
-			isAlreadyLoaded = $scope.data("is-loaded");
-
-		if (isAlreadyLoaded)
-			return;
-
-		$scope.attr("data-is-loaded", true);
+			settings = $scope.find('.premium-post-ticker__outer-wrapper').data('ticker-settings');
 
 		if (!settings)
 			return;
@@ -183,6 +177,11 @@
 	};
 
 	$(window).on('elementor/frontend/init', function () {
+
+		if ('undefined' !== typeof paElementsHandler && paElementsHandler.isElementAlreadyExists('paPostTicker')) {
+			return false;
+		}
+
 		elementorFrontend.hooks.addAction('frontend/element_ready/premium-post-ticker.default', PremiumPostTickerHandler);
 	});
 

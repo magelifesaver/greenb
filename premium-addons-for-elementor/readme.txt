@@ -5,7 +5,7 @@ Donate Link: https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_c
 Requires at least: 5.0
 Tested Up To: 6.9
 Requires PHP: 7.4
-Stable Tag: 4.11.61
+Stable Tag: 4.11.62
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -256,6 +256,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 14. Premium Progress Bar Widget
 
 == Changelog ==
+
+= 4.11.62 - 29/12/2025 =
+
+- New: Added option to play Floating Effects addon animations on Hover.
+- Fixed: Woo Mini Cart is opened on page load.
 
 = 4.11.61 - 23/12/2025 =
 

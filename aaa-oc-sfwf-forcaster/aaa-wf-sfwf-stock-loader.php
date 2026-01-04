@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       AAA Stock Forecast Workflow V1
  * Description:       Predicts out-of-stock risks and prepares purchase orders based on sales velocity, stock, and lead time.
- * Version:           1.3.0
+ * Version:           1.4.0
  * Author:            Webmaster Workflow
  * Text Domain:       aaa-wf-sfwf
  * Domain Path:       /languages
@@ -142,3 +142,32 @@ add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
                 }
         }
 }, 100 );
+
+/*
+ * Enqueue DataTables assets for the forecast grid.
+ *
+ * The forecast grid relies on the DataTables library for sorting, filtering
+ * and scrolling. To ensure a single version of DataTables is loaded and
+ * avoid conflicts with other plugins, we enqueue the CSS and JS from
+ * WordPress rather than embedding CDN links in the view file. These assets
+ * are loaded only on the forecast grid page (woocommerce_page_sfwf-forecast-grid).
+ */
+add_action( 'admin_enqueue_scripts', function( $hook_suffix ) {
+        // Only enqueue on our forecast grid page
+        if ( $hook_suffix !== 'woocommerce_page_sfwf-forecast-grid' ) {
+                return;
+        }
+        // Enqueue core DataTables styles and scripts.  Versions are pinned to
+        // ensure compatibility across the plugin.  Should you need to update
+        // versions in the future, change these version strings consistently.
+        wp_enqueue_style( 'sfwf-dt-core', 'https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css', [], '1.13.6' );
+        wp_enqueue_style( 'sfwf-dt-fixedheader', 'https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.dataTables.min.css', [ 'sfwf-dt-core' ], '3.2.4' );
+        // Optionally add DataTables Buttons or other extensions here if needed.
+
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'sfwf-dt-core', 'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js', [ 'jquery' ], '1.13.6', true );
+        wp_enqueue_script( 'sfwf-dt-fixedheader', 'https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js', [ 'sfwf-dt-core' ], '3.2.4', true );
+        // The view file includes inline DataTables initialization; therefore
+        // no separate script is enqueued here.  Additional DataTables
+        // extensions could be added as dependencies if necessary.
+}, 20 );

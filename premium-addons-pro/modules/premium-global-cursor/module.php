@@ -1119,8 +1119,6 @@ class Module extends Module_Base {
 
 		if ( 'yes' === $element->get_settings_for_display( 'premium_global_cursor_switcher' ) ) {
 
-			$id = $element->get_id();
-
 			$type = $element->get_type();
 
 			$settings = $element->get_settings_for_display();
@@ -1132,14 +1130,16 @@ class Module extends Module_Base {
 
 			if ( 'widget' === $type && \Elementor\Plugin::instance()->editor->is_edit_mode() ) {
 
-					$element->add_render_attribute(
-						'cursor' . $id,
-						array(
-							'id'                      => 'premium-global-cursor-temp-' . $id,
-							'data-gcursor'            => wp_json_encode( $addon_settings['cursor_settings'] ),
-							'data-pa_mobile_disabled' => $addon_settings['mobile_disabled'],
-						)
-					);
+                $id = $element->get_id();
+
+                $element->add_render_attribute(
+                    'cursor' . $id,
+                    array(
+                        'id'                      => 'premium-global-cursor-temp-' . $id,
+                        'data-gcursor'            => wp_json_encode( $addon_settings['cursor_settings'] ),
+                        'data-pa_mobile_disabled' => $addon_settings['mobile_disabled'],
+                    )
+                );
 
 				?>
 				<div <?php echo wp_kses_post( $element->get_render_attribute_string( 'cursor' . $id ) ); ?>></div>

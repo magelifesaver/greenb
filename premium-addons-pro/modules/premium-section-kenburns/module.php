@@ -35,20 +35,31 @@ class Module extends Module_Base {
 	 */
 	public function __construct() {
 
-		// Creates Premium Prallax tab at the end of section/column layout tab.
+        // Enqueue the required CSS/JS files.
+		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'elementor/preview/enqueue_styles', array( $this, 'enqueue_styles' ) );
+
+		// Creates Premium Ken Burns settings tab.
 		add_action( 'elementor/element/section/section_layout/after_section_end', array( $this, 'register_controls' ), 10 );
 		add_action( 'elementor/element/column/section_advanced/after_section_end', array( $this, 'register_controls' ), 10 );
+        add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_controls' ), 10 );
+        add_action( 'elementor/element/common/_section_style/after_section_end', array( $this, 'register_controls' ), 10 );
 
-		// insert data before section/column rendering.
+		// insert data before element rendering.
 		add_action( 'elementor/frontend/section/before_render', array( $this, 'before_render' ), 10, 1 );
 		add_action( 'elementor/frontend/column/before_render', array( $this, 'before_render' ), 10, 1 );
-
-		add_action( 'elementor/frontend/section/before_render', array( $this, 'check_assets_enqueue' ) );
-		add_action( 'elementor/frontend/column/before_render', array( $this, 'check_assets_enqueue' ) );
-
-        add_action( 'elementor/element/container/section_layout/after_section_end', array( $this, 'register_controls' ), 10 );
         add_action( 'elementor/frontend/container/before_render', array( $this, 'before_render' ), 10, 1 );
-        add_action( 'elementor/frontend/container/before_render', array( $this, 'check_assets_enqueue' ) );
+        add_action( 'elementor/widget/before_render_content', array( $this, 'before_render' ), 10, 1 );
+
+        add_action( 'elementor/frontend/before_render', array( $this, 'check_assets_enqueue' ) );
+
+        // Check to enqueue assets.
+		// add_action( 'elementor/frontend/section/before_render', array( $this, 'check_assets_enqueue' ) );
+		// add_action( 'elementor/frontend/column/before_render', array( $this, 'check_assets_enqueue' ) );
+        // add_action( 'elementor/frontend/container/before_render', array( $this, 'check_assets_enqueue' ) );
+
+
+
 
 	}
 
@@ -92,11 +103,17 @@ class Module extends Module_Base {
 	 */
 	public function register_controls( $element ) {
 
+        $tabs = Controls_Manager::TAB_CONTENT;
+
+		if ( 'section' === $element->get_name() || 'column' === $element->get_name() || 'container' === $element->get_name() ) {
+			$tabs = Controls_Manager::TAB_LAYOUT;
+		}
+
 		$element->start_controls_section(
 			'section_premium_kenburns',
 			array(
 				'label' => sprintf( '<i class="pa-extension-icon pa-dash-icon"></i> %s', __( 'Ken Burns Effect', 'premium-addons-pro' ) ),
-				'tab'   => Controls_Manager::TAB_LAYOUT,
+				'tab'   => $tabs,
 			)
 		);
 
@@ -203,6 +220,10 @@ class Module extends Module_Base {
 						'step' => 0.1,
 					),
 				),
+                'default'            => array(
+					'unit' => 'px',
+					'size' => 6.5,
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .premium-kenburns-img' => 'animation-duration: {{SIZE}}s;',
 				),
@@ -241,6 +262,10 @@ class Module extends Module_Base {
 						'max'  => 10,
 						'step' => 0.1,
 					),
+				),
+                'default'            => array(
+					'unit' => 'px',
+					'size' => 0.5,
 				),
 				'condition' => array(
 					'premium_kenburns_switcher' => 'yes',
@@ -290,37 +315,30 @@ class Module extends Module_Base {
 	 */
 	public function before_render( $element ) {
 
-		$data = $element->get_data();
+        if ( 'yes' !== $element->get_settings_for_display( 'premium_kenburns_switcher' ) ) {
+            return;
+        }
 
-		$type = $data['elType'];
+        $settings = $element->get_settings_for_display();
 
-		$settings = $element->get_settings_for_display();
+        // Return if no colors are set.
+        if ( ! isset( $settings['premium_kenburns_repeater'] ) ) {
+            return;
+        }
 
-		if ( ( 'section' === $type || 'container' === $type || 'column' === $type ) && 'yes' === $settings['premium_kenburns_switcher'] && isset( $settings['premium_kenburns_repeater'] ) ) {
+        $speed = $settings['premium_kenburns_speed']['size'] ?? 6.5;
+        $fade  = $settings['premium_kenburns_fade']['size'] ?? 0.5;
 
-			$transition = 1000 * ( ( isset( $settings['premium_kenburns_speed'] ) && ! empty( $settings['premium_kenburns_speed']['size'] ) ) ? $settings['premium_kenburns_speed']['size'] : 6.5 );
+        $kenburns_settings = array(
+            'fx'       => $settings['premium_kenburns_effect'] ?? 'fade',
+            'speed'    => (float) $speed * 1000,
+            'fade'     => (float) $fade * 1000,
+            'slides'   => $settings['premium_kenburns_repeater'],
+            'infinite' => $settings['premium_kenburns_infinite'] ?? '',
+        );
 
-			$fade = 1000 * ( ( isset( $settings['premium_kenburns_fade'] ) && ! empty( $settings['premium_kenburns_fade']['size'] ) ) ? $settings['premium_kenburns_fade']['size'] : 0.5 );
+        $element->add_render_attribute( '_wrapper', 'data-kenburns', wp_json_encode( $kenburns_settings ) );
 
-			$slides = array();
-
-			foreach ( $settings['premium_kenburns_repeater'] as $slide ) {
-
-				array_push( $slides, $slide );
-
-			}
-
-			$kenburns_settings = array(
-				'fx'       => $settings['premium_kenburns_effect'],
-				'speed'    => $transition,
-				'fade'     => $fade,
-				'slides'   => $slides,
-				'infinite' => $settings['premium_kenburns_infinite'],
-			);
-
-			$element->add_render_attribute( '_wrapper', 'data-kenburns', wp_json_encode( $kenburns_settings ) );
-
-		}
 	}
 
 	/**
@@ -341,7 +359,7 @@ class Module extends Module_Base {
 
         $settings = $element->get_active_settings();
 
-		if ( ! empty( $settings[ 'premium_kenburns_switcher' ] ) ) {
+		if ( 'yes' === $element->get_settings_for_display( 'premium_kenburns_switcher' ) ) {
 
 			$this->enqueue_styles();
 
@@ -349,9 +367,7 @@ class Module extends Module_Base {
 
 			$this->load_assets = true;
 
-			remove_action( 'elementor/frontend/section/before_render', array( $this, 'check_assets_enqueue' ) );
-			remove_action( 'elementor/frontend/container/before_render', array( $this, 'check_assets_enqueue' ) );
-			remove_action( 'elementor/frontend/column/before_render', array( $this, 'check_assets_enqueue' ) );
+			remove_action( 'elementor/frontend/before_render', array( $this, 'check_assets_enqueue' ) );
 		}
 	}
 }

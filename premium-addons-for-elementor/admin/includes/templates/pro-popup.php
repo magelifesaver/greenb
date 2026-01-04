@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="pa-popup-cta-wrapper">
 				<a class="pa-popup-cta" target="_blank" aria-label="<?php echo esc_attr_e( 'check features', 'premium-addons-for-elementor' ); ?>"><?php echo esc_html_e( 'CHECK FEATURES', 'premium-addons-for-elementor' ); ?></a>
 				<span class="pa-popup-separator"></span>
-				<a class="pa-popup-cta" target="_blank" aria-label="<?php echo esc_attr_e( 'upgrade now', 'premium-addons-for-elementor' ); ?>"><?php echo esc_html_e( 'Go PRO (SAVE $105)', 'premium-addons-for-elementor' ); ?></a>
+				<a class="pa-popup-cta" target="_blank" aria-label="<?php echo esc_attr_e( 'upgrade now', 'premium-addons-for-elementor' ); ?>"><?php echo esc_html_e( 'Go PRO (SAVE 30%)', 'premium-addons-for-elementor' ); ?></a>
 			</div>
 		</div>
 	</div>

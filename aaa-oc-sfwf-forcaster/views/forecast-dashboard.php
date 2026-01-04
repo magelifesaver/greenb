@@ -245,7 +245,17 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
         <?php endforeach; ?>
     </div>
 
-    <table id="sfwf-forecast-table" class="wp-list-table widefat fixed striped" style="width:100%">
+    <!--
+     Wrap the forecast table in a scrollable container so it does not
+     overflow the viewport when only a few columns are visible.  The
+     inner table uses a `min-width` rule (see CSS below) to ensure
+     DataTables can stretch columns as needed while still filling the
+     available width.  Without this wrapper the table would extend
+     beyond the screen and headers would misalign when toggling
+     column groups or filters.
+    -->
+    <div class="sfwf-table-container" style="overflow-x:auto;">
+        <table id="sfwf-forecast-table" class="wp-list-table widefat fixed striped" style="min-width:100%">
         <thead>
             <tr>
                 <!-- Checkbox column for selecting rows -->
@@ -476,12 +486,17 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
                 </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+        </table>
+    </div>
 </div>
 
-<!-- Load DataTables for enhanced grid features -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.dataTables.min.css">
+<!--
+     DataTables styles and scripts are now enqueued via the plugin loader
+     (see `aaa-wf-sfwf-stock-loader.php`).  The CDN links have been
+     removed from this view to avoid loading multiple versions and to
+     leverage WordPress dependency management.  Any required extensions
+     (e.g. FixedHeader) are enqueued alongside the core library.
+-->
 <style>
 /* Provide a consistent baseline font size */
 #sfwf-forecast-table th,
@@ -544,17 +559,22 @@ td.sfwf-sales-not_moving_t3 {
     .admin-bar .dataTables_wrapper .fixedHeader-floating { top: 46px; }
 }
 
-/* Ensure the scroll container grows to fit all columns.  By setting the
-   internal table width to max-content, DataTables will not constrain the
-   width to 100%, allowing unlimited horizontal scrolling when there are
-   many columns.  This rule targets both the scroll head and body tables. */
+/* Ensure the scroll container grows to fit all columns.  Use a minimum
+   width rather than `max-content` so the table fills the available
+   viewport when there are only a few columns, yet still allows
+   horizontal scrolling when additional columns are shown.  This rule
+   targets both the scroll head and body tables. */
 #sfwf-forecast-table_wrapper .dataTables_scrollHeadInner,
 #sfwf-forecast-table_wrapper .dataTables_scrollBody table {
-    width: max-content !important;
+    min-width: 100% !important;
 }
 </style>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+<!--
+     DataTables scripts are enqueued via the plugin loader.  The
+     initialization code below assumes these scripts are already
+     available.  If additional extensions are required in the future
+     they should be enqueued in the loader as well.
+-->
 <script>
 jQuery(document).ready(function($) {
     // Initialise DataTable with hidden filter columns and scrollX for horizontal scrolling.
@@ -567,7 +587,12 @@ jQuery(document).ready(function($) {
         // enabled.  Combined with the width="100%" attribute on the table,
         // autoWidth lets the grid expand beyond the viewport and enables
         // unlimited horizontal scrolling.
-        autoWidth: false,
+        // Allow DataTables to automatically calculate column widths.  When set to
+        // true DataTables will base each column's width on its content.  This
+        // provides more predictable sizing when columns are shown/hidden and
+        // prevents the table from stretching beyond the viewport when only a
+        // few columns are enabled.
+        autoWidth: true,
         responsive: false,
         scrollX: true,
         scrollCollapse: false,
@@ -585,6 +610,10 @@ jQuery(document).ready(function($) {
             }
         }
     });
+    // Adjust column sizing after initial draw to account for the min-width
+    // container and any dynamic content.  Without this call, DataTables may
+    // misalign headers after toggling column visibility.
+    table.columns.adjust().draw(false);
     // Apply FixedHeader plugin for sticky headers (already configured above)
 
     // Update the displayed total count whenever the table is drawn (initial load, filtering, sorting).
@@ -631,6 +660,11 @@ jQuery(document).ready(function($) {
         columns.forEach(function(colIndex) {
             table.column(colIndex).visible(visible);
         });
+        // After toggling visibility, adjust column widths so the header and
+        // body remain aligned and the scroll container recalculates its
+        // dimensions.  This resolves issues where toggling groups leaves
+        // misaligned headers or oversize tables.
+        table.columns.adjust().draw(false);
     });
 
     // Filtering by stock, category, brand using hidden columns

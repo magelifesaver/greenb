@@ -295,6 +295,7 @@ return array(
     'RankMath\\Status\\System_Status' => $baseDir . '/includes/modules/status/class-system-status.php',
     'RankMath\\Term' => $baseDir . '/includes/class-term.php',
     'RankMath\\ThirdParty\\Loco\\Loco_I18n_Inline' => $baseDir . '/includes/3rdparty/loco/class-loco-i18n-inline.php',
+    'RankMath\\ThirdParty\\WPML' => $baseDir . '/includes/3rdparty/wpml/class-wpml.php',
     'RankMath\\Thumbnail_Overlay' => $baseDir . '/includes/class-thumbnail-overlay.php',
     'RankMath\\Tools\\AIOSEO_Blocks' => $baseDir . '/includes/modules/database-tools/class-aioseo-blocks.php',
     'RankMath\\Tools\\AIOSEO_TOC_Converter' => $baseDir . '/includes/modules/database-tools/class-aioseo-toc-converter.php',

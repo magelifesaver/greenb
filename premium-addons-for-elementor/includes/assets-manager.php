@@ -76,7 +76,7 @@ class Assets_Manager {
 
 		$is_dynamic_assets_enabled = $this->enabled_elements['premium-assets-generator'];
 
-		if( $is_dynamic_assets_enabled ) {
+		if ( $is_dynamic_assets_enabled ) {
 
 			// Register AJAX Hooks for regenerate assets.
 			add_action( 'wp_ajax_pa_clear_cached_assets', array( $this, 'pa_clear_cached_assets' ) );
@@ -99,13 +99,10 @@ class Assets_Manager {
 			if ( ! is_admin() && ! $row_meta ) {
 				Admin_Bar::get_instance();
 			}
-
 		}
 
 		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_frontend_styles' ) );
 		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_frontend_scripts' ) );
-
-
 	}
 
 	/**
@@ -118,6 +115,8 @@ class Assets_Manager {
 
 		// Set current post id.
 		$this->set_post_id();
+
+		$this->enqueue_elements_handler();
 
 		// This will run only on frontend.
 		$this->get_pa_elements_list();
@@ -325,7 +324,7 @@ class Assets_Manager {
 
 		Plugin::$instance->db->iterate_data(
 			$data,
-			function ( $element ) use ( &$pa_elems, $pa_names  ) {
+			function ( $element ) use ( &$pa_elems, $pa_names ) {
 
 				if ( isset( $element['elType'] ) ) {
 
@@ -426,7 +425,7 @@ class Assets_Manager {
 		$content = '';
 
 		if ( 'edit' === $location ) {
-			//For editor, generate assets based on the enabled elements.
+			// For editor, generate assets based on the enabled elements.
 			$elements = Helper_Functions::get_enabled_widgets_names();
 		} else {
 			$elements = get_post_meta( $post_id, self::ASSETS_KEY, true );
@@ -467,7 +466,7 @@ class Assets_Manager {
 	 */
 	public function prepare_pa_elements( $elements, $ext ) {
 
-		if( Helper_Functions::check_papro_version() ) {
+		if ( Helper_Functions::check_papro_version() ) {
 
 			$social_revs = array(
 				'premium-yelp-reviews',
@@ -477,7 +476,7 @@ class Assets_Manager {
 
 			$if_has_social_reviews = array_intersect( $social_revs, $elements );
 
-			if( ! empty( $if_has_social_reviews ) ) {
+			if ( ! empty( $if_has_social_reviews ) ) {
 				$elements[] = 'premium-reviews';
 			}
 
@@ -488,10 +487,9 @@ class Assets_Manager {
 
 			$if_has_social_feed = array_intersect( $social_feed, $elements );
 
-			if( ! empty( $if_has_social_feed ) ) {
+			if ( ! empty( $if_has_social_feed ) ) {
 				$elements[] = 'social-common';
 			}
-
 		}
 
 		if ( 'css' === $ext ) {
@@ -507,10 +505,9 @@ class Assets_Manager {
 			// Load CSS files for PRO Woo Products skins handled for editor/frontend.
 			$if_woo_products = array_intersect( array( 'woo-products', 'premium-woo-products' ), $elements );
 
-			if( $if_woo_products && Helper_Functions::check_papro_version() ) {
+			if ( $if_woo_products && Helper_Functions::check_papro_version() ) {
 				$elements[] = 'premium-woo-products-pro';
 			}
-
 		} else {
 			$indep_elements = array(
 				'social-common',
@@ -716,7 +713,7 @@ class Assets_Manager {
 			Plugin::$instance->files_manager->clear_cache();
 		}
 
-		if( ! empty ( $id ) ) {
+		if ( ! empty( $id ) ) {
 			delete_post_meta( $id, self::ASSETS_KEY );
 		}
 
@@ -1023,7 +1020,7 @@ class Assets_Manager {
 			'all'
 		);
 
-		if( ! $this->enabled_elements['premium-assets-generator'] ) {
+		if ( ! $this->enabled_elements['premium-assets-generator'] ) {
 
 			wp_enqueue_style(
 				'premium-addons',
@@ -1034,6 +1031,17 @@ class Assets_Manager {
 			);
 
 		}
+	}
+
+	public function enqueue_elements_handler() {
+
+		wp_enqueue_script(
+			'pa-elements-handler',
+			PREMIUM_ADDONS_URL . 'assets/frontend/min-js/elements-handler.min.js',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
 	}
 
 	/**
@@ -1059,7 +1067,7 @@ class Assets_Manager {
 			)
 		);
 
-		if( ! $this->enabled_elements['premium-assets-generator'] ) {
+		if ( ! $this->enabled_elements['premium-assets-generator'] ) {
 			wp_register_script(
 				'premium-addons',
 				PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-addons' . $suffix . '.js',
@@ -1439,16 +1447,26 @@ class Assets_Manager {
 				)
 			);
 
+			/**
+			 * Localize the $product_added_to_cart flag to mini cart script.
+			 * The transient is deleted to be used only once.
+			 */
+			$product_added_to_cart = get_transient( 'pa_product_added_to_cart' );
+			if ( $product_added_to_cart ) {
+				delete_transient( 'pa_product_added_to_cart' );
+			}
+
 			wp_localize_script(
 				'premium-mini-cart',
 				'PAWooMCartSettings',
 				array(
-					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
-					'cta_nonce'       => wp_create_nonce( 'pa-woo-cta-nonce' ),
-					'view_cart'       => __( 'View cart', 'woocommerce' ),
-					'mini_cart_nonce' => wp_create_nonce( 'pa-mini-cart-nonce' ),
-					'qv_nonce'        => wp_create_nonce( 'pa-woo-qv-nonce' ),
-					'stock_msg'       => __( '*The current stock is only ', 'premium-addons-for-elementor' ),
+					'ajaxurl'            => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'cta_nonce'          => wp_create_nonce( 'pa-woo-cta-nonce' ),
+					'view_cart'          => __( 'View cart', 'woocommerce' ),
+					'mini_cart_nonce'    => wp_create_nonce( 'pa-mini-cart-nonce' ),
+					'qv_nonce'           => wp_create_nonce( 'pa-woo-qv-nonce' ),
+					'stock_msg'          => __( '*The current stock is only ', 'premium-addons-for-elementor' ),
+					'productAddedToCart' => (bool) $product_added_to_cart,
 				)
 			);
 
