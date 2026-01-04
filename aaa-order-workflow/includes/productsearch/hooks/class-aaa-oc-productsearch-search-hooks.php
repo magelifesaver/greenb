@@ -15,12 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class AAA_OC_ProductSearch_Search_Hooks {
     /**
+     * Store the original search query before it is removed from the main query.
+     *
+     * This static property allows us to restore the search term for
+     * presentation (e.g. in page titles and breadcrumbs) after the search
+     * index has been used to constrain the query. Without storing the
+     * original value, calling get_search_query() would return an empty
+     * string because we clear the 's' parameter in pre_get_posts().
+     *
+     * @var string
+     */
+    private static $original_search_query = '';
+    /**
      * Initialise hooks. Call this once plugins are loaded. The loader
      * handles this automatically.
      */
     public static function init() {
         add_action( 'pre_get_posts', [ __CLASS__, 'pre_get_posts' ], 99 );
         add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [ __CLASS__, 'wc_datastore' ], 99, 2 );
+        // Ensure the search term appears in titles and breadcrumbs after we
+        // clear it from the query. Hook get_search_query to return our
+        // stored original search when available.
+        add_filter( 'get_search_query', [ __CLASS__, 'filter_get_search_query' ], 10, 2 );
     }
     /**
      * Intercept the main query when it is a search and replace the
@@ -38,6 +54,8 @@ class AAA_OC_ProductSearch_Search_Hooks {
         if ( '' === $s ) {
             return;
         }
+        // Store the search term for later use in titles and breadcrumbs.
+        self::$original_search_query = $s;
         // Resolve via ProductSearch index first.
         $ids = AAA_OC_ProductSearch_Helpers::search_index( $s );
         if ( empty( $ids ) ) {
@@ -80,5 +98,26 @@ class AAA_OC_ProductSearch_Search_Hooks {
         $wp_args['orderby']  = 'post__in';
         unset( $wp_args['s'], $wp_args['search'] );
         return $wp_args;
+    }
+
+    /**
+     * Filter WordPress's search query display to use the original search term.
+     *
+     * WordPress calls get_search_query() to populate the "Search Results for"
+     * heading and other UI elements. Because we clear the 's' query var when
+     * using our custom index, get_search_query() would normally return an
+     * empty string. This filter restores the original search term so that
+     * titles and breadcrumbs are accurate and SEO‑friendly.
+     *
+     * @param string $query   The search query after WP processing.
+     * @param bool   $escaped Whether the search query is expected to be escaped.
+     * @return string The original search term when available; otherwise the default.
+     */
+    public static function filter_get_search_query( $query, $escaped ) {
+        // If we have stored a search term, return it in the requested format.
+        if ( '' !== self::$original_search_query ) {
+            return $escaped ? esc_attr( self::$original_search_query ) : self::$original_search_query;
+        }
+        return $query;
     }
 }
