@@ -2,122 +2,130 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/productsearch/hooks/class-aaa-oc-productsearch-search-hooks.php
  * Purpose: Hook standard WooCommerce searches; resolve to product IDs from the
- *          index table and hand control back to WooCommerce. This class
- *          implements pre_get_posts and the WC datastore filter used in
- *          version 1.1.0 of the upstream plugin.
- *
- * Version: 1.1.0
+ *          index table and hand control back to WooCommerce. Also preserves the
+ *          original search term for UI (titles/breadcrumbs) without breaking
+ *          get_search_query() calls in headers.
+ * Version: 1.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+
 class AAA_OC_ProductSearch_Search_Hooks {
+
     /**
-     * Store the original search query before it is removed from the main query.
-     *
-     * This static property allows us to restore the search term for
-     * presentation (e.g. in page titles and breadcrumbs) after the search
-     * index has been used to constrain the query. Without storing the
-     * original value, calling get_search_query() would return an empty
-     * string because we clear the 's' parameter in pre_get_posts().
-     *
-     * @var string
+     * Store the original search query before we clear it from the main query.
+     * This prevents "Search results for:" headings from going blank.
      */
     private static $original_search_query = '';
+
+    private static function log( $msg ) {
+        if ( ! defined( 'DEBUG_THIS_FILE' ) || ! DEBUG_THIS_FILE ) {
+            return;
+        }
+        $msg = sanitize_text_field( (string) $msg );
+        if ( function_exists( 'aaa_oc_log' ) ) {
+            aaa_oc_log( '[PRODUCTSEARCH][SEARCH_HOOKS] ' . $msg );
+        } else {
+            error_log( '[PRODUCTSEARCH][SEARCH_HOOKS] ' . $msg );
+        }
+    }
+
     /**
-     * Initialise hooks. Call this once plugins are loaded. The loader
-     * handles this automatically.
+     * Initialise hooks. Called by the module loader.
      */
     public static function init() {
-        add_action( 'pre_get_posts', [ __CLASS__, 'pre_get_posts' ], 99 );
-        add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [ __CLASS__, 'wc_datastore' ], 99, 2 );
-        // Ensure the search term appears in titles and breadcrumbs after we
-        // clear it from the query. Hook get_search_query to return our
-        // stored original search when available.
-        add_filter( 'get_search_query', [ __CLASS__, 'filter_get_search_query' ], 10, 2 );
+        add_action( 'pre_get_posts', array( __CLASS__, 'pre_get_posts' ), 99 );
+        add_filter(
+            'woocommerce_product_data_store_cpt_get_products_query',
+            array( __CLASS__, 'wc_datastore' ),
+            99,
+            2
+        );
+
+        // IMPORTANT: WordPress applies this filter with 1 argument. Do not declare 2 required args.
+        add_filter( 'get_search_query', array( __CLASS__, 'filter_get_search_query' ), 10, 1 );
     }
+
     /**
-     * Intercept the main query when it is a search and replace the
-     * product results with those returned from the index. If no results
-     * are found we let WordPress handle the search normally.
+     * Preserve the original search term for UI helpers like headings/breadcrumbs.
+     * WordPress calls this filter with a single argument ($query).
+     */
+    public static function filter_get_search_query( $query ) {
+        if ( '' !== self::$original_search_query ) {
+            return self::$original_search_query;
+        }
+        return $query;
+    }
+
+    /**
+     * Intercept the main query when it is a search and replace results with our index-based IDs.
      *
      * @param WP_Query $q The query instance (passed by reference).
      */
     public static function pre_get_posts( $q ) {
-        // Only adjust front‑end main queries.
         if ( is_admin() || ! $q->is_main_query() ) {
             return;
         }
+
         $s = (string) $q->get( 's' );
         if ( '' === $s ) {
             return;
         }
-        // Store the search term for later use in titles and breadcrumbs.
+
+        // Capture the original term before we clear it.
         self::$original_search_query = $s;
+
         // Resolve via ProductSearch index first.
         $ids = AAA_OC_ProductSearch_Helpers::search_index( $s );
         if ( empty( $ids ) ) {
             // Let WordPress do its normal search when our index has nothing.
             return;
         }
+
         // Apply redirect rule: only if all results share the same brand/category.
         AAA_OC_ProductSearch_Helpers::maybe_redirect_by_results( $s, $ids );
-        // No redirect → constrain query to our product IDs.
-        $q->set( 'post_type', [ 'product' ] );
+
+        // Constrain query to our product IDs.
+        $q->set( 'post_type', array( 'product' ) );
         $q->set( 'post__in', $ids );
         $q->set( 'orderby', 'post__in' );
-        // Avoid WP's broad text search after resolving IDs.
+
+        // Avoid WP broad text search after resolving IDs.
         $q->set( 's', '' );
     }
+
     /**
-     * Intercept the WooCommerce datastore search. This ensures that API
-     * requests and other programmatic queries also use the index. The
-     * behaviour mirrors pre_get_posts() but operates on raw WC args.
-     *
-     * @param array $wp_args The WP query args generated by the WC store.
-     * @param array $wc_query The original WC query args.
-     * @return array Modified arguments including post__in where appropriate.
+     * Intercept the WooCommerce datastore search (frontend only).
      */
     public static function wc_datastore( $wp_args, $wc_query ) {
         $s = $wp_args['s'] ?? ( $wp_args['search'] ?? '' );
         if ( ! $s ) {
             return $wp_args;
         }
-        // Only adjust frontend/product contexts; avoid admin screens.
+
         if ( is_admin() ) {
             return $wp_args;
         }
-        $ids = AAA_OC_ProductSearch_Helpers::search_index( $s );
+
+        // Preserve original term (covers WC queries that bypass main WP query).
+        if ( '' === self::$original_search_query ) {
+            self::$original_search_query = (string) $s;
+        }
+
+        $ids = AAA_OC_ProductSearch_Helpers::search_index( (string) $s );
         if ( empty( $ids ) ) {
             return $wp_args;
         }
-        AAA_OC_ProductSearch_Helpers::maybe_redirect_by_results( $s, $ids );
+
+        AAA_OC_ProductSearch_Helpers::maybe_redirect_by_results( (string) $s, $ids );
+
         $wp_args['post__in'] = $ids;
         $wp_args['orderby']  = 'post__in';
         unset( $wp_args['s'], $wp_args['search'] );
-        return $wp_args;
-    }
 
-    /**
-     * Filter WordPress's search query display to use the original search term.
-     *
-     * WordPress calls get_search_query() to populate the "Search Results for"
-     * heading and other UI elements. Because we clear the 's' query var when
-     * using our custom index, get_search_query() would normally return an
-     * empty string. This filter restores the original search term so that
-     * titles and breadcrumbs are accurate and SEO‑friendly.
-     *
-     * @param string $query   The search query after WP processing.
-     * @param bool   $escaped Whether the search query is expected to be escaped.
-     * @return string The original search term when available; otherwise the default.
-     */
-    public static function filter_get_search_query( $query, $escaped ) {
-        // If we have stored a search term, return it in the requested format.
-        if ( '' !== self::$original_search_query ) {
-            return $escaped ? esc_attr( self::$original_search_query ) : self::$original_search_query;
-        }
-        return $query;
+        return $wp_args;
     }
 }
