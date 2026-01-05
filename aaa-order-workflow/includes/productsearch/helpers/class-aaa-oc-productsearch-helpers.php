@@ -211,11 +211,21 @@ class AAA_OC_ProductSearch_Helpers {
                 $scope = 'category';
             }
         }
-        // If user searched exactly for a brand/category name, treat whole query as one token.
+        /*
+         * If the query matches a brand or category name exactly, treat the entire
+         * normalized query as a single token. Otherwise split on whitespace
+         * but also include the full normalized query as its own token. This
+         * ensures multi‑word synonyms (e.g. "vape pen") can match entries in
+         * the synonyms table without altering the default token AND logic.
+         */
         if ( $term && $scope ) {
             $tokens = [ $normalized_q ];
         } else {
             $tokens = array_values( array_unique( array_filter( preg_split( '/\s+/', $normalized_q ) ) ) );
+            // Add the full normalized query as a token if not already present.
+            if ( '' !== $normalized_q && ! in_array( $normalized_q, $tokens, true ) ) {
+                $tokens[] = $normalized_q;
+            }
         }
         if ( empty( $tokens ) ) {
             return [ 'tokens' => [], 'map' => [] ];
