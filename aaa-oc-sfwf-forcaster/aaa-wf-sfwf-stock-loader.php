@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       AAA Stock Forecast Workflow V1
  * Description:       Predicts out-of-stock risks and prepares purchase orders based on sales velocity, stock, and lead time.
- * Version:           1.4.0
+ * Version:           1.0.0
  * Author:            Webmaster Workflow
  * Text Domain:       aaa-wf-sfwf
  * Domain Path:       /languages
@@ -17,21 +17,32 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 // === Constants ===
 define( 'SFWF_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'SFWF_URL',  plugin_dir_url( __FILE__ ) );
-define( 'SFWF_VER',  '1.0.0' );
+// Bump plugin version when adding new features.  Version 1.5.0 introduces
+// integration with the custom forecast index table for per-product updates
+// and extends the AI summary with additional fields.  Ensure the table is
+// always updated alongside post meta.
+define( 'SFWF_VER',  '1.5.0' );
 
 // === Activation Hook: Create custom options table ===
 register_activation_hook( __FILE__, function() {
-	require_once SFWF_ROOT . 'index/table-options.php';
-	sfwf_create_options_table();
-	// Create forecast index table for partial rebuilds
-	if ( class_exists( 'WF_SFWF_Forecast_Index' ) ) {
-		WF_SFWF_Forecast_Index::create_table();
-	}
+        require_once SFWF_ROOT . 'index/table-options.php';
+        sfwf_create_options_table();
+        // Create forecast index table for partial rebuilds.  Use the
+        // class defined in includes/forecast to provision the table.
+        require_once SFWF_ROOT . 'includes/forecast/class-forecast-index-table.php';
+        require_once SFWF_ROOT . 'includes/forecast/class-forecast-index.php';
+        if ( class_exists( 'WF_SFWF_Forecast_Index' ) ) {
+                WF_SFWF_Forecast_Index::create_table();
+        }
 });
 
 // === Load Core Files ===
 require_once SFWF_ROOT . 'settings/class-wf-sfwf-settings.php';
 require_once SFWF_ROOT . 'includes/forecast/class-forecast-meta-registry.php';
+// Custom forecast index classes.  These provide the custom table and
+// functions for writing rows.  Must be loaded before the forecast runner.
+require_once SFWF_ROOT . 'includes/forecast/class-forecast-index-table.php';
+require_once SFWF_ROOT . 'includes/forecast/class-forecast-index.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-runner.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-timeline.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-sales-metrics.php';
@@ -45,7 +56,6 @@ require_once SFWF_ROOT . 'helpers/class-wf-sfwf-product-fields.php';
 require_once SFWF_ROOT . 'helpers/forecast-column-definitions.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-product-fields.php';
 //require_once SFWF_ROOT . 'api/class-sfwf-rest-forecast.php';
-require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-index.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-forecast-scheduler.php';
 require_once SFWF_ROOT . 'index/class-wf-sfwf-flag-handler.php';
 
@@ -63,14 +73,14 @@ require_once SFWF_ROOT . 'index/class-wf-sfwf-purchase-order-handler.php';
 // === Admin Menu: Settings Page ===
 add_action( 'admin_menu', 'sfwf_register_settings_page' );
 function sfwf_register_settings_page() {
-	add_submenu_page(
-		'woocommerce',
-		'Stock Forecast Settings',
-		'Stock Forecast Settings',
-		'manage_woocommerce',
-		'sfwf-settings',
-		'sfwf_render_settings_page'
-	);
+        add_submenu_page(
+                'woocommerce',
+                'Stock Forecast Settings',
+                'Stock Forecast Settings',
+                'manage_woocommerce',
+                'sfwf-settings',
+                'sfwf_render_settings_page'
+        );
 }
 add_action( 'admin_menu', function() {
     add_submenu_page(
@@ -85,23 +95,22 @@ add_action( 'admin_menu', function() {
     );
 });
 
-
 // === Manual Trigger for Forecast Update (DEV/ADMIN USE ONLY) ===
 add_action( 'admin_init', function() {
-	if ( isset($_GET['run_forecast']) && current_user_can('manage_woocommerce') ) {
-		WF_SFWF_Forecast_Runner::update_all_products();
-		add_action('admin_notices', function() {
-			echo '<div class="notice notice-success"><p><strong>[SFWF]</strong> Forecast updated for all products.</p></div>';
-		});
-	}
+        if ( isset($_GET['run_forecast']) && current_user_can('manage_woocommerce') ) {
+                WF_SFWF_Forecast_Runner::update_all_products();
+                add_action('admin_notices', function() {
+                        echo '<div class="notice notice-success"><p><strong>[SFWF]</strong> Forecast updated for all products.</p></div>';
+                });
+        }
 });
 
 // === Optional: Add admin footer version tag ===
 add_filter( 'admin_footer_text', function( $footer ) {
-	if ( isset($_GET['page']) && $_GET['page'] === 'sfwf-settings' ) {
-		$footer .= ' | <span style="opacity: 0.6;">SFWF v' . esc_html(SFWF_VER) . '</span>';
-	}
-	return $footer;
+        if ( isset($_GET['page']) && $_GET['page'] === 'sfwf-settings' ) {
+                $footer .= ' | <span style="opacity: 0.6;">SFWF v' . esc_html(SFWF_VER) . '</span>';
+        }
+        return $footer;
 });
 
 /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 1.3.0 (2025-12-31)
+ * Version: 1.5.0 (2026-01-06)
  * Enhanced to populate the AI summary meta field (aip_forecast_summary) and
  * updated comments.  Works with forecast grid version 1.3.0.
  *
@@ -225,7 +225,21 @@ class WF_SFWF_Forecast_Runner {
         } );
         $fields['aip_forecast_summary'] = wp_json_encode( $filtered_summary );
 
+        // Persist all forecast meta fields.  This writes the individual meta keys
+        // back to the product so existing functionality continues to work.  It
+        // also stores the AI summary meta field under `aip_forecast_summary`.
         WF_SFWF_Forecast_Meta_Updater::write( $product_id, $fields );
+
+        /*
+         * Additionally write the forecast data into the custom index table.  The
+         * custom table allows fast, typed queries for reporting and grid
+         * filtering.  Only the summary remains in post meta for AI search.
+         * Guard the call with class_exists() so this file can still be used
+         * without the custom table present.
+         */
+        if ( class_exists( 'WF_SFWF_Forecast_Index' ) ) {
+            WF_SFWF_Forecast_Index::update_index( $product_id, $fields );
+        }
     }
 
     /**
