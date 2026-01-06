@@ -10,14 +10,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Helpers to normalize existing meta to HH:mm for input[type=time].
-$__adbsa_to_24 = function( string $t12, DateTimeZone $tz ): string {
+$__aaa_oc_to_24 = function( string $t12, DateTimeZone $tz ): string {
     $t12 = strtolower(trim($t12));
     if ($t12 === '') return '';
     $dt = DateTime::createFromFormat('g:i a', $t12, $tz);
     return ($dt instanceof DateTime) ? $dt->format('H:i') : '';
 };
 
-$__adbsa_parse_range_to_h24 = function( string $range, DateTimeZone $tz ) use ($__adbsa_to_24): array {
+$__aaa_oc_parse_range_to_h24 = function( string $range, DateTimeZone $tz ) use ($__aaa_oc_to_24): array {
     $range = trim((string)$range);
     if ($range === '') return ['', ''];
 
@@ -42,7 +42,7 @@ $__adbsa_parse_range_to_h24 = function( string $range, DateTimeZone $tz ) use ($
         $from12 = trim($m[1]);
     }
 
-    return [ $__adbsa_to_24($from12, $tz), $__adbsa_to_24($to12, $tz) ];
+    return [ $__aaa_oc_to_24($from12, $tz), $__aaa_oc_to_24($to12, $tz) ];
 };
 
 $order        = wc_get_order( $order_id );
@@ -51,21 +51,13 @@ $tz           = wp_timezone();
 // Date (prefer canonical -> legacy -> timestamp)
 $dateYmd = (string) $order->get_meta('delivery_date_formatted');
 if ($dateYmd === '') {
-    $legacy = (string) $order->get_meta('_wc_other/adbsa/delivery-date');
-    if ( preg_match('/^\d{4}-\d{2}-\d{2}$/', $legacy) ) {
-        $dateYmd = $legacy;
-    } else {
-        $ts = (int) $order->get_meta('delivery_date');
-        $dateYmd = $ts ? gmdate('Y-m-d', $ts) : '';
-    }
+    $ts = (int) $order->get_meta('delivery_date');
+    $dateYmd = $ts ? gmdate('Y-m-d', $ts) : '';
 }
 
 // Time range → HH:mm
 $timeRange = (string) $order->get_meta('delivery_time_range');
-if ($timeRange === '') {
-    $timeRange = (string) $order->get_meta('_wc_other/adbsa/delivery-time');
-}
-list($fromH24, $toH24) = $__adbsa_parse_range_to_h24($timeRange, $tz);
+list($fromH24, $toH24) = $__aaa_oc_parse_range_to_h24($timeRange, $tz);
 
 // Driver dropdown data
 $options = [];

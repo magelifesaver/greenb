@@ -122,9 +122,9 @@ class AAA_OC_Announcements_Loader {
             'ajax'  => admin_url( 'admin-ajax.php' ),
             'nonce' => wp_create_nonce( 'aaa_oc_annc' ),
             'i18n'  => [
-                'ack'     => __( 'I have read this and I am up to date with the new changes.', 'aaa-oc' ),
-                'button'  => __( 'Acknowledge & Close', 'aaa-oc' ),
-                'next'    => __( 'Next', 'aaa-oc' ),
+                'ack'     => __( 'I have read this and I am up to date with the new changes.', 'aaa-order-workflow' ),
+                'button'  => __( 'Acknowledge & Close', 'aaa-order-workflow' ),
+                'next'    => __( 'Next', 'aaa-order-workflow' ),
             ],
         ] );
     }
