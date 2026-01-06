@@ -10,8 +10,6 @@
  *  - delivery_date_locale     : e.g., Thursday, October 2, 2025
  *  - delivery_time            : start time, 12h (e.g., "3:00 pm")
  *  - delivery_time_range      : "From {START} - To {END}" (12h)
- *  - _wc_other/adbsa/delivery-date : YYYY-MM-DD
- *  - _wc_other/adbsa/delivery-time : same as delivery_time_range
  */
 
 if ( ! defined('ABSPATH') ) exit;
@@ -68,7 +66,6 @@ class AAA_OC_Save_Delivery {
                 $order->update_meta_data('delivery_date',            $ts);
                 $order->update_meta_data('delivery_date_formatted',  $dateYmd);
                 $order->update_meta_data('delivery_date_locale',     $loc);
-                $order->update_meta_data('_wc_other/adbsa/delivery-date', $dateYmd);
 
                 $changed[] = 'date ' . $loc;
             }
@@ -94,7 +91,6 @@ class AAA_OC_Save_Delivery {
                 $order->update_meta_data('delivery_time', $from12);
             }
             $order->update_meta_data('delivery_time_range', $range);
-            $order->update_meta_data('_wc_other/adbsa/delivery-time', $range);
 
             $changed[] = 'time ' . $range;
         }
