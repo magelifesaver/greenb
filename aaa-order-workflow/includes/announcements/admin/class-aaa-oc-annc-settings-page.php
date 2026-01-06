@@ -39,8 +39,8 @@ class AAA_OC_Announcements_Settings_Page {
 public function register_menu() {
 	add_submenu_page(
 		'aaa-oc-workflow-board',                 // parent: Workflow
-		__( 'Workflow Announcements', 'aaa-oc' ),
-		__( 'WF Announcements', 'aaa-oc' ),
+		__( 'Workflow Announcements', 'aaa-order-workflow' ),
+		__( 'WF Announcements', 'aaa-order-workflow' ),
 		'manage_woocommerce',
 		$this->screen_slug,
 		[ $this, 'render_page' ]
@@ -57,7 +57,7 @@ public function register_menu() {
 
     public function render_page() {
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
-            wp_die( esc_html__( 'You do not have permission to access this page.', 'aaa-oc' ) );
+            wp_die( esc_html__( 'You do not have permission to access this page.', 'aaa-order-workflow' ) );
         }
 
         // Handle CRUD + Ack actions (CSV may exit early).
@@ -68,7 +68,7 @@ public function register_menu() {
         $current    = $editing_id ? $this->get_announcement( $editing_id ) : null;
 
         echo '<div class="wrap">';
-        echo '<h1 style="margin-bottom:12px;">' . esc_html__( 'Workflow Announcements', 'aaa-oc' ) . '</h1>';
+        echo '<h1 style="margin-bottom:12px;">' . esc_html__( 'Workflow Announcements', 'aaa-order-workflow' ) . '</h1>';
 
         if ( $message ) {
             echo '<div class="notice notice-success"><p>' . esc_html( $message ) . '</p></div>';
@@ -77,12 +77,12 @@ public function register_menu() {
             echo '<div class="notice notice-success"><p>' . esc_html( $ack_message ) . '</p></div>';
         }
         if ( isset( $_GET['deleted'] ) ) {
-            echo '<div class="notice notice-success"><p>' . esc_html__( 'Announcement deleted.', 'aaa-oc' ) . '</p></div>';
+            echo '<div class="notice notice-success"><p>' . esc_html__( 'Announcement deleted.', 'aaa-order-workflow' ) . '</p></div>';
         }
 
         // Toolbar
         $add_url = admin_url( 'admin.php?page=' . $this->screen_slug );
-        echo '<p><a href="' . esc_url( $add_url ) . '" class="button button-primary">' . esc_html__( 'Add New Announcement', 'aaa-oc' ) . '</a></p>';
+        echo '<p><a href="' . esc_url( $add_url ) . '" class="button button-primary">' . esc_html__( 'Add New Announcement', 'aaa-order-workflow' ) . '</a></p>';
 
         // Form (Add/Edit)
         $this->render_form( $current );
@@ -107,7 +107,7 @@ public function register_menu() {
         $end_at   = $is_edit ? $this->to_input_datetime( $row->end_at ) : '';
         $active   = $is_edit ? (int) $row->is_active : 1;
         $action   = $is_edit ? 'update' : 'create';
-        $heading  = $is_edit ? __( 'Edit Announcement', 'aaa-oc' ) : __( 'New Announcement', 'aaa-oc' );
+        $heading  = $is_edit ? __( 'Edit Announcement', 'aaa-order-workflow' ) : __( 'New Announcement', 'aaa-order-workflow' );
 
         echo '<h2 style="margin-top:24px;">' . esc_html( $heading ) . '</h2>';
         echo '<form method="post" action="">';
@@ -119,11 +119,11 @@ public function register_menu() {
 
         echo '<table class="form-table" role="presentation"><tbody>';
 
-        echo '<tr><th scope="row"><label for="annc_title">' . esc_html__( 'Title', 'aaa-oc' ) . '</label></th><td>';
+        echo '<tr><th scope="row"><label for="annc_title">' . esc_html__( 'Title', 'aaa-order-workflow' ) . '</label></th><td>';
         echo '<input type="text" class="regular-text" id="annc_title" name="annc_title" value="' . esc_attr( $title ) . '" required>';
         echo '</td></tr>';
 
-        echo '<tr><th scope="row"><label for="annc_content">' . esc_html__( 'Content', 'aaa-oc' ) . '</label></th><td>';
+        echo '<tr><th scope="row"><label for="annc_content">' . esc_html__( 'Content', 'aaa-order-workflow' ) . '</label></th><td>';
         wp_editor(
             $content,
             'annc_content',
@@ -133,26 +133,26 @@ public function register_menu() {
                 'media_buttons' => true,
             ]
         );
-        echo '<p class="description">' . esc_html__( 'This content appears in the popup shown on the Workflow Board.', 'aaa-oc' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'This content appears in the popup shown on the Workflow Board.', 'aaa-order-workflow' ) . '</p>';
         echo '</td></tr>';
 
-        echo '<tr><th scope="row"><label for="annc_start">' . esc_html__( 'Start Date/Time', 'aaa-oc' ) . '</label></th><td>';
+        echo '<tr><th scope="row"><label for="annc_start">' . esc_html__( 'Start Date/Time', 'aaa-order-workflow' ) . '</label></th><td>';
         echo '<input type="datetime-local" id="annc_start" name="annc_start" value="' . esc_attr( $start_at ) . '">';
-        echo '<p class="description">' . esc_html__( 'Announcement becomes eligible at this time (leave blank to start immediately).', 'aaa-oc' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Announcement becomes eligible at this time (leave blank to start immediately).', 'aaa-order-workflow' ) . '</p>';
         echo '</td></tr>';
 
-        echo '<tr><th scope="row"><label for="annc_end">' . esc_html__( 'End Date/Time', 'aaa-oc' ) . '</label></th><td>';
+        echo '<tr><th scope="row"><label for="annc_end">' . esc_html__( 'End Date/Time', 'aaa-order-workflow' ) . '</label></th><td>';
         echo '<input type="datetime-local" id="annc_end" name="annc_end" value="' . esc_attr( $end_at ) . '">';
-        echo '<p class="description">' . esc_html__( 'Stop showing after this time (leave blank for no end).', 'aaa-oc' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Stop showing after this time (leave blank for no end).', 'aaa-order-workflow' ) . '</p>';
         echo '</td></tr>';
 
-        echo '<tr><th scope="row">' . esc_html__( 'Active', 'aaa-oc' ) . '</th><td>';
-        echo '<label><input type="checkbox" name="annc_active" value="1" ' . checked( 1, $active, false ) . '> ' . esc_html__( 'Enabled', 'aaa-oc' ) . '</label>';
+        echo '<tr><th scope="row">' . esc_html__( 'Active', 'aaa-order-workflow' ) . '</th><td>';
+        echo '<label><input type="checkbox" name="annc_active" value="1" ' . checked( 1, $active, false ) . '> ' . esc_html__( 'Enabled', 'aaa-order-workflow' ) . '</label>';
         echo '</td></tr>';
 
         echo '</tbody></table>';
 
-        submit_button( $is_edit ? __( 'Update Announcement', 'aaa-oc' ) : __( 'Create Announcement', 'aaa-oc' ) );
+        submit_button( $is_edit ? __( 'Update Announcement', 'aaa-order-workflow' ) : __( 'Create Announcement', 'aaa-order-workflow' ) );
         echo '</form>';
     }
 
@@ -165,22 +165,22 @@ public function register_menu() {
 
         $rows = $wpdb->get_results( "SELECT id, title, start_at, end_at, is_active, created_at, updated_at FROM {$t['ann']} ORDER BY id DESC" );
 
-        echo '<h2 style="margin-top:28px;">' . esc_html__( 'Existing Announcements', 'aaa-oc' ) . '</h2>';
+        echo '<h2 style="margin-top:28px;">' . esc_html__( 'Existing Announcements', 'aaa-order-workflow' ) . '</h2>';
         if ( empty( $rows ) ) {
-            echo '<p>' . esc_html__( 'No announcements yet.', 'aaa-oc' ) . '</p>';
+            echo '<p>' . esc_html__( 'No announcements yet.', 'aaa-order-workflow' ) . '</p>';
             return;
         }
 
         $base = admin_url( 'admin.php?page=' . $this->screen_slug );
 
         echo '<table class="widefat striped" style="max-width:1100px;"><thead><tr>';
-        echo '<th>' . esc_html__( 'ID', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Title', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Start', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'End', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Active', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Updated', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Actions', 'aaa-oc' ) . '</th>';
+        echo '<th>' . esc_html__( 'ID', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Title', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Start', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'End', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Active', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Updated', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Actions', 'aaa-order-workflow' ) . '</th>';
         echo '</tr></thead><tbody>';
 
         foreach ( $rows as $r ) {
@@ -193,11 +193,11 @@ public function register_menu() {
             echo '<td>' . esc_html( $r->title ) . '</td>';
             echo '<td>' . esc_html( $this->fmt_dt( $r->start_at ) ) . '</td>';
             echo '<td>' . esc_html( $this->fmt_dt( $r->end_at ) ) . '</td>';
-            echo '<td>' . ( $r->is_active ? '<span style="color:#0a0;font-weight:600;">' . esc_html__( 'Yes', 'aaa-oc' ) . '</span>' : '<span style="color:#900;font-weight:600;">' . esc_html__( 'No', 'aaa-oc' ) . '</span>' ) . '</td>';
+            echo '<td>' . ( $r->is_active ? '<span style="color:#0a0;font-weight:600;">' . esc_html__( 'Yes', 'aaa-order-workflow' ) . '</span>' : '<span style="color:#900;font-weight:600;">' . esc_html__( 'No', 'aaa-order-workflow' ) . '</span>' ) . '</td>';
             echo '<td>' . esc_html( $this->fmt_dt( $r->updated_at ) ) . '</td>';
-            echo '<td><a class="button" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'aaa-oc' ) . '</a> ';
-            echo '<a class="button" href="' . esc_url( $view_ack ) . '">' . esc_html__( 'View Acks', 'aaa-oc' ) . '</a> ';
-            echo '<a class="button button-link-delete" href="' . esc_url( $delete_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Delete this announcement?', 'aaa-oc' ) ) . '\');">' . esc_html__( 'Delete', 'aaa-oc' ) . '</a></td>';
+            echo '<td><a class="button" href="' . esc_url( $edit_url ) . '">' . esc_html__( 'Edit', 'aaa-order-workflow' ) . '</a> ';
+            echo '<a class="button" href="' . esc_url( $view_ack ) . '">' . esc_html__( 'View Acks', 'aaa-order-workflow' ) . '</a> ';
+            echo '<a class="button button-link-delete" href="' . esc_url( $delete_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Delete this announcement?', 'aaa-order-workflow' ) ) . '\');">' . esc_html__( 'Delete', 'aaa-order-workflow' ) . '</a></td>';
             echo '</tr>';
         }
 
@@ -209,10 +209,10 @@ public function register_menu() {
      *  --------------------------- */
     protected function render_ack_panel() {
         $ann_list = $this->get_announcements_list(); // id => title
-        echo '<h2 style="margin-top:32px;">' . esc_html__( 'User Acknowledgements', 'aaa-oc' ) . '</h2>';
+        echo '<h2 style="margin-top:32px;">' . esc_html__( 'User Acknowledgements', 'aaa-order-workflow' ) . '</h2>';
 
         if ( empty( $ann_list ) ) {
-            echo '<p>' . esc_html__( 'No announcements found.', 'aaa-oc' ) . '</p>';
+            echo '<p>' . esc_html__( 'No announcements found.', 'aaa-order-workflow' ) . '</p>';
             return;
         }
 
@@ -221,28 +221,28 @@ public function register_menu() {
 
         echo '<form method="get" action="" style="margin-bottom:12px;">';
         echo '<input type="hidden" name="page" value="' . esc_attr( $this->screen_slug ) . '">';
-        echo '<label for="ack_annc_id" style="margin-right:8px;">' . esc_html__( 'Announcement', 'aaa-oc' ) . '</label>';
+        echo '<label for="ack_annc_id" style="margin-right:8px;">' . esc_html__( 'Announcement', 'aaa-order-workflow' ) . '</label>';
         echo '<select name="ack_annc_id" id="ack_annc_id">';
-        echo '<option value="0">' . esc_html__( 'Select…', 'aaa-oc' ) . '</option>';
+        echo '<option value="0">' . esc_html__( 'Select…', 'aaa-order-workflow' ) . '</option>';
         foreach ( $ann_list as $id => $title ) {
             echo '<option value="' . (int) $id . '" ' . selected( $selected, $id, false ) . '>' . esc_html( "#{$id} — {$title}" ) . '</option>';
         }
         echo '</select> ';
-        submit_button( __( 'View', 'aaa-oc' ), 'secondary', '', false );
+        submit_button( __( 'View', 'aaa-order-workflow' ), 'secondary', '', false );
         if ( $selected ) {
             $export_url = wp_nonce_url( add_query_arg( [
                 'page'        => $this->screen_slug,
                 'ack_action'  => 'export_csv',
                 'ack_annc_id' => (int) $selected,
             ], $base ), 'aaa_oc_annc_ack_export_' . (int) $selected );
-            echo ' <a class="button" href="' . esc_url( $export_url ) . '">' . esc_html__( 'Export CSV', 'aaa-oc' ) . '</a>';
+            echo ' <a class="button" href="' . esc_url( $export_url ) . '">' . esc_html__( 'Export CSV', 'aaa-order-workflow' ) . '</a>';
 
             $reset_all_url = wp_nonce_url( add_query_arg( [
                 'page'        => $this->screen_slug,
                 'ack_action'  => 'reset_all',
                 'ack_annc_id' => (int) $selected,
             ], $base ), 'aaa_oc_annc_ack_reset_all_' . (int) $selected );
-            echo ' <a class="button button-link-delete" href="' . esc_url( $reset_all_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Reset acceptance for ALL users for this announcement?', 'aaa-oc' ) ) . '\');">' . esc_html__( 'Reset All', 'aaa-oc' ) . '</a>';
+            echo ' <a class="button button-link-delete" href="' . esc_url( $reset_all_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Reset acceptance for ALL users for this announcement?', 'aaa-order-workflow' ) ) . '\');">' . esc_html__( 'Reset All', 'aaa-order-workflow' ) . '</a>';
         }
         echo '</form>';
 
@@ -268,21 +268,21 @@ public function register_menu() {
         ", $annc_id ) );
 
         echo '<table class="widefat striped" style="max-width:1100px;"><thead><tr>';
-        echo '<th>' . esc_html__( 'User', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Email', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Seen At', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Accepted', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Accepted At', 'aaa-oc' ) . '</th>';
-        echo '<th>' . esc_html__( 'Actions', 'aaa-oc' ) . '</th>';
+        echo '<th>' . esc_html__( 'User', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Email', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Seen At', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Accepted', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Accepted At', 'aaa-order-workflow' ) . '</th>';
+        echo '<th>' . esc_html__( 'Actions', 'aaa-order-workflow' ) . '</th>';
         echo '</tr></thead><tbody>';
 
         if ( empty( $rows ) ) {
-            echo '<tr><td colspan="6">' . esc_html__( 'No user activity yet.', 'aaa-oc' ) . '</td></tr>';
+            echo '<tr><td colspan="6">' . esc_html__( 'No user activity yet.', 'aaa-order-workflow' ) . '</td></tr>';
         } else {
             foreach ( $rows as $r ) {
                 $user_link = $r->user_id ? get_edit_user_link( $r->user_id ) : '';
                 $name      = $r->display_name ? $r->display_name : $r->user_login;
-                $accepted  = $r->accepted ? '<span style="color:#0a0;font-weight:600;">' . esc_html__( 'Yes', 'aaa-oc' ) . '</span>' : '<span style="color:#900;font-weight:600;">' . esc_html__( 'No', 'aaa-oc' ) . '</span>';
+                $accepted  = $r->accepted ? '<span style="color:#0a0;font-weight:600;">' . esc_html__( 'Yes', 'aaa-order-workflow' ) . '</span>' : '<span style="color:#900;font-weight:600;">' . esc_html__( 'No', 'aaa-order-workflow' ) . '</span>';
 
                 $reset_url = wp_nonce_url( add_query_arg( [
                     'page'        => $this->screen_slug,
@@ -297,7 +297,7 @@ public function register_menu() {
                 echo '<td>' . esc_html( $this->fmt_dt( $r->seen_at ) ) . '</td>';
                 echo '<td>' . $accepted . '</td>';
                 echo '<td>' . esc_html( $this->fmt_dt( $r->accepted_at ) ) . '</td>';
-                echo '<td><a class="button" href="' . esc_url( $reset_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Reset acceptance for this user?', 'aaa-oc' ) ) . '\');">' . esc_html__( 'Reset', 'aaa-oc' ) . '</a></td>';
+                echo '<td><a class="button" href="' . esc_url( $reset_url ) . '" onclick="return confirm(\'' . esc_js( __( 'Reset acceptance for this user?', 'aaa-order-workflow' ) ) . '\');">' . esc_html__( 'Reset', 'aaa-order-workflow' ) . '</a></td>';
                 echo '</tr>';
             }
         }
@@ -332,10 +332,10 @@ public function register_menu() {
 
     if ( $action === 'create' ) {
         $this->create_announcement( $title, $content, $start, $end, $active );
-        return __( 'Announcement created.', 'aaa-oc' );
+        return __( 'Announcement created.', 'aaa-order-workflow' );
     } elseif ( $action === 'update' && isset( $_POST['annc_id'] ) ) {
         $this->update_announcement( absint( $_POST['annc_id'] ), $title, $content, $start, $end, $active );
-        return __( 'Announcement updated.', 'aaa-oc' );
+        return __( 'Announcement updated.', 'aaa-order-workflow' );
     }
 
     return '';
@@ -343,7 +343,7 @@ public function register_menu() {
 
     protected function handle_delete( $id ) {
         if ( ! wp_verify_nonce( $_GET['_wpnonce'] ?? '', 'aaa_oc_annc_delete_' . (int) $id ) ) {
-            wp_die( esc_html__( 'Invalid request.', 'aaa-oc' ) );
+            wp_die( esc_html__( 'Invalid request.', 'aaa-order-workflow' ) );
         }
         global $wpdb;
         $t = $this->table_names();

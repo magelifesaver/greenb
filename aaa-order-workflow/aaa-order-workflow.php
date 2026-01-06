@@ -4,7 +4,8 @@
  * Description: Displays a workflow board using existing WooCommerce statuses, partial DOM updates for new orders. Includes a countdown bar toggle in settings, dynamic columns, and a popup-based order expansion.
  * Version:     1.5.0
  * Author:      Webmaster Delivery
- * Text Domain: aaa-oc
+ * Text Domain: aaa-order-workflow
+ * Domain Path: /languages
  *
  * File: /wp-content/plugins/aaa-order-workflow/aaa-order-workflow.php
  */
@@ -22,7 +23,7 @@ function aaa_oc_check_woocommerce_active() {
 	}
 }
 function aaa_oc_show_wc_required_notice() {
-	echo '<div class="error"><p>' . esc_html__( 'AAA Order Workflow requires WooCommerce to be installed and active.', 'aaa-oc' ) . '</p></div>';
+	echo '<div class="error"><p>' . esc_html__( 'AAA Order Workflow requires WooCommerce to be installed and active.', 'aaa-order-workflow' ) . '</p></div>';
 }
 
 /* -------------------------------------------------------------
@@ -31,6 +32,14 @@ function aaa_oc_show_wc_required_notice() {
 define( 'AAA_OC_VERSION',    '1.5.0' );
 define( 'AAA_OC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AAA_OC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
+/* -------------------------------------------------------------
+ * Translations
+ * ------------------------------------------------------------- */
+add_action( 'plugins_loaded', 'aaa_oc_load_textdomain' );
+function aaa_oc_load_textdomain() {
+	load_plugin_textdomain( 'aaa-order-workflow', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
 
 /* -------------------------------------------------------------
  * Helpers (Logging + Retention)
@@ -353,6 +362,6 @@ add_action( 'admin_bar_menu', function( $wp_admin_bar ) {
  * ------------------------------------------------------------- */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function( $links ) {
 	$settings_url = admin_url( 'admin.php?page=aaa-oc-core-settings' );
-	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-oc' ) . '</a>' );
+	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-order-workflow' ) . '</a>' );
 	return $links;
 } );
