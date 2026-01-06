@@ -472,6 +472,17 @@ if ( class_exists( 'WF_SFWF_Settings' ) ) {
                                     }
                                 }
                                 break;
+                            case 'text':
+                                if ( $v !== '' && $v !== null ) {
+                                    // Display the full text value, but if the text contains a number
+                                    // (e.g. "0.21 (85 Days)"), sort by that numeric portion.
+                                    $display_value = esc_html( $v );
+                                    $order_value   = $v;
+                                    if ( preg_match( '/-?\d+(?:\.\d+)?/', (string) $v, $m ) ) {
+                                        $order_value = floatval( $m[0] );
+                                    }
+                                }
+                                break;
                             default:
                                 if ( $v !== '' && $v !== null ) {
                                     $order_value   = $v;
@@ -665,6 +676,9 @@ jQuery(document).ready(function($) {
         // dimensions.  This resolves issues where toggling groups leaves
         // misaligned headers or oversize tables.
         table.columns.adjust().draw(false);
+        if ( table.fixedHeader ) {
+            table.fixedHeader.adjust();
+        }
     });
 
     // Filtering by stock, category, brand using hidden columns

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAA API Lokey Combined (Updated)
  * Description: Custom REST API endpoints for WooCommerce + ATUM product create/update/query.
- * Version: 2.1.0
+ * Version: 2.0.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
  */
@@ -11,8 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AAA_API_LOKEY_VERSION', '2.1.0' );
-define( 'AAA_API_LOKEY_API_VERSION', '2.1.0' );
+define( 'AAA_API_LOKEY_VERSION', '2.0.0' );
 define( 'AAA_API_LOKEY_FILE', __FILE__ );
 define( 'AAA_API_LOKEY_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AAA_API_LOKEY_URL', plugin_dir_url( __FILE__ ) );

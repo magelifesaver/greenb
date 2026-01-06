@@ -63,7 +63,10 @@ add_action( 'rest_api_init', function () {
                     continue;
                 }
                 // Supplier name (from _supplier_id or meta)
-                $supplier_id = get_post_meta( $pid, '_supplier_id', true );
+                $supplier_id = get_post_meta( $pid, '_supplier', true );
+                if ( ! $supplier_id ) {
+                    $supplier_id = get_post_meta( $pid, '_supplier_id', true );
+                }
                 $supplier    = $supplier_id ? get_the_title( $supplier_id ) : 'Unknown';
                 // Purchase price
                 $purchase_price = get_post_meta( $pid, '_purchase_price', true );
@@ -94,3 +97,4 @@ add_action( 'rest_api_init', function () {
         'permission_callback' => '__return_true',
     ] );
 } );
+

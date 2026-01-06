@@ -1,0 +1,50 @@
+*** Advanced Sales Booster For Woocommerce ***
+
+2025-09-29 - version 2.0.0
+* Fixed - Fixed variable products names in quantity discount section
+* Fixed - Fixed variable products names in upsell funnel section
+* Fixed - Fixed variable products names in make an offer section
+* Fixed - Fixed variable products names in sales notifications section
+* Fixed - Fixed layouts in rules creation popups
+* Updated - Updated toggle checkboxes as native styles
+* Removed - Removed unncessary CSS
+* Improved - Improved UI of rules popups
+* Fixed - Minor bugs fixed
+
+
+2025-01-17 - version 1.0.9
+* Fixed - Fixed endpoints display issue
+
+2024-07-03 - version 1.0.8
+* Fixed - Fixed QIT E2E issues
+* Updated - Changed the offer form submit button text
+
+2024-06-25 - version 1.0.7
+* Fixed - Fixed QIT Activation issues
+
+2024-03-20 - version 1.0.6
+* Fixed - Fixed minor QIT issues
+
+2024-03-19 - version 1.0.5
+* Fixed - Fixed minor QIT issues
+
+2024-03-14 - version 1.0.4
+* Fixed - Fixed minor QIT issues
+
+2024-02-28 - version 1.0.3
+* Updated - Make compatible with Blocks Cart/checkout pages
+
+2023-10-27 - version 1.0.2
+* Fixed - QIT issues fixed
+* Fixed - Resolved the bulk email issue
+* Fixed - Responsive issues resolved
+* Fixed - Resolved minor bugs
+
+2023-05-02 - version 1.0.1
+* Updated - Make compatible with HPOS
+* Updated - Added view button for out-of-stock product in Frequently Bought Products
+* Fixed - Minor bug fixes
+* Fixed - Minor design changes
+
+2023-01-18 - version 1.0.0
+* Initial Release

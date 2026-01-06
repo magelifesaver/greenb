@@ -57,17 +57,20 @@ if ( ! function_exists( 'aaa_rso_default_orderby' ) ) {
      * @param string $default Current default orderby key.
      * @return string
      */
-    function aaa_rso_default_orderby( $default ) {
-        $context = aaa_rso_get_context();
-        $settings = aaa_rso_get_settings();
-        if ( $context && isset( $settings[ $context ] ) ) {
-            $conf = $settings[ $context ];
-            if ( ! empty( $conf['enabled'] ) && ! empty( $conf['default'] ) ) {
-                $default = sanitize_text_field( $conf['default'] );
-            }
+function aaa_rso_default_orderby( $default ) {
+    $context  = aaa_rso_get_context();
+    $settings = aaa_rso_get_settings();
+    if ( $context && isset( $settings[ $context ] ) ) {
+        $conf = $settings[ $context ];
+        // Always honour the saved default order even when the dropdown is hidden. The
+        // enabled flag controls the visibility of the dropdown, not whether a
+        // default should be forced. If a context has a defined default, use it.
+        if ( ! empty( $conf['default'] ) ) {
+            $default = sanitize_text_field( $conf['default'] );
         }
-        return $default;
     }
+    return $default;
+}
 }
 
 if ( ! function_exists( 'aaa_rso_block_manual_orderby' ) ) {

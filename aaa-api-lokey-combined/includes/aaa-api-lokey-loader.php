@@ -24,22 +24,11 @@ final class AAA_API_Lokey_Loader {
 		require_once AAA_API_LOKEY_DIR . 'includes/class-aaa-api-lokey-auth.php';
 		require_once AAA_API_LOKEY_DIR . 'includes/class-aaa-api-lokey-settings.php';
 		require_once AAA_API_LOKEY_DIR . 'includes/atum/class-aaa-api-lokey-atum-bridge.php';
-
+		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest.php';
 		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-products-helpers.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-extended-helpers.php';
-
 		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-products.php';
 		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-atum.php';
 		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-reports.php';
-
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-lokey-inventory-common.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-lokey-inventory-diagnostics.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-lokey-inventory-list.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-lokey-inventory-update.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-lokey-inventory.php';
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest-extended-products.php';
-
-		require_once AAA_API_LOKEY_DIR . 'includes/rest/class-aaa-api-lokey-rest.php';
 
 		if ( is_admin() ) {
 			AAA_API_Lokey_Settings::init();

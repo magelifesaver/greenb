@@ -1,0 +1,9 @@
+*** AI Addons ***
+
+
+2025-09-12 - version 1.0.1
+* Added - Option to enable/disable chatbot
+
+
+2025-08-19 - version 1.0.0
+* Initial Release

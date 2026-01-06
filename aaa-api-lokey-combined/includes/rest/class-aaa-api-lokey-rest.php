@@ -30,10 +30,6 @@ final class AAA_API_Lokey_REST {
 			AAA_API_Lokey_REST_Atum::register( $ns );
 			AAA_API_Lokey_REST_Reports::register( $ns );
 		}
-
-		// OpenAI Actions OpenAPI v3.1.0 namespaces (fixed paths)
-		AAA_API_Lokey_REST_LokeyInventory::register( 'lokey-inventory/v1' );
-		AAA_API_Lokey_REST_ExtendedProducts::register( 'lokey-inventory/v1' );
 	}
 
 	public static function ping( $request ) {

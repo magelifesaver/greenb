@@ -1,0 +1,13 @@
+{
+    "name": "acme/aaa-daily-reporting",
+    "type": "wordpress-plugin",
+    "require": {
+        "dompdf/dompdf": "^3.1",
+        "phpoffice/phpspreadsheet": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "AAA\\DailyReporting\\": "includes/"
+        }
+    }
+}

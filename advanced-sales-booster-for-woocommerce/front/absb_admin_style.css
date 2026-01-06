@@ -1,0 +1,75 @@
+.modal{
+    float: left;
+}
+
+    .modal-dialog{
+      max-width: 80% !important;
+      width: 80% !important;
+      /*margin-left: 10% !important;*/
+      position: absolute !important;
+left: 50% !important;
+top: 52% !important;
+transform: translate(-50%, -50%) !important;
+    }
+  
+    .ruletblrowss {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;border: unset !important;
+    }
+.ruletblrowss tr {
+    border: unset !important;
+}
+    .ruletblrowss td, .ruletblrowss th {
+      
+        padding: 4px !important;border: unset !important;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .ruletblrowss tr {
+          display: block
+      }
+      .ruletblrowss td {
+        width: 100%;
+          float: left;
+          line-height: 22px;
+      }
+      .modal-content{
+        width: 96%;
+        margin-left: 2%;
+      }
+
+  }
+
+
+@media only screen and (max-width: 600px) {
+  .modal-dialog {
+   width: 98% !important;
+      max-width:98% !important;
+     
+      margin: unset !important;
+  }
+  #name{
+    width: 100% !important;
+  }
+  #qtty{
+    width: 100% !important;
+  }
+  .inner_tbloo_plugify td{
+    width: 50% !important;
+  }
+}
+#header-outer{
+    z-index:9;
+}
+#footer-outer, #nectar_fullscreen_rows > #footer-outer.wpb_row .full-page-inner-wrap{z-index:9;}
+   #changethis{
+    width: 99% !important;
+border: 1px solid #f1f1f1 !important;
+border-radius: 5px !important;
+   }
+
+   .close{
+    padding: 1px 5px;
+    background:transparent;font-size: 33PX;font-weight: 900;
+   }

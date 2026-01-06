@@ -1,12 +1,15 @@
 <?php
 /**
- * Inventory endpoint.
+ * Inventory endpoints.
  *
- * Provides a read‑only endpoint to retrieve ATUM or WooCommerce inventory
- * data filtered by location, brand, supplier, category or stock status.
- * Includes fallback logic when the ATUM REST API is unavailable.  This
- * endpoint is not currently described in the OpenAPI spec but remains
- * available for internal use.
+ * - GET  /lokey-inventory/v1/inventory
+ * - PUT  /lokey-inventory/v1/inventory/{id}
+ *
+ * Notes:
+ * - GET tries ATUM REST first, then falls back to a lightweight Woo query.
+ * - PUT performs a non-destructive "LKD-SAFE" update for ATUM fields and stock:
+ *     purchase_price, supplier_id, atum_locations, stock_quantity
+ *   without writing raw post meta like _supplier_id.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,9 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'rest_api_init', function () {
+
+    /**
+     * GET /inventory
+     */
     register_rest_route( LOKEY_INV_API_NS, '/inventory', [
         'methods'  => 'GET',
         'callback' => function ( WP_REST_Request $req ) {
+
             // Build filter parameters from the request.
             $filters = [];
             foreach ( [ 'location', 'brand', 'supplier', 'category', 'stock_status' ] as $key ) {
@@ -36,7 +44,7 @@ add_action( 'rest_api_init', function () {
                 return new WP_REST_Response( $atum_res['body'], 200 );
             }
 
-            // 🔄 Fallback: direct WooCommerce query if ATUM is not available or returns no data.
+            // Fallback: direct WooCommerce query if ATUM API is unavailable or returns no data.
             $args = [
                 'status' => [ 'publish', 'private' ],
                 'type'   => [ 'simple', 'variation' ],
@@ -55,32 +63,41 @@ add_action( 'rest_api_init', function () {
             $inventory   = [];
 
             foreach ( $product_ids as $product_id ) {
-                $product = wc_get_product( $product_id );
+
+                $product = function_exists( 'wc_get_product' ) ? wc_get_product( $product_id ) : null;
                 if ( ! $product ) {
                     continue;
                 }
+
                 // Stock quantity & status
                 $stock_qty    = $product->managing_stock() ? (int) $product->get_stock_quantity() : null;
                 $stock_status = $product->get_stock_status();
-                // Supplier, purchase price & ATUM meta (if available)
-                $supplier_id = get_post_meta( $product_id, '_supplier_id', true );
-                $supplier    = $supplier_id ? get_the_title( $supplier_id ) : 'Unknown';
-                $purchase_price = get_post_meta( $product_id, 'purchase_price', true );
+
+                // Supplier & purchase price (best-effort).
+                $supplier_id = get_post_meta( $product_id, '_supplier', true );
+                if ( ! $supplier_id ) {
+                    // Legacy/incorrect key used by earlier versions.
+                    $supplier_id = get_post_meta( $product_id, '_supplier_id', true );
+                }
+                $supplier = $supplier_id ? get_the_title( $supplier_id ) : 'Unknown';
+
+                $purchase_price = get_post_meta( $product_id, '_purchase_price', true );
                 if ( $purchase_price === '' ) {
-                    $purchase_price = get_post_meta( $product_id, '_purchase_price', true );
+                    $purchase_price = get_post_meta( $product_id, 'purchase_price', true );
                 }
                 $purchase_price = $purchase_price !== '' ? floatval( $purchase_price ) : 0.0;
+
                 $inventory[] = [
-                    'id'              => $product_id,
-                    'name'            => $product->get_name(),
-                    'sku'             => $product->get_sku(),
-                    'stock_status'    => $stock_status,
-                    'stock_quantity'  => $stock_qty,
-                    'supplier'        => $supplier,
-                    'purchase_price'  => $purchase_price,
-                    'sale_price'      => (float) $product->get_sale_price(),
-                    'regular_price'   => (float) $product->get_regular_price(),
-                    'total_value'     => round( $purchase_price * (int) $stock_qty, 2 ),
+                    'id'             => (int) $product_id,
+                    'name'           => $product->get_name(),
+                    'sku'            => $product->get_sku(),
+                    'stock_status'   => $stock_status,
+                    'stock_quantity' => $stock_qty,
+                    'supplier'       => $supplier,
+                    'purchase_price' => $purchase_price,
+                    'sale_price'     => (float) $product->get_sale_price(),
+                    'regular_price'  => (float) $product->get_regular_price(),
+                    'total_value'    => round( $purchase_price * (int) $stock_qty, 2 ),
                 ];
             }
 
@@ -94,8 +111,7 @@ add_action( 'rest_api_init', function () {
                 'data'      => $inventory,
             ], 200 );
         },
-        // Expose the inventory listing without requiring a JWT.  Downstream calls
-        // still authenticate with ATUM/WooCommerce using API keys.
+        // Public for GPT actions (internal Woo/ATUM auth still applies for proxy calls).
         'permission_callback' => '__return_true',
         'args'                => [
             'page'         => [ 'type' => 'integer', 'default' => 1 ],
@@ -107,26 +123,21 @@ add_action( 'rest_api_init', function () {
             'stock_status' => [ 'type' => 'string' ],
         ],
     ] );
-} );
-/**
- * --------------------------------------------------------------------------
- * PUT /lokey-inventory/v1/inventory/{id}
- * --------------------------------------------------------------------------
- * Proxies cost/stock updates to WooCommerce’s /wc/v3/products/{id}
- * so ATUM’s purchase_price field syncs to wp_atum_product_data.
- * 
- * 🔒 JWT in, 🔁 Woo API call out (Basic Auth internally)
- * Follows LKD-SAFE merge policy.
- */
-add_action( 'rest_api_init', function () {
 
+    /**
+     * PUT /inventory/{id}
+     *
+     * Updates only explicitly provided fields (LKD-SAFE).
+     * This endpoint is intended for ATUM-related fields that must land in
+     * wp_atum_product_data (supplier_id, purchase_price) + locations taxonomy.
+     */
     register_rest_route( LOKEY_INV_API_NS, '/inventory/(?P<id>\d+)', [
         'methods'  => 'PUT',
         'callback' => function ( WP_REST_Request $req ) {
 
             $id = absint( $req['id'] );
             if ( $id <= 0 ) {
-                return new WP_REST_Response([
+                return new WP_REST_Response( [
                     'status'  => 'error',
                     'code'    => 400,
                     'message' => 'Invalid product ID.',
@@ -134,69 +145,69 @@ add_action( 'rest_api_init', function () {
             }
 
             $body = $req->get_json_params() ?: [];
-            $allowed = [ 'purchase_price', 'stock_quantity' ];
-            $update_data = array_intersect_key( $body, array_flip( $allowed ) );
 
-            if ( empty( $update_data ) ) {
-                return new WP_REST_Response([
+            // Build a strict, non-destructive update payload.
+            $update_data = [];
+
+            if ( array_key_exists( 'purchase_price', $body ) && ! is_null( $body['purchase_price'] ) && $body['purchase_price'] !== '' ) {
+                $update_data['purchase_price'] = floatval( $body['purchase_price'] );
+            }
+
+            if ( array_key_exists( 'supplier_id', $body ) && ! is_null( $body['supplier_id'] ) && $body['supplier_id'] !== '' ) {
+                $update_data['supplier_id'] = absint( $body['supplier_id'] );
+            }
+
+            if ( array_key_exists( 'stock_quantity', $body ) && ! is_null( $body['stock_quantity'] ) ) {
+                $update_data['stock_quantity'] = intval( $body['stock_quantity'] );
+            }
+
+            // Accept multiple aliases for locations.
+            $loc_raw = null;
+            if ( array_key_exists( 'atum_locations', $body ) ) {
+                $loc_raw = $body['atum_locations'];
+            } elseif ( array_key_exists( 'location_ids', $body ) ) {
+                $loc_raw = $body['location_ids'];
+            } elseif ( array_key_exists( 'atum_location_ids', $body ) ) {
+                $loc_raw = $body['atum_location_ids'];
+            } elseif ( array_key_exists( 'location_id', $body ) ) {
+                $loc_raw = $body['location_id'];
+            } elseif ( array_key_exists( 'atum_location_id', $body ) ) {
+                $loc_raw = $body['atum_location_id'];
+            }
+
+            $loc_norm = lokey_inv_normalize_atum_locations( $loc_raw );
+            if ( ! is_null( $loc_norm ) ) {
+                // Keep ATUM's expected shape: [ {"id":1}, ... ] (can be empty array to clear).
+                $update_data['atum_locations'] = $loc_norm;
+            }
+
+            if ( empty( $update_data ) && ! array_key_exists( 'atum_locations', $update_data ) ) {
+                return new WP_REST_Response( [
                     'status'  => 'error',
                     'code'    => 400,
                     'message' => 'No valid fields provided.',
                 ], 400 );
             }
 
-            // 🔐 WooCommerce REST keys stored securely in wp-config.php
-            $ck = defined( 'WC_CONSUMER_KEY' ) ? WC_CONSUMER_KEY : '';
-            $cs = defined( 'WC_CONSUMER_SECRET' ) ? WC_CONSUMER_SECRET : '';
-
-            if ( empty( $ck ) || empty( $cs ) ) {
-                return new WP_REST_Response([
-                    'status'  => 'error',
-                    'code'    => 401,
-                    'message' => 'Missing internal WooCommerce REST credentials.',
-                ], 401 );
+            $result = lokey_inv_update_atum_product_data( $id, $update_data );
+            if ( is_wp_error( $result ) ) {
+                return new WP_REST_Response( [
+                    'version'   => LOKEY_INV_API_VERSION,
+                    'status'    => 'error',
+                    'code'      => $result->get_error_data()['status'] ?? 500,
+                    'message'   => $result->get_error_message(),
+                    'error'     => $result->get_error_code(),
+                    'timestamp' => current_time( 'mysql' ),
+                ], $result->get_error_data()['status'] ?? 500 );
             }
 
-            // 🔁 Forward the payload to WooCommerce’s /wc/v3/products/{id}
-            $url = get_rest_url( null, 'wc/v3/products/' . $id );
-
-            $response = wp_remote_request( $url, [
-                'method'  => 'PUT',
-                'headers' => [
-                    'Authorization' => 'Basic ' . base64_encode( "$ck:$cs" ),
-                    'Content-Type'  => 'application/json',
-                ],
-                'body'    => wp_json_encode( $update_data ),
-                'timeout' => 20,
-            ]);
-
-            if ( is_wp_error( $response ) ) {
-                return new WP_REST_Response([
-                    'status'  => 'error',
-                    'code'    => 500,
-                    'message' => 'WooCommerce request failed: ' . $response->get_error_message(),
-                ], 500 );
-            }
-
-            $code = wp_remote_retrieve_response_code( $response );
-            $body = json_decode( wp_remote_retrieve_body( $response ), true );
-
-            if ( $code < 200 || $code >= 300 ) {
-                return new WP_REST_Response([
-                    'status'  => 'error',
-                    'code'    => $code,
-                    'message' => 'WooCommerce API error.',
-                    'response' => $body,
-                ], $code );
-            }
-
-            // ✅ Success — ATUM hooks have now updated cost table
-            return new WP_REST_Response([
+            return new WP_REST_Response( [
                 'version'   => LOKEY_INV_API_VERSION,
                 'status'    => 'success',
                 'id'        => $id,
-                'data'      => $update_data,
-                'message'   => 'ATUM cost + stock synced via WooCommerce API.',
+                'applied'   => $update_data,
+                'result'    => $result,
+                'message'   => 'ATUM fields + stock updated (no raw post meta writes).',
                 'timestamp' => current_time( 'mysql' ),
             ], 200 );
         },
