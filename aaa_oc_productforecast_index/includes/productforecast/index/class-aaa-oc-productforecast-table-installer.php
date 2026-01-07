@@ -103,8 +103,17 @@ class AAA_OC_ProductForecast_Table_Installer {
             KEY idx_action (action)
         ) ENGINE=InnoDB {$charset_collate};";
 
-        dbDelta( $sql_index );
-        dbDelta( $sql_log );
+        /*
+         * Use maybe_create_table instead of dbDelta to avoid syntax errors when
+         * altering an existing table.  dbDelta attempts to compute column
+         * differences and can produce malformed ALTER statements if the
+         * CREATE definition changes in unexpected ways (for example, when
+         * comments or trailing commas are present).  maybe_create_table
+         * simply executes the CREATE statement if the table does not exist.
+         */
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        maybe_create_table( $t_index, $sql_index );
+        maybe_create_table( $t_log,   $sql_log );
 
         if ( class_exists( 'AAA_OC_ProductForecast_Helpers' ) ) {
             AAA_OC_ProductForecast_Helpers::log( 'Tables ensured: ' . $t_index . ' and ' . $t_log );
