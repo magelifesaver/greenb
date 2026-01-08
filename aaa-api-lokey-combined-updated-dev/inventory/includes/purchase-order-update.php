@@ -3,8 +3,8 @@
  * Purchase Order update endpoint.
  *
  * Merges new line items into an existing ATUM purchase order and forwards
- * the updated data to the ATUM API. Quantities are incremented when
- * duplicate product/variation IDs are supplied. Requires a valid JWT.
+ * the updated data to the ATUM API.  Quantities are incremented when
+ * duplicate product/variation IDs are supplied.  Requires a valid JWT.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,7 +15,7 @@ add_action( 'rest_api_init', function () {
     register_rest_route( LOKEY_INV_API_NS, '/purchase-orders/(?P<id>\d+)', [
         'methods'  => 'PUT',
         'callback' => 'lokey_inv_update_purchase_order_v200',
-        // Permit PUT /purchase-orders/{id} without requiring JWT. The request
+        // Permit PUT /purchase-orders/{id} without requiring JWT.  The request
         // still calls the ATUM API with appropriate credentials.
         'permission_callback' => '__return_true',
     ] );
@@ -27,15 +27,13 @@ add_action( 'rest_api_init', function () {
  * Steps:
  *  1. Fetch existing PO (edit context)
  *  2. Merge provided line_items with existing lines
- *  3. Sanitize and normalize incoming payload
- *  4. Send updated payload via PUT to ATUM
- *  5. Return structured result with merge summary
+ *  3. Send updated payload via PUT to ATUM
+ *  4. Return structured result with merge summary
  *
  * @param WP_REST_Request $request Request containing the PO ID and body.
  * @return WP_REST_Response Structured API response.
  */
 function lokey_inv_update_purchase_order_v200( WP_REST_Request $request ) {
-
     $id   = absint( $request['id'] );
     $body = $request->get_json_params() ?: [];
 
@@ -66,36 +64,6 @@ function lokey_inv_update_purchase_order_v200( WP_REST_Request $request ) {
         ? $existing_data['line_items']
         : [];
 
-    // --- 🔁 Compatibility shim: items → line_items ---
-    if ( ! empty( $body['items'] ) && empty( $body['line_items'] ) ) {
-        $body['line_items'] = $body['items'];
-        unset( $body['items'] );
-    }
-
-    // --- 🔁 Supplier normalization ---
-    if ( ! empty( $body['supplier_id'] ) && empty( $body['supplier'] ) ) {
-        $body['supplier'] = intval( $body['supplier_id'] );
-        unset( $body['supplier_id'] );
-    }
-
-    // --- ⏰ Date normalization ---
-    if ( ! empty( $body['date_expected'] ) ) {
-        if ( ! preg_match( '/T\d{2}:\d{2}:\d{2}/', $body['date_expected'] ) ) {
-            $body['date_expected'] = $body['date_expected'] . 'T00:00:00';
-        }
-    }
-
-    // --- 🧩 Fallback validation ---
-    if ( empty( $body['status'] ) ) {
-        $body['status'] = 'atum_pending';
-    }
-
-    // --- 📝 Description sanitization (optional but recommended) ---
-    if ( ! empty( $body['description'] ) ) {
-        // Allow safe HTML tags (<p>, <strong>, <em>, etc.)
-        $body['description'] = wp_kses_post( $body['description'] );
-    }
-
     // Step 2: Merge incoming line_items.
     $merge_count = 0;
     if ( ! empty( $body['line_items'] ) && is_array( $body['line_items'] ) ) {
@@ -103,58 +71,47 @@ function lokey_inv_update_purchase_order_v200( WP_REST_Request $request ) {
             if ( empty( $new_item['product_id'] ) ) {
                 continue;
             }
-
-            $product_id     = (int) $new_item['product_id'];
-            $variation_id   = isset( $new_item['variation_id'] ) ? (int) $new_item['variation_id'] : 0;
-            $quantity       = isset( $new_item['quantity'] ) ? max( 1, (int) $new_item['quantity'] ) : 1;
+            $product_id   = (int) $new_item['product_id'];
+            $variation_id = isset( $new_item['variation_id'] ) ? (int) $new_item['variation_id'] : 0;
+            $quantity     = isset( $new_item['quantity'] ) ? max( 1, (int) $new_item['quantity'] ) : 1;
             $purchase_price = null;
-
             if ( isset( $new_item['purchase_price'] ) && $new_item['purchase_price'] !== '' ) {
                 $purchase_price = (float) $new_item['purchase_price'];
             } elseif ( isset( $new_item['cost'] ) && $new_item['cost'] !== '' ) {
                 $purchase_price = (float) $new_item['cost'];
             }
-
             $merged = false;
             foreach ( $existing_lines as &$line ) {
                 $existing_pid   = (int) ( $line['product_id'] ?? 0 );
                 $existing_varid = (int) ( $line['variation_id'] ?? 0 );
-
                 if ( $existing_pid === $product_id && $existing_varid === $variation_id ) {
                     $line['quantity'] = isset( $line['quantity'] )
                         ? (int) $line['quantity'] + $quantity
                         : $quantity;
-
                     if ( null !== $purchase_price ) {
                         $line['purchase_price'] = $purchase_price;
                     }
-
                     $merged = true;
                     $merge_count++;
                     break;
                 }
             }
             unset( $line );
-
             if ( ! $merged ) {
                 $new_line = [
                     'product_id' => $product_id,
                     'quantity'   => $quantity,
                 ];
-
                 if ( $variation_id ) {
                     $new_line['variation_id'] = $variation_id;
                 }
-
                 if ( null !== $purchase_price ) {
                     $new_line['purchase_price'] = $purchase_price;
                 }
-
                 $existing_lines[] = $new_line;
                 $merge_count++;
             }
         }
-
         $body['line_items'] = $existing_lines;
     }
 

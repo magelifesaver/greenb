@@ -92,11 +92,6 @@ register_rest_route( LOKEY_INV_API_NS, '/purchase-orders', [
         if ( empty( $payload['status'] ) ) {
             $payload['status'] = 'atum_pending';
         }
-				
-				// --- 🧩 Fallback validation ---
-        if ( empty( $payload['status'] ) ) {
-            $payload['status'] = 'atum_pending';
-        }
 
         // Forward normalized payload to ATUM
         $res = lokey_inv_request( 'atum/purchase-orders', 'POST', $payload );
