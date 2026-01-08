@@ -129,6 +129,10 @@ require_once AAA_OC_PLUGIN_DIR . 'includes/payconfirm/aaa-oc-payconfirm-loader.p
 require_once AAA_OC_PLUGIN_DIR . 'includes/productsearch/aaa-oc-productsearch-assets-loader.php';
 require_once AAA_OC_PLUGIN_DIR . 'includes/productsearch/aaa-oc-productsearch-loader.php';
 
+/*  forcast  */
+require_once AAA_OC_PLUGIN_DIR . 'includes/forcast/aaa-oc-forcast-assets-loader.php';
+require_once AAA_OC_PLUGIN_DIR . 'includes/forcast/aaa-oc-forcast-loader.php';
+
 /* Board modules / options / helpers */
 require_once AAA_OC_PLUGIN_DIR . 'includes/core/modules/board-order-counter/board-order-counter-loader.php';
 require_once AAA_OC_PLUGIN_DIR . 'includes/core/options/class-aaa-oc-options-loader.php';
