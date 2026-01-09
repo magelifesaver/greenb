@@ -127,29 +127,27 @@ class AAA_OC_Forecast_Row_Builder {
         }
 
         /*
-         * Derive status flags (not moving / stale) based on the last sold date and
-         * user‑configured thresholds. These flags are stored as boolean
-         * columns in the index table but are not saved back to post meta. If
-         * there is no last sold date the product is considered new and
-         * remains unflagged.
+         * Derive basic status flags.  For the initial implementation we keep
+         * derivations simple: out‑of‑stock is true when stock <= 0.  The
+         * not‑moving and stale flags remain false until we implement
+         * comprehensive calculations in a later step.  New product flag
+         * also defaults to false.  Sales status remains whatever is set in
+         * post meta or the default of 'active'.  The update timestamp is
+         * always set to the current time.
          */
-        $last_sold_date = $row['forecast_last_sold_date'] ?? null;
-        $days_since_last = null;
-        if ( $last_sold_date ) {
-            $last_ts = strtotime( $last_sold_date );
-            if ( $last_ts ) {
-                $days_since_last = floor( ( current_time( 'timestamp' ) - $last_ts ) / DAY_IN_SECONDS );
-            }
+        // Out of stock flag
+        $stock_qty = isset( $row['forecast_stock_qty'] ) ? intval( $row['forecast_stock_qty'] ) : 0;
+        $row['forecast_is_out_of_stock'] = ( $stock_qty <= 0 ) ? 1 : 0;
+
+        // Derived flags default to false (0) until calculations are added
+        $row['forecast_is_not_moving']      = 0;
+        $row['forecast_is_stale_inventory'] = 0;
+        $row['forecast_is_new_product']     = 0;
+
+        // Sales status defaults to stored meta or 'active'
+        if ( ! isset( $row['forecast_sales_status'] ) || $row['forecast_sales_status'] === null ) {
+            $row['forecast_sales_status'] = 'active';
         }
-        // Load thresholds from options if available
-        $not_moving_threshold = 30;
-        $stale_threshold      = 60;
-        if ( function_exists( 'aaa_oc_get_option' ) ) {
-            $not_moving_threshold = absint( aaa_oc_get_option( 'forecast_not_moving_days', 'forecast', 30 ) );
-            $stale_threshold      = absint( aaa_oc_get_option( 'forecast_stale_days', 'forecast', 60 ) );
-        }
-        $row['forecast_is_not_moving'] = ( $days_since_last !== null && $days_since_last >= $not_moving_threshold ) ? 1 : 0;
-        $row['forecast_is_stale']      = ( $days_since_last !== null && $days_since_last >= $stale_threshold ) ? 1 : 0;
 
         // Timestamp for index updates
         $row['updated_at'] = current_time( 'mysql' );

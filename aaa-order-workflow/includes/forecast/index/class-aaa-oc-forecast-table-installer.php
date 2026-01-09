@@ -59,10 +59,20 @@ class AAA_OC_Forecast_Table_Installer {
             $column_sql .= "`{$column_name}` {$sql_type},\n";
         }
 
-        // Compose the final CREATE TABLE statement. Include product_id and
-        // timestamps for auditing. The primary key ensures uniqueness per product.
+        /*
+         * Compose the final CREATE TABLE statement.  In addition to the
+         * forecast meta columns defined above we also store basic product
+         * context (title, SKU, category, brand) in dedicated columns.  These
+         * fields are required because the row builder includes them when
+         * inserting/updating rows via wpdb->replace().  Without these
+         * definitions the INSERT would fail with unknown column errors.
+         */
         $sql = "CREATE TABLE {$table_name} (\n" .
             "product_id BIGINT(20) UNSIGNED NOT NULL,\n" .
+            "product_title LONGTEXT NULL,\n" .
+            "product_sku VARCHAR(255) NULL,\n" .
+            "product_category LONGTEXT NULL,\n" .
+            "product_brand LONGTEXT NULL,\n" .
             $column_sql .
             "updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n" .
             "PRIMARY KEY  (product_id)\n" .
