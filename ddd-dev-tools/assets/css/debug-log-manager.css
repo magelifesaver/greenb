@@ -1,0 +1,8 @@
+/* @version 2.1.0 */
+.ddd-debug-manager{display:flex;flex-direction:column;gap:16px}
+.ddd-debug-manager textarea{width:100%;height:300px;font-family:monospace;font-size:12px}
+.ddd-debug-manager .ddd-debug-actions{display:flex;gap:10px;flex-wrap:wrap}
+.ddd-debug-manager .ddd-debug-status{padding:10px;background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px}
+.ddd-debug-manager .ddd-debug-status strong{display:inline-block;min-width:130px}
+.ddd-debug-manager .ddd-debug-note{color:#646970}
+.ddd-debug-manager .ddd-debug-error{color:#b32d2e}

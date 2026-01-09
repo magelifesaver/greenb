@@ -1,0 +1,25 @@
+/* @version 2.1.0 */
+.dt-pro-wrap .dt-pro-card{background:#fff;border:1px solid #dcdcde;border-radius:6px;padding:16px;margin:16px 0}
+.dt-pro-wrap .dt-pro-options label{margin-right:14px;display:inline-block}
+.dt-pro-cli{margin-top:10px;padding:10px;border:1px dashed #c3c4c7;border-radius:6px}
+.dt-pro-cli-label{font-weight:600;margin-bottom:4px}
+#dt-cli-preview{display:block;white-space:pre-wrap}
+
+.dt-meta{padding:10px;background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;margin:12px 0}
+.dt-warn{margin-top:6px;color:#b32d2e}
+.dt-error{color:#b32d2e}
+.dt-results{margin:0;padding:0}
+.dt-results .dt-file{list-style:none;margin:0 0 14px 0;padding:10px;border:1px solid #dcdcde;border-radius:6px}
+.dt-file-head{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.dt-path{font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.dt-matches{margin:8px 0 0 16px}
+.dt-matches li{margin:4px 0}
+
+.dt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;padding:30px}
+.dt-modal-inner{background:#fff;border-radius:8px;max-width:1000px;margin:0 auto;max-height:calc(100vh - 60px);overflow:auto;position:relative;padding:14px}
+.dt-modal-close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:22px;cursor:pointer}
+.dt-modal-title{font-weight:700;margin:0 28px 10px 0;word-break:break-all}
+.dt-modal-body{background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;padding:10px;white-space:pre-wrap}
+.dt-line{display:flex;gap:10px;align-items:flex-start}
+.dt-ln{display:inline-block;min-width:50px;text-align:right;color:#646970;font-family:ui-monospace,Menlo,Consolas,monospace}
+.dt-line.is-focus{background:#fff4a6}

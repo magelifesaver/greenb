@@ -327,7 +327,8 @@ function aaa_oc_activate() {
 	if ( class_exists( 'AAA_OC_Payment_Setup' ) )        { AAA_OC_Payment_Setup::install(); }
 	if ( class_exists( 'AAA_OC_Table_Installer' ) )      { AAA_OC_Table_Installer::create_index_table(); }
 	if ( class_exists( 'AAA_OC_Fulfillment_Analytics' ) ){ AAA_OC_Fulfillment_Analytics::create_table(); }
-
+  if (class_exists('AAA_OC_Forecast_Table_Installer')) { AAA_OC_Forecast_Table_Installer::maybe_install_table(); }
+  if (class_exists('AAA_OC_Forecast_Queue_Installer')) { AAA_OC_Forecast_Queue_Installer::maybe_install_tables(); }
 	// Default log retention (days) if not set.
 	if ( get_option( 'aaa_oc_log_retention_days', null ) === null ) {
 		add_option( 'aaa_oc_log_retention_days', 14, '', false );
@@ -368,3 +369,4 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function( $lin
 	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-oc' ) . '</a>' );
 	return $links;
 } );
+AAA_OC_Forecast_Indexer::index_all_products();

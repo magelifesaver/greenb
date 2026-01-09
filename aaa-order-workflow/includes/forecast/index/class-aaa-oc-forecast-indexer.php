@@ -72,6 +72,36 @@ class AAA_OC_Forecast_Indexer {
     }
 
     /**
+     * Rebuild the entire forecast index for all products that have reorder enabled.
+     * This should be run once on activation or when the index table is empty.
+     */
+    public static function index_all_products() : void {
+        // Only run in an admin context to avoid unnecessary work on front end.
+        if ( ! is_admin() ) {
+            return;
+        }
+        // Fetch all published products. Use IDs only to minimise memory usage.
+        $args = [
+            'post_type'      => 'product',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        ];
+        $product_ids = get_posts( $args );
+        if ( empty( $product_ids ) ) {
+            return;
+        }
+        foreach ( $product_ids as $pid ) {
+            $enabled = get_post_meta( $pid, 'forecast_enable_reorder', true );
+            if ( $enabled === 'yes' || $enabled === 1 ) {
+                self::upsert_now( $pid, 'initial' );
+            } else {
+                // Ensure rows for disabled products are removed.
+                self::delete_row( $pid );
+            }
+        }
+    }
+    /**
      * Return all rows from the forecast index table.  Used by the admin grid.
      *
      * @return array[] Array of associative rows.

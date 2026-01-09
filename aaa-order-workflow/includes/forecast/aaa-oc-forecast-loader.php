@@ -72,21 +72,36 @@ add_action( 'plugins_loaded', function () {
     if ( AAA_OC_FORECAST_DEBUG ) {
         error_log( '[Forecast][Loader] Initialising module v' . AAA_OC_FORECAST_VERSION );
     }
-    // Install/upgrade forecast index table.
-    AAA_OC_Forecast_Table_Installer::init();
-    // Install/upgrade forecast and PO queue tables.
-    AAA_OC_Forecast_Queue_Installer::init();
-    // Setup queue system (schedule cron and handlers).
-    AAA_OC_Forecast_Queue::init();
-    // Hook indexer triggers
-    AAA_OC_Forecast_Indexer::init();
-    // Register admin grid when in the dashboard.
-    if ( is_admin() ) {
-        AAA_OC_Forecast_Grid_Admin::init();
+    // Ensure the index and queue tables exist on every load. Do not hook into plugins_loaded again,
+    // because this callback runs after plugins_loaded has already fired.
+    if ( class_exists( 'AAA_OC_Forecast_Table_Installer' ) ) {
+        AAA_OC_Forecast_Table_Installer::maybe_install_table();
     }
-
-    // Register forecast settings tab for the global settings page.
+    if ( class_exists( 'AAA_OC_Forecast_Queue_Installer' ) ) {
+        AAA_OC_Forecast_Queue_Installer::maybe_install_tables();
+    }
+    // Initialise the queue processing and indexer hooks.
+    if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+        AAA_OC_Forecast_Queue::init();
+    }
+    if ( class_exists( 'AAA_OC_Forecast_Indexer' ) ) {
+        AAA_OC_Forecast_Indexer::init();
+        // If the index table is empty, perform a one‑time initial index of all products.
+        global $wpdb;
+        if ( (int) $wpdb->get_var( "SHOW TABLES LIKE '" . $wpdb->esc_like( AAA_OC_FORECAST_INDEX_TABLE ) . "'" ) ) {
+            $count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM " . AAA_OC_FORECAST_INDEX_TABLE );
+            if ( $count === 0 ) {
+                AAA_OC_Forecast_Indexer::index_all_products();
+            }
+        }
+    }
+    // Register admin grid and settings when in the dashboard.
     if ( is_admin() ) {
-        AAA_OC_Forecast_Settings::init();
+        if ( class_exists( 'AAA_OC_Forecast_Grid_Admin' ) ) {
+            AAA_OC_Forecast_Grid_Admin::init();
+        }
+        if ( class_exists( 'AAA_OC_Forecast_Settings' ) ) {
+            AAA_OC_Forecast_Settings::init();
+        }
     }
 } );
