@@ -76,10 +76,7 @@ class AAA_OC_Forecast_Indexer {
      * This should be run once on activation or when the index table is empty.
      */
     public static function index_all_products() : void {
-        // Only run in an admin context to avoid unnecessary work on front end.
-        if ( ! is_admin() ) {
-            return;
-        }
+        // This method can be called from any context. The caller should decide when to invoke it.
         // Fetch all published products. Use IDs only to minimise memory usage.
         $args = [
             'post_type'      => 'product',
@@ -101,6 +98,7 @@ class AAA_OC_Forecast_Indexer {
             }
         }
     }
+
     /**
      * Return all rows from the forecast index table.  Used by the admin grid.
      *

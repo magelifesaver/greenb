@@ -52,13 +52,22 @@ if ( ! defined( 'AAA_OC_FORECAST_PO_QUEUE_TABLE' ) ) {
  * for the index and queue tables, queue logic and the admin grid.
  */
 require_once __DIR__ . '/helpers/class-aaa-oc-forecast-columns.php';
+require_once __DIR__ . '/helpers/class-aaa-oc-forecast-meta-registry.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-table-installer.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-queue-installer.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-indexer.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-sales-metrics.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-stock.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-projections.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-status.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-timeline.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-overrides.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-runner.php';
 require_once __DIR__ . '/class-aaa-oc-forecast-queue.php';
 require_once __DIR__ . '/helpers/class-aaa-oc-forecast-row-builder.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-grid.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-settings.php';
+require_once __DIR__ . '/admin/class-aaa-oc-forecast-product-fields.php';
 
 /* -------------------------------------------------------------------------
  * Module initialization
@@ -102,6 +111,10 @@ add_action( 'plugins_loaded', function () {
         }
         if ( class_exists( 'AAA_OC_Forecast_Settings' ) ) {
             AAA_OC_Forecast_Settings::init();
+        }
+        // Register product meta fields UI.
+        if ( class_exists( 'AAA_OC_Forecast_Product_Fields' ) ) {
+            AAA_OC_Forecast_Product_Fields::init();
         }
     }
 } );

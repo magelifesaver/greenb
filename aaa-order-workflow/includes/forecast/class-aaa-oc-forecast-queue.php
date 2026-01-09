@@ -161,14 +161,15 @@ class AAA_OC_Forecast_Queue {
             $pid = intval( $row['product_id'] );
             // Mark as processing and increment attempts. Use direct SQL for performance.
             $wpdb->query( $wpdb->prepare( "UPDATE {$table} SET status = %s, attempts = attempts + 1 WHERE id = %d", 'processing', $id ) );
-            // Run forecast update if runner exists.
-            if ( class_exists( 'WF_SFWF_Forecast_Runner' ) ) {
+            // Run forecast update via our own runner only. Legacy support has been removed.
+            if ( class_exists( 'AAA_OC_Forecast_Runner' ) ) {
                 try {
-                    WF_SFWF_Forecast_Runner::update_single_product( $pid );
-                } catch ( 
-                    Exception $e
-                ) {
-                    // Suppress exceptions and proceed.
+                    AAA_OC_Forecast_Runner::update_single_product( $pid );
+                } catch ( Exception $e ) {
+                    // Suppress exceptions and continue. Log in debug mode if enabled.
+                    if ( defined( 'AAA_OC_FORECAST_DEBUG' ) && AAA_OC_FORECAST_DEBUG ) {
+                        error_log( '[Forecast][Queue] Runner update failed for product ' . $pid . ': ' . $e->getMessage() );
+                    }
                 }
             }
             // Mark as done regardless of outcome.
