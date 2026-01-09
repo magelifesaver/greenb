@@ -25,7 +25,7 @@ class AAA_OC_Admin_Fulfillment_Column {
     }
 
     public static function add_header( $order ) {
-        echo '<th class="aaa-oc-picked-col">' . esc_html__( 'Picked', 'aaa-order-workflow' ) . '</th>';
+        echo '<th class="aaa-oc-picked-col">' . esc_html__( 'Picked', 'aaa-oc' ) . '</th>';
     }
 
     /**

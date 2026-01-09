@@ -211,21 +211,11 @@ class AAA_OC_ProductSearch_Helpers {
                 $scope = 'category';
             }
         }
-        /*
-         * If the query matches a brand or category name exactly, treat the entire
-         * normalized query as a single token. Otherwise split on whitespace
-         * but also include the full normalized query as its own token. This
-         * ensures multi‑word synonyms (e.g. "vape pen") can match entries in
-         * the synonyms table without altering the default token AND logic.
-         */
+        // Split into tokens unless the query is an exact brand or category.
         if ( $term && $scope ) {
             $tokens = [ $normalized_q ];
         } else {
             $tokens = array_values( array_unique( array_filter( preg_split( '/\s+/', $normalized_q ) ) ) );
-            // Add the full normalized query as a token if not already present.
-            if ( '' !== $normalized_q && ! in_array( $normalized_q, $tokens, true ) ) {
-                $tokens[] = $normalized_q;
-            }
         }
         if ( empty( $tokens ) ) {
             return [ 'tokens' => [], 'map' => [] ];
@@ -235,36 +225,179 @@ class AAA_OC_ProductSearch_Helpers {
         foreach ( $tokens as $t ) {
             $map[ $t ] = [ $t ];
         }
+
+        /*
+         * Generate simple morphological variants for each token. This helps
+         * match singular/plural forms (e.g., "vape" ↔ "vapes", "preroll" ↔ "prerolls").
+         */
+        // Build a map of tokens to their morphological variants. We'll use this
+        // later when matching synonyms against both the user tokens and
+        // their basic singular/plural forms.
+        $morph_map = [];
+        foreach ( $tokens as $t ) {
+            $morph_variants = [ $t ];
+            // Convert plural ies → y (e.g., companies → company).
+            if ( strlen( $t ) > 3 && substr( $t, -3 ) === 'ies' ) {
+                $morph_variants[] = substr( $t, 0, -3 ) . 'y';
+            }
+            // Remove trailing 's' for plural (e.g., vapes → vape).
+            if ( strlen( $t ) > 1 && substr( $t, -1 ) === 's' ) {
+                $morph_variants[] = substr( $t, 0, -1 );
+            }
+            // Add plural form by appending 's' if not already ending with 's'.
+            if ( substr( $t, -1 ) !== 's' ) {
+                $morph_variants[] = $t . 's';
+            }
+            // Collapse hyphenated words to catch variations like pre-roll ↔ preroll.
+            if ( strpos( $t, '-' ) !== false ) {
+                $morph_variants[] = str_replace( '-', '', $t );
+            }
+            $morph_variants = array_values( array_unique( $morph_variants ) );
+            $map[ $t ]      = array_values( array_unique( array_merge( $map[ $t ], $morph_variants ) ) );
+            $morph_map[ $t ] = $morph_variants;
+        }
+
+        /*
+         * Multi‑word synonyms detection: look for synonyms phrases that contain
+         * whitespace within the query string. If the normalized query
+         * contains a multi‑word synonym (word-boundary match), expand
+         * canonical forms for the associated term across all tokens.
+         */
+        if ( '' !== $normalized_q ) {
+            // Fetch all active brand/category synonyms that include spaces.
+            $multi_rows = $wpdb->get_results(
+                "SELECT scope, term_id, synonym FROM {$syn_table} WHERE active=1 AND scope IN ('brand','category') AND synonym LIKE '% %'",
+                ARRAY_A
+            );
+            if ( ! empty( $multi_rows ) ) {
+                foreach ( $multi_rows as $mr ) {
+                    $syn_phrase = strtolower( remove_accents( $mr['synonym'] ) );
+                    // Check for word-boundary match of the synonym phrase in the query.
+                    $pattern    = '/\b' . preg_quote( $syn_phrase, '/' ) . '\b/';
+                    if ( preg_match( $pattern, $normalized_q ) ) {
+                        $scope_row     = $mr['scope'];
+                        $term_id       = (int) $mr['term_id'];
+                        $tax           = ( 'brand' === $scope_row ) ? 'berocket_brand' : 'product_cat';
+                        $term_obj      = get_term( $term_id, $tax );
+                        if ( $term_obj && ! is_wp_error( $term_obj ) ) {
+                            $canonical_forms = [
+                                $term_obj->slug,
+                                sanitize_title( $term_obj->name ),
+                                strtolower( remove_accents( $term_obj->name ) ),
+                            ];
+                            $canonical_forms = array_unique( $canonical_forms );
+                            // Spread canonical forms to all tokens in this synonym phrase.
+                            $phrase_tokens = array_values( array_unique( array_filter( preg_split( '/\s+/', $syn_phrase ) ) ) );
+                            foreach ( $tokens as $t ) {
+                                if ( in_array( $t, $phrase_tokens, true ) ) {
+                                    $map[ $t ] = array_values( array_unique( array_merge( $map[ $t ], $canonical_forms ) ) );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         /**
          * 1) BRAND / CATEGORY: synonym → canonical expansion
          *    (user typed the synonym itself, scope = 'brand' or 'category').
          */
+        // Brand/Category: synonym → canonical expansion using both user tokens and their
+        // morphological variants. This ensures that a synonym like "vape" also
+        // expands when the user searches for "vapes".
         $rows_bc      = [];
-        $placeholders = implode( ',', array_fill( 0, count( $tokens ), '%s' ) );
-        if ( $placeholders ) {
-            $sql_bc = "SELECT scope, term_id, synonym, bidi FROM {$syn_table}
+        // Flatten all tokens' morphological variants into a single list for lookup.
+        $lookup_tokens = [];
+        foreach ( $morph_map as $t_variants ) {
+            foreach ( $t_variants as $var ) {
+                $lookup_tokens[] = $var;
+            }
+        }
+        $lookup_tokens = array_values( array_unique( $lookup_tokens ) );
+        if ( ! empty( $lookup_tokens ) ) {
+            $placeholders = implode( ',', array_fill( 0, count( $lookup_tokens ), '%s' ) );
+            $sql_bc       = "SELECT scope, term_id, synonym, bidi FROM {$syn_table}
                     WHERE active=1 AND scope IN ('brand','category') AND synonym IN ($placeholders)";
-            $rows_bc = $wpdb->get_results( $wpdb->prepare( $sql_bc, $tokens ), ARRAY_A );
+            $rows_bc      = $wpdb->get_results( $wpdb->prepare( $sql_bc, $lookup_tokens ), ARRAY_A );
         }
         foreach ( $rows_bc as $r ) {
-            $synonym    = strtolower( remove_accents( $r['synonym'] ) );
-            if ( ! isset( $map[ $synonym ] ) ) {
-                // synonym is not one of the user tokens; skip.
-                continue;
+            $synonym_norm = strtolower( remove_accents( $r['synonym'] ) );
+            $scope_row    = $r['scope'];
+            $term_id      = (int) $r['term_id'];
+            // Determine which user token this synonym variant belongs to via morph_map.
+            foreach ( $morph_map as $token_key => $variants_list ) {
+                if ( in_array( $synonym_norm, $variants_list, true ) ) {
+                    // Found a matching token; expand to canonical forms.
+                    $tax      = ( 'brand' === $scope_row ) ? 'berocket_brand' : 'product_cat';
+                    $term_row = get_term( $term_id, $tax );
+                    if ( $term_row && ! is_wp_error( $term_row ) ) {
+                        $canonical_forms = [
+                            $term_row->slug,
+                            sanitize_title( $term_row->name ),
+                            strtolower( remove_accents( $term_row->name ) ),
+                        ];
+                        $canonical_forms = array_unique( $canonical_forms );
+                        $map[ $token_key ] = array_values( array_unique( array_merge( $map[ $token_key ], $canonical_forms ) ) );
+                    }
+                    // Only apply once per token for this synonym.
+                }
             }
-            $scope_row = $r['scope'];
-            $term_id   = (int) $r['term_id'];
-            if ( 'brand' === $scope_row || 'category' === $scope_row ) {
-                $tax      = ( 'brand' === $scope_row ) ? 'berocket_brand' : 'product_cat';
-                $term_row = get_term( $term_id, $tax );
-                if ( $term_row && ! is_wp_error( $term_row ) ) {
-                    $canonical_forms = [
-                        $term_row->slug,
-                        sanitize_title( $term_row->name ),
-                        strtolower( remove_accents( $term_row->name ) ),
-                    ];
-                    $canonical_forms = array_unique( $canonical_forms );
-                    $map[ $synonym ] = array_unique( array_merge( $map[ $synonym ], $canonical_forms ) );
+        }
+
+        /*
+         * 1a) BRAND / CATEGORY: canonical → synonyms expansion when bidi=1 (even when
+         * the query is not an exact brand/category match). This ensures that
+         * canonical tokens like "vapes" or "jeeter" also include their
+         * configured synonyms (e.g., "vape pen", "vape") when the synonym
+         * record is marked bidirectional. Without this step, only
+         * exact-term searches would expand canonical names to synonyms.
+         */
+        // Fetch all bidi=1 brand/category synonym rows.
+        $rows_bidi = $wpdb->get_results(
+            "SELECT scope, term_id, synonym FROM {$syn_table} WHERE active=1 AND scope IN ('brand','category') AND bidi=1",
+            ARRAY_A
+        );
+        if ( ! empty( $rows_bidi ) ) {
+            // Group synonyms and canonical forms by term_id for efficient lookup.
+            $syn_by_term    = [];
+            $canonical_by_term = [];
+            foreach ( $rows_bidi as $row ) {
+                $t_id   = (int) $row['term_id'];
+                $scope_row = $row['scope'];
+                $syn_norm  = strtolower( remove_accents( $row['synonym'] ) );
+                $syn_by_term[ $t_id ][] = $syn_norm;
+                // We'll capture canonical forms below.
+                if ( ! isset( $canonical_by_term[ $t_id ] ) ) {
+                    $tax                  = ( 'brand' === $scope_row ) ? 'berocket_brand' : 'product_cat';
+                    $term_row             = get_term( $t_id, $tax );
+                    if ( $term_row && ! is_wp_error( $term_row ) ) {
+                        $canonical_forms = [
+                            $term_row->slug,
+                            sanitize_title( $term_row->name ),
+                            strtolower( remove_accents( $term_row->name ) ),
+                        ];
+                        $canonical_by_term[ $t_id ] = array_unique( $canonical_forms );
+                    }
+                }
+            }
+            // For each token, if it matches any canonical form for a term, add that term's synonyms.
+            foreach ( $canonical_by_term as $term_id => $canon_forms ) {
+                if ( empty( $syn_by_term[ $term_id ] ) ) {
+                    continue;
+                }
+                foreach ( $canon_forms as $canon ) {
+                    foreach ( $tokens as $t ) {
+                        if ( $canon === $t ) {
+                            // Append synonyms to this token's variant list.
+                            foreach ( $syn_by_term[ $term_id ] as $syn_tok ) {
+                                if ( ! in_array( $syn_tok, $map[ $t ], true ) ) {
+                                    $map[ $t ][] = $syn_tok;
+                                }
+                            }
+                            // No need to check other canonical forms once matched.
+                            break;
+                        }
+                    }
                 }
             }
         }

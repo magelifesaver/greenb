@@ -25,7 +25,7 @@ if ( isset( $_POST['aaa_oc_settings_submit'] ) && check_admin_referer( 'aaa_oc_s
 	aaa_oc_set_option( 'aaa_oc_show_countdown_bar', $show_countdown_bar, 'workflow' );
 	aaa_oc_set_option( 'aaa_oc_disable_polling', $disable_polling, 'workflow' );
 
-	echo '<div class="notice notice-success"><p>' . esc_html__( 'Workflow settings saved.', 'aaa-order-workflow' ) . '</p></div>';
+	echo '<div class="notice notice-success"><p>' . esc_html__( 'Workflow settings saved.', 'aaa-oc' ) . '</p></div>';
 }
 
 // --- Load current values ---
@@ -36,13 +36,13 @@ $disable_polling  = aaa_oc_get_option( 'aaa_oc_disable_polling', 'workflow', 0 )
 ?>
 
 <div class="wrap">
-	<h2><?php esc_html_e( 'Workflow Settings', 'aaa-order-workflow' ); ?></h2>
+	<h2><?php esc_html_e( 'Workflow Settings', 'aaa-oc' ); ?></h2>
 	<form method="post">
 		<?php wp_nonce_field( 'aaa_oc_settings_nonce' ); ?>
 
 		<table class="form-table">
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Board Status Visibility', 'aaa-order-workflow' ); ?></th>
+				<th scope="row"><?php esc_html_e( 'Board Status Visibility', 'aaa-oc' ); ?></th>
 				<td>
 					<?php foreach ( $all_wc_statuses as $slug => $label ) : ?>
 						<div style="margin-bottom:6px;">
@@ -59,21 +59,21 @@ $disable_polling  = aaa_oc_get_option( 'aaa_oc_disable_polling', 'workflow', 0 )
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Show Polling Countdown Bar', 'aaa-order-workflow' ); ?></th>
+				<th scope="row"><?php esc_html_e( 'Show Polling Countdown Bar', 'aaa-oc' ); ?></th>
 				<td>
 					<label>
 						<input type="checkbox" name="aaa_oc_show_countdown_bar" value="1" <?php checked( $show_bar, 1 ); ?> />
-						<?php esc_html_e( 'Display top countdown on the board page', 'aaa-order-workflow' ); ?>
+						<?php esc_html_e( 'Display top countdown on the board page', 'aaa-oc' ); ?>
 					</label>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Disable Polling (Development)', 'aaa-order-workflow' ); ?></th>
+				<th scope="row"><?php esc_html_e( 'Disable Polling (Development)', 'aaa-oc' ); ?></th>
 				<td>
 					<label>
 						<input type="checkbox" name="aaa_oc_disable_polling" value="1" <?php checked( $disable_polling, 1 ); ?> />
-						<?php esc_html_e( 'Stop board auto-refresh / polling', 'aaa-order-workflow' ); ?>
+						<?php esc_html_e( 'Stop board auto-refresh / polling', 'aaa-oc' ); ?>
 					</label>
 				</td>
 			</tr>
@@ -81,7 +81,7 @@ $disable_polling  = aaa_oc_get_option( 'aaa_oc_disable_polling', 'workflow', 0 )
 
 		<p class="submit">
 			<button type="submit" name="aaa_oc_settings_submit" class="button button-primary">
-				<?php esc_html_e( 'Save Settings', 'aaa-order-workflow' ); ?>
+				<?php esc_html_e( 'Save Settings', 'aaa-oc' ); ?>
 			</button>
 		</p>
 	</form>

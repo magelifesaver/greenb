@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAA OC AIP Indexer Bridge
  * Description: Bridges the AAA Order Workflow and AIP AI Integration Assistant plugins.  This loader exposes WooCommerce orders to the AIP indexer, synchronises order metadata for indexing, limits indexing to recent and relevant orders, caches AIP update checks, and provides a debug interface.  Designed for backend use only.
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: AI Assistant
  *
  * File: /wp-content/plugins/aaa-oc-aip-indexer.php
@@ -48,6 +48,7 @@ require_once dirname( __FILE__ ) . '/aaa-oc-aip-indexer-customer-summary.php';
 // processed via cron or front‑end actions.  The class itself checks
 // post types before acting.
 require_once dirname( __FILE__ ) . '/aaa-oc-aip-indexer-payconfirm-summary.php';
+require_once dirname( __FILE__ ) . '/aaa-oc-aip-indexer-product-meta.php';
 
 // Include the debug module only in the admin area.
 if ( is_admin() ) {

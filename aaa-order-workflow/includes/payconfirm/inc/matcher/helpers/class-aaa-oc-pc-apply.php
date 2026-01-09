@@ -39,6 +39,9 @@ class AAA_OC_PC_Apply {
 		// remember payer handle(s) per user (multiple aliases per method)
 		if ( $order = wc_get_order( $order_id ) ) {
 			if ( $uid = $order->get_user_id() ) {
+                                // NEW: store user ID on payconfirm and update author
+                                update_post_meta( $post_id, '_pc_user_id', $uid );
+                                wp_update_post( [ 'ID' => $post_id, 'post_author' => $uid ] );
 				$map = get_user_meta( $uid, 'aaa_oc_pay_accounts', true );
 				if ( ! is_array( $map ) ) { $map = []; }
 

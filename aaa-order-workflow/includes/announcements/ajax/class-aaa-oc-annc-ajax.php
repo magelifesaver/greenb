@@ -93,7 +93,7 @@ class AAA_OC_Announcements_Ajax {
             'id'      => (int) $row->id,
             'title'   => $row->title,
             'content' => wp_kses_post( $row->content ),
-            'footer'  => __( 'By checking this box you confirm you have read this update and are up to date with the new changes.', 'aaa-order-workflow' ),
+            'footer'  => __( 'By checking this box you confirm you have read this update and are up to date with the new changes.', 'aaa-oc' ),
         ] );
     }
 

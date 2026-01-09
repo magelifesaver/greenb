@@ -16,8 +16,8 @@ class AAA_OC_Core_Settings_Page {
 	public static function add_menu() {
 		add_submenu_page(
 			'aaa-oc-workflow-board',
-			__( 'Workflow Settings', 'aaa-order-workflow' ),
-			__( 'Workflow Settings', 'aaa-order-workflow' ),
+			'Workflow Settings',
+			'Workflow Settings',
 			'manage_woocommerce',
 			'aaa-oc-core-settings',
 			[ __CLASS__, 'render' ]
@@ -33,7 +33,7 @@ class AAA_OC_Core_Settings_Page {
 			? sanitize_key( $_GET['tab'] )
 			: ( array_key_first( $tabs ) ?: '' );
 
-		echo '<div class="wrap"><h1>' . esc_html__( 'Workflow Settings', 'aaa-order-workflow' ) . '</h1>';
+		echo '<div class="wrap"><h1>Workflow Settings</h1>';
 
 		// --- Tabs navigation ---
 		echo '<h2 class="nav-tab-wrapper">';
@@ -51,7 +51,7 @@ class AAA_OC_Core_Settings_Page {
 		if ( isset( $tabs[ $active ]['file'] ) && file_exists( $tabs[ $active ]['file'] ) ) {
 			include $tabs[ $active ]['file'];
 		} else {
-			echo '<p>' . esc_html__( 'No settings available.', 'aaa-order-workflow' ) . '</p>';
+			echo '<p>No settings available.</p>';
 		}
 
 		echo '</div>';

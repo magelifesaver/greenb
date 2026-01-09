@@ -98,7 +98,7 @@ final class AAA_OC_AdbDel_Loader {
 
 	public function render_admin_tools() {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'aaa-order-workflow' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'aaa-oc' ) );
 		}
 		$nonce = wp_create_nonce( 'aaa_oc_adbdel_reset' );
 		?>
@@ -116,7 +116,7 @@ final class AAA_OC_AdbDel_Loader {
 
 	public function handle_admin_reset() {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			wp_die( esc_html__( 'Insufficient permissions.', 'aaa-order-workflow' ) );
+			wp_die( esc_html__( 'Insufficient permissions.', 'aaa-oc' ) );
 		}
 		check_admin_referer( 'aaa_oc_adbdel_reset' );
 

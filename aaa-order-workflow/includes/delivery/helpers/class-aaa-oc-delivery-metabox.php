@@ -23,7 +23,7 @@ final class AAA_OC_Delivery_Metabox {
 	public static function register() : void {
 		add_meta_box(
 			'aaa-oc-delivery-metabox',
-			__( 'Delivery Date & Time', 'aaa-order-workflow' ),
+			__( 'Delivery Date & Time', 'aaa-oc' ),
 			[ __CLASS__, 'render' ],
 			'shop_order',
 			'side',
@@ -62,17 +62,17 @@ final class AAA_OC_Delivery_Metabox {
 		}
 
 		?>
-		<p><strong><?php esc_html_e( 'Delivery date', 'aaa-order-workflow' ); ?></strong><br>
+		<p><strong><?php esc_html_e( 'Delivery date', 'aaa-oc' ); ?></strong><br>
 			<input type="date" name="aaa_delivery_date" value="<?php echo esc_attr( $date ); ?>" style="width:100%;">
 		</p>
 
-		<p><strong><?php esc_html_e( 'From time', 'aaa-order-workflow' ); ?></strong><br>
+		<p><strong><?php esc_html_e( 'From time', 'aaa-oc' ); ?></strong><br>
 			<select name="aaa_delivery_time_from" style="width:100%;">
 				<?php echo self::build_time_options( '10:00', '22:00', '15 minutes', $fromH ); ?>
 			</select>
 		</p>
 
-		<p><strong><?php esc_html_e( 'To time', 'aaa-order-workflow' ); ?></strong><br>
+		<p><strong><?php esc_html_e( 'To time', 'aaa-oc' ); ?></strong><br>
 			<select name="aaa_delivery_time_to" style="width:100%;">
 				<?php echo self::build_time_options( '10:00', '22:00', '15 minutes', $toH ); ?>
 			</select>

@@ -19,8 +19,8 @@ if ( ! class_exists( 'AAA_OC_Board' ) ) {
 
 public function add_board_submenu() {
 	add_menu_page(
-		__( 'Workflow', 'aaa-order-workflow' ),
-		__( 'Workflow', 'aaa-order-workflow' ),
+		__( 'Workflow', 'aaa-oc' ),
+		__( 'Workflow', 'aaa-oc' ),
 		'manage_woocommerce',
 		'aaa-oc-workflow-board',
 		[ $this, 'render_workflow_board' ],
@@ -30,8 +30,8 @@ public function add_board_submenu() {
 
 	add_submenu_page(
 		'aaa-oc-workflow-board',
-		__( 'Workflow Board', 'aaa-order-workflow' ),
-		__( 'Workflow Board', 'aaa-order-workflow' ),
+		__( 'Workflow Board', 'aaa-oc' ),
+		__( 'Workflow Board', 'aaa-oc' ),
 		'manage_woocommerce',
 		'aaa-oc-workflow-board',
 		[ $this, 'render_workflow_board' ]
@@ -45,7 +45,7 @@ public function add_board_submenu() {
         public function render_workflow_board() {
             ?>
             <div class="wrap">
-                <h1><?php esc_html_e( 'Workflow Board', 'aaa-order-workflow' ); ?></h1>
+                <h1><?php esc_html_e( 'Workflow Board', 'aaa-oc' ); ?></h1>
                 
                 <!-- Board Columns Wrapper -->
                 <div id="aaa-oc-board-columns" style="display:flex; gap:1rem; overflow-x:auto; margin-top:1rem;">

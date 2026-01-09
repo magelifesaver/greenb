@@ -4,8 +4,7 @@
  * Description: Displays a workflow board using existing WooCommerce statuses, partial DOM updates for new orders. Includes a countdown bar toggle in settings, dynamic columns, and a popup-based order expansion.
  * Version:     1.5.0
  * Author:      Webmaster Delivery
- * Text Domain: aaa-order-workflow
- * Domain Path: /languages
+ * Text Domain: aaa-oc
  *
  * File: /wp-content/plugins/aaa-order-workflow/aaa-order-workflow.php
  */
@@ -23,7 +22,7 @@ function aaa_oc_check_woocommerce_active() {
 	}
 }
 function aaa_oc_show_wc_required_notice() {
-	echo '<div class="error"><p>' . esc_html__( 'AAA Order Workflow requires WooCommerce to be installed and active.', 'aaa-order-workflow' ) . '</p></div>';
+	echo '<div class="error"><p>' . esc_html__( 'AAA Order Workflow requires WooCommerce to be installed and active.', 'aaa-oc' ) . '</p></div>';
 }
 
 /* -------------------------------------------------------------
@@ -130,7 +129,7 @@ require_once AAA_OC_PLUGIN_DIR . 'includes/productsearch/aaa-oc-productsearch-as
 require_once AAA_OC_PLUGIN_DIR . 'includes/productsearch/aaa-oc-productsearch-loader.php';
 
 /*  forcast  */
-require_once AAA_OC_PLUGIN_DIR . 'includes/forcast/aaa-oc-forcast-assets-loader.php';
+//require_once AAA_OC_PLUGIN_DIR . 'includes/forcast/aaa-oc-forcast-assets-loader.php';
 require_once AAA_OC_PLUGIN_DIR . 'includes/forcast/aaa-oc-forcast-loader.php';
 
 /* Board modules / options / helpers */
@@ -366,6 +365,6 @@ add_action( 'admin_bar_menu', function( $wp_admin_bar ) {
  * ------------------------------------------------------------- */
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function( $links ) {
 	$settings_url = admin_url( 'admin.php?page=aaa-oc-core-settings' );
-	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-order-workflow' ) . '</a>' );
+	array_unshift( $links, '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'aaa-oc' ) . '</a>' );
 	return $links;
 } );

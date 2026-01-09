@@ -12,7 +12,7 @@
  * Adds a WooCommerce order note recording who saved the payment and when.
  * Mirrors a Dispatch Note into the payment_index table so it appears in the expanded card.
  *
- * Version: 1.0.4
+ * Version: 1.0.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -52,29 +52,29 @@ class AAA_OC_Ajax_Payment_Update {
         $old_notes  = $existing['payment_admin_notes'] ?? '';
         $old_status = $existing['aaa_oc_payment_status'] ?? '';
 
-        // Append any manual admin note
-        $new_note_input = sanitize_textarea_field( $_POST['new_admin_note'] ?? '' );
-        if ( $new_note_input !== '' ) {
-            $timestamp = current_time( 'Y-m-d H:i:s' );
-            $user      = wp_get_current_user()->display_name;
-            $entry     = sprintf( "[%s] %s: %s", $timestamp, $user, $new_note_input );
-            $updated_notes = $old_notes ? "{$old_notes}\n{$entry}" : $entry;
+	// Append any manual admin note
+	$new_note_input = sanitize_textarea_field( $_POST['new_admin_note'] ?? '' );
+	if ( $new_note_input !== '' ) {
+	    $timestamp = current_time( 'Y-m-d H:i:s' );
+	    $user      = wp_get_current_user()->display_name;
+	    $entry     = sprintf( "[%s] %s: %s", $timestamp, $user, $new_note_input );
+	    $updated_notes = $old_notes ? "{$old_notes}\n{$entry}" : $entry;
 
-            // — Save Dispatch Note as a WooCommerce Order Note —
-            $order = wc_get_order( $order_id );
-            if ( $order ) {
-                $order->add_order_note(
-                    sprintf(
-                        'Dispatch note added by %s at %s: %s',
-                        $user,
-                        $timestamp,
-                        $new_note_input
-                    )
-                );
-            }
-        } else {
-            $updated_notes = $old_notes;
-        }
+	    // — Save Dispatch Note as a WooCommerce Order Note —
+	    $order = wc_get_order( $order_id );
+	    if ( $order ) {
+	        $order->add_order_note(
+	            sprintf(
+	                'Dispatch note added by %s at %s: %s',
+	                $user,
+	                $timestamp,
+	                $new_note_input
+	            )
+	        );
+	    }
+	} else {
+	    $updated_notes = $old_notes;
+	}
 
         // Payment data payload
         $tip_meta = (float) get_post_meta( $order_id, '_wpslash_tip', true );
@@ -100,29 +100,29 @@ class AAA_OC_Ajax_Payment_Update {
             'envelope_outstanding'      => intval( $_POST['envelope_outstanding'] ?? 0 ),
             'last_updated_by'           => wp_get_current_user()->user_login,
         ];
-        // Determine real payment method from the just-submitted amounts
-        $amount_map = [
-            'Zelle'       => $data['aaa_oc_zelle_amount'],
-            'Cash'        => $data['aaa_oc_cash_amount'],
-            'Venmo'       => $data['aaa_oc_venmo_amount'],
-            'ApplePay'    => $data['aaa_oc_applepay_amount'],
-            'CashApp'     => $data['aaa_oc_cashapp_amount'],
-            'Credit Card' => $data['aaa_oc_creditcard_amount'],
-        ];
+	// Determine real payment method from the just-submitted amounts
+	$amount_map = [
+	    'Zelle'       => $data['aaa_oc_zelle_amount'],
+	    'Cash'        => $data['aaa_oc_cash_amount'],
+	    'Venmo'       => $data['aaa_oc_venmo_amount'],
+	    'ApplePay'    => $data['aaa_oc_applepay_amount'],
+	    'CashApp'     => $data['aaa_oc_cashapp_amount'],
+	    'Credit Card' => $data['aaa_oc_creditcard_amount'],
+	];
 
-        $nonzero = array_filter( $amount_map, static function( $v ) { return $v > 0; } );
+	$nonzero = array_filter( $amount_map, static function( $v ) { return $v > 0; } );
 
-        if ( count( $nonzero ) === 1 ) {
-            $real_payment_method = array_key_first( $nonzero );
-        } elseif ( count( $nonzero ) > 1 ) {
-            $max = max( $nonzero );
-            $real_payment_method = array_search( $max, $nonzero, true );
-        } else {
-            $order = isset($order) && $order ? $order : wc_get_order( $order_id );
-            $real_payment_method = $order ? (string) $order->get_payment_method() : '';
-        }
+	if ( count( $nonzero ) === 1 ) {
+	    $real_payment_method = array_key_first( $nonzero );
+	} elseif ( count( $nonzero ) > 1 ) {
+	    $max = max( $nonzero );
+	    $real_payment_method = array_search( $max, $nonzero, true );
+	} else {
+	    $order = isset($order) && $order ? $order : wc_get_order( $order_id );
+	    $real_payment_method = $order ? (string) $order->get_payment_method() : '';
+	}
 
-        $data['real_payment_method'] = $real_payment_method;
+	$data['real_payment_method'] = $real_payment_method;
 
         // Insert or update payment_index
         $exists = (int) $wpdb->get_var( $wpdb->prepare(
@@ -139,21 +139,26 @@ class AAA_OC_Ajax_Payment_Update {
             $wpdb->insert( $payment_table, $data );
         }
 
-        // Mirror only consolidated fields to post meta (force update even if 0)
+	// Mirror key fields to post meta (force update even if 0)
         foreach ( [
+            'aaa_oc_cash_amount',
+            'aaa_oc_zelle_amount',
+            'aaa_oc_venmo_amount',
+            'aaa_oc_cashapp_amount',
+            'aaa_oc_applepay_amount',
+            'aaa_oc_creditcard_amount',
             'aaa_oc_epayment_total',
             'aaa_oc_payrec_total',
             'aaa_oc_order_balance',
-            'aaa_oc_tip_total',
             'epayment_tip',
             'total_order_tip',
             'aaa_oc_payment_status',
             'payment_admin_notes',
-            'envelope_outstanding',
-            'cleared',
+   	    'envelope_outstanding',
+	    'cleared',              // and ensure cleared behaves the same
         ] as $key ) {
-            update_post_meta( $order_id, $key, $data[ $key ] ?? '' );
-        }
+    update_post_meta( $order_id, $key, $data[ $key ] ?? '' );
+	}
 
         // --- Sync WooCommerce paid state with Workflow payment status ---
         $order = wc_get_order( $order_id );
@@ -277,7 +282,6 @@ class AAA_OC_Ajax_Payment_Update {
                 }
             }
         }
-        // End auto-note section
 
         error_log('[AAA_OC] ✅ handle_payment_update() complete');
         wp_send_json_success();
