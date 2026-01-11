@@ -73,10 +73,14 @@ add_action( 'rest_api_init', function () {
                 unset( $body['atum_location_id'] );
             }
 
-            $loc_norm = lokey_inv_normalize_atum_locations( $loc_raw );
-            if ( ! is_null( $loc_norm ) ) {
-                $atum_update['atum_locations'] = $loc_norm;
-            }
+						if ( is_null( $loc_raw ) ) {
+						    $loc_raw = 1194;
+						}
+
+						$loc_norm = lokey_inv_normalize_atum_locations( $loc_raw );
+						if ( ! is_null( $loc_norm ) ) {
+						    $atum_update['atum_locations'] = $loc_norm;
+						}
 
             // Defaults & Safety
             $body['type']           = $body['type'] ?? 'simple';
@@ -139,6 +143,10 @@ add_action( 'rest_api_init', function () {
                 if ( ! empty( $primary ) ) {
 
                     $image_url = esc_url_raw( $primary );
+										if ( strpos( $image_url, '?' ) !== false ) {
+										    $image_url = strtok( $image_url, '?' );
+										}
+
 
                     // Normalize product name for SEO-safe filenames
                     $raw_name     = $data['name'] ?? ( $body['name'] ?? 'product-image' );
@@ -191,6 +199,10 @@ add_action( 'rest_api_init', function () {
 
                                     foreach ( array_slice( $images, 1 ) as $img ) {
                                         $gallery_url = esc_url_raw( $img['src'] ?? '' );
+																				if ( strpos( $gallery_url, '?' ) !== false ) {
+																				    $gallery_url = strtok( $gallery_url, '?' );
+																				}
+
                                         if ( empty( $gallery_url ) ) {
                                             continue;
                                         }
@@ -384,6 +396,10 @@ add_action( 'rest_api_init', function () {
                 if ( ! empty( $primary ) ) {
 
                     $image_url = esc_url_raw( $primary );
+										if ( strpos( $image_url, '?' ) !== false ) {
+										    $image_url = strtok( $image_url, '?' );
+										}
+
                     $raw_name  = $data['name'] ?? ( $body['name'] ?? 'product-image' );
                     $product_name = sanitize_file_name( sanitize_title_with_dashes( $raw_name ) );
                     $file_ext = strtolower( pathinfo( parse_url( $image_url, PHP_URL_PATH ), PATHINFO_EXTENSION ) ?: 'jpg' );
