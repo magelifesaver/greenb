@@ -143,10 +143,9 @@ add_action( 'rest_api_init', function () {
                 if ( ! empty( $primary ) ) {
 
                     $image_url = esc_url_raw( $primary );
-										if ( strpos( $image_url, '?' ) !== false ) {
-										    $image_url = strtok( $image_url, '?' );
-										}
-
+                    if ( strpos( $image_url, '?' ) !== false ) {
+                        $image_url = strtok( $image_url, '?' );
+                    }
 
                     // Normalize product name for SEO-safe filenames
                     $raw_name     = $data['name'] ?? ( $body['name'] ?? 'product-image' );
@@ -191,40 +190,47 @@ add_action( 'rest_api_init', function () {
                                 ] );
 
                                 update_post_meta( $image_id, '_source_image_url', $image_url );
-																$orig_basename = wp_basename( parse_url( $image_url, PHP_URL_PATH ) );
 
-																if ( ! empty( $orig_basename ) ) {
+                                $dupes = get_posts( [
+                                    'post_type'      => 'attachment',
+                                    'posts_per_page' => 20,
+                                    'fields'         => 'ids',
+                                    'meta_query'     => [
+                                        [
+                                            'key'   => '_source_image_url',
+                                            'value' => $image_url,
+                                        ],
+                                    ],
+                                ] );
 
-																$dupes = get_posts( [
-																    'post_type'      => 'attachment',
-																    'post_parent'    => 0,
-																    'posts_per_page' => 20,
-																    'fields'         => 'ids',
-																    'meta_query'     => [
-																        'relation' => 'OR',
-																        [
-																            'key'     => '_wp_attached_file',
-																            'value'   => $orig_basename,
-																            'compare' => 'LIKE',
-																        ],
-																        [
-																            'key'     => '_source_image_url',
-																            'value'   => $image_url,
-																            'compare' => '=',
-																        ],
-																    ],
-																] );
+                                if ( ! empty( $dupes ) ) {
+                                    foreach ( $dupes as $dup_id ) {
+                                        $dup_id = absint( $dup_id );
+                                        if ( ! $dup_id || $dup_id === absint( $image_id ) ) {
+                                            continue;
+                                        }
 
-																    if ( ! empty( $dupes ) ) {
-																        foreach ( $dupes as $dup_id ) {
-																            $dup_id = absint( $dup_id );
-																            if ( $dup_id && $dup_id !== absint( $image_id ) ) {
-																                wp_delete_attachment( $dup_id, true );
-																            }
-																        }
-																    }
-																}
+                                        $parent_id = (int) wp_get_post_parent_id( $dup_id );
 
+                                        // If attached to another product, remove references first.
+                                        if ( $parent_id > 0 && $parent_id !== (int) $id ) {
+
+                                            $thumb_id = (int) get_post_thumbnail_id( $parent_id );
+                                            if ( $thumb_id === $dup_id ) {
+                                                delete_post_thumbnail( $parent_id );
+                                            }
+
+                                            $gallery = (string) get_post_meta( $parent_id, '_product_image_gallery', true );
+                                            if ( $gallery !== '' ) {
+                                                $ids = array_filter( array_map( 'absint', explode( ',', $gallery ) ) );
+                                                $ids = array_values( array_diff( $ids, [ $dup_id ] ) );
+                                                update_post_meta( $parent_id, '_product_image_gallery', implode( ',', $ids ) );
+                                            }
+                                        }
+
+                                        wp_delete_attachment( $dup_id, true );
+                                    }
+                                }
 
                                 // Optional gallery images beyond the first
                                 if ( count( $images ) > 1 ) {
@@ -233,9 +239,9 @@ add_action( 'rest_api_init', function () {
 
                                     foreach ( array_slice( $images, 1 ) as $img ) {
                                         $gallery_url = esc_url_raw( $img['src'] ?? '' );
-																				if ( strpos( $gallery_url, '?' ) !== false ) {
-																				    $gallery_url = strtok( $gallery_url, '?' );
-																				}
+                                        if ( strpos( $gallery_url, '?' ) !== false ) {
+                                            $gallery_url = strtok( $gallery_url, '?' );
+                                        }
 
                                         if ( empty( $gallery_url ) ) {
                                             continue;
@@ -430,13 +436,13 @@ add_action( 'rest_api_init', function () {
                 if ( ! empty( $primary ) ) {
 
                     $image_url = esc_url_raw( $primary );
-										if ( strpos( $image_url, '?' ) !== false ) {
-										    $image_url = strtok( $image_url, '?' );
-										}
+                    if ( strpos( $image_url, '?' ) !== false ) {
+                        $image_url = strtok( $image_url, '?' );
+                    }
 
-                    $raw_name  = $data['name'] ?? ( $body['name'] ?? 'product-image' );
+                    $raw_name     = $data['name'] ?? ( $body['name'] ?? 'product-image' );
                     $product_name = sanitize_file_name( sanitize_title_with_dashes( $raw_name ) );
-                    $file_ext = strtolower( pathinfo( parse_url( $image_url, PHP_URL_PATH ), PATHINFO_EXTENSION ) ?: 'jpg' );
+                    $file_ext     = strtolower( pathinfo( parse_url( $image_url, PHP_URL_PATH ), PATHINFO_EXTENSION ) ?: 'jpg' );
 
                     $existing = get_posts( [
                         'post_type'      => 'attachment',
@@ -471,40 +477,47 @@ add_action( 'rest_api_init', function () {
                                 ] );
 
                                 update_post_meta( $image_id, '_source_image_url', $image_url );
-																$orig_basename = wp_basename( parse_url( $image_url, PHP_URL_PATH ) );
 
-																if ( ! empty( $orig_basename ) ) {
+                                $dupes = get_posts( [
+                                    'post_type'      => 'attachment',
+                                    'posts_per_page' => 20,
+                                    'fields'         => 'ids',
+                                    'meta_query'     => [
+                                        [
+                                            'key'   => '_source_image_url',
+                                            'value' => $image_url,
+                                        ],
+                                    ],
+                                ] );
 
-																$dupes = get_posts( [
-																    'post_type'      => 'attachment',
-																    'post_parent'    => 0,
-																    'posts_per_page' => 20,
-																    'fields'         => 'ids',
-																    'meta_query'     => [
-																        'relation' => 'OR',
-																        [
-																            'key'     => '_wp_attached_file',
-																            'value'   => $orig_basename,
-																            'compare' => 'LIKE',
-																        ],
-																        [
-																            'key'     => '_source_image_url',
-																            'value'   => $image_url,
-																            'compare' => '=',
-																        ],
-																    ],
-																] );
+                                if ( ! empty( $dupes ) ) {
+                                    foreach ( $dupes as $dup_id ) {
+                                        $dup_id = absint( $dup_id );
+                                        if ( ! $dup_id || $dup_id === absint( $image_id ) ) {
+                                            continue;
+                                        }
 
-																    if ( ! empty( $dupes ) ) {
-																        foreach ( $dupes as $dup_id ) {
-																            $dup_id = absint( $dup_id );
-																            if ( $dup_id && $dup_id !== absint( $image_id ) ) {
-																                wp_delete_attachment( $dup_id, true );
-																            }
-																        }
-																    }
-																}
+                                        $parent_id = (int) wp_get_post_parent_id( $dup_id );
 
+                                        // If attached to another product, remove references first.
+                                        if ( $parent_id > 0 && $parent_id !== (int) $id ) {
+
+                                            $thumb_id = (int) get_post_thumbnail_id( $parent_id );
+                                            if ( $thumb_id === $dup_id ) {
+                                                delete_post_thumbnail( $parent_id );
+                                            }
+
+                                            $gallery = (string) get_post_meta( $parent_id, '_product_image_gallery', true );
+                                            if ( $gallery !== '' ) {
+                                                $ids = array_filter( array_map( 'absint', explode( ',', $gallery ) ) );
+                                                $ids = array_values( array_diff( $ids, [ $dup_id ] ) );
+                                                update_post_meta( $parent_id, '_product_image_gallery', implode( ',', $ids ) );
+                                            }
+                                        }
+
+                                        wp_delete_attachment( $dup_id, true );
+                                    }
+                                }
 
                             } else {
                                 @unlink( $file_array['tmp_name'] );
