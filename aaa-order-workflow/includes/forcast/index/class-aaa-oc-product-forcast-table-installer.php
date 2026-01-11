@@ -1,43 +1,88 @@
 <?php
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forcast/index/class-aaa-oc-product-forcast-table-installer.php
- * Purpose: Handles the creation and update of the product forcast table.
+ * Purpose: Create or update the product forecast table. This installer ensures
+ *          the `aaa_oc_product_forcast` table exists using dbDelta. It
+ *          registers hooks on `admin_init` and `aaa_oc_module_install` so the
+ *          table can be created on demand or during plugin updates.
  * Version: 0.1.0
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 /**
  * Class AAA_OC_Product_Forcast_Table_Installer
  *
- * Responsible for installing and updating the `aaa_oc_product_forcast` table.
+ * Handles installation and upgrades of the forecast table. Mirrored after
+ * other AAA Order Workflow installers (e.g., ProductSearch) to ensure
+ * consistency and safe, idempotent execution.
  */
 class AAA_OC_Product_Forcast_Table_Installer {
 
     /**
-     * Bootstraps installation hooks.
+     * Guards against multiple installs in the same request.
+     *
+     * @var bool
      */
-    public static function init() {
-        add_action( 'plugins_loaded', [ __CLASS__, 'maybe_install_table' ], 1 );
+    private static $did = false;
+
+    /**
+     * Register hooks for installation on admin_init and module install events.
+     * Should be called during plugins_loaded to wire the installer.
+     */
+    public static function init() : void {
+        add_action( 'admin_init', [ __CLASS__, 'maybe_install' ], 5 );
+        add_action( 'aaa_oc_module_install', [ __CLASS__, 'install' ], 10 );
     }
 
     /**
-     * Checks and installs/updates the custom table as needed.
+     * Ensure the forecast table exists. This method is a thin wrapper around
+     * install() to mirror upstream installers which expose maybe_install().
      */
-    public static function maybe_install_table() {
+    public static function maybe_install() : void {
+        self::install();
+    }
+
+    /**
+     * Create or update the forecast table. Uses dbDelta under the hood so
+     * repeated calls are safe. Early returns if already run in this request.
+     */
+    public static function install() : void {
+        if ( self::$did ) {
+            return;
+        }
+        self::$did = true;
+
         global $wpdb;
-        $table_name = AAA_OC_PRODUCT_FORCAST_TABLE;
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+        $table          = AAA_OC_PRODUCT_FORCAST_TABLE;
         $charset_collate = $wpdb->get_charset_collate();
 
-        // Example SQL; adapt fields as necessary when implementing.
-        $sql = "CREATE TABLE $table_name (
-            id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-            product_id BIGINT(20) UNSIGNED NOT NULL,
-            min_qty BIGINT(20) UNSIGNED DEFAULT 0,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        // Core table structure: id, product reference, quantity, supplier reference and timestamp.
+        $sql = "CREATE TABLE {$table} (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            product_id BIGINT UNSIGNED NOT NULL,
+            qty BIGINT UNSIGNED NOT NULL DEFAULT 1,
+            supplier_id BIGINT UNSIGNED NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
-            KEY product_id (product_id)
-        ) $charset_collate;";
+            KEY idx_product_id (product_id),
+            KEY idx_supplier_id (supplier_id)
+        ) ENGINE=InnoDB {$charset_collate};";
 
-        // TODO: Use dbDelta() to execute the SQL when implementing.
+        dbDelta( $sql );
+
+        // Optional debug logging.
+        if ( defined( 'AAA_OC_FORCAST_DEBUG' ) && AAA_OC_FORCAST_DEBUG ) {
+            $msg = '[FORCAST][INSTALLER] ensured forecast table: ' . $table;
+            if ( function_exists( 'aaa_oc_log' ) ) {
+                aaa_oc_log( $msg );
+            } else {
+                error_log( $msg );
+            }
+        }
     }
 }

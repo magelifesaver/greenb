@@ -1,0 +1,1993 @@
+openapi: 3.1.0
+info:
+  title: Product Enrichments Manager
+  version: 1.6.0
+  description: 'API used by the Product Creator agent to:
+
+
+    - Authenticate (JWT)
+
+
+    - Discover reference data (categories, brands, ATUM locations, suppliers)
+
+
+    - Create/update WooCommerce products (with image sideload + brand assignment)
+
+
+    - Update ATUM fields (purchase_price, supplier_id, locations) so they land in wp_atum_product_data
+
+
+    - Manage WooCommerce global attributes + attribute terms (create/update/delete)
+
+    '
+servers:
+- url: https://lokeydelivery.com/wp-json
+tags:
+- name: Auth
+- name: Reference Data
+- name: Products
+- name: ATUM
+- name: Attributes
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    TokenRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user_email:
+          type: string
+        user_nicename:
+          type: string
+        user_display_name:
+          type: string
+    TermRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        parent:
+          type: integer
+    AtumLocationRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+    InventoryAtumUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        purchase_price:
+          type: number
+          description: ATUM purchase price (writes to wp_atum_product_data).
+        supplier_id:
+          type: integer
+          description: ATUM supplier post ID (writes to wp_atum_product_data).
+        stock_quantity:
+          type: integer
+          description: WooCommerce stock quantity.
+        atum_locations:
+          type: array
+          description: ATUM locations in REST shape (preferred).
+          items:
+            $ref: '#/components/schemas/AtumLocationRef'
+        location_ids:
+          type: array
+          description: Convenience alias. Will be converted to atum_locations.
+          items:
+            type: integer
+        atum_location_ids:
+          type: array
+          description: Convenience alias. Will be converted to atum_locations.
+          items:
+            type: integer
+        location_id:
+          type: integer
+          description: Convenience alias for a single location ID.
+        atum_location_id:
+          type: integer
+          description: Convenience alias for a single location ID.
+    ProductImageInput:
+      type: object
+      properties:
+        src:
+          type: string
+          description: Public image URL.
+    BrandInput:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: berocket_brand term ID.
+    ProductCategoryRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+    ProductAttributeInput:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Global attribute ID (from /attributes).
+        name:
+          type: string
+          description: Optional (Woo will include it on reads).
+        options:
+          type: array
+          items:
+            type: string
+    ProductExtendedUpsertRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        type:
+          type: string
+          description: Typically "simple".
+        status:
+          type: string
+          description: publish|draft|pending|private
+        regular_price:
+          type: string
+          description: Woo expects string prices.
+        discount_percent:
+          type: number
+          description: Convenience input. API will compute sale_price from regular_price.
+        description:
+          type: string
+        short_description:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategoryRef'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttributeInput'
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandInput'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImageInput'
+        purchase_price:
+          type: number
+        supplier_id:
+          type: integer
+        atum_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumLocationRef'
+        location_ids:
+          type: array
+          items:
+            type: integer
+        atum_location_ids:
+          type: array
+          items:
+            type: integer
+        location_id:
+          type: integer
+        atum_location_id:
+          type: integer
+    AttributeUpsertRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        type:
+          type: string
+          description: select|text
+        order_by:
+          type: string
+          description: menu_order|name|name_num|id
+        has_archives:
+          type: boolean
+    AttributeTermUpsertRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+          description: HTML description of the term.
+        menu_order:
+          type: integer
+          description: Menu order, used to custom sort the term.
+    AttributeTermBatchUpdateItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Term ID to update.
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+          description: HTML description of the term.
+        menu_order:
+          type: integer
+          description: Menu order, used to custom sort the term.
+      required:
+      - id
+    AttributeTermBatchRequest:
+      type: object
+      description: 'Batch create/update/delete attribute terms.
+
+
+        Supports either:
+
+        - Convenience create-only: { terms: [ ... ] }
+
+        - Woo-style batch: { create: [...], update: [...], delete: [...] }
+
+        '
+      additionalProperties: false
+      properties:
+        terms:
+          type: array
+          description: Convenience alias for create list.
+          items:
+            $ref: '#/components/schemas/AttributeTermUpsertRequest'
+        create:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeTermUpsertRequest'
+        update:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeTermBatchUpdateItem'
+        delete:
+          type: array
+          description: List of term IDs to delete.
+          items:
+            type: integer
+    AtumSupplier:
+      type: object
+      description: ATUM supplier (minimal shape). Additional fields may be present.
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        email:
+          type: string
+      required:
+      - id
+      additionalProperties: true
+    SuppliersListResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        count:
+          type: integer
+        filters:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumSupplier'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - data
+      additionalProperties: true
+    ProductLiteRow:
+      type: object
+      description: Compact product row returned by /products/search.
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        stock_status:
+          type: string
+        stock_quantity:
+          type: integer
+        category_ids:
+          type: array
+          items:
+            type: integer
+        brand_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - id
+      additionalProperties: true
+    ProductSearchLiteResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        search:
+          type: string
+        sku:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        count:
+          type: integer
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductLiteRow'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - rows
+      additionalProperties: true
+    WooProductObject:
+      type: object
+      description: WooCommerce product object (full payload). Shape depends on Woo version.
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+      additionalProperties: true
+    ProductGetResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        code:
+          type: integer
+        id:
+          type: integer
+        data:
+          $ref: '#/components/schemas/WooProductObject'
+        timestamp:
+          type: string
+        message:
+          type: string
+      required:
+      - status
+      - code
+      - id
+      additionalProperties: true
+    AtumAppliedResult:
+      type: object
+      description: Result of ATUM update helper. May include applied fields or an error object.
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        error:
+          type: string
+      additionalProperties: true
+    ProductExtendedUpsertResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        action:
+          type: string
+          enum:
+          - created
+          - updated
+        id:
+          type: integer
+        data:
+          $ref: '#/components/schemas/WooProductObject'
+        atum_applied:
+          $ref: '#/components/schemas/AtumAppliedResult'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - id
+      additionalProperties: true
+    AtumProductDataApplied:
+      type: object
+      description: Fields applied to ATUM product data update.
+      properties:
+        purchase_price:
+          type: number
+        supplier_id:
+          type: integer
+        stock_quantity:
+          type: integer
+        atum_locations:
+          type: array
+          items:
+            type: integer
+      additionalProperties: true
+    AtumInventoryUpdateResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        id:
+          type: integer
+        applied:
+          $ref: '#/components/schemas/AtumProductDataApplied'
+        result:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+        timestamp:
+          type: string
+        code:
+          type: integer
+      required:
+      - status
+      - id
+      additionalProperties: true
+    WooAttributeObject:
+      type: object
+      description: WooCommerce global attribute (minimal).
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        type:
+          type: string
+        order_by:
+          type: string
+        has_archives:
+          type: boolean
+      required:
+      - id
+      - name
+      additionalProperties: true
+    AttributesListResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        page:
+          type: integer
+        per_page:
+          type: integer
+        search:
+          type: string
+        count:
+          type: integer
+        lite:
+          type: boolean
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/WooAttributeObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - rows
+      additionalProperties: true
+    AttributeActionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        action:
+          type: string
+        data:
+          $ref: '#/components/schemas/WooAttributeObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      additionalProperties: true
+    AttributeSingleResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        method:
+          type: string
+        id:
+          type: integer
+        data:
+          $ref: '#/components/schemas/WooAttributeObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - id
+      additionalProperties: true
+    WooAttributeTermObject:
+      type: object
+      description: WooCommerce attribute term (minimal).
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        menu_order:
+          type: integer
+        count:
+          type: integer
+      required:
+      - id
+      - name
+      additionalProperties: true
+    AttributeTermsListResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        attribute_id:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        search:
+          type: string
+        count:
+          type: integer
+        lite:
+          type: boolean
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/WooAttributeTermObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - attribute_id
+      - rows
+      additionalProperties: true
+    AttributeTermActionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        action:
+          type: string
+        data:
+          $ref: '#/components/schemas/WooAttributeTermObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      additionalProperties: true
+    AttributeTermBatchResult:
+      type: object
+      description: Batch result returned by WooCommerce for attribute terms.
+      properties:
+        create:
+          type: array
+          items:
+            $ref: '#/components/schemas/WooAttributeTermObject'
+        update:
+          type: array
+          items:
+            $ref: '#/components/schemas/WooAttributeTermObject'
+        delete:
+          type: array
+          items:
+            type: integer
+      additionalProperties: true
+    AttributeTermBatchActionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        action:
+          type: string
+        attribute_id:
+          type: integer
+        data:
+          $ref: '#/components/schemas/AttributeTermBatchResult'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - attribute_id
+      additionalProperties: true
+    AttributeTermSingleResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - error
+        method:
+          type: string
+        attribute_id:
+          type: integer
+        term_id:
+          type: integer
+        data:
+          $ref: '#/components/schemas/WooAttributeTermObject'
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - attribute_id
+      - term_id
+      additionalProperties: true
+    AtumLocation:
+      type: object
+      description: ATUM stock location (taxonomy term, hierarchical).
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: "Southern California Hub"
+        slug:
+          type: string
+          example: "southern-california-hub"
+        parent:
+          type: integer
+          example: 0
+        description:
+          type: string
+          description: Term description (HTML allowed).
+        children:
+          type: array
+          description: Optional list of child locations for hierarchy representation.
+          items:
+            $ref: '#/components/schemas/TermRow'
+      required:
+      - id
+      - name
+      additionalProperties: true
+    AtumLocationBatchCreateItem:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Location name.
+        slug:
+          type: string
+          description: Optional URL-friendly slug.
+        parent:
+          type: integer
+          description: Parent location term ID (optional).
+        description:
+          type: string
+          description: Optional description (HTML allowed).
+      required:
+      - name
+      additionalProperties: false
+    AtumLocationBatchCreateRequest:
+      type: object
+      description: 'Batch create ATUM Product Locations (taxonomy: atum_location).'
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchCreateItem'
+          description: Convenience alias for create list.
+        create:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchCreateItem'
+          description: Alias for locations.
+      additionalProperties: false
+    AtumLocationBatchCreateRow:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - created
+          - exists
+          - error
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        parent:
+          type: integer
+        message:
+          type: string
+      additionalProperties: true
+    AtumLocationBatchCreateResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - partial
+          - error
+        taxonomy:
+          type: string
+          example: "atum_location"
+        count:
+          type: integer
+        created:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchCreateRow'
+        errors:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - created
+      additionalProperties: true
+
+    AtumLocationBatchUpdateItem:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          description: Existing location term ID.
+        name:
+          type: string
+          description: Updated location name (optional).
+        slug:
+          type: string
+          description: Updated URL-friendly slug (optional).
+        parent:
+          type: integer
+          description: Updated parent term ID (0 for root).
+        description:
+          type: string
+          description: Updated description (HTML allowed).
+      required:
+      - id
+
+    AtumLocationBatchUpdateRequest:
+      type: object
+      description: 'Batch update ATUM Product Locations (taxonomy: atum_location).'
+      additionalProperties: false
+      properties:
+        update:
+          type: array
+          description: List of update operations.
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchUpdateItem'
+        updates:
+          type: array
+          description: Alias for update.
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchUpdateItem'
+
+    AtumLocationBatchUpdateRow:
+      type: object
+      additionalProperties: true
+      properties:
+        action:
+          type: string
+          enum:
+          - updated
+          - error
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        parent:
+          type: integer
+        message:
+          type: string
+
+    AtumLocationBatchUpdateResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - partial
+          - error
+        taxonomy:
+          type: string
+          example: "atum_location"
+        count:
+          type: integer
+        updated:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtumLocationBatchUpdateRow'
+        errors:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        timestamp:
+          type: string
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - status
+      - updated
+  parameters:
+    SearchParam:
+      in: query
+      name: search
+      schema:
+        type: string
+      description: Optional search string used for filtering results.
+    PageParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination.
+    PerPageParam:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        default: 50
+      description: Number of records per page.
+  responses:
+    UnauthorizedError:
+      description: JWT token invalid or expired.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "error"
+              message:
+                type: string
+                example: "Invalid or expired token."
+    NotFoundError:
+      description: Requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "error"
+              message:
+                type: string
+                example: "Resource not found."
+paths:
+  /jwt-auth/v1/token:
+    post:
+      tags:
+      - Auth
+      operationId: authToken
+      summary: Get JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+  /lokey-inventory/v1/terms:
+    get:
+      tags:
+      - Reference Data
+      operationId: listTerms
+      summary: List terms for categories/brands/ATUM locations
+      description: 'If taxonomy is omitted, returns supported taxonomies.
+
+
+        Supported values:
+
+
+        - product_cat
+
+
+        - berocket_brand
+
+
+        - atum_location
+
+        '
+      parameters:
+      - in: query
+        name: taxonomy
+        schema:
+          type: string
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Terms list (lightweight)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  taxonomy:
+                    type: string
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+                  count:
+                    type: integer
+                  rows:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TermRow'
+  /lokey-inventory/v1/suppliers:
+    get:
+      tags:
+      - Reference Data
+      operationId: listSuppliers
+      summary: List ATUM suppliers
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 20
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Suppliers list (proxied from ATUM)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuppliersListResponse'
+  /lokey-inventory/v1/products/search:
+    get:
+      tags:
+      - Products
+      operationId: searchProductsLite
+      summary: Search products (light)
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: sku
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 20
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Lightweight product rows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchLiteResponse'
+  /lokey-inventory/v1/products/{id}:
+    get:
+      tags:
+      - Products
+      operationId: getProduct
+      summary: Get product by ID
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: lite
+        schema:
+          type: integer
+          default: 1
+        description: 1=compact payload, 0=full Woo payload
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductGetResponse'
+  /lokey-inventory/v1/products/extended:
+    post:
+      tags:
+      - Products
+      operationId: createProductExtended
+      summary: Create product (extended)
+      description: 'Creates a WooCommerce product and then:
+
+
+        - Sideloads images (avoids duplicates via _source_image_url)
+
+
+        - Assigns berocket_brand
+
+
+        - Applies ATUM fields (purchase_price, supplier_id, locations) into wp_atum_product_data
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductExtendedUpsertRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductExtendedUpsertResponse'
+  /lokey-inventory/v1/products/extended/{id}:
+    put:
+      tags:
+      - Products
+      operationId: updateProductExtended
+      summary: Update product (extended)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductExtendedUpsertRequest'
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductExtendedUpsertResponse'
+  /lokey-inventory/v1/inventory/{id}:
+    put:
+      tags:
+      - ATUM
+      operationId: updateAtumProductData
+      summary: Update ATUM fields + stock for a product (LKD-SAFE)
+      description: 'Updates only explicitly provided fields:
+
+
+        - purchase_price (ATUM table)
+
+
+        - supplier_id (ATUM table)
+
+
+        - atum_locations / location_ids (ATUM location terms)
+
+
+        - stock_quantity (Woo)
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryAtumUpdateRequest'
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Updated snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumInventoryUpdateResponse'
+  /lokey-inventory/v1/attributes:
+    get:
+      tags:
+      - Attributes
+      operationId: listAttributes
+      summary: List global attributes
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+      - in: query
+        name: lite
+        schema:
+          type: integer
+          default: 1
+        description: 1=compact rows, 0=full Woo payload
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributesListResponse'
+    post:
+      tags:
+      - Attributes
+      operationId: createAttribute
+      summary: Create a global attribute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeUpsertRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeActionResponse'
+  /lokey-inventory/v1/attributes/{id}:
+    get:
+      tags:
+      - Attributes
+      operationId: getAttribute
+      summary: Get attribute by ID
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeSingleResponse'
+    put:
+      tags:
+      - Attributes
+      operationId: updateAttribute
+      summary: Update attribute by ID
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeUpsertRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeSingleResponse'
+    delete:
+      tags:
+      - Attributes
+      operationId: deleteAttribute
+      summary: Delete attribute by ID
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: force
+        schema:
+          type: boolean
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeSingleResponse'
+  /lokey-inventory/v1/attributes/{id}/terms:
+    get:
+      tags:
+      - Attributes
+      operationId: listAttributeTerms
+      summary: List terms for an attribute
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+      - in: query
+        name: lite
+        schema:
+          type: integer
+          default: 1
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Attribute terms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermsListResponse'
+    post:
+      tags:
+      - Attributes
+      operationId: createAttributeTerm
+      summary: Create a term under an attribute
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeTermUpsertRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermActionResponse'
+  /lokey-inventory/v1/attributes/{id}/terms/batch:
+    post:
+      tags:
+      - Attributes
+      operationId: batchAttributeTerms
+      summary: Batch create/update/delete terms under an attribute
+      description: 'Bulk operation wrapper for WooCommerce attribute terms.
+
+
+        Accepts either:
+
+        - { terms: [ ... ] } as a convenience create-only form
+
+        - { create: [...], update: [...], delete: [...] } (Woo batch shape)
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeTermBatchRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Batch result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermBatchActionResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /lokey-inventory/v1/attributes/{id}/terms/{term_id}:
+    get:
+      tags:
+      - Attributes
+      operationId: getAttributeTerm
+      summary: Get a term under an attribute
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: term_id
+        required: true
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Term
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermSingleResponse'
+    put:
+      tags:
+      - Attributes
+      operationId: updateAttributeTerm
+      summary: Update a term under an attribute
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: term_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributeTermUpsertRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermSingleResponse'
+    delete:
+      tags:
+      - Attributes
+      operationId: deleteAttributeTerm
+      summary: Delete a term under an attribute
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: term_id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: force
+        schema:
+          type: boolean
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeTermSingleResponse'
+  /lokey-inventory/v1/categories:
+    get:
+      tags:
+      - Reference Data
+      operationId: listCategories
+      summary: List WooCommerce product categories
+      description: 'Returns all `product_cat` taxonomy terms used for product categorization.
+
+        '
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Optional search string used for filtering results.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+        description: Number of records per page.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Product categories list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  taxonomy:
+                    type: string
+                    example: "product_cat"
+                  count:
+                    type: integer
+                  rows:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TermRow'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /lokey-inventory/v1/brands:
+    get:
+      tags:
+      - Reference Data
+      operationId: listBrands
+      summary: List product brands
+      description: 'Returns all `berocket_brand` taxonomy terms available in WooCommerce.
+
+        '
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Optional search string used for filtering results.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+        description: Number of records per page.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Product brands list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  taxonomy:
+                    type: string
+                    example: "berocket_brand"
+                  count:
+                    type: integer
+                  rows:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TermRow'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /lokey-inventory/v1/locations:
+    get:
+      tags:
+      - Reference Data
+      operationId: listAtumLocations
+      summary: List ATUM stock locations
+      description: 'Returns paginated list of ATUM stock locations (`atum_location` taxonomy).
+
+        '
+      parameters:
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Optional search string used for filtering results.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - in: query
+        name: per_page
+        schema:
+          type: integer
+          default: 50
+        description: Number of records per page.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: ATUM locations list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  taxonomy:
+                    type: string
+                    example: "atum_location"
+                  count:
+                    type: integer
+                  rows:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AtumLocation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Reference Data
+      operationId: createAtumLocation
+      summary: Create a new ATUM location
+      description: 'Adds a new ATUM location term. Supports hierarchical parent assignment.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Los Angeles Hub"
+                slug:
+                  type: string
+                  example: "los-angeles-hub"
+                parent:
+                  type: integer
+                  description: Parent location ID (optional)
+                description:
+                  type: string
+                  description: Term description (HTML allowed).
+              required:
+              - name
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Location created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumLocation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /lokey-inventory/v1/locations/batch:
+    post:
+      tags:
+      - Reference Data
+      operationId: batchCreateAtumLocations
+      summary: Batch create ATUM stock locations
+      description: 'Creates multiple ATUM Product Location terms (taxonomy: atum_location) in one request.
+
+
+        Body supports either {locations:[...]} or {create:[...]} as aliases.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtumLocationBatchCreateRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Batch create result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumLocationBatchCreateResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+      - Reference Data
+      operationId: batchUpdateAtumLocations
+      summary: Batch update ATUM stock locations
+      description: 'Updates multiple ATUM Product Location terms (taxonomy: atum_location) in one request.
+
+
+        Body supports either {update:[...]} or {updates:[...]} as aliases.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtumLocationBatchUpdateRequest'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Batch update result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumLocationBatchUpdateResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /lokey-inventory/v1/locations/{id}:
+    get:
+      tags:
+      - Reference Data
+      operationId: getAtumLocation
+      summary: Get ATUM location by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Single ATUM location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumLocation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    put:
+      tags:
+      - Reference Data
+      operationId: updateAtumLocation
+      summary: Update an existing ATUM location
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                parent:
+                  type: integer
+                  description: Parent location ID to reassign hierarchy
+                description:
+                  type: string
+                  description: Term description (HTML allowed).
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Location updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtumLocation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Reference Data
+      operationId: deleteAtumLocation
+      summary: Delete an ATUM location
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: force
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: Permanently delete location (bypass trash)
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Location deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  id:
+                    type: integer
+                    example: 101
+                  message:
+                    type: string
+                    example: "Location deleted."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /lokey-inventory/v1/locations/tree:
+    get:
+      tags:
+      - Reference Data
+      operationId: getAtumLocationTree
+      summary: Get full ATUM location hierarchy
+      description: 'Returns a tree structure of ATUM locations.
+
+
+        Note: children are represented as a non-recursive term list to avoid circular
+
+        component dependencies in strict parsers.
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Full location hierarchy
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AtumLocation'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'

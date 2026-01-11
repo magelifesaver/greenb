@@ -69,6 +69,20 @@ require_once __DIR__ . '/admin/class-aaa-oc-forecast-grid.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-settings.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-product-fields.php';
 
+/*
+ * Immediately ensure the forecast tables exist.  In some environments the
+ * plugins_loaded action may fire before this loader is included, preventing
+ * table creation.  Calling the installers here guarantees the tables are
+ * created on plugin load and avoids race conditions.  These calls are
+ * idempotent; dbDelta will only create or modify tables as needed.
+ */
+if ( class_exists( 'AAA_OC_Forecast_Table_Installer' ) ) {
+    AAA_OC_Forecast_Table_Installer::maybe_install_table();
+}
+if ( class_exists( 'AAA_OC_Forecast_Queue_Installer' ) ) {
+    AAA_OC_Forecast_Queue_Installer::maybe_install_tables();
+}
+
 /* -------------------------------------------------------------------------
  * Module initialization
  *

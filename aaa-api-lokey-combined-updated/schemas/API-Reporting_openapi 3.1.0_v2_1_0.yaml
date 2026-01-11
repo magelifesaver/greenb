@@ -1,0 +1,1868 @@
+openapi: 3.1.0
+info:
+  title: Lokey Delivery WooCommerce Reporting API (with JWT Auth)
+  # Bump the spec version so integrators can track changes across revisions.
+  version: 2.1.0
+  description: |
+    Unified Lokey Delivery + GPT Reporting API with integrated JWT Auth Pro.  This
+    specification covers WooCommerce reporting, ATUM inventory, and extended product
+    creation endpoints.  All routes support JWT Bearer authentication via the
+    `bearerAuth` security scheme and note when internal key‑based authentication
+    occurs.  New diagnostics, inventory and sales overview endpoints are included
+    and purchase order responses are wrapped in an envelope containing version,
+    status, code, and timestamp metadata.
+
+servers:
+  - url: https://lokeydelivery.com/wp-json
+    description: Production server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    SalesSummary:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date
+          example: '2025-11-01'
+        to:
+          type: string
+          format: date
+          example: '2025-11-30'
+        group_by:
+          type: string
+          enum:
+            - none
+            - day
+            - week
+            - month
+        currency:
+          type: string
+          example: USD
+        totals:
+          type: object
+          properties:
+            orders:
+              type: integer
+              example: 245
+            items_sold:
+              type: integer
+              example: 382
+            gross_sales:
+              type: number
+              format: float
+              example: 112060.81
+            net_sales:
+              type: number
+              format: float
+              example: 103667.01
+            avg_order_value:
+              type: number
+              format: float
+              example: 72.6
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              period:
+                type: string
+                format: date
+                example: '2025-11-29'
+              orders:
+                type: integer
+              gross_sales:
+                type: number
+              net_sales:
+                type: number
+              avg_order_value:
+                type: number
+
+    ProductRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        qty_sold:
+          type: integer
+        gross_sales:
+          type: number
+        net_sales:
+          type: number
+        discount_total:
+          type: number
+        orders_count:
+          type: integer
+
+    OrderRow:
+      type: object
+      properties:
+        order_id:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        status:
+          type: string
+        customer_id:
+          type: integer
+        customer:
+          type: string
+        items_count:
+          type: integer
+        total:
+          type: number
+        discounts:
+          type: number
+        net_sales:
+          type: number
+        payment:
+          type: string
+
+    PurchaseOrderCreate:
+      type: object
+      properties:
+        supplier_id:
+          type: integer
+          description: ID of the supplier
+        order_date:
+          type: string
+          format: date
+          description: Order creation date
+        status:
+          type: string
+          description: ATUM order status
+        items:
+          type: array
+          description: Line items in the purchase order
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+              cost:
+                type: number
+
+    PurchaseOrderUpdate:
+      type: object
+      description: Update payload for an existing purchase order
+      properties:
+        id:
+          type: integer
+          description: ID of the purchase order
+        supplier_id:
+          type: integer
+        order_date:
+          type: string
+          format: date
+        status:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+              cost:
+                type: number
+
+    PurchaseOrderUpdateRequest:
+      type: object
+      description: |
+        Payload for updating an existing purchase order without the ID.
+        The purchase order ID is derived from the URL path.
+      properties:
+        supplier_id:
+          type: integer
+        order_date:
+          type: string
+          format: date
+        status:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+              cost:
+                type: number
+
+    ProductSalesReportItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        stock_qty:
+          type: integer
+          nullable: true
+        units_sold:
+          type: integer
+        sales_value:
+          type: number
+        sales_per_day:
+          type: number
+
+    ProductForecast:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        forecast_stock_qty:
+          type: integer
+          nullable: true
+        forecast_total_units_sold:
+          type: integer
+          nullable: true
+        forecast_sales_day:
+          type: string
+          nullable: true
+        forecast_sales_month:
+          type: number
+          nullable: true
+        forecast_sales_day_lifetime:
+          type: string
+          nullable: true
+        forecast_oos_date:
+          type: string
+          nullable: true
+        forecast_reorder_date:
+          type: string
+          nullable: true
+        forecast_margin_percent:
+          type: number
+          nullable: true
+        forecast_frozen_capital:
+          type: number
+          nullable: true
+        forecast_lead_time_days:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_minimum_order_qty:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_sales_window_days:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_cost_override:
+          oneOf:
+            - type: number
+            - type: string
+          nullable: true
+        forecast_first_sold_date:
+          type: string
+          nullable: true
+        forecast_last_sold_date:
+          type: string
+          nullable: true
+        forecast_first_purchased:
+          type: string
+          nullable: true
+        forecast_last_purchased:
+          type: string
+          nullable: true
+        forecast_enable_reorder:
+          type: string
+          nullable: true
+        forecast_po_priority_score:
+          type: number
+          nullable: true
+        forecast_product_class:
+          type: string
+          nullable: true
+        forecast_do_not_reorder:
+          type: string
+          nullable: true
+        forecast_is_not_moving:
+          type: string
+          nullable: true
+        forecast_is_must_stock:
+          type: string
+          nullable: true
+        forecast_is_new_product:
+          type: string
+          nullable: true
+        forecast_force_reorder:
+          type: string
+          nullable: true
+        forecast_flag_for_review:
+          type: string
+          nullable: true
+        forecast_reorder_note:
+          type: string
+          nullable: true
+        forecast_updated_at:
+          type: string
+          nullable: true
+        forecast_sales_status:
+          type: string
+          nullable: true
+        forecast_tier_threshold_1:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_tier_threshold_2:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_tier_threshold_3:
+          oneOf:
+            - type: integer
+            - type: string
+          nullable: true
+        forecast_minimum_stock:
+          type: integer
+          nullable: true
+        forecast_mark_for_clearance:
+          type: string
+          nullable: true
+        forecast_mark_for_removal:
+          type: string
+          nullable: true
+        forecast_is_out_of_stock:
+          type: string
+          nullable: true
+        forecast_is_stale_inventory:
+          type: string
+          nullable: true
+
+    # Extended product schema used by the new product create/update endpoints.
+    ProductExtended:
+      type: object
+      description: |
+        Schema for creating or updating WooCommerce products via the extended
+        endpoints.  Attributes are merged safely; existing terms are preserved and
+        supplier links are updated via the `_supplier_id` postmeta.  Use
+        `discount_percent` to automatically calculate the sale price from the
+        regular price.  All HTML content in descriptions is sanitised using
+        WordPress `wp_kses_post()`.
+      properties:
+        name:
+          type: string
+          example: Amazing Flower
+        sku:
+          type: string
+          example: GPT-AF-20260103
+        type:
+          type: string
+          enum:
+            - simple
+            - variable
+          default: simple
+        regular_price:
+          type: string
+          example: '48.00'
+        sale_price:
+          type: string
+          example: '28.80'
+        discount_percent:
+          type: number
+          description: Auto‑calculates sale price if provided.
+          example: 40
+        manage_stock:
+          type: boolean
+          description: Always true.  Lokey system enforces stock tracking.
+          example: true
+        stock_quantity:
+          type: integer
+          description: Initial stock count. Defaults to 0.
+          example: 0
+        status:
+          type: string
+          enum:
+            - publish
+            - draft
+          example: publish
+        categories:
+          type: array
+          description: Array of category objects with IDs.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 888
+        brands:
+          type: array
+          description: Array of brand objects with IDs.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1217
+        attributes:
+          type: array
+          description: Array of product attribute definitions.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: Classification
+              options:
+                type: array
+                items:
+                  type: string
+                example:
+                  - Indica
+              taxonomy:
+                type: boolean
+                description: Whether this attribute uses global taxonomy (pa_ prefix).
+                example: true
+              visible:
+                type: boolean
+                example: true
+              variation:
+                type: boolean
+                example: false
+        supplier_id:
+          type: integer
+          description: ID of supplier linked to product.
+          example: 21385
+
+        images:
+          type: array
+          description: >
+            Array of product images following WooCommerce REST standards.
+            The first image becomes the featured image, and subsequent images
+            populate the product gallery. Filenames are normalized and duplicates
+            prevented using the `_source_image_url` meta key.
+          items:
+            type: object
+            required:
+              - src
+            properties:
+              src:
+                type: string
+                description: Direct URL of the image.
+                example: "https://weedmaps.com/images/products/000/952/567/avatar/1765232555.jpg"
+              name:
+                type: string
+                description: Optional name for the image file (used for SEO-friendly filenames).
+                example: "berry-bomb-refined-live-resin-1g"
+              alt:
+                type: string
+                description: Optional alt text for accessibility and SEO.
+                example: "Berry Bomb Refined Live Resin Cartridge"
+
+        description:
+          type: string
+          description: Full product description (HTML allowed).
+          example: '<p>Premium indoor flower, hand-trimmed for quality.</p>'
+        short_description:
+          type: string
+          description: Short marketing description for product cards.
+          example: 'Smooth indica experience.'
+
+    # Inventory item returned by the inventory endpoint.
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        stock_status:
+          type: string
+        stock_quantity:
+          type: integer
+          nullable: true
+        supplier:
+          type: string
+        purchase_price:
+          type: number
+        sale_price:
+          type: number
+        regular_price:
+          type: number
+        total_value:
+          type: number
+
+    # Response wrapper for the inventory listing.
+    InventoryResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        count:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        fallback:
+          type: boolean
+        timestamp:
+          type: string
+          description: Generation time in MySQL datetime format
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+
+    # Response object for the diagnostics route.
+    DiagnosticsResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        plugin:
+          type: string
+        namespace:
+          type: string
+        constants:
+          type: object
+          additionalProperties: true
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              route:
+                type: string
+              active:
+                type: boolean
+              endpoint:
+                type: string
+        execution_ms:
+          type: number
+        timestamp:
+          type: string
+
+    # Item used in the top sales portion of the sales overview.
+    TopSalesItem:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        product_name:
+          type: string
+        quantity_sold:
+          type: integer
+        total_sales:
+          type: number
+        avg_price_sold:
+          type: number
+
+    # Response for the GPT sales overview endpoint.
+    SalesOverviewResponse:
+      type: object
+      properties:
+        overview_generated:
+          type: string
+          format: date-time
+        summary:
+          $ref: '#/components/schemas/SalesSummary'
+        top:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopSalesItem'
+
+    # Envelope for lists of purchase orders.
+    PurchaseOrderListResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        filters:
+          type: object
+          description: Filters used in the query
+          additionalProperties: true
+        count:
+          type: integer
+        message:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderUpdate'
+        timestamp:
+          type: string
+
+    # Envelope for a single purchase order response.
+    PurchaseOrderSingleResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        id:
+          type: integer
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PurchaseOrderUpdate'
+        timestamp:
+          type: string
+
+    # Envelope for batch purchase order update responses.
+    PurchaseOrderBatchResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        data:
+          type: object
+          description: Arbitrary batch update result returned by ATUM
+          additionalProperties: true
+        timestamp:
+          type: string
+
+security:
+  - bearerAuth: []
+
+paths:
+  /jwt-auth/v1/token:
+    post:
+      operationId: jwtAuthToken
+      summary: Obtain JWT for GPT automation
+      description: |
+        Authenticates using a dedicated WordPress user to obtain a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: gptautomation
+                password:
+                  type: string
+                  example: LywT0RHqN5qrcCw6s8o9ZeAI
+      responses:
+        '200':
+          description: JWT issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGci...
+
+  /lokey-inventory/v1/inventory/{id}:
+    put:
+      operationId: lokeyInventoryUpdateInventory
+      summary: Safe ATUM cost+stock sync (LKD-SAFE)
+      description: >
+        Non-destructive ATUM data upd. 🔒 Modifies only `purchase_price` +
+        `stock_qty`. 🚫 No nulls, no meta loss. Follows LKD-SAFE merge rules ✅.
+        Writes to ATUM tbl ↔ syncs WC stock. For cost adj + inv align ops. ⚙️
+        AI-safe minimal payload.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                purchase_price:
+                  type: number
+                  description: ATUM product cost per unit
+                  example: 14.50
+                stock_quantity:
+                  type: integer
+                  description: Optional stock adjustment
+                  example: 100
+      responses:
+        '200':
+          description: ATUM product data updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: 2.1.0
+                  status:
+                    type: string
+                    example: success
+                  id:
+                    type: integer
+                    example: 63247
+                  data:
+                    type: object
+                    properties:
+                      purchase_price:
+                        type: number
+                        example: 14.5
+                      stock_quantity:
+                        type: integer
+                        example: 100
+                  message:
+                    type: string
+                    example: ATUM product data updated successfully.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: '2026-01-04 12:55:00'
+        '400':
+          description: Invalid ID or no valid fields provided
+        '401':
+          description: Unauthorized
+
+  /gpt/v1/sales/summary:
+    get:
+      operationId: gptSalesSummaryByDate
+      summary: Retrieve sales summary by date range
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: group_by
+          in: query
+          schema:
+            type: string
+            enum:
+              - none
+              - day
+              - week
+              - month
+        - name: statuses
+          in: query
+          schema:
+            type: string
+            example: completed,processing
+      responses:
+        '200':
+          description: Sales summary results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesSummary'
+        '401':
+          description: Unauthorized
+
+  /lokeyreports/v1/sales/products:
+    get:
+      operationId: lokeySalesProducts
+      summary: Retrieve aggregated sales by product, category, or brand
+      description: |
+        Provides aggregated WooCommerce sales metrics, grouped by product, category,
+        or brand. Follows the same authentication and response conventions as
+        `/lokeyreports/v1/sales/summary`.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+            example: '2025-12-02'
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+            example: '2025-12-05'
+        - name: preset
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - today
+              - yesterday
+              - last_7_days
+              - last_30_days
+              - this_month
+              - last_month
+        - name: group_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - product
+              - category
+              - brand
+            default: product
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+        - name: order_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - net_sales
+              - gross_sales
+              - qty_sold
+              - orders_count
+            default: net_sales
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+      responses:
+        '200':
+          description: Aggregated product‑level sales results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group_by:
+                    type: string
+                    example: product
+                  from:
+                    type: string
+                    format: date
+                    example: '2025-12-02'
+                  to:
+                    type: string
+                    format: date
+                    example: '2025-12-05'
+                  filters:
+                    type: object
+                    properties:
+                      group_by:
+                        type: string
+                      order_by:
+                        type: string
+                      order:
+                        type: string
+                      limit:
+                        type: integer
+                  currency:
+                    type: string
+                    example: USD
+                  count:
+                    type: integer
+                    example: 10
+                  rows:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductRow'
+        '401':
+          description: Unauthorized — missing or invalid JWT/credentials
+
+  /lokeyreports/v1/sales/orders:
+    get:
+      operationId: lokeySalesOrders
+      summary: Lightweight order list
+      parameters:
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: statuses
+          in: query
+          schema:
+            type: string
+        - name: date_type
+          in: query
+          schema:
+            type: string
+            enum:
+              - created
+              - paid
+              - completed
+            default: created
+        - name: brand
+          in: query
+          schema:
+            type: string
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: attribute
+          in: query
+          schema:
+            type: string
+        - name: term
+          in: query
+          schema:
+            type: string
+        - name: customer
+          in: query
+          schema:
+            type: string
+        - name: payment_status
+          in: query
+          schema:
+            type: string
+            enum:
+              - paid
+              - unpaid
+              - partial
+              - refunded
+        - name: payment_type
+          in: query
+          schema:
+            type: string
+            enum:
+              - pay_with_cod
+              - pay_with_cash
+              - pay_with_zelle
+              - pay_with_venmo
+              - pay_with_cashapp
+              - pay_with_applepay
+              - pay_with_creditcard
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Filtered order data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRow'
+
+  /lokeyreports/v1/sales/categories:
+    get:
+      operationId: lokeySalesCategories
+      summary: Aggregate sales by category
+      responses:
+        '200':
+          description: Category totals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductRow'
+
+  /lokeyreports/v1/sales/brands:
+    get:
+      operationId: lokeySalesBrands
+      summary: Aggregate sales by brand
+      responses:
+        '200':
+          description: Brand‑level totals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductRow'
+
+  /lokeyreports/v1/sales/attributes:
+    get:
+      operationId: lokeySalesAttributes
+      summary: Aggregate sales by attribute term
+      parameters:
+        - name: attribute
+          in: query
+          required: true
+          schema:
+            type: string
+            example: flavor
+      responses:
+        '200':
+          description: Attribute‑term sales totals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductRow'
+
+  /gpt/v1/purchase-orders:
+    get:
+      operationId: getPurchaseOrders
+      summary: List ATUM purchase orders
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+          example: atum_received
+        - name: supplier
+          in: query
+          schema:
+            type: integer
+        - name: date_after
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: date_before
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Array of filtered purchase orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOrderUpdate'
+    post:
+      operationId: createPurchaseOrder
+      summary: Create new ATUM purchase order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderCreate'
+      responses:
+        '201':
+          description: Purchase order created
+
+  /gpt/v1/purchase-orders/{id}:
+    get:
+      operationId: getPurchaseOrderById
+      summary: Retrieve purchase order by ID
+      responses:
+        '200':
+          description: Purchase order object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderUpdate'
+    put:
+      operationId: updatePurchaseOrder
+      summary: Update existing purchase order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderUpdateRequest'
+      responses:
+        '200':
+          description: Purchase order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderUpdate'
+    delete:
+      operationId: deletePurchaseOrder
+      summary: Delete purchase order by ID
+      responses:
+        '200':
+          description: Purchase order deleted
+
+  /gpt/v1/purchase-orders/batch:
+    put:
+      operationId: batchUpdatePurchaseOrders
+      summary: Batch update purchase orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                update:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PurchaseOrderUpdate'
+      responses:
+        '200':
+          description: Batch update results
+
+  /gpt/v1/suppliers:
+    get:
+      operationId: getSuppliers
+      summary: List ATUM suppliers
+      responses:
+        '200':
+          description: Array of supplier objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+
+  # Inventory API routes
+  /lokey-inventory/v1/diagnostics:
+    get:
+      operationId: lokeyInventoryDiagnostics
+      summary: Inventory diagnostics and route status check
+      description: |
+        Returns operational status and version metadata for the Lokey Inventory API.  This
+        endpoint is publicly callable but performs internal key‑based authentication.  The
+        response includes plugin constants, endpoint health checks and a timestamp.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Diagnostics summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiagnosticsResponse'
+
+  /lokey-inventory/v1/inventory:
+    get:
+      operationId: lokeyInventoryGetInventory
+      summary: Retrieve inventory with filters and fallback
+      description: |
+        Get stock‑level data with opt filters for location, brand,
+        supplier, cat or stock status. If ATUM inventory is unavail the
+        endpoint automatically falls back to Woo. The response is an
+        envelope (version, pagination and data array). call this freely to
+        fetch inv details using the provided filters.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number for pagination
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+          description: Number of records per page
+        - name: location
+          in: query
+          schema:
+            type: string
+          description: Filter by stock location
+        - name: brand
+          in: query
+          schema:
+            type: string
+          description: Filter by brand slug or ID
+        - name: supplier
+          in: query
+          schema:
+            type: string
+          description: Filter by supplier slug or ID
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Filter by category slug or ID
+        - name: stock_status
+          in: query
+          schema:
+            type: string
+          description: Filter by stock status (e.g. instock, outofstock)
+      responses:
+        '200':
+          description: Inventory data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+
+  # Purchase order endpoints under lokey‑inventory/v1 returning wrapped responses
+  /lokey-inventory/v1/purchase-orders:
+    get:
+      operationId: lokeyInventoryGetPOs
+      summary: Retrieve filtered ATUM purchase orders
+      description: |
+        Returns a paginated list of ATUM purchase orders with optional filters.  AI may call
+        this endpoint with status, supplier or date filters to retrieve recent purchase
+        orders. Internal key‑based authentication is used; a Bearer token is still
+        required.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          description: ATUM purchase order status slug.
+          schema:
+            type: string
+          example: atum_received
+        - name: supplier
+          in: query
+          description: Filter by supplier ID.
+          schema:
+            type: integer
+          example: 21385
+        - name: date_after
+          in: query
+          description: Show orders created after this date.
+          schema:
+            type: string
+            format: date
+        - name: date_before
+          in: query
+          description: Show orders created before this date.
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Array of ATUM purchase orders wrapped in an envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderListResponse'
+    post:
+      operationId: lokeyInventoryCreatePO
+      summary: Create new ATUM purchase order
+      description: Creates a new ATUM purchase order with supplier, status, and line items.  The
+        response is wrapped in an envelope containing version, status and code fields.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderCreate'
+      responses:
+        '201':
+          description: Purchase order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderSingleResponse'
+
+  /lokey-inventory/v1/purchase-orders/{id}:
+    get:
+      operationId: lokeyInventoryGetPOById
+      summary: Retrieve purchase order by ID
+      description: Returns a single purchase order wrapped in an envelope.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the purchase order
+      responses:
+        '200':
+          description: Single purchase order object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderSingleResponse'
+    put:
+      operationId: lokeyInventoryUpdatePO
+      summary: Update existing purchase order
+      description: Updates an existing purchase order.  The response is wrapped in an envelope.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderUpdateRequest'
+      responses:
+        '200':
+          description: Updated purchase order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderSingleResponse'
+    delete:
+      operationId: lokeyInventoryDeletePO
+      summary: Delete purchase order by ID
+      description: Deletes a purchase order and returns an envelope with deletion status.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Purchase order deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderSingleResponse'
+
+  /lokey-inventory/v1/purchase-orders/batch:
+    put:
+      operationId: lokeyInventoryBatchUpdatePOs
+      summary: Batch update multiple purchase orders
+      description: Performs a bulk update of purchase orders.  The result is wrapped in an envelope.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                update:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PurchaseOrderUpdate'
+      responses:
+        '200':
+          description: Batch update result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderBatchResponse'
+
+  # Inventory report and forecast routes remain unchanged.
+  /lokey-inventory/v1/report/products:
+    get:
+      operationId: lokeyInventoryReportProducts
+      summary: Generate sales report for products filtered by stock levels
+      description: |
+        Returns metrics for products based on current stock and recent sales.  Use
+        the `stock_below` parameter (e.g. 6) to focus on low‑inventory items and
+        apply sorting to id top performers. Use this endpoint to
+        answer questions like “What products with six or fewer units in stock are
+        selling best?”.  
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: stock_below
+          in: query
+          schema:
+            type: integer
+          description: Include products with stock quantity less than or equal to this value
+        - name: stock_above
+          in: query
+          schema:
+            type: integer
+          description: Include products with stock quantity greater than or equal to this value
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+          description: Number of days to look back for sales data
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+          description: Maximum number of products to return
+        - name: order_by
+          in: query
+          schema:
+            type: string
+            enum:
+              - units_sold
+              - sales_value
+              - stock_qty
+              - sales_per_day
+            default: units_sold
+          description: Field to sort by
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          description: Sort direction
+      responses:
+        '200':
+          description: Sales report per product filtered by stock
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductSalesReportItem'
+        '401':
+          description: Unauthorized
+
+  /lokey-inventory/v1/forecast/products:
+    get:
+      operationId: lokeyInventoryForecastProducts
+      summary: Retrieve forecast metrics for products
+      description: |
+        Returns an array of forecast metrics for products filtered by stock levels,
+        sales status, and other optional criteria.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: stock_below
+          in: query
+          schema:
+            type: integer
+          description: Include products with forecast_stock_qty less than or equal to this value
+        - name: stock_above
+          in: query
+          schema:
+            type: integer
+          description: Include products with forecast_stock_qty greater than or equal to this value
+        - name: sales_status
+          in: query
+          schema:
+            type: string
+          description: Filter by forecast_sales_status (e.g. active, not_moving_t1, not_moving_t2, not_moving_t3)
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+          description: Maximum number of products to return
+        - name: order_by
+          in: query
+          schema:
+            type: string
+            enum:
+              - forecast_oos_date
+              - forecast_reorder_date
+              - forecast_total_units_sold
+              - forecast_sales_month
+              - forecast_stock_qty
+            default: forecast_oos_date
+          description: Field to sort by
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Forecast metrics per product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductForecast'
+        '401':
+          description: Unauthorized
+
+  /lokey-inventory/v1/forecast/products/{id}:
+    get:
+      operationId: lokeyInventoryForecastProductById
+      summary: Retrieve forecast metrics for a single product
+      description: |
+        Returns forecast metrics for the specified product ID.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the product
+      responses:
+        '200':
+          description: Forecast metrics for the product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductForecast'
+        '404':
+          description: Product not found
+        '401':
+          description: Unauthorized
+
+  /lokey-inventory/v1/forecast/qualify-po:
+    get:
+      operationId: lokeyInventoryForecastQualifyPO
+      summary: Evaluate forecasted products for purchase order qualification
+      description: |
+        Returns forecast‑enabled products that qualify for a purchase order based on
+        stock levels, forecast metrics and interval logic.  AI can use this endpoint to
+        determine which products should be reordered.  It derives data internally from
+        `/lokey-inventory/v1/forecast/products`.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: interval
+          in: query
+          description: Reorder evaluation interval (daily or monthly).
+          required: false
+          schema:
+            type: string
+            enum:
+              - daily
+              - monthly
+            default: daily
+        - name: stock_below
+          in: query
+          description: Optional override for stock threshold (default 5).
+          required: false
+          schema:
+            type: integer
+            default: 5
+        - name: sales_status
+          in: query
+          description: Filter forecast sales status (default active).
+          required: false
+          schema:
+            type: string
+            default: active
+        - name: limit
+          in: query
+          description: Maximum number of records to return (default 100).
+          required: false
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Array of products that qualify for purchase order creation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: 2.1.0
+                  status:
+                    type: string
+                    example: success
+                  interval:
+                    type: string
+                    example: daily
+                  criteria:
+                    type: object
+                    properties:
+                      stock_below:
+                        type: integer
+                        example: 5
+                      sales_status:
+                        type: string
+                        example: active
+                  count:
+                    type: integer
+                    example: 3
+                  generated:
+                    type: string
+                    format: date-time
+                    example: '2025-12-30 10:45:12'
+                  qualified:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 14567
+                        name:
+                          type: string
+                          example: Pineapple Express 3.5g
+                        sku:
+                          type: string
+                          example: PX-35-001
+                        forecast_stock_qty:
+                          type: number
+                          example: 4
+                        forecast_sales_day:
+                          type: number
+                          example: 0.6
+                        forecast_lead_time_days:
+                          type: integer
+                          example: 7
+                        forecast_minimum_order_qty:
+                          type: integer
+                          example: 12
+                        forecast_reorder_date:
+                          type: string
+                          example: '2025-12-29'
+                        forecast_oos_date:
+                          type: string
+                          example: '2026-01-03'
+                        qualifies:
+                          type: boolean
+                          example: true
+                        reason:
+                          type: string
+                          example: Stock below threshold and within lead time window.
+                        suggested_order_qty:
+                          type: integer
+                          example: 18
+        '401':
+          description: Unauthorized
+        '404':
+          description: Forecast qualification route not found
+
+  # Extended product creation and update routes
+  /lokey-inventory/v1/products/extended:
+    post:
+      operationId: lokeyInventoryCreateProductExtended
+      summary: Create a new WooCommerce product with extended data
+      description: |
+        Creates a new WooCommerce product including category, brand, supplier, attributes,
+        and descriptions. Automatically calculates sale price from `discount_percent` if
+        provided.  This route extends core product creation with safe defaults.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductExtended'
+      responses:
+        '200':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: 2.1.0
+                  status:
+                    type: string
+                    example: success
+                  action:
+                    type: string
+                    example: created
+                  id:
+                    type: integer
+                    example: 15893
+                  data:
+                    type: object
+                    description: Full WooCommerce product response object
+        '400':
+          description: Invalid payload or creation failed
+        '401':
+          description: Unauthorized
+
+  /lokey-inventory/v1/products/extended/{id}:
+    put:
+      operationId: lokeyInventoryUpdateProductExtended
+      summary: Update an existing WooCommerce product with extended data
+      description: |
+        Updates an existing WooCommerce product safely using partial updates.  Attributes are
+        merged, not replaced.  Supports updating product descriptions, short descriptions,
+        pricing, and supplier linkage.  The extended schema should be used for the
+        request body.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the product to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductExtended'
+      responses:
+        '200':
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: 2.1.0
+                  status:
+                    type: string
+                    example: success
+                  action:
+                    type: string
+                    example: updated
+                  id:
+                    type: integer
+                    example: 15893
+                  data:
+                    type: object
+                    description: Full WooCommerce product response object
+        '400':
+          description: Invalid product ID or update failed
+        '401':
+          description: Unauthorized
+
+  # GPT unified sales overview endpoint
+  /gpt/v1/sales/overview:
+    get:
+      operationId: lokeyGPTSalesOverview
+      summary: GPT unified sales overview
+      description: |
+        Returns a combined sales summary and top product report for a date range.  Supply
+        `from` and `to` dates or a `days` look‑back period. The response includes
+        an overview timestamp, a summary matching SalesSummary and a top list of
+        product sales metrics.  Call this to get an at‑a‑glance view of sales.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Start date in YYYY‑MM‑DD format
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            description: End date in YYYY‑MM‑DD format
+        - name: days
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of days to include when dates are not provided
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Maximum number of top products to return
+        - name: group_by
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional grouping for the summary (none, day, week, month)
+        - name: statuses
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma‑separated order statuses
+      responses:
+        '200':
+          description: Combined sales summary and top data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOverviewResponse'
+

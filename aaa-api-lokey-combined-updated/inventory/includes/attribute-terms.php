@@ -5,6 +5,7 @@
  * Routes:
  *   - GET  /lokey-inventory/v1/attributes/{id}/terms
  *   - POST /lokey-inventory/v1/attributes/{id}/terms
+ *   - POST /lokey-inventory/v1/attributes/{id}/terms/batch
  *   - GET  /lokey-inventory/v1/attributes/{id}/terms/{term_id}
  *   - PUT  /lokey-inventory/v1/attributes/{id}/terms/{term_id}
  *   - DELETE /lokey-inventory/v1/attributes/{id}/terms/{term_id}
