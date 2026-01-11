@@ -6,35 +6,37 @@ use AC;
 use AC\Capabilities;
 use AC\ListScreenCollection;
 use AC\ListScreenRepository\Storage;
-use AC\RequestHandler;
 use AC\Type\ListScreenId;
+use ACP\ListScreenPreferences;
+use ACP\Migrate\Export\ResponseFactory;
+use ACP\Nonce\ExportNonce;
+use ACP\RequestHandler;
+use ACP\Search\Entity;
 use ACP\Search\SegmentCollection;
-use ACP\Tools\Export\ResponseFactory;
 
 final class Export implements RequestHandler
 {
 
-    private Storage $storage;
+    private $storage;
 
-    private ResponseFactory $response_factory;
+    private $response_factory;
 
-    private AC\Nonce\Ajax $nonce;
-
-    public function __construct(Storage $storage, ResponseFactory $response_factory, AC\Nonce\Ajax $nonce)
-    {
+    public function __construct(
+        Storage $storage,
+        ResponseFactory $response_factory
+    ) {
         $this->storage = $storage;
         $this->response_factory = $response_factory;
-        $this->nonce = $nonce;
     }
 
     public function handle(AC\Request $request): void
     {
-        if ( ! $this->nonce->verify($request)) {
-            wp_send_json_error();
+        if ( ! (new ExportNonce())->verify($request)) {
+            return;
         }
 
         if ( ! current_user_can(Capabilities::MANAGE)) {
-            wp_send_json_error();
+            return;
         }
 
         $data = (object)filter_input_array(INPUT_POST, [
@@ -56,15 +58,15 @@ final class Export implements RequestHandler
 
         foreach ($list_screens as $list_screen) {
             $segments = [];
-            $unfiltered_segments = $list_screen->get_segments();
 
-            foreach ($unfiltered_segments as $segment) {
+            /* @var Entity\Segment $segment */
+            foreach ($list_screen->get_preference(ListScreenPreferences::SHARED_SEGMENTS) as $segment) {
                 if (is_array($data->segments) && in_array((string)$segment->get_key(), $data->segments, true)) {
                     $segments[] = $segment;
                 }
             }
 
-            $list_screen->set_segments(new SegmentCollection($segments));
+            $list_screen->set_preference(ListScreenPreferences::SHARED_SEGMENTS, new SegmentCollection($segments));
         }
 
         $response = $this->response_factory->create(

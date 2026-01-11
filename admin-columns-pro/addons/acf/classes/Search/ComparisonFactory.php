@@ -1,38 +1,26 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search;
 
 use AC\Meta\Query;
 use AC\Meta\QueryMetaFactory;
-use AC\MetaType;
-use AC\Type\TableScreenContext;
+use ACA\ACF\Column;
 use ACA\ACF\Field;
 use ACA\ACF\FieldType;
 use ACA\ACF\Search;
 use ACP;
 use ACP\Search\Comparison\Meta\Post;
 use ACP\Search\Comparison\Meta\Posts;
-use ACP\Search\Helper\Select\Meta\DateOptionsFactory;
 
-class ComparisonFactory
+class ComparisonFactory implements SearchComparisonFactory
 {
 
-    protected function create_query(TableScreenContext $table_context, string $meta_key): Query
+    protected function create_query(Column $column): Query
     {
-        $meta_type = $table_context->get_meta_type();
-
-        $query = (new QueryMetaFactory())->create($meta_key, $meta_type);
-
-        if ($meta_type->equals(MetaType::create_post_meta())) {
-            $query = $query->where_post_type((string)$table_context->get_post_type());
-        }
-
-        return $query;
+        return (new QueryMetaFactory())->create_by_meta_column($column);
     }
 
-    public function create(Field $field, string $meta_key, TableScreenContext $table_context): ?ACP\Search\Comparison
+    public function create(Field $field, string $meta_key, string $meta_type, Column $column): ?ACP\Search\Comparison
     {
         switch ($field->get_type()) {
             case FieldType::TYPE_BOOLEAN:
@@ -51,28 +39,16 @@ class ComparisonFactory
                 );
 
             case FieldType::TYPE_DATE_PICKER:
-                return new Search\Comparison\DatePicker(
-                    $meta_key,
-                    new DateOptionsFactory(
-                        $this->create_query($table_context, $meta_key),
-                        'Ymd'
-                    )
-                );
+                return new Search\Comparison\DatePicker($meta_key, $this->create_query($column));
 
             case FieldType::TYPE_DATE_TIME_PICKER:
-                return new ACP\Search\Comparison\Meta\DateTime\ISO(
-                    $meta_key,
-                    $this->create_query($table_context, $meta_key)
-                );
+                return new ACP\Search\Comparison\Meta\DateTime\ISO($meta_key, $this->create_query($column));
 
             case FieldType::TYPE_TEXT:
             case FieldType::TYPE_EMAIL;
             case FieldType::TYPE_COLOR_PICKER:
             case FieldType::TYPE_URL:
-                return new ACP\Search\Comparison\Meta\SearchableText(
-                    $meta_key,
-                    $this->create_query($table_context, $meta_key)
-                );
+                return new ACP\Search\Comparison\Meta\SearchableText($meta_key, $this->create_query($column));
 
             case FieldType::TYPE_PASSWORD:
             case FieldType::TYPE_TEXTAREA:
@@ -87,7 +63,7 @@ class ComparisonFactory
                 if ($field instanceof Field\PostTypeFilterable) {
                     $query = $query_factory->create_with_post_types($meta_key, $field->get_post_types());
                 } else {
-                    $query = $query_factory->create($meta_key, $table_context->get_meta_type());
+                    $query = $query_factory->create($meta_key, $meta_type);
                 }
 
                 return new ACP\Search\Comparison\Meta\Image($meta_key, $query);
@@ -109,7 +85,12 @@ class ComparisonFactory
 
             case FieldType::TYPE_FILE:
                 $query_factory = new QueryMetaFactory();
-                $query = $query_factory->create($meta_key, $table_context->get_meta_type());
+
+                if ($field instanceof Field\PostTypeFilterable) {
+                    $query = $query_factory->create_with_post_type($meta_key, $field->get_post_types());
+                } else {
+                    $query = $query_factory->create($meta_key, $meta_type);
+                }
 
                 return new ACP\Search\Comparison\Meta\Media($meta_key, $query);
 
@@ -129,14 +110,14 @@ class ComparisonFactory
                         $meta_key,
                         $post_types,
                         $terms,
-                        $this->create_query($table_context, $meta_key)
+                        $this->create_query($column)
                     )
                     : new Post(
                         $meta_key,
                         $post_types,
                         $terms,
                         null,
-                        $this->create_query($table_context, $meta_key)
+                        $this->create_query($column)
                     );
 
             case FieldType::TYPE_TAXONOMY:
@@ -157,8 +138,8 @@ class ComparisonFactory
 
             case FieldType::TYPE_USER:
                 return $field instanceof Field\Multiple && $field->is_multiple()
-                    ? new Search\Comparison\Users($meta_key, $this->create_query($table_context, $meta_key))
-                    : new Search\Comparison\User($meta_key, $this->create_query($table_context, $meta_key));
+                    ? new Search\Comparison\Users($meta_key, $this->create_query($column))
+                    : new Search\Comparison\User($meta_key, $this->create_query($column));
 
             default:
                 return null;

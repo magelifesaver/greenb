@@ -2,7 +2,7 @@
 
 namespace ACP\Sorting\Model\Post;
 
-use AC\Setting\ComponentFactory;
+use AC;
 
 class CommentCountFactory
 {
@@ -10,13 +10,13 @@ class CommentCountFactory
     public function create(string $type): CommentCount
     {
         switch ($type) {
-            case ComponentFactory\CommentStatus::STATUS_APPROVED :
+            case AC\Settings\Column\CommentCount::STATUS_APPROVED :
                 return new CommentCount([CommentCount::STATUS_APPROVED]);
-            case ComponentFactory\CommentStatus::STATUS_TRASH :
+            case AC\Settings\Column\CommentCount::STATUS_TRASH :
                 return new CommentCount([CommentCount::STATUS_TRASH]);
-            case ComponentFactory\CommentStatus::STATUS_SPAM :
+            case AC\Settings\Column\CommentCount::STATUS_SPAM :
                 return new CommentCount([CommentCount::STATUS_SPAM]);
-            case ComponentFactory\CommentStatus::STATUS_PENDING :
+            case AC\Settings\Column\CommentCount::STATUS_PENDING :
                 return new CommentCount([CommentCount::STATUS_PENDING]);
             default :
                 return new CommentCount([CommentCount::STATUS_APPROVED, CommentCount::STATUS_PENDING]);

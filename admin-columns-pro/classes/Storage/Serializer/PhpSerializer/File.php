@@ -9,7 +9,7 @@ use ACP\Storage\Serializer;
 final class File implements Serializer
 {
 
-    private Serializer $serializer;
+    private $serializer;
 
     public function __construct(Serializer $serializer)
     {

@@ -2,16 +2,20 @@
 
 namespace ACP\ConditionalFormat\Formatter;
 
+use AC\Column;
 use ACP\ConditionalFormat\Formatter;
 
 final class FilterHtmlFormatter implements Formatter
 {
 
-    private Formatter $formatter;
+    /**
+     * @var Formatter
+     */
+    private $formatter;
 
-    public function __construct(?Formatter $formatter = null)
+    public function __construct(Formatter $formatter)
     {
-        $this->formatter = $formatter ?? new StringFormatter();
+        $this->formatter = $formatter;
     }
 
     public function get_type(): string
@@ -19,11 +23,11 @@ final class FilterHtmlFormatter implements Formatter
         return $this->formatter->get_type();
     }
 
-    public function format(string $value, $id, string $operator_group): string
+    public function format(string $value, $id, Column $column, string $operator_group): string
     {
         $value = trim(strip_tags($value));
 
-        return $this->formatter->format($value, $id, $operator_group);
+        return $this->formatter->format($value, $id, $column, $operator_group);
     }
 
 }

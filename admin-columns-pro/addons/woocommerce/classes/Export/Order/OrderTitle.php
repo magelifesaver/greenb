@@ -7,7 +7,7 @@ use ACP;
 class OrderTitle implements ACP\Export\Service
 {
 
-    public function get_value($id): string
+    public function get_value($id)
     {
         $order = wc_get_order($id);
 

@@ -12,30 +12,26 @@ use LogicException;
 final class Segment
 {
 
-    private SegmentKey $key;
+    private $key;
 
-    private string $name;
+    private $name;
 
-    private array $url_parameters;
+    private $url_parameters;
 
-    private ListScreenId $list_id;
+    private $list_id;
 
-    private ?int $user_id;
+    private $user_id;
 
-    private ?DateTime $modified;
+    private $modified;
 
     public function __construct(
         SegmentKey $key,
         string $name,
         array $url_parameters,
         ListScreenId $list_id,
-        ?int $user_id = null,
-        ?DateTime $modified = null
+        int $user_id = null,
+        DateTime $modified = null
     ) {
-        if ($modified === null) {
-            $modified = $this->get_modified_now();
-        }
-
         $this->key = $key;
         $this->name = $name;
         $this->url_parameters = $url_parameters;
@@ -73,48 +69,14 @@ final class Segment
         return $this->url_parameters;
     }
 
-    public function get_modified(): DateTime
+    public function get_modified(): ?DateTime
     {
         return $this->modified;
-    }
-
-    public function has_modified(): bool
-    {
-        return $this->modified !== null;
-    }
-
-    public function with_modified_now(): Segment
-    {
-        return new self(
-            $this->key,
-            $this->name,
-            $this->url_parameters,
-            $this->list_id,
-            $this->user_id,
-            $this->get_modified_now()
-        );
     }
 
     public function get_list_id(): ListScreenId
     {
         return $this->list_id;
-    }
-
-    public function with_list_id_and_key(ListScreenId $list_id, SegmentKey $key): self
-    {
-        return new self(
-            $key,
-            $this->name,
-            $this->url_parameters,
-            $list_id,
-            $this->user_id,
-            $this->modified
-        );
-    }
-
-    private function get_modified_now(): DateTime
-    {
-        return new DateTime();
     }
 
 }

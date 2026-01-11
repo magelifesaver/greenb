@@ -2,15 +2,12 @@
 
 namespace ACA\Pods\Sorting;
 
-use AC\Setting\Config;
 use ACP;
 
-trait DefaultSortingTrait
-{
+trait DefaultSortingTrait {
 
-    public function get_sorting(Config $config): ?ACP\Sorting\Model\QueryBindings
-    {
-        return (new ACP\Sorting\Model\MetaFactory())->create($this->field->get_meta_type(), $this->field->get_name());
-    }
+	public function sorting() {
+		return ( new ACP\Sorting\Model\MetaFactory() )->create( $this->get_meta_type(), $this->get_meta_key() );
+	}
 
 }

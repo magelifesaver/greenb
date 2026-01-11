@@ -2,8 +2,7 @@
 
 namespace AC\Admin;
 
-use AC\Admin\Type\MenuItem;
-use AC\AdminColumns;
+use AC\Admin\Menu\Item;
 use AC\Asset\Location;
 use AC\Deprecated\Hooks;
 use AC\Type\Url\Site;
@@ -12,17 +11,14 @@ use AC\Type\Url\UtmTags;
 class MenuFactory implements MenuFactoryInterface
 {
 
-    protected string $url;
+    protected $url;
 
-    protected Location $location;
+    protected $location;
 
-    private Hooks $hooks;
-
-    public function __construct(string $url, AdminColumns $plugin, Hooks $hooks)
+    public function __construct(string $url, Location\Absolute $location)
     {
         $this->url = $url;
-        $this->location = $plugin->get_location();
-        $this->hooks = $hooks;
+        $this->location = $location;
     }
 
     protected function create_menu_link(string $slug): string
@@ -41,33 +37,24 @@ class MenuFactory implements MenuFactoryInterface
         $menu = new Menu();
 
         $items = [
-            Page\Columns::NAME  => __('Columns', 'codepress-admin-columns'),
+            Page\Columns::NAME => __('Columns', 'codepress-admin-columns'),
             Page\Settings::NAME => __('Settings', 'codepress-admin-columns'),
-            Page\Addons::NAME   => __('Add-ons', 'codepress-admin-columns'),
+            Page\Addons::NAME => __('Add-ons', 'codepress-admin-columns'),
         ];
 
-        $hook_count = $this->hooks->get_count();
+        $hooks = new Hooks();
 
-        if ($hook_count > 0) {
-            $menu->add_item(
-                new MenuItem(
-                    Page\Help::NAME,
-                    $this->create_menu_link(Page\Help::NAME),
-                    sprintf(
-                        '%s %s',
-                        __('Help', 'codepress-admin-columns'),
-                        '<span class="ac-badge">' . $hook_count . '</span>'
-                    ),
-                    sprintf('-%s %s', Page\Help::NAME, $current === Page\Help::NAME ? '-active' : ''),
-                    '',
-                    20
-                )
+        if ($hooks->get_count() > 0) {
+            $items[Page\Help::NAME] = sprintf(
+                '%s %s',
+                __('Help', 'codepress-admin-columns'),
+                '<span class="ac-badge">' . $hooks->get_count() . '</span>'
             );
         }
 
         foreach ($items as $slug => $label) {
             $menu->add_item(
-                new MenuItem(
+                new Item(
                     $slug,
                     $this->create_menu_link($slug),
                     $label,
@@ -76,18 +63,14 @@ class MenuFactory implements MenuFactoryInterface
             );
         }
 
-        $url = (new UtmTags(Site::create_admin_columns_pro(), 'upgrade'))->get_url();
-
-        $menu->add_item(
-            new MenuItem(
-                'pro',
-                $url,
-                sprintf('%s %s', 'Admin Columns Pro', '<span class="dashicons dashicons-external"></span>'),
-                '-pro',
-                '_blank',
-                30
-            ),
+        $url = (new UtmTags(new Site(Site::PAGE_ABOUT_PRO), 'upgrade'))->get_url();
+        $image = sprintf(
+            '<img alt="%s" src="%s">',
+            'Admin Columns Pro',
+            $this->location->with_suffix('/assets/images/external.svg')->get_url()
         );
+
+        $menu->add_item(new Item('pro', $url, sprintf('%s %s', 'Admin Columns Pro', $image), '-pro', '_blank'));
 
         do_action('ac/admin/page/menu', $menu);
 

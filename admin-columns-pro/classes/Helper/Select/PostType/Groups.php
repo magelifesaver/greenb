@@ -1,51 +1,36 @@
 <?php
-
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace ACP\Helper\Select\PostType;
 
 use AC\Helper\Select;
 use AC\Helper\Select\OptionGroup;
 
-class Groups extends Select\Options
-{
+/**
+ * Decorator for Select\Post\Options
+ */
+class Groups extends Select\Options {
 
-    public function __construct(Options $options, GroupFormatter $formatter, ?string $order = null)
-    {
-        parent::__construct(
-            $this->create_groups(
-                $options,
-                $formatter,
-                $order === 'desc'
-                    ? 'desc'
-                    : 'asc'
-            )
-        );
-    }
+	public function __construct( Options $options, GroupFormatter $formatter ) {
+		parent::__construct( $this->create_groups( $options, $formatter ) );
+	}
 
-    private function create_groups(Options $options, GroupFormatter $formatter, string $order): array
-    {
-        $groups = [];
+	private function create_groups( Options $options, GroupFormatter $formatter ): array {
+		$groups = [];
 
-        foreach ($options as $option) {
-            $post = $options->get_post_type($option->get_value());
+		foreach ( $options as $option ) {
+			$post = $options->get_post_type( $option->get_value() );
 
-            $groups[$formatter->format($post)][] = $option;
-        }
+			$groups[ $formatter->format( $post ) ][] = $option;
+		}
 
-        uksort($groups, function ($a, $b) use ($order) {
-            return 'desc' === $order
-                ? strnatcmp($b, $a)
-                : strnatcmp($a, $b);
-        });
+		$option_groups = [];
 
-        $option_groups = [];
+		foreach ( $groups as $label => $_options ) {
+			$option_groups[] = new OptionGroup( $label, $_options );
+		}
 
-        foreach ($groups as $label => $_options) {
-            $option_groups[] = new OptionGroup($label, $_options);
-        }
-
-        return $option_groups;
-    }
+		return $option_groups;
+	}
 
 }

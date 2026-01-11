@@ -6,35 +6,43 @@ use AC\MetaType;
 use ACP;
 use RWMB_Field;
 
-class Field implements ACP\Editing\Storage
-{
+class Field implements ACP\Editing\Storage {
 
-    protected $meta_key;
+	/**
+	 * @var string
+	 */
+	protected $meta_key;
 
-    protected $meta_type;
+	/**
+	 * @var MetaType
+	 */
+	protected $meta_type;
 
-    protected $field_settings;
+	/**
+	 * @var array
+	 */
+	protected $field_settings;
 
-    protected $single;
+	/**
+	 * @var bool
+	 */
+	protected $single;
 
-    public function __construct(string $meta_key, MetaType $meta_type, array $field_settings, bool $single = true)
-    {
-        $this->meta_key = $meta_key;
-        $this->meta_type = $meta_type;
-        $this->field_settings = $field_settings;
-        $this->single = $single;
-    }
+	public function __construct( $meta_key, MetaType $meta_type, array $field_settings, $single = true ) {
+		$this->meta_key = (string) $meta_key;
+		$this->meta_type = $meta_type;
+		$this->field_settings = $field_settings;
+		$this->single = (bool) $single;
+	}
 
-    public function get(int $id)
-    {
-        return get_metadata((string)$this->meta_type, $id, $this->meta_key, $this->single);
-    }
+	public function get( int $id ) {
+		return get_metadata( $this->meta_type->get(), $id, $this->meta_key, $this->single );
+	}
 
-    public function update(int $id, $data): bool
-    {
-        RWMB_Field::save($data, $this->get($id), $id, $this->field_settings);
+	public function update( int $id, $data ): bool {
+		RWMB_Field::save( $data, $this->get( $id ), $id, $this->field_settings );
 
-        return true;
-    }
+		return true;
+	}
 
 }

@@ -2,49 +2,105 @@
 
 namespace ACA\Types;
 
-class Field
+use ACA\Types\ConditionalFormatting\FormattableConfigFactory;
+use ACP;
+use ACP\ConditionalFormat\FormattableConfig;
+
+class Field implements ACP\ConditionalFormat\Formattable
 {
 
-    private $config;
+    protected $column;
 
-    public function __construct(array $config)
+    public function __construct(Column $column)
     {
-        $this->config = $config;
+        $this->set_column($column);
     }
 
-    public function get_id(): string
+    public function get_value($id)
     {
-        return (string)$this->config['id'];
+        $this->is_required();
+
+        return $this->column->get_render_value($id);
     }
 
-    public function get_label(): string
+    public function get_raw_value($id)
     {
-        return $this->config['name'];
+        $value = get_metadata($this->column->get_meta_type(), $id, $this->column->get_meta_key());
+
+        if ( ! $this->column->is_repeatable()) {
+            $value = isset($value[0]) ? $value[0] : '';
+        }
+
+        return $value;
     }
 
-    public function get_type(): string
+    public function get_meta_type()
     {
-        return $this->config['type'];
+        return $this->column->get_meta_type();
     }
 
-    public function get_meta_key(): ?string
+    public function get_dependent_settings()
     {
-        return $this->config['meta_key'] ?? null;
+        return [];
     }
 
-    public function is_repeatable(): bool
+    public function sorting()
     {
-        return isset($this->config['data']['repetitive']) && '1' === $this->config['data']['repetitive'];
+        return null;
     }
 
-    public function get_config(): array
+    public function editing()
     {
-        return $this->config;
+        return false;
     }
 
-    public function get_data(string $key)
+    public function search()
     {
-        return $this->config['data'][$key] ?? null;
+        return false;
+    }
+
+    public function export()
+    {
+        return new Export\Field($this->column);
+    }
+
+    public function conditional_format(): ?FormattableConfig
+    {
+        return (new FormattableConfigFactory())->create($this);
+    }
+
+    public function is_serialized()
+    {
+        return false;
+    }
+
+    public function is_required()
+    {
+        $validate = $this->get('validate');
+
+        return isset($validate['required']) && 1 === (int)$validate['required']['active'];
+    }
+
+    public function get($key)
+    {
+        $data = $this->column->get_type_field_option('data');
+
+        return isset($data[$key]) ? $data[$key] : false;
+    }
+
+    public function set_column(Column $column)
+    {
+        $this->column = $column;
+    }
+
+    public function get_repeatable_value($id)
+    {
+        return ac_helper()->html->small_block(explode(', ', $this->column->get_render_value($id)));
+    }
+
+    public function get_meta_key()
+    {
+        return $this->column->get_meta_key();
     }
 
 }

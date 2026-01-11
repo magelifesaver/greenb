@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search\Comparison;
 
 use AC\Helper\Select\Options;
@@ -13,7 +11,7 @@ class Select extends Meta
     implements Values
 {
 
-    private array $choices;
+    private $choices;
 
     public function __construct(string $meta_key, array $choices)
     {

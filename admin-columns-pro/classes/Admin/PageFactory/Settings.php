@@ -3,29 +3,41 @@
 namespace ACP\Admin\PageFactory;
 
 use AC;
+use AC\Asset\Location;
 use ACP\Admin\MenuFactory;
-use ACP\Admin\ScriptFactory\GeneralSettingsFactory;
+use ACP\Admin\Section;
+use ACP\Settings\General\LayoutStyle;
+use ACP\Sorting\Admin\Section\ResetSorting;
 
 class Settings extends AC\Admin\PageFactory\Settings
 {
 
-    private GeneralSettingsFactory $settings_factory;
+    private $layout_style;
 
     public function __construct(
-        AC\AdminColumns $plugin,
+        Location\Absolute $location,
         MenuFactory $menu_factory,
-        GeneralSettingsFactory $settings_factory
+        LayoutStyle $layout_style,
+        AC\Settings\General\EditButton $edit_button
     ) {
-        parent::__construct($plugin, $menu_factory);
+        parent::__construct($location, $menu_factory, true, $edit_button);
 
-        $this->settings_factory = $settings_factory;
+        $this->layout_style = $layout_style;
     }
 
     public function create(): AC\Admin\Page\Settings
     {
-        $this->settings_factory->create()->enqueue();
+        $page = parent::create();
+        $page->add_section(new ResetSorting(), 30);
 
-        return parent::create();
+        $general_section = $page->get_section(AC\Admin\Section\General::NAME);
+        if ($general_section instanceof AC\Admin\Section\General) {
+            $general_section->add_option(
+                new Section\Partial\LayoutTabs($this->layout_style)
+            );
+        }
+
+        return $page;
     }
 
 }

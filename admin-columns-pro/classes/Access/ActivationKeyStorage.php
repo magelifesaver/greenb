@@ -2,18 +2,19 @@
 
 namespace ACP\Access;
 
-use AC\Storage\OptionData;
-use AC\Storage\OptionDataFactory;
+use AC\Storage\KeyValueFactory;
+use AC\Storage\KeyValuePair;
 use ACP\Type\Activation\Key;
 
 class ActivationKeyStorage
 {
 
-    private OptionData $storage;
+    /**
+     * @var KeyValuePair
+     */
+    private $storage;
 
-    private ?string $data = null;
-
-    public function __construct(OptionDataFactory $storage_factory)
+    public function __construct(KeyValueFactory $storage_factory)
     {
         $this->storage = $storage_factory->create('acp_activation_key');
     }
@@ -22,37 +23,26 @@ class ActivationKeyStorage
     {
         $key = $this->get();
 
-        return Key::is_valid($key)
-            ? new Key($key)
-            : null;
-    }
-
-    private function get(): string
-    {
-        if (null === $this->data) {
-            $this->data = (string)$this->storage->get();
+        if ( ! Key::is_valid($key)) {
+            return null;
         }
 
-        return $this->data;
+        return new Key($key);
     }
 
-    private function flush_cache(): void
+    private function get()
     {
-        $this->data = null;
+        return $this->storage->get();
     }
 
-    public function save(Key $key): void
+    public function save(Key $key): bool
     {
-        $this->storage->save($key->get_token());
-
-        $this->flush_cache();
+        return $this->storage->save($key->get_token());
     }
 
-    public function delete(): void
+    public function delete(): bool
     {
-        $this->storage->delete();
-
-        $this->flush_cache();
+        return $this->storage->delete();
     }
 
 }

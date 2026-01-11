@@ -8,43 +8,44 @@ use AC\Admin\Page\Columns;
 use AC\Admin\Page\Settings;
 use AC\Ajax;
 use AC\Capabilities;
+use AC\Entity\Plugin;
 use AC\Message;
 use AC\Registerable;
 use AC\Screen;
 use AC\Storage;
+use AC\Type\Url\Site;
 use AC\Type\Url\UtmTags;
 use ACP\Access\ActivationStorage;
 use ACP\ActivationTokenFactory;
-use ACP\AdminColumnsPro;
-use ACP\Type;
+use ACP\Entity;
 use ACP\Type\Activation\ExpiryDate;
-use ACP\Type\Url\AccountFactory;
+use ACP\Type\SiteUrl;
 use DateTime;
 
 class Renewal
     implements Registerable
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    private ActivationTokenFactory $activation_token_factory;
+    private $activation_token_factory;
 
-    private ActivationStorage $activation_storage;
+    private $activation_storage;
 
-    private array $intervals = [1, 7, 21];
+    private $intervals = [1, 7, 21];
 
-    private AccountFactory $account_url_factory;
+    private $site_url;
 
     public function __construct(
-        AdminColumnsPro $plugin,
+        Plugin $plugin,
         ActivationTokenFactory $activation_token_factory,
         ActivationStorage $activation_storage,
-        AccountFactory $url_factory
+        SiteUrl $site_url
     ) {
         $this->plugin = $plugin;
         $this->activation_token_factory = $activation_token_factory;
         $this->activation_storage = $activation_storage;
-        $this->account_url_factory = $url_factory;
+        $this->site_url = $site_url;
     }
 
     public function register(): void
@@ -86,7 +87,7 @@ class Renewal
         );
     }
 
-    private function get_activation(): ?Type\Activation
+    private function get_activation(): ?Entity\Activation
     {
         $token = $this->activation_token_factory->create();
 
@@ -95,12 +96,13 @@ class Renewal
             : null;
     }
 
-    private function is_activation_up_for_renewal(Type\Activation $activation): bool
+    private function is_activation_up_for_renewal(Entity\Activation $activation): bool
     {
-        return ! $activation->is_auto_renewal() &&
-               ! $activation->is_expired() &&
-               ! $activation->is_lifetime() &&
-               ! $activation->is_cancelled();
+        return ! $activation->is_auto_renewal()
+               && ! $activation->is_expired()
+               && ! $activation->is_cancelled()
+               && ! $activation->is_lifetime()
+               && $activation->get_expiry_date()->exists();
     }
 
     public function display(Screen $screen): void
@@ -118,10 +120,8 @@ class Renewal
             case $screen->is_plugin_screen():
                 $activation = $this->get_activation();
 
-                if ($activation
-                    && $this->is_activation_up_for_renewal($activation)
-                    && $activation->has_expiry_date()
-                    && $activation->get_expiry_date()->is_expiring_within_seconds(DAY_IN_SECONDS * 21)) {
+                if ($activation && $this->is_activation_up_for_renewal($activation) && $activation->get_expiry_date(
+                    )->is_expiring_within_seconds(DAY_IN_SECONDS * 21)) {
                     $notice = new Message\Plugin(
                         $this->get_message($activation->get_expiry_date()),
                         $this->plugin->get_basename()
@@ -135,10 +135,8 @@ class Renewal
             case $screen->is_admin_screen(Settings::NAME):
                 $activation = $this->get_activation();
 
-                if ($activation
-                    && $this->is_activation_up_for_renewal($activation)
-                    && $activation->has_expiry_date()
-                    && $activation->get_expiry_date()->is_expiring_within_seconds(DAY_IN_SECONDS * 21)) {
+                if ($activation && $this->is_activation_up_for_renewal($activation) && $activation->get_expiry_date(
+                    )->is_expiring_within_seconds(DAY_IN_SECONDS * 21)) {
                     $notice = new Message\Notice($this->get_message($activation->get_expiry_date()));
                     $notice
                         ->set_type($notice::WARNING)
@@ -148,12 +146,10 @@ class Renewal
                 return;
 
             // Dismissible
-            case ($screen->is_table_screen() || $screen->is_admin_screen(Columns::NAME)):
+            case ($screen->is_list_screen() || $screen->is_admin_screen(Columns::NAME)):
                 $activation = $this->get_activation();
 
-                if ( ! $activation
-                     || ! $this->is_activation_up_for_renewal($activation)
-                     || ! $activation->has_expiry_date()) {
+                if ( ! $activation || ! $this->is_activation_up_for_renewal($activation)) {
                     return;
                 }
 
@@ -206,7 +202,13 @@ class Renewal
 
     protected function get_message(ExpiryDate $expiry_date): string
     {
-        $url = new UtmTags($this->account_url_factory->create(), 'renewal');
+        $url = new UtmTags(new Site(Site::PAGE_ACCOUNT_SUBSCRIPTIONS), 'renewal');
+        $activation_token = $this->activation_token_factory->create();
+
+        if ($activation_token) {
+            $url = $url->with_arg($activation_token->get_type(), $activation_token->get_token())
+                       ->with_arg('site_url', $this->site_url->get_url());
+        }
 
         $renewal_link = sprintf(
             '<a href="%s">%s</a>',

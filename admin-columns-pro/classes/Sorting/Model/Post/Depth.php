@@ -14,7 +14,7 @@ class Depth implements QueryBindings
 
     use PostRequestTrait;
 
-    private string $post_type;
+    private $post_type;
 
     public function __construct(string $post_type)
     {

@@ -2,34 +2,48 @@
 
 namespace AC\Helper;
 
-class File
-{
+class File {
 
-    public function get_readable_filesize(int $bytes, int $decimals = 2, string $fallback = ''): string
-    {
-        $filesize = $this->get_readable_filesize_as_array($bytes, $decimals);
+	/**
+	 * Convert file size to readable format
+	 *
+	 * @param      $bytes
+	 * @param int  $decimals
+	 * @param bool $empty_text
+	 *
+	 * @return string|false Readable file size
+	 * @since 1.4.5
+	 */
+	public function get_readable_filesize( $bytes, $decimals = 2, $empty_text = false ) {
 
-        if ( ! $filesize) {
-            return $fallback;
-        }
+		$filesize = $this->get_readable_filesize_as_array( $bytes, $decimals );
 
-        return implode(' ', $filesize);
-    }
+		if ( ! $filesize ) {
+			return $empty_text;
+		}
 
-    public function get_readable_filesize_as_array(int $bytes, int $decimals = 2): array
-    {
-        if ( ! $bytes) {
-            return [];
-        }
+		return implode( ' ', $filesize );
+	}
 
-        $filesize_units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	/**
+	 * @param string $bytes
+	 * @param int    $decimals
+	 *
+	 * @return array [ string $size, string $unit ]
+	 */
+	public function get_readable_filesize_as_array( $bytes, $decimals = 2 ) {
+		if ( ! $bytes ) {
+			return [];
+		}
 
-        $i = (int)floor(log($bytes, 1024));
+		$filesize_units = [ 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB' ];
 
-        return [
-            round($bytes / pow(1024, $i), $decimals),
-            $filesize_units[$i],
-        ];
-    }
+		$i = (int) floor( log( $bytes, 1024 ) );
+
+		return [
+			round( $bytes / pow( 1024, $i ), $decimals ),
+			$filesize_units[ $i ],
+		];
+	}
 
 }

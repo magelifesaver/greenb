@@ -2,119 +2,87 @@
 
 namespace AC\Deprecated;
 
-use Closure;
-use ReflectionFunction;
-
-class Hook
+abstract class Hook
 {
 
-    private string $name;
+    /** @var string */
+    private $name;
 
-    private string $version;
+    /** @var string */
+    private $version;
 
-    private ?string $replacement;
+    /** @var string */
+    private $slug;
 
-    public function __construct(string $name, string $version, ?string $replacement = null)
+    public function __construct($name, $version, $slug = null)
     {
         $this->name = $name;
         $this->version = $version;
-        $this->replacement = $replacement;
+        $this->slug = $slug;
     }
 
-    public function get_name(): string
+    /**
+     * @return string
+     */
+    public function get_name()
     {
         return $this->name;
     }
 
-    public function get_version(): string
+    /**
+     * @return string
+     */
+    public function get_version()
     {
         return $this->version;
     }
 
-    public function get_replacement(): string
+    /**
+     * @return string
+     */
+    public function get_slug()
     {
-        return $this->replacement;
+        return $this->slug;
     }
 
-    public function has_replacement(): bool
-    {
-        return null !== $this->replacement;
-    }
-
-    public function has_hook(): bool
-    {
-        return has_filter($this->name);
-    }
-
-    public function usage_count(): int
-    {
-        return count($this->get_callbacks());
-    }
-
-    private function get_filter_callbacks(): array
-    {
-        global $wp_filter;
-
-        return $wp_filter[$this->name]->callbacks ?? [];
-    }
+    /**
+     * @return bool
+     */
+    abstract public function has_hook();
 
     public function get_callbacks(): ?array
     {
-        $messages = [];
+        global $wp_filter;
 
-        foreach ($this->get_filter_callbacks() as $callback) {
+        if ( ! isset($wp_filter[$this->name])) {
+            return null;
+        }
+
+        if (empty($wp_filter[$this->name]->callbacks)) {
+            return null;
+        }
+
+        $callbacks = [];
+
+        foreach ($wp_filter[$this->name]->callbacks as $callback) {
             foreach ($callback as $cb) {
-                $function = $cb['function'];
-
                 // Function
-                if (is_scalar($function)) {
-                    $messages[] = sprintf('%s is called %s()', __('Function', 'codepress-admin-columns'), $function);
-                    continue;
+                if (is_scalar($cb['function'])) {
+                    $callbacks[] = $cb['function'];
                 }
 
                 // Method
-                if (is_array($function)) {
-                    $messages[] = sprintf('%s::%s()', get_class($function[0]), $function[1]);
-                    continue;
-                }
-
-                // Anonymous function
-                if ($function instanceof Closure) {
-                    $reflection = new ReflectionFunction($function);
-                    $closure = $reflection->getClosureScopeClass();
-
-                    $class_name = $closure
-                        ? $closure->getName()
-                        : null;
-
-                    if ($class_name) {
-                        $messages[] = sprintf(
-                            '%s is called from %s',
-                            __('Anonymous function', 'codepress-admin-columns'),
-                            $class_name,
-                        );
-
-                        continue;
-                    }
-
-                    $messages[] = sprintf(
-                        '%s is called from %s',
-                        __('Anonymous Function', 'codepress-admin-columns'),
-                        $reflection->getFileName(),
-                    );
-
-                    continue;
+                if (is_array($cb['function'])) {
+                    $callbacks[] = get_class($cb['function'][0]) . '::' . $cb['function'][1];
                 }
             }
         }
 
-        if ( ! $messages) {
+        if ( ! $callbacks) {
             return null;
         }
 
-        natcasesort($messages);
-
-        return $messages;
+        return $callbacks;
     }
 
 }

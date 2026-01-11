@@ -2,26 +2,24 @@
 
 namespace ACA\GravityForms\Export\Model\Entry;
 
-use ACA\GravityForms\Field\Field;
+use AC\Column;
 use ACP\Export;
 
 class ItemList implements Export\Service
 {
 
-    private $field;
+    private $column;
 
-    public function __construct(Field $field)
+    public function __construct(Column $column)
     {
-        $this->field = $field;
+        $this->column = $column;
     }
 
-    public function get_value($id): string
+    public function get_value($id)
     {
-        $items = unserialize($this->field->get_entry_value($id), ['allowed_classes' => false]);
+        $items = unserialize((string)$this->column->get_raw_value($id), ['allowed_classes' => false]);
 
-        return is_array($items)
-            ? ac_helper()->array->implode_recursive(', ', $items)
-            : '';
+        return ac_helper()->array->implode_recursive(', ', $items);
     }
 
 }

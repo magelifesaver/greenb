@@ -17,7 +17,10 @@ class CommentCount implements QueryBindings
     public const STATUS_TRASH = 'trash';
     public const STATUS_PENDING = '0';
 
-    private array $stati;
+    /**
+     * @var array
+     */
+    private $stati;
 
     public function __construct(array $stati = [])
     {

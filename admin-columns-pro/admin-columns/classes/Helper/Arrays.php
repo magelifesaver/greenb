@@ -2,158 +2,216 @@
 
 namespace AC\Helper;
 
-class Arrays
-{
+class Arrays {
 
-    public function add_nested_value(array $keys, $value, array $result = []): array
-    {
-        $key = array_shift($keys);
+	/**
+	 * @param mixed $array
+	 *
+	 * @return bool
+	 */
+	public function is_associative( $array ) {
+		if ( ! is_array( $array ) ) {
+			return false;
+		}
 
-        if ($keys) {
-            $value = $this->add_nested_value(
-                $keys,
-                $value,
-                is_array($result[$key]) ? $result[$key] : []
-            );
-        }
+		foreach ( $array as $key => $value ) {
+			if ( is_string( $key ) ) {
+				return true;
+			}
+		}
 
-        $result[$key] = $value;
+		return false;
+	}
 
-        return $result;
-    }
+	/**
+	 * @param array $keys
+	 * @param mixed $value
+	 * @param array $result
+	 *
+	 * @return array
+	 */
+	public function add_nested_value( array $keys, $value, array $result = [] ) {
+		$key = array_shift( $keys );
 
-    public function get_nested_value(array $array, array $keys)
-    {
-        foreach ($keys as $key) {
-            if ( ! isset($array[$key])) {
-                return null;
-            }
+		if ( $keys ) {
+			$value = $this->add_nested_value( $keys, $value, is_array( $result[ $key ] ) ? $result[ $key ] : [] );
+		}
 
-            $array = $array[$key];
-        }
+		$result[ $key ] = $value;
 
-        return $array;
-    }
+		return $result;
+	}
 
-    public function implode_recursive(string $glue, $pieces): string
-    {
-        if (is_scalar($pieces)) {
-            return (string)$pieces;
-        }
+	/**
+	 * @param array $array
+	 * @param array $keys
+	 *
+	 * @return mixed
+	 */
+	public function get_nested_value( array $array, array $keys ) {
+		foreach ( $keys as $key ) {
+			if ( ! isset( $array[ $key ] ) ) {
+				return null;
+			}
 
-        if ( ! is_array($pieces)) {
-            return '';
-        }
+			$array = $array[ $key ];
+		}
 
-        $scalars = [];
+		return $array;
+	}
 
-        foreach ($pieces as $r_pieces) {
-            if (is_array($r_pieces)) {
-                $scalars[] = $this->implode_recursive($glue, $r_pieces);
-            }
-            if (is_scalar($r_pieces)) {
-                $scalars[] = (string)$r_pieces;
-            }
-        }
+	/**
+	 * Implode for multi dimensional array
+	 *
+	 * @param string       $glue
+	 * @param string|array $pieces
+	 *
+	 * @return string Imploded array
+	 * @since 3.0
+	 */
+	public function implode_recursive( string $glue, $pieces ): string {
+		if ( is_scalar( $pieces ) ) {
+			return $pieces;
+		}
 
-        return implode($glue, array_filter($scalars, 'strlen'));
-    }
+		$scalars = [];
 
-    /**
-     * Indents any object as long as it has a unique id and that of its parent.
-     */
-    public function indent(
-        array $array,
-        int $parentId = 0,
-        string $parentKey = 'post_parent',
-        string $selfKey = 'ID',
-        string $childrenKey = 'children'
-    ): array {
-        $indent = [];
+		if ( is_array( $pieces ) ) {
+			foreach ( $pieces as $r_pieces ) {
+				if ( is_array( $r_pieces ) ) {
+					$scalars[] = $this->implode_recursive( $glue, $r_pieces );
+				}
+				if ( is_scalar( $r_pieces ) ) {
+					$scalars[] = $r_pieces;
+				}
+			}
+		}
 
-        $i = 0;
-        foreach ($array as $v) {
-            if ($v->$parentKey == $parentId) {
-                $indent[$i] = $v;
-                $indent[$i]->$childrenKey = $this->indent($array, $v->$selfKey, $parentKey, $selfKey);
+		return implode( $glue, array_filter( $scalars, 'strlen' ) );
+	}
 
-                $i++;
-            }
-        }
+	/**
+	 * Indents any object as long as it has a unique id and that of its parent.
+	 *
+	 * @param array  $array
+	 * @param int    $parentId
+	 * @param string $parentKey
+	 * @param string $selfKey
+	 * @param string $childrenKey
+	 *
+	 * @return array Indented Array
+	 * @since 1.0
+	 */
+	public function indent(
+		$array,
+		$parentId = 0,
+		$parentKey = 'post_parent',
+		$selfKey = 'ID',
+		$childrenKey = 'children'
+	) {
+		$indent = [];
 
-        return $indent;
-    }
+		$i = 0;
+		foreach ( $array as $v ) {
+			if ( $v->$parentKey == $parentId ) {
+				$indent[ $i ] = $v;
+				$indent[ $i ]->$childrenKey = $this->indent( $array, $v->$selfKey, $parentKey, $selfKey );
 
-    /**
-     * Remove empty values from array
-     */
-    public function filter(array $array): array
-    {
-        return array_filter($array, [ac_helper()->string, 'is_not_empty']);
-    }
+				$i++;
+			}
+		}
 
-    /**
-     * Insert element into array at specific position
-     */
-    public function insert(array $array, array $insert, $position): array
-    {
-        $new = [];
-        foreach ($array as $key => $value) {
-            $new[$key] = $value;
-            if ($key === $position) {
-                $new = array_merge($new, $insert);
-            }
-        }
+		return $indent;
+	}
 
-        return $new;
-    }
+	/**
+	 * Remove empty values from array
+	 *
+	 * @param array $array
+	 *
+	 * @return array
+	 */
+	public function filter( $array ) {
+		return array_filter( $array, [ ac_helper()->string, 'is_not_empty' ] );
+	}
 
-    public function is_associative($array): bool
-    {
-        _deprecated_function(__METHOD__, 'NEWVERSION');
+	/**
+	 * Insert element into array at specific position
+	 *
+	 * @param array  $array
+	 * @param array  $insert
+	 * @param string $position
+	 *
+	 * @return array
+	 */
+	public function insert( $array, $insert, $position ) {
+		$new = [];
+		foreach ( $array as $key => $value ) {
+			$new[ $key ] = $value;
+			if ( $key === $position ) {
+				$new = array_merge( $new, $insert );
+			}
 
-        if ( ! is_array($array)) {
-            return false;
-        }
+		}
 
-        foreach ($array as $key => $value) {
-            if (is_string($key)) {
-                return true;
-            }
-        }
+		return $new;
+	}
 
-        return false;
-    }
+	/**
+	 * Get duplicates from array
+	 *
+	 * @param array $array
+	 *
+	 * @return array
+	 */
+	public function get_duplicates( array $array ) {
+		return array_intersect( $array, array_unique( array_diff_key( $array, array_unique( $array ) ) ) );
+	}
 
-    public function get_duplicates(array $array): array
-    {
-        _deprecated_function(__METHOD__, 'NEWVERSION');
+	/**
+	 * Returns all integers from an array or comma separated string
+	 *
+	 * @param array|string $mixed
+	 *
+	 * @return int[]
+	 */
+	public function get_integers_from_mixed( $mixed ) {
+		$string = ac_helper()->array->implode_recursive( ',', $mixed );
 
-        return [];
-    }
+		return ac_helper()->string->string_to_array_integers( $string );
+	}
 
-    /**
-     * Returns all integers from an array or comma separated string
-     */
-    public function get_integers_from_mixed($mixed): array
-    {
-        _deprecated_function(__METHOD__, 'NEWVERSION');
+	/**
+	 * @param array  $array
+	 * @param string $glue
+	 *
+	 * @return string
+	 */
+	public function implode_associative( array $array, $glue ) {
+		_deprecated_function( __METHOD__, '5.7.1' );
 
-        return [];
-    }
+		return '';
+	}
 
-    public function implode_associative(array $array, $glue): string
-    {
-        _deprecated_function(__METHOD__, '5.7.1');
+	/**
+	 * Replace a single key in an associative array
+	 *
+	 * @param array      $input   Input array.
+	 * @param int|string $old_key Key to replace.
+	 * @param int|string $new_key Key to replace $old_key with
+	 *
+	 * @return array
+	 * @since 2.2.7
+	 */
+	public function key_replace( $input, $old_key, $new_key ) {
+		$keys = array_keys( $input );
+		$old_key_pos = array_search( $old_key, $keys );
+		if ( $old_key_pos === false ) {
+			return $input;
+		}
+		$keys[ $old_key_pos ] = $new_key;
 
-        return '';
-    }
-
-    public function key_replace($input, $old_key, $new_key): array
-    {
-        _deprecated_function(__METHOD__, 'NEWVERSION');
-
-        return [];
-    }
+		return array_combine( $keys, array_values( $input ) );
+	}
 
 }

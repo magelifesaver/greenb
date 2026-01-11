@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search\Comparison\Repeater;
 
 use AC\Helper\Select\Options;
@@ -13,7 +11,8 @@ class Select extends Comparison\Repeater
     implements Values
 {
 
-    private array $choices;
+    /** @var array */
+    private $choices;
 
     public function __construct(
         string $meta_type,

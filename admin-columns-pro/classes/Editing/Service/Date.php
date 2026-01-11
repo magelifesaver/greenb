@@ -10,13 +10,22 @@ use DateTime;
 class Date implements Service
 {
 
-    public const FORMAT = 'Y-m-d';
+    const FORMAT = 'Y-m-d';
 
-    private View\Date $view;
+    /**
+     * @var View\Date
+     */
+    private $view;
 
-    private Storage $storage;
+    /**
+     * @var Storage
+     */
+    private $storage;
 
-    protected string $date_format;
+    /**
+     * @var string
+     */
+    protected $date_format;
 
     public function __construct(View\Date $view, Storage $storage, $date_format = self::FORMAT)
     {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\EC\Search\Event\Field;
 
 use AC;
@@ -13,7 +11,10 @@ class Options extends Meta
     implements Values
 {
 
-    private array $options;
+    /**
+     * @var array
+     */
+    private $options;
 
     public function __construct(string $meta_key, array $options)
     {

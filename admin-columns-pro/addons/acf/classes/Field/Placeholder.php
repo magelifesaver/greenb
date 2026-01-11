@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Field;
 
-interface Placeholder
-{
+interface Placeholder {
 
-    public function get_placeholder(): string;
+	/**
+	 * @return string
+	 */
+	public function get_placeholder();
 
 }

@@ -2,43 +2,38 @@
 
 namespace ACA\WC\Export\Product;
 
+use ACA\WC\Column;
 use ACP;
-use WC_Product;
 
-class Sale implements ACP\Export\Service
-{
+class Sale implements ACP\Export\Service {
 
-    public function is_scheduled(WC_Product $product)
-    {
-        return $product->get_date_on_sale_from() || $product->get_date_on_sale_to();
-    }
+	protected $column;
 
-    public function get_value($id): string
-    {
-        $product = wc_get_product($id);
+	public function __construct( Column\Product\Sale $column ) {
+		$this->column = $column;
+	}
 
-        if ($this->is_scheduled($product)) {
-            $date_from = $product->get_date_on_sale_from('edit') ? $product->get_date_on_sale_from('edit')->format(
-                'Y-m-d'
-            ) : null;
-            $date_to = $product->get_date_on_sale_to('edit') ? $product->get_date_on_sale_to('edit')->format(
-                'Y-m-d'
-            ) : null;
+	public function get_value( $id ) {
+		$product = wc_get_product( $id );
 
-            if ($date_from && $date_to) {
-                return sprintf('%s / %s', $date_from, $date_to);
-            }
+		if ( $this->column->is_scheduled( $product ) ) {
+			$date_from = $product->get_date_on_sale_from( 'edit' ) ? $product->get_date_on_sale_from( 'edit' )->format( 'Y-m-d' ) : null;
+			$date_to = $product->get_date_on_sale_to( 'edit' ) ? $product->get_date_on_sale_to( 'edit' )->format( 'Y-m-d' ) : null;
 
-            if ($date_from) {
-                return _x('From', 'Product on sale from (date)', 'codepress-admin-columns') . ' ' . $date_from;
-            }
+			if ( $date_from && $date_to ) {
+				return sprintf( '%s / %s', $date_from, $date_to );
+			}
 
-            if ($date_to) {
-                return _x('Until', 'Product on sale from (date)', 'codepress-admin-columns') . ' ' . $date_to;
-            }
-        }
+			if ( $date_from ) {
+				return _x( 'From', 'Product on sale from (date)', 'codepress-admin-columns' ) . ' ' . $date_from;
+			}
 
-        return $product->is_on_sale('edit');
-    }
+			if ( $date_to ) {
+				return _x( 'Until', 'Product on sale from (date)', 'codepress-admin-columns' ) . ' ' . $date_to;
+			}
+		}
+
+		return $product->is_on_sale( 'edit' );
+	}
 
 }

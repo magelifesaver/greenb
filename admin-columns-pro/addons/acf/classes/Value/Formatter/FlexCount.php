@@ -1,68 +1,60 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Value\Formatter;
 
-use AC\Exception\ValueNotFoundException;
-use AC\Setting\Formatter;
-use AC\Type\Value;
+use ACA\ACF\Column;
 use ACA\ACF\Field;
+use ACA\ACF\Value\Formatter;
 
-class FlexCount implements Formatter
-{
+class FlexCount extends Formatter {
 
-    private Field\Type\FlexibleContent $field;
+	public function __construct( Column $column, Field\Type\FlexibleContent $field ) {
+		parent::__construct( $column, $field );
+	}
 
-    public function __construct(Field\Type\FlexibleContent $field)
-    {
-        $this->field = $field;
-    }
+	public function format( $values, $id = null ) {
+		if ( ! $values ) {
+			return $this->column->get_empty_char();
+		}
 
-    public function format(Value $value)
-    {
-        $values = $value->get_value();
+		if ( empty( $this->field->get_layouts() ) ) {
+			return $this->column->get_empty_char();
+		}
 
-        if (empty($values)) {
-            throw ValueNotFoundException::from_id($value->get_id());
-        }
+		$layouts = [];
+		$labels = $this->get_layout_labels();
 
-        if (empty($this->field->get_layouts())) {
-            throw ValueNotFoundException::from_id($value->get_id());
-        }
+		foreach ( $values as $field ) {
+			if ( ! isset( $layouts[ $field['acf_fc_layout'] ] ) ) {
+				$layouts[ $field['acf_fc_layout'] ] = [
+					'count' => 1,
+					'label' => isset( $labels[ $field['acf_fc_layout'] ] ) ? $labels[ $field['acf_fc_layout'] ] : $field['acf_fc_layout'],
+				];
+			} else {
+				$layouts[ $field['acf_fc_layout'] ]['count']++;
+			}
+		}
 
-        $layouts = [];
-        $labels = $this->get_layout_labels();
+		$result = array_map( function ( $l ) {
+			return ( $l['count'] > 1 )
+				? sprintf( '%s <span class="ac-rounded">%s</span>', $l['label'], $l['count'] )
+				: $l['label'];
+		}, $layouts );
 
-        foreach ($values as $field) {
-            if ( ! isset($layouts[$field['acf_fc_layout']])) {
-                $layouts[$field['acf_fc_layout']] = [
-                    'count' => 1,
-                    'label' => $labels[$field['acf_fc_layout']] ?? $field['acf_fc_layout'],
-                ];
-            } else {
-                $layouts[$field['acf_fc_layout']]['count']++;
-            }
-        }
+		return implode( '<br>', $result );
+	}
 
-        $result = array_map(function ($l) {
-            return ($l['count'] > 1)
-                ? sprintf('%s <span class="ac-rounded">%s</span>', $l['label'], $l['count'])
-                : $l['label'];
-        }, $layouts);
+	/**
+	 * @return array
+	 */
+	private function get_layout_labels() {
+		$labels = [];
 
-        return $value->with_value(implode('<br>', $result));
-    }
+		foreach ( $this->field->get_layouts() as $layout ) {
+			$labels[ $layout['name'] ] = $layout['label'];
+		}
 
-    private function get_layout_labels(): array
-    {
-        $labels = [];
-
-        foreach ($this->field->get_layouts() as $layout) {
-            $labels[$layout['name']] = $layout['label'];
-        }
-
-        return $labels;
-    }
+		return $labels;
+	}
 
 }

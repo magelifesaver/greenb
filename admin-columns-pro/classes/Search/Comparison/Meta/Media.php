@@ -16,9 +16,9 @@ class Media extends Meta
     implements Comparison\SearchableValues
 {
 
-    private ?Query $query = null;
+    private $query;
 
-    public function __construct(string $meta_key, ?Query $query = null)
+    public function __construct(string $meta_key, Query $query)
     {
         $operators = new Operators([
             Operators::EQ,
@@ -51,7 +51,7 @@ class Media extends Meta
             [
                 's'        => $search,
                 'paged'    => $page,
-                'post__in' => $this->query ? $this->query->get() : [],
+                'post__in' => $this->query->get(),
             ],
             $this->formatter()
         );

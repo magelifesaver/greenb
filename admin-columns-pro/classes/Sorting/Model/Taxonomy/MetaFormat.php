@@ -15,15 +15,15 @@ use ACP\Sorting\Type\Order;
 class MetaFormat implements QueryBindings
 {
 
-    private string $taxonomy;
+    private $taxonomy;
 
-    private FormatValue $formatter;
+    private $formatter;
 
-    private string $meta_key;
+    private $meta_key;
 
-    protected DataType $data_type;
+    protected $data_type;
 
-    public function __construct(string $taxonomy, FormatValue $formatter, string $meta_key, ?DataType $data_type = null)
+    public function __construct(string $taxonomy, FormatValue $formatter, string $meta_key, DataType $data_type = null)
     {
         $this->taxonomy = $taxonomy;
         $this->formatter = $formatter;

@@ -2,46 +2,35 @@
 
 namespace ACP\Access;
 
-use AC\Storage\OptionData;
-use AC\Storage\OptionDataFactory;
+use AC\Storage\KeyValueFactory;
+use AC\Storage\KeyValuePair;
 
 final class PermissionsStorage
 {
 
-    private OptionData $storage;
+    /**
+     * @var KeyValuePair
+     */
+    private $storage;
 
-    private $data;
-
-    public function __construct(OptionDataFactory $storage_factory)
+    public function __construct(KeyValueFactory $storage_factory)
     {
         $this->storage = $storage_factory->create('_acp_access_permissions');
     }
 
     public function retrieve(): Permissions
     {
-        return new Permissions($this->get() ?: []);
-    }
-
-    private function get()
-    {
-        if (null === $this->data) {
-            $this->data = $this->storage->get();
-        }
-
-        return $this->data;
+        return new Permissions($this->storage->get() ?: []);
     }
 
     public function exists(): bool
     {
-        return false !== $this->get();
+        return $this->storage->exists();
     }
 
     public function save(Permissions $permissions): void
     {
         $this->storage->save($permissions->to_array());
-
-        // flush cache
-        $this->data = null;
     }
 
 }

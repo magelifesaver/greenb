@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\FieldGroup\Location;
 
 use ACA\ACF\FieldGroup;

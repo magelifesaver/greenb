@@ -5,77 +5,90 @@ namespace AC\Table\InlineStyle;
 use AC\ColumnSize\ListStorage;
 use AC\ColumnSize\UserStorage;
 use AC\ListScreen;
-use AC\Type\ColumnId;
+use AC\Renderable;
 use AC\Type\ColumnWidth;
-use AC\Type\TableId;
 
-class ColumnSize
+class ColumnSize implements Renderable
 {
 
-	private ListStorage $list_storage;
+    /**
+     * @var ListScreen
+     */
+    private $list_screen;
 
-	private UserStorage $user_storage;
+    /**
+     * @var ListStorage
+     */
+    private $list_storage;
 
-	public function __construct(ListStorage $list_storage, UserStorage $user_storage)
-	{
-		$this->list_storage = $list_storage;
-		$this->user_storage = $user_storage;
-	}
+    /**
+     * @var UserStorage
+     */
+    private $user_storage;
 
-	private function render_style(TableId $table_id, ColumnId $column_id, ColumnWidth $column_width, $type)
-	{
-		$css_width = $column_width->get_value() . $column_width->get_unit();
+    public function __construct(ListScreen $list_screen, ListStorage $list_storage, UserStorage $user_storage)
+    {
+        $this->list_screen = $list_screen;
+        $this->list_storage = $list_storage;
+        $this->user_storage = $user_storage;
+    }
 
-		$css = sprintf(
-				'.ac-%1$s .wrap table th.column-%2$s, .ac-%1$s .wrap table td.column-%2$s   { width: %3$s !important; }',
-				esc_attr((string)$table_id),
-				esc_attr((string)$column_id),
-				$css_width
-		);
+    private function render_style($column_name, ColumnWidth $column_width, $type)
+    {
+        $css_width = $column_width->get_value() . $column_width->get_unit();
 
-		$css .= sprintf(
-				'body.acp-overflow-table.ac-%1$s .wrap th.column-%2$s, body.acp-overflow-table.ac-%1$s .wrap td.column-%2$s { min-width: %3$s !important; max-width: %3$s !important }',
-				esc_attr((string)$table_id),
-				esc_attr((string)$column_id),
-				$css_width
-		);
+        $css = sprintf(
+            '.ac-%1$s .wrap table th.column-%2$s, .ac-%1$s .wrap table td.column-%2$s   { width: %3$s !important; }',
+            esc_attr($this->list_screen->get_key()),
+            esc_attr($column_name),
+            $css_width
+        );
 
-		$id = sprintf(
-				'ac-column-size-%s-%s',
-				$type,
-				$column_id
-		);
+        $css .= sprintf(
+            'body.acp-overflow-table.ac-%1$s .wrap th.column-%2$s, body.acp-overflow-table.ac-%1$s .wrap td.column-%2$s { min-width: %3$s !important; max-width: %3$s !important }',
+            esc_attr($this->list_screen->get_key()),
+            esc_attr($column_name),
+            $css_width
+        );
 
-		ob_start();
-		?>
+        $id = sprintf(
+            'ac-column-size-%s-%s',
+            $type,
+            $column_name
+        );
+
+        ob_start();
+        ?>
 		<style id="<?= $id ?>">
 			@media screen and (min-width: 783px) {
 			<?= $css ?>
 			}
 		</style>
-		<?php
-		return ob_get_clean();
-	}
+        <?php
+        return ob_get_clean();
+    }
 
-	public function render(ListScreen $list_screen): string
-	{
-		$html = '';
+    public function render(): string
+    {
+        if ( ! $this->list_screen->get_settings()) {
+            return '';
+        }
 
-		foreach ($list_screen->get_columns() as $column) {
-			$width = $this->list_storage->get($column);
+        $html = '';
 
-			if ($width) {
-				$html .= $this->render_style($list_screen->get_table_id(), $column->get_id(), $width, 'list');
-			}
+        foreach ($this->list_screen->get_columns() as $column) {
+            $width = $this->list_storage->get($this->list_screen, $column->get_name());
+            if ($width) {
+                $html .= $this->render_style($column->get_name(), $width, 'list');
+            }
 
-			$width = $this->user_storage->get($list_screen->get_id(), $column->get_id());
+            $width = $this->user_storage->get($this->list_screen->get_id(), $column->get_name());
+            if ($width) {
+                $html .= $this->render_style($column->get_name(), $width, 'user');
+            }
+        }
 
-			if ($width) {
-				$html .= $this->render_style($list_screen->get_table_id(), $column->get_id(), $width, 'user');
-			}
-		}
-
-		return $html;
-	}
+        return $html;
+    }
 
 }

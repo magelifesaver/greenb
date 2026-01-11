@@ -12,9 +12,15 @@ use WP_Term;
 class Taxonomy implements Storage
 {
 
-    private string $taxonomy;
+    /**
+     * @var string
+     */
+    private $taxonomy;
 
-    private bool $enable_term_creation;
+    /**
+     * @var string
+     */
+    private $enable_term_creation;
 
     public function __construct(string $taxonomy, bool $enable_term_creation)
     {
@@ -22,7 +28,7 @@ class Taxonomy implements Storage
         $this->enable_term_creation = $enable_term_creation;
     }
 
-    public function get($id): array
+    public function get($id)
     {
         $terms = get_the_terms($id, $this->taxonomy);
 
@@ -87,9 +93,15 @@ class Taxonomy implements Storage
         $transaction = new Transaction();
 
         $term_ids = [];
+        $search_numeric_terms = apply_filters('acp/editing/taxonomy/numeric_term_names', false, $this->taxonomy);
 
         foreach ($term_ids_or_names as $term_id_or_name) {
             if (is_numeric($term_id_or_name)) {
+                if ( ! $search_numeric_terms) {
+                    $term_ids[] = $term_id_or_name;
+                    continue;
+                }
+
                 $term = get_term_by('term_id', $term_id_or_name, $this->taxonomy);
                 $term_ids[] = $term instanceof WP_Term
                     ? $term->term_id

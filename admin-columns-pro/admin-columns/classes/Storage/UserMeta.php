@@ -1,19 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace AC\Storage;
 
-class UserMeta implements UserData
+use LogicException;
+
+class UserMeta implements KeyValuePair
 {
 
-    protected int $user_id;
+    protected $user_id;
 
-    protected string $key;
+    protected $key;
 
-    private bool $single;
-
-    public function __construct(string $key, ?int $user_id = null, bool $single = true)
+    public function __construct(string $key, int $user_id = null)
     {
         if (null === $user_id) {
             $user_id = get_current_user_id();
@@ -21,22 +19,38 @@ class UserMeta implements UserData
 
         $this->user_id = $user_id;
         $this->key = $key;
-        $this->single = $single;
+
+        $this->validate();
+    }
+
+    private function validate(): void
+    {
+        if ($this->user_id < 0) {
+            throw new LogicException('Invalid user id.');
+        }
+        if ('' === $this->key) {
+            throw new LogicException('Invalid key.');
+        }
     }
 
     public function get()
     {
-        return get_user_meta($this->user_id, $this->key, $this->single);
+        return get_user_meta($this->user_id, $this->key, true);
     }
 
-    public function save($value): void
+    public function save($value): bool
     {
-        update_user_meta($this->user_id, $this->key, $value);
+        return (bool)update_user_meta($this->user_id, $this->key, $value);
     }
 
-    public function delete(): void
+    public function delete(): bool
     {
-        delete_user_meta($this->user_id, $this->key);
+        return delete_user_meta($this->user_id, $this->key);
+    }
+
+    public function exists(): bool
+    {
+        return false !== $this->get();
     }
 
 }

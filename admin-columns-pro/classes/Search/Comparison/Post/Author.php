@@ -14,7 +14,7 @@ class Author extends PostField
     implements SearchableValues
 {
 
-    private string $post_type;
+    private $post_type;
 
     public function __construct(string $post_type)
     {

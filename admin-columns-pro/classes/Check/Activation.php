@@ -7,6 +7,7 @@ use AC\Admin\Page\Columns;
 use AC\Admin\Page\Settings;
 use AC\Ajax;
 use AC\Capabilities;
+use AC\Entity\Plugin;
 use AC\Message;
 use AC\Registerable;
 use AC\Screen;
@@ -19,34 +20,29 @@ use ACP\Access\PermissionsStorage;
 use ACP\ActivationTokenFactory;
 use ACP\Admin\Page\License;
 use ACP\Admin\Page\Tools;
-use ACP\AdminColumnsPro;
-use ACP\Type\Url\AccountFactory;
 
-class Activation implements Registerable
+class Activation
+    implements Registerable
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    private ActivationTokenFactory $activation_token_factory;
+    private $activation_token_factory;
 
-    private ActivationStorage $activation_storage;
+    private $activation_storage;
 
-    private PermissionsStorage $permission_storage;
-
-    private AccountFactory $account_url_factory;
+    private $permission_storage;
 
     public function __construct(
-        AdminColumnsPro $plugin,
+        Plugin $plugin,
         ActivationTokenFactory $activation_token_factory,
         ActivationStorage $activation_storage,
-        PermissionsStorage $permission_storage,
-        AccountFactory $account_url_factory
+        PermissionsStorage $permission_storage
     ) {
         $this->plugin = $plugin;
         $this->activation_token_factory = $activation_token_factory;
         $this->activation_storage = $activation_storage;
         $this->permission_storage = $permission_storage;
-        $this->account_url_factory = $account_url_factory;
     }
 
     public function register(): void
@@ -87,12 +83,12 @@ class Activation implements Registerable
                      $screen->is_admin_screen(Tools::NAME) ||
                      $screen->is_admin_screen(Addons::NAME) ||
                      $screen->is_admin_screen(License::NAME)) && $this->show_message() :
-                $notice = new Message\AdminNotice($this->get_message());
+                $notice = new Message\Notice($this->get_message());
                 $notice
                     ->set_type(Message::INFO)
                     ->register();
                 break;
-            case $screen->is_table_screen() && $this->get_dismiss_option()->is_expired() && $this->show_message() :
+            case $screen->is_list_screen() && $this->get_dismiss_option()->is_expired() && $this->show_message() :
 
                 // Dismissible message on list table
                 $notice = new Message\Notice\Dismissible($this->get_message(), $this->get_ajax_handler());
@@ -105,7 +101,7 @@ class Activation implements Registerable
 
     private function show_message(): bool
     {
-        // We send a different (locked) message when a user has no usage permissions
+        // We send a different (locked) message when a use has no usage permissions
         $has_usage = $this->permission_storage->retrieve()->has_permission(Permissions::USAGE);
 
         if ( ! $has_usage) {
@@ -136,7 +132,7 @@ class Activation implements Registerable
 
     private function get_account_url(): Url\UtmTags
     {
-        return new Url\UtmTags($this->account_url_factory->create(), 'license-activation');
+        return new Url\UtmTags(new Url\Site(Url\Site::PAGE_ACCOUNT_SUBSCRIPTIONS), 'license-activation');
     }
 
     private function get_message(): string

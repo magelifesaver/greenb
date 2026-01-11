@@ -4,32 +4,22 @@ declare(strict_types=1);
 
 namespace ACA\WC\ConditionalFormat\Formatter\Product;
 
-use AC;
-use AC\Expression\ComparisonOperators;
-use AC\Type;
+use AC\Column;
 use ACP\ConditionalFormat\Formatter;
+use ACP\Expression\ComparisonOperators;
 
 class AvgOrderIntervalFormatter implements Formatter
 {
-
-    private AC\Setting\Formatter $formatter;
-
-    public function __construct(AC\Setting\Formatter $formatter)
-    {
-        $this->formatter = $formatter;
-    }
 
     public function get_type(): string
     {
         return self::INTEGER;
     }
 
-    public function format(string $value, $id, string $operator_group): string
+    public function format(string $value, $id, Column $column, string $operator_group): string
     {
         if (ComparisonOperators::class === $operator_group) {
-            // return days
-            return (string)$this->formatter->format(new Type\Value($id))
-                                           ->get_value();
+            return (string)$column->get_raw_value($id); // returns number of days
         }
 
         return $value;

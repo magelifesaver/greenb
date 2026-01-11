@@ -2,9 +2,8 @@
 
 namespace ACP\RequestHandler\Ajax;
 
-use AC;
-use AC\Capabilities;
 use AC\Nonce;
+use AC\Request;
 use AC\RequestAjaxHandler;
 use ACP\Access\ActivationUpdater;
 use ACP\ActivationTokenFactory;
@@ -15,29 +14,21 @@ class SubscriptionUpdate implements RequestAjaxHandler
 
     private ActivationTokenFactory $token_factory;
 
-    private Nonce\Ajax $nonce;
-
     private ActivationUpdater $activation_updater;
 
     public function __construct(
         ActivationTokenFactory $token_factory,
-        Nonce\Ajax $nonce,
         ActivationUpdater $activation_updater
     ) {
         $this->token_factory = $token_factory;
-        $this->nonce = $nonce;
         $this->activation_updater = $activation_updater;
     }
 
     public function handle(): void
     {
-        if ( ! current_user_can(Capabilities::MANAGE)) {
-            return;
-        }
+        $request = new Request();
 
-        $request = new AC\Request();
-
-        if ( ! $this->nonce->verify($request)) {
+        if ( ! (new Nonce\Ajax())->verify($request)) {
             wp_send_json_error();
         }
 

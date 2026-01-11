@@ -1,13 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Field;
 
-interface Date
-{
+interface Date {
 
-    public function get_display_format(): string;
+	/**
+	 * @return string
+	 */
+	public function get_display_format();
 
-    public function get_first_day(): int;
+	/**
+	 * @return integer
+	 */
+	public function get_first_day();
 }

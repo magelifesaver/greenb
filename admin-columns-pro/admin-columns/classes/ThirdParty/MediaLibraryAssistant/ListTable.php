@@ -5,47 +5,46 @@ declare(strict_types=1);
 namespace AC\ThirdParty\MediaLibraryAssistant;
 
 use AC;
+use MLA_List_Table;
 use MLAData;
 
 class ListTable implements AC\ListTable
 {
 
-    private WpListTableFactory $factory;
+    private $table;
 
-    public function __construct(WpListTableFactory $factory)
+    public function __construct(MLA_List_Table $table)
     {
-        $this->factory = $factory;
+        $this->table = $table;
     }
 
-    public function render_cell(string $column_id, $row_id): string
+    public function get_column_value(string $column, $id): string
     {
-        $item = $this->get_attachment($row_id);
+        $item = (object)MLAData::mla_get_attachment_by_id($id);
 
         if ( ! $item) {
             return '';
         }
 
-        $method = 'column_' . $column_id;
+        $method = 'column_' . $column;
 
-        $table = $this->factory->create();
-
-        if (method_exists($table, $method)) {
-            return (string)call_user_func([$table, $method], $item);
+        if (method_exists($this->table, $method)) {
+            return (string)call_user_func([$this->table, $method], $item);
         }
 
-        return (string)$table->column_default($item, $column_id);
+        return (string)$this->table->column_default($item, $column);
     }
 
     public function get_total_items(): int
     {
-        return $this->factory->create()->get_pagination_arg('total_items');
+        return $this->table->get_pagination_arg('total_items');
     }
 
     public function render_row($id): string
     {
         ob_start();
 
-        $this->factory->create()->single_row($this->get_attachment($id));
+        $this->table->single_row($this->get_attachment($id));
 
         return ob_get_clean();
     }

@@ -4,22 +4,23 @@ namespace ACP\Check;
 
 use AC;
 use AC\Capabilities;
+use AC\Entity\Plugin;
 use AC\Message;
+use AC\Message\Notice;
 use AC\Registerable;
 use AC\Screen;
 use AC\Type\Url;
 use ACP\Access\PermissionsStorage;
 use ACP\Admin\Page;
-use ACP\AdminColumnsPro;
 
 class LockedSettings implements Registerable
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    private PermissionsStorage $permission_storage;
+    private $permission_storage;
 
-    public function __construct(AdminColumnsPro $plugin, PermissionsStorage $permission_storage)
+    public function __construct(Plugin $plugin, PermissionsStorage $permission_storage)
     {
         $this->plugin = $plugin;
         $this->permission_storage = $permission_storage;
@@ -125,19 +126,17 @@ class LockedSettings implements Registerable
                 $notice->register();
                 break;
             case $screen->is_admin_screen(Page\License::NAME) && $this->missing_usage_permission() :
-                $notice = new Message\AdminNotice(
+                $notice = new Notice(
                     $this->get_license_page_message(),
                     Message::ERROR
                 );
 
                 $notice->register();
                 break;
-            case (
-                     $screen->is_admin_screen(AC\Admin\Page\Columns::NAME) ||
-                     $screen->is_admin_screen(Page\Tools::NAME) ||
-                     $screen->is_admin_screen(AC\Admin\Page\Settings::NAME)
-                 ) && $this->missing_usage_permission() :
-                $notice = new Message\AdminNotice(
+            case ($screen->is_admin_screen(AC\Admin\Page\Columns::NAME) || $screen->is_admin_screen(
+                        Page\Tools::NAME
+                    ) || $screen->is_admin_screen(AC\Admin\Page\Settings::NAME)) && $this->missing_usage_permission() :
+                $notice = new Notice(
                     $this->get_message(),
                     Message::ERROR
                 );

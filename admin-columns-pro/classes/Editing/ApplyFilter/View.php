@@ -9,36 +9,22 @@ use ACP\Editing\Service;
 class View
 {
 
-    private AC\Setting\Context $context;
+    private $column;
 
-    private string $edit_context;
+    private $context;
 
-    private Service $service;
+    private $service;
 
-    private AC\TableScreen $table_screen;
-
-    public function __construct(
-        AC\Setting\Context $context,
-        string $edit_context,
-        Service $service,
-        AC\TableScreen $table_screen
-    ) {
+    public function __construct(AC\Column $column, string $context, Service $service)
+    {
+        $this->column = $column;
         $this->context = $context;
-        $this->edit_context = $edit_context;
         $this->service = $service;
-        $this->table_screen = $table_screen;
     }
 
-    public function apply_filters(?Editing\View $view = null): ?Editing\View
+    public function apply_filters(Editing\View $view = null): ?Editing\View
     {
-        $view = apply_filters(
-            'ac/editing/view',
-            $view,
-            $this->context,
-            $this->edit_context,
-            $this->service,
-            $this->table_screen
-        );
+        $view = apply_filters('acp/editing/view', $view, $this->column, $this->context, $this->service);
 
         return $view instanceof Editing\View
             ? $view

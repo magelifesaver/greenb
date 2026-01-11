@@ -8,19 +8,19 @@ use AC\Nonce;
 use AC\Request;
 use AC\RequestAjaxHandler;
 use AC\Type\ListScreenId;
+use ACP\Export\ColumnStateCollection;
 use ACP\Export\Repository\UserColumnStateRepository;
 use ACP\Export\Type\ColumnState;
-use ACP\Export\Type\ColumnStateCollection;
 use Exception;
 
-final class SaveExportPreference implements RequestAjaxHandler
+class SaveExportPreference implements RequestAjaxHandler
 {
 
     private $state_repository;
 
-    public function __construct(UserColumnStateRepository $column_state_repository)
+    public function __construct()
     {
-        $this->state_repository = $column_state_repository;
+        $this->state_repository = new UserColumnStateRepository();
     }
 
     public function handle(): void

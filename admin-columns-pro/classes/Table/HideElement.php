@@ -2,9 +2,11 @@
 
 namespace ACP\Table;
 
-interface HideElement
-{
+interface HideElement {
 
-    public function hide(): void;
+	/**
+	 * @return void
+	 */
+	public function hide();
 
 }

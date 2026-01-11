@@ -91,7 +91,12 @@ class Post extends RequestHandler
             );
     }
 
-    protected function validate_post_lock(int $id): void
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    protected function validate_post_lock($id)
     {
         $user_locked_post = wp_check_post_lock($id);
 

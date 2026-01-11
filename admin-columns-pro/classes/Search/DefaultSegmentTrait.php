@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace ACP\Search;
 
 use AC;
-use ACP\ListScreenPreferences;
+use ACP;
 use ACP\Search\Entity\Segment;
 use ACP\Search\Type\SegmentKey;
 
 trait DefaultSegmentTrait
 {
 
-    protected SegmentRepository $segment_repository;
+    /**
+     * @var SegmentRepository
+     */
+    protected $segment_repository;
 
     protected function get_default_segment(AC\ListScreen $list_screen): ?Segment
     {
@@ -22,8 +25,8 @@ trait DefaultSegmentTrait
             return null;
         }
 
-        //  test SEGMENTS
-        $segments = $list_screen->get_segments();
+        /** @var SegmentCollection $segments */
+        $segments = $list_screen->get_preference(ACP\ListScreenPreferences::SHARED_SEGMENTS);
 
         return $segments->contains($segment_key)
             ? $segments->get($segment_key)
@@ -32,7 +35,7 @@ trait DefaultSegmentTrait
 
     protected function get_default_segment_key(AC\ListScreen $list_screen): ?SegmentKey
     {
-        $setting = $list_screen->get_preference(ListScreenPreferences::FILTER_SEGMENT);
+        $setting = $list_screen->get_preference(ACP\ListScreenPreferences::FILTER_SEGMENT);
 
         if ( ! $setting) {
             return null;

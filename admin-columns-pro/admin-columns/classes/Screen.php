@@ -9,13 +9,16 @@ use WP_Screen;
 class Screen implements Registerable
 {
 
-    protected ?WP_Screen $screen = null;
+    private $list_screen_factory;
 
-    private TableScreenFactory $table_screen_factory;
+    /**
+     * @var WP_Screen
+     */
+    protected $screen;
 
-    public function __construct(TableScreenFactory $table_screen_factory)
+    public function __construct(ListScreenFactory $list_screen_factory)
     {
-        $this->table_screen_factory = $table_screen_factory;
+        $this->list_screen_factory = $list_screen_factory;
     }
 
     public function register(): void
@@ -72,9 +75,9 @@ class Screen implements Registerable
         return $this->screen->in_admin('network');
     }
 
-    public function is_table_screen(): bool
+    public function is_list_screen(): bool
     {
-        return $this->table_screen_factory->can_create_from_wp_screen($this->screen);
+        return $this->list_screen_factory->can_create_from_wp_screen($this->screen);
     }
 
     public function is_plugin_screen(): bool
@@ -86,7 +89,7 @@ class Screen implements Registerable
         return $this->is_screen($screen);
     }
 
-    public function is_admin_screen(?string $slug = null): bool
+    public function is_admin_screen(string $slug = null): bool
     {
         if (null !== $slug) {
             $tabs = [$slug];

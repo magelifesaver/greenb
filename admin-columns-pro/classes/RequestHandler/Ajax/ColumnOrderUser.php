@@ -5,28 +5,28 @@ namespace ACP\RequestHandler\Ajax;
 use AC\Nonce;
 use AC\Request;
 use AC\RequestAjaxHandler;
-use AC\Storage\Repository\UserColumnOrder;
+use AC\Storage\UserColumnOrder;
 use AC\Type\ListScreenId;
 use LogicException;
 
 class ColumnOrderUser implements RequestAjaxHandler
 {
 
-    private UserColumnOrder $user_storage;
+    /**
+     * @var UserColumnOrder
+     */
+    private $user_storage;
 
-    private Nonce\Ajax $nonce;
-
-    public function __construct(UserColumnOrder $user_storage, Nonce\Ajax $nonce)
+    public function __construct(UserColumnOrder $user_storage)
     {
         $this->user_storage = $user_storage;
-        $this->nonce = $nonce;
     }
 
     public function handle(): void
     {
         $request = new Request();
 
-        if ( ! $this->nonce->verify($request)) {
+        if ( ! (new Nonce\Ajax())->verify($request)) {
             wp_send_json_error();
         }
 

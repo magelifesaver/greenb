@@ -9,9 +9,9 @@ use ACP\Storage\Serializer;
 final class I18n implements Serializer
 {
 
-    private Serializer $serializer;
+    private $serializer;
 
-    private string $text_domain;
+    private $text_domain;
 
     public function __construct(Serializer $serializer, string $text_domain)
     {

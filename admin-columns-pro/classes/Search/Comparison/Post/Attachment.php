@@ -48,8 +48,6 @@ class Attachment extends Comparison
                 break;
         }
 
-        $bindings->group_by("$wpdb->posts.ID");
-
         return $bindings;
     }
 

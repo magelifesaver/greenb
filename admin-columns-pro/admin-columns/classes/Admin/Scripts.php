@@ -2,7 +2,7 @@
 
 namespace AC\Admin;
 
-use AC\AdminColumns;
+use AC\Asset\Location\Absolute;
 use AC\Asset\Script;
 use AC\Asset\Style;
 use AC\Registerable;
@@ -12,9 +12,9 @@ class Scripts implements Registerable
 
     private $location;
 
-    public function __construct(AdminColumns $plugin)
+    public function __construct(Absolute $location)
     {
-        $this->location = $plugin->get_location();
+        $this->location = $location;
     }
 
     public function register(): void

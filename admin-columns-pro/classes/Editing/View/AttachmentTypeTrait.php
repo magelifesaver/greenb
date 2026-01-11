@@ -2,23 +2,25 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
 use InvalidArgumentException;
 
-trait AttachmentTypeTrait
-{
+trait AttachmentTypeTrait {
 
-    public function set_attachment_type(string $type): View
-    {
-        if ( ! in_array($type, ['image', 'video', 'audio'], true)) {
-            throw new InvalidArgumentException('Invalid attachment type.');
-        }
+	/**
+	 * @param string $type
+	 *
+	 * @return $this
+	 */
+	public function set_attachment_type( $type ) {
+		if ( ! in_array( $type, [ 'image', 'video', 'audio' ], true ) ) {
+			throw new InvalidArgumentException( 'Invalid attachment type.' );
+		}
 
-        $args = (array)$this->get_arg('attachment');
+		$args = (array) $this->get_arg( 'attachment' );
 
-        $args['library']['type'] = $type;
+		$args['library']['type'] = $type;
 
-        return $this->set('attachment', $args);
-    }
+		return $this->set( 'attachment', $args );
+	}
 
 }

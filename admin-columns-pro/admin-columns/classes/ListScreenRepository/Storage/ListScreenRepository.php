@@ -11,16 +11,16 @@ use LogicException;
 final class ListScreenRepository
 {
 
-    private AC\ListScreenRepository $list_screen_repository;
+    private $list_screen_repository;
 
-    private bool $writable;
+    private $writable;
 
-    private ?Rules $rules;
+    private $rules;
 
     public function __construct(
         AC\ListScreenRepository $list_screen_repository,
-        ?bool $writable = null,
-        ?Rules $rules = null
+        bool $writable = null,
+        Rules $rules = null
     ) {
         if (null === $writable) {
             $writable = false;

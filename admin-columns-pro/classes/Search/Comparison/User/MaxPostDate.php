@@ -48,8 +48,7 @@ class MaxPostDate extends Comparison
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         global $wpdb;
-
-        $alias = uniqid('acs');
+        $alias = uniqid('acs', false);
         $comparison = ComparisonFactory::create("$alias.date", $operator, $value)->prepare();
 
         $min_or_max = $this->oldest_post

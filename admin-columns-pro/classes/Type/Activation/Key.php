@@ -8,7 +8,7 @@ use InvalidArgumentException;
 final class Key implements ActivationToken
 {
 
-    private string $token;
+    private $token;
 
     public function __construct(string $token)
     {
@@ -29,9 +29,9 @@ final class Key implements ActivationToken
         return 'activation_key';
     }
 
-    public static function is_valid(string $token): bool
+    public static function is_valid($token): bool
     {
-        return $token && strlen($token) > 12 && false !== strpos($token, '-');
+        return $token && is_string($token) && strlen($token) > 12 && false !== strpos($token, '-');
     }
 
 }

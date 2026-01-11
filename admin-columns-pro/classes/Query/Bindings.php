@@ -8,19 +8,19 @@ class Bindings
     /**
      * @var int[]
      */
-    private static array $aliases = [];
+    private static $aliases = [];
 
-    protected string $where = '';
+    protected $where = '';
 
-    protected string $join = '';
+    protected $join = '';
 
-    protected string $group_by = '';
+    protected $group_by = '';
 
-    protected string $order_by = '';
+    protected $order_by = '';
 
-    protected string $limits = '';
+    protected $limits = '';
 
-    protected array $meta_query = [];
+    protected $meta_query = [];
 
     public function get_unique_alias(string $column): string
     {

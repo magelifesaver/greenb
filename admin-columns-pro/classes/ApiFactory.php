@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace ACP;
 
+use AC\Entity\Plugin;
 use AC\Type\Url\Site;
 
 class ApiFactory
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    public function __construct(AdminColumnsPro $plugin)
+    public function __construct(Plugin $plugin)
     {
         $this->plugin = $plugin;
     }

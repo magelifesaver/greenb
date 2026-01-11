@@ -2,16 +2,17 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait AjaxTrait {
 
-trait AjaxTrait
-{
+	/**
+	 * @param bool $use_ajax
+	 *
+	 * @return $this
+	 */
+	public function set_ajax_populate( $use_ajax ) {
+		$this->set( 'ajax_populate', (bool) $use_ajax );
 
-    public function set_ajax_populate(bool $use_ajax): View
-    {
-        $this->set('ajax_populate', $use_ajax);
-
-        return $this;
-    }
+		return $this;
+	}
 
 }

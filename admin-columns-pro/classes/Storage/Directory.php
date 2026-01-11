@@ -10,7 +10,7 @@ use SplFileInfo;
 final class Directory
 {
 
-    private SplFileInfo $info;
+    private $info;
 
     public function __construct(string $path)
     {

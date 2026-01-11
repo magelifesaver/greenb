@@ -3,9 +3,8 @@
 namespace ACP\Search\RequestHandler;
 
 use AC;
-use AC\Type\ColumnId;
-use ACP\Column;
-use ACP\Query\QueryRegistry;
+use ACP\QueryFactory;
+use ACP\Search\ComparisonFactory;
 use ACP\Search\Value;
 use LogicException;
 
@@ -15,16 +14,17 @@ use LogicException;
 class Rules
 {
 
-    use AC\Column\ColumnLabelTrait;
-
-    private AC\ListScreen $list_screen;
+    /**
+     * @var AC\ListScreen
+     */
+    private $list_screen;
 
     public function __construct(AC\ListScreen $list_screen)
     {
         $this->list_screen = $list_screen;
     }
 
-    public function handle(AC\Request $request): void
+    public function handle(AC\Request $request)
     {
         $rules = $request->filter('ac-rules', [], FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
@@ -35,13 +35,13 @@ class Rules
         $bindings = [];
 
         foreach ($rules as $rule) {
-            $column = $this->list_screen->get_column(new ColumnId((string)$rule['name']));
+            $column = $this->list_screen->get_column_by_name($rule['name']);
 
-            if ( ! $column instanceof Column) {
+            if ( ! $column) {
                 continue;
             }
 
-            $comparison = $column->search();
+            $comparison = (new ComparisonFactory())->create($column);
 
             if ( ! $comparison) {
                 continue;
@@ -61,7 +61,7 @@ class Rules
                 // Error message
                 $message = sprintf(
                     __('Smart filter for %s could not be applied.', 'codepress-admin-columns'),
-                    sprintf('<strong>%s</strong>', $this->get_column_label($column))
+                    sprintf('<strong>%s</strong>', $column->get_custom_label())
                 );
                 $message = sprintf('%s %s', $message, __('Try to re-apply the filter.', 'codepress-admin-columns'));
 
@@ -73,8 +73,8 @@ class Rules
             }
         }
 
-        QueryRegistry::create(
-            $this->list_screen->get_table_screen(),
+        QueryFactory::create(
+            $this->list_screen->get_query_type(),
             $bindings
         )->register();
     }

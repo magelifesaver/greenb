@@ -7,7 +7,7 @@ namespace ACP\Search\Type;
 final class SegmentKey
 {
 
-    private string $key;
+    private $key;
 
     public function __construct(string $key)
     {

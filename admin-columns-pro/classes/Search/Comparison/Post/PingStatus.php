@@ -2,12 +2,10 @@
 
 namespace ACP\Search\Comparison\Post;
 
-class PingStatus extends CommentStatus
-{
+class PingStatus extends CommentStatus {
 
-    protected function get_field(): string
-    {
-        return 'ping_status';
-    }
+	protected function get_field(): string {
+		return 'ping_status';
+	}
 
 }

@@ -12,7 +12,7 @@ use AC\Plugin\Version;
 final class V6300 extends Update
 {
 
-    private Storage $storage;
+    private $storage;
 
     public function __construct(Storage $storage)
     {

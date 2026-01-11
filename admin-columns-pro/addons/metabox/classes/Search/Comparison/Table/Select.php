@@ -5,30 +5,23 @@ namespace ACA\MetaBox\Search\Comparison\Table;
 use AC\Helper\Select\Options;
 use ACP;
 
-class Select extends TableStorage implements ACP\Search\Comparison\Values
-{
+class Select extends TableStorage implements ACP\Search\Comparison\Values {
 
-    protected $choices;
+	/**
+	 * @var array
+	 */
+	protected $choices;
 
-    public function __construct(string $table, string $column, array $choices)
-    {
-        $operators = new ACP\Search\Operators([
-            ACP\Search\Operators::EQ,
-            ACP\Search\Operators::NEQ,
-            ACP\Search\Operators::IS_EMPTY,
-            ACP\Search\Operators::NOT_IS_EMPTY,
-        ]);
+	public function __construct( $operators, $table, $column, $choices ) {
+		$this->choices = $choices;
 
-        parent::__construct($operators, $table, $column);
+		parent::__construct( $operators, $table, $column );
+	}
 
-        $this->choices = $choices;
-    }
+	public function get_values(): Options {
+		$options = empty( $this->choices ) ? [] : $this->choices;
 
-    public function get_values(): Options
-    {
-        $options = empty($this->choices) ? [] : $this->choices;
-
-        return Options::create_from_array($options);
-    }
+		return Options::create_from_array( $options );
+	}
 
 }

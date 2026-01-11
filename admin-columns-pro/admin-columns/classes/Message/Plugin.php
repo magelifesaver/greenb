@@ -8,9 +8,11 @@ use AC\View;
 class Plugin extends Message
 {
 
-    protected string $plugin_basename;
+    protected $plugin_basename;
 
-    public function __construct(string $message, string $plugin_basename, ?string $type = null)
+    protected $icon;
+
+    public function __construct(string $message, string $plugin_basename, string $type = null)
     {
         if (null === $type) {
             $type = self::WARNING;
@@ -19,6 +21,7 @@ class Plugin extends Message
         parent::__construct($message, $type);
 
         $this->plugin_basename = $plugin_basename;
+        $this->icon = $this->get_icon_by_current_type();
     }
 
     public function register(): void
@@ -51,7 +54,7 @@ class Plugin extends Message
 
         $data = [
             'plugin_basename' => $this->plugin_basename,
-            'icon'            => $this->get_icon_by_current_type(),
+            'icon'            => $this->icon,
             'class'           => $class,
             'message'         => $this->message,
             'type'            => $this->type,
@@ -64,7 +67,10 @@ class Plugin extends Message
         return $view->render();
     }
 
-    protected function get_icon_by_current_type(): string
+    /**
+     * @return string
+     */
+    protected function get_icon_by_current_type()
     {
         $mapping = [
             self::SUCCESS => '\f147', // yes
@@ -73,7 +79,18 @@ class Plugin extends Message
             self::INFO    => '\f14c', // info outline
         ];
 
-        return $mapping[$this->type] ?? '';
+        if ( ! isset($mapping[$this->type])) {
+            return false;
+        }
+
+        return $mapping[$this->type];
+    }
+
+    public function set_icon(string $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
     }
 
 }

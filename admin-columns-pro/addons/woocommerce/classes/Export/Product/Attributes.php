@@ -2,46 +2,43 @@
 
 namespace ACA\WC\Export\Product;
 
+use ACA\WC\Column;
 use ACP;
-use WC_Product;
 
-class Attributes implements ACP\Export\Service
-{
+class Attributes implements ACP\Export\Service {
 
-    private function get_delimiter(): string
-    {
-        return defined('WC_DELIMITER') && WC_DELIMITER
-            ? (string)WC_DELIMITER
-            : ' | ';
-    }
+	protected $column;
 
-    public function get_value($id): string
-    {
-        $product = wc_get_product($id);
+	public function __construct( Column\Product\Attributes $column ) {
+		$this->column = $column;
+	}
 
-        if ( ! $product instanceof WC_Product) {
-            return '';
-        }
+	private function get_delimiter(): string {
+		return defined( 'WC_DELIMITER' ) && WC_DELIMITER
+			? (string) WC_DELIMITER
+			: ' | ';
+	}
 
-        $attributes = [];
+	public function get_value( $id ) {
+		$values = [];
 
-        foreach ($product->get_attributes() as $attribute) {
-            if ($attribute->is_taxonomy()) {
-                $label = wc_attribute_label($attribute->get_name(), $product);
-                $options = wc_get_product_terms($product->get_id(), $attribute->get_name(), ['fields' => 'names']);
-            } else {
-                $label = $attribute->get_name();
-                $options = $attribute->get_options();
-            }
+		foreach ( $this->column->get_raw_value( $id ) as $name => $attribute ) {
+			$options = $attribute->get_options();
 
-            $attributes[] = $label . ': ' . implode(' ' . $this->get_delimiter() . ' ', $options);
-        }
+			if ( $attribute->is_taxonomy() ) {
+				$options = wc_get_product_terms( $id, $name, [ 'fields' => 'names' ] );
+			}
 
-        if ( ! $attributes) {
-            return '';
-        }
+			$value = implode( ' ' . $this->get_delimiter() . ' ', $options );
 
-        return implode(', ', $attributes);
-    }
+			if ( ! $this->column->get_attribute() ) {
+				$value = wc_attribute_label( $name ) . ': ' . $value;
+			}
+
+			$values[] = $value;
+		}
+
+		return implode( ', ', $values );
+	}
 
 }

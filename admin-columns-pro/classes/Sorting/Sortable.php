@@ -2,10 +2,14 @@
 
 namespace ACP\Sorting;
 
-/**
- * @deprecated 7.0
- */
+use ACP\Sorting\Model\QueryBindings;
+
 interface Sortable
 {
+
+    /**
+     * @return QueryBindings|null
+     */
+    public function sorting();
 
 }

@@ -8,7 +8,10 @@
             <?= __('Recent Order', 'codepress-admin-columns') ?>
 		</th>
 		<th class="col-orders">
-            <?= __('Orders', 'codepress-admin-columns') ?>
+            <?= __('Orders', 'codepress-admin-columns') ?>&nbsp;
+			<small style="font-weight: normal; font-style: italic">
+                <?= __('containing this product', 'codepress-admin-columns') ?>
+			</small>
 		</th>
 	</tr>
 	</thead>

@@ -2,39 +2,26 @@
 
 namespace ACP\Editing\ApplyFilter;
 
-use AC\Setting\Context;
-use AC\TableScreen;
-use AC\Type\ListScreenId;
+use AC;
 
 class EditValue
 {
 
-    private int $id;
+    private $id;
 
-    private Context $context;
+    private $column;
 
-    private TableScreen $table_screen;
-
-    private ListScreenId $list_screen_id;
-
-    public function __construct(int $id, Context $context, TableScreen $table_screen, ListScreenId $list_screen_id)
+    public function __construct(int $id, AC\Column $column)
     {
         $this->id = $id;
-        $this->context = $context;
-        $this->table_screen = $table_screen;
-        $this->list_screen_id = $list_screen_id;
+        $this->column = $column;
     }
 
     public function apply_filters($value)
     {
-        return apply_filters(
-            'ac/editing/input_value',
-            $value,
-            $this->context,
-            $this->id,
-            $this->table_screen,
-            $this->list_screen_id
-        );
+        $value = apply_filters('acp/editing/value', $value, $this->id, $this->column);
+
+        return apply_filters('acp/editing/value/' . $this->column->get_type(), $value, $this->id, $this->column);
     }
 
 }

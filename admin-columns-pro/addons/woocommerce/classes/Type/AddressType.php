@@ -10,7 +10,7 @@ final class AddressType
     public const BILLING = 'billing';
     public const SHIPPING = 'shipping';
 
-    private string $address_type;
+    private $address_type;
 
     public function __construct(string $address_type)
     {

@@ -1,40 +1,39 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Editing\Storage;
 
-use ACA\ACF\Storage\FieldStorage;
-use ACP;
+use ACP\Editing\Storage;
 
-class Field implements ACP\Editing\Storage
-{
+class Field implements Storage {
 
-    private string $key;
+	/**
+	 * @var string
+	 */
+	private $field_key;
 
-    private FieldStorage $storage;
+	/**
+	 * @var string
+	 */
+	private $id_prefix;
 
-    public function __construct(string $key, FieldStorage $storage)
-    {
-        $this->key = $key;
-        $this->storage = $storage;
-    }
+	/**
+	 * @var ReadStorage
+	 */
+	private $read_storage;
 
-    public function get(int $id)
-    {
-        return $this->storage->get($id, $this->key) ?: false;
-    }
+	public function __construct( $field_key, $id_prefix, ReadStorage $read_storage ) {
+		$this->field_key = (string) $field_key;
+		$this->id_prefix = (string) $id_prefix;
+		$this->read_storage = $read_storage;
+	}
 
-    public function update(int $id, $data): bool
-    {
-        // Null is not allowed
-        return $this->storage->update(
-            $id,
-            $this->key,
-            is_null($data)
-                ? false
-                : $data
-        );
-    }
+	public function get( int $id ) {
+		return $this->read_storage->get( $id );
+	}
+
+	public function update( int $id, $data ): bool {
+		// Null is not allowed
+		return false !== update_field( $this->field_key, is_null( $data ) ? false : $data, $this->id_prefix . $id );
+	}
 
 }

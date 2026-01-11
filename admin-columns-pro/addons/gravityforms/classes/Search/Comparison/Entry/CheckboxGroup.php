@@ -13,6 +13,9 @@ use ACP\Search\Value;
 class CheckboxGroup extends Search\Comparison\Entry implements ACP\Search\Comparison\Values
 {
 
+    /**
+     * @var array
+     */
     private $choices;
 
     /**

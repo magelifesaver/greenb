@@ -4,27 +4,30 @@ namespace ACP\Sorting\FormatValue;
 
 use ACP\Sorting\FormatValue;
 
-class SerializedSettingFormatter implements FormatValue
-{
+class SerializedSettingFormatter implements FormatValue {
 
-    private FormatValue $formatter;
+	/**
+	 * @var FormatValue
+	 */
+	private $formatter;
 
-    public function __construct(FormatValue $formatter)
-    {
-        $this->formatter = $formatter;
-    }
+	/**
+	 * @param FormatValue $formatter
+	 */
+	public function __construct( FormatValue $formatter ) {
+		$this->formatter = $formatter;
+	}
 
-    public function format_value($string)
-    {
-        $values = maybe_unserialize($string);
+	public function format_value( $string ) {
+		$values = maybe_unserialize( $string );
 
-        if (empty($values) || ! is_array($values)) {
-            return null;
-        }
+		if ( empty( $values ) || ! is_array( $values ) ) {
+			return null;
+		}
 
-        $formatted = array_map([$this->formatter, 'format_value'], $values);
+		$formatted = array_map( [ $this->formatter, 'format_value' ], $values );
 
-        return implode(' ', $formatted);
-    }
+		return implode( ' ', $formatted );
+	}
 
 }

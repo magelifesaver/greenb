@@ -11,14 +11,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// Prevent double‑loading this module.
+// Prevent double-loading this module.
 if ( defined( 'AAA_OC_FORECAST_LOADER_READY' ) ) { return; }
 define( 'AAA_OC_FORECAST_LOADER_READY', true );
 
-// Local debug toggle and version constant.
+// Local debug toggle for this loader.
 if ( ! defined( 'AAA_OC_FORECAST_DEBUG' ) ) {
     define( 'AAA_OC_FORECAST_DEBUG', false );
 }
+
+// Define module version.
 if ( ! defined( 'AAA_OC_FORECAST_VERSION' ) ) {
     define( 'AAA_OC_FORECAST_VERSION', '0.1.0' );
 }
@@ -44,13 +46,7 @@ if ( ! defined( 'AAA_OC_FORECAST_PO_QUEUE_TABLE' ) ) {
     define( 'AAA_OC_FORECAST_PO_QUEUE_TABLE', $wpdb->prefix . 'aaa_oc_po_queue' );
 }
 
-/* -------------------------------------------------------------------------
- * Includes
- *
- * Load helper classes and installers. These files are kept small (<150 lines)
- * and grouped by responsibility: helpers for column definitions, installers
- * for the index and queue tables, queue logic and the admin grid.
- */
+// Load required files.
 require_once __DIR__ . '/helpers/class-aaa-oc-forecast-columns.php';
 require_once __DIR__ . '/helpers/class-aaa-oc-forecast-meta-registry.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-table-installer.php';
@@ -68,26 +64,12 @@ require_once __DIR__ . '/helpers/class-aaa-oc-forecast-row-builder.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-grid.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-settings.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-product-fields.php';
+require_once __DIR__ . '/admin/class-aaa-oc-forecast-admin-actions.php';
+require_once __DIR__ . '/admin/class-aaa-oc-forecast-product-list.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-nightly.php';
 
-/*
- * Immediately ensure the forecast tables exist.  In some environments the
- * plugins_loaded action may fire before this loader is included, preventing
- * table creation.  Calling the installers here guarantees the tables are
- * created on plugin load and avoids race conditions.  These calls are
- * idempotent; dbDelta will only create or modify tables as needed.
- */
-if ( class_exists( 'AAA_OC_Forecast_Table_Installer' ) ) {
-    AAA_OC_Forecast_Table_Installer::maybe_install_table();
-}
-if ( class_exists( 'AAA_OC_Forecast_Queue_Installer' ) ) {
-    AAA_OC_Forecast_Queue_Installer::maybe_install_tables();
-}
-
-/* -------------------------------------------------------------------------
- * Module initialization
- *
- * On the plugins_loaded hook we kick off table installation, queue setup
- * and admin UI registration. This runs after WooCommerce is available and
+/**
+ * On plugins_loaded we ensure tables exist and register hooks. This timing
  * ensures our tables exist before any indexing or queueing occurs.
  */
 add_action( 'plugins_loaded', function () {
@@ -104,20 +86,46 @@ add_action( 'plugins_loaded', function () {
         AAA_OC_Forecast_Queue_Installer::maybe_install_tables();
     }
     // Initialise the queue processing and indexer hooks.
+    if ( class_exists( 'AAA_OC_Forecast_Indexer' ) ) {
+        AAA_OC_Forecast_Indexer::init();
+        // Run an initial index for existing products if table is empty.
+        global $wpdb;
+        $table = AAA_OC_FORECAST_INDEX_TABLE;
+        $count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table" );
+        if ( $count === 0 ) {
+            AAA_OC_Forecast_Indexer::index_all_products();
+        }
+    }
+
+    /*
+     * Fallback queue processing.  If there are pending forecast jobs and no
+     * cron event is scheduled, process them immediately.  In some
+     * environments (e.g. where WP Cron is disabled or insufficient traffic
+     * triggers cron) scheduled events may never run.  This check runs on
+     * every page load but only processes items when needed.
+     */
+    if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+        global $wpdb;
+        $pending = 0;
+        $queue_table = AAA_OC_FORECAST_QUEUE_TABLE;
+        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $queue_table ) ) === $queue_table ) {
+            $pending = (int) $wpdb->get_var( "SELECT COUNT(*) FROM $queue_table WHERE status = 'pending'" );
+        }
+        if ( $pending > 0 && ! wp_next_scheduled( 'aaa_oc_process_forecast_queue' ) ) {
+            // Process immediately if no cron is scheduled.
+            AAA_OC_Forecast_Queue::process_forecast_queue();
+        }
+    }
+
     if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
         AAA_OC_Forecast_Queue::init();
     }
-    if ( class_exists( 'AAA_OC_Forecast_Indexer' ) ) {
-        AAA_OC_Forecast_Indexer::init();
-        // If the index table is empty, perform a one‑time initial index of all products.
-        global $wpdb;
-        if ( (int) $wpdb->get_var( "SHOW TABLES LIKE '" . $wpdb->esc_like( AAA_OC_FORECAST_INDEX_TABLE ) . "'" ) ) {
-            $count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM " . AAA_OC_FORECAST_INDEX_TABLE );
-            if ( $count === 0 ) {
-                AAA_OC_Forecast_Indexer::index_all_products();
-            }
-        }
+
+    // Nightly enqueue (optional). Controlled by Forecast Settings tab.
+    if ( class_exists( 'AAA_OC_Forecast_Nightly' ) ) {
+        AAA_OC_Forecast_Nightly::init();
     }
+
     // Register admin grid and settings when in the dashboard.
     if ( is_admin() ) {
         if ( class_exists( 'AAA_OC_Forecast_Grid_Admin' ) ) {
@@ -129,6 +137,12 @@ add_action( 'plugins_loaded', function () {
         // Register product meta fields UI.
         if ( class_exists( 'AAA_OC_Forecast_Product_Fields' ) ) {
             AAA_OC_Forecast_Product_Fields::init();
+        }
+        if ( class_exists( 'AAA_OC_Forecast_Admin_Actions' ) ) {
+            AAA_OC_Forecast_Admin_Actions::init();
+        }
+        if ( class_exists( 'AAA_OC_Forecast_Product_List' ) ) {
+            AAA_OC_Forecast_Product_List::init();
         }
     }
 } );

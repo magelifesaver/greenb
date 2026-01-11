@@ -16,12 +16,16 @@ class DisplayName extends BasicStorage implements RemoteOptions
         parent::__construct(new Storage\User\DisplayName());
     }
 
-    public function get_view(string $context): View\RemoteSelect
+    public function get_view(string $context): ?View
     {
+        if ($context === self::CONTEXT_BULK) {
+            return null;
+        }
+
         return new View\RemoteSelect();
     }
 
-    public function get_remote_options(?int $id = null): Options
+    public function get_remote_options(int $id = null): Options
     {
         $user = get_userdata($id);
 

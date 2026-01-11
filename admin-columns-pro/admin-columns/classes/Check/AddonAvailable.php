@@ -24,6 +24,7 @@ final class AddonAvailable
     public function register(): void
     {
         add_action('ac/screen', [$this, 'display']);
+
         $this->get_ajax_handler()->register();
     }
 
@@ -37,17 +38,15 @@ final class AddonAvailable
         return $handler;
     }
 
-    private function get_preferences(): Preferences\Preference
+    private function get_preferences(): Preferences\User
     {
-        return (new Preferences\UserFactory())->create(
-            'check-addon-available-' . $this->integration->get_slug()
-        );
+        return new Preferences\User('check-addon-available-' . $this->integration->get_slug());
     }
 
     public function ajax_dismiss_notice(): void
     {
         $this->get_ajax_handler()->verify_request();
-        $this->get_preferences()->save('dismiss-notice', true);
+        $this->get_preferences()->set('dismiss-notice', true);
     }
 
     public function display(Screen $screen): void
@@ -55,7 +54,7 @@ final class AddonAvailable
         if (
             ! current_user_can(Capabilities::MANAGE)
             || ! $this->integration->show_notice($screen)
-            || $this->get_preferences()->find('dismiss-notice')
+            || $this->get_preferences()->get('dismiss-notice')
         ) {
             return;
         }
@@ -67,7 +66,7 @@ final class AddonAvailable
 
         $link = sprintf(
             '<a href="%s">%s</a>',
-            'https://www.admincolumns.com',
+            $this->integration->get_url(),
             __('Get Admin Columns Pro', 'codepress-admin-columns')
         );
         $message = sprintf('%s %s', $support_text, $link);

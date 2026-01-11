@@ -16,7 +16,7 @@ final class SegmentCollection implements Iterator, Countable
     /**
      * @var Segment[]
      */
-    private array $data = [];
+    private $data = [];
 
     public function __construct(array $data = [])
     {
@@ -57,9 +57,9 @@ final class SegmentCollection implements Iterator, Countable
         next($this->data);
     }
 
-    public function key(): string
+    public function key(): SegmentKey
     {
-        return key($this->data);
+        return new SegmentKey(key($this->data));
     }
 
     public function valid(): bool

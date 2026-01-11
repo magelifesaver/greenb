@@ -12,7 +12,7 @@ use ACP\Sorting\Type\Order;
 class UserField implements QueryBindings
 {
 
-    private string $user_field;
+    private $user_field;
 
     public function __construct(string $user_field)
     {

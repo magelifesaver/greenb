@@ -2,7 +2,7 @@
 /**
  * File: /includes/core/options/admin/class-aaa-oc-core-settings-page.php
  * Purpose: Central “Workflow Settings” page. Loads all module tabs automatically.
- * Version: 1.2.0
+ * Version: 1.2.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -65,6 +65,7 @@ class AAA_OC_Core_Settings_Page {
 		$paths = [
 			$base . 'admin/tabs/',
 			dirname( $base, 2 ) . '/announcements/admin/tabs/',
+			dirname( $base, 2 ) . '/forecast/admin/tabs/',
 			dirname( $base, 2 ) . '/core/modules/board-order-counter/admin/tabs/',
 		];
 

@@ -11,7 +11,7 @@ use ACP\Search\Operators;
 class PostDate extends Post\Date implements RemoteValues
 {
 
-    private DateOptionsFactory $value_factory;
+    private $value_factory;
 
     public function __construct(string $post_type)
     {

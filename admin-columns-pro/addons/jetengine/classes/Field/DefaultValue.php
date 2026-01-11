@@ -1,14 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\JetEngine\Field;
 
-interface DefaultValue
-{
+interface DefaultValue {
 
-    public function get_default_value(): ?string;
+	/**
+	 * @return mixed
+	 */
+	public function get_default_value();
 
-    public function has_default_value(): bool;
+	/**
+	 * @return bool
+	 */
+	public function has_default_value();
 
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search\Comparison\Repeater;
 
 use ACA\ACF\Search\Comparison;

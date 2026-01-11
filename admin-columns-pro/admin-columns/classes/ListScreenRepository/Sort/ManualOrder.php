@@ -9,27 +9,27 @@ use AC\Storage;
 class ManualOrder implements Sort
 {
 
-    private Storage\Repository\ListScreenOrder $list_screen_order;
+    private $list_screen_order;
 
     public function __construct()
     {
-        $this->list_screen_order = new Storage\Repository\ListScreenOrder();
+        $this->list_screen_order = new Storage\ListScreenOrder();
     }
 
     public function sort(ListScreenCollection $list_screens): ListScreenCollection
     {
-        $list_screen = $list_screens->first();
-
-        if ( ! $list_screen) {
+        if ( ! $list_screens->count()) {
             return $list_screens;
         }
 
-        $key = $list_screen->get_table_id();
+        $key = $list_screens->get_first()->get_key();
 
         $layouts = [];
 
         foreach ($list_screens as $list_screen) {
-            $layouts[(string)$list_screen->get_id()] = $list_screen;
+            if ($list_screen->has_id()) {
+                $layouts[(string)$list_screen->get_id()] = $list_screen;
+            }
         }
 
         $ordered = new ListScreenCollection();

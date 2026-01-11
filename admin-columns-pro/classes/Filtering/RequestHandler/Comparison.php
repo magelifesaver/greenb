@@ -9,22 +9,21 @@ use AC\ListScreenRepository\Storage;
 use AC\Request;
 use AC\RequestAjaxHandler;
 use AC\Response;
-use AC\Type\ColumnId;
 use AC\Type\ListScreenId;
-use ACP;
 use ACP\Filtering\ApplyFilter\CacheDuration;
 use ACP\Filtering\OptionsFactory;
 use ACP\Search;
+use ACP\Search\Searchable;
 use DomainException;
 
 class Comparison implements RequestAjaxHandler
 {
 
-    private Request $request;
+    private $request;
 
-    private Storage $storage;
+    private $storage;
 
-    private OptionsFactory $options_factory;
+    private $options_factory;
 
     public function __construct(Request $request, Storage $storage, OptionsFactory $options_factory)
     {
@@ -51,11 +50,11 @@ class Comparison implements RequestAjaxHandler
             $response->error();
         }
 
-        $column_id = (string)$this->request->filter('column', null, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $column = $list_screen->get_column_by_name(
+            (string)$this->request->filter('column', null, FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+        );
 
-        $column = $list_screen->get_column(new ColumnId($column_id));
-
-        if ( ! $column instanceof ACP\Column) {
+        if ( ! $column instanceof Searchable) {
             $response->error();
         }
 
@@ -65,7 +64,7 @@ class Comparison implements RequestAjaxHandler
             case $comparison instanceof Search\Comparison\RemoteValues :
                 $response->set_header(
                     'Cache-Control',
-                    'max-age=' . $this->get_cache_duration_in_seconds($comparison)
+                    'max-age=' . $this->get_cache_duraction_in_seconds($comparison)
                 );
                 $options = $this->options_factory->create_by_remote($comparison);
                 $has_more = false;
@@ -77,7 +76,7 @@ class Comparison implements RequestAjaxHandler
                 if ('' === $search_term) {
                     $response->set_header(
                         'Cache-Control',
-                        'max-age=' . $this->get_cache_duration_in_seconds($comparison)
+                        'max-age=' . $this->get_cache_duraction_in_seconds($comparison)
                     );
                 }
 
@@ -102,7 +101,7 @@ class Comparison implements RequestAjaxHandler
             ->success();
     }
 
-    private function get_cache_duration_in_seconds(Search\Comparison $comparison): int
+    private function get_cache_duraction_in_seconds(Search\Comparison $comparison): int
     {
         return (new CacheDuration($comparison))->apply_filters(300);
     }

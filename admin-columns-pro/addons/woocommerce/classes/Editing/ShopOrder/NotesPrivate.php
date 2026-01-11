@@ -65,7 +65,7 @@ class NotesPrivate implements ACP\Editing\Service
             : null;
     }
 
-    private function get_date_formatted(WC_DateTime $date): string
+    private function get_date_formatted(WC_DateTime $date)
     {
         return sprintf(
             __('%1$s at %2$s', 'woocommerce'),
@@ -74,7 +74,7 @@ class NotesPrivate implements ACP\Editing\Service
         );
     }
 
-    public function get_value(int $id): array
+    public function get_value(int $id)
     {
         $notes = wc_get_order_notes([
             'order_id' => $id,
@@ -82,7 +82,7 @@ class NotesPrivate implements ACP\Editing\Service
         ]);
 
         // Ignore system notes
-        $notes = array_filter($notes, static function ($note) {
+        $notes = array_filter($notes, function ($note) {
             return 'system' !== $note->added_by;
         });
 

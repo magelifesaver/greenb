@@ -9,32 +9,41 @@ use MetaBox\CustomTable\Storage;
 class CustomTable implements ACP\Editing\Storage
 {
 
-    private Storage $storage;
+    /**
+     * @var Storage
+     */
+    private $storage;
 
+    /**
+     * @var string
+     */
+    private $meta_key;
+
+    /**
+     * @var string
+     */
     private $table;
 
-    private $field_id;
-
-    public function __construct(Storage $storage, string $field_id)
+    public function __construct(Storage $storage, $table, $meta_key)
     {
         $this->storage = $storage;
-        $this->table = $storage->table;
-        $this->field_id = $field_id;
+        $this->meta_key = $meta_key;
+        $this->table = $table;
     }
 
     public function get(int $id)
     {
         $row = Cache::get($id, $this->table);
 
-        $value = $row[$this->field_id] ?? false;
+        $value = isset($row[$this->meta_key]) ? $row[$this->meta_key] : false;
 
         if ( ! $this->is_serialized($value)) {
             return $value;
         }
 
-        $data = @unserialize($value, ['allowed_classes' => false]);
+        $unserialize = @unserialize($value, ['allowed_classes' => false]);
 
-        return $data !== false ? $data : $value;
+        return $unserialize !== false ? $unserialize : $value;
     }
 
     private function is_serialized($value): bool
@@ -62,7 +71,7 @@ class CustomTable implements ACP\Editing\Storage
             $data = serialize($data);
         }
 
-        $row[$this->field_id] = $data;
+        $row[$this->meta_key] = $data;
 
         if ($this->storage->row_exists($id)) {
             $this->storage->update_row($id, $row);

@@ -6,7 +6,6 @@ namespace AC\ListScreenRepository\Filter;
 
 use AC\ListScreenCollection;
 use AC\ListScreenRepository\Filter;
-use AC\Type\TableId;
 
 class Site implements Filter
 {
@@ -16,7 +15,7 @@ class Site implements Filter
         $collection = new ListScreenCollection();
 
         foreach ($list_screens as $list_screen) {
-            if ($this->is_site($list_screen->get_table_id())) {
+            if ($this->is_site($list_screen->get_key())) {
                 $collection->add($list_screen);
             }
         }
@@ -24,9 +23,9 @@ class Site implements Filter
         return $collection;
     }
 
-    protected function is_site(TableId $table_id): bool
+    protected function is_site(string $list_key): bool
     {
-        return ! in_array((string)$table_id, Network::KEYS, true);
+        return ! in_array($list_key, Network::KEYS, true);
     }
 
 }

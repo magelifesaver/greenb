@@ -12,11 +12,11 @@ use ACP\Sorting\Type\Order;
 class UserMeta implements QueryBindings
 {
 
-    private string $meta_key;
+    private $meta_key;
 
-    protected DataType $data_type;
+    protected $data_type;
 
-    public function __construct(string $meta_key, ?DataType $data_type = null)
+    public function __construct(string $meta_key, DataType $data_type = null)
     {
         $this->meta_key = $meta_key;
         $this->data_type = $data_type ?: new DataType(DataType::STRING);

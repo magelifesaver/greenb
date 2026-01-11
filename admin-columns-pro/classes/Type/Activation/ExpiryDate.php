@@ -9,16 +9,25 @@ use DateTime;
 class ExpiryDate
 {
 
-    private DateTime $expiry_date;
+    /**
+     * @var DateTime `null` is lifetime
+     */
+    private $expiry_date;
 
-    public function __construct(DateTime $expiry_date)
+    /**
+     * @var DateTime
+     */
+    private $current_date;
+
+    public function __construct(DateTime $expiry_date = null)
     {
         $this->expiry_date = $expiry_date;
+        $this->current_date = new DateTime();
     }
 
-    private function now(): DateTime
+    public function exists(): bool
     {
-        return new DateTime();
+        return null !== $this->expiry_date;
     }
 
     public function get_value(): DateTime
@@ -28,17 +37,36 @@ class ExpiryDate
 
     public function is_expired(): bool
     {
-        return $this->expiry_date < $this->now();
+        if ($this->is_lifetime()) {
+            return false;
+        }
+
+        return $this->expiry_date && $this->expiry_date < $this->current_date;
+    }
+
+    public function is_lifetime(): bool
+    {
+        if (null === $this->expiry_date) {
+            return false;
+        }
+
+        $lifetime_end_date = DateTime::createFromFormat('Y-m-d', '2037-12-30');
+
+        if ( ! $lifetime_end_date) {
+            return false;
+        }
+
+        return $this->expiry_date > $lifetime_end_date;
     }
 
     public function get_expired_seconds(): int
     {
-        return $this->now()->getTimestamp() - $this->expiry_date->getTimestamp();
+        return $this->current_date->getTimestamp() - $this->expiry_date->getTimestamp();
     }
 
-    private function get_remaining_seconds(): int
+    public function get_remaining_seconds(): int
     {
-        return $this->expiry_date->getTimestamp() - $this->now()->getTimestamp();
+        return $this->expiry_date->getTimestamp() - $this->current_date->getTimestamp();
     }
 
     public function get_remaining_days(): float
@@ -53,7 +81,7 @@ class ExpiryDate
 
     public function get_human_time_diff(): string
     {
-        return human_time_diff($this->expiry_date->getTimestamp(), $this->now()->getTimestamp());
+        return human_time_diff($this->expiry_date->getTimestamp(), $this->current_date->getTimestamp());
     }
 
 }

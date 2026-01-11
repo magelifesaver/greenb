@@ -12,13 +12,16 @@ use AC\View;
 class AdminLoader implements Registerable
 {
 
-    protected string $hook;
+    protected $hook;
 
-    protected RequestHandlerInterface $request_handler;
+    protected $request_handler;
 
-    protected Enqueueables $assets;
+    protected $assets;
 
-    private ?Renderable $page = null;
+    /**
+     * @var Renderable|null
+     */
+    private $page;
 
     public function __construct(string $hook, RequestHandlerInterface $request_handler, Enqueueables $assets)
     {
@@ -47,7 +50,7 @@ class AdminLoader implements Registerable
         }
 
         if ($this->page instanceof Registerable) {
-            $this->page->register();
+            $this->register();
         }
 
         $screen = get_current_screen();

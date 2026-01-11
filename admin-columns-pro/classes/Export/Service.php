@@ -2,9 +2,13 @@
 
 namespace ACP\Export;
 
-interface Service
-{
+interface Service {
 
-    public function get_value($id): string;
+	/**
+	 * @param int $id
+	 *
+	 * @return string
+	 */
+	public function get_value( $id );
 
 }

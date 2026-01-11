@@ -7,9 +7,9 @@ use ACP\Search\Value;
 class Comparison extends Statement
 {
 
-    protected string $column;
+    protected $column;
 
-    protected string $operator;
+    protected $operator;
 
     public function __construct(string $column, string $operator, Value $value)
     {
@@ -30,7 +30,10 @@ class Comparison extends Statement
         );
     }
 
-    public function __invoke(): string
+    /**
+     * @return string
+     */
+    public function __invoke()
     {
         return $this->prepare();
     }

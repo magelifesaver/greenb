@@ -2,14 +2,17 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait OptionsTrait {
 
-trait OptionsTrait
-{
+	/**
+	 * @param array $options
+	 *
+	 * @return $this
+	 */
+	public function set_options( array $options ) {
+		$this->set( 'options', $options );
 
-    public function set_options(array $options): View
-    {
-        return $this->set('options', $options);
-    }
+		return $this;
+	}
 
 }

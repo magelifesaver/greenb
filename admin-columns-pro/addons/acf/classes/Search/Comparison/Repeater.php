@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search\Comparison;
 
 use AC\MetaType;
@@ -15,22 +13,34 @@ use ACP\Search\Value;
 class Repeater extends Comparison
 {
 
-    protected string $meta_type;
+    /**
+     * @var string
+     */
+    protected $meta_type;
 
-    protected string $parent_key;
+    /**
+     * @var string
+     */
+    protected $parent_key;
 
-    protected string $sub_key;
+    /**
+     * @var string
+     */
+    protected $sub_key;
 
-    protected bool $serialized;
+    /**
+     * @var boolean
+     */
+    protected $serialized;
 
     public function __construct(
         string $meta_type,
         string $parent_key,
         string $sub_key,
         Operators $operators,
-        ?string $value_type = null,
+        string $value_type = null,
         bool $serialized = false,
-        ?Labels $labels = null
+        Labels $labels = null
     ) {
         $this->meta_type = $meta_type;
         $this->parent_key = $parent_key;

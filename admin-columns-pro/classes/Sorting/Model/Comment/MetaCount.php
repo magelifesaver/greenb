@@ -15,7 +15,7 @@ use ACP\Sorting\Type\Order;
 class MetaCount implements QueryBindings
 {
 
-    private string $meta_key;
+    private $meta_key;
 
     public function __construct(string $meta_key)
     {

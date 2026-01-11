@@ -4,7 +4,6 @@
         "list_screen": {
             "title": "👤 Compact View",
             "type": "wp-users",
-            "status": "inactive",
             "id": "6549025e48aeb",
             "updated": 1699428691,
             "columns": {

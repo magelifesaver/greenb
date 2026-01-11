@@ -8,15 +8,19 @@ use AC\ListScreen;
 use AC\Registerable;
 use AC\Request;
 use ACP\Filtering\RequestHandler;
+use ACP\Search\ComparisonFactory;
 
 class FilterRequestHandler implements Registerable
 {
 
     private $request;
 
-    public function __construct(Request $request)
+    private $comparison_factory;
+
+    public function __construct(Request $request, ComparisonFactory $comparison_factory)
     {
         $this->request = $request;
+        $this->comparison_factory = $comparison_factory;
     }
 
     public function register(): void
@@ -26,7 +30,7 @@ class FilterRequestHandler implements Registerable
 
     public function handle_request(ListScreen $list_screen): void
     {
-        (new RequestHandler\Filters($list_screen))->handle($this->request);
+        (new RequestHandler\Filters($list_screen, $this->comparison_factory))->handle($this->request);
     }
 
 }

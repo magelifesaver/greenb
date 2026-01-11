@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ACA\WC\ConditionalFormat\Formatter\User;
 
+use AC\Column;
 use ACP\ConditionalFormat\Formatter;
 
 class TotalSalesFormatter extends Formatter\FloatFormatter
@@ -14,9 +15,17 @@ class TotalSalesFormatter extends Formatter\FloatFormatter
         return self::FLOAT;
     }
 
-    public function format(string $value, $id, string $operator_group): string
+    public function format(string $value, $id, Column $column, string $operator_group): string
     {
-        return wc_get_customer_total_spent($id);
+        $totals = $column->get_raw_value($id);
+
+        if (is_array($totals)) {
+            return (string)reset($totals);
+        }
+
+        return is_scalar($totals)
+            ? (string)$totals
+            : '';
     }
 
 }

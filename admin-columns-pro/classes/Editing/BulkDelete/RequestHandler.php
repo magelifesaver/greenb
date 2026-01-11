@@ -17,7 +17,7 @@ abstract class RequestHandler implements ACP\Editing\RequestHandler
 
     abstract protected function delete($id, array $args = []): void;
 
-    public function handle(Request $request): void
+    public function handle(Request $request)
     {
         $response = new Response\Json();
 

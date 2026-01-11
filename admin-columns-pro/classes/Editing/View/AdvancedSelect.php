@@ -4,18 +4,16 @@ namespace ACP\Editing\View;
 
 use ACP\Editing\View;
 
-class AdvancedSelect extends View
-{
+class AdvancedSelect extends View {
 
-    use MethodTrait;
-    use MultipleTrait;
-    use OptionsTrait;
+	use OptionsTrait,
+		MethodTrait,
+		MultipleTrait;
 
-    public function __construct(array $options = [])
-    {
-        parent::__construct('select2_dropdown');
+	public function __construct( array $options = [] ) {
+		parent::__construct( 'select2_dropdown' );
 
-        $this->set_options($options);
-    }
+		$this->set_options( $options );
+	}
 
 }

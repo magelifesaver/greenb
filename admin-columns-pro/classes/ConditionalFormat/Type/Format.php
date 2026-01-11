@@ -1,22 +1,17 @@
-<?php
-
-declare(strict_types=1);
+<?php declare( strict_types=1 );
 
 namespace ACP\ConditionalFormat\Type;
 
-final class Format
-{
+final class Format {
 
-    private string $class;
+	private $class;
 
-    public function __construct(string $class)
-    {
-        $this->class = $class;
-    }
+	public function __construct( string $class ) {
+		$this->class = $class;
+	}
 
-    public function __toString(): string
-    {
-        return $this->class;
-    }
+	public function __toString(): string {
+		return $this->class;
+	}
 
 }

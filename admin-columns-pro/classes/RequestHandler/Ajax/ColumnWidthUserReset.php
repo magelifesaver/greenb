@@ -12,21 +12,21 @@ use LogicException;
 class ColumnWidthUserReset implements RequestAjaxHandler
 {
 
-    private ColumnSize\UserStorage $user_storage;
+    /**
+     * @var ColumnSize\UserStorage
+     */
+    private $user_storage;
 
-    private Nonce\Ajax $nonce;
-
-    public function __construct(ColumnSize\UserStorage $user_storage, Nonce\Ajax $nonce)
+    public function __construct(ColumnSize\UserStorage $user_storage)
     {
         $this->user_storage = $user_storage;
-        $this->nonce = $nonce;
     }
 
     public function handle(): void
     {
         $request = new Request();
 
-        if ( ! $this->nonce->verify($request)) {
+        if ( ! (new Nonce\Ajax())->verify($request)) {
             wp_send_json_error();
         }
 

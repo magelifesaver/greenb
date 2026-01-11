@@ -1,21 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Field\Type;
 
-trait PostTypeTrait
-{
+trait PostTypeTrait {
 
-    public function get_post_types(): array
-    {
-        $post_type = $this->settings['post_type'] ?? null;
+	public function get_post_types(): array {
+		$post_type = $this->settings['post_type'] ?? null;
 
-        if ( ! $post_type || in_array($post_type, ['all', 'any'])) {
-            return [];
-        }
+		if ( ! $post_type || in_array( $post_type, [ 'all', 'any' ] ) ) {
+			return [];
+		}
 
-        return (array)$post_type;
-    }
+		return (array) $post_type;
+	}
 
 }

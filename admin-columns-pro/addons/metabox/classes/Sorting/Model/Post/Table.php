@@ -2,7 +2,7 @@
 
 namespace ACA\MetaBox\Sorting\Model\Post;
 
-use ACA\MetaBox\Sorting\ModelFactory\TableOrderByFactory;
+use ACA\MetaBox\Sorting\TableOrderByFactory;
 use ACP\Query\Bindings;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Type\DataType;
@@ -11,13 +11,13 @@ use ACP\Sorting\Type\Order;
 class Table implements QueryBindings
 {
 
-    private string $table_name;
+    private $table_name;
 
-    private string $meta_key;
+    private $meta_key;
 
-    protected ?DataType $data_type;
+    protected $data_type;
 
-    public function __construct(string $table_name, string $meta_key, ?DataType $data_type = null)
+    public function __construct(string $table_name, string $meta_key, DataType $data_type = null)
     {
         $this->table_name = $table_name;
         $this->meta_key = $meta_key;

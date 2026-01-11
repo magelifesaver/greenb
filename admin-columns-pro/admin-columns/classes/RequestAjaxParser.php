@@ -5,7 +5,7 @@ namespace AC;
 class RequestAjaxParser implements Registerable
 {
 
-    private RequestAjaxHandlers $handlers;
+    private $handlers;
 
     public function __construct(RequestAjaxHandlers $handlers)
     {

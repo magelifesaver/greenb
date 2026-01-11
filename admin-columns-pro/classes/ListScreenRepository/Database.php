@@ -5,62 +5,65 @@ declare(strict_types=1);
 namespace ACP\ListScreenRepository;
 
 use AC;
-use AC\Exception\FailedToSaveListScreen;
 use AC\ListScreen;
-use AC\TableScreenFactory;
-use ACP\Exception\FailedToSaveConditionalFormattingException;
+use AC\ListScreenFactory;
 use ACP\Exception\FailedToSaveSegmentException;
-use ACP\Storage\EncoderFactory;
+use ACP\ListScreenPreferences;
+use ACP\Search\SegmentRepository;
 
 final class Database extends AC\ListScreenRepository\Database
 {
 
-    private SegmentHandler $segment_handler;
+    use SegmentTrait;
 
-    private ConditionalFormatHandler $conditional_format_handler;
+    public function __construct(ListScreenFactory $list_screen_factory, SegmentRepository\Database $segment_repository)
+    {
+        $this->segment_repository = $segment_repository;
 
-    public function __construct(
-        TableScreenFactory $table_screen_factory,
-        EncoderFactory $encoder_factory,
-        SegmentHandler $segment_handler,
-        ConditionalFormatHandler $conditional_format_handler,
-        AC\ColumnFactories\Aggregate $column_factory
-    ) {
-        $this->segment_handler = $segment_handler;
-        $this->conditional_format_handler = $conditional_format_handler;
-
-        parent::__construct($table_screen_factory, $encoder_factory, $column_factory);
+        parent::__construct($list_screen_factory);
     }
 
-    protected function create_list_screen(object $data): ?ListScreen
+    protected function save_preferences(ListScreen $list_screen): array
     {
-        $list_screen = parent::create_list_screen($data);
+        $preferences = parent::save_preferences($list_screen);
 
-        if ($list_screen) {
-            $this->segment_handler->load($list_screen);
-            $this->conditional_format_handler->load($list_screen);
-        }
+        unset($preferences[ListScreenPreferences::SHARED_SEGMENTS]);
 
-        return $list_screen;
+        return $preferences;
+    }
+
+    protected function get_preferences(ListScreen $list_screen): array
+    {
+        $preferences = parent::get_preferences($list_screen);
+        $preferences[ListScreenPreferences::SHARED_SEGMENTS] = $this->segment_repository->find_all_shared(
+            $list_screen->get_id()
+        );
+
+        return $preferences;
     }
 
     /**
      * @throws FailedToSaveSegmentException
-     * @throws FailedToSaveConditionalFormattingException
-     * @throws FailedToSaveListScreen
      */
     public function save(ListScreen $list_screen): void
     {
+        $segments = $list_screen->get_preference(ListScreenPreferences::SHARED_SEGMENTS);
+
         parent::save($list_screen);
 
-        $this->segment_handler->save($list_screen);
-        $this->conditional_format_handler->save($list_screen);
+        if ( ! $segments) {
+            return;
+        }
+
+        $this->save_segments(
+            $segments,
+            $list_screen->get_id()
+        );
     }
 
     public function delete(ListScreen $list_screen): void
     {
-        $this->segment_handler->delete($list_screen);
-        $this->conditional_format_handler->delete($list_screen);
+        $this->segment_repository->delete_all_shared($list_screen->get_id());
 
         parent::delete($list_screen);
     }

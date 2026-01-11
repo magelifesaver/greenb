@@ -2,7 +2,6 @@
 
 namespace ACA\MetaBox\Entity;
 
-use AC\MetaType;
 use MB_Relationships_API;
 use MBR_Relationship;
 use WP_Post;
@@ -12,13 +11,19 @@ use WP_User;
 class Relation
 {
 
-    private MBR_Relationship $relation;
+    /**
+     * @var MBR_Relationship
+     */
+    private $relation;
 
-    private string $type;
+    /**
+     * @var string
+     */
+    private $type;
 
     /**
      * @param MBR_Relationship $relation
-     * @param 'from'|'to'      $type
+     * @param 'from'|'to'      $relation
      */
     public function __construct(MBR_Relationship $relation, string $type)
     {
@@ -26,34 +31,34 @@ class Relation
         $this->type = $type;
     }
 
-    public function get_id(): string
+    public function get_id()
     {
         return $this->relation->id;
     }
 
-    public function get_type(): string
+    public function get_type()
     {
         return $this->type;
     }
 
-    public function get_related_type(): string
+    public function get_related_type()
     {
         return $this->type === 'from'
             ? 'to'
             : 'from';
     }
 
-    public function get_meta_type(): string
+    public function get_meta_type()
     {
         return $this->relation->get_object_type($this->type);
     }
 
-    public function get_related_meta_type(): MetaType
+    public function get_related_meta_type()
     {
-        return new MetaType($this->relation->get_object_type($this->get_related_type()));
+        return $this->relation->get_object_type($this->get_related_type());
     }
 
-    public function get_title(): string
+    public function get_title()
     {
         if ($this->relation->menu_title) {
             return $this->relation->menu_title;
@@ -95,14 +100,19 @@ class Relation
      * @return array
      */
 
-    public function get_related_field_settings(): array
+    public function get_related_field_settings()
     {
         return 'to' === $this->get_related_type()
             ? $this->relation->to['field']
             : $this->relation->from['field'];
     }
 
-    public function get_related_ids($object_id): array
+    /**
+     * @param $object_id
+     *
+     * @return int[]
+     */
+    public function get_related_ids($object_id)
     {
         $ids = [];
         $items = MB_Relationships_API::get_connected([
@@ -125,7 +135,7 @@ class Relation
         return $ids;
     }
 
-    public function add_relation($from_id, $to_id): bool
+    public function add_relation($from_id, $to_id)
     {
         return MB_Relationships_API::add(
             $this->type === 'from' ? $from_id : $to_id,
@@ -134,7 +144,7 @@ class Relation
         );
     }
 
-    public function delete_relation($from_id, $to_id): bool
+    public function delete_relation($from_id, $to_id)
     {
         return MB_Relationships_API::delete(
             $this->type === 'from' ? $from_id : $to_id,

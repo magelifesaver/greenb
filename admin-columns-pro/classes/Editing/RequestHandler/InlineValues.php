@@ -7,29 +7,25 @@ use AC\Column;
 use AC\ListScreenRepository\Storage;
 use AC\Request;
 use AC\Response;
-use AC\Setting\ContextFactory;
-use AC\Type\ColumnId;
 use AC\Type\ListScreenId;
-use ACP;
 use ACP\Editing\ApplyFilter\EditValue;
+use ACP\Editing\Editable;
 use ACP\Editing\RequestHandler;
+use ACP\Editing\Service;
 use ACP\Editing\Service\Editability;
-use ACP\Editing\Strategy\AggregateFactory;
+use ACP\Editing\Settings;
 
 class InlineValues implements RequestHandler
 {
 
-    private Storage $storage;
+    /**
+     * @var Storage
+     */
+    private $storage;
 
-    private AggregateFactory $aggregate_factory;
-
-    private ContextFactory $context_factory;
-
-    public function __construct(Storage $storage, AggregateFactory $aggregate_factory, ContextFactory $context_factory)
+    public function __construct(Storage $storage)
     {
         $this->storage = $storage;
-        $this->aggregate_factory = $aggregate_factory;
-        $this->context_factory = $context_factory;
     }
 
     public function handle(Request $request)
@@ -54,13 +50,7 @@ class InlineValues implements RequestHandler
             $response->error();
         }
 
-        $strategy = $this->aggregate_factory->create(
-            $list_screen->get_table_screen()
-        );
-
-        if ( ! $strategy) {
-            $response->error();
-        }
+        $strategy = $list_screen->editing();
 
         foreach ($ids as $k => $id) {
             if ( ! $strategy->user_can_edit_item((int)$id)) {
@@ -68,14 +58,10 @@ class InlineValues implements RequestHandler
             }
         }
 
-        $column_id = (string)$request->get('column');
-
-        $column = ColumnId::is_valid_id($column_id)
-            ? $list_screen->get_column(new ColumnId($column_id))
-            : null;
+        $column = $list_screen->get_column_by_name($request->get('column'));
 
         $values = $column
-            ? $this->get_values_by_column($column, $ids, $list_screen)
+            ? $this->get_values_by_column($column, $ids)
             : $this->get_values_by_list_screen($list_screen, $ids);
 
         $response
@@ -83,40 +69,46 @@ class InlineValues implements RequestHandler
             ->success();
     }
 
-    private function get_values_by_list_screen(AC\ListScreen $list_screen, array $ids): array
+    /**
+     * @param AC\ListScreen $list_screen
+     * @param array         $ids
+     *
+     * @return array
+     */
+    private function get_values_by_list_screen(AC\ListScreen $list_screen, array $ids)
     {
         $values = [];
 
         foreach ($list_screen->get_columns() as $column) {
-            $values[] = $this->get_values_by_column($column, $ids, $list_screen);
+            $values[] = $this->get_values_by_column($column, $ids);
         }
 
         return array_merge(...$values);
     }
 
-    private function get_values_by_column(Column $column, array $ids, AC\ListScreen $list_screen): array
+    /**
+     * @param Column $column
+     * @param array  $ids
+     *
+     * @return array
+     */
+    private function get_values_by_column(Column $column, array $ids)
     {
-        if ( ! $column instanceof ACP\Column) {
+        if ( ! $column instanceof Editable) {
             return [];
         }
 
-        $setting = $column->get_setting('edit');
+        $setting = $column->get_setting(Settings::NAME);
 
-        if ( ! $setting instanceof AC\Setting\Component || ! $setting->has_input()) {
-            return [];
-        }
-
-        if ('on' !== $setting->get_input()->get_value()) {
+        if ( ! $setting instanceof Settings || ! $setting->is_active()) {
             return [];
         }
 
         $service = $column->editing();
 
-        if ( ! $service) {
+        if ( ! $service instanceof Service) {
             return [];
         }
-
-        $context = $this->context_factory->create($column, $list_screen->get_table_screen());
 
         $values = [];
 
@@ -127,12 +119,7 @@ class InlineValues implements RequestHandler
                 continue;
             }
 
-            $filter = new EditValue(
-                $id,
-                $context,
-                $list_screen->get_table_screen(),
-                $list_screen->get_id()
-            );
+            $filter = new EditValue($id, $column);
             $value = $filter->apply_filters($service->get_value($id));
 
             // Not editable. Backwards compatibility.
@@ -147,7 +134,7 @@ class InlineValues implements RequestHandler
 
             $values[] = [
                 'id'          => $id,
-                'column_name' => (string)$column->get_id(),
+                'column_name' => $column->get_name(),
                 'value'       => $value,
             ];
         }

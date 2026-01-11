@@ -4,9 +4,13 @@ namespace ACP\Editing\View;
 
 use ACP\Editing\View;
 
-interface Placeholder
-{
+interface Placeholder {
 
-    public function set_placeholder(string $placeholder): View;
+	/**
+	 * @param string $placeholder
+	 *
+	 * @return View
+	 */
+	public function set_placeholder( $placeholder );
 
 }

@@ -4,7 +4,7 @@ namespace ACA\GravityForms\Search\TableScreen;
 
 use ACP\Search;
 
-class Entry extends Search\TableMarkup
+class Entry extends Search\TableScreen
 {
 
     public function register(): void

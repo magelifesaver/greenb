@@ -15,16 +15,16 @@ class NetworkUser implements ListTable
         $this->table = $table;
     }
 
-    public function render_cell(string $column_id, $row_id): string
+    public function get_column_value(string $column, $id): string
     {
         ob_start();
 
-        $method = 'column_' . $column_id;
+        $method = 'column_' . $column;
 
         if (method_exists($this->table, $method)) {
-            call_user_func([$this->table, $method], get_userdata($row_id));
+            call_user_func([$this->table, $method], get_userdata($id));
         } else {
-            $this->table->column_default(get_userdata($row_id), $column_id);
+            $this->table->column_default(get_userdata($id), $column);
         }
 
         return ob_get_clean();

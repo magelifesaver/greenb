@@ -1,43 +1,63 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Service;
 
 use AC;
-use AC\Asset\Location\Absolute;
 use AC\Registerable;
-use AC\Type\TableId;
+use ACA\BP\Editing\Ajax\TableRows;
+use ACA\BP\ListScreen\Email;
+use ACA\BP\ListScreen\Group;
 
-class Table implements Registerable
-{
+class Table implements Registerable {
 
-    private Absolute $location;
+	/**
+	 * @var AC\Asset\Location\Absolute
+	 */
+	private $location;
 
-    public function __construct(Absolute $location)
+	/**
+	 * @param AC\Asset\Location\Absolute $location
+	 */
+	public function __construct( AC\Asset\Location\Absolute $location ) {
+		$this->location = $location;
+	}
+
+	public function register(): void
     {
-        $this->location = $location;
-    }
+		add_action( 'ac/table/list_screen', [ $this, 'init_editable_table' ] );
+		add_action( 'ac/table_scripts', [ $this, 'table_scripts' ], 1 );
+	}
 
-    public function register(): void
-    {
-        add_action('ac/table_scripts', [$this, 'table_scripts'], 1);
-    }
+	private function is_bp_list_screen( $list_screen ) {
+		return $list_screen instanceof Group ||
+		       $list_screen instanceof Email;
+	}
 
-    private function is_bp_list_screen(AC\TableScreen $table_screen): bool
-    {
-        return $table_screen->get_id()->equals(new TableId('bp-groups')) ||
-               $table_screen->get_id()->equals(new TableId('bp-email'));
-    }
+	/**
+	 * @param AC\ListScreen $list_screen
+	 */
+	public function table_scripts( AC\ListScreen $list_screen ) {
+		if ( ! $this->is_bp_list_screen( $list_screen ) ) {
+			return;
+		}
 
-    public function table_scripts(AC\ListScreen $list_screen): void
-    {
-        if ( ! $this->is_bp_list_screen($list_screen->get_table_screen())) {
-            return;
-        }
+		$style = new AC\Asset\Style( 'aca-bp-table', $this->location->with_suffix( 'assets/css/table.css' ) );
+		$style->enqueue();
+	}
 
-        $style = new AC\Asset\Style('aca-bp-table', $this->location->with_suffix('assets/css/table.css'));
-        $style->enqueue();
-    }
+	/**
+	 * @param AC\ListScreen $list_screen
+	 */
+	public function init_editable_table( AC\ListScreen $list_screen ) {
+		if ( ! $list_screen instanceof Group ) {
+			return;
+		}
+
+		$table_rows = new TableRows\Groups( new AC\Request(), $list_screen );
+
+		if ( $table_rows->is_request() ) {
+			$table_rows->register();
+		}
+	}
 
 }

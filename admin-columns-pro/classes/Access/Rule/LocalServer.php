@@ -11,13 +11,11 @@ class LocalServer implements ACP\Access\Rule
 
     public function get_permissions(): Permissions
     {
-        $permissions = new Permissions();
-
         if (Platform::is_local()) {
-            $permissions = $permissions->with_permission(Permissions::USAGE);
+            return new Permissions([Permissions::USAGE]);
         }
 
-        return $permissions;
+        return new Permissions();
     }
 
 }

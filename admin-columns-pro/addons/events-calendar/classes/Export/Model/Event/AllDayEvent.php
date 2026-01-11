@@ -1,21 +1,24 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\EC\Export\Model\Event;
 
+use AC\Column;
 use ACP;
 
-class AllDayEvent implements ACP\Export\Service
-{
+class AllDayEvent implements ACP\Export\Service {
 
-    public function get_value($id): string
-    {
-        $value = get_post_meta($id, '_EventAllDay', true);
+	private $column;
 
-        return $value
-            ? '1'
-            : '';
-    }
+	public function __construct( Column $column ) {
+		$this->column = $column;
+	}
+
+	public function get_value( $id ) {
+		$value = $this->column->get_raw_value( $id );
+
+		return $value
+			? '1'
+			: '';
+	}
 
 }

@@ -2,17 +2,20 @@
 
 namespace ACP;
 
-use AC\Storage\OptionData;
-use AC\Storage\OptionDataFactory;
+use AC\Storage\KeyValueFactory;
+use AC\Storage\KeyValuePair;
 use ACP\Type\Activation\Key;
 use ACP\Type\LicenseKey;
 
 class LicenseKeyRepository
 {
 
-    private OptionData $storage;
+    /**
+     * @var KeyValuePair
+     */
+    private $storage;
 
-    public function __construct(OptionDataFactory $storage_factory)
+    public function __construct(KeyValueFactory $storage_factory)
     {
         $this->storage = $storage_factory->create('acp_subscription_key');
     }
@@ -23,7 +26,7 @@ class LicenseKeyRepository
             ? ACP_LICENCE
             : $this->storage->get();
 
-        if ( ! Key::is_valid((string)$key)) {
+        if ( ! Key::is_valid($key)) {
             return null;
         }
 
@@ -39,9 +42,9 @@ class LicenseKeyRepository
         return defined('ACP_LICENCE') && ACP_LICENCE;
     }
 
-    public function delete(): void
+    public function delete(): bool
     {
-        $this->storage->delete();
+        return $this->storage->delete();
     }
 
 }

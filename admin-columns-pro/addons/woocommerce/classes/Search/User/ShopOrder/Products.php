@@ -43,7 +43,7 @@ class Products extends Comparison
     }
 
     /**
-     * @param int $product_id
+     * @param integer $product_id
      *
      * @return array
      */

@@ -2,22 +2,30 @@
 
 namespace ACP\Search;
 
-abstract class Filter
-{
+abstract class Filter {
 
-    protected $name;
+	/**
+	 * @var string
+	 */
+	protected $name;
 
-    protected $comparison;
+	/** @var Comparison */
+	protected $comparison;
 
-    protected $label;
+	/** @var string */
+	protected $label;
 
-    public function __construct(string $name, Comparison $comparison, string $label)
-    {
-        $this->name = $name;
-        $this->comparison = $comparison;
-        $this->label = $label;
-    }
+	/**
+	 * @param string     $name
+	 * @param Comparison $comparison
+	 * @param string     $label
+	 */
+	public function __construct( $name, Comparison $comparison, $label ) {
+		$this->name = $name;
+		$this->comparison = $comparison;
+		$this->label = $label;
+	}
 
-    abstract public function __invoke();
+	public abstract function __invoke();
 
 }

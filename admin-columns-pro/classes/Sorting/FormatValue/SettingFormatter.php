@@ -2,30 +2,22 @@
 
 namespace ACP\Sorting\FormatValue;
 
-use AC\Setting\FormatterCollection;
-use AC\Table\ProcessFormatters;
-use AC\Type\Value;
+use AC;
 use ACP\Sorting\FormatValue;
 
-class SettingFormatter implements FormatValue
-{
+class SettingFormatter implements FormatValue {
 
-    private FormatterCollection $formatters;
+	/**
+	 * @var AC\Settings\FormatValue
+	 */
+	private $setting;
 
-    public function __construct(FormatterCollection $formatters)
-    {
-        $this->formatters = $formatters;
-    }
+	public function __construct( AC\Settings\FormatValue $setting ) {
+		$this->setting = $setting;
+	}
 
-    public function format_value($value): string
-    {
-        if (null === $value) {
-            return '';
-        }
-
-        $formatter = new ProcessFormatters($this->formatters);
-
-        return (string)$formatter->format(new Value($value));
-    }
+	public function format_value( $value ) {
+		return $this->setting->format( $value, null );
+	}
 
 }

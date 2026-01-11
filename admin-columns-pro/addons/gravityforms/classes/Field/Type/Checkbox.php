@@ -5,29 +5,31 @@ namespace ACA\GravityForms\Field\Type;
 use ACA\GravityForms;
 use GF_Field;
 
-class Checkbox extends GravityForms\Field\Field
-{
+class Checkbox extends GravityForms\Field\Field {
 
-    private $value;
+	/**
+	 * @var string
+	 */
+	private $value;
 
-    private $label;
+	/**
+	 * @var string
+	 */
+	private $label;
 
-    public function __construct(int $form_id, string $field_id, GF_Field $field, string $value, string $label)
-    {
-        parent::__construct($form_id, $field_id, $field);
+	public function __construct( $form_id, $field_id, GF_Field $field, $value, $label ) {
+		parent::__construct( $form_id, $field_id, $field );
 
-        $this->value = $value;
-        $this->label = $label;
-    }
+		$this->value = (string) $value;
+		$this->label = (string) $label;
+	}
 
-    public function get_value(): string
-    {
-        return $this->value;
-    }
+	public function get_value() {
+		return $this->value;
+	}
 
-    public function get_label(): string
-    {
-        return $this->label;
-    }
+	public function get_label() {
+		return $this->label;
+	}
 
 }

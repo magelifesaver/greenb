@@ -8,7 +8,7 @@ use Automattic;
 class Orders implements AC\ListTable
 {
 
-    private Automattic\WooCommerce\Internal\Admin\Orders\ListTable $table;
+    private $table;
 
     public function __construct(Automattic\WooCommerce\Internal\Admin\Orders\ListTable $list_table)
     {
@@ -29,16 +29,16 @@ class Orders implements AC\ListTable
         return ob_get_clean();
     }
 
-    public function render_cell(string $column_id, $row_id): string
+    public function get_column_value(string $column, $id): string
     {
         ob_start();
 
-        $method = 'column_' . $column_id;
+        $method = 'column_' . $column;
 
         if (method_exists($this->table, $method)) {
-            call_user_func([$this->table, $method], wc_get_order($row_id));
+            call_user_func([$this->table, $method], wc_get_order($id));
         } else {
-            $this->table->column_default(wc_get_order($row_id), $column_id);
+            $this->table->column_default(wc_get_order($id), $column);
         }
 
         return ob_get_clean();

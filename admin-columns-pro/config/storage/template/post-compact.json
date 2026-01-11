@@ -4,7 +4,6 @@
         "list_screen": {
             "title": "📝 Compact View",
             "type": "post",
-            "status": "inactive",
             "id": "6544f0ca2f4a4",
             "updated": 1699017037,
             "columns": {

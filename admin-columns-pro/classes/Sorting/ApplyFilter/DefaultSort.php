@@ -11,33 +11,39 @@ use ACP\Sorting\Type\SortType;
 class DefaultSort
 {
 
-    private ListScreen $list_screen;
+    /**
+     * @var ListScreen
+     */
+    private $list_screen;
 
+    /**
+     * @param ListScreen $list_screen
+     */
     public function __construct(ListScreen $list_screen)
     {
         $this->list_screen = $list_screen;
     }
 
-    public function apply_filters(?SortType $sort_type = null): ?SortType
+    public function apply_filters(SortType $sort_type = null): ?SortType
     {
-        $args = $sort_type
+        $args = $sort_type instanceof SortType
             ? $this->create_args($sort_type)
             : [];
 
         /**
          * @param array $args [ 0 => (string) $column_name, 1 => (bool) $descending ]
          */
-        $args = apply_filters('ac/sorting/default', $args, $this->list_screen);
+        $args = apply_filters('acp/sorting/default', $args, $this->list_screen);
 
         $order_by = $this->parse_order_by($args);
 
-        if ( ! SortType::validate($order_by)) {
+        if ( ! $order_by) {
             return null;
         }
 
         return new SortType(
             $order_by,
-            $this->is_descending($args)
+            $this->parse_order($args)
         );
     }
 
@@ -45,7 +51,7 @@ class DefaultSort
     {
         return [
             $sort_type->get_order_by(),
-            $sort_type->is_descending(),
+            'desc' === $sort_type->get_order(),
         ];
     }
 
@@ -56,9 +62,11 @@ class DefaultSort
             : null;
     }
 
-    private function is_descending($args): bool
+    private function parse_order($args): string
     {
-        return is_array($args) && isset($args[1]) && $args[1];
+        return is_array($args) && isset($args[1]) && $args[1]
+            ? 'desc'
+            : 'asc';
     }
 
 }

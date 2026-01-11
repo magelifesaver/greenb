@@ -9,13 +9,25 @@ use WP_Error;
 class API
 {
 
-    protected ?string $url = null;
+    /**
+     * @var string
+     */
+    protected $url;
 
-    protected ?string $proxy = null;
+    /**
+     * @var string
+     */
+    protected $proxy;
 
-    protected bool $use_proxy = true;
+    /**
+     * @var bool
+     */
+    protected $use_proxy = true;
 
-    private array $meta = [];
+    /**
+     * @var array
+     */
+    private $meta = [];
 
     public function get_url(): string
     {

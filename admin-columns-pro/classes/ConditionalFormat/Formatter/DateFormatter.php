@@ -1,15 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare( strict_types=1 );
 
 namespace ACP\ConditionalFormat\Formatter;
 
-class DateFormatter extends BaseFormatter
-{
+class DateFormatter extends BaseFormatter {
 
-    public function __construct()
-    {
-        parent::__construct(self::DATE);
-    }
+	public function __construct() {
+		parent::__construct( self::DATE );
+	}
 
 }

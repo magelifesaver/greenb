@@ -4,38 +4,33 @@ declare(strict_types=1);
 
 namespace AC;
 
-use AC\Asset\Location;
+use AC\Asset\Location\Absolute;
 use AC\ListScreenRepository\Storage;
 use AC\Vendor\Psr\Container\ContainerInterface;
 use LogicException;
 
-final class Container
+class Container
 {
 
-    private static ?ContainerInterface $instance = null;
+    private static $instance;
 
     public static function set_container(ContainerInterface $container): void
     {
-        if (self::$instance !== null) {
+        if (self::$instance) {
             throw new LogicException('Container is already set.');
         }
 
         self::$instance = $container;
     }
 
-    public static function get_location(): Location
+    public static function get_location(): Absolute
     {
-        return self::$instance->get(AdminColumns::class)->get_location();
+        return self::$instance->get(Absolute::class);
     }
 
     public static function get_storage(): Storage
     {
         return self::$instance->get(Storage::class);
-    }
-
-    public static function is_pro(): bool
-    {
-        return self::$instance->get('is.pro');
     }
 
 }

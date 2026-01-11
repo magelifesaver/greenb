@@ -12,7 +12,10 @@ use Iterator;
 final class SourceCollection implements Iterator, Countable
 {
 
-    private array $data = [];
+    /**
+     * @var string[]
+     */
+    private $data = [];
 
     public function __construct(array $data = [])
     {

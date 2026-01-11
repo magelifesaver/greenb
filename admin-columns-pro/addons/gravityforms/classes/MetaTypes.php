@@ -2,9 +2,8 @@
 
 namespace ACA\GravityForms;
 
-interface MetaTypes
-{
+interface MetaTypes {
 
-    public const GRAVITY_FORMS_ENTRY = 'gravity_forms_entry';
+	public const GRAVITY_FORMS_ENTRY = 'gravity_forms_entry';
 
 }

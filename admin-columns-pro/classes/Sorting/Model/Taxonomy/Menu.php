@@ -13,7 +13,7 @@ use ACP\Sorting\Type\Order;
 class Menu implements QueryBindings
 {
 
-    private string $taxonomy;
+    private $taxonomy;
 
     public function __construct(string $taxonomy)
     {

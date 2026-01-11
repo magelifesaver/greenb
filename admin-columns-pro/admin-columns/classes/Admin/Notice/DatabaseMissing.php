@@ -1,61 +1,51 @@
 <?php
 
-declare(strict_types=1);
-
 namespace AC\Admin\Notice;
 
-use AC\Capabilities;
+use AC\ListScreen;
 use AC\Message;
+use AC\Plugin\Install\Database;
 use AC\Registerable;
-use AC\Screen;
 use AC\Service\Setup;
-use AC\Storage\Table\AdminColumns;
 
-final class DatabaseMissing implements Registerable
+class DatabaseMissing implements Registerable
 {
-
-    private AdminColumns $table;
-
-    public function __construct(AdminColumns $table)
-    {
-        $this->table = $table;
-    }
 
     public function register(): void
     {
-        add_action('ac/screen', [$this, 'render_notice']);
+        add_action('ac/settings/notice', [$this, 'render_notice']);
     }
 
-    public function render_notice(Screen $screen): void
+    public function render_notice(ListScreen $list_screen): void
     {
-        if ( ! current_user_can(Capabilities::MANAGE) ||
-             ! $screen->is_admin_screen() ||
-             $this->table->exists()
-        ) {
-            return;
-        }
+        global $wpdb;
 
-        $message = sprintf(
-            __('Database table %s is missing.', 'codepress-admin-columns'),
-            '`' . $this->table->get_name() . '`'
-        );
-
-        $message .= ' ' . sprintf(
-                '<a href="%s">%s</a>',
-                esc_url(
-                    add_query_arg(Setup::PARAM_FORCE_INSTALL, '1')
-                ),
-                esc_html(
-                    __('Create database table.', 'codepress-admin-columns')
-                )
+        if ( ! Database::verify_database_exists()) {
+            $message = sprintf(
+                __('Database table %s is missing.', 'codepress-admin-columns'),
+                '`' . $wpdb->prefix . 'admin_columns`'
             );
 
-        $notice = new Message\AdminNotice(
-            $message,
-            Message::ERROR
-        );
+            $message .= ' ' . sprintf(
+                    '<a href="%s">%s</a>',
+                    esc_url(
+                        (string)$list_screen->get_editor_url()->with_arg(Setup::PARAM_FORCE_INSTALL, '1')
+                    ),
+                    esc_html(
+                        __('Create database table.', 'codepress-admin-columns')
+                    )
+                );
 
-        echo $notice->render();
+            $notice = new Message\InlineMessage(
+                sprintf(
+                    '<p>%s</p>',
+                    $message
+                ),
+                Message::ERROR
+            );
+
+            echo $notice->render();
+        }
     }
 
 }

@@ -8,11 +8,11 @@ namespace AC\ThirdParty;
 class WPMLColumn
 {
 
-    public const COLUMN_NAME = 'icl_translations';
+    const COLUMN_NAME = 'icl_translations';
 
     private $column;
 
-    public function __construct(string $post_type)
+    function __construct(string $post_type)
     {
         add_filter(
             "manage_{$post_type}_posts_columns",

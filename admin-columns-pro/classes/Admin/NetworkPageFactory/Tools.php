@@ -4,32 +4,48 @@ namespace ACP\Admin\NetworkPageFactory;
 
 use AC;
 use AC\Admin\PageFactoryInterface;
+use AC\Asset\Location;
+use AC\ListScreenRepository\Storage;
+use AC\Table\ListKeysFactoryInterface;
 use ACP\Admin\MenuNetworkFactory;
 use ACP\Admin\Page;
-use ACP\AdminColumnsPro;
+use ACP\Migrate\Admin\Section\Export;
+use ACP\Migrate\Admin\Section\Import;
 
-final class Tools implements PageFactoryInterface
+class Tools implements PageFactoryInterface
 {
 
-    private AdminColumnsPro $plugin;
+    private $location;
 
-    private MenuNetworkFactory $menu_factory;
+    private $storage;
+
+    private $menu_factory;
+
+    private $list_keys_factory;
 
     public function __construct(
-        AdminColumnsPro $plugin,
-        MenuNetworkFactory $menu_factory
+        Location\Absolute $location,
+        Storage $storage,
+        MenuNetworkFactory $menu_factory,
+        ListKeysFactoryInterface $list_keys_factory
     ) {
-        $this->plugin = $plugin;
+        $this->location = $location;
+        $this->storage = $storage;
         $this->menu_factory = $menu_factory;
+        $this->list_keys_factory = $list_keys_factory;
     }
 
     public function create()
     {
-        return new Page\Tools(
-            $this->plugin,
-            new AC\Admin\View\Menu($this->menu_factory->create('import-export')),
-            true
+        $page = new Page\Tools(
+            $this->location,
+            new AC\Admin\View\Menu($this->menu_factory->create('import-export'))
         );
+
+        $page->add_section(new Export($this->storage, $this->list_keys_factory, true))
+             ->add_section(new Import());
+
+        return $page;
     }
 
 }

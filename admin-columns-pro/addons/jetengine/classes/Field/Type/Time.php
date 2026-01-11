@@ -1,14 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\JetEngine\Field\Type;
 
 use ACA\JetEngine\Field\Field;
 
-final class Time extends Field
-{
+class Time extends Field {
 
-    public const TYPE = 'time';
+	const TYPE = 'time';
 
 }

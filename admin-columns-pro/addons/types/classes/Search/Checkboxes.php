@@ -14,9 +14,12 @@ class Checkboxes extends ACP\Search\Comparison\Meta
     implements Comparison\Values
 {
 
+    /**
+     * @var array options
+     */
     private $options;
 
-    public function __construct(string $meta_key, array $options, ?string $value_type = null)
+    public function __construct(string $meta_key, array $options, string $value_type = null)
     {
         $this->options = $options;
 

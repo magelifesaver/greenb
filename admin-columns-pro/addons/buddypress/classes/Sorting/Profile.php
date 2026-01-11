@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Sorting;
 
+use ACA\BP\Column;
 use ACP\Query\Bindings;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
@@ -14,13 +13,13 @@ use ACP\Sorting\Type\Order;
 class Profile implements QueryBindings
 {
 
-    protected DataType $data_type;
+    protected $column;
 
-    private int $field_id;
+    protected $data_type;
 
-    public function __construct(int $field_id, ?DataType $data_type = null)
+    public function __construct(Column\Profile $column, DataType $data_type = null)
     {
-        $this->field_id = $field_id;
+        $this->column = $column;
         $this->data_type = $data_type ?: new DataType(DataType::STRING);
     }
 
@@ -36,7 +35,7 @@ class Profile implements QueryBindings
                 LEFT JOIN {$bp->profile->table_name_data} as acsort_pd 
 				    ON $wpdb->users.ID = acsort_pd.user_id AND acsort_pd.field_id = %d
 		        ",
-                $this->field_id
+                $this->column->get_buddypress_field_id()
             )
         );
         $bindings->group_by("$wpdb->users.ID");

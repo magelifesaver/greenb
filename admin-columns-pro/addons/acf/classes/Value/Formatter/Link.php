@@ -1,35 +1,27 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Value\Formatter;
 
-use AC\Exception\ValueNotFoundException;
-use AC\Setting\Formatter;
-use AC\Type\Value;
+use ACA\ACF\Value\Formatter;
 
-class Link implements Formatter
-{
+class Link extends Formatter {
 
-    public function format(Value $value)
-    {
-        $link = $value->get_value();
+	public function format( $link, $id = null ) {
+		if( empty( $link ) ){
+			return $this->column->get_empty_char();
+		}
 
-        if (empty($link)) {
-            throw ValueNotFoundException::from_id($value->get_id());
-        }
+		$label = $link['title'];
 
-        $label = $link['title'];
+		if ( ! $label ) {
+			$label = str_replace( [ 'http://', 'https://' ], '', $link['url'] );
+		}
 
-        if ( ! $label) {
-            $label = str_replace(['http://', 'https://'], '', $link['url']);
-        }
+		if ( '_blank' === $link['target'] ) {
+			$label .= '<span class="dashicons dashicons-external" style="font-size: 1em;"></span>';
+		}
 
-        if ('_blank' === $link['target']) {
-            $label .= '<span class="dashicons dashicons-external" style="font-size: 1em;"></span>';
-        }
-
-        return $value->with_value(ac_helper()->html->link($link['url'], $label));
-    }
+		return ac_helper()->html->link( $link['url'], $label );
+	}
 
 }

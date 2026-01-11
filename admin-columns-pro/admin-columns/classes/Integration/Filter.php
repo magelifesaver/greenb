@@ -2,7 +2,7 @@
 
 namespace AC\Integration;
 
-use AC\Type\Integrations;
+use AC\Integrations;
 
 interface Filter
 {

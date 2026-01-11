@@ -2,23 +2,23 @@
 
 namespace AC\Service;
 
-use AC\AdminColumns;
+use AC\Asset\Location\Absolute;
 use AC\Capabilities;
 use AC\Check;
-use AC\Integration\IntegrationRepository;
+use AC\IntegrationRepository;
 use AC\Registerable;
 use AC\Services;
 
 class NoticeChecks implements Registerable
 {
 
-    private IntegrationRepository $integration_repository;
+    private $location;
 
-    private AdminColumns $plugin;
+    private $integration_repository;
 
-    public function __construct(AdminColumns $plugin, IntegrationRepository $integration_repository)
+    public function __construct(Absolute $location, IntegrationRepository $integration_repository)
     {
-        $this->plugin = $plugin;
+        $this->location = $location;
         $this->integration_repository = $integration_repository;
     }
 
@@ -32,7 +32,7 @@ class NoticeChecks implements Registerable
         $services = new Services();
 
         if (current_user_can(Capabilities::MANAGE)) {
-            $services->add(new Check\Review($this->plugin->get_location()));
+            $services->add(new Check\Review($this->location));
 
             foreach ($this->integration_repository->find_all_by_active_plugins() as $integration) {
                 $services->add(new Check\AddonAvailable($integration));

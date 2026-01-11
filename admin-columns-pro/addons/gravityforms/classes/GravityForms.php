@@ -5,31 +5,27 @@ declare(strict_types=1);
 namespace ACA\GravityForms;
 
 use AC;
-use AC\Asset\Location\Absolute;
-use AC\Plugin\Version;
+use AC\DefaultColumnsRepository;
 use AC\Registerable;
 use AC\Services;
-use AC\Vendor\DI;
+use AC\Vendor\Psr\Container\ContainerInterface;
 use ACA\GravityForms\Service\ColumnGroup;
 use ACA\GravityForms\Service\Scripts;
-use ACA\GravityForms\TableScreen\EntryFactory;
-use ACA\GravityForms\TableScreen\MenuGroupFactory;
-use ACA\GravityForms\TableScreen\TableIdsFactory;
-use ACA\GravityForms\TableScreen\TableRowsFactory;
 use ACP;
+use ACP\QueryFactory;
 use ACP\Service\IntegrationStatus;
-use GFForms;
-
-use function AC\Vendor\DI\autowire;
+use GFCommon;
 
 final class GravityForms implements Registerable
 {
 
-    private Absolute $location;
+    public const GROUP = 'gravity_forms';
 
-    private DI\Container $container;
+    private $location;
 
-    public function __construct(Absolute $location, DI\Container $container)
+    private $container;
+
+    public function __construct(AC\Asset\Location\Absolute $location, ContainerInterface $container)
     {
         $this->location = $location;
         $this->container = $container;
@@ -37,66 +33,40 @@ final class GravityForms implements Registerable
 
     public function register(): void
     {
-        if ( ! class_exists('GFForms', false) || ! isset(GFForms::$version)) {
+        if ( ! class_exists('GFCommon', false)) {
             return;
         }
 
-        $version = new Version(GFForms::$version);
+        $minimum_gf_version = '2.5';
 
-        if ( ! $version->is_valid() || $version->is_lt(new Version('2.5'))) {
+        if (class_exists('GFCommon', false) && version_compare((string)GFCommon::$version, $minimum_gf_version, '<')) {
             return;
         }
 
-        $this->define_container();
-        $this->define_factories();
+        AC\ListScreenFactory\Aggregate::add(new ListScreenFactory\EntryFactory());
 
-        $this->create_services()
-             ->register();
-    }
+        $this->create_services()->register();
 
-    private function define_container(): void
-    {
-        $this->container->set(
-            Scripts::class,
-            autowire()->constructorParameter(0, $this->location)
-        );
-    }
-
-    private function define_factories(): void
-    {
-        AC\TableScreenFactory\Aggregate::add($this->container->get(EntryFactory::class));
-        AC\Admin\MenuGroupFactory\Aggregate::add($this->container->get(MenuGroupFactory::class));
-        AC\TableIdsFactory\Aggregate::add($this->container->get(TableIdsFactory::class));
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\EntryFactory::class));
-        AC\TableScreen\TableRowsFactory\Aggregate::add($this->container->get(TableRowsFactory::class));
-        ACP\Export\Strategy\AggregateFactory::add($this->container->get(Export\Strategy\EntryFactory::class));
-        ACP\Editing\Strategy\AggregateFactory::add($this->container->make(Editing\Strategy\EntryFactory::class));
-        ACP\Query\QueryRegistry::add($this->container->get(Query\EntryFactory::class));
-        ACP\Search\TableMarkupFactory::register(TableScreen\Entry::class, Search\TableScreen\Entry::class);
-        ACP\Filtering\TableScreenFactory::register(TableScreen\Entry::class, Filtering\Table\Entry::class);
-        AC\Service\ManageHeadings::add($this->container->get(ListTable\ManageHeading\EntryFactory::class));
-        AC\Service\SaveHeadings::add($this->container->get(ListTable\SaveHeading\EntryFactory::class));
+        QueryFactory::register(MetaTypes::GRAVITY_FORMS_ENTRY, Query\Entry::class);
+        ACP\Search\TableScreenFactory::register(ListScreen\Entry::class, Search\TableScreen\Entry::class);
+        ACP\Filtering\TableScreenFactory::register(ListScreen\Entry::class, Filtering\Table\Entry::class);
     }
 
     private function create_services(): Services
     {
-        $services = new Services([
+        return new Services([
+            new Service\ListScreens(),
+            new Service\Columns(),
+            new TableScreen\Entry(
+                new AC\ListScreenFactory\Aggregate(),
+                $this->container->get(AC\ListScreenRepository\Storage::class),
+                new DefaultColumnsRepository()
+            ),
+            new Admin(),
             new IntegrationStatus('ac-addon-gravityforms'),
+            new Scripts($this->location),
+            new ColumnGroup(),
         ]);
-
-        $class_names = [
-            Service\Entry::class,
-            Service\StoreDefaultColumns::class,
-            Service\Admin::class,
-            Scripts::class,
-            ColumnGroup::class,
-        ];
-
-        foreach ($class_names as $class_name) {
-            $services->add($this->container->get($class_name));
-        }
-
-        return $services;
     }
 
 }

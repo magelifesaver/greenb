@@ -1,27 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\JetEngine;
 
 use AC;
 use AC\Registerable;
 use AC\Services;
-use AC\Setting\ContextFactory;
-use ACA\JetEngine\TableScreen\MenuGroupFactory;
 use ACP\Service\IntegrationStatus;
 
-final class JetEngine implements Registerable
+class JetEngine implements Registerable
 {
 
-    private AC\Asset\Location\Absolute $location;
+    private $location;
 
-    private AC\Vendor\DI\Container $container;
-
-    public function __construct(AC\Asset\Location\Absolute $location, AC\Vendor\DI\Container $container)
+    public function __construct(AC\Asset\Location\Absolute $location)
     {
         $this->location = $location;
-        $this->container = $container;
     }
 
     public function register(): void
@@ -30,25 +23,17 @@ final class JetEngine implements Registerable
             return;
         }
 
-        $context_factory = $this->container->get(ContextFactory::class);
-
-        if ($context_factory instanceof AC\Setting\ContextFactory\Aggregate) {
-            $context_factory->add($this->container->get(Setting\ContextFieldFactory::class));
-            $context_factory->add($this->container->get(Setting\ContextRelationFactory::class));
-        }
-
-        AC\Admin\MenuGroupFactory\Aggregate::add(new MenuGroupFactory());
-
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\MetaFactory::class));
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\RelationFactory::class));
-
         $this->create_services()->register();
     }
 
     private function create_services(): Services
     {
         return new Services([
-            new Service\ColumnGroups($this->location),
+            new Service\Admin($this->location),
+            new Service\ColumnInstantiate(),
+            new Service\ColumnGroups(),
+            new Service\RelationalColumns(),
+            new Service\MetaColumns(),
             new IntegrationStatus('ac-addon-jetengine'),
         ]);
     }

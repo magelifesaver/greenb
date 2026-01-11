@@ -2,29 +2,29 @@
 
 namespace AC\Plugin;
 
-use AC\Storage\KeyValue;
+use AC\Storage\KeyValuePair;
 
 abstract class Setup
 {
 
-    private KeyValue $storage;
+    private $storage;
 
-    private Version $version;
+    private $version;
 
-    private InstallCollection $installers;
+    private $installers;
 
-    private UpdateCollection $updates;
+    private $updates;
 
     public function __construct(
-        KeyValue $storage,
+        KeyValuePair $storage,
         Version $version,
-        ?InstallCollection $installers = null,
-        ?UpdateCollection $updates = null
+        InstallCollection $installers,
+        UpdateCollection $updates
     ) {
         $this->storage = $storage;
         $this->version = $version;
-        $this->installers = $installers ?? new InstallCollection();
-        $this->updates = $updates ?? new UpdateCollection();
+        $this->installers = $installers;
+        $this->updates = $updates;
     }
 
     protected function update_stored_version(Version $version): void

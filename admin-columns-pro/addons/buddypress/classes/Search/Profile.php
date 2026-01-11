@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search;
 
 use ACA\BP\Helper\Select;
@@ -15,15 +13,29 @@ use ACP\Search\Value;
 class Profile extends Comparison
 {
 
-    protected string $field;
+    /**
+     * @var string
+     */
+    protected $field;
 
-    public function __construct(Operators $operators, string $db_field, string $value, ?Labels $labels = null)
+    /**
+     * Profile constructor.
+     *
+     * @param Operators $operators
+     * @param string    $db_field
+     * @param string    $value
+     * @param Labels    $labels
+     */
+    public function __construct($operators, $db_field, $value, $labels = null)
     {
         $this->field = $db_field;
 
         parent::__construct($operators, $value, $labels);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         global $wpdb, $bp;
@@ -50,7 +62,7 @@ class Profile extends Comparison
         return $bindings;
     }
 
-    private function create_empty_bindings(): Bindings
+    private function create_empty_bindings()
     {
         global $wpdb, $bp;
 

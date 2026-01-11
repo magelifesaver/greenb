@@ -8,6 +8,7 @@ use AC\ListScreen;
 use AC\Request;
 use AC\Table\TableFormView;
 use ACP\Search;
+use ACP\Sorting;
 
 /**
  * Fill the $_GET and $_REQUEST params with the preferred segment query parameters.
@@ -17,7 +18,7 @@ class RequestSetter
 
     use Search\DefaultSegmentTrait;
 
-    private ListScreen $list_screen;
+    private $list_screen;
 
     public function __construct(ListScreen $list_screen, Search\SegmentRepository\Database $segment_repository)
     {
@@ -41,8 +42,8 @@ class RequestSetter
         $params = $segment->get_url_parameters();
 
         $ignored_params = [
-            'orderby',
-            'order',
+            Sorting\NativeSortable\Request\Sort::PARAM_ORDERBY,
+            Sorting\NativeSortable\Request\Sort::PARAM_ORDER,
             'layout',
             'ac-rules',
             'ac-rules-raw',

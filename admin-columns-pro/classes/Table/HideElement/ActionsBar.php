@@ -4,12 +4,10 @@ namespace ACP\Table\HideElement;
 
 use ACP\Table\HideElement;
 
-class ActionsBar implements HideElement
-{
+class ActionsBar implements HideElement {
 
-	public function hide(): void
-	{
-		add_action('ac/admin_head', function () {
+	public function hide() {
+		add_action( 'ac/admin_head', function () {
 			?>
 			<style>
 				[class="alignleft actions"] {
@@ -17,7 +15,7 @@ class ActionsBar implements HideElement
 				}
 			</style>
 			<?php
-		});
+		} );
 	}
 
 }

@@ -2,40 +2,41 @@
 
 namespace ACP\QuickAdd\Admin;
 
+use AC\ListScreen;
 use AC\Registerable;
-use AC\TableScreen;
 use ACP\QuickAdd\Filter;
 use ACP\QuickAdd\Model\Factory;
-use ACP\Settings\ListScreen\TableElements;
+use ACP\Settings\ListScreen\HideOnScreenCollection;
+use ACP\Type\HideOnScreen\Group;
 
-class Settings implements Registerable
-{
+class Settings implements Registerable {
 
-    private $filter;
+	/**
+	 * @var Filter
+	 */
+	private $filter;
 
-    public function __construct(Filter $filter)
+	public function __construct( Filter $filter ) {
+		$this->filter = $filter;
+	}
+
+	public function register(): void
     {
-        $this->filter = $filter;
-    }
+		add_action( 'acp/admin/settings/hide_on_screen', [ $this, 'add_hide_on_screen' ], 10, 2 );
+	}
 
-    public function register(): void
-    {
-        add_action('ac/admin/settings/table_elements', [$this, 'add_table_elements'], 10, 2);
-    }
+	public function add_hide_on_screen( HideOnScreenCollection $collection, ListScreen $list_screen ) {
+		if ( ! $this->filter->match( $list_screen ) ) {
+			return;
+		}
 
-    public function add_table_elements(TableElements $collection, TableScreen $table_screen)
-    {
-        if ( ! $this->filter->match($table_screen)) {
-            return;
-        }
+		$model = Factory::create( $list_screen );
 
-        $model = Factory::create($table_screen);
+		if ( ! $model || ! $model->has_permission( wp_get_current_user() ) ) {
+			return;
+		}
 
-        if ( ! $model || ! $model->has_permission(wp_get_current_user())) {
-            return;
-        }
-
-        $collection->add(new TableElement\QuickAdd(), 60);
-    }
+		$collection->add( new HideOnScreen\QuickAdd(), new Group( Group::FEATURE ), 60 );
+	}
 
 }

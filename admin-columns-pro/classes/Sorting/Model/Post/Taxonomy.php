@@ -12,7 +12,7 @@ use ACP\Sorting\Type\Order;
 class Taxonomy implements QueryBindings
 {
 
-    private string $taxonomy;
+    private $taxonomy;
 
     public function __construct(string $taxonomy)
     {

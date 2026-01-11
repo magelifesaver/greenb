@@ -2,9 +2,11 @@
 
 namespace ACP\Search\Helper\Sql\Comparison;
 
-interface Negatable
-{
+interface Negatable {
 
-    public function is_negated(): bool;
+	/**
+	 * @return bool
+	 */
+	public function is_negated();
 
 }

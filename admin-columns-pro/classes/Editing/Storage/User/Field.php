@@ -5,37 +5,41 @@ namespace ACP\Editing\Storage\User;
 use ACP\Editing\Storage;
 use RuntimeException;
 
-class Field implements Storage
-{
+class Field implements Storage {
 
-    private string $field;
+	const FIELD_REGISTERED = 'user_registered';
+	const FIELD_EMAIL = 'user_email';
+	const FIELD_NICENAME = 'user_nicename';
+	const FIELD_URL = 'user_url';
 
-    public function __construct(string $field)
-    {
-        $this->field = $field;
-    }
+	/**
+	 * @var string
+	 */
+	private $field;
 
-    public function get(int $id)
-    {
-        return get_userdata($id)->{$this->field} ?? null;
-    }
+	public function __construct( $field ) {
+		$this->field = (string) $field;
+	}
 
-    public function update(int $id, $data): bool
-    {
-        $args = [
-            $this->field => $data,
-            'ID'         => $id,
-        ];
+	public function get( int $id ) {
+		return ac_helper()->user->get_user_field( $this->field, $id );
+	}
 
-        $result = wp_update_user($args);
+	public function update( int $id, $data ): bool {
+		$args = [
+			$this->field => $data,
+			'ID'         => $id,
+		];
 
-        if (is_wp_error($result)) {
-            throw new RuntimeException($result->get_error_message());
-        }
+		$result = wp_update_user( $args );
 
-        clean_user_cache($id);
+		if ( is_wp_error( $result ) ) {
+			throw new RuntimeException( $result->get_error_message() );
+		}
 
-        return is_int($result) && $result > 0;
-    }
+		clean_user_cache( $id );
+
+		return is_int( $result ) && $result > 0;
+	}
 
 }

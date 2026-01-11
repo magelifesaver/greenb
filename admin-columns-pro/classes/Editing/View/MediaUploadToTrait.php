@@ -2,20 +2,14 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait MediaUploadToTrait {
 
-trait MediaUploadToTrait
-{
+	public function set_upload_media_only( $upload_only ) {
+		$args = (array) $this->get_arg( 'attachment' );
 
-    public function set_upload_media_only(bool $upload_only): View
-    {
-        $args = (array)$this->get_arg('attachment');
+		$args['library']['uploadedTo'] = (bool) $upload_only;
 
-        if ($upload_only) {
-            $args['library']['uploadedTo'] = true;
-        }
-
-        return $this->set('attachment', $args);
-    }
+		return $this->set( 'attachment', $args );
+	}
 
 }

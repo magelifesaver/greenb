@@ -8,29 +8,23 @@ use AC;
 use AC\Asset\Location\Absolute;
 use AC\ListScreen;
 use AC\Request;
-use ACP;
 use ACP\Search\Asset\Script;
 use ACP\Search\Type\SegmentKey;
 
 class TableScriptFactory
 {
 
-    use AC\Column\ColumnLabelTrait;
+    private $location;
 
-    private Absolute $location;
-
-    private AC\Setting\ContextFactory $context_factory;
-
-    public function __construct(Absolute $location, AC\Setting\ContextFactory $context_factory)
+    public function __construct(Absolute $location)
     {
         $this->location = $location;
-        $this->context_factory = $context_factory;
     }
 
     public function create(
         ListScreen $list_screen,
         Request $request,
-        ?SegmentKey $segment_key = null
+        SegmentKey $segment_key = null
     ): Script\Table {
         return new Script\Table(
             'aca-search-table',
@@ -42,9 +36,31 @@ class TableScriptFactory
         );
     }
 
+    /**
+     * Allow dashicons as label, all the rest is parsed by 'strip_tags'
+     */
+    private function sanitize_label(string $label): string
+    {
+        if (false === strpos($label, 'dashicons')) {
+            $label = strip_tags($label);
+        }
+
+        return trim($label);
+    }
+
     private function get_filter_label(AC\Column $column): string
     {
-        return $this->get_column_label($column);
+        $label = $this->sanitize_label($column->get_custom_label());
+
+        if ( ! $label) {
+            $label = $this->sanitize_label($column->get_label());
+        }
+
+        if ( ! $label) {
+            $label = $column->get_type();
+        }
+
+        return $label;
     }
 
     private function get_filters(ListScreen $list_screen): array
@@ -52,40 +68,34 @@ class TableScriptFactory
         $filters = [];
 
         foreach ($list_screen->get_columns() as $column) {
-            if ( ! $column instanceof ACP\Column) {
-                continue;
-            }
-
             $setting = $column->get_setting('search');
 
-            if ( ! $setting) {
+            if ( ! $setting instanceof Settings\Column) {
                 continue;
             }
 
-            $is_active = $setting->get_input()->get_value() === 'on';
+            $is_active = apply_filters_deprecated(
+                'acp/search/smart-filtering-active',
+                [$setting->is_active(), $setting],
+                '5.2',
+                'Smart filtering can be disabled using the UI.'
+            );
 
             if ( ! $is_active) {
                 continue;
             }
 
-            if ( ! $column->search()) {
+            if ( ! $column instanceof Searchable || ! $column->search()) {
                 continue;
             }
 
             $filter = new Middleware\Filter(
-                (string)$column->get_id(),
+                $column->get_name(),
                 $column->search(),
                 $this->get_filter_label($column)
             );
 
-            $context = $this->context_factory->create($column, $list_screen->get_table_screen());
-            $filters[] = apply_filters(
-                'ac/search/filters',
-                $filter(),
-                $context,
-                $list_screen->get_table_screen(),
-                $list_screen->get_id()
-            );
+            $filters[] = apply_filters('acp/search/filters', $filter(), $column);
         }
 
         return $filters;

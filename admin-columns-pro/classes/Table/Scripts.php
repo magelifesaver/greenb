@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace ACP\Table;
 
+use AC\Asset;
 use AC\Asset\Style;
 use AC\ColumnSize;
 use AC\ListScreen;
 use AC\ListScreenRepository\Storage;
 use AC\Registerable;
-use AC\Settings\GeneralOption;
-use ACP\AdminColumnsPro;
 use ACP\Asset\Script\Table;
+use ACP\Settings\General\LayoutStyle;
 
 class Scripts implements Registerable
 {
@@ -24,20 +24,20 @@ class Scripts implements Registerable
 
     private $storage;
 
-    private GeneralOption $option_storage;
+    private $layout_style;
 
     public function __construct(
-        AdminColumnsPro $plugin,
+        Asset\Location\Absolute $location,
         ColumnSize\UserStorage $user_storage,
         ColumnSize\ListStorage $list_storage,
         Storage $storage,
-        GeneralOption $option_storage
+        LayoutStyle $layout_style
     ) {
-        $this->location = $plugin->get_location();
+        $this->location = $location;
         $this->user_storage = $user_storage;
         $this->list_storage = $list_storage;
         $this->storage = $storage;
-        $this->option_storage = $option_storage;
+        $this->layout_style = $layout_style;
     }
 
     public function register(): void
@@ -47,6 +47,10 @@ class Scripts implements Registerable
 
     public function scripts(ListScreen $list_screen): void
     {
+        if ( ! $list_screen->has_id()) {
+            return;
+        }
+
         $assets = [
             new Style('acp-table', $this->location->with_suffix('assets/core/css/table.css')),
             new Table(
@@ -55,7 +59,7 @@ class Scripts implements Registerable
                 $this->user_storage,
                 $this->list_storage,
                 $this->storage,
-                $this->option_storage
+                $this->layout_style
             ),
         ];
 

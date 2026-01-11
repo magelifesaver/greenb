@@ -10,18 +10,30 @@ class Handler implements Registerable
 
     public const NONCE_ACTION = 'ac-ajax';
 
-    protected array $params = [];
+    /**
+     * @var array
+     */
+    protected $params;
 
     /**
-     * @var callable
+     * @var string|array
      */
     protected $callback;
 
-    protected bool $wp_ajax;
+    /**
+     * @var bool
+     */
+    protected $wp_ajax;
 
-    protected int $priority = 10;
+    /**
+     * @var int
+     */
+    protected $priority = 10;
 
-    public function __construct(?bool $wp_ajax = null)
+    /**
+     * @param bool|null $wp_ajax Using the WP Ajax endpoint or custom
+     */
+    public function __construct($wp_ajax = null)
     {
         $this->wp_ajax = $wp_ajax === null;
 
@@ -41,12 +53,15 @@ class Handler implements Registerable
         add_action($this->get_action(), $this->get_callback(), $this->priority);
     }
 
-    public function deregister(): void
+    public function deregister()
     {
         remove_action($this->get_action(), $this->get_callback(), $this->priority);
     }
 
-    public function get_action(): string
+    /**
+     * @return string|null
+     */
+    public function get_action()
     {
         $action = $this->get_param('action');
 
@@ -57,47 +72,92 @@ class Handler implements Registerable
         return $action;
     }
 
-    public function set_action(string $action): self
+    /**
+     * @param string $action
+     *
+     * @return $this
+     */
+    public function set_action($action)
     {
         $this->params['action'] = $action;
 
         return $this;
     }
 
-    public function set_priority(int $priority): self
+    /**
+     * @param int $priority
+     *
+     * @return Handler
+     */
+    public function set_priority($priority)
     {
+        if ( ! is_int($priority)) {
+            throw new LogicException('Priority can only be of type integer.');
+        }
+
         $this->priority = $priority;
 
         return $this;
     }
 
-    public function get_priority(): ?int
+    /**
+     * @return int
+     */
+    public function get_priority()
     {
         return $this->priority;
     }
 
-    public function set_callback(callable $callback): self
+    /**
+     * @param string|array $callback
+     *
+     * @return $this
+     */
+    public function set_callback($callback)
     {
         $this->callback = $callback;
 
         return $this;
     }
 
-    public function get_callback(): callable
+    /**
+     * @return array|string
+     */
+    public function get_callback()
     {
         return $this->callback;
     }
 
-    public function set_nonce(?string $nonce = null): void
+    /**
+     * @param null|string $nonce
+     *
+     * @return $this
+     */
+    public function set_nonce($nonce = null)
     {
         if (null === $nonce) {
             $nonce = wp_create_nonce(self::NONCE_ACTION);
         }
 
         $this->params['_ajax_nonce'] = $nonce;
+
+        return $this;
     }
 
-    public function verify_request(?string $action = null): void
+    /**
+     * @return $this
+     */
+    public function unset_nonce()
+    {
+        unset($this->params['_ajax_nonce']);
+
+        return $this;
+    }
+
+    /**
+     * @param string $action
+     */
+    public function verify_request($action = null)
     {
         if (null === $action) {
             $action = self::NONCE_ACTION;
@@ -106,12 +166,20 @@ class Handler implements Registerable
         check_ajax_referer($action);
     }
 
-    public function get_params(): array
+    /**
+     * @return array
+     */
+    public function get_params()
     {
         return $this->params;
     }
 
-    public function get_param(string $key)
+    /**
+     * @param $key
+     *
+     * @return mixed|null
+     */
+    public function get_param($key)
     {
         if ( ! array_key_exists($key, $this->params)) {
             return null;
@@ -120,7 +188,27 @@ class Handler implements Registerable
         return $this->params[$key];
     }
 
-    public function set_param(string $key, $value): void
+    /**
+     * @param array $params
+     *
+     * @return $this
+     */
+    public function set_params(array $params)
+    {
+        foreach ($params as $key => $value) {
+            $this->set_param($key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function set_param($key, $value)
     {
         switch ($key) {
             case 'action':
@@ -134,6 +222,8 @@ class Handler implements Registerable
             default:
                 $this->params[$key] = $value;
         }
+
+        return $this;
     }
 
 }

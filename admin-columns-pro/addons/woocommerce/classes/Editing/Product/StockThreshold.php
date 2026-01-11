@@ -13,7 +13,7 @@ class StockThreshold implements ACP\Editing\Service
         return new ACP\Editing\View\Number();
     }
 
-    public function get_value(int $id)
+    public function get_value($id)
     {
         $product = wc_get_product($id);
 

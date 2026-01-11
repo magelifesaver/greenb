@@ -9,7 +9,7 @@ use ACP\Access\Rule;
 class ApiDetailsResponse implements Rule
 {
 
-    protected ACP\API\Response $response;
+    protected $response;
 
     public function __construct(ACP\API\Response $response)
     {

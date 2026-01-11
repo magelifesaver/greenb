@@ -11,7 +11,7 @@ use SplFileInfo;
 final class FileIterator extends FilterIterator
 {
 
-    private string $extension;
+    private $extension;
 
     public function __construct(Iterator $iterator, string $extension)
     {

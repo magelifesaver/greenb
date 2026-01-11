@@ -1,37 +1,25 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Value\Formatter;
 
-use AC\Exception\ValueNotFoundException;
-use AC\Setting\Formatter;
-use AC\Type\Value;
+use ACA\ACF\Value\Formatter;
 
-class File implements Formatter
-{
+class File extends Formatter {
 
-    public function format(Value $value)
-    {
-        $attachment_id = $value->get_value();
+	public function format( $attachment_id, $id = null ) {
+		$value = null;
 
-        if ( ! is_numeric($attachment_id)) {
-            throw ValueNotFoundException::from_id($value->get_id());
-        }
+		if ( $attachment_id ) {
+			$attachment = get_attached_file( $attachment_id );
 
-        $attachment = get_attached_file($attachment_id);
+			if ( $attachment ) {
+				$value = ac_helper()->html->link( wp_get_attachment_url( $attachment_id ), esc_html( basename( $attachment ) ), [ 'target' => '_blank' ] );
+			} else {
+				$value = '<em>' . __( 'Invalid attachment', 'codepress-admin-columns' ) . '</em>';
+			}
+		}
 
-        if ( ! $attachment) {
-            return $value->with_value('<em>' . __('Invalid attachment', 'codepress-admin-columns') . '</em>');
-        }
-
-        return $value->with_value(
-            ac_helper()->html->link(
-                wp_get_attachment_url($attachment_id) ?: '',
-                esc_html(basename($attachment)),
-                ['target' => '_blank']
-            )
-        );
-    }
+		return $value ?: $this->column->get_empty_char();
+	}
 
 }

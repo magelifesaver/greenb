@@ -1,0 +1,227 @@
+#selected-products .quantity{width:60px}
+#selected-products .product-row,.wrapnput{display:flex;padding:10px;max-width:100%;}
+#selected-products .product-row-inner{display:flex;align-self:center}
+#selected-products .product-row>span{flex-grow:1;padding-right:10px}
+#selected-products{margin-top:30px;margin-bottom:30px}
+.remove-product{margin-left:10px}
+.autocomplete-item{padding:5px;cursor:pointer;color:#1176b1;font-weight:bold}
+#product-search{width:100%}
+.autogenresponse{
+    margin-top: 40px;
+    width: calc(60% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapautogen{margin:20px}
+/* General Styles */
+#wpbody-content {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Page Title */
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Search Box */
+.wrapnput {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+#product-search {
+    width: 60%;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#product-search:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 4px 8px rgba(0, 123, 186, 0.2);
+}
+
+/* Autocomplete Dropdown */
+#autocomplete-dropdown {
+    margin-top: 10px;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff;
+    border: 0px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-item {
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.gvncl_notfound{padding:10px}
+.autocomplete-item:hover {
+    background: #f0f8ff;
+}
+
+/* Selected Products Section */
+#selected-products {
+    max-width: calc(60% - 40px);
+    margin: 20px auto;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.product-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.product-row:last-child {
+    border-bottom: none;
+}
+
+.product-row span {
+    flex-grow: 1;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.product-row-inner {
+    margin-left: 10px;
+}
+
+.quantity, .price {
+    width: 80px;
+    padding: 5px 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Generate Link Section */
+#generate-link {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background: #38b6ff;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#generate-link:hover {
+    background: #005f8c;
+}
+
+/* Footer Section */
+div[style*="margin-top:100px"] {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+div[style*="margin-top:100px"] a {
+    color: #007cba;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div[style*="margin-top:100px"] a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #selected-products,#autocomplete-dropdown,#product-search,.autogenresponse {
+        width: 90%; max-width: 90% !important;
+    }
+    #autocomplete-dropdown, #selected-products {
+        max-width: 90%;
+    }
+}
+
+
+/* Style for the Custom Discount and Expire Days sections */
+#customdiscount, #expiredays {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Input Fields */
+#customdiscount input, #expiredays input {
+    margin-left: 10px;
+    padding: 10px;
+    width: 80px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#customdiscount input:focus, #expiredays input:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 4px 8px rgba(0, 123, 186, 0.2);
+}
+
+/* Label Alignment */
+#customdiscount label, #expiredays label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Container Wrapping */
+#customdiscount, #expiredays {
+    max-width: 400px;
+    text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #customdiscount, #expiredays {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #customdiscount input, #expiredays input {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

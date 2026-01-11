@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search\User;
 
 use ACP\Query\Bindings;
@@ -12,7 +10,8 @@ use ACP\Search\Value;
 class ActivityUpdates extends Comparison
 {
 
-    private string $activity;
+    /** @var string */
+    private $activity;
 
     public function __construct($activity)
     {
@@ -28,6 +27,9 @@ class ActivityUpdates extends Comparison
         parent::__construct($operators, Value::INT);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         global $wpdb, $bp;

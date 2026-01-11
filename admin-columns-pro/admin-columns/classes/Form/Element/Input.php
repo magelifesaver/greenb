@@ -7,7 +7,7 @@ use AC\Form\Element;
 class Input extends Element
 {
 
-    protected function is_valid_type(string $type): bool
+    protected function is_valid_type($type)
     {
         $valid_types = [
             'hidden',
@@ -34,7 +34,7 @@ class Input extends Element
         return sprintf($template, $this->get_attributes_as_string($attributes), $this->render_description());
     }
 
-    public function get_type(): string
+    public function get_type()
     {
         $type = $this->get_attribute('type');
 
@@ -45,7 +45,12 @@ class Input extends Element
         return strtolower($type);
     }
 
-    public function set_type(string $type): self
+    /**
+     * @param string $type
+     *
+     * @return $this
+     */
+    public function set_type($type)
     {
         if ($this->is_valid_type($type)) {
             $this->set_attribute('type', $type);

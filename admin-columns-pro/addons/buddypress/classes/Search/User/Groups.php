@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search\User;
 
 use AC\Helper\Select\Options\Paginated;
@@ -27,6 +25,9 @@ class Groups extends Comparison
         parent::__construct($operators);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         global $wpdb, $bp;

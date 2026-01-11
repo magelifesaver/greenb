@@ -1,38 +1,23 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Export\Model;
 
-use AC\Setting\Formatter;
-use AC\Type\Value;
+use AC\Column;
 use ACA;
 use ACP;
-use Exception;
 
-class Link implements ACP\Export\Service
-{
+class Link implements ACP\Export\Service {
 
-    private Formatter $formatter;
+	private $column;
 
-    public function __construct(Formatter $formatter)
-    {
-        $this->formatter = $formatter;
-    }
+	public function __construct( Column $column ) {
+		$this->column = $column;
+	}
 
-    public function get_value($id): string
-    {
-        try {
-            $link = $this->formatter->format(new Value($id))->get_value();
-        } catch (Exception $e) {
-            return '';
-        }
+	public function get_value( $id ) {
+		$link = $this->column->get_raw_value( $id );
 
-        if ( ! $link) {
-            return '';
-        }
-
-        return $link['url'] ?? '';
-    }
+		return $link['url'] ?? '';
+	}
 
 }

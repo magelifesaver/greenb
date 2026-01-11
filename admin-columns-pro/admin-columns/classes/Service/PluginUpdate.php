@@ -12,9 +12,9 @@ use AC\Type\Url\Site;
 final class PluginUpdate implements Registerable
 {
 
-	private Plugin $plugin;
+	private $plugin;
 
-	private Site $upgrade_url_template;
+	private $upgrade_url_template;
 
 	public function __construct(Plugin $plugin, Site $upgrade_url_template)
 	{
@@ -99,7 +99,7 @@ final class PluginUpdate implements Registerable
 	/**
 	 * Add upgrade notice to the update message on the updates page in the WordPress admin
 	 */
-	public function add_upgrade_notice_to_response($transient): ?object
+	public function add_upgrade_notice_to_response($transient)
 	{
 		$basename = $this->plugin->get_basename();
 

@@ -9,11 +9,11 @@ use AC\Asset\Location;
 use AC\Asset\Script\Localize\Translation;
 use AC\Helper\Select\ArrayMapper;
 use AC\Request;
-use AC\Type\ColumnId;
-use ACP\Column;
 use ACP\Filtering;
 use ACP\Filtering\OptionsFactory;
+use ACP\Filtering\Settings;
 use ACP\Search\Comparison;
+use ACP\Search\ComparisonFactory;
 use ACP\Search\Operators;
 use ACP\Search\Value;
 
@@ -22,22 +22,22 @@ final class TableScriptFactory
 
     private $location;
 
+    private $comparison_factory;
+
     private $options_factory;
 
     private $request;
 
-    private array $default_filters;
-
     public function __construct(
         Location $location,
+        ComparisonFactory $comparison_factory,
         OptionsFactory $options_factory,
-        Request $request,
-        array $default_filters = []
+        Request $request
     ) {
         $this->location = $location;
+        $this->comparison_factory = $comparison_factory;
         $this->options_factory = $options_factory;
         $this->request = $request;
-        $this->default_filters = $default_filters;
     }
 
     public function create(AC\ListScreen $list_screen): AC\Asset\Script
@@ -48,14 +48,10 @@ final class TableScriptFactory
             ['jquery', 'jquery-ui-datepicker', AC\Asset\Script\GlobalTranslationFactory::HANDLE]
         );
 
-        $script->add_inline_variable(
-            'acp_filtering',
-            [
-                'filters'                => $this->get_filters($list_screen),
-                'rules'                  => $this->get_rules($list_screen),
-                'default_active_filters' => $this->default_filters,
-            ]
-        );
+        $script->add_inline_variable('acp_filtering', [
+            'filters' => $this->get_filters($list_screen),
+            'rules'   => $this->get_rules($list_screen),
+        ]);
 
         $script->localize(
             'acp_filtering_i18n',
@@ -81,15 +77,13 @@ final class TableScriptFactory
         $rules = [];
 
         foreach ($request->get('acp_filter', []) as $column_name => $value) {
-            $column = $list_screen->get_column(
-                new ColumnId((string)$column_name)
-            );
+            $column = $list_screen->get_column_by_name($column_name);
 
-            if ( ! $column instanceof Column) {
+            if ( ! $column) {
                 continue;
             }
 
-            $comparison = $column->search();
+            $comparison = $this->comparison_factory->create($column);
 
             if ( ! $comparison) {
                 continue;
@@ -97,16 +91,12 @@ final class TableScriptFactory
 
             $setting = $column->get_setting('filter');
 
-            if ( ! $setting instanceof AC\Setting\Component || ! $setting->has_input()) {
-                continue;
-            }
-
-            if ($setting->get_input()->get_value() !== 'on') {
+            if ( ! $setting instanceof Settings || ! $setting->is_active()) {
                 continue;
             }
 
             $rules[] = [
-                'column_name' => (string)$column->get_id(),
+                'column_name' => $column->get_name(),
                 'value'       => $value,
                 'label'       => $this->get_option_label($comparison, $value),
             ];
@@ -141,11 +131,7 @@ final class TableScriptFactory
         $filters = [];
 
         foreach ($list_screen->get_columns() as $column) {
-            if ( ! $column instanceof Column) {
-                continue;
-            }
-
-            $comparison = $column->search();
+            $comparison = $this->comparison_factory->create($column);
 
             if ( ! $comparison) {
                 continue;
@@ -153,16 +139,12 @@ final class TableScriptFactory
 
             $setting = $column->get_setting('filter');
 
-            if ( ! $setting instanceof AC\Setting\Component) {
-                continue;
-            }
-
-            if ( ! $setting->has_input() || $setting->get_input()->get_value() !== 'on') {
+            if ( ! $setting instanceof Settings || ! $setting->is_active()) {
                 continue;
             }
 
             $filter = [
-                'column'        => (string)$column->get_id(),
+                'column'        => $column->get_name(),
                 'label'         => $this->get_filter_label($column),
                 'type'          => $this->get_filter_type($comparison),
                 'remote_values' => false,
@@ -189,10 +171,8 @@ final class TableScriptFactory
                 continue;
             }
 
-            $filter_format = $column->get_setting('filter_format');
-
-            if ($filter['type'] === 'date' && $filter_format) {
-                $date_type = $filter_format->get_input()->get_value();
+            if ($column instanceof Filtering\FilterableDateSetting) {
+                $date_type = $column->get_filtering_date_setting();
 
                 if (null !== $date_type) {
                     $filter['type'] = $date_type ? sprintf('date_%s', $date_type) : 'date';
@@ -256,22 +236,15 @@ final class TableScriptFactory
 
     private function get_filter_label(AC\Column $column): string
     {
-        $setting = $column->get_setting('filter_label');
+        $label = $column->get_label();
+        $setting = $column->get_setting('filter');
 
-        if ( ! $setting) {
-            return $column->get_label();
-        }
+        if ($setting instanceof Settings) {
+            $label = $setting->get_filter_label();
 
-        $label = $setting->get_input()->get_value();
-
-        if ( ! $label) {
-            $label_setting = $column->get_setting('label');
-
-            $column_label = $label_setting
-                ? trim(strip_tags($label_setting->get_input()->get_value()))
-                : '';
-
-            return sprintf(__("Any %s", 'codepress-admin-columns'), $column_label ?: $column->get_label());
+            if ( ! $label) {
+                $label = $setting->get_filter_label_default();
+            }
         }
 
         return $label;

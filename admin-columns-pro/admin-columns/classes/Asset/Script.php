@@ -7,13 +7,11 @@ use AC\Asset\Script\Inline\Position;
 class Script extends Enqueueable
 {
 
-    protected bool $in_footer;
-
-    protected array $templates = [];
+    protected $in_footer;
 
     public function __construct(
         string $handle,
-        ?Location $location = null,
+        Location $location = null,
         array $dependencies = [],
         bool $in_footer = false
     ) {
@@ -58,16 +56,6 @@ class Script extends Enqueueable
         }
 
         wp_enqueue_script($this->get_handle());
-
-        if ($this->templates) {
-            // Allows JS frameworks to use PHP templates
-            $this->add_inline(
-                sprintf(
-                    'window.addEventListener("DOMContentLoaded",function(){document.body.insertAdjacentHTML("beforeend", %s);});',
-                    json_encode(implode('', $this->templates))
-                )
-            );
-        }
     }
 
     public function localize(string $name, Script\Localize\Translation $translation): self
@@ -81,13 +69,17 @@ class Script extends Enqueueable
         return $this;
     }
 
-    public function add_inline(string $data, ?Position $position = null): self
+    public function add_inline(string $data, Position $position = null): self
     {
+        if (null === $position) {
+            $position = Position::after();
+        }
+
         if ( ! $this->is_registered()) {
             $this->register();
         }
 
-        wp_add_inline_script($this->handle, $data, (string)($position ?? Position::after()));
+        wp_add_inline_script($this->handle, $data, (string)$position);
 
         return $this;
     }
@@ -98,13 +90,6 @@ class Script extends Enqueueable
             sprintf('var %s = %s;', $name, json_encode($data)),
             Position::before()
         );
-    }
-
-    public function add_template(string $id, string $html): self
-    {
-        $this->templates[] = sprintf('<template id="%s">%s</template>', esc_attr($id), $html);
-
-        return $this;
     }
 
 }

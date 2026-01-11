@@ -7,7 +7,7 @@ use ACP;
 class Status implements ACP\Export\Service
 {
 
-    public function get_value($id): string
+    public function get_value($id)
     {
         $statuses = wc_get_order_statuses();
         $status = 'wc-' . wc_get_order($id)->get_status();

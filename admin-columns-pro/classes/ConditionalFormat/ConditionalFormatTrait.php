@@ -2,16 +2,10 @@
 
 namespace ACP\ConditionalFormat;
 
-use AC\Setting\Config;
+trait ConditionalFormatTrait {
 
-trait ConditionalFormatTrait
-{
-
-    protected function get_conditional_format(Config $config): ?FormattableConfig
-    {
-        return new FormattableConfig(
-            new Formatter\FilterHtmlFormatter()
-        );
-    }
+	public function conditional_format(): ?FormattableConfig {
+		return new FormattableConfig();
+	}
 
 }

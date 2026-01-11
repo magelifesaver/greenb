@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Search\Comparison\Repeater;
 
 use AC\Helper\Select\Options\Paginated;
@@ -15,13 +13,16 @@ class Posts extends Comparison\Repeater
     implements SearchableValues
 {
 
-    private ?array $post_type;
+    /**
+     * @var array
+     */
+    private $post_type;
 
     public function __construct(
         string $meta_type,
         string $parent_key,
         string $sub_key,
-        ?array $post_types = null,
+        array $post_types = null,
         bool $multiple = false
     ) {
         if (null === $post_types) {

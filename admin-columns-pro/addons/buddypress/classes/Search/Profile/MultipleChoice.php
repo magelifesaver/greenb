@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search\Profile;
 
 use AC;
@@ -17,7 +15,8 @@ class MultipleChoice extends Search\Profile
     implements Values
 {
 
-    private array $options;
+    /** @var array */
+    private $options;
 
     public function __construct($meta_key, $options)
     {

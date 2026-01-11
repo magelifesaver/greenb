@@ -2,7 +2,6 @@
 
 namespace ACP\Check;
 
-use AC\Message;
 use AC\Message\Notice;
 use AC\Registerable;
 use AC\Screen;
@@ -12,7 +11,7 @@ class Beta
     implements Registerable
 {
 
-    private Feedback $feedback;
+    private $feedback;
 
     public function __construct(Feedback $feedback)
     {
@@ -38,12 +37,12 @@ class Beta
 
     public function register_notice(Screen $screen): void
     {
-        if ( ! $screen->is_table_screen() && ! $screen->is_admin_screen()) {
+        if ( ! $screen->is_list_screen() && ! $screen->is_admin_screen()) {
             return;
         }
 
         $notice = new Notice($this->get_message());
-        $notice->set_type(Message::WARNING)
+        $notice->set_type(Notice::WARNING)
                ->register();
 
         add_action('admin_footer', [$this, 'render']);

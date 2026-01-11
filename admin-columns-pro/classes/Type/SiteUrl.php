@@ -7,7 +7,7 @@ use AC\Type\Url;
 class SiteUrl implements Url
 {
 
-    private string $url;
+    private $url;
 
     public function __construct(string $url)
     {

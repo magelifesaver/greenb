@@ -2,14 +2,17 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait StepTrait {
 
-trait StepTrait
-{
+	/**
+	 * @param string $step
+	 *
+	 * @return $this
+	 */
+	public function set_step( $step ) {
+		$this->set( 'range_step', (string) $step );
 
-    public function set_step(string $step): View
-    {
-        return $this->set('range_step', $step);
-    }
+		return $this;
+	}
 
 }

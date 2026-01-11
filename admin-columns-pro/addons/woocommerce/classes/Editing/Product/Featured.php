@@ -10,7 +10,7 @@ use ACP\Editing\View;
 class Featured implements Service
 {
 
-    public function get_value(int $id)
+    public function get_value($id)
     {
         $product = wc_get_product($id);
 

@@ -3,9 +3,10 @@
 namespace ACA\WC\Service;
 
 use AC\ListScreen;
-use AC\PostType;
 use AC\Registerable;
-use AC\TableScreen;
+use ACA\WC\ListScreen\Order;
+use ACA\WC\ListScreen\Product;
+use ACP\ListScreen\Post;
 
 class Table implements Registerable
 {
@@ -14,7 +15,7 @@ class Table implements Registerable
     {
         add_action('ac/table/list_screen', [$this, 'fix_manual_product_sort'], 12); // After Sorting is applied
         add_filter(
-            'ac/sorting/remember_last_sorting_preference',
+            'acp/sorting/remember_last_sorting_preference',
             [
                 $this,
                 'disable_product_sorting_mode_preference',
@@ -22,13 +23,13 @@ class Table implements Registerable
             10,
             2
         );
-        add_filter('ac/sticky_header/enable', [$this, 'disable_sticky_headers']);
-        add_filter('ac/table/query_args_whitelist', [$this, 'add_query_arg_customer_to_whitelist'], 10, 2);
+        add_filter('acp/sticky_header/enable', [$this, 'disable_sticky_headers']);
+        add_filter('acp/table/query_args_whitelist', [$this, 'add_query_arg_customer_to_whitelist'], 10, 2);
     }
 
     public function add_query_arg_customer_to_whitelist(array $args, ListScreen $list_screen): array
     {
-        if ('shop_order' === $list_screen->get_post_type()) {
+        if ($list_screen instanceof Order) {
             $args[] = '_customer_user';
         }
 
@@ -39,8 +40,8 @@ class Table implements Registerable
     {
         if (
             isset($_GET['orderby']) &&
-            $list_screen instanceof PostType &&
-            $list_screen->get_post_type()->equals('product') &&
+            $list_screen instanceof Post &&
+            $list_screen->get_post_type() === 'product' &&
             strpos($_GET['orderby'], 'menu_order') !== false &&
             ! filter_input(INPUT_GET, 'orderby')
         ) {
@@ -60,11 +61,9 @@ class Table implements Registerable
         return $enabled;
     }
 
-    public function disable_product_sorting_mode_preference(bool $enabled, TableScreen $table_screen): bool
+    public function disable_product_sorting_mode_preference(bool $enabled, ListScreen $list_screen): bool
     {
-        if ($table_screen instanceof PostType
-            && $table_screen->get_post_type()->equals('product')
-            && 'menu_order title' === filter_input(INPUT_GET, 'orderby')) {
+        if ($list_screen instanceof Product && 'menu_order title' === filter_input(INPUT_GET, 'orderby')) {
             return false;
         }
 

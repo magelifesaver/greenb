@@ -7,7 +7,7 @@ use ACP;
 class LowOnStock implements ACP\Export\Service
 {
 
-    public function get_value($id): string
+    public function get_value($id)
     {
         $product = wc_get_product($id);
 

@@ -8,7 +8,6 @@ use ACP\Query\Bindings;
 use ACP\Sorting\FormatValue;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
-use ACP\Sorting\Model\WarningAware;
 use ACP\Sorting\Sorter;
 use ACP\Sorting\Type\DataType;
 use ACP\Sorting\Type\Order;
@@ -17,20 +16,17 @@ use ACP\Sorting\Type\Order;
  * Sorts a post list table on a meta key. The meta value may contain mixed values, as long
  * as the supplied formatter can process them into a string.
  */
-class MetaFormat implements QueryBindings, WarningAware
+class MetaFormat implements QueryBindings
 {
 
-    protected string $meta_key;
+    protected $meta_key;
 
-    protected FormatValue $formatter;
+    protected $formatter;
 
-    protected ?DataType $data_type;
+    protected $data_type;
 
-    public function __construct(
-        FormatValue $formatter,
-        string $meta_key,
-        ?DataType $data_type = null
-    ) {
+    public function __construct(FormatValue $formatter, string $meta_key, DataType $data_type = null)
+    {
         $this->formatter = $formatter;
         $this->meta_key = $meta_key;
         $this->data_type = $data_type;
@@ -74,7 +70,6 @@ class MetaFormat implements QueryBindings, WarningAware
         );
 
         $results = $wpdb->get_results($sql);
-
         if ( ! $results) {
             return [];
         }

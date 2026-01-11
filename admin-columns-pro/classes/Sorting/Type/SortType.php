@@ -2,30 +2,33 @@
 
 namespace ACP\Sorting\Type;
 
-use AC\ListScreen;
-use ACP\Sorting\ApplyFilter\DefaultSort;
+use ACP\Sorting\NativeSortable;
 use InvalidArgumentException;
 
 class SortType
 {
 
-    private string $order_by;
+    private $order_by;
 
-    private bool $descending;
+    private $order;
 
-    public function __construct(string $order_by, bool $descending = true)
+    public function __construct(string $order_by, string $order)
     {
-        $this->order_by = $order_by;
-        $this->descending = $descending;
-
-        if ( ! self::validate($order_by)) {
-            throw new InvalidArgumentException('String can not be empty.');
+        if ('asc' !== $order) {
+            $order = 'desc';
         }
+
+        $this->order_by = $order_by;
+        $this->order = $order;
+
+        $this->validate();
     }
 
-    public static function validate($order_by): bool
+    private function validate(): void
     {
-        return is_string($order_by) && '' !== $order_by;
+        if ( ! is_string($this->order_by)) {
+            throw new InvalidArgumentException('Expected a string for order by.');
+        }
     }
 
     public function get_order_by(): string
@@ -33,46 +36,21 @@ class SortType
         return $this->order_by;
     }
 
-    public function is_descending(): bool
+    public function get_order(): string
     {
-        return $this->descending;
+        return $this->order;
     }
 
     public function equals(SortType $sort_type): bool
     {
-        return $sort_type->is_descending() === $this->descending &&
-               $sort_type->get_order_by() === $this->order_by;
+        return $sort_type->get_order() === $this->order && $sort_type->get_order_by() === $this->order_by;
     }
 
-    public static function create_by_list_screen(ListScreen $list_screen): ?self
+    public static function create_by_request(NativeSortable\Request\Sort $request): self
     {
-        $order_by = $list_screen->get_preference('sorting');
-
-        if ( ! self::validate($order_by)) {
-            return null;
-        }
-
-        $sort_type = new self(
-            $order_by,
-            'asc' !== $list_screen->get_preference('sorting_order')
-        );
-
-        return (new DefaultSort($list_screen))->apply_filters($sort_type);
-    }
-
-    public static function create_by_request_globals(): ?self
-    {
-        $order_by = $_GET['orderby'] ?? null;
-
-        if ( ! self::validate($order_by)) {
-            return null;
-        }
-
-        $order = $_GET['order'] ?? '';
-
         return new self(
-            $order_by,
-            'asc' !== strtolower($order)
+            (string)$request->get_order_by(),
+            (string)$request->get_order()
         );
     }
 

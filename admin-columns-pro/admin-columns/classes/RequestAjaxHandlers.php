@@ -8,7 +8,7 @@ class RequestAjaxHandlers
     /**
      * @var RequestAjaxHandler[]
      */
-    private array $request_handlers = [];
+    private $request_handlers = [];
 
     public function add(string $action, RequestAjaxHandler $request_handler): self
     {

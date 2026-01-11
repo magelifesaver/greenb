@@ -2,21 +2,21 @@
 
 namespace ACP\Editing\ApplyFilter;
 
-use AC\Setting\Context;
+use AC;
 
 class PostStatus
 {
 
-    private Context $context;
+    private $column;
 
-    public function __construct(Context $context)
+    public function __construct(AC\Column $column)
     {
-        $this->context = $context;
+        $this->column = $column;
     }
 
-    public function apply_filters(array $stati, string $post_type): array
+    public function apply_filters(array $stati): array
     {
-        return (array)apply_filters('ac/editing/post_statuses', $stati, $this->context, $post_type);
+        return (array)apply_filters('acp/editing/post_statuses', $stati, $this->column);
     }
 
 }

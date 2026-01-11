@@ -4,18 +4,16 @@ namespace ACP\Editing\View;
 
 use ACP\Editing\View;
 
-class Image extends View
-{
+class Image extends View {
 
-    use AttachmentTypeTrait;
-    use MediaUploadToTrait;
-    use MultipleTrait;
+	use AttachmentTypeTrait,
+		MultipleTrait,
+		MediaUploadToTrait;
 
-    public function __construct()
-    {
-        parent::__construct('media');
+	public function __construct() {
+		parent::__construct( 'media' );
 
-        $this->set_attachment_type('image');
-    }
+		$this->set_attachment_type( 'image' );
+	}
 
 }

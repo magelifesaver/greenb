@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace AC\Storage;
 
-class Option implements OptionData
+final class Option implements KeyValuePair
 {
 
-    protected string $key;
+    protected $key;
 
     public function __construct(string $key)
     {
@@ -16,19 +14,22 @@ class Option implements OptionData
 
     public function get()
     {
-        wp_cache_delete($this->key, 'options');
-
-        return get_option($this->key, false);
+        return get_option($this->key);
     }
 
-    public function save($value): void
+    public function save($value): bool
     {
-        update_option($this->key, $value, false);
+        return update_option($this->key, $value, false);
     }
 
-    public function delete(): void
+    public function delete(): bool
     {
-        delete_option($this->key);
+        return delete_option($this->key);
+    }
+
+    public function exists(): bool
+    {
+        return false !== $this->get();
     }
 
 }

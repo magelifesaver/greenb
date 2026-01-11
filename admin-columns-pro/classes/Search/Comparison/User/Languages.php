@@ -22,23 +22,14 @@ class Languages extends Comparison\Meta
         parent::__construct($operators, 'locale');
     }
 
-    private function get_translations(): array
-    {
-        static $translations;
-
-        if (null === $translations) {
-            $translations = (new AC\Helper\Translations())->get_available_translations();
-        }
-
-        return $translations;
-    }
-
     public function format_label(string $value): string
     {
-        return $this->get_translations()[$value]['native_name'] ?? $value;
+        $translations = (new AC\Helper\User())->get_translations_remote();
+
+        return $translations[$value]['native_name'] ?? $value;
     }
 
-    private function get_language_options(): array
+    private function get_language_options()
     {
         $options = [];
 

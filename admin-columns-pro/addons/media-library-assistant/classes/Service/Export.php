@@ -6,33 +6,34 @@ namespace ACA\MLA\Service;
 
 use AC;
 use AC\Registerable;
-use AC\Setting\Context;
+use ACA\MLA\Export\Strategy;
+use ACP;
 
 class Export implements Registerable
 {
 
     public function register(): void
     {
-        add_filter('ac/export/row_headers', [$this, 'fix_excel_issue'], 10, 2);
-        add_filter('ac/export/render', [$this, 'strip_tags_value'], 10, 4);
+        add_filter('ac/export/headers', [$this, 'fix_excel_issue'], 10, 2);
+        add_filter('ac/export/value', [$this, 'strip_tags_value'], 10, 2);
     }
 
-    public function strip_tags_value($value, Context $context, string $row_id, AC\TableScreen $table_screen): string
+    public function strip_tags_value($value, AC\Column $column)
     {
-        if ( ! $table_screen instanceof AC\ThirdParty\MediaLibraryAssistant\TableScreen) {
-            return (string)$value;
+        if ($column->get_group() === ColumnGroup::NAME) {
+            $value = strip_tags((string)$value);
         }
 
-        return strip_tags((string)$value);
+        return $value;
     }
 
     /**
      * Error 'SYLK: File format is not valid' in Excel
      * MS Excel 2003 and 2013 does not allow the first label to start with 'ID'
      */
-    public function fix_excel_issue(array $headers, AC\TableScreen $table_screen): array
+    public function fix_excel_issue(array $headers, ACP\Export\Strategy $strategy): array
     {
-        if ( ! $table_screen instanceof AC\ThirdParty\MediaLibraryAssistant\TableScreen) {
+        if ( ! $strategy instanceof Strategy) {
             return $headers;
         }
 

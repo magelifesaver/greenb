@@ -13,7 +13,7 @@ class MenuListItem
 
     private $group;
 
-    public function __construct(string $key, string $label, MenuGroup $group)
+    public function __construct(string $key, string $label, string $group)
     {
         $this->key = $key;
         $this->label = $label;
@@ -30,7 +30,7 @@ class MenuListItem
         return $this->label;
     }
 
-    public function get_group(): MenuGroup
+    public function get_group(): string
     {
         return $this->group;
     }

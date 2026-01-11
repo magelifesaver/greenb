@@ -2,14 +2,12 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait WeekstartTrait {
 
-trait WeekstartTrait
-{
+	public function set_week_start( $week_start ) {
+		$this->set( 'weekstart', (int) $week_start );
 
-    public function set_week_start(int $week_start): View
-    {
-        return $this->set('weekstart', $week_start);
-    }
+		return $this;
+	}
 
 }

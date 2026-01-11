@@ -16,7 +16,9 @@ class ImageFileSizes implements QueryBindings, WarningAware
 
     use PostRequestTrait;
 
-    private ContentTotalImageSize $format_value;
+    private $post_type;
+
+    private $format_value;
 
     public function __construct()
     {

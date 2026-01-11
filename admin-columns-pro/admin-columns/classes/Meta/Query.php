@@ -7,27 +7,60 @@ use WP_Meta_Query;
 class Query
 {
 
-    private ?WP_Meta_Query $query = null;
+    /**
+     * @var WP_Meta_Query
+     */
+    private $query;
 
-    private string $sql;
+    /**
+     * @var string
+     */
+    private $sql;
 
-    private array $select = [];
+    /**
+     * @var array
+     */
+    private $select = [];
 
-    private string $count = '';
+    /**
+     * @var string|false
+     */
+    private $count = false;
 
-    private bool $distinct = false;
+    /**
+     * @var bool
+     */
+    private $distinct = false;
 
-    private string $join = '';
+    /**
+     * @var bool
+     */
+    private $join = false;
 
-    private array $join_where = [];
+    /**
+     * @var array
+     */
+    private $join_where = [];
 
-    private array $where = [];
+    /**
+     * @var array
+     */
+    private $where = [];
 
-    private string $group_by = '';
+    /**
+     * @var array
+     */
+    private $group_by = [];
 
-    private array $order_by = [];
+    /**
+     * @var array
+     */
+    private $order_by = [];
 
-    private int $limit = 0;
+    /**
+     * @var int|false
+     */
+    private $limit = false;
 
     public function __construct(string $meta_type)
     {
@@ -41,7 +74,7 @@ class Query
      *
      * @return $this
      */
-    public function select(string $field): self
+    public function select($field)
     {
         $fields = explode(',', $field);
 
@@ -54,8 +87,12 @@ class Query
 
     /**
      * Add a COUNT clause AS count
+     *
+     * @param string $field
+     *
+     * @return $this
      */
-    public function count(string $field): self
+    public function count($field)
     {
         $this->count = $field;
 
@@ -70,24 +107,35 @@ class Query
      *
      * @return $this
      */
-    public function group_by(string $field): self
+    public function group_by($field)
     {
         $this->group_by = $field;
 
         return $this;
     }
 
-    public function join(string $type = 'inner'): self
+    public function join($type = 'inner')
     {
         $this->join = strtoupper($type);
 
         return $this;
     }
 
+    public function left_join()
+    {
+        return $this->join('left');
+    }
+
     /**
+     * @param string           $field
+     * @param string           $operator
+     * @param string|int|array $value
+     * @param string           $boolean
+     *
+     * @return $this
      * @see get_where_clause()
      */
-    public function join_where(string $field, ?string $operator = null, $value = null, string $boolean = 'AND'): self
+    public function join_where($field, $operator = null, $value = null, $boolean = 'AND'): self
     {
         // set default join
         if ( ! $this->join) {
@@ -99,7 +147,7 @@ class Query
         return $this;
     }
 
-    public function order_by(string $order_by, string $order = 'asc'): self
+    public function order_by($order_by, $order = 'asc')
     {
         $parts = explode(',', $order_by);
 
@@ -113,12 +161,12 @@ class Query
         return $this;
     }
 
-    public function limit(int $limit): void
+    public function limit($limit)
     {
         $this->limit = absint($limit);
     }
 
-    public function distinct(): self
+    public function distinct()
     {
         $this->distinct = true;
 
@@ -135,7 +183,7 @@ class Query
      *
      * @return array
      */
-    private function get_where_clause($field, ?string $operator = null, $value = null, string $boolean = 'AND'): array
+    private function get_where_clause($field, string $operator = null, $value = null, string $boolean = 'AND')
     {
         // allows to omit operator
         if (null === $value) {
@@ -174,9 +222,15 @@ class Query
     }
 
     /**
+     * @param        $field
+     * @param null   $operator
+     * @param null   $value
+     * @param string $boolean
+     *
+     * @return $this
      * @see get_where_clause()
      */
-    public function remove_where($field, ?string $operator = null, $value = null, string $boolean = 'AND'): self
+    public function remove_where($field, $operator = null, $value = null, $boolean = 'AND')
     {
         $where = $this->get_where_clause($field, $operator, $value, $boolean);
 
@@ -190,9 +244,15 @@ class Query
     }
 
     /**
+     * @param        $field
+     * @param null   $operator
+     * @param null   $value
+     * @param string $boolean
+     *
+     * @return $this
      * @see get_where_clause()
      */
-    public function where($field, ?string $operator = null, $value = null, string $boolean = 'AND'): self
+    public function where($field, $operator = null, $value = null, $boolean = 'AND')
     {
         $this->where[] = $this->get_where_clause($field, $operator, $value, $boolean);
 
@@ -200,24 +260,34 @@ class Query
     }
 
     /**
+     * @param      $field
+     * @param null $operator
+     * @param null $value
+     *
+     * @return $this
      * @see get_where_clause()
      */
-    public function or_where($field, ?string $operator = null, $value = null): self
+    public function or_where($field, $operator = null, $value = null)
     {
         return $this->where($field, $operator, $value, 'OR');
     }
 
-    public function where_in(array $in): self
+    /**
+     * @param array $in
+     *
+     * @return $this
+     */
+    public function where_in(array $in)
     {
         return $this->where('id', 'in', $in);
     }
 
-    public function where_is_null($field): self
+    public function where_is_null($field)
     {
         return $this->where($field, '', 'IS NULL');
     }
 
-    public function where_post_type(string $post_type): self
+    public function where_post_type($post_type): self
     {
         return $this->where('post_type', '=', $post_type);
     }
@@ -227,7 +297,7 @@ class Query
         return $this->where('post_type', 'in', $post_types);
     }
 
-    private function parse_field(string $field): string
+    private function parse_field($field)
     {
         switch ($field) {
             case 'id':
@@ -391,7 +461,7 @@ class Query
     }
 
     /**
-     * Return last SQL query that was queried
+     * Return last sql that was queried
      */
     public function get_sql(): string
     {
@@ -415,7 +485,7 @@ class Query
         return $this->query;
     }
 
-    private function set_query(string $type): void
+    private function set_query(string $type)
     {
         global $wpdb;
 

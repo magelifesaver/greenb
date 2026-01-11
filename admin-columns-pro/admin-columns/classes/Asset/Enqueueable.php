@@ -7,13 +7,22 @@ use AC\Asset\Location\Absolute;
 abstract class Enqueueable
 {
 
-    protected string $handle;
+    /**
+     * @var string
+     */
+    protected $handle;
 
-    protected ?Absolute $location;
+    /**
+     * @var Absolute|null
+     */
+    protected $location;
 
-    protected array $dependencies;
+    /**
+     * @var string[]
+     */
+    protected $dependencies;
 
-    public function __construct(string $handle, ?Absolute $location = null, array $dependencies = [])
+    public function __construct(string $handle, Absolute $location = null, array $dependencies = [])
     {
         $this->handle = $handle;
         $this->location = $location;

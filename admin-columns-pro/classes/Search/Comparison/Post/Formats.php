@@ -14,9 +14,12 @@ class Formats extends Comparison
     implements Comparison\Values
 {
 
-    protected string $taxonomy;
+    /**
+     * @var string
+     */
+    protected $taxonomy;
 
-    public function __construct(string $taxonomy)
+    public function __construct($taxonomy)
     {
         $operators = new Operators([
             Operators::EQ,
@@ -57,7 +60,7 @@ class Formats extends Comparison
         return $bindings->tax_query($tax_query->get_expression());
     }
 
-    private function create_non_existent_post_format_bindings(): Bindings\Post
+    private function create_non_existent_post_format_bindings()
     {
         $bindings = new Bindings\Post();
 

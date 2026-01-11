@@ -14,14 +14,14 @@ final class Table extends Script
     /**
      * @var Export\Strategy
      */
-    private Export\Strategy $strategy;
+    private $strategy;
 
     /**
      * @var array [ $column_name => $column_label, ... ]
      */
-    private array $columns;
+    private $columns;
 
-    private bool $show_button;
+    private $show_button;
 
     public function __construct(
         string $handle,
@@ -43,7 +43,7 @@ final class Table extends Script
 
         $this->add_inline_variable('acp_export', [
             'total_num_items' => $this->strategy->get_total_items() ?? 0,
-            'num_iterations'  => $this->strategy->get_items_per_iteration(),
+            'num_iterations'  => $this->strategy->get_num_items_per_iteration(),
             'nonce'           => wp_create_nonce(self::NONCE_ACTION),
             'columns'         => $this->columns,
             'show_button'     => $this->show_button,

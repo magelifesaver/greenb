@@ -7,7 +7,7 @@ use ACP\Query\Bindings;
 class Post extends Bindings
 {
 
-    protected array $tax_query = [];
+    protected $tax_query = [];
 
     public function get_tax_query(): array
     {

@@ -10,7 +10,7 @@ class PluginActionLinks implements Registerable
 
     private $plugin;
 
-    public function __construct(AdminColumns $plugin)
+    public function __construct(Entity\Plugin $plugin)
     {
         $this->plugin = $plugin;
     }

@@ -45,10 +45,7 @@ class AjaxScreenOption implements Registerable
             exit;
         }
 
-        $this->preference_button->set_status(
-            $list_screen->get_table_id(),
-            'true' === filter_input(INPUT_POST, 'value')
-        );
+        echo $this->preference_button->set($list_screen->get_key(), 'true' === filter_input(INPUT_POST, 'value'));
         exit;
     }
 

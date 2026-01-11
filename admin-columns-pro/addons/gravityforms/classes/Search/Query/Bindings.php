@@ -8,14 +8,28 @@ use GFFormsModel;
 class Bindings extends Query\Bindings
 {
 
-    private function get_entry_meta_table_name(): string
+    /**
+     * @return string
+     */
+    public function get_entry_meta_table_name()
     {
         return GFFormsModel::get_entry_meta_table_name();
     }
 
-    public function get_entry_meta_table_name_alias(): string
+    /**
+     * @return string
+     */
+    public function get_entry_meta_table_name_alias()
     {
         return $this->get_unique_alias($this->get_entry_meta_table_name());
+    }
+
+    /**
+     * @return string
+     */
+    public function get_entry_table()
+    {
+        return GFFormsModel::get_entry_table_name();
     }
 
     public function join_entry_meta_table($join_alias, $meta_key, $join_type = null)

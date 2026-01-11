@@ -3,16 +3,22 @@
 namespace ACP\Search\Helper\Sql\Comparison;
 
 use ACP\Search\Helper\DateValueFactory;
+use ACP\Search\Helper\Sql\Comparison;
 use ACP\Search\Value;
+use Exception;
 
-class LtDaysAgo extends Between
-{
+class LtDaysAgo extends Between {
 
-    public function bind_value(Value $value): self
-    {
-        $value_factory = new DateValueFactory($value->get_type());
+	/**
+	 * @param Value $value
+	 *
+	 * @return Comparison
+	 * @throws Exception
+	 */
+	public function bind_value( Value $value ) {
+		$value_factory = new DateValueFactory( $value->get_type() );
 
-        return parent::bind_value($value_factory->create_less_than_days_ago((int)$value->get_value()));
-    }
+		return parent::bind_value( $value_factory->create_less_than_days_ago( (int) $value->get_value() ) );
+	}
 
 }

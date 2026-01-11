@@ -4,49 +4,56 @@ namespace AC\Table;
 
 use AC\Registerable;
 
-final class TableFormView implements Registerable
-{
+final class TableFormView implements Registerable {
 
-    public const PARAM_ACTION = 'ac-actions-form';
+	const PARAM_ACTION = 'ac-actions-form';
 
-    private string $meta_type;
+	/**
+	 * @var string
+	 */
+	private $type;
 
-    private string $html;
+	/**
+	 * @var string
+	 */
+	private $html;
 
-    private int $priority;
+	/**
+	 * @var int
+	 */
+	private $priority;
 
-    public function __construct(string $meta_type, string $html, ?int $priority = null)
+	public function __construct( $type, $html, $priority = null ) {
+		if ( null === $priority ) {
+			$priority = 10;
+		}
+
+		$this->type = (string) $type;
+		$this->html = (string) $html;
+		$this->priority = (int) $priority;
+	}
+
+	public function register(): void
     {
-        if (null === $priority) {
-            $priority = 10;
-        }
 
-        $this->meta_type = $meta_type;
-        $this->html = $html;
-        $this->priority = $priority;
-    }
+		switch ( $this->type ) {
+			case 'post':
+				add_action( 'restrict_manage_posts', [ $this, 'render' ], $this->priority );
 
-    public function register(): void
-    {
-        switch ($this->meta_type) {
-            case 'post':
-                add_action('restrict_manage_posts', [$this, 'render'], $this->priority);
+				break;
+			case'user':
+				add_action( 'restrict_manage_users', [ $this, 'render' ], $this->priority );
 
-                break;
-            case'user':
-                add_action('restrict_manage_users', [$this, 'render'], $this->priority);
+				break;
+			case 'comment':
+				add_action( 'restrict_manage_comment', [ $this, 'render' ], $this->priority );
 
-                break;
-            case 'comment':
-                add_action('restrict_manage_comment', [$this, 'render'], $this->priority);
+				break;
+		}
+	}
 
-                break;
-        }
-    }
-
-    public function render(): void
-    {
-        echo $this->html;
-    }
+	public function render() {
+		echo $this->html;
+	}
 
 }

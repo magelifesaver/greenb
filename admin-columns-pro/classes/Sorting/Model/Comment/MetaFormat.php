@@ -19,13 +19,13 @@ use ACP\Sorting\Type\Order;
 class MetaFormat implements QueryBindings
 {
 
-    private string $meta_key;
+    private $meta_key;
 
-    private FormatValue $formatter;
+    private $formatter;
 
-    private DataType $data_type;
+    private $data_type;
 
-    public function __construct(FormatValue $formatter, string $meta_key, ?DataType $data_type = null)
+    public function __construct(FormatValue $formatter, string $meta_key, DataType $data_type = null)
     {
         $this->meta_key = $meta_key;
         $this->formatter = $formatter;

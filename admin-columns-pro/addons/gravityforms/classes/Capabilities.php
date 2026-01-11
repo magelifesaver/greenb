@@ -2,9 +2,8 @@
 
 namespace ACA\GravityForms;
 
-interface Capabilities
-{
+interface Capabilities {
 
-    public const EDIT_ENTRIES = 'gravityforms_edit_entries';
+	const EDIT_ENTRIES = 'gravityforms_edit_entries';
 
 }

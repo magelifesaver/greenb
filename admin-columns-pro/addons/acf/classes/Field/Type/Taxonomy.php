@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Field\Type;
 
 use ACA\ACF\Field;
@@ -9,12 +7,18 @@ use ACA\ACF\Field;
 class Taxonomy extends Field implements Field\Multiple, Field\TermRelation
 {
 
-    public function uses_native_term_relation(): bool
+    /**
+     * @return bool
+     */
+    public function uses_native_term_relation()
     {
         return (1 === $this->settings['load_terms'] && 1 === $this->settings['save_terms']);
     }
 
-    public function is_multiple(): bool
+    /**
+     * @return bool
+     */
+    public function is_multiple()
     {
         return in_array($this->settings['field_type'], ['checkbox', 'multi_select'], true);
     }

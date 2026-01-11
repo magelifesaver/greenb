@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace ACP\ConditionalFormat;
 
-use AC\Collection;
-use ACP\ConditionalFormat\Type\Rule;
+use AC\Iterator;
+use ACP\ConditionalFormat\Entity\Rule;
 
-final class RuleCollection extends Collection
+final class RuleCollection extends Iterator
 {
 
     public function __construct(array $data = [])
     {
-        foreach ($data as $rule) {
-            $this->add($rule);
-        }
+        array_map([$this, 'add'], $data);
     }
 
     public function add(Rule $rule): void
@@ -24,12 +22,7 @@ final class RuleCollection extends Collection
 
     public function current(): Rule
     {
-        return current($this->data);
-    }
-
-    public function first(): ?Rule
-    {
-        return parent::first();
+        return parent::current();
     }
 
 }

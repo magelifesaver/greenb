@@ -11,12 +11,15 @@ use ACP;
 final class MetaServiceFactory
 {
 
-    public function create(Field $field, MetaType $meta_type): ?ACP\Editing\Service
+    /**
+     * @return ACP\Editing\Service|false
+     */
+    public function create(Field $field, MetaType $meta_type)
     {
         $view = (new MetaViewFactory())->create($field);
 
         if ( ! $view) {
-            return null;
+            return false;
         }
 
         switch (true) {
@@ -32,10 +35,6 @@ final class MetaServiceFactory
                 );
 
             case $field instanceof Type\Date:
-                if ( ! $view instanceof ACP\Editing\View\Date) {
-                    return null;
-                }
-
                 return new ACP\Editing\Service\Date(
                     $view,
                     $this->create_meta_storage($field, $meta_type),
@@ -43,10 +42,6 @@ final class MetaServiceFactory
                 );
 
             case $field instanceof Type\DateTime:
-                if ( ! $view instanceof ACP\Editing\View\DateTime) {
-                    return null;
-                }
-
                 return new ACP\Editing\Service\DateTime(
                     $view,
                     $this->create_meta_storage($field, $meta_type),
@@ -66,10 +61,6 @@ final class MetaServiceFactory
                 );
 
             case $field instanceof Type\Posts:
-                if ( ! $view instanceof ACP\Editing\View\AjaxSelect) {
-                    return null;
-                }
-
                 return $field->is_multiple()
                     ? new Service\Meta\Posts(
                         $view,

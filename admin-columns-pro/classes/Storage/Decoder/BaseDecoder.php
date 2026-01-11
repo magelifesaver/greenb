@@ -10,7 +10,7 @@ use ACP\Storage\Decoder;
 abstract class BaseDecoder implements Decoder
 {
 
-    protected array $encoded_data;
+    protected $encoded_data;
 
     public function __construct(array $encoded_data)
     {
@@ -21,13 +21,11 @@ abstract class BaseDecoder implements Decoder
 
     public function has_required_version(): bool
     {
-        $version = $this->encoded_data['version'] ?? null;
-
-        if ( ! $version) {
+        if ( ! $this->encoded_data['version']) {
             return false;
         }
 
-        return $this->get_version()->is_lte(new Version($this->encoded_data['version']));
+        return $this->get_version()->is_lte( new Version($this->encoded_data['version']));
     }
 
 }

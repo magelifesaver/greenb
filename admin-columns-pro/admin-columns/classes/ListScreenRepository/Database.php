@@ -4,23 +4,13 @@ declare(strict_types=1);
 
 namespace AC\ListScreenRepository;
 
-use AC\ColumnFactories\Aggregate;
-use AC\ColumnIterator;
-use AC\ColumnIterator\ProxyColumnIterator;
-use AC\ColumnRepository\EncodedData;
-use AC\Exception\FailedToSaveListScreen;
+use AC\Exception\MissingListScreenIdException;
 use AC\ListScreen;
 use AC\ListScreenCollection;
+use AC\ListScreenFactory;
 use AC\ListScreenRepositoryWritable;
-use AC\Setting\Config;
-use AC\Setting\ConfigCollection;
-use AC\Storage\EncoderFactory;
-use AC\TableScreen;
-use AC\TableScreenFactory;
 use AC\Type\ListScreenId;
-use AC\Type\ListScreenStatus;
-use AC\Type\TableId;
-use DateTime;
+use LogicException;
 
 class Database implements ListScreenRepositoryWritable
 {
@@ -29,20 +19,11 @@ class Database implements ListScreenRepositoryWritable
 
     private const TABLE = 'admin_columns';
 
-    private TableScreenFactory $table_screen_factory;
+    private $list_screen_factory;
 
-    private EncoderFactory $encoder_factory;
-
-    private Aggregate $column_factory;
-
-    public function __construct(
-        TableScreenFactory $table_screen_factory,
-        EncoderFactory $encoder_factory,
-        Aggregate $column_factory
-    ) {
-        $this->table_screen_factory = $table_screen_factory;
-        $this->encoder_factory = $encoder_factory;
-        $this->column_factory = $column_factory;
+    public function __construct(ListScreenFactory $list_screen_factory)
+    {
+        $this->list_screen_factory = $list_screen_factory;
     }
 
     protected function find_from_source(ListScreenId $id): ?ListScreen
@@ -81,10 +62,8 @@ class Database implements ListScreenRepositoryWritable
         );
     }
 
-    protected function find_all_by_table_id_from_source(
-        TableId $table_id,
-        ?ListScreenStatus $status = null
-    ): ListScreenCollection {
+    protected function find_all_by_key_from_source(string $key): ListScreenCollection
+    {
         global $wpdb;
 
         $sql = $wpdb->prepare(
@@ -93,44 +72,31 @@ class Database implements ListScreenRepositoryWritable
 			FROM ' . $wpdb->prefix . self::TABLE . '
 			WHERE list_key = %s
 		',
-            (string)$table_id,
+            $key
         );
-
-        if ($status) {
-            $is_empty = '' === (string)$status;
-
-            $sql .= $is_empty
-                ? " AND ( status = '' OR STATUS IS NULL )"
-                : $wpdb->prepare(' AND status = %s', (string)$status);
-        }
 
         return $this->create_list_screens(
             $wpdb->get_results($sql)
         );
     }
 
-    /**
-     * @throws FailedToSaveListScreen
-     */
     public function save(ListScreen $list_screen): void
     {
         global $wpdb;
 
-        $list_screen_dto = $this->encoder_factory->create()
-                                                 ->set_list_screen($list_screen)
-                                                 ->encode()['list_screen'];
+        if ( ! $list_screen->has_id()) {
+            throw MissingListScreenIdException::from_saving_list_screen();
+        }
 
-        $settings = $this->save_preferences($list_screen_dto);
-        $date = DateTime::createFromFormat('U', (string)$list_screen_dto['updated']);
+        $list_screen->set_preferences($this->save_preferences($list_screen));
 
         $args = [
-            'list_id'       => $list_screen_dto['id'],
-            'list_key'      => $list_screen_dto['type'],
-            'title'         => $list_screen_dto['title'],
-            'columns'       => $list_screen_dto['columns'] ? serialize($list_screen_dto['columns']) : null,
-            'settings'      => $settings ? serialize($settings) : null,
-            'date_modified' => $date->format('Y-m-d H:i:s'),
-            'status'        => (string)$list_screen_dto['status'],
+            'list_id'       => (string)$list_screen->get_id(),
+            'list_key'      => $list_screen->get_key(),
+            'title'         => $list_screen->get_title(),
+            'columns'       => $list_screen->get_settings() ? serialize($list_screen->get_settings()) : null,
+            'settings'      => $list_screen->get_preferences() ? serialize($list_screen->get_preferences()) : null,
+            'date_modified' => $list_screen->get_updated()->format('Y-m-d H:i:s'),
         ];
 
         $table = $wpdb->prefix . self::TABLE;
@@ -143,7 +109,7 @@ class Database implements ListScreenRepositoryWritable
                 [
                     'list_id' => (string)$list_screen->get_id(),
                 ],
-                array_fill(0, 7, '%s')
+                array_fill(0, 6, '%s')
             );
         } else {
             $args['date_created'] = $args['date_modified'];
@@ -151,18 +117,18 @@ class Database implements ListScreenRepositoryWritable
             $wpdb->insert(
                 $table,
                 $args,
-                array_fill(0, 8, '%s')
+                array_fill(0, 7, '%s')
             );
-        }
-
-        if ($wpdb->last_error) {
-            throw new FailedToSaveListScreen('Failed to save list screen: ' . $wpdb->last_error);
         }
     }
 
     public function delete(ListScreen $list_screen): void
     {
         global $wpdb;
+
+        if ( ! $list_screen->has_id()) {
+            throw new LogicException('Cannot delete a ListScreen without an identity.');
+        }
 
         $wpdb->delete(
             $wpdb->prefix . self::TABLE,
@@ -178,69 +144,40 @@ class Database implements ListScreenRepositoryWritable
     /**
      * Template method to add and remove preferences before save
      */
-    protected function save_preferences(array $list_screen_dto): array
+    protected function save_preferences(ListScreen $list_screen): array
     {
-        return $list_screen_dto['settings'];
+        return $list_screen->get_preferences();
     }
 
     /**
      * Template method to add and remove preferences before retrieval
      */
-    protected function get_preferences(object $data): array
+    protected function get_preferences(ListScreen $list_screen): array
     {
-        return $data->settings
-            ? unserialize($data->settings, ['allowed_classes' => false])
-            : [];
+        return $list_screen->get_preferences();
     }
 
-    protected function create_list_screen(object $data): ?ListScreen
+    private function create_list_screen(object $data): ?ListScreen
     {
-        $table_id = new TableId($data->list_key);
-
-        if ( ! $this->table_screen_factory->can_create($table_id)) {
+        if ( ! $this->list_screen_factory->can_create($data->list_key)) {
             return null;
         }
 
-        $table_screen = $this->table_screen_factory->create($table_id);
-
-        return new ListScreen(
-            new ListScreenId($data->list_id),
-            $data->title,
-            $table_screen,
-            $this->create_column_iterator($table_screen, $data),
-            $this->get_preferences($data),
-            new ListScreenStatus($data->status),
-            new DateTime($data->date_modified)
+        $list_screen = $this->list_screen_factory->create(
+            $data->list_key,
+            [
+                'title'       => $data->title,
+                'list_id'     => $data->list_id,
+                'date'        => $data->date_modified,
+                'preferences' => $data->settings ? unserialize($data->settings, ['allowed_classes' => false]) : [],
+                'columns'     => $data->columns ? unserialize($data->columns, ['allowed_classes' => false]) : [],
+                'group'       => null,
+            ]
         );
-    }
 
-    private function create_column_iterator(TableScreen $table_screen, object $data): ColumnIterator
-    {
-        return new ProxyColumnIterator(
-            new EncodedData(
-                $this->column_factory->create($table_screen),
-                $this->create_configs($data)
-            )
-        );
-    }
+        $list_screen->set_preferences($this->get_preferences($list_screen));
 
-    private function create_configs(object $data): ConfigCollection
-    {
-        $configs = [];
-
-        $columns = $data->columns
-            ? unserialize($data->columns, ['allowed_classes' => false])
-            : [];
-
-        foreach ($columns as $name => $config) {
-            if ( ! isset($config['name'])) {
-                $config['name'] = $name;
-            }
-
-            $configs[] = new Config($config);
-        }
-
-        return new ConfigCollection($configs);
+        return $list_screen;
     }
 
     private function create_list_screens(array $rows): ListScreenCollection

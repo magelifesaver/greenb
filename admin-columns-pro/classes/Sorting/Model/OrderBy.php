@@ -8,7 +8,7 @@ use ACP\Sorting\Type\Order;
 class OrderBy implements QueryBindings
 {
 
-    protected string $orderby;
+    protected $orderby;
 
     public function __construct(string $orderby)
     {

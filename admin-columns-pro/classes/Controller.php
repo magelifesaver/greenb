@@ -8,7 +8,7 @@ use ACP\Exception\ControllerException;
 abstract class Controller
 {
 
-    protected Request $request;
+    protected $request;
 
     public function __construct(Request $request)
     {

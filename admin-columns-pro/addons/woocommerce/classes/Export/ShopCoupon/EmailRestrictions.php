@@ -2,17 +2,19 @@
 
 namespace ACA\WC\Export\ShopCoupon;
 
+use AC\Column;
 use ACP;
-use WC_Coupon;
 
-class EmailRestrictions implements ACP\Export\Service
-{
+class EmailRestrictions implements ACP\Export\Service {
 
-    public function get_value($id): string
-    {
-        $restrictions = (new WC_Coupon($id))->get_email_restrictions();
+	private $column;
 
-        return implode(', ', $restrictions);
-    }
+	public function __construct( Column $column ) {
+		$this->column = $column;
+	}
+
+	public function get_value( $id ) {
+		return implode( ', ', $this->column->get_raw_value( $id ) );
+	}
 
 }

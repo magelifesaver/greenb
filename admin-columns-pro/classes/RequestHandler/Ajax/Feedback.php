@@ -3,22 +3,19 @@
 namespace ACP\RequestHandler\Ajax;
 
 use AC\Capabilities;
+use AC\Entity\Plugin;
 use AC\Nonce;
 use AC\Request;
 use AC\RequestAjaxHandler;
-use ACP\AdminColumnsPro;
 
 class Feedback implements RequestAjaxHandler
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    private Nonce\Ajax $nonce;
-
-    public function __construct(AdminColumnsPro $plugin, Nonce\Ajax $nonce)
+    public function __construct(Plugin $plugin)
     {
         $this->plugin = $plugin;
-        $this->nonce = $nonce;
     }
 
     public function handle(): void
@@ -29,7 +26,7 @@ class Feedback implements RequestAjaxHandler
 
         $request = new Request();
 
-        if ( ! $this->nonce->verify($request)) {
+        if ( ! (new Nonce\Ajax())->verify($request)) {
             wp_send_json_error(__('Invalid request', 'codepress-admin-columns'));
         }
 
@@ -53,7 +50,7 @@ class Feedback implements RequestAjaxHandler
         ];
 
         wp_mail(
-            'support@admincolumns.com',
+            acp_support_email(),
             sprintf('Beta Feedback on Admin Columns Pro %s', $this->plugin->get_version()),
             nl2br($feedback),
             $headers

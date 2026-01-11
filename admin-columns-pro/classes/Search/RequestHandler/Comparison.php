@@ -4,55 +4,55 @@ namespace ACP\Search\RequestHandler;
 
 use AC;
 use AC\Exception;
-use AC\Exception\RequestException;
+use AC\ListScreenFactory;
 use AC\ListScreenRepository\Storage;
 use AC\Request;
 use AC\Response;
-use AC\Type\ColumnId;
 use AC\Type\ListScreenId;
-use ACP;
 use ACP\Controller;
 use ACP\Filtering\ApplyFilter\CacheDuration;
 use ACP\Search;
+use ACP\Search\Searchable;
 use DomainException;
 
 class Comparison extends Controller
 {
 
+    /**
+     * @var AC\ListScreen;
+     */
     protected $list_screen;
 
-    private $storage;
-
-    public function __construct(Storage $storage, Request $request)
-    {
+    public function __construct(
+        Storage $storage,
+        Request $request,
+        ListScreenFactory $list_screen_factory
+    ) {
         parent::__construct($request);
-        $this->storage = $storage;
+
+        $id = $request->get('layout');
+        $list_key = (string)$request->get('list_screen', '');
+
+        if (ListScreenId::is_valid_id($id)) {
+            $this->list_screen = $storage->find(new ListScreenId($id));
+        } elseif ($list_key && $list_screen_factory->can_create($list_key)) {
+            $this->list_screen = $list_screen_factory->create($list_key);
+        }
+
+        if ( ! $this->list_screen instanceof AC\ListScreen) {
+            throw Exception\RequestException::parameters_invalid();
+        }
     }
 
-    /**
-     * @throws RequestException
-     */
     public function get_options_action(): void
     {
-        $id = $this->request->get('layout');
-
-        if ( ! ListScreenId::is_valid_id($id)) {
-            throw Exception\RequestException::parameters_invalid();
-        }
-
-        $list_screen = $this->storage->find(new ListScreenId($id));
-
-        if ( ! $list_screen) {
-            throw Exception\RequestException::parameters_invalid();
-        }
-
         $response = new Response\Json();
 
-        $column = $list_screen->get_column(
-            new ColumnId((string)$this->request->filter('column', null, FILTER_SANITIZE_FULL_SPECIAL_CHARS))
+        $column = $this->list_screen->get_column_by_name(
+            (string)$this->request->filter('column', null, FILTER_SANITIZE_FULL_SPECIAL_CHARS)
         );
 
-        if ( ! $column instanceof ACP\Column) {
+        if ( ! $column instanceof Searchable) {
             $response->error();
         }
 

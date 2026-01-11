@@ -5,21 +5,16 @@ namespace ACA\Types;
 use AC;
 use AC\Registerable;
 use AC\Services;
-use AC\Setting\ContextFactory;
-use AC\Vendor\DI;
 use ACP\Service\IntegrationStatus;
 
 final class Types implements Registerable
 {
 
-    private AC\Asset\Location\Absolute $location;
+    private $location;
 
-    private DI\Container $container;
-
-    public function __construct(AC\Asset\Location\Absolute $location, DI\Container $container)
+    public function __construct(AC\Asset\Location\Absolute $location)
     {
         $this->location = $location;
-        $this->container = $container;
     }
 
     public function register(): void
@@ -32,25 +27,14 @@ final class Types implements Registerable
             return;
         }
 
-        $context_factory = $this->container->get(ContextFactory::class);
-
-        if ($context_factory instanceof AC\Setting\ContextFactory\Aggregate) {
-            $context_factory->add($this->container->get(Setting\ContextFieldFactory::class));
-            $context_factory->add($this->container->get(Setting\ContextRelationFactory::class));
-        }
-
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\TypesFieldFactory::class));
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\RelationFactory::class));
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\IntermediaryRelationFactory::class));
-        AC\ColumnFactories\Aggregate::add($this->container->get(ColumnFactories\TypesDeprecatedFactory::class));
-
         $this->create_services()->register();
     }
 
     private function create_services(): Services
     {
         return new Services([
-            new Service\Columns($this->location),
+            new Service\Columns(),
+            new Service\Scripts($this->location),
             new IntegrationStatus('ac-addon-types'),
         ]);
     }

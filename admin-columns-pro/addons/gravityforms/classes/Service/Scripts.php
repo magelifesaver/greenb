@@ -9,7 +9,7 @@ use AC\Asset\Script;
 use AC\Asset\Style;
 use AC\ListScreen;
 use AC\Registerable;
-use ACA\GravityForms\TableScreen;
+use ACA\GravityForms\ListScreen\Entry;
 
 class Scripts implements Registerable
 {
@@ -36,9 +36,7 @@ class Scripts implements Registerable
 
     public function table_scripts(ListScreen $list_screen): void
     {
-        $table_screen = $list_screen->get_table_screen();
-
-        if ( ! $table_screen instanceof TableScreen\Entry) {
+        if ( ! $list_screen instanceof Entry) {
             return;
         }
 

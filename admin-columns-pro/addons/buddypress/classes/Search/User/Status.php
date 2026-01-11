@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search\User;
 
 use AC;
@@ -10,29 +8,29 @@ use ACP\Search\Comparison;
 use ACP\Search\Operators;
 
 class Status extends Comparison\User\UserField
-    implements Comparison\Values
-{
+	implements Comparison\Values {
 
-    public function __construct()
+	public function __construct() {
+		$operators = new Operators( [
+			Operators::EQ,
+		] );
+
+		parent::__construct( $operators );
+	}
+
+	protected function get_field(): string
     {
-        $operators = new Operators([
-            Operators::EQ,
-        ]);
+		return 'user_status';
+	}
 
-        parent::__construct($operators);
-    }
-
-    protected function get_field(): string
-    {
-        return 'user_status';
-    }
-
-    public function get_values(): Options
-    {
-        return AC\Helper\Select\Options::create_from_array([
-            0 => __('Active', 'buddypress'),
-            1 => __('Spammer', 'buddypress'),
-        ]);
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function get_values(): Options {
+		return AC\Helper\Select\Options::create_from_array( [
+			0 => __( 'Active', 'buddypress' ),
+			1 => __( 'Spammer', 'buddypress' ),
+		] );
+	}
 
 }

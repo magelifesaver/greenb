@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\BP\Search\User;
 
 use AC;
@@ -17,9 +15,12 @@ class MemberTypes extends Comparison
     implements Comparison\Values
 {
 
-    private array $options;
+    /**
+     * @var array
+     */
+    private $options;
 
-    public function get_meta_type(): string
+    public function get_meta_type()
     {
         return MetaType::USER;
     }

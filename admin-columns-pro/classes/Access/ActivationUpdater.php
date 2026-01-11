@@ -2,14 +2,15 @@
 
 namespace ACP\Access;
 
-use AC\Integration\IntegrationRepository;
+use AC\IntegrationRepository;
 use ACP\Access\Rule\ApiDetailsResponse;
 use ACP\API;
 use ACP\ApiFactory;
+use ACP\Entity;
 use ACP\LicenseKeyRepository;
-use ACP\Type\Activation;
 use ACP\Type\Activation\ExpiryDate;
 use ACP\Type\Activation\Key;
+use ACP\Type\Activation\Products;
 use ACP\Type\Activation\RenewalMethod;
 use ACP\Type\Activation\Status;
 use ACP\Type\ActivationToken;
@@ -22,19 +23,19 @@ use WP_Error;
 class ActivationUpdater
 {
 
-    private ActivationKeyStorage $activation_key_storage;
+    private $activation_key_storage;
 
-    private ActivationStorage $activation_storage;
+    private $activation_storage;
 
-    private LicenseKeyRepository $license_key_repository;
+    private $license_key_repository;
 
-    private ApiFactory $api_factory;
+    private $api_factory;
 
-    private SiteUrl $site_url;
+    private $site_url;
 
-    private IntegrationRepository $integration_repository;
+    private $integration_repository;
 
-    private PermissionChecker $permission_checker;
+    private $permission_checker;
 
     public function __construct(
         ActivationKeyStorage $activation_key_storage,
@@ -110,9 +111,9 @@ class ActivationUpdater
         return $key;
     }
 
-    private function create_activation_from_response(API\Response $api_response): ?Activation
+    private function create_activation_from_response(API\Response $api_response): ?Entity\Activation
     {
-        $expire_date = $api_response->get('expiry_date')
+        $expiry_date = $api_response->get('expiry_date')
             ? DateTime::createFromFormat(
                 'Y-m-d H:i:s',
                 $api_response->get('expiry_date'),
@@ -120,12 +121,8 @@ class ActivationUpdater
             )
             : null;
 
-        if ($expire_date === false) {
+        if ($expiry_date === false) {
             return null;
-        }
-
-        if ($expire_date && $expire_date > DateTime::createFromFormat('Y-m-d', '2037-12-30')) {
-            $expire_date = null;
         }
 
         $status = $api_response->get('status');
@@ -140,12 +137,13 @@ class ActivationUpdater
             return null;
         }
 
-        return new Activation(
+        $products = $api_response->get('products') ?: [];
+
+        return new Entity\Activation(
             new Status($status),
             new RenewalMethod($method),
-            $expire_date
-                ? new ExpiryDate($expire_date)
-                : null
+            new ExpiryDate($expiry_date),
+            new Products($products)
         );
     }
 

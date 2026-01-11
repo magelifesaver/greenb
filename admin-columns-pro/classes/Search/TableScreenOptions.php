@@ -9,20 +9,29 @@ class TableScreenOptions implements AC\Registerable
 
     public const INPUT_NAME = 'acp_enable_smart_filtering_button';
 
+    /**
+     * @var Preferences\SmartFiltering
+     */
     private $preferences;
 
-    private $table_element_smart_filters;
+    /**
+     * @var Settings\HideOnScreen\SmartFilters
+     */
+    private $hide_smart_filters;
 
+    /**
+     * @var AC\Asset\Location\Absolute
+     */
     private $location;
 
     public function __construct(
         AC\Asset\Location\Absolute $location,
         Preferences\SmartFiltering $preferences,
-        Settings\TableElement\SmartFilters $table_element_smart_filters
+        Settings\HideOnScreen\SmartFilters $hide_smart_filters
     ) {
         $this->location = $location;
         $this->preferences = $preferences;
-        $this->table_element_smart_filters = $table_element_smart_filters;
+        $this->hide_smart_filters = $hide_smart_filters;
     }
 
     public function register(): void
@@ -33,22 +42,22 @@ class TableScreenOptions implements AC\Registerable
 
     private function is_active(AC\ListScreen $list_screen): bool
     {
-        return $this->preferences->is_active($list_screen->get_table_id());
+        return $this->preferences->is_active($list_screen);
     }
 
     public function register_screen_option(AC\Table\Screen $table): void
     {
         $list_screen = $table->get_list_screen();
 
-        if ( ! $list_screen) {
+        if ( ! TableScreenSupport::is_searchable($list_screen)) {
             return;
         }
 
-        if ( ! TableScreenSupport::is_searchable($list_screen->get_table_screen())) {
+        if ( ! $list_screen->has_id()) {
             return;
         }
 
-        if ( ! $this->table_element_smart_filters->is_enabled($list_screen)) {
+        if ($this->hide_smart_filters->is_hidden($list_screen)) {
             return;
         }
 
@@ -62,7 +71,7 @@ class TableScreenOptions implements AC\Registerable
 
     public function scripts(AC\ListScreen $list_screen): void
     {
-        if ( ! TableScreenSupport::is_searchable($list_screen->get_table_screen())) {
+        if ( ! TableScreenSupport::is_searchable($list_screen)) {
             return;
         }
 

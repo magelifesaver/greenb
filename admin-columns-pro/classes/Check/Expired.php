@@ -6,39 +6,40 @@ namespace ACP\Check;
 
 use AC\Ajax;
 use AC\Capabilities;
+use AC\Entity\Plugin;
 use AC\Message;
 use AC\Registerable;
 use AC\Screen;
 use AC\Storage;
+use AC\Type\Url\Site;
 use AC\Type\Url\UtmTags;
-use ACP;
 use ACP\Access\ActivationStorage;
 use ACP\ActivationTokenFactory;
-use ACP\AdminColumnsPro;
-use ACP\Type\Url\AccountFactory;
+use ACP\Entity;
+use ACP\Type\SiteUrl;
 use DateTime;
 
 class Expired implements Registerable
 {
 
-    private AdminColumnsPro $plugin;
+    private $plugin;
 
-    private ActivationTokenFactory $activation_token_factory;
+    private $activation_token_factory;
 
-    private ActivationStorage $activation_storage;
+    private $activation_storage;
 
-    private AccountFactory $account_url_factory;
+    private $site_url;
 
     public function __construct(
-        AdminColumnsPro $plugin,
+        Plugin $plugin,
         ActivationTokenFactory $activation_token_factory,
         ActivationStorage $activation_storage,
-        AccountFactory $account_url_factory
+        SiteUrl $site_url
     ) {
         $this->plugin = $plugin;
         $this->activation_token_factory = $activation_token_factory;
         $this->activation_storage = $activation_storage;
-        $this->account_url_factory = $account_url_factory;
+        $this->site_url = $site_url;
     }
 
     public function register(): void
@@ -48,10 +49,10 @@ class Expired implements Registerable
         $this->get_ajax_handler()->register();
     }
 
-    private function is_activation_expired(ACP\Type\Activation $activation): bool
+    private function is_activation_expired(Entity\Activation $activation): bool
     {
         if ( ! $activation->is_expired() ||
-             ! $activation->has_expiry_date()) {
+             ! $activation->get_expiry_date()->exists()) {
             return false;
         }
 
@@ -65,7 +66,7 @@ class Expired implements Registerable
         return true;
     }
 
-    private function get_activation(): ?ACP\Type\Activation
+    private function get_activation(): ?Entity\Activation
     {
         $token = $this->activation_token_factory->create();
 
@@ -111,7 +112,7 @@ class Expired implements Registerable
                 return;
 
             // Dismissible on list table
-            case $screen->is_table_screen() && $this->get_dismiss_option()->is_expired() :
+            case $screen->is_list_screen() && $this->get_dismiss_option()->is_expired() :
                 $activation = $this->get_activation();
 
                 if ($activation && $this->is_activation_expired($activation)) {
@@ -131,7 +132,13 @@ class Expired implements Registerable
     {
         $expired_on = ac_format_date(get_option('date_format'), $expiration_date->getTimestamp());
 
-        $url = new UtmTags($this->account_url_factory->create(), 'expired');
+        $activation_token = $this->activation_token_factory->create();
+        $url = new UtmTags(new Site(Site::PAGE_ACCOUNT_SUBSCRIPTIONS), 'expired');
+
+        if ($activation_token) {
+            $url = $url->with_arg($activation_token->get_type(), $activation_token->get_token())
+                       ->with_arg('site_url', $this->site_url->get_url());
+        }
 
         return sprintf(
             __(

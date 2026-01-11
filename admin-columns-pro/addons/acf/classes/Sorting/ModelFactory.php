@@ -1,33 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Sorting;
 
-use AC\Setting\Config;
-use AC\Type\TableScreenContext;
+use ACA\ACF\Column;
 use ACA\ACF\Field;
 use ACA\ACF\FieldType;
 use ACA\ACF\Sorting;
 use ACP;
 
-class ModelFactory
+class ModelFactory implements SortingModelFactory
 {
 
-    private ModelFactory\Relation $relation_factory;
-
-    public function __construct(ModelFactory\Relation $relation_factory)
+    public function create(Field $field, string $meta_key, Column $column)
     {
-        $this->relation_factory = $relation_factory;
-    }
-
-    public function create(
-        Field $field,
-        string $meta_key,
-        TableScreenContext $table_context,
-        Config $config
-    ): ?ACP\Sorting\Model\QueryBindings {
-        $meta_type = $table_context->get_meta_type();
+        $meta_type = $column->get_meta_type();
 
         switch ($field->get_type()) {
             case FieldType::TYPE_NUMBER:
@@ -74,8 +60,8 @@ class ModelFactory
                     new Sorting\FormatValue\Select($choices),
                     null,
                     [
-                        'post_type' => $table_context->has_post_type() ? (string)$table_context->get_post_type() : null,
-                        'taxonomy'  => $table_context->has_taxonomy() ? (string)$table_context->get_taxonomy() : null,
+                        'post_type' => $column->get_post_type(),
+                        'taxonomy'  => $column->get_taxonomy(),
                     ]
                 );
             case FieldType::TYPE_FILE:
@@ -85,8 +71,8 @@ class ModelFactory
                     new Sorting\FormatValue\File(),
                     null,
                     [
-                        'post_type' => $table_context->has_post_type() ? (string)$table_context->get_post_type() : null,
-                        'taxonomy'  => $table_context->has_taxonomy() ? (string)$table_context->get_taxonomy() : null,
+                        'post_type' => $column->get_post_type(),
+                        'taxonomy'  => $column->get_taxonomy(),
                     ]
                 );
 
@@ -96,7 +82,7 @@ class ModelFactory
                 natcasesort($choices);
 
                 return (new ACP\Sorting\Model\MetaMappingFactory())->create(
-                    (string)$meta_type,
+                    $meta_type,
                     $meta_key,
                     array_keys($choices)
                 );
@@ -112,28 +98,22 @@ class ModelFactory
                         new Sorting\FormatValue\Select($choices),
                         null,
                         [
-                            'post_type' => $table_context->has_post_type() ? (string)$table_context->get_post_type(
-                            ) : null,
-                            'taxonomy'  => $table_context->has_taxonomy() ? (string)$table_context->get_taxonomy(
-                            ) : null,
+                            'post_type' => $column->get_post_type(),
+                            'taxonomy'  => $column->get_taxonomy(),
                         ]
                     )
-                    : (new ACP\Sorting\Model\MetaMappingFactory())->create(
-                        (string)$meta_type,
-                        $meta_key,
-                        array_keys($choices)
-                    );
+                    : (new ACP\Sorting\Model\MetaMappingFactory())->create($meta_type, $meta_key, array_keys($choices));
 
             case FieldType::TYPE_RELATIONSHIP:
             case FieldType::TYPE_POST:
             case FieldType::TYPE_PAGE_LINK:
-                return $this->relation_factory->create($field, $meta_key, $table_context, $config);
+                return (new Sorting\ModelFactory\Relation())->create($field, $meta_key, $column);
 
             case FieldType::TYPE_USER:
-                return (new Sorting\ModelFactory\User())->create($field, $meta_key, $table_context, $config);
+                return (new Sorting\ModelFactory\User())->create($field, $meta_key, $column);
 
             case FieldType::TYPE_TAXONOMY:
-                return (new Sorting\ModelFactory\Taxonomy())->create($field, $meta_key, $table_context);
+                return (new Sorting\ModelFactory\Taxonomy())->create($field, $meta_key, $column);
 
             default:
                 return null;

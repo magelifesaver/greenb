@@ -2,25 +2,31 @@
 
 namespace ACP\Editing\ApplyFilter;
 
-use AC\ListScreen;
-use AC\Setting\Context;
+use AC;
 
 class BulkEditActive
 {
 
-    private Context $context;
+    private $column;
 
-    private ListScreen $list_screen;
-
-    public function __construct(Context $context, ListScreen $list_screen)
+    public function __construct(AC\Column $column)
     {
-        $this->context = $context;
-        $this->list_screen = $list_screen;
+        $this->column = $column;
     }
 
     public function apply_filters(bool $is_active): bool
     {
-        return (bool)apply_filters('ac/editing/bulk/active', $is_active, $this->context, $this->list_screen);
+        /**
+         * @deprecated 5.7
+         */
+        $is_active = (bool)apply_filters('acp/editing/bulk-edit-active', $is_active, $this->column);
+
+        return (bool)apply_filters(
+            'acp/editing/bulk/is_active',
+            $is_active,
+            $this->column,
+            $this->column->get_list_screen()
+        );
     }
 
 }

@@ -10,7 +10,7 @@ use ACP\Search\Operators;
 abstract class Date extends Comparison\Date implements Comparison\RemoteValues
 {
 
-    private DateOptionsFactory $value_factory;
+    private $value_factory;
 
     public function __construct()
     {

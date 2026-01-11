@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace ACA\ACF\Field;
 
-interface TermRelation
-{
+interface TermRelation {
 
-    public function uses_native_term_relation(): bool;
+	/**
+	 * @return array
+	 */
+	public function uses_native_term_relation();
 
 }

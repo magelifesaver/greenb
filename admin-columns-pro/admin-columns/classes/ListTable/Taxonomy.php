@@ -19,9 +19,9 @@ class Taxonomy implements ListTable
         $this->taxonomy = $taxonomy;
     }
 
-    public function render_cell(string $column_id, $row_id): string
+    public function get_column_value(string $column, $id): string
     {
-        return (string)apply_filters("manage_{$this->taxonomy}_custom_column", '', $column_id, $row_id);
+        return (string)apply_filters("manage_{$this->taxonomy}_custom_column", '', $column, $id);
     }
 
     public function render_row($id): string

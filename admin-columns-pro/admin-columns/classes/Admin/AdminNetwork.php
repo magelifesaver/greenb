@@ -2,26 +2,34 @@
 
 namespace AC\Admin;
 
-use AC\AdminColumns;
-use AC\Asset\Location;
+use AC\Asset\Location\Absolute;
 use AC\Registerable;
 
 class AdminNetwork implements Registerable
 {
 
-    private RequestHandlerInterface $request_handler;
+    /**
+     * @var RequestHandlerInterface
+     */
+    private $request_handler;
 
-    private Location $location_core;
+    /**
+     * @var Absolute
+     */
+    private $location_core;
 
-    private AdminScripts $scripts;
+    /**
+     * @var AdminScripts
+     */
+    private $scripts;
 
     public function __construct(
         PageNetworkRequestHandlers $request_handler,
-        AdminColumns $plugin,
+        Absolute $location_core,
         AdminScripts $scripts
     ) {
         $this->request_handler = $request_handler;
-        $this->location_core = $plugin->get_location();
+        $this->location_core = $location_core;
         $this->scripts = $scripts;
     }
 
@@ -33,7 +41,7 @@ class AdminNetwork implements Registerable
     private function get_menu_page_factory(): MenuPageFactory
     {
         return apply_filters(
-            'ac/menu_network_page_factory',
+            'acp/menu_network_page_factory',
             new MenuPageFactory\SubMenu()
         );
     }

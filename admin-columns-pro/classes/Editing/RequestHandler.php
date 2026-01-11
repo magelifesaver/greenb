@@ -4,9 +4,8 @@ namespace ACP\Editing;
 
 use AC\Request;
 
-interface RequestHandler
-{
+interface RequestHandler {
 
-    public function handle(Request $request);
+	public function handle( Request $request );
 
 }

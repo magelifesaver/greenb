@@ -1,13 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 namespace AC\Admin\Colors;
 
 use AC\Admin\Colors\Type\Color;
-use AC\Collection;
+use AC\Iterator;
 
-final class ColorCollection extends Collection
+final class ColorCollection extends Iterator
 {
 
     public function __construct(array $colors = [])
@@ -22,7 +21,7 @@ final class ColorCollection extends Collection
 
     public function current(): Color
     {
-        return current($this->data);
+        return parent::current();
     }
 
 }

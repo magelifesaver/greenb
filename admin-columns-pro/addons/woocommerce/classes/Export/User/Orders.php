@@ -2,35 +2,30 @@
 
 namespace ACA\WC\Export\User;
 
+use AC\Column;
 use ACP;
 
 class Orders implements ACP\Export\Service
 {
 
-    private $order_status;
+    protected $column;
 
-    public function __construct(array $order_status = [])
+    public function __construct(Column $column)
     {
-        $this->order_status = $order_status;
+        $this->column = $column;
     }
 
-    public function get_value($id): string
+    public function get_value($id)
     {
-        $args = [
-            'customer_id' => $id,
-            'limit'       => -1,
-            'orderby'     => 'date',
-            'order'       => 'DESC',
-            'return'      => 'ids',
-        ];
+        $result = [];
 
-        if ( ! empty($this->order_status)) {
-            $args['status'] = $this->order_status;
+        $orders = (array)$this->column->get_raw_value($id);
+
+        foreach ($orders as $order) {
+            $result[] = $order->get_id();
         }
 
-        $orders = wc_get_orders($args);
-
-        return implode(', ', $orders);
+        return implode(', ', $result);
     }
 
 }

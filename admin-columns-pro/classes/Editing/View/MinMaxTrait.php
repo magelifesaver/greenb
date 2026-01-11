@@ -2,27 +2,32 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait MinMaxTrait {
 
-trait MinMaxTrait
-{
+	/**
+	 * @param float $min
+	 *
+	 * @return $this
+	 */
+	public function set_min( $min ) {
+		if ( is_numeric( $min ) ) {
+			$this->set( 'range_min', (float) $min );
+		}
 
-    public function set_min(?float $min = null): View
-    {
-        if ($min) {
-            $this->set('range_min', $min);
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param float $min
+	 *
+	 * @return $this
+	 */
+	public function set_max( $max ) {
+		if ( is_numeric( $max ) ) {
+			$this->set( 'range_max', (float) $max );
+		}
 
-    public function set_max(?float $max = null): View
-    {
-        if ($max) {
-            $this->set('range_max', $max);
-        }
-
-        return $this;
-    }
+		return $this;
+	}
 
 }

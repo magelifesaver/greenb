@@ -2,6 +2,7 @@
 
 namespace ACA\WC\Search\Product;
 
+use AC;
 use AC\Helper\Select\Options;
 use ACP\Query\Bindings;
 use ACP\Search\Comparison;
@@ -12,34 +13,36 @@ class Visibility extends Comparison
     implements Comparison\Values
 {
 
+    /** @var array */
     private $visibility_options;
 
-    public function __construct(array $visibility_options)
+    public function __construct($visibility_options)
     {
+        $operators = new Operators([
+            Operators::EQ,
+        ]);
+
         $this->visibility_options = $visibility_options;
 
-        parent::__construct(new Operators([
-            Operators::EQ,
-        ]));
+        parent::__construct($operators);
     }
 
     public function get_values(): Options
     {
-        return Options::create_from_array($this->visibility_options);
+        return AC\Helper\Select\Options::create_from_array($this->visibility_options);
     }
 
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         $bindings = new Bindings\Post();
-        $bindings->tax_query(
-            $this->get_tax_query($value)
-        );
+        $bindings->tax_query($this->get_tax_query($value));
 
         return $bindings;
     }
 
-    private function get_tax_query(Value $value): array
+    public function get_tax_query(Value $value)
     {
+        // TODO
         switch ($value->get_value()) {
             case 'search':
                 return [

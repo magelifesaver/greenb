@@ -4,7 +4,7 @@ namespace ACA\WC\Search\TableScreen;
 
 use ACP\Search;
 
-class Order extends Search\TableMarkup
+class Order extends Search\TableScreen
 {
 
     public function register(): void

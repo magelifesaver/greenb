@@ -2,14 +2,12 @@
 
 namespace ACP\Editing\View;
 
-use ACP\Editing\View;
+trait MaxlengthTrait {
 
-trait MaxlengthTrait
-{
+	public function set_max_length( $max_length ) {
+		$this->set( 'maxlength', (int) $max_length );
 
-    public function set_max_length(int $max_length): View
-    {
-        return $this->set('maxlength', $max_length);
-    }
+		return $this;
+	}
 
 }

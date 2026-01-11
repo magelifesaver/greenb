@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace ACP\Admin;
 
 use AC\ListScreen;
-use AC\Type\Url\Preview;
+use ACP\Type\Url\Preview;
 use WP_User;
 
 class Encoder
 {
 
-    private ListScreen $list_screen;
+    private $list_screen;
 
     public function __construct(ListScreen $list_screen)
     {
@@ -21,10 +21,9 @@ class Encoder
     public function encode(): array
     {
         return [
-            'id'                     => (string)$this->list_screen->get_id(),
-            'title'                  => trim($this->list_screen->get_title()) ?: $this->list_screen->get_label(),
+            'id'                     => $this->list_screen->has_id() ? (string)$this->list_screen->get_id() : '',
+            'title'                  => $this->list_screen->get_title() ?: $this->list_screen->get_label(),
             'read_only'              => $this->list_screen->is_read_only(),
-            'status'                 => (string)$this->list_screen->get_status(),
             'edit_url'               => (string)$this->list_screen->get_editor_url(),
             'preview_url'            => (string)new Preview($this->list_screen->get_table_url()),
             'restricted_description' => $this->get_restricted_description(),
@@ -51,11 +50,11 @@ class Encoder
                 $user = get_userdata($users[0]);
 
                 if ($user instanceof WP_User) {
-                    $description[] = ac_helper()->user->get_formatted_name($user)
+                    $description[] = ucfirst((string)ac_helper()->user->get_display_name($user, 'full_name'))
                         ?: __('User', 'codepress-admin-columns');
                 }
             } else {
-                $description[] = sprintf('%d %s', count($users), __('Users', 'codepress-admin-columns'));
+                $description[] = __('Users');
             }
         }
 

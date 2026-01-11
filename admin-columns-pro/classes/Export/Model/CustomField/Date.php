@@ -2,34 +2,28 @@
 
 namespace ACP\Export\Model\CustomField;
 
-use AC\Storage\MetaData;
+use AC\Column;
 use ACP\Export\Service;
 
-class Date implements Service
-{
+class Date implements Service {
 
-    private MetaData $storage;
+	private $column;
 
-    private string $meta_key;
+	public function __construct( Column $column ) {
+		$this->column = $column;
+	}
 
-    public function __construct(MetaData $storage, string $meta_key)
-    {
-        $this->storage = $storage;
-        $this->meta_key = $meta_key;
-    }
+	public function get_value( $id ) {
+		$timestamp = ac_helper()->date->strtotime(
+			$this->column->get_raw_value( $id )
+		);
 
-    public function get_value($id): string
-    {
-        $timestamp = ac_helper()->date->strtotime(
-            $this->storage->get($id, $this->meta_key)
-        );
+		if ( ! $timestamp ) {
+			return false;
+		}
 
-        if ( ! $timestamp) {
-            return false;
-        }
-
-        // Spreadsheet date format
-        return date('Y-m-d H:i:s', $timestamp);
-    }
+		// Spreadsheet date format
+		return date( 'Y-m-d H:i:s', $timestamp );
+	}
 
 }

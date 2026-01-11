@@ -2,22 +2,23 @@
 
 namespace ACP\Export\Model\Post;
 
+use ACP\Column;
 use ACP\Export\Service;
 
-class Shortcodes implements Service
-{
+class Shortcodes implements Service {
 
-    public function get_value($id): string
-    {
-        global $shortcode_tags;
+	private $column;
 
-        $shortcodes = $shortcode_tags
-            ? ac_helper()->string->get_shortcodes(get_post_field('post_content', $id))
-            : null;
+	public function __construct( Column\Post\Shortcodes $column ) {
+		$this->column = $column;
+	}
 
-        return $shortcodes
-            ? implode(', ', array_keys($shortcodes))
-            : '';
-    }
+	public function get_value( $id ) {
+		$raw_value = $this->column->get_raw_value( (int) $id );
+
+		return $raw_value
+			? implode( ', ', array_keys( $raw_value ) )
+			: '';
+	}
 
 }
