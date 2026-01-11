@@ -191,6 +191,34 @@ add_action( 'rest_api_init', function () {
                                 ] );
 
                                 update_post_meta( $image_id, '_source_image_url', $image_url );
+																$orig_basename = wp_basename( parse_url( $image_url, PHP_URL_PATH ) );
+
+																if ( ! empty( $orig_basename ) ) {
+
+																    $dupes = get_posts( [
+																        'post_type'      => 'attachment',
+																        'post_parent'    => $id,
+																        'posts_per_page' => 20,
+																        'fields'         => 'ids',
+																        'meta_query'     => [
+																            [
+																                'key'     => '_wp_attached_file',
+																                'value'   => $orig_basename,
+																                'compare' => 'LIKE',
+																            ],
+																        ],
+																    ] );
+
+																    if ( ! empty( $dupes ) ) {
+																        foreach ( $dupes as $dup_id ) {
+																            $dup_id = absint( $dup_id );
+																            if ( $dup_id && $dup_id !== absint( $image_id ) ) {
+																                wp_delete_attachment( $dup_id, true );
+																            }
+																        }
+																    }
+																}
+
 
                                 // Optional gallery images beyond the first
                                 if ( count( $images ) > 1 ) {
