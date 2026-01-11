@@ -41,6 +41,14 @@ add_action( 'rest_api_init', function () {
                 $brands = $body['brands'];
                 unset( $body['brands'] );
             }
+						if ( empty( $brands ) ) {
+					    return new WP_REST_Response( [
+					        'status'  => 'error',
+					        'code'    => 400,
+					        'message' => 'Brand is required for product creation. Resolve berocket_brand term ID and include it as brands: [{ "id": <term_id> }].',
+					    ], 400 );
+					}
+
 
             // ATUM fields are applied AFTER product creation (guarantees wp_atum_product_data write).
             $atum_update = [];
