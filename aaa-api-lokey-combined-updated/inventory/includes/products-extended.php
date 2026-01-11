@@ -195,19 +195,25 @@ add_action( 'rest_api_init', function () {
 
 																if ( ! empty( $orig_basename ) ) {
 
-																    $dupes = get_posts( [
-																        'post_type'      => 'attachment',
-																        'post_parent'    => $id,
-																        'posts_per_page' => 20,
-																        'fields'         => 'ids',
-																        'meta_query'     => [
-																            [
-																                'key'     => '_wp_attached_file',
-																                'value'   => $orig_basename,
-																                'compare' => 'LIKE',
-																            ],
+																$dupes = get_posts( [
+																    'post_type'      => 'attachment',
+																    'post_parent'    => 0,
+																    'posts_per_page' => 20,
+																    'fields'         => 'ids',
+																    'meta_query'     => [
+																        'relation' => 'OR',
+																        [
+																            'key'     => '_wp_attached_file',
+																            'value'   => $orig_basename,
+																            'compare' => 'LIKE',
 																        ],
-																    ] );
+																        [
+																            'key'     => '_source_image_url',
+																            'value'   => $image_url,
+																            'compare' => '=',
+																        ],
+																    ],
+																] );
 
 																    if ( ! empty( $dupes ) ) {
 																        foreach ( $dupes as $dup_id ) {
@@ -469,19 +475,25 @@ add_action( 'rest_api_init', function () {
 
 																if ( ! empty( $orig_basename ) ) {
 
-																    $dupes = get_posts( [
-																        'post_type'      => 'attachment',
-																        'post_parent'    => $id,
-																        'posts_per_page' => 20,
-																        'fields'         => 'ids',
-																        'meta_query'     => [
-																            [
-																                'key'     => '_wp_attached_file',
-																                'value'   => $orig_basename,
-																                'compare' => 'LIKE',
-																            ],
+																$dupes = get_posts( [
+																    'post_type'      => 'attachment',
+																    'post_parent'    => 0,
+																    'posts_per_page' => 20,
+																    'fields'         => 'ids',
+																    'meta_query'     => [
+																        'relation' => 'OR',
+																        [
+																            'key'     => '_wp_attached_file',
+																            'value'   => $orig_basename,
+																            'compare' => 'LIKE',
 																        ],
-																    ] );
+																        [
+																            'key'     => '_source_image_url',
+																            'value'   => $image_url,
+																            'compare' => '=',
+																        ],
+																    ],
+																] );
 
 																    if ( ! empty( $dupes ) ) {
 																        foreach ( $dupes as $dup_id ) {
