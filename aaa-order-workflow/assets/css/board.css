@@ -562,3 +562,17 @@ div#aaa-oc-countdown-bar {
     margin-left: 4px;
     font-size: 24px;
 }
+.aaa-oc-blocker-banner{
+  border: 2px solid #cc0000;
+  background: #ffe9e9;
+  color: #990000;
+  font-weight: 800;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin: 10px 0;
+  text-align: center;
+}
+.aaa-oc-required-border{
+  border: 2px solid #cc0000 !important;
+  box-shadow: 0 0 0 2px rgba(204,0,0,0.15) !important;
+}

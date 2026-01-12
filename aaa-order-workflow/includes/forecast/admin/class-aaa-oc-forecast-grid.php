@@ -72,7 +72,7 @@ class AAA_OC_Forecast_Grid_Admin {
         $columns = AAA_OC_Forecast_Columns::get_columns();
 
         // Determine which columns to hide (flags will be shown via icons instead)
-        $hidden_columns = [ 'forecast_is_not_moving', 'forecast_is_stale' ];
+        $hidden_columns = [ 'forecast_is_not_moving', 'forecast_is_stale_inventory' ];
 
         // Load custom labels for flags from settings
         $not_moving_label = function_exists( 'aaa_oc_get_option' ) ? aaa_oc_get_option( 'forecast_not_moving_label', 'forecast', 'Not Moving' ) : 'Not Moving';
@@ -130,7 +130,7 @@ class AAA_OC_Forecast_Grid_Admin {
                                     if ( ( $row['forecast_is_not_moving'] ?? 0 ) ) {
                                         echo '<span class="dashicons dashicons-clock" style="margin-left:4px;" title="' . esc_attr( $not_moving_label ) . '"></span>';
                                     }
-                                    if ( ( $row['forecast_is_stale'] ?? 0 ) ) {
+                                    if ( ( $row['forecast_is_stale_inventory'] ?? 0 ) ) {
                                         echo '<span class="dashicons dashicons-warning" style="margin-left:4px;color:#dc3232;" title="' . esc_attr( $stale_label ) . '"></span>';
                                     }
                                     ?>

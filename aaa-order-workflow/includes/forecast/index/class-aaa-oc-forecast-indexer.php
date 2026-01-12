@@ -171,17 +171,22 @@ class AAA_OC_Forecast_Indexer {
         if ( $meta_key !== 'forecast_enable_reorder' ) {
             return;
         }
-        // Only act on products
         if ( get_post_type( $post_id ) !== 'product' ) {
             return;
         }
-        $new = $_meta_value;
-        if ( $new === 'yes' || $new === 1 ) {
-            // Reorder enabled, queue product for indexing
-            AAA_OC_Forecast_Queue::enqueue_product( $post_id );
-        } else {
-            // Reorder disabled, remove row from index
-            self::delete_row( $post_id );
+
+        $enabled = ( $_meta_value === 'yes' || $_meta_value === 1 || $_meta_value === '1' || $_meta_value === true );
+
+        if ( $enabled ) {
+            if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+                AAA_OC_Forecast_Queue::enqueue_product( $post_id );
+            }
+            return;
         }
+
+        if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+            AAA_OC_Forecast_Queue::dequeue_product( $post_id );
+        }
+        self::delete_row( $post_id );
     }
 }

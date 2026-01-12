@@ -1,4 +1,107 @@
+/**
+ * File: /assets/js/board-payment-modal.js
+ * Purpose: Open/close payment modal with detailed logging, safe reset (no [checked]/[selected] restore),
+ *          and required-field highlighting based on blocker banner flags.
+ */
 jQuery(document).ready(function ($) {
+
+    function stashOriginals($fields) {
+        // Numbers + readonly
+        $fields.find('input[type="number"], input[readonly]').each(function () {
+            $(this).attr('data-orig', $(this).val() || '');
+        });
+
+        // Selects
+        $fields.find('select').each(function () {
+            $(this).attr('data-orig', $(this).val() || '');
+        });
+
+        // Checkboxes
+        $fields.find('input[type="checkbox"]').each(function () {
+            $(this).attr('data-orig', $(this).is(':checked') ? '1' : '0');
+        });
+    }
+
+    function restoreOriginals($fields) {
+        $fields.find('input[type="number"], input[readonly]').each(function () {
+            const orig = $(this).attr('data-orig');
+            if (orig !== undefined) {
+                $(this).val(orig);
+            }
+        });
+
+        $fields.find('select').each(function () {
+            const orig = $(this).attr('data-orig');
+            if (orig !== undefined) {
+                $(this).val(orig);
+            }
+        });
+
+        $fields.find('input[type="checkbox"]').each(function () {
+            const orig = $(this).attr('data-orig');
+            if (orig !== undefined) {
+                $(this).prop('checked', orig === '1');
+            }
+        });
+
+        // Recalculate after reset
+        if (typeof recalcPaymentTotals === 'function') {
+            recalcPaymentTotals($fields);
+        }
+    }
+
+    function applyRequiredHighlights($modal, orderId) {
+        // Always clear old highlights first
+        $modal.find('.aaa-oc-required-border').removeClass('aaa-oc-required-border');
+
+        // Banner could be inside modal OR in expanded card. Prefer modal, fallback to page.
+        let $banner = $modal.find('.aaa-oc-blocker-banner');
+        if (!$banner.length) {
+            $banner = $('.aaa-oc-blocker-banner[data-order-id="' + orderId + '"]');
+        }
+        if (!$banner.length) {
+            return;
+        }
+
+        const needDriver   = ($banner.data('require-driver') == 1);
+        const needDelivery = ($banner.data('require-delivery') == 1);
+        const needPayment  = ($banner.data('require-payment') == 1);
+        const needFulfill  = ($banner.data('require-fulfillment') == 1);
+
+        // Driver field
+        if (needDriver) {
+            $modal.find('select[name="driver_id"]').addClass('aaa-oc-required-border');
+        }
+
+        // Delivery fields
+        if (needDelivery) {
+            $modal.find('input[name="aaa_delivery_date"], input[name="aaa_delivery_from"], input[name="aaa_delivery_to"]')
+                .addClass('aaa-oc-required-border');
+        }
+
+        // Payment fields (minimal)
+        if (needPayment) {
+            $modal.find('select[name="aaa_oc_payment_status"], input[name="envelope_outstanding"]')
+                .addClass('aaa-oc-required-border');
+        }
+
+        // Fulfillment highlight (best effort: highlight product table area if present in modal)
+        if (needFulfill) {
+            $modal.find('.aaa-oc-items-table, .aaa-oc-order-items, .aaa-oc-products-table')
+                .first()
+                .addClass('aaa-oc-required-border');
+        }
+    }
+
+    // Expose helper so save JS can call it after successful save (prevents checkbox revert on close)
+    window.aaaOcPaymentModalSyncOriginals = function (orderId) {
+        const $modal = $('#aaa-payment-modal-' + orderId);
+        const $fields = $modal.find('.aaa-payment-fields');
+        if ($fields.length) {
+            stashOriginals($fields);
+            console.log('[MODAL] Synced originals for order', orderId);
+        }
+    };
 
     // Open the modal when the button is clicked
     $(document).on('click', '.open-payment-modal', function (e) {
@@ -10,9 +113,17 @@ jQuery(document).ready(function ($) {
         const $modal = $('#aaa-payment-modal-' + orderId);
         if ($modal.length) {
             console.log('[MODAL] Found modal for order ID:', orderId);
-            // Show the modal, then log initial field values
-            $modal.fadeIn(200, function() {
+
+            $modal.fadeIn(200, function () {
                 const $fields = $modal.find('.aaa-payment-fields');
+
+                // Store originals based on current values (NOT attributes)
+                stashOriginals($fields);
+
+                // Apply required-field highlights (if any)
+                applyRequiredHighlights($modal, orderId);
+
+                // Log initial field values (kept from your current file)
                 console.log('[MODAL] Initial payment data for order', orderId, {
                     orderTotal:      $fields.find('input[name="aaa_oc_order_total"]').val(),
                     cash:            $fields.find('input[name="aaa_oc_cash_amount"]').val(),
@@ -29,9 +140,11 @@ jQuery(document).ready(function ($) {
                     totalOrderTip:   $fields.find('input[name="total_order_tip"]').val(),
                     paymentStatus:   $fields.find('select[name="aaa_oc_payment_status"]').val(),
                     driverId:        $fields.find('select[name="driver_id"]').val(),
-                    cleared:         $fields.find('input[name="cleared"]').is(':checked')
+                    cleared:         $fields.find('input[name="cleared"]').is(':checked'),
+                    envelope_outstanding: $fields.find('input[name="envelope_outstanding"]').is(':checked')
                 });
             });
+
         } else {
             console.warn('[MODAL] Modal not found for order ID:', orderId);
         }
@@ -40,33 +153,18 @@ jQuery(document).ready(function ($) {
     // Close the modal when the close button is clicked
     $(document).on('click', '.close-payment-modal', function (e) {
         e.preventDefault();
+
         const $modal  = $(this).closest('.aaa-payment-modal');
         const $fields = $modal.find('.aaa-payment-fields');
+        const orderId = $fields.data('order-id') || '';
 
-        console.log('[MODAL] Clearing payment fields for order ID:', $fields.data('order-id'));
+        console.log('[MODAL] Restoring payment fields for order ID:', orderId);
 
-        // Reset fields to their original values on close
-        $fields.each(function () {
-            const $form = $(this);
-            // Restore from the value attributes set on load
-            $form.find('input[type="number"], input[readonly]').each(function() {
-                const original = $(this).attr('value') || '';
-                $(this).val(original);
-            });
-            $form.find('select').each(function() {
-                const original = $(this).find('option[selected]').val() || 'unpaid';
-                $(this).val(original);
-            });
-            $form.find('input[type="checkbox"]').each(function() {
-                const origChecked = $(this).is('[checked]');
-                $(this).prop('checked', origChecked);
-            });
+        // Restore to original snapshot (NOT from HTML attributes)
+        restoreOriginals($fields);
 
-            // Recalculate after reset
-            if (typeof recalcPaymentTotals === 'function') {
-                recalcPaymentTotals($form);
-            }
-        });
+        // Clear highlights when closing
+        $modal.find('.aaa-oc-required-border').removeClass('aaa-oc-required-border');
 
         $modal.hide();
     });

@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/class-aaa-oc-forecast-settings.php
  * Purpose: Registers Forecast settings tabs on the Workflow Settings page.
- * Version: 0.1.1
+ * Version: 0.1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -22,6 +22,11 @@ class AAA_OC_Forecast_Settings {
 		$tabs['aaa-oc-forecast-field-settings'] = [
 			'label' => __( 'Forecast Fields', 'aaa-oc' ),
 			'file'  => __DIR__ . '/tabs/aaa-oc-forecast-field-settings.php',
+		];
+
+		$tabs['aaa-oc-forecast-queue'] = [
+			'label' => __( 'Forecast Queue', 'aaa-oc' ),
+			'file'  => __DIR__ . '/tabs/aaa-oc-forecast-queue.php',
 		];
 
 		return $tabs;

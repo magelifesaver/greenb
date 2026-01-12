@@ -1,204 +1,105 @@
 <?php
 /**
- * Filepath: sfwf/helpers/class-wf-sfwf-product-fields.php (modified for simple products only)
+ * Filepath: sfwf/helpers/class-wf-sfwf-product-fields.php
  * ---------------------------------------------------------------------------
- * Adds forecasting fields to WooCommerce product edit screen.  This version
- * contains surgical changes to ensure that the forecasting custom fields apply
- * only to WooCommerce *simple* products.  All class names and function names
- * remain unchanged; only the logic inside is amended.
+ * Adds forecast fields to WooCommerce product edit screen and saves them.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class WF_SFWF_Product_Fields {
 
-    public static function init() {
-        add_action( 'woocommerce_product_options_general_product_data', [ __CLASS__, 'add_fields' ] );
-        add_action( 'woocommerce_process_product_meta', [ __CLASS__, 'save_fields' ] );
-    }
+	public static function init() {
+		add_action( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'add_fields' ) );
+		add_action( 'woocommerce_process_product_meta', array( __CLASS__, 'save_fields' ) );
+	}
 
-    /**
-     * Add forecasting fields to the product edit screen.
-     *
-     * This implementation checks the product type and only outputs fields
-     * when editing a simple product.  If the current product is not a
-     * ``simple`` product, the function returns early, leaving the
-     * rest of the page unchanged.
-     */
-    public static function add_fields() {
-        // Determine the current product in the admin.  WooCommerce exposes
-        // ``$product_object`` as a global when editing a product.  Fallback
-        // to wc_get_product(get_the_ID()) if the global isn't set.
-        $product = null;
-        if ( isset( $GLOBALS['product_object'] ) && $GLOBALS['product_object'] instanceof WC_Product ) {
-            $product = $GLOBALS['product_object'];
-        } elseif ( function_exists( 'wc_get_product' ) ) {
-            $post_id = get_the_ID();
-            if ( $post_id ) {
-                $product = wc_get_product( $post_id );
-            }
-        }
+	public static function add_fields() {
+		echo '<div class="options_group">';
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_lead_time_days','label' => 'Forecast Lead Time (days)','type' => 'number',
+			'description' => 'Overrides global lead time.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_minimum_order_qty','label' => 'Minimum Order Quantity','type' => 'number',
+			'description' => 'Minimum units per purchase.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_tier_threshold_1','label' => 'Tier Threshold 1','type' => 'number',
+			'description' => 'Days before reorder is Tier 1.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_tier_threshold_2','label' => 'Tier Threshold 2','type' => 'number',
+			'description' => 'Days before reorder is Tier 2.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_tier_threshold_3','label' => 'Tier Threshold 3','type' => 'number',
+			'description' => 'Days before reorder is Tier 3.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_sales_window_days','label' => 'Sales Window (days)','type' => 'number',
+			'description' => 'Override sales window for this product.'
+		) );
+		woocommerce_wp_text_input( array(
+			'id' => 'forecast_cost_override','label' => 'Cost Override ($)','type' => 'number','custom_attributes' => array( 'step' => '0.01' ),
+			'description' => 'Override cost for this product.'
+		) );
+		woocommerce_wp_select( array(
+			'id' => 'forecast_product_class','label' => 'Product Class',
+			'options' => array( '' => 'Default', 't1' => 'Tier 1', 't2' => 'Tier 2', 't3' => 'Tier 3' ),
+			'description' => 'Override default class.'
+		) );
+		woocommerce_wp_checkbox( array( 'id' => 'forecast_enable_reorder','label' => 'Enable Reorder Forecasting' ) );
+		woocommerce_wp_checkbox( array( 'id' => 'forecast_do_not_reorder','label' => 'Do Not Reorder (Manual Override)' ) );
+		woocommerce_wp_checkbox( array( 'id' => 'forecast_always_in_stock','label' => 'Always In Stock (Never Flag OOS)' ) );
+		woocommerce_wp_checkbox( array( 'id' => 'forecast_force_reorder','label' => 'Force Reorder (Always Flag)' ) );
+		woocommerce_wp_textarea_input( array(
+			'id' => 'forecast_reorder_note','label' => 'Reorder Note','description' => 'Internal note about reorder.'
+		) );
+		echo '</div>';
+	}
 
-        // Bail out if we don't have a product or if it's not a simple type.
-        // Use WC_Product::is_type() to check product types【539457720013971†L29-L58】.
-        if ( ! $product || ! $product->is_type( 'simple' ) ) {
-            return;
-        }
+	public static function save_fields( $post_id ) {
+		$post_id = absint( $post_id );
+		if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) return;
 
-        echo '<div class="options_group"><hr/><h4>Stock Forecasting</h4>';
+		$checkboxes = array(
+			'forecast_enable_reorder','forecast_do_not_reorder','forecast_always_in_stock','forecast_force_reorder'
+		);
+		foreach ( $checkboxes as $key ) {
+			$val = isset($_POST[$key]) ? 'yes' : 'no';
+			update_post_meta( $post_id, $key, $val );
+		}
 
-        // Lead Time (days)
-        woocommerce_wp_text_input([
-            'id'            => 'forecast_lead_time_days',
-            'label'         => 'Lead Time (days)',
-            'type'          => 'number',
-            'description'   => 'Fallback to global if empty',
-            // Only display for simple products【142306055597918†L185-L193】.
-            'wrapper_class' => 'show_if_simple',
-        ]);
+		$ints = array(
+			'forecast_lead_time_days','forecast_minimum_order_qty',
+			'forecast_tier_threshold_1','forecast_tier_threshold_2','forecast_tier_threshold_3',
+			'forecast_sales_window_days'
+		);
+		foreach ( $ints as $key ) {
+			$raw = isset($_POST[$key]) ? wc_clean( wp_unslash($_POST[$key]) ) : '';
+			if ( $raw === '' ) delete_post_meta( $post_id, $key );
+			else update_post_meta( $post_id, $key, absint($raw) );
+		}
 
-        // Minimum Order Quantity
-        woocommerce_wp_text_input([
-            'id'            => 'forecast_minimum_order_qty',
-            'label'         => 'Minimum Order Quantity',
-            'type'          => 'number',
-            'wrapper_class' => 'show_if_simple',
-        ]);
+		$cost = isset($_POST['forecast_cost_override']) ? wc_clean( wp_unslash($_POST['forecast_cost_override']) ) : '';
+		if ( $cost === '' ) delete_post_meta( $post_id, 'forecast_cost_override' );
+		else update_post_meta( $post_id, 'forecast_cost_override', (string) floatval($cost) );
 
-        // Tier Thresholds
-        woocommerce_wp_text_input([
-            'id'                => 'forecast_tier_threshold_1',
-            'label'             => 'Tier 1 Threshold (Days)',
-            'type'              => 'number',
-            'custom_attributes' => [ 'step' => '1', 'min' => '0' ],
-            'desc_tip'          => true,
-            'description'       => 'Number of days beyond expected interval to trigger Tier 1 warning.',
-            'wrapper_class'     => 'show_if_simple',
-        ]);
-        woocommerce_wp_text_input([
-            'id'                => 'forecast_tier_threshold_2',
-            'label'             => 'Tier 2 Threshold (Days)',
-            'type'              => 'number',
-            'custom_attributes' => [ 'step' => '1', 'min' => '0' ],
-            'desc_tip'          => true,
-            'description'       => 'Number of days to trigger Tier 2 (moderate concern).',
-            'wrapper_class'     => 'show_if_simple',
-        ]);
-        woocommerce_wp_text_input([
-            'id'                => 'forecast_tier_threshold_3',
-            'label'             => 'Tier 3 Threshold (Days)',
-            'type'              => 'number',
-            'custom_attributes' => [ 'step' => '1', 'min' => '0' ],
-            'desc_tip'          => true,
-            'description'       => 'Maximum allowed delay before product is flagged as unsellable.',
-            'wrapper_class'     => 'show_if_simple',
-        ]);
+		$class = isset($_POST['forecast_product_class']) ? sanitize_text_field( wp_unslash($_POST['forecast_product_class']) ) : '';
+		if ( $class === '' ) delete_post_meta( $post_id, 'forecast_product_class' );
+		else update_post_meta( $post_id, 'forecast_product_class', $class );
 
-        // Sales Window (days)
-        woocommerce_wp_text_input([
-            'id'            => 'forecast_sales_window_days',
-            'label'         => 'Sales Window (days)',
-            'type'          => 'number',
-            'wrapper_class' => 'show_if_simple',
-        ]);
+		$note = isset($_POST['forecast_reorder_note']) ? sanitize_textarea_field( wp_unslash($_POST['forecast_reorder_note']) ) : '';
+		if ( $note === '' ) delete_post_meta( $post_id, 'forecast_reorder_note' );
+		else update_post_meta( $post_id, 'forecast_reorder_note', $note );
 
-        // Cost Override (%)
-        woocommerce_wp_text_input([
-            'id'                => 'forecast_cost_override',
-            'label'             => 'Cost Override (%)',
-            'type'              => 'number',
-            'description'       => 'Only used if ATUM or Woo COGS is missing. Overrides global cost %.',
-            'custom_attributes' => [ 'step' => '0.01' ],
-            'wrapper_class'     => 'show_if_simple',
-        ]);
-
-        // Product Class
-        woocommerce_wp_select([
-            'id'            => 'forecast_product_class',
-            'label'         => 'Product Class',
-            'options'       => [
-                'regular'    => 'Regular',
-                'seasonal'   => 'Seasonal',
-                'limited'    => 'Limited',
-                'disposable' => 'Disposable',
-            ],
-            'wrapper_class' => 'show_if_simple',
-        ]);
-
-        // Checkboxes
-        woocommerce_wp_checkbox([
-            'id'            => 'forecast_enable_reorder',
-            'label'         => 'Enable Reorder',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-        woocommerce_wp_checkbox([
-            'id'            => 'forecast_do_not_reorder',
-            'label'         => 'Do Not Reorder',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-        woocommerce_wp_checkbox([
-            'id'            => 'forecast_is_must_stock',
-            'label'         => 'Must Stock',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-        woocommerce_wp_checkbox([
-            'id'            => 'forecast_force_reorder',
-            'label'         => 'Force Reorder',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-        woocommerce_wp_checkbox([
-            'id'            => 'forecast_flag_for_review',
-            'label'         => 'Flag for Review',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-
-        // Reorder Note
-        woocommerce_wp_textarea_input([
-            'id'            => 'forecast_reorder_note',
-            'label'         => 'Reorder Note',
-            'description'   => 'Optional internal note for PO or exclusion reasons.',
-            'wrapper_class' => 'show_if_simple',
-        ]);
-
-        echo '</div>';
-    }
-
-    /**
-     * Save forecasting fields when the product is saved.
-     *
-     * This implementation only processes forecast meta for simple products.
-     * If the current product is not simple, it returns early without
-     * touching any forecast meta keys.
-     *
-     * @param int $post_id Product ID
-     */
-    public static function save_fields( $post_id ) {
-        // Load the WC_Product and ensure it's a simple product.  Bail if not.
-        $product = function_exists( 'wc_get_product' ) ? wc_get_product( $post_id ) : null;
-        if ( ! $product || ! $product->is_type( 'simple' ) ) {
-            return;
-        }
-
-        $fields = Forecast_Meta_Registry::get_keys();
-
-        foreach ( $fields as $key => $default ) {
-            if ( isset( $_POST[ $key ] ) && $_POST[ $key ] !== '' ) {
-                update_post_meta( $post_id, $key, wc_clean( $_POST[ $key ] ) );
-            } else {
-                if ( in_array( $key, [
-                    'forecast_enable_reorder',
-                    'forecast_do_not_reorder',
-                    'forecast_is_must_stock',
-                    'forecast_force_reorder',
-                    'forecast_flag_for_review',
-                ], true ) ) {
-                    update_post_meta( $post_id, $key, 'no' );
-                } else {
-                    delete_post_meta( $post_id, $key );
-                }
-            }
-        }
-    }
+		// Queue behavior: Enable Reorder => queued; Disable => removed.
+		if ( class_exists('WF_SFWF_Forecast_Queue') ) {
+			if ( isset($_POST['forecast_enable_reorder']) ) WF_SFWF_Forecast_Queue::enqueue( $post_id, 'enable_reorder' );
+			else WF_SFWF_Forecast_Queue::dequeue( $post_id );
+		}
+	}
 }
 
 WF_SFWF_Product_Fields::init();

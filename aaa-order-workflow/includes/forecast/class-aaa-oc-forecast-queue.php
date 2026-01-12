@@ -1,218 +1,219 @@
 <?php
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/class-aaa-oc-forecast-queue.php
- * Purpose: Manages the forecast queue table and cron processing. Products are
- *          queued for forecasting in small batches to avoid timeouts. The queue
- *          supports both forecast indexing and purchase order queueing. This
- *          class also provides wrappers for backward compatibility.
- * Version: 0.1.0
+ * Purpose: Forecast queue CRUD + batch processing.
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class AAA_OC_Forecast_Queue {
 
-    /**
-     * Register hooks for cron scheduling and admin handlers.
-     */
-    public static function init(): void {
-        // Clear any legacy recurring schedules on plugin init. Prior versions
-        // scheduled an hourly recurring event; we now schedule single runs
-        // dynamically when items are enqueued.
-        add_action( 'init', [ __CLASS__, 'clear_legacy_schedule' ] );
-        // Cron callback for processing queued items.
-        add_action( 'aaa_oc_process_forecast_queue', [ __CLASS__, 'process_forecast_queue' ] );
-        // Admin bulk actions are handled by the grid class. Do not register
-        // another handler here to avoid duplicate processing.
-    }
+	private const HOOK        = 'aaa_oc_process_forecast_queue';
+	private const INLINE_LOCK = 'aaa_oc_forecast_queue_inline_lock';
 
-    /**
-     * Ensures a scheduled event exists for processing the forecast queue. Runs
-     * hourly by default. This hook runs on every page load but schedules
-     * an event only when none is pending.
-     */
+	public static function init(): void {
+		add_action( 'init', [ __CLASS__, 'clear_legacy_schedule' ] );
+		add_action( self::HOOK, [ __CLASS__, 'process_forecast_queue' ] );
+		add_action( 'admin_init', [ __CLASS__, 'maybe_process_inline' ] );
+	}
 
-    /**
-     * Remove any previously scheduled recurring events for the forecast queue.
-     * We use single events scheduled dynamically when items are queued. This
-     * avoids cron buildup and makes queue processing traffic-friendly.
-     */
-    public static function clear_legacy_schedule(): void {
-        // Only clear legacy *recurring* schedules. Do not clear single events that drive queue processing.
-        $event = wp_get_scheduled_event( 'aaa_oc_process_forecast_queue' );
-        if ( $event && ! empty( $event->schedule ) ) {
-            wp_clear_scheduled_hook( 'aaa_oc_process_forecast_queue' );
-        }
-    }
+	public static function clear_legacy_schedule(): void {
+		$event = wp_get_scheduled_event( self::HOOK );
+		if ( $event && ! empty( $event->schedule ) ) {
+			wp_clear_scheduled_hook( self::HOOK );
+		}
+	}
 
-    /**
-     * Backwards compatibility wrapper. Enqueue a single product for forecasting.
-     * This method proxies to queue_products_for_forecast() with a single-item
-     * array. Some existing code in the indexer and grid still calls
-     * enqueue_product(); adding this wrapper avoids fatal errors.
-     *
-     * @param int $product_id The product ID to enqueue.
-     */
-    public static function enqueue_product( int $product_id ): void {
-        $pid = absint( $product_id );
-        if ( $pid ) {
-            self::queue_products_for_forecast( [ $pid ] );
-        }
-    }
+	public static function enqueue_product( int $product_id ): void {
+		$pid = absint( $product_id );
+		if ( $pid ) { self::queue_products_for_forecast( [ $pid ] ); }
+	}
 
-    /**
-     * Backwards compatibility wrapper. Enqueue a single product for purchase order.
-     * This proxies to queue_products_for_po() with a single-item array. Some
-     * existing grid code references enqueue_po_product(); this wrapper
-     * preserves the API while delegating to the new method.
-     *
-     * @param int $product_id The product ID to enqueue for PO.
-     */
-    public static function enqueue_po_product( int $product_id ): void {
-        $pid = absint( $product_id );
-        if ( $pid ) {
-            self::queue_products_for_po( [ $pid ] );
-        }
-    }
+	public static function enqueue_po_product( int $product_id ): void {
+		$pid = absint( $product_id );
+		if ( $pid ) { self::queue_products_for_po( [ $pid ] ); }
+	}
 
-    /**
-     * Adds an array of product IDs to the forecast queue. Each ID is
-     * inserted as a separate row with status pending. Duplicate entries
-     * are ignored via a simple lookup.
-     *
-     * @param array $product_ids
-     */
-    public static function queue_products_for_forecast( array $product_ids ): void {
-        global $wpdb;
-        if ( empty( $product_ids ) ) {
-            return;
-        }
-        $table = AAA_OC_FORECAST_QUEUE_TABLE;
-        $user  = get_current_user_id();
-        foreach ( $product_ids as $pid ) {
-            $pid = absint( $pid );
-            if ( ! $pid ) {
-                continue;
-            }
-            // Check for existing pending/processing rows to avoid duplicates.
-            $exists = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $table WHERE product_id = %d AND status IN ('pending','processing') LIMIT 1", $pid ) );
-            if ( $exists ) {
-                continue;
-            }
-            $wpdb->insert(
-                $table,
-                [
-                    'product_id' => $pid,
-                    'status'     => 'pending',
-                    'created_at' => current_time( 'mysql' ),
-                    'created_by' => $user,
-                ],
-                [ '%d', '%s', '%s', '%d' ]
-            );
-        }
-        // After enqueuing items schedule a single processing event soon. The delay
-        // allows batch inserts to finish before processing begins. If a
-        // processing event is already scheduled it will not be duplicated.
-        self::schedule_next_run( MINUTE_IN_SECONDS );
-    }
+	public static function dequeue_product( int $product_id ): void {
+		$pid = absint( $product_id );
+		if ( ! $pid ) { return; }
+		global $wpdb;
 
-    /**
-     * Adds an array of product IDs to the purchase order queue table.
-     *
-     * @param array $product_ids
-     */
-    public static function queue_products_for_po( array $product_ids ): void {
-        global $wpdb;
-        if ( empty( $product_ids ) ) {
-            return;
-        }
-        $table = AAA_OC_FORECAST_PO_QUEUE_TABLE;
-        $user  = get_current_user_id();
-        foreach ( $product_ids as $pid ) {
-            $pid = absint( $pid );
-            if ( ! $pid ) {
-                continue;
-            }
-            $exists = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM $table WHERE product_id = %d AND status IN ('pending','processing') LIMIT 1", $pid ) );
-            if ( $exists ) {
-                continue;
-            }
-            $wpdb->insert(
-                $table,
-                [
-                    'product_id' => $pid,
-                    'status'     => 'pending',
-                    'created_at' => current_time( 'mysql' ),
-                    'created_by' => $user,
-                ],
-                [ '%d', '%s', '%s', '%d' ]
-            );
-        }
-    }
+		foreach ( [ AAA_OC_FORECAST_QUEUE_TABLE, AAA_OC_FORECAST_PO_QUEUE_TABLE ] as $table ) {
+			if ( ! self::table_exists( $table ) ) { continue; }
+			$sql = $wpdb->prepare(
+				"DELETE FROM {$table} WHERE product_id = %d AND status IN ('pending','processing')",
+				$pid
+			);
+			$wpdb->query( $sql );
+		}
+	}
 
-    /**
-     * Process a batch of queued products. This method is triggered by cron or by
-     * fallback execution. It will mark jobs processing, run the forecast runner,
-     * then mark them done. Processes up to 5 per run.
-     */
-    public static function process_forecast_queue(): void {
-        global $wpdb;
+	public static function queue_products_for_forecast( array $product_ids ): void {
+		$ids = array_values( array_filter( array_map( 'absint', (array) $product_ids ) ) );
+		if ( empty( $ids ) ) { return; }
 
-        $table = AAA_OC_FORECAST_QUEUE_TABLE;
-        $rows  = $wpdb->get_results( "SELECT * FROM $table WHERE status = 'pending' ORDER BY id ASC LIMIT 5", ARRAY_A );
-        if ( empty( $rows ) ) {
-            return;
-        }
+		self::maybe_install_tables();
 
-        foreach ( $rows as $row ) {
-            $id  = absint( $row['id'] );
-            $pid = absint( $row['product_id'] );
+		global $wpdb;
+		$table   = AAA_OC_FORECAST_QUEUE_TABLE;
+		$user_id = get_current_user_id();
 
-            $wpdb->update(
-                $table,
-                [
-                    'status'     => 'processing',
-                    'updated_at' => current_time( 'mysql' ),
-                    'updated_by' => get_current_user_id(),
-                ],
-                [ 'id' => $id ],
-                [ '%s', '%s', '%d' ],
-                [ '%d' ]
-            );
+		if ( ! self::table_exists( $table ) ) { return; }
 
-            if ( $pid && class_exists( 'AAA_OC_Forecast_Runner' ) ) {
-                AAA_OC_Forecast_Runner::update_single_product( $pid );
-            }
+		foreach ( $ids as $pid ) {
+			$exists = $wpdb->get_var( $wpdb->prepare(
+				"SELECT id FROM {$table} WHERE product_id = %d AND status IN ('pending','processing') LIMIT 1",
+				$pid
+			) );
+			if ( $exists ) { continue; }
 
-            $wpdb->update(
-                $table,
-                [
-                    'status'     => 'done',
-                    'updated_at' => current_time( 'mysql' ),
-                    'updated_by' => get_current_user_id(),
-                ],
-                [ 'id' => $id ],
-                [ '%s', '%s', '%d' ],
-                [ '%d' ]
-            );
-        }
+			$data   = [ 'product_id' => $pid, 'status' => 'pending' ];
+			$format = [ '%d', '%s' ];
 
-        $more = (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE status = 'pending'" );
-        if ( $more > 0 ) {
-            self::schedule_next_run( 5 * MINUTE_IN_SECONDS );
-        }
-    }
+			if ( self::table_has_col( $table, 'user_id' ) ) {
+				$data['user_id'] = $user_id; $format[] = '%d';
+			} elseif ( self::table_has_col( $table, 'created_by' ) ) {
+				$data['created_by'] = $user_id; $format[] = '%d';
+			}
+			if ( self::table_has_col( $table, 'attempts' ) ) {
+				$data['attempts'] = 0; $format[] = '%d';
+			}
 
-    /**
-     * Schedule a single cron event for processing the forecast queue after a delay.
-     * If an event is already scheduled, this call does nothing. This ensures
-     * we never stack duplicate cron events.
-     *
-     * @param int $delay Seconds until the next run.
-     */
-    private static function schedule_next_run( int $delay ): void {
-        if ( ! wp_next_scheduled( 'aaa_oc_process_forecast_queue' ) ) {
-            wp_schedule_single_event( time() + $delay, 'aaa_oc_process_forecast_queue' );
-        }
-    }
+			$wpdb->insert( $table, $data, $format );
+		}
+
+		self::schedule_next_run( MINUTE_IN_SECONDS );
+	}
+
+	public static function queue_products_for_po( array $product_ids ): void {
+		$ids = array_values( array_filter( array_map( 'absint', (array) $product_ids ) ) );
+		if ( empty( $ids ) ) { return; }
+
+		self::maybe_install_tables();
+
+		global $wpdb;
+		$table   = AAA_OC_FORECAST_PO_QUEUE_TABLE;
+		$user_id = get_current_user_id();
+
+		if ( ! self::table_exists( $table ) ) { return; }
+
+		foreach ( $ids as $pid ) {
+			$exists = $wpdb->get_var( $wpdb->prepare(
+				"SELECT id FROM {$table} WHERE product_id = %d AND status IN ('pending','processing') LIMIT 1",
+				$pid
+			) );
+			if ( $exists ) { continue; }
+
+			$data   = [ 'product_id' => $pid, 'status' => 'pending' ];
+			$format = [ '%d', '%s' ];
+
+			if ( self::table_has_col( $table, 'user_id' ) ) {
+				$data['user_id'] = $user_id; $format[] = '%d';
+			} elseif ( self::table_has_col( $table, 'created_by' ) ) {
+				$data['created_by'] = $user_id; $format[] = '%d';
+			}
+			if ( self::table_has_col( $table, 'quantity' ) ) {
+				$data['quantity'] = 1; $format[] = '%d';
+			}
+
+			$wpdb->insert( $table, $data, $format );
+		}
+	}
+
+	public static function process_forecast_queue(): void {
+		self::maybe_install_tables();
+
+		global $wpdb;
+		$table = AAA_OC_FORECAST_QUEUE_TABLE;
+		if ( ! self::table_exists( $table ) ) { return; }
+
+		$rows = $wpdb->get_results(
+			"SELECT * FROM {$table} WHERE status = 'pending' ORDER BY id ASC LIMIT 5",
+			ARRAY_A
+		);
+		if ( empty( $rows ) ) { return; }
+
+		$user_id = get_current_user_id();
+
+		foreach ( $rows as $row ) {
+			$id  = absint( $row['id'] ?? 0 );
+			$pid = absint( $row['product_id'] ?? 0 );
+			if ( ! $id ) { continue; }
+
+			$attempts = absint( $row['attempts'] ?? 0 );
+			$update   = [ 'status' => 'processing' ];
+			$fmt      = [ '%s' ];
+
+			if ( self::table_has_col( $table, 'attempts' ) ) { $update['attempts'] = $attempts + 1; $fmt[] = '%d'; }
+			if ( self::table_has_col( $table, 'user_id' ) ) { $update['user_id'] = $user_id; $fmt[] = '%d'; }
+			if ( self::table_has_col( $table, 'updated_by' ) ) { $update['updated_by'] = $user_id; $fmt[] = '%d'; }
+
+			$wpdb->update( $table, $update, [ 'id' => $id ], $fmt, [ '%d' ] );
+
+			if ( $pid && class_exists( 'AAA_OC_Forecast_Runner' ) ) {
+				try {
+					AAA_OC_Forecast_Runner::update_single_product( $pid );
+				} catch ( Throwable $e ) {
+					if ( defined( 'AAA_OC_FORECAST_DEBUG' ) && AAA_OC_FORECAST_DEBUG ) {
+						error_log( '[Forecast][Queue] Runner failed for product ' . $pid . ': ' . $e->getMessage() );
+					}
+				}
+			}
+
+			$done = [ 'status' => 'done' ];
+			$dft  = [ '%s' ];
+			if ( self::table_has_col( $table, 'user_id' ) ) { $done['user_id'] = $user_id; $dft[] = '%d'; }
+			if ( self::table_has_col( $table, 'updated_by' ) ) { $done['updated_by'] = $user_id; $dft[] = '%d'; }
+
+			$wpdb->update( $table, $done, [ 'id' => $id ], $dft, [ '%d' ] );
+		}
+
+		$more = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'pending'" );
+		if ( $more > 0 ) { self::schedule_next_run( 5 * MINUTE_IN_SECONDS ); }
+	}
+
+	public static function maybe_process_inline(): void {
+		if ( ! is_admin() ) { return; }
+		if ( get_transient( self::INLINE_LOCK ) ) { return; }
+
+		global $wpdb;
+		$table = AAA_OC_FORECAST_QUEUE_TABLE;
+		if ( ! self::table_exists( $table ) ) { return; }
+
+		$pending = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'pending'" );
+		if ( $pending < 1 ) { return; }
+
+		set_transient( self::INLINE_LOCK, 1, MINUTE_IN_SECONDS );
+		self::process_forecast_queue();
+	}
+
+	private static function schedule_next_run( int $delay ): void {
+		if ( ! wp_next_scheduled( self::HOOK ) ) {
+			wp_schedule_single_event( time() + max( 5, $delay ), self::HOOK );
+		}
+	}
+
+	private static function maybe_install_tables(): void {
+		if ( class_exists( 'AAA_OC_Forecast_Queue_Installer' ) ) {
+			AAA_OC_Forecast_Queue_Installer::maybe_install_tables();
+		}
+	}
+
+	private static function table_exists( string $table ): bool {
+		global $wpdb;
+		$found = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) );
+		return ( $found === $table );
+	}
+
+	private static function table_has_col( string $table, string $col ): bool {
+		static $cache = [];
+		$key = $table . '|' . $col;
+		if ( isset( $cache[ $key ] ) ) { return $cache[ $key ]; }
+		global $wpdb;
+		$found = $wpdb->get_var( $wpdb->prepare( "SHOW COLUMNS FROM {$table} LIKE %s", $col ) );
+		$cache[ $key ] = ( $found === $col );
+		return $cache[ $key ];
+	}
 }

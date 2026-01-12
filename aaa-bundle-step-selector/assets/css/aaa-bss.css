@@ -1,0 +1,13 @@
+.aaa-bss{max-width:520px;margin:0 auto;font-family:inherit}
+.aaa-bss-title{font-size:20px;font-weight:700;margin:0 0 6px}
+.aaa-bss-subtitle{font-size:14px;opacity:.8;margin:0 0 14px}
+.aaa-bss-list{border:1px solid #e5e5e5;border-radius:10px;padding:12px}
+.aaa-bss-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0}
+.aaa-bss-row:last-child{border-bottom:0}
+.aaa-bss-name{padding-right:12px}
+.aaa-bss-qty input{width:90px}
+.aaa-bss-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.aaa-bss-btn{padding:10px 14px;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer}
+.aaa-bss-msg{margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff3cd;border:1px solid #ffe69c}
+.aaa-bss-maxnote{margin-top:10px;font-size:12px;opacity:.75}
+.aaa-bss-empty{padding:12px;border:1px dashed #ddd;border-radius:10px}
