@@ -5,7 +5,7 @@
  *          lifecycle data. Flags include tiered not-moving statuses,
  *          out-of-stock, stale inventory and new product indicators.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -40,7 +40,16 @@ class AAA_OC_Forecast_Status {
         if ( $last_sold ) {
             $days_since_sale = floor( ( $now - strtotime( $last_sold ) ) / DAY_IN_SECONDS );
         }
-        if ( $total_units == 0 ) {
+        $stock_threshold_enabled = false;
+        $stock_threshold_qty = 0;
+        if ( function_exists( 'aaa_oc_get_option' ) ) {
+            $stock_threshold_enabled = ( aaa_oc_get_option( 'enable_stock_threshold', 'forecast', 'no' ) === 'yes' );
+            $stock_threshold_qty     = absint( aaa_oc_get_option( 'stock_threshold_qty', 'forecast', 0 ) );
+        }
+
+        if ( $stock_threshold_enabled && $stock_threshold_qty > 0 && $stock > $stock_threshold_qty ) {
+            $sales_status = 'high_stock';
+        } elseif ( $total_units == 0 ) {
             $sales_status = 'not_moving_t1';
         } elseif ( $days_since_sale !== null ) {
             if ( $days_since_sale >= $t2 ) {
