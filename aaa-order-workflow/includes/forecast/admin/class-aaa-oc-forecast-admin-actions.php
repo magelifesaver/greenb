@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/class-aaa-oc-forecast-admin-actions.php
  * Purpose: Admin-post handlers used by Forecast settings tabs (queue tools).
- * Version: 0.1.1
+ * Version: 0.1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -23,28 +23,15 @@ class AAA_OC_Forecast_Admin_Actions {
 		self::require_manage_woo();
 		check_admin_referer( 'aaa_oc_forecast_queue_all_enabled' );
 
-		$q = new WP_Query( [
-			'post_type'      => 'product',
-			'post_status'    => 'publish',
-			'fields'         => 'ids',
-			'posts_per_page' => -1,
-			'no_found_rows'  => true,
-			'meta_query'     => [
-				[ 'key' => 'forecast_enable_reorder', 'value' => 'yes' ],
-			],
-		] );
-
-		$ids = array_values( array_filter( array_map( 'absint', (array) $q->posts ) ) );
-
-		if ( ! empty( $ids ) && class_exists( 'AAA_OC_Forecast_Queue' ) ) {
-			AAA_OC_Forecast_Queue::queue_products_for_forecast( $ids );
+		if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+			AAA_OC_Forecast_Queue::schedule_queue_all_enabled();
 		}
 
 		if ( AAA_OC_FORECAST_ADMIN_ACTIONS_DEBUG ) {
-			error_log( '[AAA_OC Forecast Admin] Queued enabled products: ' . count( $ids ) );
+			error_log( '[AAA_OC Forecast Admin] Scheduled queueing of enabled products.' );
 		}
 
-		self::redirect_back( [ 'aaa_oc_forecast_queued_all' => count( $ids ) ] );
+		self::redirect_back( [ 'aaa_oc_forecast_queue_scheduled' => 1 ] );
 	}
 
 	public static function process_queue_now(): void {
@@ -52,14 +39,14 @@ class AAA_OC_Forecast_Admin_Actions {
 		check_admin_referer( 'aaa_oc_forecast_process_queue_now' );
 
 		if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
-			AAA_OC_Forecast_Queue::process_forecast_queue();
+			AAA_OC_Forecast_Queue::schedule_process_queue( 10 );
 		}
 
 		if ( AAA_OC_FORECAST_ADMIN_ACTIONS_DEBUG ) {
-			error_log( '[AAA_OC Forecast Admin] Ran one queue batch immediately.' );
+			error_log( '[AAA_OC Forecast Admin] Scheduled queue processing.' );
 		}
 
-		self::redirect_back( [ 'aaa_oc_forecast_processed' => 1 ] );
+		self::redirect_back( [ 'aaa_oc_forecast_process_scheduled' => 1 ] );
 	}
 
 	public static function repair_queue_tables(): void {

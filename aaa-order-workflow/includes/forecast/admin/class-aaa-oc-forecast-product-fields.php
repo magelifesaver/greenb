@@ -8,7 +8,7 @@
  *          products show these fields. Values are stored as post meta
  *          and consumed by the forecast runner and indexer.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -148,6 +148,12 @@ class AAA_OC_Forecast_Product_Fields {
         }
         // Grab list of all forecast meta keys
         $fields = AAA_OC_Forecast_Meta_Registry::get_keys();
+        unset(
+            $fields['aip_product_summary'],
+            $fields['aip_inventory_summary'],
+            $fields['aip_sales_summary'],
+            $fields['aip_forecast_summary']
+        );
         // Keys that represent checkboxes; unchecked boxes should be stored as "no".
         $checkboxes = [
             'forecast_enable_reorder',

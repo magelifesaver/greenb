@@ -1,0 +1,43 @@
+/* File: /wp-content/plugins/aaa-order-workflow/includes/forecast/assets/forecast-grid.css
+ * Version: 0.1.0
+ */
+
+.aaa-oc-forecast-grid-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 10px 0 16px;
+    align-items: center;
+}
+
+.aaa-oc-forecast-grid-controls__label {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.aaa-oc-forecast-grid-controls__group {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#aaa-oc-forecast-table th,
+#aaa-oc-forecast-table td {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#aaa-oc-forecast-table th.aaa-oc-forecast-col--number,
+#aaa-oc-forecast-table td.aaa-oc-forecast-col--number,
+#aaa-oc-forecast-table th.aaa-oc-forecast-col--currency,
+#aaa-oc-forecast-table td.aaa-oc-forecast-col--currency,
+#aaa-oc-forecast-table th.aaa-oc-forecast-col--percent,
+#aaa-oc-forecast-table td.aaa-oc-forecast-col--percent {
+    text-align: right;
+}

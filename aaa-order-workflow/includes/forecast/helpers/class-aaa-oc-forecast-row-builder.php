@@ -9,7 +9,7 @@
  *          context (title, SKU, categories, brands) in addition to the
  *          forecast fields defined in AAA_OC_Forecast_Columns.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -22,7 +22,7 @@ class AAA_OC_Forecast_Row_Builder {
      * @param int $product_id The WooCommerce product ID.
      * @return array Associative array of column => value or empty array on error.
      */
-    public static function build_row( int $product_id ) : array {
+    public static function build_row( int $product_id, array $values = [] ) : array {
         // Ensure WooCommerce functions are available.
         if ( ! function_exists( 'wc_get_product' ) ) {
             return [];
@@ -45,8 +45,8 @@ class AAA_OC_Forecast_Row_Builder {
         $brand_names = [];
         $brand_slug  = null;
         // If the workflow settings class exists, attempt to read a configured brand taxonomy slug
-        if ( class_exists( 'AAA_OC_Settings' ) ) {
-            $brand_slug = get_option( 'aaa_oc_brand_taxonomy_slug', '' );
+        if ( function_exists( 'aaa_oc_get_option' ) ) {
+            $brand_slug = aaa_oc_get_option( 'brand_taxonomy_slug', 'forecast', 'pwb-brand' );
         }
         if ( ! empty( $brand_slug ) ) {
             $brands = get_the_terms( $product_id, $brand_slug );
@@ -104,7 +104,10 @@ class AAA_OC_Forecast_Row_Builder {
 
         // Loop through each forecast meta and cast according to type
         foreach ( $columns as $key => $def ) {
-            $value = $meta_cache[ $key ] ?? null;
+            $value = array_key_exists( $key, $values ) ? $values[ $key ] : ( $meta_cache[ $key ] ?? null );
+            if ( is_array( $value ) || is_object( $value ) ) {
+                $value = wp_json_encode( $value );
+            }
             switch ( $def['type'] ) {
                 case 'number':
                     $row[ $key ] = $to_int( $value );
@@ -121,7 +124,11 @@ class AAA_OC_Forecast_Row_Builder {
                     break;
                 case 'text':
                 default:
-                    $row[ $key ] = ( $value !== '' ) ? sanitize_text_field( $value ) : null;
+                    if ( $value === '' || $value === null ) {
+                        $row[ $key ] = null;
+                    } else {
+                        $row[ $key ] = is_string( $value ) ? $value : sanitize_text_field( (string) $value );
+                    }
                     break;
             }
         }
@@ -137,12 +144,20 @@ class AAA_OC_Forecast_Row_Builder {
          */
         // Out of stock flag
         $stock_qty = isset( $row['forecast_stock_qty'] ) ? intval( $row['forecast_stock_qty'] ) : 0;
-        $row['forecast_is_out_of_stock'] = ( $stock_qty <= 0 ) ? 1 : 0;
+        if ( ! isset( $row['forecast_is_out_of_stock'] ) || $row['forecast_is_out_of_stock'] === null ) {
+            $row['forecast_is_out_of_stock'] = ( $stock_qty <= 0 ) ? 1 : 0;
+        }
 
         // Derived flags default to false (0) until calculations are added
-        $row['forecast_is_not_moving']      = 0;
-        $row['forecast_is_stale_inventory'] = 0;
-        $row['forecast_is_new_product']     = 0;
+        if ( ! isset( $row['forecast_is_not_moving'] ) || $row['forecast_is_not_moving'] === null ) {
+            $row['forecast_is_not_moving'] = 0;
+        }
+        if ( ! isset( $row['forecast_is_stale_inventory'] ) || $row['forecast_is_stale_inventory'] === null ) {
+            $row['forecast_is_stale_inventory'] = 0;
+        }
+        if ( ! isset( $row['forecast_is_new_product'] ) || $row['forecast_is_new_product'] === null ) {
+            $row['forecast_is_new_product'] = 0;
+        }
 
         // Sales status defaults to stored meta or 'active'
         if ( ! isset( $row['forecast_sales_status'] ) || $row['forecast_sales_status'] === null ) {

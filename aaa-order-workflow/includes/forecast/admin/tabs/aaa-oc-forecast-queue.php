@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/tabs/aaa-oc-forecast-queue.php
  * Purpose: View + manage the Forecast queue table.
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -46,12 +46,12 @@ $self = admin_url( 'admin.php?page=aaa-oc-core-settings&tab=aaa-oc-forecast-queu
 		<div class="notice notice-success"><p><?php esc_html_e( 'Forecast tables repaired (dbDelta ran).', 'aaa-oc' ); ?></p></div>
 	<?php endif; ?>
 
-	<?php if ( ! empty( $_GET['aaa_oc_forecast_queued_all'] ) ) : ?>
-		<div class="notice notice-success"><p><?php echo esc_html( absint( $_GET['aaa_oc_forecast_queued_all'] ) . ' products queued.' ); ?></p></div>
+	<?php if ( ! empty( $_GET['aaa_oc_forecast_queue_scheduled'] ) ) : ?>
+		<div class="notice notice-success"><p><?php esc_html_e( 'Queueing all enabled products has been scheduled.', 'aaa-oc' ); ?></p></div>
 	<?php endif; ?>
 
-	<?php if ( ! empty( $_GET['aaa_oc_forecast_processed'] ) ) : ?>
-		<div class="notice notice-success"><p><?php esc_html_e( 'Processed one queue batch (up to 5 items).', 'aaa-oc' ); ?></p></div>
+	<?php if ( ! empty( $_GET['aaa_oc_forecast_process_scheduled'] ) ) : ?>
+		<div class="notice notice-success"><p><?php esc_html_e( 'Queue processing has been scheduled to run in the background.', 'aaa-oc' ); ?></p></div>
 	<?php endif; ?>
 
 	<?php if ( ! $exists ) : ?>
@@ -81,13 +81,13 @@ $self = admin_url( 'admin.php?page=aaa-oc-core-settings&tab=aaa-oc-forecast-queu
 	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="display:inline-block;margin-right:12px;">
 		<input type="hidden" name="action" value="aaa_oc_forecast_queue_all_enabled" />
 		<?php wp_nonce_field( 'aaa_oc_forecast_queue_all_enabled' ); ?>
-		<button type="submit" class="button"><?php esc_html_e( 'Queue All Enabled Products', 'aaa-oc' ); ?></button>
+		<button type="submit" class="button"><?php esc_html_e( 'Queue All Enabled Products (Scheduled)', 'aaa-oc' ); ?></button>
 	</form>
 
 	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="display:inline-block;">
 		<input type="hidden" name="action" value="aaa_oc_forecast_process_queue_now" />
 		<?php wp_nonce_field( 'aaa_oc_forecast_process_queue_now' ); ?>
-		<button type="submit" class="button button-primary"><?php esc_html_e( 'Process Queue Now', 'aaa-oc' ); ?></button>
+		<button type="submit" class="button button-primary"><?php esc_html_e( 'Process Queue (Scheduled)', 'aaa-oc' ); ?></button>
 	</form>
 
 	<hr />

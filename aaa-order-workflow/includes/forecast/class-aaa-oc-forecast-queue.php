@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/class-aaa-oc-forecast-queue.php
  * Purpose: Forecast queue CRUD + batch processing.
- * Version: 0.1.1
+ * Version: 0.1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -11,10 +11,12 @@ class AAA_OC_Forecast_Queue {
 
 	private const HOOK        = 'aaa_oc_process_forecast_queue';
 	private const INLINE_LOCK = 'aaa_oc_forecast_queue_inline_lock';
+	private const QUEUE_ALL_HOOK = 'aaa_oc_queue_all_enabled_products';
 
 	public static function init(): void {
 		add_action( 'init', [ __CLASS__, 'clear_legacy_schedule' ] );
 		add_action( self::HOOK, [ __CLASS__, 'process_forecast_queue' ] );
+		add_action( self::QUEUE_ALL_HOOK, [ __CLASS__, 'queue_all_enabled_products' ] );
 		add_action( 'admin_init', [ __CLASS__, 'maybe_process_inline' ] );
 	}
 
@@ -85,6 +87,35 @@ class AAA_OC_Forecast_Queue {
 		}
 
 		self::schedule_next_run( MINUTE_IN_SECONDS );
+	}
+
+	public static function schedule_queue_all_enabled( int $delay = MINUTE_IN_SECONDS ): void {
+		if ( ! wp_next_scheduled( self::QUEUE_ALL_HOOK ) ) {
+			wp_schedule_single_event( time() + max( 5, $delay ), self::QUEUE_ALL_HOOK );
+		}
+	}
+
+	public static function schedule_process_queue( int $delay = MINUTE_IN_SECONDS ): void {
+		self::schedule_next_run( $delay );
+	}
+
+	public static function queue_all_enabled_products(): void {
+		$q = new WP_Query( [
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'fields'         => 'ids',
+			'posts_per_page' => -1,
+			'no_found_rows'  => true,
+			'meta_query'     => [
+				[ 'key' => 'forecast_enable_reorder', 'value' => 'yes' ],
+			],
+		] );
+
+		$ids = array_values( array_filter( array_map( 'absint', (array) $q->posts ) ) );
+
+		if ( ! empty( $ids ) ) {
+			self::queue_products_for_forecast( $ids );
+		}
 	}
 
 	public static function queue_products_for_po( array $product_ids ): void {
@@ -186,7 +217,7 @@ class AAA_OC_Forecast_Queue {
 		if ( $pending < 1 ) { return; }
 
 		set_transient( self::INLINE_LOCK, 1, MINUTE_IN_SECONDS );
-		self::process_forecast_queue();
+		self::schedule_next_run( MINUTE_IN_SECONDS );
 	}
 
 	private static function schedule_next_run( int $delay ): void {

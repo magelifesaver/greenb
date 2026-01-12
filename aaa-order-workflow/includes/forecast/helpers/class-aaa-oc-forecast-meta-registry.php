@@ -6,7 +6,7 @@
  *          module. By keeping the list in one place we ensure that
  *          calculations, UI and database code remain in sync.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -79,6 +79,9 @@ class AAA_OC_Forecast_Meta_Registry {
             'forecast_updated_at'         => '',
 
             // AI / summary
+            'aip_product_summary'         => '',
+            'aip_inventory_summary'       => '',
+            'aip_sales_summary'           => '',
             'aip_forecast_summary'        => '',
         ];
     }

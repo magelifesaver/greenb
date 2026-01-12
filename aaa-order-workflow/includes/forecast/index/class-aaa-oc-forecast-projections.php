@@ -5,7 +5,7 @@
  *          to reorder based on daily sales velocity. Uses per-product lead
  *          time and minimum stock buffer or global fallbacks.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -63,7 +63,14 @@ class AAA_OC_Forecast_Projections {
     protected static function get_minimum_stock( WC_Product $product ) : int {
         $value = get_post_meta( $product->get_id(), 'forecast_minimum_stock', true );
         if ( $value === '' ) {
-            $value = function_exists( 'aaa_oc_get_option' ) ? aaa_oc_get_option( 'global_minimum_stock_buffer', 'forecast', 0 ) : 0;
+            if ( function_exists( 'aaa_oc_get_option' ) ) {
+                $value = aaa_oc_get_option( 'global_minimum_stock', 'forecast', 0 );
+                if ( $value === '' || $value === null ) {
+                    $value = aaa_oc_get_option( 'global_minimum_stock_buffer', 'forecast', 0 );
+                }
+            } else {
+                $value = 0;
+            }
         }
         return intval( $value );
     }
