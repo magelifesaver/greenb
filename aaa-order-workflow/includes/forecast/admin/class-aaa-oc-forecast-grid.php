@@ -7,7 +7,7 @@
  *          filtering.  Handles form submission via admin_post to enqueue
  *          selected products.
  *
- * Version: 0.1.0
+ * Version: 0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -50,6 +50,7 @@ class AAA_OC_Forecast_Grid_Admin {
         }
         // Ensure dashicons are available for flag icons.
         wp_enqueue_style( 'dashicons' );
+        wp_enqueue_style( 'aaa-oc-forecast-grid', plugins_url( 'includes/forecast/assets/forecast-grid.css', dirname( __DIR__, 3 ) . '/aaa-order-workflow.php' ), [], '0.1.0' );
         // DataTables core
         wp_enqueue_style( 'aaa-oc-datatables', 'https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css', [], '1.13.6' );
         wp_enqueue_script( 'aaa-oc-datatables', 'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js', [ 'jquery' ], '1.13.6', true );
@@ -77,6 +78,16 @@ class AAA_OC_Forecast_Grid_Admin {
         // Load custom labels for flags from settings
         $not_moving_label = function_exists( 'aaa_oc_get_option' ) ? aaa_oc_get_option( 'forecast_not_moving_label', 'forecast', 'Not Moving' ) : 'Not Moving';
         $stale_label      = function_exists( 'aaa_oc_get_option' ) ? aaa_oc_get_option( 'forecast_stale_label', 'forecast', 'Stale' ) : 'Stale';
+        // Determine PO option availability
+        $po_enabled = function_exists( 'aaa_oc_get_option' ) ? ( aaa_oc_get_option( 'enable_purchase_orders_globally', 'forecast', 'yes' ) === 'yes' ) : true;
+
+        // Build column groups for toggles
+        $groups = [];
+        foreach ( $columns as $key => $def ) {
+            $group_label = $def['group'] ?? 'Other';
+            $groups[ $group_label ] = $group_label;
+        }
+
         // Nonce for bulk action
         $nonce = wp_create_nonce( 'aaa_oc_forecast_bulk_action' );
         ?>
@@ -90,10 +101,22 @@ class AAA_OC_Forecast_Grid_Admin {
                         <select name="bulk_action" id="bulk-action-selector-top">
                             <option value="" selected="selected"><?php esc_html_e( 'Bulk actions', 'aaa-oc-forecast' ); ?></option>
                             <option value="queue_forecast"><?php esc_html_e( 'Queue for Forecast', 'aaa-oc-forecast' ); ?></option>
-                            <option value="queue_po"><?php esc_html_e( 'Queue for Purchase Order', 'aaa-oc-forecast' ); ?></option>
+                            <?php if ( $po_enabled ) : ?>
+                                <option value="queue_po"><?php esc_html_e( 'Queue for Purchase Order', 'aaa-oc-forecast' ); ?></option>
+                            <?php endif; ?>
                         </select>
                         <button type="submit" class="button action"><?php esc_html_e( 'Apply', 'aaa-oc-forecast' ); ?></button>
                     </div>
+                </div>
+                <div class="aaa-oc-forecast-grid-controls">
+                    <span class="aaa-oc-forecast-grid-controls__label"><?php esc_html_e( 'Column Groups:', 'aaa-oc-forecast' ); ?></span>
+                    <?php foreach ( $groups as $group_label ) : ?>
+                        <?php $slug = sanitize_html_class( $group_label ); ?>
+                        <label class="aaa-oc-forecast-grid-controls__group">
+                            <input type="checkbox" class="aaa-oc-forecast-group-toggle" data-group="<?php echo esc_attr( $slug ); ?>" checked />
+                            <?php echo esc_html( $group_label ); ?>
+                        </label>
+                    <?php endforeach; ?>
                 </div>
                 <table id="aaa-oc-forecast-table" class="display wp-list-table widefat striped">
                     <thead>
@@ -109,8 +132,10 @@ class AAA_OC_Forecast_Grid_Admin {
                                 if ( in_array( $key, $hidden_columns, true ) ) {
                                     continue;
                                 }
+                                $group_class = sanitize_html_class( $def['group'] ?? 'Other' );
+                                $type_class = 'aaa-oc-forecast-col--' . sanitize_html_class( $def['type'] ?? 'text' );
                             ?>
-                            <th scope="col" data-col="<?php echo esc_attr( $key ); ?>">
+                            <th scope="col" data-col="<?php echo esc_attr( $key ); ?>" data-group="<?php echo esc_attr( $group_class ); ?>" class="<?php echo esc_attr( $type_class ); ?>">
                                     <?php echo esc_html( $def['label'] ); ?>
                                 </th>
                             <?php endforeach; ?>
@@ -144,9 +169,11 @@ class AAA_OC_Forecast_Grid_Admin {
                                         continue;
                                     }
                                     $val = $row[ $key ] ?? null;
+                                    $group_class = sanitize_html_class( $def['group'] ?? 'Other' );
+                                    $type_class = 'aaa-oc-forecast-col--' . sanitize_html_class( $def['type'] ?? 'text' );
                                     // Render booleans as icons
                                     if ( $def['type'] === 'boolean' ) {
-                                        echo '<td style="text-align:center;">' . ( $val ? '&#x2714;' : '&#x2014;' ) . '</td>';
+                                        echo '<td style="text-align:center;" data-group="' . esc_attr( $group_class ) . '" class="' . esc_attr( $type_class ) . '">' . ( $val ? '&#x2714;' : '&#x2014;' ) . '</td>';
                                     } else {
                                         // Format dates and numbers nicely
                                         if ( $def['type'] === 'date' && $val ) {
@@ -154,11 +181,11 @@ class AAA_OC_Forecast_Grid_Admin {
                                         } elseif ( $def['type'] === 'currency' && $val !== null ) {
                                             $display = wc_price( $val );
                                         } elseif ( $def['type'] === 'percent' && $val !== null ) {
-                                            $display = round( $val * 100, 2 ) . '%';
+                                            $display = ( abs( $val ) <= 1 ) ? round( $val * 100, 2 ) . '%' : round( $val, 2 ) . '%';
                                         } else {
                                             $display = $val;
                                         }
-                                        echo '<td>' . esc_html( $display ) . '</td>';
+                                        echo '<td data-group="' . esc_attr( $group_class ) . '" class="' . esc_attr( $type_class ) . '">' . esc_html( $display ) . '</td>';
                                     }
                                     ?>
                                 <?php endforeach; ?>
@@ -175,6 +202,18 @@ class AAA_OC_Forecast_Grid_Admin {
                 fixedHeader: true,
                 order: [],
                 pageLength: 25
+            });
+            function setGroupVisibility(group, visible) {
+                table.columns().every(function(index) {
+                    var header = $(this.header());
+                    if (header.data('group') === group) {
+                        this.visible(visible);
+                    }
+                });
+            }
+            $('.aaa-oc-forecast-group-toggle').on('change', function() {
+                var group = $(this).data('group');
+                setGroupVisibility(group, $(this).is(':checked'));
             });
             // Select/Deselect all
             $('#aaa_oc_forecast_select_all').on('click', function(){

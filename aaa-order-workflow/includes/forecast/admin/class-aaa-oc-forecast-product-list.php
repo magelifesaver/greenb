@@ -2,7 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/class-aaa-oc-forecast-product-list.php
  * Purpose: Optional forecast columns + sorting + bulk queue on WooCommerce Products list.
- * Version: 0.1.1
+ * Version: 0.1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -11,7 +11,7 @@ if ( ! defined( 'AAA_OC_FORECAST_PRODUCT_LIST_DEBUG' ) ) { define( 'AAA_OC_FOREC
 
 class AAA_OC_Forecast_Product_List {
 
-	private static $numeric = [ 'forecast_stock_qty','forecast_total_units_sold','forecast_sales_month','forecast_sales_day','forecast_sales_day_lifetime','forecast_margin_percent','forecast_frozen_capital','forecast_po_priority_score' ];
+	private static $numeric = [ 'forecast_stock_qty','forecast_total_units_sold','forecast_sales_month','forecast_margin_percent','forecast_frozen_capital','forecast_po_priority_score' ];
 	private static $table_cache = [];
 
 	public static function init(): void {
@@ -31,7 +31,15 @@ class AAA_OC_Forecast_Product_List {
 			AAA_OC_Options::init();
 		}
 		$s = aaa_oc_get_option( 'forecast_field_settings', 'forecast', [] );
-		return is_array( $s ) ? $s : [];
+		if ( ! is_array( $s ) ) {
+			return [];
+		}
+		foreach ( $s as $key => $cfg ) {
+			if ( ! isset( $cfg['mirror'] ) ) {
+				$s[ $key ]['mirror'] = 1;
+			}
+		}
+		return $s;
 	}
 
 	private static function is_main_products_query( WP_Query $q ): bool {
@@ -52,7 +60,7 @@ class AAA_OC_Forecast_Product_List {
 		$settings = self::get_settings();
 		$table_cols = [];
 		foreach ( $settings as $key => $cfg ) {
-			if ( ! empty( $cfg['enabled'] ) && ( $cfg['storage'] ?? 'meta' ) === 'table' ) { $table_cols[] = $key; }
+			if ( ! empty( $cfg['enabled'] ) ) { $table_cols[] = $key; }
 		}
 		if ( empty( $table_cols ) ) { return $posts; }
 
@@ -78,15 +86,14 @@ class AAA_OC_Forecast_Product_List {
 		$cfg = self::get_settings()[ $col ] ?? [];
 		if ( empty( $cfg['enabled'] ) ) { return; }
 
-		$storage = $cfg['storage'] ?? 'meta';
-		$val = ( $storage === 'table' && isset( self::$table_cache[ $post_id ][ $col ] ) ) ? self::$table_cache[ $post_id ][ $col ] : get_post_meta( $post_id, $col, true );
+		$val = isset( self::$table_cache[ $post_id ][ $col ] ) ? self::$table_cache[ $post_id ][ $col ] : get_post_meta( $post_id, $col, true );
 		if ( is_array( $val ) ) { $val = wp_json_encode( $val ); }
 		echo esc_html( (string) $val );
 	}
 
 	public static function sortable_columns( array $sortable ): array {
 		foreach ( self::get_settings() as $key => $cfg ) {
-			if ( ! empty( $cfg['enabled'] ) && ! empty( $cfg['sortable'] ) && ( $cfg['storage'] ?? 'meta' ) === 'meta' ) { $sortable[ $key ] = $key; }
+			if ( ! empty( $cfg['enabled'] ) && ! empty( $cfg['mirror'] ) ) { $sortable[ $key ] = $key; }
 		}
 		return $sortable;
 	}
@@ -95,7 +102,7 @@ class AAA_OC_Forecast_Product_List {
 		if ( ! self::is_main_products_query( $q ) ) { return; }
 		$orderby = (string) $q->get( 'orderby' );
 		$cfg = self::get_settings()[ $orderby ] ?? [];
-		if ( empty( $cfg['sortable'] ) || ( $cfg['storage'] ?? 'meta' ) !== 'meta' ) { return; }
+		if ( empty( $cfg['mirror'] ) ) { return; }
 		$q->set( 'meta_key', $orderby );
 		$q->set( 'orderby', in_array( $orderby, self::$numeric, true ) ? 'meta_value_num' : 'meta_value' );
 	}

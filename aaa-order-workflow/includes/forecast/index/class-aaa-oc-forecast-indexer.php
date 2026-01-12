@@ -9,7 +9,7 @@
  *          to write the latest forecast data.  This class keeps its
  *          responsibilities limited to database operations and enqueuing.
  *
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -34,14 +34,14 @@ class AAA_OC_Forecast_Indexer {
      * @param int    $product_id Product ID.
      * @param string $src        Optional source label for logging/debug.
      */
-    public static function upsert_now( int $product_id, string $src = '' ) : void {
+    public static function upsert_now( int $product_id, string $src = '', array $values = [] ) : void {
         global $wpdb;
         // Ensure table exists
         if ( class_exists( 'AAA_OC_Forecast_Table_Installer' ) ) {
             AAA_OC_Forecast_Table_Installer::init();
         }
         // Build row
-        $row = AAA_OC_Forecast_Row_Builder::build_row( $product_id );
+        $row = AAA_OC_Forecast_Row_Builder::build_row( $product_id, $values );
         if ( empty( $row ) ) {
             return;
         }
@@ -91,7 +91,11 @@ class AAA_OC_Forecast_Indexer {
         foreach ( $product_ids as $pid ) {
             $enabled = get_post_meta( $pid, 'forecast_enable_reorder', true );
             if ( $enabled === 'yes' || $enabled === 1 ) {
-                self::upsert_now( $pid, 'initial' );
+                if ( class_exists( 'AAA_OC_Forecast_Runner' ) ) {
+                    AAA_OC_Forecast_Runner::update_single_product( $pid );
+                } else {
+                    self::upsert_now( $pid, 'initial' );
+                }
             } else {
                 // Ensure rows for disabled products are removed.
                 self::delete_row( $pid );
