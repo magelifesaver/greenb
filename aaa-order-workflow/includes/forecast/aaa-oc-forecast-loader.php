@@ -6,7 +6,11 @@
  *          processing hooks. Designed to coexist with the legacy forecaster
  *          without overwriting its keys. All new functionality lives under
  *          the forecast namespace and does not rename existing meta keys.
+<<<<<<< HEAD
  * Version: 0.1.2
+=======
+ * Version: 0.1.1
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -115,6 +119,7 @@ add_action( 'plugins_loaded', function () {
         if ( $pending > 0 && ! wp_next_scheduled( 'aaa_oc_process_forecast_queue' ) ) {
             // Schedule processing in the background if no cron is scheduled.
             AAA_OC_Forecast_Queue::schedule_process_queue( MINUTE_IN_SECONDS );
+<<<<<<< HEAD
         }
     }
 
@@ -127,6 +132,8 @@ add_action( 'plugins_loaded', function () {
         }
         if ( $po_pending > 0 && ! wp_next_scheduled( 'aaa_oc_process_po_queue' ) ) {
             AAA_OC_Forecast_Queue::schedule_po_run( MINUTE_IN_SECONDS );
+=======
+>>>>>>> main
         }
     }
 

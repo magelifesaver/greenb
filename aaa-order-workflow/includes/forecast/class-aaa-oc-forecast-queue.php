@@ -2,7 +2,11 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/class-aaa-oc-forecast-queue.php
  * Purpose: Forecast queue CRUD + batch processing.
+<<<<<<< HEAD
  * Version: 0.1.3
+=======
+ * Version: 0.1.2
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -12,13 +16,19 @@ class AAA_OC_Forecast_Queue {
 	private const HOOK        = 'aaa_oc_process_forecast_queue';
 	private const INLINE_LOCK = 'aaa_oc_forecast_queue_inline_lock';
 	private const QUEUE_ALL_HOOK = 'aaa_oc_queue_all_enabled_products';
+<<<<<<< HEAD
 	private const PO_HOOK = 'aaa_oc_process_po_queue';
+=======
+>>>>>>> main
 
 	public static function init(): void {
 		add_action( 'init', [ __CLASS__, 'clear_legacy_schedule' ] );
 		add_action( self::HOOK, [ __CLASS__, 'process_forecast_queue' ] );
 		add_action( self::QUEUE_ALL_HOOK, [ __CLASS__, 'queue_all_enabled_products' ] );
+<<<<<<< HEAD
 		add_action( self::PO_HOOK, [ __CLASS__, 'process_po_queue' ] );
+=======
+>>>>>>> main
 		add_action( 'admin_init', [ __CLASS__, 'maybe_process_inline' ] );
 	}
 

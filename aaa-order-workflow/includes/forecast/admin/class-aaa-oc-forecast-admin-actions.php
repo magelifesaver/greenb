@@ -2,7 +2,11 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/class-aaa-oc-forecast-admin-actions.php
  * Purpose: Admin-post handlers used by Forecast settings tabs (queue tools).
+<<<<<<< HEAD
  * Version: 0.1.3
+=======
+ * Version: 0.1.2
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -48,6 +52,7 @@ class AAA_OC_Forecast_Admin_Actions {
 		}
 
 		self::redirect_back( [ 'aaa_oc_forecast_process_scheduled' => 1 ] );
+<<<<<<< HEAD
 	}
 
 	public static function process_po_queue(): void {
@@ -63,6 +68,8 @@ class AAA_OC_Forecast_Admin_Actions {
 		}
 
 		self::redirect_back( [ 'aaa_oc_forecast_po_process_scheduled' => 1 ] );
+=======
+>>>>>>> main
 	}
 
 	public static function repair_queue_tables(): void {
