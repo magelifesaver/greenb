@@ -2,7 +2,11 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/class-aaa-oc-forecast-queue.php
  * Purpose: Forecast queue CRUD + batch processing.
+<<<<<<< HEAD
+ * Version: 0.1.3
+=======
  * Version: 0.1.2
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -12,11 +16,19 @@ class AAA_OC_Forecast_Queue {
 	private const HOOK        = 'aaa_oc_process_forecast_queue';
 	private const INLINE_LOCK = 'aaa_oc_forecast_queue_inline_lock';
 	private const QUEUE_ALL_HOOK = 'aaa_oc_queue_all_enabled_products';
+<<<<<<< HEAD
+	private const PO_HOOK = 'aaa_oc_process_po_queue';
+=======
+>>>>>>> main
 
 	public static function init(): void {
 		add_action( 'init', [ __CLASS__, 'clear_legacy_schedule' ] );
 		add_action( self::HOOK, [ __CLASS__, 'process_forecast_queue' ] );
 		add_action( self::QUEUE_ALL_HOOK, [ __CLASS__, 'queue_all_enabled_products' ] );
+<<<<<<< HEAD
+		add_action( self::PO_HOOK, [ __CLASS__, 'process_po_queue' ] );
+=======
+>>>>>>> main
 		add_action( 'admin_init', [ __CLASS__, 'maybe_process_inline' ] );
 	}
 
@@ -151,6 +163,58 @@ class AAA_OC_Forecast_Queue {
 
 			$wpdb->insert( $table, $data, $format );
 		}
+
+		self::schedule_po_run( MINUTE_IN_SECONDS );
+	}
+
+	public static function schedule_po_run( int $delay ): void {
+		if ( ! wp_next_scheduled( self::PO_HOOK ) ) {
+			wp_schedule_single_event( time() + max( 5, $delay ), self::PO_HOOK );
+		}
+	}
+
+	public static function process_po_queue(): void {
+		self::maybe_install_tables();
+
+		if ( ! class_exists( 'AAA_OC_Forecast_PO_Processor' ) ) {
+			return;
+		}
+
+		global $wpdb;
+		$table = AAA_OC_FORECAST_PO_QUEUE_TABLE;
+		if ( ! self::table_exists( $table ) ) { return; }
+
+		$rows = $wpdb->get_results(
+			"SELECT * FROM {$table} WHERE status = 'pending' ORDER BY id ASC LIMIT 10",
+			ARRAY_A
+		);
+		if ( empty( $rows ) ) { return; }
+
+		$user_id = get_current_user_id();
+		$ids = [];
+		foreach ( $rows as $row ) {
+			$id = absint( $row['id'] ?? 0 );
+			if ( ! $id ) { continue; }
+			$ids[] = $id;
+			$update = [ 'status' => 'processing' ];
+			$fmt = [ '%s' ];
+			if ( self::table_has_col( $table, 'user_id' ) ) { $update['user_id'] = $user_id; $fmt[] = '%d'; }
+			$wpdb->update( $table, $update, [ 'id' => $id ], $fmt, [ '%d' ] );
+		}
+
+		$po_id = AAA_OC_Forecast_PO_Processor::create_purchase_order( $rows );
+		$status = $po_id ? 'done' : 'error';
+
+		foreach ( $ids as $id ) {
+			$done = [ 'status' => $status ];
+			$dft  = [ '%s' ];
+			if ( self::table_has_col( $table, 'user_id' ) ) { $done['user_id'] = $user_id; $dft[] = '%d'; }
+			if ( $po_id && self::table_has_col( $table, 'po_id' ) ) { $done['po_id'] = $po_id; $dft[] = '%d'; }
+			$wpdb->update( $table, $done, [ 'id' => $id ], $dft, [ '%d' ] );
+		}
+
+		$more = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'pending'" );
+		if ( $more > 0 ) { self::schedule_po_run( 5 * MINUTE_IN_SECONDS ); }
 	}
 
 	public static function process_forecast_queue(): void {

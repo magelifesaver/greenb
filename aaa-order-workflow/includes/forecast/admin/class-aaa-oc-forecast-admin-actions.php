@@ -2,7 +2,11 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/class-aaa-oc-forecast-admin-actions.php
  * Purpose: Admin-post handlers used by Forecast settings tabs (queue tools).
+<<<<<<< HEAD
+ * Version: 0.1.3
+=======
  * Version: 0.1.2
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -16,6 +20,7 @@ class AAA_OC_Forecast_Admin_Actions {
 	public static function init(): void {
 		add_action( 'admin_post_aaa_oc_forecast_queue_all_enabled', [ __CLASS__, 'queue_all_enabled' ] );
 		add_action( 'admin_post_aaa_oc_forecast_process_queue_now', [ __CLASS__, 'process_queue_now' ] );
+		add_action( 'admin_post_aaa_oc_forecast_process_po_queue', [ __CLASS__, 'process_po_queue' ] );
 		add_action( 'admin_post_aaa_oc_forecast_repair_queue_tables', [ __CLASS__, 'repair_queue_tables' ] );
 	}
 
@@ -47,6 +52,24 @@ class AAA_OC_Forecast_Admin_Actions {
 		}
 
 		self::redirect_back( [ 'aaa_oc_forecast_process_scheduled' => 1 ] );
+<<<<<<< HEAD
+	}
+
+	public static function process_po_queue(): void {
+		self::require_manage_woo();
+		check_admin_referer( 'aaa_oc_forecast_process_po_queue' );
+
+		if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+			AAA_OC_Forecast_Queue::schedule_po_run( 10 );
+		}
+
+		if ( AAA_OC_FORECAST_ADMIN_ACTIONS_DEBUG ) {
+			error_log( '[AAA_OC Forecast Admin] Scheduled PO queue processing.' );
+		}
+
+		self::redirect_back( [ 'aaa_oc_forecast_po_process_scheduled' => 1 ] );
+=======
+>>>>>>> main
 	}
 
 	public static function repair_queue_tables(): void {

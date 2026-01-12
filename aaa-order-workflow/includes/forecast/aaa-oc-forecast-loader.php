@@ -6,7 +6,11 @@
  *          processing hooks. Designed to coexist with the legacy forecaster
  *          without overwriting its keys. All new functionality lives under
  *          the forecast namespace and does not rename existing meta keys.
+<<<<<<< HEAD
+ * Version: 0.1.2
+=======
  * Version: 0.1.1
+>>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -59,6 +63,7 @@ require_once __DIR__ . '/index/class-aaa-oc-forecast-status.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-timeline.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-overrides.php';
 require_once __DIR__ . '/index/class-aaa-oc-forecast-runner.php';
+require_once __DIR__ . '/index/class-aaa-oc-forecast-po-processor.php';
 require_once __DIR__ . '/class-aaa-oc-forecast-queue.php';
 require_once __DIR__ . '/helpers/class-aaa-oc-forecast-row-builder.php';
 require_once __DIR__ . '/admin/class-aaa-oc-forecast-grid.php';
@@ -114,6 +119,21 @@ add_action( 'plugins_loaded', function () {
         if ( $pending > 0 && ! wp_next_scheduled( 'aaa_oc_process_forecast_queue' ) ) {
             // Schedule processing in the background if no cron is scheduled.
             AAA_OC_Forecast_Queue::schedule_process_queue( MINUTE_IN_SECONDS );
+<<<<<<< HEAD
+        }
+    }
+
+    if ( class_exists( 'AAA_OC_Forecast_Queue' ) ) {
+        global $wpdb;
+        $po_pending = 0;
+        $po_table = AAA_OC_FORECAST_PO_QUEUE_TABLE;
+        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $po_table ) ) === $po_table ) {
+            $po_pending = (int) $wpdb->get_var( "SELECT COUNT(*) FROM $po_table WHERE status = 'pending'" );
+        }
+        if ( $po_pending > 0 && ! wp_next_scheduled( 'aaa_oc_process_po_queue' ) ) {
+            AAA_OC_Forecast_Queue::schedule_po_run( MINUTE_IN_SECONDS );
+=======
+>>>>>>> main
         }
     }
 

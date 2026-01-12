@@ -5,7 +5,7 @@
  *          There are two queues: one for forecast jobs and another for
  *          purchase order preparations. Each queue holds lightweight rows
  *          referencing product IDs and tracks status, user and timestamps.
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -49,6 +49,7 @@ class AAA_OC_Forecast_Queue_Installer {
             "product_id BIGINT(20) UNSIGNED NOT NULL,\n" .
             "quantity BIGINT(20) UNSIGNED NOT NULL DEFAULT 1,\n" .
             "price DECIMAL(20,4) NULL,\n" .
+            "po_id BIGINT(20) UNSIGNED NULL,\n" .
             "status VARCHAR(20) NOT NULL DEFAULT 'pending',\n" .
             "user_id BIGINT(20) UNSIGNED NULL,\n" .
             "created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" .
