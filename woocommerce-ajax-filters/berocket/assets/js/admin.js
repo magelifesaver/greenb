@@ -344,8 +344,13 @@ var br_something_changed = false;
                                 $result_block = $('body').append($result_block);
                                 $('.berocket_search_result').css('position', 'absolute')
                                 .css('top', $search_box.offset().top+$search_box.height())
-                                .css('left', $search_box.offset().left)
                                 .outerWidth($search_box.outerWidth());
+                                if( getComputedStyle($search_box[0]).direction === 'rtl' ) {
+                                    var rtl_pos = ($('.berocket_search_result').offsetParent().outerWidth() - $search_box.offset().left) - $search_box.outerWidth();
+                                    $('.berocket_search_result').css('right', rtl_pos);
+                                } else {
+                                    $('.berocket_search_result').css('left', $search_box.offset().left);
+                                }
                             }
                             $('.berocket_product_search .berocket_loads').remove();
                         }, 'json');

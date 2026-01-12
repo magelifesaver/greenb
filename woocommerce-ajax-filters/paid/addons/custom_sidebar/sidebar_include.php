@@ -380,7 +380,7 @@ class BeRocket_AAPF_custom_sidebar {
             BeRocket_AAPF::wp_enqueue_style('berocket_aapf_widget-themes');
         }
     }
-    public function add_javascript_option($the_ajax_script, $option) {
+    public function add_javascript_option($the_ajax_script, $option = array()) {
         $the_ajax_script['custom_sidebar_close'] = ! empty($option['custom_sidebar_close']);
         return $the_ajax_script;
     }

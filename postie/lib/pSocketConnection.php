@@ -43,9 +43,10 @@ class pSocketConnection extends pConnection {
 
         stream_set_timeout($this->socket, $this->timeout);
 
+        $openSsl = extension_loaded('openssl');
         if ($this->type == 'imap') {
             DebugEcho("Socket: IMAP");
-            if ($this->secure && extension_loaded('openssl')) {
+            if ($this->secure && $openSsl) {
                 $response = $this->write('CAPABILITY');
                 if (preg_match('#\bstarttls\b#i', $response[0])) {
                     $this->write('STARTTLS');
@@ -56,7 +57,15 @@ class pSocketConnection extends pConnection {
                         $res = stream_socket_enable_crypto($this->socket, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
                     } while ($res === 0);
                 }
+            } else {
+                if (!$openSsl) {
+                    DebugEcho("Socket: OpenSSL not enabled");
+                }
+                if ($this->secure) {
+                    DebugEcho("Socket: IMAP-SSL was not selected");
+                }
             }
+
             $response = $this->write('LOGIN ' . $this->username . ' "' . $this->password . '"');
             if (!$response || !preg_match('#^[^ ]+\s+OK#', $response[count($response) - 1])) {
                 throw new fValidationException('IMAP - Could not connect to %1$s server %2$s on port %3$s. %4$s', strtoupper($this->type), $this->host, $this->port, print_r($response, true));
@@ -72,7 +81,7 @@ class pSocketConnection extends pConnection {
                 preg_match('#<[^@]+@[^>]+>#', $response[0], $match);
             }
 
-            if ($this->secure && extension_loaded('openssl')) {
+            if ($this->secure && $openSsl) {
                 DebugEcho("Socket: attempting a secure connection");
                 $response = $this->write('STLS', 1);
                 if ($response[0][0] == '+') {
@@ -91,6 +100,13 @@ class pSocketConnection extends pConnection {
                     if ($res === FALSE) {
                         throw new fConnectivityException('Error establishing secure connection');
                     }
+                }
+            } else {
+                if (!$openSsl) {
+                    DebugEcho("Socket: OpenSSL not enabled");
+                }
+                if ($this->secure) {
+                    DebugEcho("Socket: POP-SSL was not selected");
                 }
             }
 
@@ -245,5 +261,4 @@ class pSocketConnection extends pConnection {
     public function isPersistant() {
         return true;
     }
-
 }

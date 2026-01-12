@@ -11,7 +11,7 @@
 
 		var self = this,
 			$elem = $scope.find(".premium-woocommerce"),
-			skin = $scope.find('.premium-woocommerce').data('skin'),
+			skin = $elem.data('skin'),
 			html = null,
 			canLoadMore = true;
 
@@ -37,6 +37,8 @@
 		self.init = function () {
 
 			self.handleProductsCarousel();
+
+			self.handleMarqueeEffect();
 
 			if ("yes" === isQuickView) {
 				self.handleProductQuickView();
@@ -131,6 +133,10 @@
 				return '<i class="fas fa-circle"></i>';
 			};
 
+			if (carousel.arrowCustomPos) {
+				carousel.appendArrows = $elem.find(".premium-carousel-arrows-wrapper");
+			}
+
 			$products.on("init", function (event) {
 				setTimeout(function () {
 					$elem.removeClass("premium-carousel-hidden");
@@ -144,16 +150,132 @@
 				return;
 			}
 
-
 			$products.slick(carousel);
 
+		};
 
+		self.handleMarqueeEffect = function () {
+			var isMarquee = $elem.hasClass("premium-woo-products-marquee");
+
+			if (!isMarquee)
+				return;
+
+			var $products = $elem.find('ul.products'),
+				settings = $elem.data('woo_marquee'),
+				scrollDir = settings.direction,
+				spacing = getComputedStyle($products[0]).getPropertyValue('--pa-marquee-spacing');
+
+			this.cloneItems();
+			var horAlignWidth = this.setHorizontalWidth(spacing);
+
+			var fullWidth = horAlignWidth;
+			if ('normal' === scrollDir) {
+
+				var animation = gsap.to($products, {
+					x: -fullWidth,
+					duration: settings.speed || 50,
+					ease: "none",
+					repeat: -1,
+					modifiers: {
+						x: gsap.utils.unitize(x => parseFloat(x) % fullWidth)
+					}
+
+				});
+			} else {
+
+				gsap.set($products[0], { x: -fullWidth });
+
+				var animation = gsap.to($products, {
+					x: 0,
+					duration: settings.speed || 50,
+					ease: "none",
+					repeat: -1,
+					modifiers: {
+						x: gsap.utils.unitize(x => {
+							var value = parseFloat(x);
+							return value > 0 ? value - fullWidth : value;
+						})
+					}
+				});
+			}
+
+			// Show the marquee after initializing GSAP to avoid unstyled content flash.
+			$elem.removeClass("premium-carousel-hidden");
+
+			// Make it draggable.
+			var isDraggable = settings.draggable && !elementorFrontend.isEditMode();
+			if (isDraggable) {
+
+				Draggable.create($products, {
+					type: "x",
+					inertia: false,
+					onDragStart: function () {
+						animation.pause();
+
+					},
+					onDragEnd: function () {
+						var currentX = gsap.getProperty($products[0], "x"),
+							// Calculate where we are in the cycle
+							normalizedX = ((currentX % fullWidth) + fullWidth) % fullWidth - fullWidth;
+
+						// Set to normalized position and restart animation.
+						gsap.set($products[0], { x: normalizedX });
+						animation.invalidate().restart();
+					},
+					onDrag: function () {
+						// Wrap the position for infinite scroll.
+						var currentX = gsap.getProperty($products[0], "x");
+
+						if (currentX > 0) {
+							gsap.set($products[0], { x: currentX - fullWidth });
+						} else if (currentX < -fullWidth) {
+							gsap.set($products[0], { x: currentX + fullWidth });
+						}
+					},
+				});
+
+			}
+
+			// Pause animation on hover.
+			$elem.hover(function () {
+				animation.pause();
+			}, function () {
+				animation.play();
+			})
+
+		};
+
+		self.cloneItems = function () {
+
+			var $products = $elem.find('ul.products'),
+				$items = $products.find('li.product'),
+				docFragment = new DocumentFragment();
+
+			$items.each(function () {
+				var clone = $(this).clone(true, true)[0];
+				docFragment.appendChild(clone);
+			});
+
+			$products.append(docFragment);
+
+		};
+
+		self.setHorizontalWidth = function (spacing) {
+
+			var slidesSpacing = parseFloat(spacing) || 0,
+				fullWidth = 0,
+				$products = $elem.find('li.product'),
+				slideWidth = $products[0].offsetWidth;
+
+			fullWidth = (slideWidth + slidesSpacing) * ($products.length / 2);
+
+			return fullWidth;
 
 		};
 
 		self.handleGridMasonry = function () {
 
-			var $products = $elem.find("ul.products");
+			var $products = $elem.find('ul.products');
 
 			$products
 				.imagesLoaded(function () { })
@@ -168,9 +290,6 @@
 								queue: false
 							},
 							layoutMode: "masonry",
-							// masonry: {
-							//     columnWidth: cellSize
-							// }
 						});
 					});
 		};
@@ -705,6 +824,10 @@
 
 	//Elementor JS Hooks.
 	$(window).on("elementor/frontend/init", function () {
+
+		if ('undefined' !== typeof paElementsHandler && paElementsHandler.isElementAlreadyExists('paWooProducts')) {
+			return false;
+		}
 
 		if ($('.static-products').length > 0) {
 			$('.elementor-widget-premium-woo-products').map(function (index, elem) {

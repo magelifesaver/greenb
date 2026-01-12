@@ -45,16 +45,6 @@
   visibility: hidden;
 }
 
-.premium-carousel-arrows-wrapper {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
-}
-
 .ver-carousel-arrow.carousel-next i {
   margin-bottom: -3px;
 }

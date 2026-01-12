@@ -106,7 +106,24 @@ if( ! class_exists('BeRocket_AAPF_search_field_apply') ) {
                     $post_content = array();
                     global $berocket_parse_page_obj;
                     global $wp_query;
-                    $query_vars = $berocket_parse_page_obj->query_vars;
+                    if( ! empty($berocket_query_var_title['group_search_box']) ) {
+                        if( $berocket_query_var_title['group_search_box_link_type'] == 'category' ) {
+                            $query_vars = array(
+                                'tax_query' => array(
+                                    'relation' => 'AND',
+                                    array(
+                                        'taxonomy'  => 'protuc_cat',
+                                        'field'     => 'slug',
+                                        'terms'     => $berocket_query_var_title['group_search_box_category'],
+                                    ),
+                                )
+                            );
+                        } else {
+                            $query_vars = array();
+                        }
+                    } else {
+                        $query_vars = $berocket_parse_page_obj->query_vars;
+                    }
                     if( ($search = $this->get_srch()) !== false ) {
                         $term_search = $this->get_term_search_data($search);
                     }

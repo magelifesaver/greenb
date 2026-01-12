@@ -854,6 +854,7 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
         add_filter( 'berocket_aapf_group_after_all', array($this, 'search_box_after_group_end'), 10, 2 );
         add_filter( 'berocket_aapf_group_before_filter', array($this, 'search_box_before_group_filter'), 10, 2 );
         add_filter( 'berocket_aapf_group_after_filter', array($this, 'search_box_after_group_filter'), 10, 2 );
+        add_filter( 'berocket_query_var_title_before_element', array($this, 'search_box_field_data'), 100, 2 );
         add_filter( 'berocket_aapf_group_new_args', array($this, 'group_new_args'), 10, 2 );
         add_filter( 'berocket_aapf_group_new_args_filter', array($this, 'group_new_args_filter'), 10, 3 );
         add_filter( 'wp_footer', array($this, 'search_box_loaded_footer') );
@@ -863,6 +864,7 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
     }
     //GROUP SEARCH BOX
     function search_box_before_group_start($custom_vars, $filters) {
+        $custom_vars['search_box'] = ! empty($filters['search_box']);
         if( ! empty($filters['search_box']) ) {
             $search_box_main_class = array('berocket_search_box_block');
             if( ! empty($filters['hide_group']['mobile']) ) {
@@ -940,6 +942,15 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
         }
         return $custom_vars;
     }
+    function search_box_field_data($set_query_var_title, $additional) {
+        if( ! empty($additional['args']['group_search_box']) ) {
+            $set_query_var_title['group_search_box']           = true;
+            $set_query_var_title['group_search_box_link_type'] = $additional['args']['group_search_box_link_type'];
+            $set_query_var_title['group_search_box_category']  = $additional['args']['group_search_box_category'];
+            $set_query_var_title['group_search_box_url']       = $additional['args']['group_search_box_url'];
+        }
+        return $set_query_var_title;
+    }
     function search_box_loaded_footer() {
         if( ! empty($_GET['bapf_gid']) ) {
             $group_id = intval($_GET['bapf_gid']);
@@ -953,6 +964,12 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
     }
     //GROUP INLINE
     function group_new_args($new_args, $filters) {
+        if( ! empty($filters['search_box']) ) {
+            $new_args['group_search_box']           = true;
+            $new_args['group_search_box_link_type'] = $filters['search_box_link_type'];
+            $new_args['group_search_box_category']  = $filters['search_box_category'];
+            $new_args['group_search_box_url']       = $filters['search_box_url'];
+        }
         $title_class = array();
         $additional_class = array();
 	    if( empty($new_args['additional_class']) || ! is_array($new_args['additional_class']) ) {
@@ -2380,11 +2397,11 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
         echo '<div class="braapf_attribute_setup_flex">';
             echo '<div class="braapf_range_display_type braapf_select_full">';
                 $range_types = array(
-                    array('value' => '',        'name' => __('1.00-100.00, 101.00-200.00, 201.00-1000.00', 'BeRocket_AJAX_domain')),
-                    array('value' => 'same',    'name' => __('1.00-100.00, 100.00-200.00, 200.00-1000.00', 'BeRocket_AJAX_domain')),
                     array('value' => 'decimal', 'name' => __('1.00-99.99, 100.00-199.99, 200.00-999.99', 'BeRocket_AJAX_domain')),
+                    array('value' => 'same',    'name' => __('1.00-100.00, 100.00-200.00, 200.00-1000.00', 'BeRocket_AJAX_domain')),
+                    array('value' => '',        'name' => __('1.00-100.00, 101.00-200.00, 201.00-1000.00', 'BeRocket_AJAX_domain')),
                 );
-                $range_display_type = br_get_value_from_array($braapf_filter_settings, 'range_display_type', '0');
+                $range_display_type = br_get_value_from_array($braapf_filter_settings, 'range_display_type', 'decimal');
                 echo '<select id="braapf_range_display_type" name="'.$settings_name.'[range_display_type]">';
                     echo '<optgroup label="' . __('Ranges: 1,100,200,1000', 'BeRocket_AJAX_domain') . '">';
                     foreach($range_types as $range_type) {
@@ -2765,7 +2782,8 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
         add_filter('BeRocket_AAPF_template_single_item', array($this, 'multiple_color'), 1000, 4);
     }
     static function multiple_color($template, $term, $i, $berocket_query_var_title) {
-        if( ! empty($berocket_query_var_title['new_style']) && berocket_isset($berocket_query_var_title['new_style']['specific']) == 'color' ) {
+        if( ! empty($berocket_query_var_title['new_style']) && berocket_isset($berocket_query_var_title['new_style']['specific']) == 'color'
+        && empty($berocket_query_var_title['clrimg_use_attrval']) ) {
             $color_list = array('color', 'color_2', 'color_3', 'color_4');
             $meta_color = array();
             foreach($color_list as $color_name) {

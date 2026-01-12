@@ -6,8 +6,8 @@ Plugin URI: http://PostiePlugin.com/
 Tags: e-mail, email, post-by-email
 Requires PHP: 7.0
 Requires at least: 5.6
-Tested up to: 6.8
-Stable tag: 1.9.73
+Tested up to: 6.9
+Stable tag: 1.9.74
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ All script, style and body tags are stripped from html emails.
 Attachments are now processed in the order they were attached.
 
 == CHANGELOG ==
+= 1.9.74 (2026-01-06) =
+* Add logging for missing OpenSSL
+* Address https://patchstack.com/database/wordpress/plugin/postie/vulnerability/wordpress-postie-plugin-1-9-73-cross-site-scripting-xss-vulnerability
+
 = 1.9.73 (2025-09-09) =
 * Improved error handling for action/filter calls
 

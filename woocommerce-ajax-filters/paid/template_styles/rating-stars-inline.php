@@ -63,11 +63,12 @@ if( ! class_exists('BeRocket_AAPF_Template_Style_rating_stars_inline') ) {
                 }
                 if( $checked !== false ) {
                     foreach($template['template']['content']['filter']['content']['list']['content'] as $i => &$element) {
-                        if( $order_asc && $i < $checked ) {
-                            $element['content']['label']['content']['name'] = '<i class="fa fa-star"></i>';
-                            $element['content']['checkbox']['attributes']['checked'] = 'checked';
-                        } elseif( ! $order_asc && $i > $checked ) {
-                            $element['content']['label']['content']['name'] = '<i class="fa fa-star"></i>';
+                        if( ($order_asc && $i < $checked ) || (! $order_asc && $i > $checked) ) {
+                            if( isset($element['content']['label']['content']['link']) ) {
+                                $element['content']['label']['content']['link']['content']['name'] = '<i class="fa fa-star"></i>';
+                            } else {
+                                $element['content']['label']['content']['name'] = '<i class="fa fa-star"></i>';
+                            }
                             $element['content']['checkbox']['attributes']['checked'] = 'checked';
                         }
                     }

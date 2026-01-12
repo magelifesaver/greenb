@@ -9,6 +9,7 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
     class BeRocket_updater {
         public static $plugin_info = array();
         public static $slugs       = array();
+        public static $free_slugs  = array();
         public static $key         = '';
         public static $error_log   = array();
         public static $debug_mode  = false;
@@ -56,6 +57,7 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
             $update = false;
             foreach ( $plugin as $plug_id => $plug ) {
                 self::$slugs[ $plug[ 'id' ] ] = $plug[ 'slug' ];
+                self::$free_slugs[ $plug[ 'id' ] ] = $plug[ 'free_slug' ];
                 if ( isset( $options[ 'plugin_key' ][ $plug[ 'id' ] ] ) && $options[ 'plugin_key' ][ $plug[ 'id' ] ] != '' ) {
                     $plugin[ $plug_id ][ 'key' ] = $options[ 'plugin_key' ][ $plug[ 'id' ] ];
                 } elseif ( isset( $plugin[ $plug_id ][ 'key' ] ) && $plugin[ $plug_id ][ 'key' ] != '' ) {
@@ -969,9 +971,20 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                             unset( $value->no_update[ $key ] );
                         }
                     }
+                    if ( isset( $val->slug ) && in_array( $val->slug, self::$free_slugs ) ) {
+                        if( ! array_key_exists($key, $no_update_paid) ) {
+                            unset( $value->no_update[ $key ] );
+                        }
+                    }
                 }
             }
-
+            if ( ! empty($value) && isset( $value->response ) && is_array( $value->response ) ) {
+                foreach ( $value->response as $key => $val ) {
+                    if( array_key_exists($key, $no_update_paid) ) {
+                        unset( $value->response[ $key ] );
+                    }
+                }
+            }
             return $value;
         }
 

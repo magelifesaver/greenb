@@ -114,14 +114,35 @@ class Woo_Products extends Widget_Base {
 	 * @return array JS script handles.
 	 */
 	public function get_script_depends() {
-		return array(
-			'pa-glass',
-			'isotope-js',
-			'flexslider',
-			'pa-slick',
-			'imagesloaded',
-			'premium-woocommerce',
-		);
+
+		$is_edit = Helper_Functions::is_edit_mode();
+
+		$scripts = array( 'pa-glass', 'flexslider', 'imagesloaded' );
+
+		if ( $is_edit ) {
+
+			$scripts = array_merge( $scripts, array( 'pa-tweenmax', 'pa-draggable', 'isotope-js', 'pa-slick' ) );
+
+		} else {
+			$settings = $this->get_settings_for_display();
+
+			if ( 'masonry' === $settings['layout_type'] ) {
+				$scripts[] = 'isotope-js';
+			} else if( 'marquee' === $settings['layout_type'] ) {
+
+				if( 'yes' === $settings['marquee_draggable'] ) {
+					$scripts[] = 'pa-draggable';
+				}
+				$scripts[] = 'pa-tweenmax';
+			} else if( 'carousel' === $settings['layout_type'] ) {
+				$scripts[] = 'pa-slick';
+			}
+
+		}
+
+		$scripts[] = 'premium-woocommerce';
+
+		return $scripts;
 	}
 
 	/**
@@ -198,6 +219,7 @@ class Woo_Products extends Widget_Base {
 		$this->register_content_general_section( $papro_activated, $pro_skins );
 		$this->register_content_grid_section( $pro_skins );
 		$this->register_content_carousel_section( $pro_skins );
+		$this->register_content_marquee_section( $pro_skins );
 		$this->register_content_query_section( $pro_skins );
 		$this->register_content_pagination_section( $pro_skins );
 		$this->register_quick_view_settings( $pro_skins );
@@ -260,9 +282,32 @@ class Woo_Products extends Widget_Base {
 					'grid'     => __( 'Grid', 'premium-addons-for-elementor' ),
 					'carousel' => __( 'Carousel', 'premium-addons-for-elementor' ),
 					'masonry'  => __( 'Masonry', 'premium-addons-for-elementor' ),
+					'marquee'  => __( 'Marquee', 'premium-addons-for-elementor' ),
 				),
 				'condition' => array(
 					'_skin!' => $pro_skins,
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'marquee_product_width',
+			array(
+				'label'              => __( 'Product Width', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SLIDER,
+				'render_type'        => 'template',
+				'range'              => array(
+					'px' => array(
+						'min' => 100,
+						'max' => 800,
+					),
+				),
+				'label_block'        => true,
+				'condition'          => array(
+					'layout_type' => 'marquee',
+				),
+				'selectors'          => array(
+					'{{WRAPPER}} .premium-woo-products-marquee li.product'  => 'width: {{SIZE}}{{UNIT}}',
 				),
 			)
 		);
@@ -344,7 +389,7 @@ class Woo_Products extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => array(
 					'pagination!'  => 'yes',
-					'layout_type!' => 'carousel',
+					'layout_type!' => [ 'carousel', 'marquee' ],
 					'query_type!'  => array( 'cross-sells', 'up-sells' ),
 				),
 			)
@@ -421,11 +466,116 @@ class Woo_Products extends Widget_Base {
 		);
 
 		$this->add_control(
+			'overflow_slides',
+			array(
+				'label'       => __( 'Overflow Slides', 'premium-addons-for-elementor' ),
+				'render_type' => 'template',
+				'type'        => Controls_Manager::SWITCHER,
+				'selectors'   => array(
+					'{{WRAPPER}} .slick-list' => 'overflow: visible;',
+					'body'                    => 'overflow-x: hidden;',
+				),
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
 			'arrows',
 			array(
 				'label'   => __( 'Show Arrows', 'premium-addons-for-elementor' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+			)
+		);
+
+		$this->add_control(
+			'arrows_position',
+			array(
+				'label'     => __( 'Position', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'above'   => array(
+						'title' => __( 'Above Slide', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'default' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-center',
+					),
+					'below'   => array(
+						'title' => __( 'Below Slides', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+				),
+				'default'   => 'default',
+				'toggle'      => false,
+				'condition' => array(
+					'arrows' => 'yes',
+				),
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'arrows_alignment',
+			array(
+				'label'     => __( 'Alignment', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'start'  => array(
+						'title' => __( 'Start', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-left',
+					),
+					'center' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-middle',
+					),
+					'end'    => array(
+						'title' => __( 'End', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+				),
+				'default'   => 'start',
+				'toggle'      => false,
+				'condition' => array(
+					'arrows' => 'yes',
+					'arrows_position!'	=> 'default',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'justify-content: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_gap',
+			array(
+				'label'      => __( 'Spacing', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%', 'custom' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'gap: {{SIZE}}{{UNIT}}',
+				),
+				'condition'  => array(
+					'arrows' => 'yes',
+					'arrows_position!'             => 'default',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_margin',
+			array(
+				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%', 'custom' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'arrows' => 'yes',
+					'arrows_position!'                  => 'default',
+				),
 			)
 		);
 
@@ -447,6 +597,7 @@ class Woo_Products extends Widget_Base {
 				),
 				'condition'  => array(
 					'arrows' => 'yes',
+					'arrows_position'	=> 'default',
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .premium-woocommerce a.carousel-arrow.carousel-next' => 'right: {{SIZE}}{{UNIT}};',
@@ -461,24 +612,9 @@ class Woo_Products extends Widget_Base {
 				'label'   => __( 'Show Dots', 'premium-addons-for-elementor' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
+				'separator' => 'before',
 			)
 		);
-
-		// $this->add_control(
-		// 'dots_position',
-		// array(
-		// 'label'     => __( 'Position', 'premium-addons-for-elementor' ),
-		// 'type'      => Controls_Manager::SELECT,
-		// 'default'   => 'below',
-		// 'options'   => array(
-		// 'below' => __( 'Below Slides', 'premium-addons-for-elementor' ),
-		// 'above' => __( 'On Slides', 'premium-addons-for-elementor' ),
-		// ),
-		// 'condition' => array(
-		// 'dots' => 'yes',
-		// ),
-		// )
-		// );
 
 		$this->add_responsive_control(
 			'dots_hoffset',
@@ -573,6 +709,18 @@ class Woo_Products extends Widget_Base {
 		);
 
 		$this->add_control(
+			'speed',
+			array(
+				'label'     => __( 'Autoplay Speed', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 500,
+				'condition' => array(
+					'autoplay_slides' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
 			'hover_pause',
 			array(
 				'label'     => __( 'Pause on Hover', 'premium-addons-for-elementor' ),
@@ -589,18 +737,89 @@ class Woo_Products extends Widget_Base {
 				'label'     => __( 'Infinite Loop', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
-				'separator' => 'before',
+				'condition' => array(
+					'overflow_slides!' => 'yes',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Register marquee settings section.
+	 *
+	 * @access public
+	 * @since 4.11.62
+	 *
+	 * @param array $pro_skins   pro skins.
+	 */
+	public function register_content_marquee_section( $pro_skins ) {
+
+		$this->start_controls_section(
+			'marquee_section',
+			array(
+				'label'     => __( 'Marquee Settings', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'layout_type' => 'marquee',
+					'_skin!'      => $pro_skins,
+				),
 			)
 		);
 
 		$this->add_control(
-			'speed',
+			'marquee_direction',
 			array(
-				'label'     => __( 'Autoplay Speed', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => 500,
-				'condition' => array(
-					'autoplay_slides' => 'yes',
+				'label'       => __( 'Animation Direction', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'normal',
+				'options'     => array(
+					'normal'  => __( 'Normal', 'premium-addons-for-elementor' ),
+					'reverse' => __( 'Reverse', 'premium-addons-for-elementor' ),
+				),
+				'render_type' => 'template',
+			)
+		);
+
+		$this->add_control(
+			'marquee_speed',
+			array(
+				'label'       => __( 'Speed', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'description' => __( 'The smaller the value, the faster the animation.', 'premium-addons-for-elementor' ),
+				'default'     => 50,
+				'render_type' => 'template',
+			)
+		);
+
+		$this->add_control(
+			'marquee_draggable',
+			array(
+				'label'     => __( 'Make it Draggable', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+			)
+		);
+
+		$this->add_control(
+			'marquee_draggable_notice',
+			array(
+				'raw'             => __( 'Draggable option works on the frontend only.', 'premium-addons-for-elementor' ),
+				'type'            => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => array(
+					'marquee_draggable'  => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'fading_color',
+			array(
+				'label'     => __( 'Fading Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woo-products-marquee .premium-woo-products-inner:after' => 'background:linear-gradient(to right, {{VALUE}}, #F291D800 10%, #F291D800 90%, {{VALUE}}) !important',
 				),
 			)
 		);
@@ -1392,9 +1611,11 @@ class Woo_Products extends Widget_Base {
 						'max' => 100,
 					),
 				),
+				'render_type'        => 'template',
 				'selectors' => array(
-					'{{WRAPPER}} .premium-woocommerce li.product' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
-					'{{WRAPPER}} .premium-woocommerce ul.products' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-products-marquee) li.product' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-products-marquee) ul.products' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .premium-woo-products-marquee ul.products' => '--pa-marquee-spacing: {{SIZE}}{{UNIT}}',
 				),
 			)
 		);
@@ -2029,6 +2250,7 @@ class Woo_Products extends Widget_Base {
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'layout_type' => 'carousel',
+					'layout_type!'      => 'marquee',
 					'_skin!'      => $pro_skins,
 				),
 			)
@@ -2062,6 +2284,21 @@ class Woo_Products extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'disabled_arrow_color',
+			array(
+				'label'     => __( 'Disabled Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woocommerce .slick-arrow.slick-disabled' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .premium-woocommerce .slick-arrow.slick-disabled svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array(
+					'overflow_slides' => 'yes',
+				),
+			)
+		);
+
 		$this->add_responsive_control(
 			'arrow_size',
 			array(
@@ -2090,6 +2327,20 @@ class Woo_Products extends Widget_Base {
 				),
 				'condition' => array(
 					'arrows' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'disabled_arrow_background',
+			array(
+				'label'     => __( 'Disabled Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woocommerce .slick-arrow.slick-disabled' => 'background-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'overflow_slides' => 'yes',
 				),
 			)
 		);

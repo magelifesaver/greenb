@@ -146,7 +146,7 @@ class Premium_Dual_Header extends Widget_Base {
 	}
 
 	public function has_widget_inner_wrapper(): bool {
-		return true;
+		return false;
 	}
 
 	/**
@@ -313,7 +313,7 @@ class Premium_Dual_Header extends Widget_Base {
 				),
 				'default'   => 'center',
 				'selectors' => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
 				),
 			)
 		);
@@ -369,37 +369,6 @@ class Premium_Dual_Header extends Widget_Base {
 				'label_block' => false,
 				'toggle'      => false,
 				'render_type' => 'ui',
-				'condition'   => array(
-					'rotate!' => '',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'transform_origin_y',
-			array(
-				'label'       => __( 'Y Anchor Point', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'default'     => 'center',
-				'options'     => array(
-					'top'    => array(
-						'title' => __( 'Top', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-v-align-top',
-					),
-					'center' => array(
-						'title' => __( 'Center', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-v-align-middle',
-					),
-					'bottom' => array(
-						'title' => __( 'Bottom', 'premium-addons-for-elementor' ),
-						'icon'  => 'eicon-v-align-bottom',
-					),
-				),
-				'selectors'   => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'transform-origin: {{transform_origin_x.VALUE}} {{VALUE}}',
-				),
-				'label_block' => false,
-				'toggle'      => false,
 				'condition'   => array(
 					'rotate!' => '',
 				),
@@ -1461,6 +1430,7 @@ class Premium_Dual_Header extends Widget_Base {
 
 		?>
 
+		<div class="elementor-widget-container">
 		<?php if ( 'yes' === $settings['premium_dual_header_link_switcher'] ) : ?>
 		<a <?php echo wp_kses_post( $this->get_render_attribute_string( 'link' ) ); ?>>
 		<?php endif; ?>
@@ -1468,6 +1438,7 @@ class Premium_Dual_Header extends Widget_Base {
 		<?php if ( 'yes' === $settings['premium_dual_header_link_switcher'] ) : ?>
 		</a>
 		<?php endif; ?>
+		</div>
 
 		<?php
 	}
@@ -1555,18 +1526,20 @@ class Premium_Dual_Header extends Widget_Base {
 
 		#>
 
-		<# if( 'yes' === settings.premium_dual_header_link_switcher && '' !== link ) { #>
-			<a {{{ view.getRenderAttributeString('button') }}}>
-		<# } #>
-		<{{{firstTag}}} {{{ view.getRenderAttributeString('first_title') }}}>
-			<span class="premium-dual-header-first-span" data-text="{{ firstText }}">{{{ firstText }}}</span>
-			<# if ( '' != secondText ) { #>
-				<span {{{ view.getRenderAttributeString('second_title') }}}>{{{ secondText }}}</span>
+		<div class="elementor-widget-container">
+			<# if( 'yes' === settings.premium_dual_header_link_switcher && '' !== link ) { #>
+				<a {{{ view.getRenderAttributeString('button') }}}>
 			<# } #>
-		</{{{firstTag}}}>
-		<# if( 'yes' == settings.premium_dual_header_link_switcher && '' !== link ) { #>
-			</a>
-		<# } #>
+			<{{{firstTag}}} {{{ view.getRenderAttributeString('first_title') }}}>
+				<span class="premium-dual-header-first-span" data-text="{{ firstText }}">{{{ firstText }}}</span>
+				<# if ( '' != secondText ) { #>
+					<span {{{ view.getRenderAttributeString('second_title') }}}>{{{ secondText }}}</span>
+				<# } #>
+			</{{{firstTag}}}>
+			<# if( 'yes' == settings.premium_dual_header_link_switcher && '' !== link ) { #>
+				</a>
+			<# } #>
+		</div>
 
 		<?php
 	}

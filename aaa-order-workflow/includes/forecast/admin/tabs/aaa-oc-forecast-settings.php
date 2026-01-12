@@ -2,11 +2,7 @@
 /**
  * File: /wp-content/plugins/aaa-order-workflow/includes/forecast/admin/tabs/aaa-oc-forecast-settings.php
  * Purpose: Forecast global settings + queue tools. Stores options in aaa_oc_options scope "forecast".
-<<<<<<< HEAD
  * Version: 0.1.3
-=======
- * Version: 0.1.2
->>>>>>> main
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -45,14 +41,11 @@ if ( isset( $_POST['aaa_oc_forecast_settings_submit'] ) && check_admin_referer( 
 		'global_minimum_stock'          => isset( $_POST['global_minimum_stock'] ) ? absint( $_POST['global_minimum_stock'] ) : 0,
 		'grid_sales_window_days'        => isset( $_POST['grid_sales_window_days'] ) ? absint( $_POST['grid_sales_window_days'] ) : 180,
 		'enable_purchase_orders_globally' => ( isset( $_POST['enable_purchase_orders_globally'] ) && $_POST['enable_purchase_orders_globally'] === 'yes' ) ? 'yes' : 'no',
-<<<<<<< HEAD
 		'forecast_po_supplier_id'         => isset( $_POST['forecast_po_supplier_id'] ) ? absint( $_POST['forecast_po_supplier_id'] ) : 0,
 		'forecast_po_multiple_suppliers'  => ( isset( $_POST['forecast_po_multiple_suppliers'] ) && $_POST['forecast_po_multiple_suppliers'] === 'no' ) ? 'no' : 'yes',
 		'forecast_po_date_expected'       => isset( $_POST['forecast_po_date_expected'] ) ? sanitize_text_field( wp_unslash( $_POST['forecast_po_date_expected'] ) ) : '',
 		'forecast_po_description'         => isset( $_POST['forecast_po_description'] ) ? wp_kses_post( wp_unslash( $_POST['forecast_po_description'] ) ) : '',
 		'forecast_po_meta_data'           => isset( $_POST['forecast_po_meta_data'] ) ? wp_unslash( $_POST['forecast_po_meta_data'] ) : '',
-=======
->>>>>>> main
 		'not_moving_t1_days'               => isset( $_POST['not_moving_t1_days'] ) ? absint( $_POST['not_moving_t1_days'] ) : 14,
 		'not_moving_t2_days'               => isset( $_POST['not_moving_t2_days'] ) ? absint( $_POST['not_moving_t2_days'] ) : 30,
 		'not_moving_t3_after_best_sold_by' => isset( $_POST['not_moving_t3_after_best_sold_by'] ) ? absint( $_POST['not_moving_t3_after_best_sold_by'] ) : 15,
@@ -100,14 +93,11 @@ $min_order_qty = absint( aaa_oc_get_option( 'global_minimum_order_qty', $scope, 
 $min_stock = absint( aaa_oc_get_option( 'global_minimum_stock', $scope, 0 ) );
 $grid_window = absint( aaa_oc_get_option( 'grid_sales_window_days', $scope, 180 ) );
 $po_enabled = aaa_oc_get_option( 'enable_purchase_orders_globally', $scope, 'yes' );
-<<<<<<< HEAD
 $po_supplier_id = absint( aaa_oc_get_option( 'forecast_po_supplier_id', $scope, 0 ) );
 $po_multiple = aaa_oc_get_option( 'forecast_po_multiple_suppliers', $scope, 'yes' );
 $po_date_expected = aaa_oc_get_option( 'forecast_po_date_expected', $scope, '' );
 $po_description = aaa_oc_get_option( 'forecast_po_description', $scope, '' );
 $po_meta_data = aaa_oc_get_option( 'forecast_po_meta_data', $scope, '' );
-=======
->>>>>>> main
 $tier1 = absint( aaa_oc_get_option( 'not_moving_t1_days', $scope, 14 ) );
 $tier2 = absint( aaa_oc_get_option( 'not_moving_t2_days', $scope, 30 ) );
 $tier3 = absint( aaa_oc_get_option( 'not_moving_t3_after_best_sold_by', $scope, 15 ) );
@@ -160,7 +150,6 @@ $brand_slug = aaa_oc_get_option( 'brand_taxonomy_slug', $scope, 'pwb-brand' );
 			</tr>
 		</table>
 
-<<<<<<< HEAD
 		<h3><?php esc_html_e( 'Purchase Order Defaults', 'aaa-oc' ); ?></h3>
 		<table class="form-table" role="presentation">
 			<tr>
@@ -196,8 +185,6 @@ $brand_slug = aaa_oc_get_option( 'brand_taxonomy_slug', $scope, 'pwb-brand' );
 			</tr>
 		</table>
 
-=======
->>>>>>> main
 		<h3><?php esc_html_e( 'New & Stock Thresholds', 'aaa-oc' ); ?></h3>
 		<table class="form-table" role="presentation">
 			<tr>

@@ -15,6 +15,7 @@
     color: black;
     font-weight: 600;
     padding-right: 15px;
+    padding-inline-end: 15px;
 }
 #settings #braapf_filter_title {
     min-width: 320px;
@@ -36,6 +37,7 @@
     padding: 1.4em 2em 1.5em 2em;
     box-shadow: 1px 1px 6px 0 #f0f0f0;
     text-align: left;
+    text-align: start;
     margin-bottom: 4em;
     position: relative;
     width: calc(100% - 300px);
@@ -49,12 +51,18 @@
     width: 250px;
     padding-right: 0;
     padding-left: 20px;
+    padding-inline-end: 0;
+    padding-inline-start: 20px;
     margin-bottom: 2em;
 }
 
 #settings .berocket_sbs_step_docs .berocket_sbs_step_docs_content {
     padding-left: 10px;
+    padding-inline-end: 0;
+    padding-inline-start: 10px;
     border-left: 2px solid #999;
+    border-inline-end: 0;
+    border-inline-start: 2px solid #999;
     line-height: 1.4;
     color: #6c6c6c;
 }
@@ -197,6 +205,8 @@
 #settings .berocket_sbs_step .advanced_button_container {
     position: absolute;
     right: 0;
+    inset-inline-end: 0;
+    inset-inline-start: initial;
     bottom: 0;
     top: 0;
     display: flex;
@@ -303,6 +313,8 @@
     display: block;
     position: absolute;
     left: 22px;
+    inset-inline-end: initial;
+    inset-inline-start: 22px;
     top:-12px;
     height: 26px;
     width: 26px;
@@ -339,6 +351,8 @@
     display: block;
     position: absolute;
     left: 35px;
+    inset-inline-end: initial;
+    inset-inline-start: 35px;
     bottom: 0;
     height: 4em;
     width: 2px;
@@ -926,7 +940,7 @@
 #settings .berocket_sbs_step .braapf_style_customization h4 {
     font-size: 1.5em;
     font-weight: 400;
-    padding: 10px 0 10px 4%;
+    padding: 10px 3% 10px 3%;
     margin: 0 0 2px;
     background: #f1f5f9;
 }
@@ -941,6 +955,8 @@
     font-size: 18px;
     top: 11px;
     right: 6px;
+    inset-inline-start: initial;
+    inset-inline-end: 6px;
     transform: rotate(90deg);
 }
 #settings .berocket_sbs_step .braapf_style_customization h4.dynamic.active {
@@ -983,6 +999,8 @@
 #settings .berocket_sbs_step .braapf_form_group_elements {
     border: 1px solid #d7e2ec;
     border-right-width: 0;
+    border-inline-end-width: 0;
+    border-inline-start-width: 1px;
     padding: 0;
     text-decoration: none;
     color: #555;
@@ -1001,10 +1019,20 @@
 }
 #settings .berocket_sbs_step .braapf_form_group_elements:first-child {
     border-radius: 5px 0 0 5px;
+    border-start-start-radius: 5px;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-end-start-radius: 5px;
 }
 #settings .berocket_sbs_step .braapf_form_group_elements:last-child {
     border-radius: 0 5px 5px 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 5px;
+    border-end-end-radius: 5px;
+    border-end-start-radius: 0;
     border-right-width: 1px;
+    border-inline-end-width: 1px;
+    border-inline-start-width: 1px;
 }
 #settings .berocket_sbs_step .braapf_form_group_elements:hover {
     color: #111;
@@ -1070,6 +1098,8 @@
 }
 #settings .berocket_sbs_step .size_units {
     padding: 0 20px 0 0;
+    padding-inline-start: 0;
+    padding-inline-end: 20px;
     border: 0;
     width: 43px;
     font-size: 13px;
@@ -1126,7 +1156,7 @@
     margin: 5px 0 2px;
 }
 #settings .berocket_sbs_step .braapf_style_customization_size4.option-label {
-    justify-content: left;
+    justify-content: start;
 }
 #settings .berocket_sbs_step .braapf_style_customization_size4.option-input input,
 #settings .berocket_sbs_step .braapf_style_customization_size4.option-input .braapf_form_group_elements_line div {

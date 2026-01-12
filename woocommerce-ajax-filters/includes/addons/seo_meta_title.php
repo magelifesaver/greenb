@@ -194,7 +194,7 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
                             $from = $this->wc_price($filter['val_arr']['from']);
                             $to   = $this->wc_price($filter['val_arr']['to']);
                             $new_terms_name['values'] = array(
-                                'price' => apply_filters('berocket_aapf_seo_meta_filtered_price_label', wc_format_price_range($from, $to), $filter, array($filter['val_arr']['from'], $filter['val_arr']['to']))
+                                'price' => apply_filters('berocket_aapf_seo_meta_filtered_price_label', self::wc_format_price_range($from, $to), $filter, array($filter['val_arr']['from'], $filter['val_arr']['to']))
                             );
                         } elseif( ! empty($filter['val_arr']) && is_array($filter['val_arr']) ) {
                             $new_terms_name['values'] = ( empty($filter['val_arr']['op']) ? 'OR' : $filter['val_arr']['op'] );
@@ -206,7 +206,7 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
                                 if( isset($val_arr['from']) && isset($val_arr['to']) ) {
                                     $from = $this->wc_price($val_arr['from']);
                                     $to   = $this->wc_price($val_arr['to']);
-                                    $values[] = apply_filters('berocket_aapf_seo_meta_filtered_price_label', wc_format_price_range($from, $to), $filter, array($val_arr['from'], $val_arr['to']));
+                                    $values[] = apply_filters('berocket_aapf_seo_meta_filtered_price_label', self::wc_format_price_range($from, $to), $filter, array($val_arr['from'], $val_arr['to']));
                                 }
                             }
                             if( ! empty($values ) ) {
@@ -234,6 +234,10 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
                 }
             }
             $this->terms_filtered = apply_filters('berocket_aapf_seo_meta_filtered_terms', $terms_name);
+        }
+        public static function wc_format_price_range($from, $to) {
+            $price  = sprintf( _x( '%1$s &ndash; %2$s', 'Price range: from-to', 'BeRocket_AJAX_domain' ), is_numeric( $from ) ? wc_price( $from, array( 'in_span' => false ) ) : $from, is_numeric( $to ) ? wc_price( $to, array( 'in_span' => false ) ) : $to );
+            return $price;
         }
         public static function wc_price($price) {
             $decimal_separator  = wc_get_price_decimal_separator();

@@ -178,7 +178,16 @@ class Kadence_Blocks_Pro_Imageoverlay_Block extends Kadence_Blocks_Pro_Abstract_
 
 		$css->set_selector( '.kt-img-overlay' . $unique_id . ' .kt-image-overlay-color' );
 		$css->add_property( 'background-color', ( ! empty( $attributes['overlayColor'] ) ? $css->render_color( $attributes['overlayColor'] ) : '#B75500' ) );
-		$css->add_property( 'opacity', isset( $attributes['overlayOpacity'] ) && is_numeric( $attributes['overlayOpacity'] ) ? $attributes['overlayOpacity'] : 0.6 );
+		
+		if ( array_key_exists( 'overlayOpacity', $attributes ) ) {
+			// $css->add_property doesn't set a property if the value is 0. However, it allows for 0.0.
+			$opacity_value = floatval( $attributes['overlayOpacity'] );
+			if ( 0.0 === $opacity_value ) {
+				$css->add_property( 'opacity', '0.0' );
+			} else {
+				$css->add_property( 'opacity', $attributes['overlayOpacity'] );
+			}
+		}
 
 		// Border.
 		// Render radius on wrap and the border, but style only on inner.

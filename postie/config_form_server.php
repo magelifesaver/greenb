@@ -24,7 +24,11 @@
                 <option value="pop3-ssl" <?php echo ($input_protocol == "pop3-ssl") ? "selected='selected' " : "" ?>>POP3-SSL</option>
                 <option value="imap-ssl" <?php echo ($input_protocol == "imap-ssl") ? "selected='selected' " : "" ?>>IMAP-SSL</option>
             </select>
-
+            <p class='description'><?php
+                if (!extension_loaded('openssl')) {
+                    _e("OpenSSL has not been enabled. POP3-SSL and IMAP-SSL will not work as expected.", 'postie');
+                }
+                ?></p>
         </td>
         </tr>
 

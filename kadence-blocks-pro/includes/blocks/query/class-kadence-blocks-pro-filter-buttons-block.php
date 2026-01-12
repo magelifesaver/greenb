@@ -120,10 +120,10 @@ class Kadence_Blocks_Pro_Filter_Buttons_Block extends Kadence_Blocks_Query_Child
 			$css->add_property( 'color', $css->render_color( $attributes['colorButton'] ) );
 		}
 		if ( 'normal' === $bg_type && ! empty( $attributes['backgroundButton'] ) ) {
-			$css->add_property( 'background', $css->render_color( $attributes['backgroundButton'] ) . ( 'gradient' === $bg_hover_type ? ' !important' : '' ) );
+			$css->add_property( 'background', $css->render_color( $attributes['backgroundButton'] ) );
 		}
 		if ( 'gradient' === $bg_type && ! empty( $attributes['gradientButton'] ) ) {
-			$css->add_property( 'background', $attributes['gradientButton'] . ' !important' );
+			$css->add_property( 'background', $attributes['gradientButton'] );
 		}
 		$css->render_measure_output( $attributes, 'borderRadiusButton', 'border-radius', [ 'unit_key' => 'borderRadiusButtonUnit' ] );
 		$css->render_border_styles( $attributes, 'borderStyleButton', true );
@@ -143,6 +143,9 @@ class Kadence_Blocks_Pro_Filter_Buttons_Block extends Kadence_Blocks_Query_Child
 		if ( 'gradient' !== $bg_type && 'normal' === $bg_hover_type && ! empty( $attributes['backgroundHoverButton'] ) ) {
 			$css->add_property( 'background', $css->render_color( $attributes['backgroundHoverButton'] ) );
 		}
+		if ( 'gradient' === $bg_hover_type && ! empty( $attributes['gradientHoverButton'] ) ) {
+			$css->add_property( 'background', $attributes['gradientHoverButton'] );
+		}
 		$css->render_measure_output( $attributes, 'borderHoverRadiusButton', 'border-radius', [ 'unit_key' => 'borderHoverRadiusButtonUnit' ] );
 		$css->render_border_styles( $attributes, 'borderHoverStyleButton', true );
 		if ( isset( $attributes['displayHoverShadowButton'] ) && true === $attributes['displayHoverShadowButton'] ) {
@@ -161,8 +164,11 @@ class Kadence_Blocks_Pro_Filter_Buttons_Block extends Kadence_Blocks_Query_Child
 		if ( ! empty( $attributes['colorActiveButton'] ) ) {
 			$css->add_property( 'color', $css->render_color( $attributes['colorActiveButton'] ) );
 		}
-		if ( 'gradient' !== $bg_type && 'normal' === $bg_hover_type && ! empty( $attributes['backgroundActiveButton'] ) ) {
+		if ( 'gradient' !== $bg_type && 'normal' === $bg_active_type && ! empty( $attributes['backgroundActiveButton'] ) ) {
 			$css->add_property( 'background', $css->render_color( $attributes['backgroundActiveButton'] ) );
+		}
+		if ( 'gradient' === $bg_active_type && ! empty( $attributes['gradientActiveButton'] ) ) {
+			$css->add_property( 'background', $attributes['gradientActiveButton'] );
 		}
 		$css->render_measure_output( $attributes, 'borderActiveRadiusButton', 'border-radius', [ 'unit_key' => 'borderActiveRadiusButtonUnit' ] );
 		$css->render_border_styles( $attributes, 'borderActiveStyleButton', true );

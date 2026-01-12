@@ -142,7 +142,11 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         $data = parent::get_addon_data();
         return array_merge($data, array(
             'addon_name'    => __('Additional Tables', 'BeRocket_AJAX_domain'),
-            'tooltip'       => __('Create 4 additional tables.<ul><li>Table to speed up hierarchical taxonomies recount: <strong>Product categories</strong>, <strong>Brands</strong> etc</li><li>3 tables to speed up functions for variation filtering</li></ul>', 'BeRocket_AJAX_domain'),
+            'tooltip'       => __('Create 4 additional tables.<ul><li>Table to speed up hierarchical taxonomies recount: 
+									<strong>Product categories</strong>, <strong>Brands</strong> etc</li><li>3 tables to 
+									speed up functions for variation filtering</li></ul>', 'BeRocket_AJAX_domain'),
+            'image'         => 'https://berocket.ams3.cdn.digitaloceanspaces.com/plugins/addons/filters/filters_c_tables.jpg',
+            'image_class'   => 'c_tables',
         ));
     }
     function check_init() {

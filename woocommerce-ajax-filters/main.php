@@ -8,10 +8,10 @@ foreach (glob(__DIR__ . "/includes/*.php") as $filename)
 {
     include_once($filename);
 }
-if( file_exists(__DIR__ . "/paid/paid.php") ) {
+if( ( ! defined("BAPF_VER_PAID_DISABLE") || ! BAPF_VER_PAID_DISABLE ) && file_exists(__DIR__ . "/paid/paid.php") ) {
     include_once(__DIR__ . "/paid/paid.php");
 }
-if( file_exists(__DIR__ . "/business/business.php") ) {
+if( ( ! defined("BAPF_VER_BUSINESS_DISABLE") || ! BAPF_VER_BUSINESS_DISABLE ) && file_exists(__DIR__ . "/business/business.php") ) {
     include_once(__DIR__ . "/business/business.php");
 }
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -196,7 +196,7 @@ class BeRocket_AAPF extends BeRocket_Framework {
         }
         $this->feature_list = array();
         $this->framework_data['fontawesome_frontend'] = true;
-        $this->active_libraries = array('addons', 'feature', 'tippy', 'popup', 'tutorial');
+        $this->active_libraries = apply_filters('bapf_active_libraries', array('addons', 'feature', 'tippy', 'popup', 'tutorial'));
 
         if( method_exists($this, 'include_once_files') ) {
             $this->include_once_files();

@@ -109,6 +109,9 @@ class Admin_Helper {
 		add_action( 'wp_ajax_pa_check_unused_widgets', array( $this, 'pa_check_unused_widgets' ) );
 		add_action( 'wp_ajax_pa_hide_unused_widgets_dialog', array( $this, 'pa_hide_unused_widgets_dialog' ) );
 
+		// Used to empty dynamic assets dir on plugin update to make sure new assets are generated.
+		add_action( 'upgrader_process_complete', array( $this, 'pa_handle_upgrade' ), 10, 2 );
+
 		// Register Deactivation hooks.
 		register_deactivation_hook( PREMIUM_ADDONS_FILE, array( $this, 'clear_dynamic_assets_dir' ) );
 
@@ -141,7 +144,6 @@ class Admin_Helper {
 				Feedback::get_instance();
 			}
 		}
-
 	}
 
 	/**
@@ -905,7 +907,7 @@ class Admin_Helper {
 				'cta'   => 'https://premiumaddons.com/get/papro/#get-pa-pro',
 			);
 
-		} if( isset( $license_info['id'] ) && '4' !== $license_info['id'] ) {
+		} if ( isset( $license_info['id'] ) && '4' !== $license_info['id'] ) {
 
 			$upgrade_link = Helper_Functions::get_campaign_link( 'http://premiumaddons.com/docs/upgrade-premium-addons-license/', 'dashboard-banner', 'wp-dash', 'upgrade-pro' );
 
@@ -1450,7 +1452,7 @@ class Admin_Helper {
 
 		$did_check = get_option( 'pa_unused_widget_dialog' );
 
-		if( ! $did_check ) {
+		if ( ! $did_check ) {
 
 			update_option( 'pa_unused_widget_dialog', true );
 
@@ -1458,7 +1460,7 @@ class Admin_Helper {
 			$install_time = get_option( 'pa_install_time' );
 
 			// If install time is not set, set it now and exit.
-			if( ! $install_time ) {
+			if ( ! $install_time ) {
 				$current_time = gmdate( 'j F, Y', time() );
 				update_option( 'pa_install_time', $current_time );
 				wp_send_json_error( 'Installation time set.' );
@@ -1468,16 +1470,14 @@ class Admin_Helper {
 			$days_diff = ( time() - strtotime( $install_time ) ) / DAY_IN_SECONDS;
 
 			// If 7 days have passed since installation, proceed.
-			if( $days_diff >= 7 ) {
+			if ( $days_diff >= 7 ) {
 				wp_send_json_success();
 			} else {
 				wp_send_json_error( 'Not enough days since installation.' );
 			}
-
 		}
 
 		wp_send_json_error( 'Already checked, or canceled' );
-
 	}
 
 	/**
@@ -1493,7 +1493,6 @@ class Admin_Helper {
 		update_option( 'pa_unused_widget_dialog', true );
 
 		wp_send_json_success( 'Option updated.' );
-
 	}
 
 	/**
@@ -1729,7 +1728,56 @@ class Admin_Helper {
 
 			unlink( Helper_Functions::get_safe_path( $path . DIRECTORY_SEPARATOR . $file ) );
 		}
+	}
 
+	/**
+	 * Handle Plugin Upgrade
+	 *
+	 * Clears dynamic assets directory when Premium Addons or Premium Addons Pro is updated
+	 *
+	 * @since 4.11.63
+	 * @access public
+	 *
+	 * @param object $upgrader_object Upgrader Object.
+	 * @param array  $options         Upgrade Options.
+	 */
+	public function pa_handle_upgrade( $upgrader_object, $options ) {
+
+		// We only care about plugin updates.
+		if (
+			empty( $options['action'] ) ||
+			empty( $options['type'] ) ||
+			'update' !== $options['action'] ||
+			'plugin' !== $options['type']
+		) {
+			return;
+		}
+
+		// Plugins we want to react to.
+		$target_plugins = array(
+			PREMIUM_ADDONS_BASENAME,
+			'premium-addons-pro/premium-addons-pro-for-elementor.php',
+		);
+
+		// Normalize updated plugins into an array
+		$updated_plugins = array();
+
+		if ( ! empty( $options['plugins'] ) && is_array( $options['plugins'] ) ) {
+			$updated_plugins = $options['plugins'];
+		} elseif ( ! empty( $options['plugin'] ) ) {
+			$updated_plugins = array( $options['plugin'] );
+		}
+
+		// No plugin info → nothing to do
+		if ( empty( $updated_plugins ) ) {
+			return;
+		}
+
+		// Check intersection
+		if ( array_intersect( $target_plugins, $updated_plugins ) ) {
+			// Remove dynamic assets files on plugin update.
+			$this->clear_dynamic_assets_dir();
+		}
 	}
 
 	/**

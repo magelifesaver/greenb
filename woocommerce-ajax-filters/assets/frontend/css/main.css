@@ -1241,7 +1241,10 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
 .bapf_sfilter .bapf_body .bapf_slidr_main .ui-slider-handle {
     border-style: solid;
 }
-
+.berocket_aapf_widget_selected_area a.braapf_unselect .fa,
+.berocket_aapf_widget_selected_area .braapf_unselect_all .fa {
+    margin-right: 3px;
+}
 .bapf_ckbox_search {
     position: relative;
     margin-bottom: 10px;
@@ -1779,7 +1782,7 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     font-size: 32px;
     font-weight: 100;
 }
-.bapf-sfa-grey-rounded .berocket_aapf_widget_selected_area li a i.fa {
+.bapf-sfa-grey-rounded .berocket_aapf_widget_selected_area li a i.fa-times {
     display: none !important;
 }
 .bapf-sfa-grey-rounded .berocket_aapf_widget_selected_area a.braapf_unselect_all {
@@ -2902,15 +2905,15 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     position: relative;
     font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i {
+.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i.fa-times {
     position: absolute;
     left: 100%;
     margin-left: -1.4em;
     top: 0.9em;
 }
 
-.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i::before,
-.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i::after {
+.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i.fa-times::before,
+.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i.fa-times::after {
     content: '';
     display: block;
     border-top: 1px solid #6d6d6d;
@@ -2920,7 +2923,7 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     width: 0.9em;
     transform: rotateZ(45deg);
 }
-.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i::after {
+.bapf_sfilter.bapf_divi_sfa .berocket_aapf_widget_selected_filter ul li a i.fa-times::after {
     transform: rotateZ(-45deg);
 }
 .bapf_sfilter.divi_color_class .bapf_hasdesc .bapf_colaps_smb,
@@ -3272,13 +3275,24 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
   color: #999999;
 }
 
+.bapf_sfilter.bapf_rtnstrs ul {
+    display: flex;
+    gap: 5px;
+}
 .bapf_sfilter.bapf_rtnstrs ul li {
-    float: left;
+    display: flex;
+    place-items: center;
+}
+.bapf_sfilter.bapf_rtnstrs ul li,
+.bapf_sfilter.bapf_rtnstrs ul li label{
+    padding: 0;
+    margin: 0;
 }
 .bapf_sfilter.bapf_rtnstrs ul li input {
     display: none;
 }
-.bapf_sfilter.bapf_rtnstrs ul li label {
+.bapf_sfilter.bapf_rtnstrs ul li label,
+.bapf_sfilter.bapf_rtnstrs ul li label .fa {
     font-size: 36px;
 }
 .bapf_sfilter.bapf_srch .bapf_form {
@@ -3521,8 +3535,8 @@ body .berocket_ajax_filters_sidebar_back.brapf_sidefl_linegrey {
     right: auto;
     left: 5px;
 }
-.bapf_sfa_min_space ul.bapf_sfa_unall li a i.fa,
-.bapf_sfa_min_space .bapf_sfa_taxonomy > ul li a i.fa {
+.bapf_sfa_min_space ul.bapf_sfa_unall li a i.fa-times,
+.bapf_sfa_min_space .bapf_sfa_taxonomy > ul li a i.fa-times {
     display: none;
 }
 .bapf_sfilter.bapf_sfa_min_space .bapf_sfa_taxonomy ul,

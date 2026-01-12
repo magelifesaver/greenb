@@ -169,6 +169,10 @@ class Kadence_Blocks_Pro_Query_Indexer_Woo {
 			return '';
 		}
 
+		if ( ! is_a( $attribute_object, 'WC_Product_Attribute' ) ) {
+			return '';
+		}
+
 		$split_character = apply_filters( 'kadence_blocks_pro_query_block_split_character', ',' );
 		return $attribute_object->is_taxonomy() ? implode( $split_character . ' ', wc_get_product_terms( $product->get_id(), $attribute_object->get_name(), array( 'fields' => 'names' ) ) ) : wc_implode_text_attributes( $attribute_object->get_options() );
 	}

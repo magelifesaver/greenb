@@ -104,6 +104,10 @@ function berocket_format_number (number, number_style) {
     if( typeof number_style == 'undefined' ) {
         number_style = the_ajax_script.number_style;
     }
+    number = parseFloat(number);
+    if( number === NaN ) {
+        return '0';
+    }
     var num = number.toFixed(number_style[2]);
     num = num.toString();
     var decimal = num.split('.');
@@ -860,6 +864,7 @@ function braapf_filtered_filters_set() {
             var html = '';
             $.each(braapf_filtered_filters, function(i, taxonomy) {
                 if( taxonomy.values.length > 0 ) {
+                    taxonomy = berocket_apply_filters('default_selected_filters_area_single_taxonomy', taxonomy);
                     var html2 = '<div class="bapf_sfa_taxonomy"><span>' + taxonomy.name + '</span>';
                     html2 += '<ul>';
                     var html2_elements = '';
@@ -1150,25 +1155,30 @@ braapf_show_hide_values_set;
     $(document).on('click', '.bapf_ocolaps .bapf_colaps_togl, .bapf_ccolaps .bapf_colaps_togl', function(e) {
         e.preventDefault;
         if( $(this).closest('.bapf_ocolaps, .bapf_ccolaps').is('.bapf_ocolaps' ) ) {
-            $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ocolaps');
+            $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ocolaps', ["slideDown"]);
         } else {
-            $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ccolaps');
+            $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ccolaps', ["slideUp"]);
         }
     });
     $(document).on('keydown', '.bapf_ocolaps .bapf_colaps_togl, .bapf_ccolaps .bapf_colaps_togl', function(e) {
         if( e.key === 'Enter' ) {
             e.preventDefault;
             if( $(this).closest('.bapf_ocolaps, .bapf_ccolaps').is('.bapf_ocolaps' ) ) {
-                $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ocolaps');
+                $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ocolaps', ["slideDown"]);
             } else {
-                $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ccolaps');
+                $(this).closest('.bapf_ocolaps, .bapf_ccolaps').trigger('bapf_ccolaps', ["slideUp"]);
             }
         }
     });
-    $(document).on('bapf_ocolaps', '.bapf_sfilter.bapf_ocolaps, .bapf_sfilter.bapf_ccolaps', function(e) {
+    $(document).on('bapf_ocolaps', '.bapf_sfilter.bapf_ocolaps, .bapf_sfilter.bapf_ccolaps', function(e, animation) {
         $(this).removeClass('bapf_ocolaps').addClass('bapf_ccolaps');
         if( berocket_apply_filters('colaps_smb_open_apply', true, $(this)) ) {
-            $(this).find('.bapf_body').first().show();
+            if ( typeof animation == "undefined") animation = "show";
+            if ( animation == "slideDown" ) {
+                $(this).find('.bapf_body').first().slideDown();
+            } else {
+                $(this).find('.bapf_body').first().show();
+            }
             if( $(this).find('.bapf_colaps_smb').length ) {
                 var data = $(this).find('.bapf_colaps_smb').data();
                 if( typeof(data.opened) == 'undefined' ) {
@@ -1181,10 +1191,15 @@ braapf_show_hide_values_set;
             }
         }
     });
-    $(document).on('bapf_ccolaps', '.bapf_sfilter.bapf_ocolaps, .bapf_sfilter.bapf_ccolaps', function(e) {
+    $(document).on('bapf_ccolaps', '.bapf_sfilter.bapf_ocolaps, .bapf_sfilter.bapf_ccolaps', function(e, animation) {
         $(this).addClass('bapf_ocolaps').removeClass('bapf_ccolaps');
         if( berocket_apply_filters('colaps_smb_close_apply', true, $(this)) ) {
-            $(this).find('.bapf_body').first().hide();
+            if ( typeof animation == "undefined") animation = "hide";
+            if ( animation == "slideUp" ) {
+                $(this).find('.bapf_body').first().slideUp();
+            } else {
+                $(this).find('.bapf_body').first().hide();
+            }
             if( $(this).find('.bapf_colaps_smb').length ) {
                 var data = $(this).find('.bapf_colaps_smb').data();
                 if( typeof(data.opened) == 'undefined' ) {
@@ -1240,10 +1255,10 @@ braapf_show_hide_values_set;
     }
     braapf_collapse_status_set = function(data) {
         $.each(braapf_collapse_status.open, function(i, val) {
-            $('#'+val).trigger('bapf_ccolaps');
+            $('#'+val).trigger('bapf_ccolaps', ["show"]);
         });
         $.each(braapf_collapse_status.close, function(i, val) {
-            $('#'+val).trigger('bapf_ocolaps');
+            $('#'+val).trigger('bapf_ocolaps', ["hide"]);
         });
         return data;
     }
@@ -1350,7 +1365,12 @@ braapf_show_hide_values_set;
 	jQuery( document ).on( 'elementor/popup/show', function() {
         try{
             braapf_init_load();
-        } catch (e) {berocket_throw_error('wprocketInstance_get', e);}
+        } catch (e) {berocket_throw_error('elementor_popup_show', e);}
+	} );
+	jQuery( document ).on( 'pjax:success', function() {
+        try{
+            braapf_init_load();
+        } catch (e) {berocket_throw_error('woodmart_ajax', e);}
 	} );
 })(jQuery);
 berocket_add_filter('get_current_url_data', braapf_get_current_filters);
@@ -1564,6 +1584,10 @@ braapf_search_box_url_filtered_partial;
     braapf_search_box_url_filtered_partial = function (url, context, element) {
         if( element.closest('.berocket_search_box_block').length ) {
             var data_id = element.closest('.berocket_search_box_block').data('id');
+            if( context == 'search_field' ) {
+                var search_box_url = braapf_get_url_search_box(element.closest('.berocket_search_box_block'));
+                url = search_box_url;
+            }
             if( typeof(data_id) != 'undefined' ) {
                 if( url.indexOf('?') > 0 ) {
                     url += '&';
@@ -1847,8 +1871,6 @@ var berocket_rewidth_inline_filters;
     }
     braapf_apply_order_products = function(url_data, single_data) {
         if(typeof(single_data.orderby) != 'undefined' && single_data.orderby) {
-            console.log(url_data);
-            console.log(single_data);
             var exist = false;
             if( Array.isArray(url_data.queryargs) ) {
                 var newqueryargs = [];
@@ -1889,6 +1911,7 @@ var berocket_rewidth_inline_filters;
                 name = name.toLowerCase();
                 if( name.indexOf(search) >= 0 ) {
                     $(this).show();
+                    $(this).parents('.bapf_sfilter ul li').show();
                 } else {
                     $(this).hide();
                 }
@@ -2102,7 +2125,11 @@ jQuery(document).ready(function() {
     }
     jQuery(document).on('berocket_ajax_filtering_on_update', function() {
         if( jQuery('.bapf_sfilter .bapf_select2').length && typeof(jQuery('.bapf_sfilter .bapf_select2').select2) == 'function' ) {
-            jQuery('.bapf_sfilter .bapf_select2').select2('close');
+            jQuery('.bapf_sfilter .bapf_select2').each(function() {
+                if (jQuery(this).data('select2')) {
+                    jQuery(this).select2('close');
+                }
+            });
         }
         bapf_select2_disable_for_parent(jQuery(document));
     });
@@ -2563,7 +2590,7 @@ bapf_change_rtnstrs = function(this_element, taxonomy, value, $checked) {
     return $this;
 }
 bapf_grab_single_rtnstrs = function(single_data, element, selected_filters, grab_single) {
-    if( jQuery(element).is('.bapf_rtnstrs') && jQuery(element).is('.bapf_asradio') ) {
+    if( jQuery(element).is('.bapf_rtnstrs') ) {
         var values = [];
         if( grab_single ) {
             var $elements = element;
@@ -2573,29 +2600,56 @@ bapf_grab_single_rtnstrs = function(single_data, element, selected_filters, grab
             $elements = braapf_filter_mobile_desktop_filters($elements);
         }
         var checked = $elements.find('input:checked:not(:disabled)');
-        if( checked.length > 0 ) {
-            if( jQuery(element).is('.bapf_rtnstrs_asc') ) {
-                var $this = $elements.find('input:checked:not(:disabled)').last();
-                values.push({value:$this.val(), html:$this.data('name')});
-            } else {
-                var $this = $elements.find('input:checked:not(:disabled)').first();
-                values.push({value:$this.val(), html:$this.data('name')});
+        if (jQuery(element).is('.bapf_asradio') ) {
+            if( checked.length > 0 ) {
+                if( jQuery(element).is('.bapf_rtnstrs_asc') ) {
+                    var $this = $elements.find('input:checked:not(:disabled)').last();
+                    values.push({value:$this.val(), html:$this.data('name')});
+                } else {
+                    var $this = $elements.find('input:checked:not(:disabled)').first();
+                    values.push({value:$this.val(), html:$this.data('name')});
+                }
+                single_data.values = values;
             }
-            single_data.values = values;
+        } else {
+            if( checked.length > 0 ) {
+                if( jQuery(element).is('.bapf_rtnstrs_asc') ) {
+                    single_data.type = 'rtnstrs_asc';
+                } else {
+                    single_data.type = 'rtnstrs';
+                }
+            }
         }
     }
     return single_data;
 }
-if ( typeof(berocket_add_filter) == 'function' ) {
+bapf_sfa_taxonomy_rtnstrs = function(taxonomy) {
+    if( typeof (taxonomy.type) != 'undefined' && (taxonomy.type == 'rtnstrs' || taxonomy.type == 'rtnstrs_asc') ) {
+        if( taxonomy.type == 'rtnstrs_asc' ) {
+            element_set = taxonomy.values[taxonomy.values.length - 1];
+        } else {
+            element_set = taxonomy.values[0];
+        }
+        taxonomy.values = [element_set];
+    }
+    return taxonomy;
+}
+function braapf_unselect_rtnstrs () {
+    jQuery(document).off('braapf_unselect', '.bapf_sfilter.bapf_rtnstrs', braapf_unselect_rtnstrs);
+    jQuery(this).trigger('braapf_unselect', false);
+    jQuery(document).on('braapf_unselect', '.bapf_sfilter.bapf_rtnstrs', braapf_unselect_rtnstrs);
+}
+function bapf_rtnstrs_filters_init() {
     berocket_add_filter('input_ckbox_changed', bapf_change_rtnstrs_before, 1);
     berocket_add_filter('input_ckbox_changed', bapf_change_rtnstrs, 1000);
     berocket_add_filter('grab_single_filter_default', bapf_grab_single_rtnstrs);
+    berocket_add_filter('default_selected_filters_area_single_taxonomy', bapf_sfa_taxonomy_rtnstrs);
+}
+jQuery(document).on('braapf_unselect', '.bapf_sfilter.bapf_rtnstrs', braapf_unselect_rtnstrs);
+if ( typeof(berocket_add_filter) == 'function' ) {
+    bapf_rtnstrs_filters_init()
 } else {
-    jQuery(document).on('berocket_hooks_ready', function() {
-        berocket_add_filter('input_ckbox_changed', bapf_change_rtnstrs_before, 1);
-        berocket_add_filter('input_ckbox_changed', bapf_change_rtnstrs, 1000);
-        berocket_add_filter('grab_single_filter_default', bapf_grab_single_rtnstrs);
-    });
+    jQuery(document).on('berocket_hooks_ready', bapf_rtnstrs_filters_init);
 }
 var braapf_grab_single_search_field,
 braapf_apply_search_field,
@@ -2691,7 +2745,7 @@ braapf_show_search_filter_suggestion;
 					var url_filtered = braapf_get_url_with_filters_selected();
                     $(this).data('value', old_value);
                     $(this).data('name', old_name);
-					braapf_ajax_load_from_url(url_filtered, {}, berocket_apply_filters('ajax_load_from_search_field', {done:[braapf_show_search_filter_suggestion, braapf_init_load]}, url_filtered, 'partial'), 'search_field');
+					braapf_ajax_load_from_url(berocket_apply_filters('before_update_products_context_url_filtered_partial', url_filtered, 'search_field', $(this)), {}, berocket_apply_filters('ajax_load_from_search_field', {done:[braapf_show_search_filter_suggestion, braapf_init_load]}, url_filtered, 'partial'), 'search_field');
 				}
             }
         } else {

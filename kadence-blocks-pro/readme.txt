@@ -3,7 +3,7 @@ Contributors: britner, oakesjosh, woodardmc
 Tags: gutenberg, blocks, page builder, google fonts, dual buttons, svg icons, editor width,
 Requires at least: 6.6
 Tested up to: 6.9
-Stable tag: 2.8.6
+Stable tag: 2.8.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,20 @@ assist you with verification, CVE assignment, and notify the
 developers of this plugin.
 
 == Changelog ==
+
+= 2.8.8 =
+Release Date: 9th January 2026
+* Fix: Issue with adv gallery block sliders using dynamic content.
+* Fix: Issue with opacity in image overlay block
+
+= 2.8.7 =
+Release Date: 8th January 2026
+* Fix: Some editor color selectors not working with extended color pallette.
+* Fix: Repeater Block Row/Column Gap Bug
+* Fix: Filter Buttons block Hover/Active states not working if gradient set
+* Fix: Repeater block is showing No content in block settings of Hooked element
+* Fix: Image Overlay: Transparent background color won't reflect on frontend
+* Fix: Post Grid / Carousel block's unexpected box shadow
 
 = 2.8.6 =
 Release Date: 3rd December 2025

@@ -356,7 +356,7 @@ class BeRocket_AAPF_single_filter extends BeRocket_custom_post_class {
     }
     public function conditions($post) {
         $options = $this->get_option( $post->ID );
-        echo $this->conditions->build($options['data']);
+        echo $this->conditions->build($options['data'], array('global_class' => 'bapf_conditions'));
         ?>
         <div class="section_conditions_hide_this_on">
             <table>
@@ -691,7 +691,7 @@ class BeRocket_AAPF_group_filters extends BeRocket_custom_post_class {
     }
     public function conditions($post) {
         $options = $this->get_option( $post->ID );
-        echo $this->conditions->build($options['data']);
+        echo $this->conditions->build($options['data'], array('global_class' => 'bapf_conditions'));
         ?>
         <div class="section_conditions_hide_this_on">
             <table>

@@ -96,13 +96,19 @@ class Premium_Blog extends Widget_Base {
 
 		if ( $is_edit ) {
 
-			$scripts = array_merge( $scripts, array( 'isotope-js', 'pa-slick' ) );
+			$scripts = array_merge( $scripts, array( 'isotope-js', 'pa-slick', 'pa-tweenmax', 'pa-draggable' ) );
 
 		} else {
-			$settings = $this->get_settings();
+			$settings = $this->get_settings_for_display();
 
 			if ( 'masonry' === $settings['premium_blog_layout'] ) {
 				$scripts[] = 'isotope-js';
+			} elseif ( 'marquee' === $settings['premium_blog_layout'] ) {
+
+				if ( 'yes' === $settings['marquee_draggable'] ) {
+					$scripts[] = 'pa-draggable';
+				}
+				$scripts[] = 'pa-tweenmax';
 			}
 
 			if ( 'yes' === $settings['premium_blog_carousel'] ) {
@@ -248,12 +254,36 @@ class Premium_Blog extends Widget_Base {
 				'options'            => array(
 					'even'    => __( 'Even', 'premium-addons-for-elementor' ),
 					'masonry' => __( 'Masonry', 'premium-addons-for-elementor' ),
+					'marquee' => __( 'Marquee', 'premium-addons-for-elementor' ),
 				),
 				'default'            => 'even',
 				'condition'          => array(
 					'premium_blog_grid' => 'yes',
 				),
 				'frontend_available' => true,
+			)
+		);
+
+		$this->add_responsive_control(
+			'marquee_post_width',
+			array(
+				'label'       => __( 'Post Width', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'range'       => array(
+					'px' => array(
+						'min' => 100,
+						'max' => 800,
+					),
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'premium_blog_grid'   => 'yes',
+					'premium_blog_layout' => 'marquee',
+				),
+				'selectors'   => array(
+					'{{WRAPPER}} .premium-blog-post-outer-container'  => 'width: {{SIZE}}{{UNIT}}',
+				),
 			)
 		);
 
@@ -264,8 +294,8 @@ class Premium_Blog extends Widget_Base {
 				'type'               => Controls_Manager::SWITCHER,
 				'return_value'       => 'true',
 				'condition'          => array(
-					'premium_blog_grid'   => 'yes',
-					'premium_blog_layout' => 'even',
+					'premium_blog_grid'    => 'yes',
+					'premium_blog_layout!' => 'masonry',
 				),
 				'frontend_available' => true,
 			)
@@ -304,7 +334,8 @@ class Premium_Blog extends Widget_Base {
 				'render_type'        => 'template',
 				'label_block'        => true,
 				'condition'          => array(
-					'premium_blog_grid' => 'yes',
+					'premium_blog_grid'    => 'yes',
+					'premium_blog_layout!' => 'marquee',
 				),
 				'selectors'          => array(
 					'{{WRAPPER}} .premium-blog-post-outer-container'  => 'width: {{VALUE}}',
@@ -632,6 +663,29 @@ class Premium_Blog extends Widget_Base {
 			'show_featured_image' => 'yes',
 		);
 
+		$this->add_responsive_control(
+			'premium_blog_thumb_min_height',
+			array(
+				'label'      => __( 'Height', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'custom' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 600,
+					),
+					'em' => array(
+						'min' => 1,
+						'max' => 60,
+					),
+				),
+				'condition'  => array_merge( $featured_image_conditions ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-blog-thumbnail-container img' => 'height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			array(
@@ -704,29 +758,6 @@ class Premium_Blog extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .premium-blog-thumb-effect-wrapper' => 'flex-basis: {{SIZE}}%',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'premium_blog_thumb_min_height',
-			array(
-				'label'      => __( 'Height', 'premium-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em', 'custom' ),
-				'range'      => array(
-					'px' => array(
-						'min' => 0,
-						'max' => 600,
-					),
-					'em' => array(
-						'min' => 1,
-						'max' => 60,
-					),
-				),
-				'condition'  => array_merge( $featured_image_conditions ),
-				'selectors'  => array(
-					'{{WRAPPER}} .premium-blog-thumbnail-container img' => 'height: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -846,28 +877,33 @@ class Premium_Blog extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .premium-blog-post-outer-container' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				),
+				'condition'   => array(
+					'premium_blog_layout!' => 'marquee',
+				),
 			)
 		);
 
 		$this->add_responsive_control(
 			'premium_blog_posts_spacing',
 			array(
-				'label'     => __( 'Columns Spacing', 'premium-addons-for-elementor' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => array(
+				'label'       => __( 'Columns Spacing', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'default'     => array(
 					'size' => 5,
 				),
-				'range'     => array(
+				'range'       => array(
 					'px' => array(
 						'min' => 0,
 						'max' => 50,
 					),
 				),
-				'selectors' => array(
-					'{{WRAPPER}} .premium-blog-post-outer-container' => 'padding-inline: calc( {{SIZE}}{{UNIT}}/2 );',
-					'{{WRAPPER}} .premium-blog-wrap' => 'margin-inline: calc( -{{SIZE}}{{UNIT}}/2 );',
+				'selectors'   => array(
+					'{{WRAPPER}} .premium-blog-wrap:not(.premium-blog-marquee) .premium-blog-post-outer-container' => 'padding-inline: calc( {{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .premium-blog-wrap:not(.premium-blog-marquee)' => 'margin-inline: calc( -{{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .premium-marquee-wrapper' => '--pa-marquee-spacing: {{SIZE}}{{UNIT}}',
 				),
-				'condition' => array(
+				'render_type' => 'template',
+				'condition'   => array(
 					'premium_blog_grid' => 'yes',
 				),
 			)
@@ -1132,6 +1168,7 @@ class Premium_Blog extends Widget_Base {
 				'condition'          => array(
 					'premium_blog_carousel!' => 'yes',
 					'premium_blog_paging!'   => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 				'frontend_available' => true,
 			)
@@ -1144,6 +1181,7 @@ class Premium_Blog extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => array(
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -1165,6 +1203,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_cat_tabs'  => 'yes',
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -1178,6 +1217,7 @@ class Premium_Blog extends Widget_Base {
 				'condition'       => array(
 					'premium_blog_cat_tabs'  => 'yes',
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -1191,6 +1231,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_cat_tabs'  => 'yes',
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -1219,6 +1260,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_cat_tabs'  => 'yes',
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .premium-blog-filter' => 'justify-content: {{VALUE}};',
@@ -1238,6 +1280,7 @@ class Premium_Blog extends Widget_Base {
 				'condition'          => array(
 					'premium_blog_cat_tabs'  => 'yes',
 					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -1261,6 +1304,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_infinite_scroll!' => 'yes',
 					'premium_blog_paging!'          => 'yes',
+					'premium_blog_layout!'          => 'marquee',
 				),
 			)
 		);
@@ -1270,6 +1314,25 @@ class Premium_Blog extends Widget_Base {
 			array(
 				'label'              => __( 'Enable Carousel', 'premium-addons-for-elementor' ),
 				'type'               => Controls_Manager::SWITCHER,
+				'prefix_class'       => 'premium-blog__carousel-',
+				'render_type'        => 'template',
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'overflow_slides',
+			array(
+				'label'              => __( 'Overflow Slides', 'premium-addons-for-elementor' ),
+				'render_type'        => 'template',
+				'type'               => Controls_Manager::SWITCHER,
+				'selectors'          => array(
+					'{{WRAPPER}} .slick-list' => 'overflow: visible;',
+					'body'                    => 'overflow-x: hidden;',
+				),
+				'condition'          => array(
+					'premium_blog_carousel' => 'yes',
+				),
 				'frontend_available' => true,
 			)
 		);
@@ -1282,6 +1345,7 @@ class Premium_Blog extends Widget_Base {
 				'condition'          => array(
 					'premium_blog_carousel'       => 'yes',
 					'premium_blog_columns_number' => '100%',
+					'overflow_slides!'            => 'yes',
 				),
 				'frontend_available' => true,
 			)
@@ -1290,7 +1354,7 @@ class Premium_Blog extends Widget_Base {
 		$this->add_control(
 			'premium_blog_carousel_play',
 			array(
-				'label'              => __( 'Auto Play', 'premium-addons-for-elementor' ),
+				'label'              => __( 'Autoplay Slides', 'premium-addons-for-elementor' ),
 				'type'               => Controls_Manager::SWITCHER,
 				'condition'          => array(
 					'premium_blog_carousel' => 'yes',
@@ -1351,6 +1415,7 @@ class Premium_Blog extends Widget_Base {
 				'type'               => Controls_Manager::SWITCHER,
 				'condition'          => array(
 					'premium_blog_carousel' => 'yes',
+					'overflow_slides!'      => 'yes',
 				),
 				'frontend_available' => true,
 			)
@@ -1365,6 +1430,7 @@ class Premium_Blog extends Widget_Base {
 				'default'            => '15',
 				'condition'          => array(
 					'premium_blog_carousel' => 'yes',
+					'overflow_slides!'      => 'yes',
 				),
 				'frontend_available' => true,
 			)
@@ -1395,6 +1461,101 @@ class Premium_Blog extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'arrows_position',
+			array(
+				'label'     => __( 'Position', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'above'   => array(
+						'title' => __( 'Above Slide', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'default' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-center',
+					),
+					'below'   => array(
+						'title' => __( 'Below Slides', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+				),
+				'default'   => 'default',
+				'toggle'      => false,
+				'condition' => array(
+					'premium_blog_carousel'        => 'yes',
+					'premium_blog_carousel_arrows' => 'yes',
+				),
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'arrows_alignment',
+			array(
+				'label'     => __( 'Alignment', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'start'  => array(
+						'title' => __( 'Start', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-left',
+					),
+					'center' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-v-align-middle',
+					),
+					'end'    => array(
+						'title' => __( 'End', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+				),
+				'default'   => 'start',
+				'toggle'      => false,
+				'condition' => array(
+					'premium_blog_carousel'        => 'yes',
+					'premium_blog_carousel_arrows' => 'yes',
+					'arrows_position!'             => 'default',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'justify-content: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_gap',
+			array(
+				'label'      => __( 'Spacing', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%', 'custom' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'gap: {{SIZE}}{{UNIT}}',
+				),
+				'condition'  => array(
+					'premium_blog_carousel'        => 'yes',
+					'premium_blog_carousel_arrows' => 'yes',
+					'arrows_position!'             => 'default',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_margin',
+			array(
+				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%', 'custom' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-carousel-arrows-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'premium_blog_carousel'        => 'yes',
+					'premium_blog_carousel_arrows' => 'yes',
+					'arrows_position!'                  => 'default',
+				),
+			)
+		);
+
 		$this->add_responsive_control(
 			'premium_blog_carousel_arrows_pos',
 			array(
@@ -1414,10 +1575,11 @@ class Premium_Blog extends Widget_Base {
 				'condition'  => array(
 					'premium_blog_carousel'        => 'yes',
 					'premium_blog_carousel_arrows' => 'yes',
+					'arrows_position'              => 'default',
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-blog-wrap a.carousel-arrow.carousel-next' => 'right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .premium-blog-wrap a.carousel-arrow.carousel-prev' => 'left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes a.carousel-arrow.carousel-next' => 'right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes a.carousel-arrow.carousel-prev' => 'left: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -1430,6 +1592,7 @@ class Premium_Blog extends Widget_Base {
 				'label'     => __( 'Pagination', 'premium-addons-for-elementor' ),
 				'condition' => array(
 					'premium_blog_carousel!'        => 'yes',
+					'premium_blog_layout!'          => 'marquee',
 					'premium_blog_infinite_scroll!' => 'yes',
 				),
 			)
@@ -1531,6 +1694,78 @@ class Premium_Blog extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'marquee_section',
+			array(
+				'label'     => __( 'Marquee Settings', 'premium-addons-for-elementor' ),
+				'condition' => array(
+					'premium_blog_layout' => 'marquee',
+				),
+			)
+		);
+
+		$this->add_control(
+			'marquee_direction',
+			array(
+				'label'              => __( 'Animation Direction', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'normal',
+				'options'            => array(
+					'normal'  => __( 'Normal', 'premium-addons-for-elementor' ),
+					'reverse' => __( 'Reverse', 'premium-addons-for-elementor' ),
+				),
+				'render_type'        => 'template',
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'marquee_speed',
+			array(
+				'label'              => __( 'Speed', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::NUMBER,
+				'description'        => __( 'The smaller the value, the faster the animation.', 'premium-addons-for-elementor' ),
+				'default'            => 50,
+				'render_type'        => 'template',
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'marquee_draggable',
+			array(
+				'label'              => __( 'Make it Draggable', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'default'            => 'yes',
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'marquee_draggable_notice',
+			array(
+				'raw'             => __( 'Draggable option works on the frontend only.', 'premium-addons-for-elementor' ),
+				'type'            => Controls_Manager::RAW_HTML,
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => array(
+					'marquee_draggable' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'fading_color',
+			array(
+				'label'     => __( 'Fading Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-blog-marquee:after' => 'background:linear-gradient(to right, {{VALUE}}, #F291D800 10%, #F291D800 90%, {{VALUE}}) !important',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_pa_docs',
 			array(
 				'label' => __( 'Help & Docs', 'premium-addons-for-elementor' ),
@@ -1572,7 +1807,9 @@ class Premium_Blog extends Widget_Base {
 				'label'     => __( 'Filter', 'premium-addons-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'premium_blog_cat_tabs' => 'yes',
+					'premium_blog_cat_tabs'  => 'yes',
+					'premium_blog_carousel!' => 'yes',
+					'premium_blog_layout!'   => 'marquee',
 				),
 			)
 		);
@@ -3007,6 +3244,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_carousel'      => 'yes',
 					'premium_blog_carousel_dots' => 'yes',
+					'premium_blog_layout!'       => 'marquee',
 				),
 			)
 		);
@@ -3049,6 +3287,7 @@ class Premium_Blog extends Widget_Base {
 				'condition' => array(
 					'premium_blog_carousel'        => 'yes',
 					'premium_blog_carousel_arrows' => 'yes',
+					'premium_blog_layout!'         => 'marquee',
 				),
 			)
 		);
@@ -3062,7 +3301,22 @@ class Premium_Blog extends Widget_Base {
 					'default' => Global_Colors::COLOR_PRIMARY,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .premium-blog-wrap .slick-arrow' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'disabled_arrow_color',
+			array(
+				'label'     => __( 'Disabled Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow.slick-disabled' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow.slick-disabled svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array(
+					'overflow_slides' => 'yes',
 				),
 			)
 		);
@@ -3074,7 +3328,7 @@ class Premium_Blog extends Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-blog-wrap .slick-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -3088,7 +3342,21 @@ class Premium_Blog extends Widget_Base {
 					'default' => Global_Colors::COLOR_SECONDARY,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .premium-blog-wrap .slick-arrow' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'disabled_arrow_background',
+			array(
+				'label'     => __( 'Disabled Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow.slick-disabled' => 'background-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'overflow_slides' => 'yes',
 				),
 			)
 		);
@@ -3100,7 +3368,7 @@ class Premium_Blog extends Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-blog-wrap .slick-arrow' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow' => 'border-radius: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -3112,7 +3380,7 @@ class Premium_Blog extends Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .premium-blog-wrap .slick-arrow' => 'padding: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.premium-blog__carousel-yes .slick-arrow' => 'padding: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -3254,7 +3522,7 @@ class Premium_Blog extends Widget_Base {
 
 		$blog_helper = Blog_Helper::getInstance();
 
-		if ( 'yes' === $settings['premium_blog_cat_tabs'] && 'yes' !== $settings['premium_blog_carousel'] ) {
+		if ( 'yes' === $settings['premium_blog_cat_tabs'] && 'yes' !== $settings['premium_blog_carousel'] && 'marquee' !== $settings['premium_blog_layout'] ) {
 
 			$filter_rule = $settings['filter_tabs_type'];
 
@@ -3300,8 +3568,20 @@ class Premium_Blog extends Widget_Base {
 
 		}
 
-		if ( 'yes' === $settings['premium_blog_carousel'] ) {
+		$carousel = 'yes' === $settings['premium_blog_carousel'];
+		if ( $carousel || ( 'yes' === $settings['premium_blog_grid'] && 'marquee' === $settings['premium_blog_layout'] ) ) {
 			$this->add_render_attribute( 'blog', 'class', 'premium-carousel-hidden' );
+
+		}
+
+		if( $carousel ) {
+			$arrows = 'yes' === $settings['premium_blog_carousel_arrows'];
+			$arrows_custom_pos = $arrows && 'default' !== $settings['arrows_position'];
+
+			if ( $arrows && $arrows_custom_pos ) {
+				$this->add_render_attribute( 'blog', 'class', 'pa-has-custom-pos' );
+			}
+
 		}
 
 		// Add page ID to be used later to get posts by AJAX.
@@ -3319,24 +3599,38 @@ class Premium_Blog extends Widget_Base {
 
 		?>
 
-		<?php if ( 'yes' === $settings['premium_blog_cat_tabs'] && 'yes' !== $settings['premium_blog_carousel'] ) : ?>
+		<?php if ( 'yes' === $settings['premium_blog_cat_tabs'] && 'yes' !== $settings['premium_blog_carousel'] && 'marquee' !== $settings['premium_blog_layout'] ) : ?>
 			<?php $this->get_filter_tabs_markup( $filters ); ?>
 		<?php endif; ?>
+
+
+		<?php if ( $carousel && $arrows && 'above' === $settings['arrows_position'] ) { ?>
+			<div class="premium-carousel-arrows-wrapper"></div>
+		<?php } ?>
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'blog' ) ); ?>>
-			<?php
-				$id = $this->get_id();
-				$blog_helper->render_posts();
-			?>
+			<?php if ( 'yes' === $settings['premium_blog_grid'] && 'marquee' === $settings['premium_blog_layout'] ) : ?>
+				<div class="premium-marquee-wrapper">
+			<?php endif; ?>
+				<?php
+					$id = $this->get_id();
+					$blog_helper->render_posts();
+				?>
+			<?php if ( 'yes' === $settings['premium_blog_grid'] && 'marquee' === $settings['premium_blog_layout'] ) : ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
-		<?php if ( 'yes' === $settings['premium_blog_paging'] && $total_pages > 1 ) : ?>
-		<div class="premium-blog-footer">
-			<?php $blog_helper->render_pagination(); ?>
-		</div>
-			<?php
-		endif;
+		<?php if ( 'yes' === $settings['premium_blog_paging'] && 'marquee' !== $settings['premium_blog_layout'] && $total_pages > 1 ) : ?>
+			<div class="premium-blog-footer">
+				<?php $blog_helper->render_pagination(); ?>
+			</div>
+		<?php endif; ?>
 
-		if ( Plugin::instance()->editor->is_edit_mode() ) {
+		<?php if ( $carousel && $arrows && 'below' === $settings['arrows_position'] ) { ?>
+			<div class="premium-carousel-arrows-wrapper"></div>
+		<?php } ?>
+
+		<?php if ( Plugin::instance()->editor->is_edit_mode() ) {
 
 			if ( 'yes' === $settings['premium_blog_grid'] ) {
 				if ( 'masonry' === $settings['premium_blog_layout'] && 'yes' !== $settings['premium_blog_carousel'] ) {

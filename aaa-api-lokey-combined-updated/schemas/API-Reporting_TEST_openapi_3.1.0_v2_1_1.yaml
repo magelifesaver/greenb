@@ -1,0 +1,1077 @@
+openapi: 3.1.0
+info:
+  title: Lokey Delivery TEST Ops API (JWT Auth)
+  version: 2.1.1
+  description: 'Unified Lokey Delivery + GPT Reporting API with integrated JWT Auth Pro.  This
+
+    specification covers WooCommerce reporting, ATUM inventory, and extended product
+
+    creation endpoints.  All routes support JWT Bearer authentication via the
+
+    `bearerAuth` security scheme and note when internal key‑based authentication
+
+    occurs.  New diagnostics, inventory and sales overview endpoints are included
+
+    and purchase order responses are wrapped in an envelope containing version,
+
+    status, code, and timestamp metadata.
+
+
+    NOTE: This is the TEST split schema (<=30 operations). Includes /gpt/v1/* plus /jwt-auth/v1/token.
+
+    Use this schema in your TEST GPT (safe experimentation).'
+servers:
+- url: https://lokeydelivery.com/wp-json
+  description: Production server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    SalesSummary:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date
+          example: '2025-11-01'
+        to:
+          type: string
+          format: date
+          example: '2025-11-30'
+        group_by:
+          type: string
+          enum:
+          - none
+          - day
+          - week
+          - month
+        currency:
+          type: string
+          example: USD
+        totals:
+          type: object
+          properties:
+            orders:
+              type: integer
+              example: 245
+            items_sold:
+              type: integer
+              example: 382
+            gross_sales:
+              type: number
+              format: float
+              example: 112060.81
+            net_sales:
+              type: number
+              format: float
+              example: 103667.01
+            avg_order_value:
+              type: number
+              format: float
+              example: 72.6
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              period:
+                type: string
+                format: date
+                example: '2025-11-29'
+              orders:
+                type: integer
+              gross_sales:
+                type: number
+              net_sales:
+                type: number
+              avg_order_value:
+                type: number
+    ProductRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        qty_sold:
+          type: integer
+        gross_sales:
+          type: number
+        net_sales:
+          type: number
+        discount_total:
+          type: number
+        orders_count:
+          type: integer
+    OrderRow:
+      type: object
+      properties:
+        order_id:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        status:
+          type: string
+        customer_id:
+          type: integer
+        customer:
+          type: string
+        items_count:
+          type: integer
+        total:
+          type: number
+        discounts:
+          type: number
+        net_sales:
+          type: number
+        payment:
+          type: string
+    PurchaseOrderStatus:
+      type: string
+      description: Purchase order status slug (ATUM).
+      enum:
+      - atum_pending
+      - atum_ordered
+      - atum_onthewayin
+      - atum_receiving
+      - atum_received
+      - trash
+      default: atum_ordered
+      example: atum_ordered
+    PurchaseOrderLineItem:
+      type: object
+      description: Purchase order line item (request/response).
+      properties:
+        product_id:
+          type: integer
+          description: WooCommerce product ID.
+        variation_id:
+          type: integer
+          nullable: true
+          description: WooCommerce variation ID (optional).
+        quantity:
+          type: integer
+          description: Quantity to order.
+        purchase_price:
+          type: number
+          nullable: true
+          description: Unit cost (preferred).
+        cost:
+          type: number
+          nullable: true
+          deprecated: true
+          description: Legacy alias of purchase_price.
+    PurchaseOrderCreate:
+      type: object
+      additionalProperties: false
+      required:
+      - supplier
+      - line_items
+      properties:
+        supplier:
+          type: integer
+          description: Supplier ID linked to the purchase order.
+        supplier_id:
+          type: integer
+          deprecated: true
+          description: Legacy alias of supplier.
+        status:
+          $ref: '#/components/schemas/PurchaseOrderStatus'
+        currency:
+          type: string
+          description: Currency code (ISO).
+          default: USD
+          example: USD
+        date_expected:
+          type: string
+          format: date-time
+          description: Expected arrival date (site timezone).
+        multiple_suppliers:
+          type: boolean
+          description: Whether multiple suppliers is enabled.
+          default: false
+        line_items:
+          type: array
+          description: Line items for the purchase order (preferred).
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItem'
+        items:
+          type: array
+          deprecated: true
+          description: Legacy alias of line_items.
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItem'
+        shipping_lines:
+          type: array
+          description: Shipping lines (advanced).
+          items:
+            type: object
+            additionalProperties: true
+        fee_lines:
+          type: array
+          description: Fee lines (advanced).
+          items:
+            type: object
+            additionalProperties: true
+        meta_data:
+          type: array
+          description: Meta data (advanced).
+          items:
+            type: object
+            additionalProperties: true
+        description:
+          type: string
+          description: Purchase order description.
+    PurchaseOrderUpdate:
+      type: object
+      description: ATUM Purchase Order object (subset of fields).
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the resource.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/PurchaseOrderStatus'
+        currency:
+          type: string
+          description: Currency code (ISO).
+        date_created:
+          type: string
+          format: date-time
+          description: Creation date in site timezone.
+        date_created_gmt:
+          type: string
+          format: date-time
+          description: Creation date as GMT.
+        date_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        date_modified_gmt:
+          type: string
+          format: date-time
+          readOnly: true
+        supplier:
+          type: integer
+          description: Supplier ID linked to the purchase order.
+        multiple_suppliers:
+          type: boolean
+          description: Whether multiple suppliers is enabled.
+        date_expected:
+          type: string
+          format: date-time
+          description: Expected arrival date in site timezone.
+        date_expected_gmt:
+          type: string
+          format: date-time
+          description: Expected arrival date as GMT.
+        line_items:
+          type: array
+          description: Line items.
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItem'
+        shipping_lines:
+          type: array
+          description: Shipping lines.
+          items:
+            type: object
+            additionalProperties: true
+        fee_lines:
+          type: array
+          description: Fee lines.
+          items:
+            type: object
+            additionalProperties: true
+        meta_data:
+          type: array
+          description: Meta data.
+          items:
+            type: object
+            additionalProperties: true
+        description:
+          type: string
+          description: Purchase order description.
+    PurchaseOrderUpdateRequest:
+      type: object
+      additionalProperties: false
+      description: 'Payload for updating an existing purchase order without the ID.
+
+        The purchase order ID is derived from the URL path.
+
+        '
+      properties:
+        supplier:
+          type: integer
+          description: Supplier ID linked to the purchase order.
+        supplier_id:
+          type: integer
+          deprecated: true
+          description: Legacy alias of supplier.
+        status:
+          $ref: '#/components/schemas/PurchaseOrderStatus'
+        currency:
+          type: string
+          description: Currency code (ISO).
+        date_expected:
+          type: string
+          format: date-time
+          description: Expected arrival date (site timezone).
+        multiple_suppliers:
+          type: boolean
+          description: Whether multiple suppliers is enabled.
+        line_items:
+          type: array
+          description: Line items to merge into the purchase order (preferred).
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItem'
+        items:
+          type: array
+          deprecated: true
+          description: Legacy alias of line_items.
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLineItem'
+        shipping_lines:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        fee_lines:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        meta_data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        description:
+          type: string
+    ProductSalesReportItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        stock_qty:
+          type: integer
+          nullable: true
+        units_sold:
+          type: integer
+        sales_value:
+          type: number
+        sales_per_day:
+          type: number
+    ProductForecast:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        forecast_stock_qty:
+          type: integer
+          nullable: true
+        forecast_total_units_sold:
+          type: integer
+          nullable: true
+        forecast_sales_day:
+          type: string
+          nullable: true
+        forecast_sales_month:
+          type: number
+          nullable: true
+        forecast_sales_day_lifetime:
+          type: string
+          nullable: true
+        forecast_oos_date:
+          type: string
+          nullable: true
+        forecast_reorder_date:
+          type: string
+          nullable: true
+        forecast_margin_percent:
+          type: number
+          nullable: true
+        forecast_frozen_capital:
+          type: number
+          nullable: true
+        forecast_lead_time_days:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_minimum_order_qty:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_sales_window_days:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_cost_override:
+          oneOf:
+          - type: number
+          - type: string
+          nullable: true
+        forecast_first_sold_date:
+          type: string
+          nullable: true
+        forecast_last_sold_date:
+          type: string
+          nullable: true
+        forecast_first_purchased:
+          type: string
+          nullable: true
+        forecast_last_purchased:
+          type: string
+          nullable: true
+        forecast_enable_reorder:
+          type: string
+          nullable: true
+        forecast_po_priority_score:
+          type: number
+          nullable: true
+        forecast_product_class:
+          type: string
+          nullable: true
+        forecast_do_not_reorder:
+          type: string
+          nullable: true
+        forecast_is_not_moving:
+          type: string
+          nullable: true
+        forecast_is_must_stock:
+          type: string
+          nullable: true
+        forecast_is_new_product:
+          type: string
+          nullable: true
+        forecast_force_reorder:
+          type: string
+          nullable: true
+        forecast_flag_for_review:
+          type: string
+          nullable: true
+        forecast_reorder_note:
+          type: string
+          nullable: true
+        forecast_updated_at:
+          type: string
+          nullable: true
+        forecast_sales_status:
+          type: string
+          nullable: true
+        forecast_tier_threshold_1:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_tier_threshold_2:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_tier_threshold_3:
+          oneOf:
+          - type: integer
+          - type: string
+          nullable: true
+        forecast_minimum_stock:
+          type: integer
+          nullable: true
+        forecast_mark_for_clearance:
+          type: string
+          nullable: true
+        forecast_mark_for_removal:
+          type: string
+          nullable: true
+        forecast_is_out_of_stock:
+          type: string
+          nullable: true
+        forecast_is_stale_inventory:
+          type: string
+          nullable: true
+    ProductExtended:
+      type: object
+      description: 'Schema for creating or updating WooCommerce products via the extended
+
+        endpoints.  Attributes are merged safely; existing terms are preserved and
+
+        supplier links are updated via the `_supplier_id` postmeta.  Use
+
+        `discount_percent` to automatically calculate the sale price from the
+
+        regular price.  All HTML content in descriptions is sanitised using
+
+        WordPress `wp_kses_post()`.
+
+        '
+      properties:
+        name:
+          type: string
+          example: Amazing Flower
+        sku:
+          type: string
+          example: GPT-AF-20260103
+        type:
+          type: string
+          enum:
+          - simple
+          - variable
+          default: simple
+        regular_price:
+          type: string
+          example: '48.00'
+        sale_price:
+          type: string
+          example: '28.80'
+        discount_percent:
+          type: number
+          description: Auto‑calculates sale price if provided.
+          example: 40
+        manage_stock:
+          type: boolean
+          description: Always true.  Lokey system enforces stock tracking.
+          example: true
+        stock_quantity:
+          type: integer
+          description: Initial stock count. Defaults to 0.
+          example: 0
+        status:
+          type: string
+          enum:
+          - publish
+          - draft
+          example: publish
+        categories:
+          type: array
+          description: Array of category objects with IDs.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 888
+        brands:
+          type: array
+          description: Array of brand objects with IDs.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1217
+        attributes:
+          type: array
+          description: Array of product attribute definitions.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 2
+              name:
+                type: string
+                example: Classification
+              options:
+                type: array
+                items:
+                  type: string
+                example:
+                - Indica
+              taxonomy:
+                type: boolean
+                description: Whether this attribute uses global taxonomy (pa_ prefix).
+                example: true
+              visible:
+                type: boolean
+                example: true
+              variation:
+                type: boolean
+                example: false
+        supplier_id:
+          type: integer
+          description: ID of supplier linked to product.
+          example: 21385
+        images:
+          type: array
+          description: 'Array of product images following WooCommerce REST standards. The first image becomes the featured
+            image, and subsequent images populate the product gallery. Filenames are normalized and duplicates prevented using
+            the `_source_image_url` meta key.
+
+            '
+          items:
+            type: object
+            required:
+            - src
+            properties:
+              src:
+                type: string
+                description: Direct URL of the image.
+                example: https://weedmaps.com/images/products/000/952/567/avatar/1765232555.jpg
+              name:
+                type: string
+                description: Optional name for the image file (used for SEO-friendly filenames).
+                example: berry-bomb-refined-live-resin-1g
+              alt:
+                type: string
+                description: Optional alt text for accessibility and SEO.
+                example: Berry Bomb Refined Live Resin Cartridge
+        description:
+          type: string
+          description: Full product description (HTML allowed).
+          example: <p>Premium indoor flower, hand-trimmed for quality.</p>
+        short_description:
+          type: string
+          description: Short marketing description for product cards.
+          example: Smooth indica experience.
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        stock_status:
+          type: string
+        stock_quantity:
+          type: integer
+          nullable: true
+        supplier:
+          type: string
+        purchase_price:
+          type: number
+        sale_price:
+          type: number
+        regular_price:
+          type: number
+        total_value:
+          type: number
+    InventoryResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        count:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        fallback:
+          type: boolean
+        timestamp:
+          type: string
+          description: Generation time in MySQL datetime format
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+    DiagnosticsResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        plugin:
+          type: string
+        namespace:
+          type: string
+        constants:
+          type: object
+          additionalProperties: true
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              route:
+                type: string
+              active:
+                type: boolean
+              endpoint:
+                type: string
+        execution_ms:
+          type: number
+        timestamp:
+          type: string
+    TopSalesItem:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        product_name:
+          type: string
+        quantity_sold:
+          type: integer
+        total_sales:
+          type: number
+        avg_price_sold:
+          type: number
+    SalesOverviewResponse:
+      type: object
+      properties:
+        overview_generated:
+          type: string
+          format: date-time
+        summary:
+          $ref: '#/components/schemas/SalesSummary'
+        top:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopSalesItem'
+    PurchaseOrderListResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        filters:
+          type: object
+          description: Filters used in the query
+          additionalProperties: true
+        count:
+          type: integer
+        message:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderUpdate'
+        timestamp:
+          type: string
+    PurchaseOrderSingleResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        id:
+          type: integer
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PurchaseOrderUpdate'
+        timestamp:
+          type: string
+    PurchaseOrderBatchResponse:
+      type: object
+      properties:
+        version:
+          type: string
+        status:
+          type: string
+        code:
+          type: integer
+        data:
+          type: object
+          description: Arbitrary batch update result returned by ATUM
+          additionalProperties: true
+        timestamp:
+          type: string
+security:
+- bearerAuth: []
+paths:
+  /jwt-auth/v1/token:
+    post:
+      operationId: jwtAuthToken
+      summary: Obtain JWT for GPT automation
+      description: 'Authenticates using a dedicated WordPress user to obtain a JWT token.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: gptautomation
+                password:
+                  type: string
+                  example: REDACTED
+      responses:
+        '200':
+          description: JWT issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGci...
+      security: []
+  /gpt/v1/sales/summary:
+    get:
+      operationId: gptSalesSummaryByDate
+      summary: Retrieve sales summary by date range
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: group_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - none
+          - day
+          - week
+          - month
+      - name: statuses
+        in: query
+        schema:
+          type: string
+          example: completed,processing
+      responses:
+        '200':
+          description: Sales summary results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesSummary'
+        '401':
+          description: Unauthorized
+  /gpt/v1/purchase-orders/properties:
+    get:
+      operationId: gptPurchaseOrderProperties
+      summary: Purchase order properties (statuses, defaults)
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Purchase order properties
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  allowed_statuses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrderStatus'
+                  default_status:
+                    $ref: '#/components/schemas/PurchaseOrderStatus'
+  /gpt/v1/purchase-orders:
+    get:
+      operationId: getPurchaseOrders
+      summary: List ATUM purchase orders
+      parameters:
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/PurchaseOrderStatus'
+        example: atum_received
+      - name: supplier
+        in: query
+        schema:
+          type: integer
+      - name: date_after
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: date_before
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Array of filtered purchase orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOrderUpdate'
+    post:
+      operationId: createPurchaseOrder
+      summary: Create new ATUM purchase order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderCreate'
+      responses:
+        '201':
+          description: Purchase order created
+  /gpt/v1/purchase-orders/{id}:
+    get:
+      operationId: getPurchaseOrderById
+      summary: Retrieve purchase order by ID
+      responses:
+        '200':
+          description: Purchase order object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderUpdate'
+    put:
+      operationId: updatePurchaseOrder
+      summary: Update existing purchase order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderUpdateRequest'
+      responses:
+        '200':
+          description: Purchase order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrderUpdate'
+    delete:
+      operationId: deletePurchaseOrder
+      summary: Delete purchase order by ID
+      responses:
+        '200':
+          description: Purchase order deleted
+  /gpt/v1/purchase-orders/batch:
+    put:
+      operationId: batchUpdatePurchaseOrders
+      summary: Batch update purchase orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                update:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PurchaseOrderUpdate'
+      responses:
+        '200':
+          description: Batch update results
+  /gpt/v1/suppliers:
+    get:
+      operationId: getSuppliers
+      summary: List ATUM suppliers
+      responses:
+        '200':
+          description: Array of supplier objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+  /gpt/v1/sales/overview:
+    get:
+      operationId: lokeyGPTSalesOverview
+      summary: GPT unified sales overview
+      description: 'Returns a combined sales summary and top product report for a date range.  Supply
+
+        `from` and `to` dates or a `days` look‑back period. The response includes
+
+        an overview timestamp, a summary matching SalesSummary and a top list of
+
+        product sales metrics.  Call this to get an at‑a‑glance view of sales.
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Start date in YYYY‑MM‑DD format
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          description: End date in YYYY‑MM‑DD format
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Number of days to include when dates are not provided
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of top products to return
+      - name: group_by
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Optional grouping for the summary (none, day, week, month)
+      - name: statuses
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma‑separated order statuses
+      responses:
+        '200':
+          description: Combined sales summary and top data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOverviewResponse'

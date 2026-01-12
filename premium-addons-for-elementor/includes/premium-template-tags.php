@@ -843,7 +843,7 @@ class Premium_Template_Tags {
 
 		$settings = self::$settings;
 
-		if ( 'yes' !== $settings['premium_blog_paging'] ) {
+		if ( 'yes' !== $settings['premium_blog_paging'] || ( isset( $settings['premium_blog_layout'] ) && 'marquee' === $settings['premium_blog_layout']) ) {
 			return;
 		}
 

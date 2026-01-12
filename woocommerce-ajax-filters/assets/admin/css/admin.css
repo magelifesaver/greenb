@@ -571,24 +571,24 @@ td.br_colorpicker_field.colorpicker_removed:after {
     margin-top: 20px;
 }
 /*Conditions*/
-#conditions #submitpost {
+#conditions #submitpost.bapf_conditions {
     display: flex;
     flex-direction: row-reverse;
 }
-#conditions #submitpost .berocket_conditions_block {
+#conditions #submitpost.bapf_conditions .berocket_conditions_block {
     width: calc(100% - 250px);
 }
-#conditions .section_conditions_hide_this_on {
+#conditions .bapf_conditions .section_conditions_hide_this_on {
     margin-left: -13px;
     margin-right: -13px;
     border-top: 1px solid #ccc;
     padding: 5px 12px 1px;
     margin-top: 8px;
 }
-#conditions .section_conditions_hide_this_on label {
+#conditions .bapf_conditions .section_conditions_hide_this_on label {
     display: inline-block;
 }
-#poststuff #conditions .inside {
+#poststuff #conditions .bapf_conditions .inside {
     padding-bottom: 6px;
 }
 .tr_out_of_stock_variable td label{
@@ -689,7 +689,11 @@ td.br_colorpicker_field.colorpicker_removed:after {
 }
 #conditions #submitpost .berocket_conditions_block_docs_content {
     padding-left: 10px;
+    padding-inline-end: 0;
+    padding-inline-start: 10px;
     border-left: 2px solid #999;
+    border-inline-end: 0;
+    border-inline-start: 2px solid #999;
     line-height: 1.4;
     color: #6c6c6c;
 }
@@ -823,6 +827,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     padding: 20px 16px 12px 8px;
     box-shadow: 1px 1px 6px 0 #f0f0f0;
     text-align: left;
+    text-align: start;
 }
 .br_conditions .br_html_condition .br_cond_select {
     border: 0 none;
@@ -852,6 +857,8 @@ td.br_colorpicker_field.colorpicker_removed:after {
     border: 1px solid #dcdfe3;
     border-radius: 5px;
     padding: 3px 24px 3px 14px;
+    padding-inline-start: 14px;
+    padding-inline-end: 24px;
 }
 .br_conditions .br_html_condition .br_current_cond {
     margin-top: 0;
@@ -967,6 +974,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     border: 0 none;
     padding: 0 2em 1.5em 2em;
     text-align: left;
+    text-align: start;
     margin-bottom: 1em;
     position: relative;
     width: calc(100% - 250px);
@@ -1058,7 +1066,11 @@ td.br_colorpicker_field.colorpicker_removed:after {
 }
 #settings .berocket_group_docs .berocket_group_docs_content {
     padding-left: 10px;
+    padding-inline-start: 10px;
+    padding-inline-end: 0;
     border-left: 2px solid #999;
+    border-inline-start: 2px solid #999;
+    border-inline-end: 0;
     line-height: 1.4;
     color: #6c6c6c;
     font-size: 13px;
@@ -1176,6 +1188,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     padding: 1.4em 2em 1.5em 2em;
     box-shadow: 1px 1px 6px 0 #f0f0f0;
     text-align: left;
+    text-align: start;
     margin-bottom: 4em;
     margin-top: 1em;
     position: relative;
@@ -1412,6 +1425,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     border: 0 none;
     padding: 0 2em;
     text-align: left;
+    text-align: start;
     margin-bottom: 0;
     position: relative;
     width: calc(100% - 250px);
@@ -1512,6 +1526,7 @@ td.br_colorpicker_field.colorpicker_removed:after {
     padding: 1.4em 2em 1.5em 2em;
     box-shadow: 1px 1px 6px 0 #f0f0f0;
     text-align: left;
+    text-align: start;
     margin-bottom: 4em;
     margin-top: 1em;
     position: relative;
@@ -1552,7 +1567,11 @@ td.br_colorpicker_field.colorpicker_removed:after {
 }
 #search_box .berocket_groups_search .berocket_groups_search_docs_content {
     padding-left: 10px;
+    padding-inline-start: 10px;
+    padding-inline-end: 0;
     border-left: 2px solid #999;
+    border-inline-start: 2px solid #999;
+    border-inline-end: 0;
     line-height: 1.4;
     color: #6c6c6c;
     font-size: 13px;

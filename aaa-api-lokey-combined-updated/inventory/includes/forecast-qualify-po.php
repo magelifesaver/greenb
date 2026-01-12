@@ -158,11 +158,24 @@ function lokey_inv_forecast_qualify_po( WP_REST_Request $req ) {
             $suggested_qty = max( $min_order, ceil( $threshold_qty - $current_qty ) );
         }
 
+        $supplier_id = absint( get_post_meta( $pid, '_supplier_id', true ) );
+        $supplier_name = '';
+        if ( $supplier_id ) {
+            $sp = get_post( $supplier_id );
+            if ( $sp && ! is_wp_error( $sp ) ) { $supplier_name = (string) $sp->post_title; }
+        }
+        $pp = get_post_meta( $pid, '_purchase_price', true );
+        if ( $pp === '' || ! is_numeric( $pp ) ) { $pp = get_post_meta( $pid, '_atum_purchase_price', true ); }
+        if ( $pp === '' || ! is_numeric( $pp ) ) { $pp = get_post_meta( $pid, 'purchase_price', true ); }
+        $purchase_price = is_numeric( $pp ) ? floatval( $pp ) : null;
         if ( $qualifies ) {
             $qualified[] = [
                 'id'                   => $pid,
                 'name'                 => $product->get_name(),
                 'sku'                  => $product->get_sku(),
+                'supplier_id'          => $supplier_id ? $supplier_id : null,
+                'supplier_name'        => $supplier_name ? $supplier_name : null,
+                'purchase_price'       => $purchase_price,
                 'forecast_stock_qty'   => $forecast_stock,
                 'forecast_sales_day'   => $daily_sales,
                 'forecast_lead_time_days' => $lead_days,

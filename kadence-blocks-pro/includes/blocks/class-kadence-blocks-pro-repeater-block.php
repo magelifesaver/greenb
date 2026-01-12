@@ -78,14 +78,14 @@ class Kadence_Blocks_Pro_Repeater_Block extends Kadence_Blocks_Pro_Abstract_Bloc
 		$grid_template_tablet  = 'repeat(' . $columns_tablet . ', ' . $grid_template_base . ')';
 		$grid_template_mobile  = 'repeat(' . $columns_mobile . ', ' . $grid_template_base . ')';
 
-		$column_gap_desktop = ! empty( $attributes['columnGap'][0] ) ? $attributes['columnGap'][0] : 10;
-		$column_gap_tablet  = ! empty( $attributes['columnGap'][1] ) ? $attributes['columnGap'][1] : $column_gap_desktop;
-		$column_gap_mobile  = ! empty( $attributes['columnGap'][2] ) ? $attributes['columnGap'][2] : $column_gap_tablet;
+		$column_gap_desktop = isset( $attributes['columnGap'][0] ) && is_numeric( $attributes['columnGap'][0] ) ? $attributes['columnGap'][0] : 10;
+		$column_gap_tablet  = isset( $attributes['columnGap'][1] ) && is_numeric( $attributes['columnGap'][1] ) ? $attributes['columnGap'][1] : $column_gap_desktop;
+		$column_gap_mobile  = isset( $attributes['columnGap'][2] ) && is_numeric( $attributes['columnGap'][2] ) ? $attributes['columnGap'][2] : $column_gap_tablet;
 		$column_gap_unit    = ! empty( $attributes['columnGapUnit'] ) ? $attributes['columnGapUnit'] : 'px';
 
-		$row_gap_desktop = ! empty( $attributes['rowGap'][0] ) ? $attributes['rowGap'][0] : 10;
-		$row_gap_tablet  = ! empty( $attributes['rowGap'][1] ) ? $attributes['rowGap'][1] : $row_gap_desktop;
-		$row_gap_mobile  = ! empty( $attributes['rowGap'][2] ) ? $attributes['rowGap'][2] : $row_gap_tablet;
+		$row_gap_desktop = isset( $attributes['rowGap'][0] ) && is_numeric( $attributes['rowGap'][0] ) ? $attributes['rowGap'][0] : 10;
+		$row_gap_tablet  = isset( $attributes['rowGap'][1] ) && is_numeric( $attributes['rowGap'][1] ) ? $attributes['rowGap'][1] : $row_gap_desktop;
+		$row_gap_mobile  = isset( $attributes['rowGap'][2] ) && is_numeric( $attributes['rowGap'][2] ) ? $attributes['rowGap'][2] : $row_gap_tablet;
 		$row_gap_unit    = ! empty( $attributes['rowGapUnit'] ) ? $attributes['rowGapUnit'] : 'px';
 
 		$css->set_media_state( 'desktop' );

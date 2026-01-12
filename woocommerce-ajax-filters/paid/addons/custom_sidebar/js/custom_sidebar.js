@@ -53,7 +53,6 @@ berocket_custom_sidebar_hide;
         }
     }
     bapf_custom_sidebar_close_on_filtering = function(xhr, url, send_data, callback_func, type) {
-        console.log(type);
         if(type == 'default' && typeof(the_ajax_script) != 'undefined' && the_ajax_script.custom_sidebar_close) {
             $(document).trigger('berocket_custom_sidebar_close');
         }

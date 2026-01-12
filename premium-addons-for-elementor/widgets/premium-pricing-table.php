@@ -631,6 +631,7 @@ class Premium_Pricing_Table extends Widget_Base {
 			'premium_pricing_table_slashed_price_value',
 			array(
 				'label'       => __( 'Slashed Price', 'premium-addons-for-elementor' ),
+				'description'       => __( 'Enabling Discount Reveal automatically adds the currency to the Slashed Price, if available.', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'dynamic'     => array( 'active' => true ),
 				'label_block' => true,
@@ -3696,7 +3697,7 @@ class Premium_Pricing_Table extends Widget_Base {
 
 			<?php if ( ! empty( $settings['premium_pricing_table_slashed_price_value'] ) ) : ?>
 				<strike class="premium-pricing-slashed-price-value">
-					<?php echo wp_kses_post( $settings['premium_pricing_table_slashed_price_value'] ); ?>
+					<?php echo wp_kses_post( ( $has_slashed_price ? $settings['premium_pricing_table_price_currency'] : '' ) . $settings['premium_pricing_table_slashed_price_value'] ); ?>
 				</strike>
 			<?php endif; ?>
 

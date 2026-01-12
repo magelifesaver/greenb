@@ -118,29 +118,26 @@ abstract class Skin_Style {
 	}
 
 	/**
-	 * Get Wrapper Classes.
+	 * Add carousel attributes
 	 *
 	 * @since 4.7.0
 	 * @access public
 	 */
-	public function set_slider_attr() {
+	public function add_carousel_attributes() {
 
 		$settings = self::$settings;
-
-		if ( 'carousel' !== $settings['layout_type'] ) {
-			return;
-		}
 
 		$is_rtl = is_rtl();
 		$dots   = 'yes' === $settings['dots'] ? true : false;
 		$arrows = 'yes' === $settings['arrows'] ? true : false;
+		$arrows_custom_pos = 'default' !== $settings['arrows_position'];
 
 		$slick_options = array(
 			'slidesToShow'   => ( $settings['products_show'] ) ? absint( $settings['products_show'] ) : 4,
 			'slidesToScroll' => ( $settings['products_on_scroll'] ) ? absint( $settings['products_on_scroll'] ) : 1,
 			'autoplaySpeed'  => ( $settings['autoplay_speed'] ) ? absint( $settings['autoplay_speed'] ) : 5000,
 			'autoplay'       => ( 'yes' === $settings['autoplay_slides'] ),
-			'infinite'       => ( 'yes' === $settings['infinite_loop'] ),
+			'infinite'       => 'yes' === $settings['infinite_loop'] && 'yes' !== $settings['overflow_slides'],
 			'pauseOnHover'   => ( 'yes' === $settings['hover_pause'] ),
 			'speed'          => ( $settings['speed'] ) ? absint( $settings['speed'] ) : 500,
 			'arrows'         => $arrows,
@@ -183,11 +180,41 @@ abstract class Skin_Style {
 			}
 		}
 
+		if ( $arrows && $arrows_custom_pos ) {
+			$slick_options['arrowCustomPos'] = true;
+			$this->add_render_attribute( 'wrapper', 'class', 'pa-has-custom-pos' );
+		}
+
 		$this->add_render_attribute(
 			'wrapper',
 			array(
 				'class'             => 'premium-carousel-hidden',
 				'data-woo_carousel' => wp_json_encode( $slick_options ),
+			)
+		);
+	}
+
+	/**
+	 * Add marquee attributes
+	 *
+	 * @since 4.7.0
+	 * @access public
+	 */
+	public function add_marquee_attributes() {
+
+		$settings = self::$settings;
+
+		$marquee_settings = array(
+			'direction' => $settings['marquee_direction'],
+			'speed'     => $settings['marquee_speed'] ? absint( $settings['marquee_speed'] ) : 50,
+			'draggable'      => 'yes' === $settings['marquee_draggable'],
+		);
+
+		$this->add_render_attribute(
+			'wrapper',
+			array(
+				'class'            => 'premium-carousel-hidden',
+				'data-woo_marquee' => wp_json_encode( $marquee_settings ),
 			)
 		);
 	}
@@ -813,7 +840,7 @@ abstract class Skin_Style {
 				'pa_woo_main_query_args',
 				array(
 					'post_type'   => 'product',
-					'product_cat' => $args['product_cat'],
+					'product_cat' => self::$query_args['product_cat'],
 				),
 				self::$query_args
 			);
@@ -868,7 +895,11 @@ abstract class Skin_Style {
 			$page_id = \Elementor\Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
-		$this->set_slider_attr();
+		if ( 'carousel' === $settings['layout_type'] ) {
+			$this->add_carousel_attributes();
+		} elseif ( 'marquee' === $settings['layout_type'] ) {
+			$this->add_marquee_attributes();
+		}
 
 		$this->add_render_attribute(
 			'wrapper',
@@ -927,6 +958,10 @@ abstract class Skin_Style {
 		}
 
 		echo '<div ' . wp_kses_post( $this->get_render_attribute_string( 'inner' ) ) . '>';
+
+		if( 'carousel' === $settings['layout_type'] && 'above' === $settings['arrows_position'] ) {
+			echo '<div class="premium-carousel-arrows-wrapper"></div>';
+		}
 	}
 
 	/**
@@ -935,6 +970,13 @@ abstract class Skin_Style {
 	 * @since 1.1.0
 	 */
 	public function end_loop_inner() {
+
+		$settings = self::$settings;
+
+		if( 'carousel' === $settings['layout_type'] && 'below' === $settings['arrows_position'] ) {
+			echo '<div class="premium-carousel-arrows-wrapper"></div>';
+		}
+
 		echo '</div>';
 	}
 

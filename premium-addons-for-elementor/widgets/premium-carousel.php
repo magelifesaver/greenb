@@ -612,6 +612,7 @@ class Premium_Carousel extends Widget_Base {
 					),
 				),
 				'default'   => 'default',
+				'toggle'    => false,
 				'condition' => array(
 					'premium_carousel_navigation_show' => 'yes',
 					'premium_carousel_slider_type'     => 'horizontal',
@@ -639,6 +640,7 @@ class Premium_Carousel extends Widget_Base {
 					),
 				),
 				'default'   => 'start',
+				'toggle'    => false,
 				'condition' => array(
 					'premium_carousel_navigation_show' => 'yes',
 					'premium_carousel_slider_type'     => 'horizontal',
@@ -679,7 +681,7 @@ class Premium_Carousel extends Widget_Base {
 				'condition'  => array(
 					'premium_carousel_navigation_show' => 'yes',
 					'premium_carousel_slider_type'     => 'horizontal',
-					'arrows_position'                  => 'below',
+					'arrows_position!'                  => 'default',
 				),
 			)
 		);
