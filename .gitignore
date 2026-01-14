@@ -1,7 +1,7 @@
 # WordPress core files (optional)
 *
 !/aaa-order-workflow/
-!/aaa-f*
+!/aaa-*/
 # Logs, caches, uploads
 *.log
 debug.log
