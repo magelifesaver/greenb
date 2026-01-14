@@ -1,0 +1,34 @@
+.aaa-bss-banner-wrap{margin:14px 0;text-align:center}
+.aaa-bss-banner-btn{padding:0;border:0;background:transparent;cursor:pointer;display:inline-block;max-width:100%}
+.aaa-bss-banner-img{max-width:100%;height:auto;border-radius:10px;display:block}
+
+body.aaa-bss-modal-open{overflow:hidden}
+.aaa-bss-modal{position:fixed;inset:0;z-index:999999}
+.aaa-bss-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.aaa-bss-modal-panel{position:relative;max-width:640px;margin:8vh auto;background:#fff;border-radius:14px;box-shadow:0 10px 35px rgba(0,0,0,.25);padding:16px}
+@media (max-width:720px){.aaa-bss-modal-panel{margin:6vh 14px}}
+
+.aaa-bss-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.aaa-bss-modal-title{font-size:18px;font-weight:700}
+.aaa-bss-close{border:1px solid #ddd;border-radius:10px;background:#fff;padding:8px 10px;cursor:pointer}
+
+.aaa-bss{max-width:560px;margin:0 auto;font-family:inherit}
+.aaa-bss-title{font-size:18px;font-weight:700;margin:0 0 6px}
+.aaa-bss-subtitle{font-size:14px;opacity:.8;margin:0 0 14px}
+.aaa-bss-list{border:1px solid #e5e5e5;border-radius:10px;padding:12px}
+.aaa-bss-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0}
+.aaa-bss-row:last-child{border-bottom:0}
+.aaa-bss-name{padding-right:12px}
+.aaa-bss-qty input{width:90px}
+.aaa-bss-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.aaa-bss-btn{padding:10px 14px;border:1px solid #ddd;border-radius:10px;background:#fff;cursor:pointer}
+.aaa-bss-msg{margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff3cd;border:1px solid #ffe69c}
+.aaa-bss-maxnote{margin-top:10px;font-size:12px;opacity:.75}
+.aaa-bss-row-missing{opacity:.75}
+
+.aaa-bss-left{display:flex;flex-direction:column;gap:6px}
+.aaa-bss-pills{display:flex;flex-wrap:wrap;gap:6px}
+.aaa-bss-pill{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid #e5e5e5;font-size:12px;opacity:.9}
+.aaa-bss-success{padding:14px;border:1px solid #d1e7dd;background:#d1e7dd33;border-radius:12px}
+.aaa-bss-success-title{font-weight:800;font-size:16px;margin-bottom:4px}
+.aaa-bss-success-sub{font-size:13px;opacity:.85}

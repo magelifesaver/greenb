@@ -84,26 +84,76 @@ if ( ! class_exists('CtMPAC_Application') ) {
 			}			
 		}
 
-		public static function getErrorNotice( $minimumCartTotal, $currentCartTotal) {
-			if (!empty($minimumCartTotal) && 0<$minimumCartTotal) {
-				$remainingAmountToMakePurchase = '<span class="ct-mpac-remaining-amount">' . wc_price($minimumCartTotal - $currentCartTotal) . '</span>'; 
-				$minimumCartTotal              = '<span class="ct-mpac-minimum-amount">' . wc_price($minimumCartTotal) . '</span>';
-				$currentCartTotal			   = '<span class="ct-mpac-current-amount">' . wc_price($currentCartTotal) . '</span>';
-				$customCartMessage             = get_option('ct_mpac_cart_limit_message', null);
-				//load default message
-				if (empty($customCartMessage) || null===$customCartMessage) {
-					$customCartMessage = __('The minimum amount to make a purchase is', 'ct-minimum-purchase-amount-for-woo-cart' ) . ' [minimum-amount] ' . __(' & the current cart total is', 'ct-minimum-purchase-amount-for-woo-cart') . ' [current-total] ' . __('please add the products worth', 'ct-minimum-purchase-amount-for-woo-cart') . ' [amount-remaining] ' . __('or more to successfully make a purchase', 'ct-minimum-purchase-amount-for-woo-cart');
-				}
+		public static function getErrorNotice( $minimumCartTotal, $currentCartTotal ) {
 
-				$customCartMessage = str_replace(__('[minimum-amount]', 'ct-minimum-purchase-amount-for-woo-cart'), $minimumCartTotal, $customCartMessage);
-				$customCartMessage = str_replace('[minimum-amount]', $minimumCartTotal, $customCartMessage);
-				$customCartMessage = str_replace(__('[amount-remaining]', 'ct-minimum-purchase-amount-for-woo-cart'), $remainingAmountToMakePurchase, $customCartMessage);
-				$customCartMessage = str_replace('[amount-remaining]', $remainingAmountToMakePurchase, $customCartMessage);
-				$customCartMessage = str_replace(__('[current-total]', 'ct-minimum-purchase-amount-for-woo-cart'), $currentCartTotal, $customCartMessage);
-				$customCartMessage = str_replace('[current-total]', $currentCartTotal, $customCartMessage);
-
-				return $customCartMessage;
+			if ( empty( $minimumCartTotal ) || $minimumCartTotal <= 0 ) {
+				return '';
 			}
+
+			$remaining_raw = (float) ( $minimumCartTotal - $currentCartTotal );
+			if ( $remaining_raw <= 0 ) {
+				return '';
+			}
+
+			$remainingAmountToMakePurchase = '<span class="ct-mpac-remaining-amount">' . wc_price( $remaining_raw ) . '</span>';
+			$minimumCartTotalHtml          = '<span class="ct-mpac-minimum-amount">' . wc_price( $minimumCartTotal ) . '</span>';
+			$currentCartTotalHtml          = '<span class="ct-mpac-current-amount">' . wc_price( $currentCartTotal ) . '</span>';
+
+			// Buffer logic: remaining + 5 (filterable)
+			$buffer_dollars = (int) apply_filters( 'ct_mpac_budget_link_buffer_dollars', 5, $remaining_raw, $minimumCartTotal, $currentCartTotal );
+			if ( $buffer_dollars < 0 ) { $buffer_dollars = 0; }
+
+			$max_price = (int) ceil( $remaining_raw + $buffer_dollars );
+			$max_price = (int) apply_filters( 'ct_mpac_budget_link_max_price', $max_price, $remaining_raw, $buffer_dollars, $minimumCartTotal, $currentCartTotal );
+			if ( $max_price < 1 ) { $max_price = 1; }
+
+			$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
+			$link_url = add_query_arg(
+				array(
+					'min_price' => 0,
+					'max_price' => $max_price,
+					'orderby'   => 'price',
+				),
+				$shop_url
+			);
+
+			$budgetLink = '<a class="ct-mpac-budget-link" href="' . esc_url( $link_url ) . '">Shop items under ' . esc_html( wp_strip_all_tags( wc_price( $max_price ) ) ) . '</a>';
+
+			$customCartMessage = get_option( 'ct_mpac_cart_limit_message', null );
+
+			// Default message (includes [budget-link] so it shows even if user never edits settings)
+			if ( empty( $customCartMessage ) ) {
+				$customCartMessage =
+					__( 'The minimum amount to make a purchase is', 'ct-minimum-purchase-amount-for-woo-cart' ) . ' [minimum-amount] ' .
+					__( ' & the current cart subtotal is', 'ct-minimum-purchase-amount-for-woo-cart' ) . ' [current-total]. ' .
+					__( 'Please add products worth', 'ct-minimum-purchase-amount-for-woo-cart' ) . ' [amount-remaining] ' .
+					__( 'or more to successfully make a purchase.', 'ct-minimum-purchase-amount-for-woo-cart' ) . ' ' .
+					'[budget-link]';
+			}
+
+			// Existing replacements
+			$customCartMessage = str_replace( __( '[minimum-amount]', 'ct-minimum-purchase-amount-for-woo-cart' ), $minimumCartTotalHtml, $customCartMessage );
+			$customCartMessage = str_replace( '[minimum-amount]', $minimumCartTotalHtml, $customCartMessage );
+
+			$customCartMessage = str_replace( __( '[amount-remaining]', 'ct-minimum-purchase-amount-for-woo-cart' ), $remainingAmountToMakePurchase, $customCartMessage );
+			$customCartMessage = str_replace( '[amount-remaining]', $remainingAmountToMakePurchase, $customCartMessage );
+
+			$customCartMessage = str_replace( __( '[current-total]', 'ct-minimum-purchase-amount-for-woo-cart' ), $currentCartTotalHtml, $customCartMessage );
+			$customCartMessage = str_replace( '[current-total]', $currentCartTotalHtml, $customCartMessage );
+
+			// New replacement: [budget-link]
+			$customCartMessage = str_replace( __( '[budget-link]', 'ct-minimum-purchase-amount-for-woo-cart' ), $budgetLink, $customCartMessage );
+			$customCartMessage = str_replace( '[budget-link]', $budgetLink, $customCartMessage );
+
+			// If user’s message doesn’t include it, append it cleanly.
+			if ( false === strpos( $customCartMessage, 'ct-mpac-budget-link' ) ) {
+				$customCartMessage .= ' <br>' . $budgetLink;
+			}
+
+			/**
+			 * Final filter to allow theme/site customization without editing plugin again.
+			 */
+			return apply_filters( 'ct_mpac_error_notice_html', $customCartMessage, $minimumCartTotal, $currentCartTotal, $max_price, $buffer_dollars );
 		}
 
 		public function register_wc_shortcodes() {

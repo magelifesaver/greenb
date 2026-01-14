@@ -5,3 +5,16 @@ div.ct-mpac-min-amount-notice {
     border-left: 4px solid #ff000026;
     padding: 12px;
 }
+.woocommerce-notices-wrapper a.ct-mpac-budget-link{
+  display:inline-flex !important;
+  padding:10px 12px !important;
+  border-radius:12px !important;
+  background:#111827 !important;
+  color:#ffffff !important;
+  border:1px solid rgba(109,40,217,.55) !important;
+  text-decoration:none !important;
+  font-weight:900 !important;
+}
+.woocommerce-notices-wrapper a.ct-mpac-budget-link:hover{
+  filter:brightness(1.06);
+}
