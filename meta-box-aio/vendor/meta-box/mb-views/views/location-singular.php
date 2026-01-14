@@ -1,1 +1,0 @@
-<div id="mbv-singular-locations"></div>

@@ -1,1 +1,0 @@
-!function(){"use strict";(0,window.wp.plugins.registerPlugin)("check-my-address",{render:()=>{},scope:"woocommerce-checkout"})}();

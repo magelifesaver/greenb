@@ -1,2 +1,0 @@
-<?php
-return ['domain'=>'meta-box-include-exclude','plural-forms'=>'nplurals=2; plural=n != 1;','language'=>'de_DE','project-id-version'=>'Meta Box Include Exclude','pot-creation-date'=>'2025-04-13 13:47+0000','po-revision-date'=>'2025-04-13 13:48+0000','x-generator'=>'Loco https://localise.biz/','messages'=>['Invalid user ID.'=>'Ungültige Benutzer-ID.']];

@@ -1,1 +1,0 @@
-<div id="mbv-archive-locations"></div>

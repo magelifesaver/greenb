@@ -1,1 +1,0 @@
-(()=>{"use strict";(0,window.wp.plugins.registerPlugin)("szbd-shipping-message",{render:()=>{},scope:"woocommerce-checkout"})})();
